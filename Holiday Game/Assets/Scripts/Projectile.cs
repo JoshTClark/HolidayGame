@@ -50,5 +50,11 @@ public class Projectile : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+
+        // Destroys the projectile if it hits a wall
+        if (other.gameObject.layer == LayerMask.NameToLayer("Wall")) 
+        {
+            Destroy(gameObject);
+        }
     }
 }

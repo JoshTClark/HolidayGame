@@ -5,6 +5,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
+    private Camera cam;
+
+    [SerializeField]
     private Enemy enemy;
 
     [SerializeField]
@@ -23,6 +26,8 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-
+        // Moving the camera
+        Vector3 camPos = new Vector3(player.transform.position.x, player.transform.position.y, cam.transform.position.z);
+        cam.transform.position = camPos;
     }
 }

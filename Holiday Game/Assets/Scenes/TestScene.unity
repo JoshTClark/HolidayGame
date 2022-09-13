@@ -563,6 +563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afa3e26b2ea57934d895dddcc24528f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam: {fileID: 519420031}
   enemy: {fileID: -672623973766071318, guid: b8b5a0b01002cf44f8ca5e3dd14f603c, type: 3}
   attacks:
   - {fileID: 3480518518316415826, guid: 004bf8ebdd84e4d40844a9da715c7154, type: 3}

@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     public static List<Enemy> currentEnemies = new List<Enemy>();
 
-    public Player player;
+    public static Player player;
 
     void Start()
     {

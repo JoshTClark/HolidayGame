@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
         attacks.Add(Instantiate(attack, transform));
     }
 
+    // Deals damage to the player
     public void DealDamage(float damage)
     {
         health -= damage;

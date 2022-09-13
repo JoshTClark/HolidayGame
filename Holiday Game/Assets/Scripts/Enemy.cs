@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
 
     }
 
+    // Deals damage to the enemy
     public void DealDamage(float damage)
     {
         health -= damage;

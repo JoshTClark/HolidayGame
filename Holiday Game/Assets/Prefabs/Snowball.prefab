@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7666470324831021168}
   - component: {fileID: 7666470324831021171}
   - component: {fileID: 7666470324831021170}
-  - component: {fileID: 7666470324831021134}
+  - component: {fileID: 2198510103596972710}
   m_Layer: 8
   m_Name: Snowball
   m_TagString: Untagged
@@ -117,14 +117,14 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &7666470324831021134
+--- !u!114 &2198510103596972710
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,10 +133,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7666470324831021173}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a20d4eb563b71c45b5737b2880f5ddb, type: 3}
+  m_Script: {fileID: 11500000, guid: 62a5d4014656189429e0d87ac3e7a3e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 5
   damage: 3
   lifetime: 3
-  team: 0
+  pierce: 1
+  projectileTeam: 0

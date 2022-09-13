@@ -10,7 +10,7 @@ public class Attack : MonoBehaviour
     private float delay;
 
     [SerializeField]
-    private Projectile projectile;
+    private ProjectileBase projectile;
 
     void Update()
     {
@@ -26,7 +26,7 @@ public class Attack : MonoBehaviour
         timer += delta;
         if (timer >= delay)
         {
-            Instantiate<Projectile>(projectile, transform.position, transform.rotation);
+            Instantiate<ProjectileBase>(projectile, transform.position, transform.rotation);
             timer = 0.0f;
         }
     }

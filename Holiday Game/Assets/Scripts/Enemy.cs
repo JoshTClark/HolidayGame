@@ -12,27 +12,27 @@ public class Enemy : MonoBehaviour
 
     private Vector2 velocity = Vector2.zero;
 
-    private float speed = 5;
+    private float speed = 4;
     [SerializeField]
     private float health;
 
     void Update()
     {
-
+        // Get the players position, seek that point, apply forces, and move
+        velocity = seekPlayer(player) * speed;
+        GetComponent<Rigidbody2D>().velocity = velocity;
     }
 
     // Deals damage to the enemy
     public void DealDamage(float damage)
     {
         health -= damage;
-        // Get the players position, seek that point, apply forces, and move
-        velocity = seekPlayer(player) * speed;
-        GetComponent<Rigidbody2D>().velocity = velocity;
+
     }
     Vector2 seekPlayer(Player player)
     {
         // Get the players position
-        Vector2 desiredVelocity = (Vector2)player.transform.position - position;
+        Vector2 desiredVelocity = (Vector2)player.transform.position - (Vector2)transform.position;
 
         return desiredVelocity.normalized;
     }

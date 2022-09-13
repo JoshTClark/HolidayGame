@@ -5,6 +5,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
+    private Camera cam;
+
+    [SerializeField]
     private Enemy enemy;
 
     [SerializeField]
@@ -16,6 +19,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        // Just testing adding enemies and an attack to the player
         currentEnemies.Add(Instantiate<Enemy>(enemy, new Vector2(3, 0), Quaternion.identity));
         foreach(Enemy e in currentEnemies)
         {
@@ -26,6 +30,8 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-
+        // Moving the camera
+        Vector3 camPos = new Vector3(player.transform.position.x, player.transform.position.y, cam.transform.position.z);
+        cam.transform.position = camPos;
     }
 }

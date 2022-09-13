@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
-    private float timer;
+    private float timer = 0.0f;
 
     [SerializeField]
     private float delay;
@@ -16,20 +16,22 @@ public class Attack : MonoBehaviour
     {
         float delta = Time.deltaTime;
 
-        timer += delta;
-
+        // Basic targetting for now just targets the closest enemy
         Enemy e = GetClosestEnemy();
         Vector2 direction = e.transform.position - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
+        // Attack timer it will do the attack every "delay" seconds
+        timer += delta;
         if (timer >= delay)
         {
             Instantiate<Projectile>(projectile, transform.position, transform.rotation);
-            timer = 0f;
+            timer = 0.0f;
         }
     }
 
+    // Gets the closest enemy
     private Enemy GetClosestEnemy()
     {
         List<Enemy> enemies = GameManager.currentEnemies;

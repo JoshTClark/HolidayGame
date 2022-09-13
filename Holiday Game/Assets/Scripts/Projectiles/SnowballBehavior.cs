@@ -11,21 +11,21 @@ public class SnowballBehavior : ProjectileBase
 
     public override void OnCollision()
     {
-        throw new System.NotImplementedException();
+        // Nothing special
     }
 
     public override void OnDeath()
     {
-        throw new System.NotImplementedException();
+        // Nothing special
     }
 
-    public override void OnHit()
+    public override void OnHit(StatsComponent receiver)
     {
-        throw new System.NotImplementedException();
+        // Nothing special
     }
 
     public override void OnUpdate()
     {
-        throw new System.NotImplementedException();
+        // Nothing special
     }
 }

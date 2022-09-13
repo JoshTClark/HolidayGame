@@ -136,4 +136,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3ece8b9c5eb3f44db6f3b5df30aac07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  baseMaxHP: 50
+  baseSpeed: 2
+  baseDamage: 5
+  baseAttackSpeed: 1
+  baseArmor: 0
+  baseRegen: 0
+  baseCritChance: 0
+  baseCritDamage: 0
+  player: {fileID: 0}

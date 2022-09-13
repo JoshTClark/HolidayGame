@@ -2,29 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+// Player now derives from StatsComponent. This helps it keep track of all of its stats and helps organize things a lot
+public class Enemy : StatsComponent
 {
     [SerializeField]
     public Player player;
 
     private Vector2 velocity = Vector2.zero;
 
-    private float speed = 1;
-
-    [SerializeField]
-    private float health;
-
     void Update()
     {
         // Get the players position, seek that point, apply forces, and move
-        velocity = seekPlayer(player) * speed;
+        velocity = seekPlayer(player) * Speed;
         GetComponent<Rigidbody2D>().velocity = velocity;
-    }
-
-    // Deals damage to the enemy
-    public void DealDamage(float damage)
-    {
-        health -= damage;
     }
 
     Vector2 seekPlayer(Player player)

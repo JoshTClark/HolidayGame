@@ -6,7 +6,7 @@ public abstract class ProjectileBase : MonoBehaviour
 {
     private float timeAlive = 0.0f;
     private float usedPierce = 0f;
-    private List<Enemy> hitEnemies = new List<Enemy>();
+    private List<StatsComponent> hitTargets = new List<StatsComponent>();
 
     [SerializeField]
     private float baseSpeed, baseDamage, baseLifetime, basePierce;
@@ -60,19 +60,17 @@ public abstract class ProjectileBase : MonoBehaviour
     // Handles the projectiles collision
     private void HandleCollision(Collider2D other)
     {
-        OnCollision();
-
         // Basic collision detection for bullets
         if (projectileTeam == Team.Player)
         {
             // Player bullet so only collide with enemies
             if (other.gameObject.GetComponent<Enemy>())
             {
-                Enemy enemy = other.gameObject.GetComponent<Enemy>();
-                if (!hitEnemies.Contains(enemy))
+                StatsComponent receiver = other.gameObject.GetComponent<StatsComponent>();
+                if (!hitTargets.Contains(receiver))
                 {
-                    enemy.DealDamage(Damage);
-                    hitEnemies.Add(enemy);
+                    Hit(receiver);
+                    hitTargets.Add(receiver);
 
                     if (Pierce > 0 && usedPierce < Pierce)
                     {
@@ -82,6 +80,7 @@ public abstract class ProjectileBase : MonoBehaviour
                     {
                         DestroyProjectile();
                     }
+                    OnCollision();
                 }
             }
         }
@@ -90,8 +89,10 @@ public abstract class ProjectileBase : MonoBehaviour
             // Enemy bullet so only collide with player
             if (other.gameObject.GetComponent<Player>())
             {
-                other.gameObject.GetComponent<Player>().DealDamage(Damage);
+                StatsComponent receiver = other.gameObject.GetComponent<StatsComponent>();
+                Hit(receiver);
                 DestroyProjectile();
+                OnCollision();
             }
         }
 
@@ -99,13 +100,15 @@ public abstract class ProjectileBase : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
             DestroyProjectile();
+            OnCollision();
         }
     }
 
     // Called when the projectile hits something
-    private void Hit()
+    private void Hit(StatsComponent receiver)
     {
-
+        OnHit(receiver);
+        receiver.DealDamage(Damage);
     }
 
     /// <summary>
@@ -126,7 +129,7 @@ public abstract class ProjectileBase : MonoBehaviour
     /// <summary>
     /// Any special behavior for when the projectile hits something with health goes here
     /// </summary>
-    public abstract void OnHit();
+    public abstract void OnHit(StatsComponent receiver);
 
     /// <summary>
     /// Any special behavior for when the projectile collides with something goes here

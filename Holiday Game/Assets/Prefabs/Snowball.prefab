@@ -136,8 +136,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62a5d4014656189429e0d87ac3e7a3e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  damage: 3
-  lifetime: 3
-  pierce: 1
+  baseSpeed: 5
+  baseDamage: 4
+  baseLifetime: 4
+  basePierce: 0
   projectileTeam: 0

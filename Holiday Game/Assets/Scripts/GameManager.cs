@@ -17,6 +17,10 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         currentEnemies.Add(Instantiate<Enemy>(enemy, new Vector2(3, 0), Quaternion.identity));
+        foreach(Enemy e in currentEnemies)
+        {
+            e.player = player;
+        }
         player.AddAttack(attacks[0]);
     }
 

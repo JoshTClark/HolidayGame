@@ -11,6 +11,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private InputActionReference movement;
 
+    [SerializeField]
+    private float health;
+
     private void Update()
     {
         float delta = Time.deltaTime;
@@ -21,8 +24,14 @@ public class Player : MonoBehaviour
         GetComponent<Rigidbody2D>().velocity = movementInput;
     }
 
+    // Adds an attack to the player
     public void AddAttack(Attack attack)
     {
         attacks.Add(Instantiate(attack, transform));
+    }
+
+    public void DealDamage(float damage)
+    {
+        health -= damage;
     }
 }

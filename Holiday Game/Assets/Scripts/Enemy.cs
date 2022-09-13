@@ -7,12 +7,10 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     public Player player;
 
-    [SerializeField]
-    Vector2 position = Vector2.zero;
-
     private Vector2 velocity = Vector2.zero;
 
-    private float speed = 4;
+    private float speed = 1;
+
     [SerializeField]
     private float health;
 
@@ -27,8 +25,8 @@ public class Enemy : MonoBehaviour
     public void DealDamage(float damage)
     {
         health -= damage;
-
     }
+
     Vector2 seekPlayer(Player player)
     {
         // Get the players position

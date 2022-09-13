@@ -28,7 +28,7 @@ public class Projectile : MonoBehaviour
         GetComponent<Rigidbody2D>().velocity = transform.right * speed;
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerStay2D(Collider2D other)
     {
         // Collision detection for bullets
         Debug.Log("test");
@@ -52,7 +52,7 @@ public class Projectile : MonoBehaviour
         }
 
         // Destroys the projectile if it hits a wall
-        if (other.gameObject.layer == LayerMask.NameToLayer("Wall")) 
+        if (other.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
             Destroy(gameObject);
         }

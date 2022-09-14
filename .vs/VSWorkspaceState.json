@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Holiday Game"
+    "\\Holiday Game",
+    "\\Holiday Game\\Assets",
+    "\\Holiday Game\\Assets\\Scripts"
   ],
+  "SelectedNode": "\\Holiday Game\\Assets\\Scripts\\Projectile.cs",
   "PreviewInSolutionExplorer": false
 }

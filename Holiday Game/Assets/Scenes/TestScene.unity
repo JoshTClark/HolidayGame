@@ -573,7 +573,7 @@ MonoBehaviour:
   cam: {fileID: 519420031}
   enemy: {fileID: -672623973766071318, guid: b8b5a0b01002cf44f8ca5e3dd14f603c, type: 3}
   attacks:
-  - {fileID: 3480518518316415826, guid: 004bf8ebdd84e4d40844a9da715c7154, type: 3}
+  - {fileID: 2227321042379140027, guid: 004bf8ebdd84e4d40844a9da715c7154, type: 3}
   player: {fileID: 170384907}
 --- !u!1 &2124577261
 GameObject:
@@ -653,7 +653,7 @@ Transform:
   m_GameObject: {fileID: 2124577261}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

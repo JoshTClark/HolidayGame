@@ -141,3 +141,5 @@ MonoBehaviour:
   baseLifetime: 4
   basePierce: 0
   projectileTeam: 0
+  delay: 1.5
+  projectile: {fileID: 0}

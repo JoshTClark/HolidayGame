@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SnowballBehavior : ProjectileBase
 {
+
     public override void Move()
     {
         GetComponent<Rigidbody2D>().velocity = transform.right * Speed;

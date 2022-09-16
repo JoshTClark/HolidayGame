@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 // Player now derives from StatsComponent. This helps it keep track of all of its stats and helps organize things a lot
 public class Player : StatsComponent
 {
-    private List<Attack> attacks = new List<Attack>();
+    private List<Weapon> attacks = new List<Weapon>();
 
     [SerializeField]
     private InputActionReference movement;
@@ -22,7 +22,7 @@ public class Player : StatsComponent
     }
 
     // Adds an attack to the player
-    public void AddAttack(Attack attack)
+    public void AddAttack(Weapon attack)
     {
         attacks.Add(Instantiate(attack, transform));
     }

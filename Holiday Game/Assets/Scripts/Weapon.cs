@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Attack : MonoBehaviour
+public class Weapon : MonoBehaviour
 {
     private float timer = 0.0f;
 

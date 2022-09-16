@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     private Enemy enemy;
 
     [SerializeField]
-    private List<Attack> attacks = new List<Attack>();
+    private List<Weapon> attacks = new List<Weapon>();
 
     public static List<Enemy> currentEnemies = new List<Enemy>();
 

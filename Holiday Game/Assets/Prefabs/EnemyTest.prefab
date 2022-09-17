@@ -145,3 +145,4 @@ MonoBehaviour:
   baseCritChance: 0
   baseCritDamage: 0
   player: {fileID: 0}
+  index: 1

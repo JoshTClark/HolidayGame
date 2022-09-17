@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3480518518316415827}
   - component: {fileID: 2227321042379140027}
   m_Layer: 0
-  m_Name: SnowballAttack
+  m_Name: SnowballWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delay: 1.5
   projectile: {fileID: 2198510103596972710, guid: 3cca2b20c1f90644ebc798eea4666eec, type: 3}
+  index: 1

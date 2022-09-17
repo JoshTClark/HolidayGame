@@ -362,7 +362,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -551,7 +551,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1529754978}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.028314, y: 0.3923007, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -571,8 +571,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 519420031}
-  enemy: {fileID: -672623973766071318, guid: b8b5a0b01002cf44f8ca5e3dd14f603c, type: 3}
-  attacks:
+  enemyPrefabs:
+  - {fileID: -672623973766071318, guid: b8b5a0b01002cf44f8ca5e3dd14f603c, type: 3}
+  weaponPrefabs:
   - {fileID: 2227321042379140027, guid: 004bf8ebdd84e4d40844a9da715c7154, type: 3}
   player: {fileID: 170384907}
 --- !u!1 &2124577261

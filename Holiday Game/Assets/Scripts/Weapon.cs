@@ -2,20 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public abstract class Weapon : MonoBehaviour
 {
-    protected float timer = 0.0f;
-
     [SerializeField]
     protected float delay;
 
     [SerializeField]
     protected ProjectileBase projectile;
 
+    public GameManager.WeaponIndex index;
+
+    protected float timer = 0.0f;
+
     // Gets the closest enemy
     protected Enemy GetClosestEnemy()
     {
-        List<Enemy> enemies = GameManager.currentEnemies;
+        List<Enemy> enemies = GameManager.instance.CurrentEnemies;
         if (enemies.Count > 0)
         {
             Enemy closest = enemies[0];

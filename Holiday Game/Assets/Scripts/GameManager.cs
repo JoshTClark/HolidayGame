@@ -4,28 +4,60 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public enum EnemyIndex
+    {
+        None,
+        Test
+    }
+
+    public enum WeaponIndex
+    {
+        None,
+        Snowball
+    }
+
     [SerializeField]
     private Camera cam;
 
     [SerializeField]
-    private Enemy enemy;
+    private List<Enemy> enemyPrefabs = new List<Enemy>();
 
     [SerializeField]
-    private List<Weapon> attacks = new List<Weapon>();
+    private List<Weapon> weaponPrefabs = new List<Weapon>();
 
-    public static List<Enemy> currentEnemies = new List<Enemy>();
+    private List<Enemy> currentEnemies = new List<Enemy>();
+
+    private float time = 0.0f;
+
+    public float Time
+    {
+        get { return time; }
+    }
+
+    public List<Enemy> CurrentEnemies
+    {
+        get
+        {
+            return currentEnemies;
+        }
+    }
+
+    // Only a single gamemanger should ever exist so we can always get it here
+    public static GameManager instance;
 
     public Player player;
 
     void Start()
     {
+        instance = this;
+
         // Just testing adding enemies and an attack to the player
-        currentEnemies.Add(Instantiate<Enemy>(enemy, new Vector2(3, 0), Quaternion.identity));
-        foreach(Enemy e in currentEnemies)
+        currentEnemies.Add(Instantiate<Enemy>(GetEnemyFromIndex(EnemyIndex.Test), new Vector2(3, 0), Quaternion.identity));
+        foreach (Enemy e in currentEnemies)
         {
             e.player = player;
         }
-        player.AddAttack(attacks[0]);
+        GivePlayerWeapon(WeaponIndex.Snowball);
     }
 
     void Update()
@@ -33,5 +65,38 @@ public class GameManager : MonoBehaviour
         // Moving the camera
         Vector3 camPos = new Vector3(player.transform.position.x, player.transform.position.y, cam.transform.position.z);
         cam.transform.position = camPos;
+    }
+
+    // Gets an enemy prefab from the list using the index
+    public Enemy GetEnemyFromIndex(EnemyIndex index)
+    {
+        foreach (Enemy i in enemyPrefabs)
+        {
+            if (i.index == index)
+            {
+                return i;
+            }
+        }
+        return null;
+    }
+
+    // Gets a weapon prefab from the list using the index
+    public Weapon GetWeaponFromIndex(WeaponIndex index)
+    {
+        foreach (Weapon i in weaponPrefabs)
+        {
+            if (i.index == index)
+            {
+                return i;
+            }
+        }
+        return null;
+    }
+
+    // Gives the player the desired weapon
+    public void GivePlayerWeapon(WeaponIndex index)
+    {
+        Weapon weapon = GetWeaponFromIndex(index);
+        player.AddAttack(weapon);
     }
 }

@@ -4,16 +4,18 @@ using UnityEngine;
 
 public abstract class ProjectileBase : MonoBehaviour
 {
-    private float timeAlive = 0.0f;
-    private float usedPierce = 0f;
-    private List<StatsComponent> hitTargets = new List<StatsComponent>();
-
     [SerializeField]
     private float baseSpeed, baseDamage, baseLifetime, basePierce;
 
     [SerializeField]
     private Team projectileTeam;
 
+    private float timeAlive = 0.0f;
+    private float usedPierce = 0f;
+    private List<StatsComponent> hitTargets = new List<StatsComponent>();
+    private Vector2 direction = new Vector2();
+
+    public Vector2 Direction { get { return direction; } set { direction = value; } }
     public float Speed { get { return baseSpeed; } }
     public float Damage { get { return baseDamage; } }
     public float Lifetime { get { return baseLifetime; } }
@@ -28,7 +30,6 @@ public abstract class ProjectileBase : MonoBehaviour
         None
     }
 
-
     private void Update()
     {
         float delta = Time.deltaTime;
@@ -39,6 +40,9 @@ public abstract class ProjectileBase : MonoBehaviour
         {
             DestroyProjectile();
         }
+
+        // Update stuff
+        OnUpdate();
 
         // Moving the projectile
         Move();
@@ -109,6 +113,12 @@ public abstract class ProjectileBase : MonoBehaviour
     {
         OnHit(receiver);
         receiver.DealDamage(Damage);
+    }
+
+    // Rotates the direction the projectile is moving by a certain degree
+    public void RotateDirection(float degrees)
+    {
+        direction = Quaternion.Euler(0f, 0f, degrees) * direction;
     }
 
     /// <summary>

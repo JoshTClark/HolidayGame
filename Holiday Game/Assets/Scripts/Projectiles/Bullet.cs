@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SnowballBehavior : ProjectileBase
+public class Bullet : ProjectileBase
 {
+    private void Start()
+    {
+    }
 
     public override void Move()
     {
-        GetComponent<Rigidbody2D>().velocity = Direction * Speed;
-        //Debug.Log(GetComponent<Rigidbody2D>().velocity);
+        Vector2 velocity = Direction * Speed;
+        GetComponent<Rigidbody2D>().velocity = velocity;
     }
 
     public override void OnCollision()
@@ -28,6 +31,5 @@ public class SnowballBehavior : ProjectileBase
 
     public override void OnUpdate()
     {
-        // Nothing special
     }
 }

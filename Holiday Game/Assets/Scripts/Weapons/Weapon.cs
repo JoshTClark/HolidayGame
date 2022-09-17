@@ -22,10 +22,10 @@ public abstract class Weapon : MonoBehaviour
         {
             Enemy closest = enemies[0];
             float distance = 0f;
-            foreach (Enemy e in enemies) 
+            foreach (Enemy e in enemies)
             {
                 float newDistance = Vector2.Distance(transform.position, e.transform.position);
-                if (newDistance > distance) 
+                if (newDistance > distance)
                 {
                     closest = e;
                     distance = newDistance;
@@ -33,7 +33,8 @@ public abstract class Weapon : MonoBehaviour
             }
             return closest;
         }
-        else {
+        else
+        {
             return null;
         }
     }

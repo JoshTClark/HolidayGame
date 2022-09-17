@@ -7,13 +7,15 @@ public class GameManager : MonoBehaviour
     public enum EnemyIndex
     {
         None,
-        Test
+        Test,
+        Test2
     }
 
     public enum WeaponIndex
     {
         None,
-        Snowball
+        Snowball,
+        Test
     }
 
     [SerializeField]
@@ -52,7 +54,7 @@ public class GameManager : MonoBehaviour
         instance = this;
 
         // Just testing adding enemies and an attack to the player
-        currentEnemies.Add(Instantiate<Enemy>(GetEnemyFromIndex(EnemyIndex.Test), new Vector2(3, 0), Quaternion.identity));
+        currentEnemies.Add(Instantiate<Enemy>(GetEnemyFromIndex(EnemyIndex.Test2), new Vector2(0, 5), Quaternion.identity));
         foreach (Enemy e in currentEnemies)
         {
             e.player = player;

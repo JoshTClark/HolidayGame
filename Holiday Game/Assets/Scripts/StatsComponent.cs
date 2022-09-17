@@ -23,6 +23,9 @@ public class StatsComponent : MonoBehaviour
     // Flags
     private bool isDead = false;
 
+    // Weapon List
+    private List<Weapon> attacks = new List<Weapon>();
+
     // Used to get the base stats without changing them at all
     public float BaseMaxHp { get; }
     public float BaseSpeed { get; }
@@ -105,5 +108,11 @@ public class StatsComponent : MonoBehaviour
     public void DealDamage(float damage)
     {
         currentHP -= damage;
+    }
+
+    // Adds an attack
+    public void AddAttack(Weapon attack)
+    {
+        attacks.Add(Instantiate(attack, transform));
     }
 }

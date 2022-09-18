@@ -12,7 +12,11 @@ public class StatsComponent : MonoBehaviour
     private float baseMaxHP, baseSpeed, baseDamage, baseAttackSpeed, baseArmor, baseRegen, baseCritChance, baseCritDamage;
 
     // CurrentHP is here and is handled by this script
+    [SerializeField]
     private float currentHP;
+
+    [SerializeField]
+    private float xpLevel;
 
     // Flat additions to stats
     private float hpAdd, speedAdd, damageAdd, attackSpeedAdd, armorAdd, regenAdd, critChanceAdd, critDamageAdd;
@@ -21,6 +25,7 @@ public class StatsComponent : MonoBehaviour
     private float hpMult, speedMult, damageMult, attackSpeedMult, armorMult, regenMult, critChanceMult, critDamageMult;
 
     // Flags
+    [SerializeField]
     private bool isDead = false;
 
     // Weapon List
@@ -34,9 +39,11 @@ public class StatsComponent : MonoBehaviour
     public float BaseRegen { get; }
     public float BaseCritChance { get; }
     public float BaseCritDamage { get; }
+    
 
     // Don't use this to do damage there should be a damage method
     public float CurrentHP { get; set; }
+    public float XPLevel { get; set; }
 
     // Used to get the "true" values of stats after calculating any additions from upgrades etc
     public float MaxHp { get { return (baseMaxHP + hpAdd) * hpMult; } }
@@ -51,7 +58,7 @@ public class StatsComponent : MonoBehaviour
     // Flags
     public bool IsDead { get { return isDead; } }
 
-    private void Start()
+    protected void Start()
     {
         hpMult = 1.0f;
         speedMult = 1.0f;
@@ -63,17 +70,27 @@ public class StatsComponent : MonoBehaviour
         critDamageMult = 1.0f;
 
         currentHP = MaxHp;
+        xpLevel = 0;
     }
 
-    private void Update()
+    protected void Update()
     {
         CalculateStats();
+
+        //This is temporary. Just until we can better handle enemy death, this just will reset it be alive the first tick after it died
+        if (isDead)
+        {
+            isDead = false;
+            currentHP = 20;
+        }
+
 
         // Checks if should be dead
         if (currentHP <= 0)
         {
             isDead = true;
         }
+        
     }
 
     // This method is where all the stat multipliers and additions are calculated based on upgrades
@@ -102,6 +119,7 @@ public class StatsComponent : MonoBehaviour
         critDamageMult = 1.0f;
 
         // Do upgrade stuff here
+        
     }
 
     // Deals damage here
@@ -114,5 +132,10 @@ public class StatsComponent : MonoBehaviour
     public void AddAttack(Weapon attack)
     {
         attacks.Add(Instantiate(attack, transform));
+    }
+    
+    public void AddXP(float amount)
+    {
+        xpLevel += amount;
     }
 }

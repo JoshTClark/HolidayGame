@@ -10,6 +10,10 @@ public abstract class Enemy : StatsComponent
 
     protected Vector2 velocity = Vector2.zero;
 
+    //Which XP prefab this enemy will drop
+    [SerializeField]
+    public XP XPType;
+
     // Moves the enemy towards the player
     protected void seekPlayer()
     {
@@ -20,4 +24,6 @@ public abstract class Enemy : StatsComponent
         velocity = desiredVelocity * Speed;
         GetComponent<Rigidbody2D>().velocity = velocity;
     }
+
+
 }

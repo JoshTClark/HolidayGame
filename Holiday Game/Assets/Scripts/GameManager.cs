@@ -67,6 +67,15 @@ public class GameManager : MonoBehaviour
         // Moving the camera
         Vector3 camPos = new Vector3(player.transform.position.x, player.transform.position.y, cam.transform.position.z);
         cam.transform.position = camPos;
+
+        for(int i = 0; i < currentEnemies.Count; i++)
+        {
+            if (currentEnemies[i].IsDead)
+            {
+                currentEnemies.Remove(currentEnemies[i]);
+                i--;
+            }
+        }
     }
 
     // Gets an enemy prefab from the list using the index

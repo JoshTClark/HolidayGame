@@ -9,7 +9,11 @@ public class Player : StatsComponent
     [SerializeField]
     private InputActionReference movement;
 
-    private void Update()
+    public override void OnDeath()
+    {
+    }
+
+    public override void OnUpdate()
     {
         float delta = Time.deltaTime;
 

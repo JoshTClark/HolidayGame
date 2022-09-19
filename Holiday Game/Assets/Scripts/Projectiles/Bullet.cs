@@ -31,5 +31,7 @@ public class Bullet : ProjectileBase
 
     public override void OnUpdate()
     {
+        float delta = Time.deltaTime;
+        RotateDirection(90f * delta);
     }
 }

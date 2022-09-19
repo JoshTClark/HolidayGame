@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TestEnemy : Enemy
 {
-    void Update()
+    public override void OnUpdate()
     {
         seekPlayer();
     }

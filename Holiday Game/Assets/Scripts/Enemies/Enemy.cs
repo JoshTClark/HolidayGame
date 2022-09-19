@@ -25,5 +25,9 @@ public abstract class Enemy : StatsComponent
         GetComponent<Rigidbody2D>().velocity = velocity;
     }
 
-
+    public override void OnDeath()
+    {
+        //Drops XP
+        Instantiate<XP>(XPType, transform.position, Quaternion.identity);
+    }
 }

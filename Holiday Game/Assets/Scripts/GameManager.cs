@@ -68,11 +68,14 @@ public class GameManager : MonoBehaviour
         Vector3 camPos = new Vector3(player.transform.position.x, player.transform.position.y, cam.transform.position.z);
         cam.transform.position = camPos;
 
+        // Enemy death
         for(int i = 0; i < currentEnemies.Count; i++)
         {
             if (currentEnemies[i].IsDead)
             {
-                currentEnemies.Remove(currentEnemies[i]);
+                Enemy e = currentEnemies[i];
+                currentEnemies.Remove(e);
+                Destroy(e.gameObject);
                 i--;
             }
         }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StatsComponent : MonoBehaviour
+public abstract class StatsComponent : MonoBehaviour
 {
     // All of these are base stats
     // They shouldn't be changed during runtime and should be set in the inspector
@@ -15,6 +15,7 @@ public class StatsComponent : MonoBehaviour
     [SerializeField]
     private float currentHP;
 
+    // Level
     [SerializeField]
     private float xpLevel;
 
@@ -43,6 +44,8 @@ public class StatsComponent : MonoBehaviour
 
     // Don't use this to do damage there should be a damage method
     public float CurrentHP { get; set; }
+
+    // Level
     public float XPLevel { get; set; }
 
     // Used to get the "true" values of stats after calculating any additions from upgrades etc
@@ -77,6 +80,8 @@ public class StatsComponent : MonoBehaviour
     {
         CalculateStats();
 
+        OnUpdate();
+
         //This is temporary. Just until we can better handle enemy death, this just will reset it be alive the first tick after it died
         if (isDead)
         {
@@ -90,7 +95,11 @@ public class StatsComponent : MonoBehaviour
         {
             isDead = true;
         }
-        
+
+        if (IsDead)
+        {
+            OnDeath();
+        }
     }
 
     // This method is where all the stat multipliers and additions are calculated based on upgrades
@@ -138,4 +147,8 @@ public class StatsComponent : MonoBehaviour
     {
         xpLevel += amount;
     }
+
+    public abstract void OnUpdate();
+
+    public abstract void OnDeath();
 }

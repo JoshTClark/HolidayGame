@@ -74,6 +74,8 @@ public abstract class StatsComponent : MonoBehaviour
 
         currentHP = MaxHp;
         xpLevel = 0;
+
+        OnStart();
     }
 
     protected void Update()
@@ -151,4 +153,6 @@ public abstract class StatsComponent : MonoBehaviour
     public abstract void OnUpdate();
 
     public abstract void OnDeath();
+
+    public abstract void OnStart();
 }

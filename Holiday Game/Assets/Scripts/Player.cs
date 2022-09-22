@@ -9,6 +9,10 @@ public class Player : StatsComponent
     [SerializeField]
     private InputActionReference movement;
 
+    public override void OnStart()
+    {
+    }
+
     public override void OnDeath()
     {
     }

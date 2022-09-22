@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
 
     private float time = 0.0f;
 
-    public float Time
+    public float GameTime
     {
         get { return time; }
     }
@@ -64,6 +64,8 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        time += Time.deltaTime;
+
         // Moving the camera
         Vector3 camPos = new Vector3(player.transform.position.x, player.transform.position.y, cam.transform.position.z);
         cam.transform.position = camPos;

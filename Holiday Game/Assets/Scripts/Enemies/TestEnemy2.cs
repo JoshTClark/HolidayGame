@@ -9,10 +9,8 @@ public class TestEnemy2 : Enemy
         shooterMove();
     }
 
-    private void Start()
+    public override void OnStart()
     {
-        base.Start();
-
         // Set player ranges
         minPlayerDist = 6f;
         maxPlayerDist = 8f;

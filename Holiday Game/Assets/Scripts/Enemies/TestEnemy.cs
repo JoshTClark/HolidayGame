@@ -10,6 +10,6 @@ public class TestEnemy : Enemy
 
     public override void OnUpdate()
     {
-        seekPlayer();
+        SeekPlayer();
     }
 }

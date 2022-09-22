@@ -17,15 +17,15 @@ public abstract class Weapon : MonoBehaviour
     // Gets the closest enemy
     protected Enemy GetClosestEnemy()
     {
-        List<Enemy> enemies = GameManager.instance.CurrentEnemies;
+        List<Enemy> enemies = EnemyManager.instance.CurrentEnemies;
         if (enemies.Count > 0)
         {
             Enemy closest = enemies[0];
-            float distance = 0f;
+            float distance = closest.PlayerDistance();
             foreach (Enemy e in enemies)
             {
-                float newDistance = Vector2.Distance(transform.position, e.transform.position);
-                if (newDistance > distance)
+                float newDistance = e.PlayerDistance();
+                if (newDistance < distance)
                 {
                     closest = e;
                     distance = newDistance;

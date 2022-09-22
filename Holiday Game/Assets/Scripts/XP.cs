@@ -7,17 +7,8 @@ public class XP : MonoBehaviour
     [SerializeField]
     private float XPAmount;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField]
+    public EnemyManager.XPIndex index;
 
     private void OnTriggerStay2D(Collider2D other)
     {

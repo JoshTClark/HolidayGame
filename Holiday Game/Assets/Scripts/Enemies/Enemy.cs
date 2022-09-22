@@ -6,9 +6,12 @@ public abstract class Enemy : StatsComponent
 {
     public Player player;
 
-    public GameManager.EnemyIndex index;
+    public EnemyManager.EnemyIndex index;
 
     protected Vector2 velocity = Vector2.zero;
+
+    [SerializeField]
+    private float spawnWeight;
 
 
     /// <summary>
@@ -23,15 +26,20 @@ public abstract class Enemy : StatsComponent
 
     //Which XP prefab this enemy will drop
     [SerializeField]
-    public XP XPType;
+    public EnemyManager.XPIndex XPType;
+
+    public float SpawnWeight
+    {
+        get { return spawnWeight; }
+    }
 
     /// <summary>
     /// Moves the Enemy towards the player
     /// </summary>
-    protected void seekPlayer()
+    protected void SeekPlayer()
     {
         // Get the players position
-        Vector2 desiredVelocity = (Vector2)player.transform.position - (Vector2)transform.position;
+        Vector2 desiredVelocity = ((Vector2)player.transform.position - (Vector2)transform.position).normalized;
 
         // Get the players position, seek that point, apply forces, and move
         velocity = desiredVelocity * Speed;
@@ -41,7 +49,7 @@ public abstract class Enemy : StatsComponent
     /// <summary>
     /// Moves the Enemy away from the player
     /// </summary>
-    protected void fleePlayer()
+    protected void FleePlayer()
     {
         // Get Player Position
         Vector2 desiredVelocity = (Vector2)transform.position - (Vector2)player.transform.position;
@@ -54,18 +62,18 @@ public abstract class Enemy : StatsComponent
     /// <summary>
     /// Stays within a certain distance of the player, either fleeing or seeking
     /// </summary>
-    protected void shooterMove()
+    protected void ShooterMove()
     {
         // Calculate the distance & compare it to the values
-        if(playerDistance() >= maxPlayerDist)
+        if (PlayerDistance() >= maxPlayerDist)
         {
             // Player is too far away, move closer
-            seekPlayer();
+            SeekPlayer();
         }
-        else if(playerDistance() <= minPlayerDist)
+        else if (PlayerDistance() <= minPlayerDist)
         {
             //player is too close, move away
-            fleePlayer();
+            FleePlayer();
         }
         else
         {
@@ -77,7 +85,7 @@ public abstract class Enemy : StatsComponent
     /// Calculates the distance between player & enemy
     /// </summary>
     /// <returns>Distance between</returns>
-    protected float playerDistance()
+    public float PlayerDistance()
     {
         return Vector2.Distance((Vector2)player.transform.position, (Vector2)transform.position);
     }
@@ -85,6 +93,6 @@ public abstract class Enemy : StatsComponent
     public override void OnDeath()
     {
         //Drops XP
-        Instantiate<XP>(XPType, transform.position, Quaternion.identity);
+        Instantiate<XP>(EnemyManager.instance.GetXPFromIndex(XPType), transform.position, Quaternion.identity);
     }
 }

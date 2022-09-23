@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class TestEnemy : Enemy
 {
+    public override void OnStart()
+    {
+    }
+
     public override void OnUpdate()
     {
-        seekPlayer();
+        SeekPlayer();
     }
 }

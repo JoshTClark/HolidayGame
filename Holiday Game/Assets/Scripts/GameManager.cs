@@ -1,16 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public enum EnemyIndex
-    {
-        None,
-        Test,
-        Test2
-    }
-
     public enum WeaponIndex
     {
         None,
@@ -22,76 +16,55 @@ public class GameManager : MonoBehaviour
     private Camera cam;
 
     [SerializeField]
-    private List<Enemy> enemyPrefabs = new List<Enemy>();
+    private Canvas ui;
+
+    [SerializeField]
+    private TMP_Text timerDisplay, difficultyDisplay;
 
     [SerializeField]
     private List<Weapon> weaponPrefabs = new List<Weapon>();
 
-    private List<Enemy> currentEnemies = new List<Enemy>();
-
     private float time = 0.0f;
+    private float currentDifficulty = 1;
 
-    public float Time
+    public Player player;
+
+    public float CurrentDifficulty
     {
-        get { return time; }
+        get { return currentDifficulty; }
     }
 
-    public List<Enemy> CurrentEnemies
+    public float GameTime
     {
-        get
-        {
-            return currentEnemies;
-        }
+        get { return time; }
     }
 
     // Only a single gamemanger should ever exist so we can always get it here
     public static GameManager instance;
 
-    public Player player;
-
     void Start()
     {
         instance = this;
 
-        // Just testing adding enemies and an attack to the player
-        currentEnemies.Add(Instantiate<Enemy>(GetEnemyFromIndex(EnemyIndex.Test2), new Vector2(0, 5), Quaternion.identity));
-        foreach (Enemy e in currentEnemies)
-        {
-            e.player = player;
-        }
+        // Testing giving player a weapon
         GivePlayerWeapon(WeaponIndex.Snowball);
     }
 
     void Update()
     {
+        // Updating the timer and difficulty
+        time += Time.deltaTime;
+        currentDifficulty = Mathf.Floor(1 + (time / 5));
+
+        // Updating displays
+        string minutes = Mathf.Floor(time / 60).ToString("00");
+        string seconds = (time % 60).ToString("00");
+        timerDisplay.text = minutes + ":" + seconds;
+        difficultyDisplay.text = currentDifficulty.ToString();
+
         // Moving the camera
         Vector3 camPos = new Vector3(player.transform.position.x, player.transform.position.y, cam.transform.position.z);
         cam.transform.position = camPos;
-
-        // Enemy death
-        for(int i = 0; i < currentEnemies.Count; i++)
-        {
-            if (currentEnemies[i].IsDead)
-            {
-                Enemy e = currentEnemies[i];
-                currentEnemies.Remove(e);
-                Destroy(e.gameObject);
-                i--;
-            }
-        }
-    }
-
-    // Gets an enemy prefab from the list using the index
-    public Enemy GetEnemyFromIndex(EnemyIndex index)
-    {
-        foreach (Enemy i in enemyPrefabs)
-        {
-            if (i.index == index)
-            {
-                return i;
-            }
-        }
-        return null;
     }
 
     // Gets a weapon prefab from the list using the index
@@ -112,5 +85,15 @@ public class GameManager : MonoBehaviour
     {
         Weapon weapon = GetWeaponFromIndex(index);
         player.AddAttack(weapon);
+    }
+
+    // Random check
+    public static bool RollCheck(float chance)
+    {
+        float roll = Random.value;
+        if (roll < chance) {
+            return true;
+        }
+        return false;
     }
 }

@@ -11,13 +11,15 @@ public abstract class StatsComponent : MonoBehaviour
     [SerializeField]
     private float baseMaxHP, baseSpeed, baseDamage, baseAttackSpeed, baseArmor, baseRegen, baseCritChance, baseCritDamage;
 
-    // CurrentHP is here and is handled by this script
+    // Level up stuff
     [SerializeField]
-    private float currentHP;
+    private float levelScaling, hpLevelUp, damageLevelUp;
+
+    // CurrentHP is here and is handled by this script
+    public float currentHP;
 
     // Level
-    [SerializeField]
-    private float xpLevel;
+    public float xpAmount, level;
 
     // Flat additions to stats
     private float hpAdd, speedAdd, damageAdd, attackSpeedAdd, armorAdd, regenAdd, critChanceAdd, critDamageAdd;
@@ -40,13 +42,14 @@ public abstract class StatsComponent : MonoBehaviour
     public float BaseRegen { get; }
     public float BaseCritChance { get; }
     public float BaseCritDamage { get; }
-    
+
 
     // Don't use this to do damage there should be a damage method
     public float CurrentHP { get; set; }
 
     // Level
-    public float XPLevel { get; set; }
+    public float XP { get { return xpAmount; } }
+    public float Level { get { return level; } }
 
     // Used to get the "true" values of stats after calculating any additions from upgrades etc
     public float MaxHp { get { return (baseMaxHP + hpAdd) * hpMult; } }
@@ -73,7 +76,10 @@ public abstract class StatsComponent : MonoBehaviour
         critDamageMult = 1.0f;
 
         currentHP = MaxHp;
-        xpLevel = 0;
+        xpAmount = 0;
+        level = 1;
+
+        OnStart();
     }
 
     protected void Update()
@@ -81,14 +87,6 @@ public abstract class StatsComponent : MonoBehaviour
         CalculateStats();
 
         OnUpdate();
-
-        //This is temporary. Just until we can better handle enemy death, this just will reset it be alive the first tick after it died
-        if (isDead)
-        {
-            isDead = false;
-            currentHP = 20;
-        }
-
 
         // Checks if should be dead
         if (currentHP <= 0)
@@ -127,8 +125,11 @@ public abstract class StatsComponent : MonoBehaviour
         critChanceMult = 1.0f;
         critDamageMult = 1.0f;
 
-        // Do upgrade stuff here
-        
+        // LEVELS
+        hpAdd += ((level - 1) * levelScaling) * hpLevelUp;
+        damageAdd += ((level - 1) * levelScaling) * damageLevelUp;
+
+        // UPGRADES
     }
 
     // Deals damage here
@@ -142,13 +143,23 @@ public abstract class StatsComponent : MonoBehaviour
     {
         attacks.Add(Instantiate(attack, transform));
     }
-    
+
     public void AddXP(float amount)
     {
-        xpLevel += amount;
+        xpAmount += amount;
+    }
+
+    public void SetLevel(int i)
+    {
+        level = i;
+        Debug.Log(level);
+        CalculateStats();
+        currentHP = MaxHp;
     }
 
     public abstract void OnUpdate();
 
     public abstract void OnDeath();
+
+    public abstract void OnStart();
 }

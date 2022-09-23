@@ -77,7 +77,7 @@ public class EnemyManager : MonoBehaviour
         Vector2 spawnPos = new Vector2();
         float pX = Random.Range(minSpawnDistance.x, maxSpawnDistance.x);
         float pY = Random.Range(minSpawnDistance.y, maxSpawnDistance.y);
-        Vector2 playerPos = GameManager.instance.player.transform.position;
+        Vector2 playerPos = GameManager.instance.Player.transform.position;
         if (GameManager.RollCheck(0.5f))
         {
             pX *= -1;
@@ -91,7 +91,7 @@ public class EnemyManager : MonoBehaviour
         spawnPos.y = playerPos.y + pY;
 
         Enemy spawned = Instantiate(prefab, spawnPos, Quaternion.identity);
-        spawned.player = GameManager.instance.player;
+        spawned.player = GameManager.instance.Player;
         spawned.SetLevel((int)GameManager.instance.CurrentDifficulty);
         currentEnemies.Add(spawned);
     }

@@ -22,12 +22,20 @@ public class GameManager : MonoBehaviour
     private TMP_Text timerDisplay, difficultyDisplay;
 
     [SerializeField]
+    private Player playerPrefab;
+
+    [SerializeField]
     private List<Weapon> weaponPrefabs = new List<Weapon>();
 
     private float time = 0.0f;
     private float currentDifficulty = 1;
 
-    public Player player;
+    public Player Player
+    {
+        get { return player; }
+    }
+
+    private Player player;
 
     public float CurrentDifficulty
     {
@@ -46,6 +54,8 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
 
+        player = Instantiate<Player>(playerPrefab, new Vector2(), Quaternion.identity);
+
         // Testing giving player a weapon
         GivePlayerWeapon(WeaponIndex.Snowball);
     }
@@ -63,7 +73,7 @@ public class GameManager : MonoBehaviour
         difficultyDisplay.text = currentDifficulty.ToString();
 
         // Moving the camera
-        Vector3 camPos = new Vector3(player.transform.position.x, player.transform.position.y, cam.transform.position.z);
+        Vector3 camPos = new Vector3(Player.transform.position.x, Player.transform.position.y, cam.transform.position.z);
         cam.transform.position = camPos;
     }
 
@@ -84,14 +94,15 @@ public class GameManager : MonoBehaviour
     public void GivePlayerWeapon(WeaponIndex index)
     {
         Weapon weapon = GetWeaponFromIndex(index);
-        player.AddAttack(weapon);
+        Player.AddAttack(weapon);
     }
 
     // Random check
     public static bool RollCheck(float chance)
     {
         float roll = Random.value;
-        if (roll < chance) {
+        if (roll < chance)
+        {
             return true;
         }
         return false;

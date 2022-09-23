@@ -9,6 +9,8 @@ public class Player : StatsComponent
     [SerializeField]
     private InputActionReference movement;
 
+    public float pickupRange;
+
     public override void OnStart()
     {
     }

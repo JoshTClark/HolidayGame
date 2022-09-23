@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
+  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   m_Color: {r: 0.6320754, g: 0.16398184, b: 0.5103799, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -145,6 +145,7 @@ MonoBehaviour:
   baseCritChance: 0
   baseCritDamage: 0
   currentHP: 0
+  xpLevel: 0
   isDead: 0
   player: {fileID: 0}
   index: 2

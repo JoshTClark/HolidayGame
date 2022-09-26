@@ -142,8 +142,6 @@ MonoBehaviour:
   hpLevelUp: 10
   damageLevelUp: 1
   currentHP: 0
-  xpAmount: 0
-  level: 0
   hpAdd: 0
   speedAdd: 0
   damageAdd: 0
@@ -155,6 +153,7 @@ MonoBehaviour:
   isDead: 0
   movement: {fileID: -8801911651582695651, guid: 46c5d35181ff19744bbe64637b663d10, type: 3}
   pickupRange: 5
+  attackActivationRange: 10
 --- !u!61 &1069143796030833450
 BoxCollider2D:
   m_ObjectHideFlags: 0

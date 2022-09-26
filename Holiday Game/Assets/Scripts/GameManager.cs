@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,7 +20,10 @@ public class GameManager : MonoBehaviour
     private Canvas ui;
 
     [SerializeField]
-    private TMP_Text timerDisplay, difficultyDisplay;
+    private TMP_Text timerDisplay, difficultyDisplay, playerStats;
+
+    [SerializeField]
+    private CanvasRenderer statsPanel;
 
     [SerializeField]
     private Player playerPrefab;
@@ -29,6 +33,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private List<Weapon> weaponPrefabs = new List<Weapon>();
+
+    [SerializeField]
+    private InputActionReference displayStats;
 
     private float time = 0.0f;
     private float currentDifficulty = 1;
@@ -75,6 +82,16 @@ public class GameManager : MonoBehaviour
         timerDisplay.text = minutes + ":" + seconds;
         difficultyDisplay.text = currentDifficulty.ToString();
 
+        if (displayStats.action.ReadValue<float>() > 0)
+        {
+            statsPanel.gameObject.SetActive(true);
+            DisplayPlayerStats();
+        }
+        else
+        {
+            statsPanel.gameObject.SetActive(false);
+        }
+
         // Moving the camera
         Vector3 camPos = new Vector3(Player.transform.position.x, Player.transform.position.y, cam.transform.position.z);
         cam.transform.position = camPos;
@@ -109,5 +126,18 @@ public class GameManager : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    private void DisplayPlayerStats()
+    {
+        playerStats.text =
+            "Max HP = " + player.MaxHp +
+            "\nSpeed = " + player.Speed +
+            "\nDamage = " + player.Damage +
+            "\nAttack Speed = " + player.AttackSpeed +
+            "\nArmor = " + player.Armor +
+            "\nRegen = " + player.Regen +
+            "\nCritical Chance = " + player.CritDamage +
+            "\nCritical Damage = " + player.CritDamage;
     }
 }

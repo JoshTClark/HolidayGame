@@ -10,6 +10,7 @@ public class Player : StatsComponent
     private InputActionReference movement;
 
     public float pickupRange;
+    public float attackActivationRange;
 
     public override void OnStart()
     {
@@ -27,5 +28,11 @@ public class Player : StatsComponent
         Vector2 movementInput = movement.action.ReadValue<Vector2>();
         movementInput = movementInput * Speed;
         GetComponent<Rigidbody2D>().velocity = movementInput;
+    }
+
+    private void OnDrawGizmos()
+    {
+        // Showing attack range
+        Gizmos.DrawWireSphere(transform.position, attackActivationRange);
     }
 }

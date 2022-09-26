@@ -6,6 +6,7 @@ public class SnowballWeapon : Weapon
 {
     void Update()
     {
+
         float delta = Time.deltaTime;
 
         // Basic targetting for now just targets the closest enemy

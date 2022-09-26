@@ -19,7 +19,7 @@ public abstract class StatsComponent : MonoBehaviour
     public float currentHP;
 
     // Level
-    public float xpAmount, level;
+    private float xpAmount, level;
 
     // Flat additions to stats
     private float hpAdd, speedAdd, damageAdd, attackSpeedAdd, armorAdd, regenAdd, critChanceAdd, critDamageAdd;
@@ -152,7 +152,6 @@ public abstract class StatsComponent : MonoBehaviour
     public void SetLevel(int i)
     {
         level = i;
-        Debug.Log(level);
         CalculateStats();
         currentHP = MaxHp;
     }

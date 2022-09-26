@@ -587,6 +587,7 @@ MonoBehaviour:
   timerDisplay: {fileID: 989351337}
   difficultyDisplay: {fileID: 118963396}
   playerPrefab: {fileID: 1069143796030833455, guid: a487fa23d2b6b8f429579c3891e1c79b, type: 3}
+  timeToDifficultyIncrease: 30
   weaponPrefabs:
   - {fileID: 2227321042379140027, guid: 004bf8ebdd84e4d40844a9da715c7154, type: 3}
   - {fileID: 7954688961587838055, guid: a5dc687a85641c345843c3600552eda2, type: 3}
@@ -605,11 +606,13 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: -672623973766071318, guid: b8b5a0b01002cf44f8ca5e3dd14f603c, type: 3}
   - {fileID: -8459343449954966639, guid: a7d71d0cd087a234eba3f60f5c12b2d3, type: 3}
+  phases:
+  - {fileID: 11400000, guid: a707b7c26a29e33449e96eb1b03f9d46, type: 2}
+  - {fileID: 11400000, guid: d5630dd28e0882244905cab4f78eb009, type: 2}
   xpPrefabs:
   - {fileID: 7984401659860504494, guid: c74d9ec7b8c27fb40ba9b8bdfbe06a0a, type: 3}
-  minSpawnDistance: {x: 5, y: 3}
-  maxSpawnDistance: {x: 15, y: 9}
-  spawnInterval: 2
+  minSpawnDistance: {x: 16, y: 9}
+  maxSpawnDistance: {x: 20, y: 15}
 --- !u!1 &2124577261
 GameObject:
   m_ObjectHideFlags: 0

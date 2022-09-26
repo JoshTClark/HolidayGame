@@ -20,15 +20,17 @@ public class EnemyManager : MonoBehaviour
     private List<Enemy> enemyPrefabs = new List<Enemy>();
 
     [SerializeField]
+    private List<SpawnPhaseScriptableObject> phases = new List<SpawnPhaseScriptableObject>();
+
+    [SerializeField]
     private List<XP> xpPrefabs = new List<XP>();
 
     [SerializeField]
     private Vector2 minSpawnDistance, maxSpawnDistance;
 
-    [SerializeField]
-    private float spawnInterval;
-
     private float spawnTimer = 0;
+
+    private SpawnPhaseScriptableObject currentPhase;
 
     private List<Enemy> currentEnemies = new List<Enemy>();
 
@@ -42,18 +44,22 @@ public class EnemyManager : MonoBehaviour
     public void Start()
     {
         instance = this;
+        FindCurrentPhase();
     }
 
     private void Update()
     {
-        spawnTimer += Time.deltaTime;
-        if (spawnTimer >= spawnInterval)
+        float delta = Time.deltaTime;
+        spawnTimer += delta;
+        if (spawnTimer >= currentPhase.spawnInterval)
         {
-            SpawnEnemy(EnemyIndex.Test);
+            SpawnEnemiesByPhase();
             spawnTimer = 0;
         }
 
         RemoveDeadEnemies();
+
+        FindCurrentPhase();
     }
 
     // Removes dead enemies from the game
@@ -96,6 +102,15 @@ public class EnemyManager : MonoBehaviour
         currentEnemies.Add(spawned);
     }
 
+    private void SpawnEnemiesByPhase()
+    {
+        EnemyIndex[] indices = currentPhase.GetSpawnWave();
+        for (int i = 0; i < indices.Length; i++)
+        {
+            SpawnEnemy(indices[i]);
+        }
+    }
+
     // Gets an enemy prefab from the list using the index
     public Enemy GetEnemyFromIndex(EnemyManager.EnemyIndex index)
     {
@@ -119,5 +134,21 @@ public class EnemyManager : MonoBehaviour
             }
         }
         return null;
+    }
+
+    /// <summary>
+    /// Finds which phase it should be on
+    /// </summary>
+    private void FindCurrentPhase()
+    {
+        for (int i = 0; i < phases.Count; i++)
+        {
+            if (phases[i].startTime <= GameManager.instance.GameTime)
+            {
+                currentPhase = phases[i];
+                phases.RemoveAt(i);
+                break;
+            }
+        }
     }
 }

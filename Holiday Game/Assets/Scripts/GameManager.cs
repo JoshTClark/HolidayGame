@@ -25,6 +25,9 @@ public class GameManager : MonoBehaviour
     private Player playerPrefab;
 
     [SerializeField]
+    private float timeToDifficultyIncrease;
+
+    [SerializeField]
     private List<Weapon> weaponPrefabs = new List<Weapon>();
 
     private float time = 0.0f;
@@ -64,7 +67,7 @@ public class GameManager : MonoBehaviour
     {
         // Updating the timer and difficulty
         time += Time.deltaTime;
-        currentDifficulty = Mathf.Floor(1 + (time / 5));
+        currentDifficulty = Mathf.Floor(1 + (time / timeToDifficultyIncrease));
 
         // Updating displays
         string minutes = Mathf.Floor(time / 60).ToString("00");

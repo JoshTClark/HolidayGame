@@ -10,9 +10,6 @@ public abstract class Enemy : StatsComponent
 
     protected Vector2 velocity = Vector2.zero;
 
-    [SerializeField]
-    private float spawnWeight;
-
 
     /// <summary>
     /// Minimum distance between enemy & player
@@ -27,11 +24,6 @@ public abstract class Enemy : StatsComponent
     //Which XP prefab this enemy will drop
     [SerializeField]
     public EnemyManager.XPIndex XPType;
-
-    public float SpawnWeight
-    {
-        get { return spawnWeight; }
-    }
 
     /// <summary>
     /// Moves the Enemy towards the player

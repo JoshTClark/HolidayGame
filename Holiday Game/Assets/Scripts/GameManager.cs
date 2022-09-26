@@ -84,15 +84,15 @@ public class GameManager : MonoBehaviour
         timerDisplay.text = minutes + ":" + seconds;
         difficultyDisplay.text = currentDifficulty.ToString();
 
-        if (displayStats.action.ReadValue<float>() > 0)
-        {
-            statsPanel.gameObject.SetActive(true);
-            DisplayPlayerStats();
-        }
-        else
-        {
-            statsPanel.gameObject.SetActive(false);
-        }
+       //if (displayStats.action.ReadValue<float>() > 0)
+       //{
+       //    statsPanel.gameObject.SetActive(true);
+       //    DisplayPlayerStats();
+       //}
+       //else
+       //{
+       //    statsPanel.gameObject.SetActive(false);
+       //}
 
         // Moving the camera
         Vector3 camPos = new Vector3(Player.transform.position.x, Player.transform.position.y, cam.transform.position.z);

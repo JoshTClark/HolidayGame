@@ -46,4 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delay: 3
   projectile: {fileID: 4520824908635731440, guid: ffac36bb446f16342bf8db7cf71be2d4, type: 3}
-  index: 2
+  index: 1

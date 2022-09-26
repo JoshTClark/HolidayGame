@@ -8,9 +8,16 @@ public class GameManager : MonoBehaviour
 {
     public enum WeaponIndex
     {
-        None,
         Snowball,
-        Test
+        Test,
+        Count
+    }
+
+    public enum GameState
+    {
+        Normal,
+        Paused,
+        UpgradeMenu
     }
 
     [SerializeField]
@@ -20,7 +27,7 @@ public class GameManager : MonoBehaviour
     private Canvas ui;
 
     [SerializeField]
-    private TMP_Text timerDisplay, difficultyDisplay, playerStats;
+    private TMP_Text timerDisplay, difficultyDisplay, playerStats, pausedText;
 
     [SerializeField]
     private CanvasRenderer statsPanel;
@@ -39,6 +46,7 @@ public class GameManager : MonoBehaviour
 
     private float time = 0.0f;
     private float currentDifficulty = 1;
+    private GameState state = GameState.Normal;
 
     public Player Player
     {
@@ -72,29 +80,41 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        // Updating the timer and difficulty
-        time += Time.deltaTime;
-        currentDifficulty = Mathf.Floor(1 + (time / timeToDifficultyIncrease));
-
-        // Updating displays
-        string minutes = Mathf.Floor(time / 60).ToString("00");
-        string seconds = (time % 60).ToString("00");
-        timerDisplay.text = minutes + ":" + seconds;
-        difficultyDisplay.text = currentDifficulty.ToString();
-
-        if (displayStats.action.ReadValue<float>() > 0)
+        switch (state)
         {
-            statsPanel.gameObject.SetActive(true);
-            DisplayPlayerStats();
-        }
-        else
-        {
-            statsPanel.gameObject.SetActive(false);
-        }
+            case GameState.Normal:
+                // Updating the timer and difficulty
+                time += Time.deltaTime;
+                currentDifficulty = Mathf.Floor(1 + (time / timeToDifficultyIncrease));
 
-        // Moving the camera
-        Vector3 camPos = new Vector3(Player.transform.position.x, Player.transform.position.y, cam.transform.position.z);
-        cam.transform.position = camPos;
+                // Updating displays
+                string minutes = Mathf.Floor(time / 60).ToString("00");
+                string seconds = (time % 60).ToString("00");
+                timerDisplay.text = minutes + ":" + seconds;
+                difficultyDisplay.text = currentDifficulty.ToString();
+                pausedText.gameObject.SetActive(false);
+
+                // Displaying stats
+                if (displayStats.action.ReadValue<float>() > 0)
+                {
+                    statsPanel.gameObject.SetActive(true);
+                    DisplayPlayerStats();
+                }
+                else
+                {
+                    statsPanel.gameObject.SetActive(false);
+                }
+
+                // Moving the camera
+                Vector3 camPos = new Vector3(Player.transform.position.x, Player.transform.position.y, cam.transform.position.z);
+                cam.transform.position = camPos;
+                break;
+            case GameState.Paused:
+                pausedText.gameObject.SetActive(true);
+                break;
+            case GameState.UpgradeMenu:
+                break;
+        }
     }
 
     // Gets a weapon prefab from the list using the index

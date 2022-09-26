@@ -9,8 +9,7 @@ public class Player : StatsComponent
     [SerializeField]
     private InputActionReference movement;
 
-    [SerializeField]
-    private HealthBar healthBar;
+    public HealthBar healthBar;
 
     public float pickupRange;
     public float attackActivationRange;

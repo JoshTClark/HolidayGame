@@ -21,6 +21,7 @@ public abstract class StatsComponent : MonoBehaviour
     // Level
     private float xpAmount, level;
 
+    [SerializeField]
     // Flat additions to stats
     private float hpAdd, speedAdd, damageAdd, attackSpeedAdd, armorAdd, regenAdd, critChanceAdd, critDamageAdd;
 
@@ -84,6 +85,7 @@ public abstract class StatsComponent : MonoBehaviour
 
     protected void Update()
     {
+        
         CalculateStats();
 
         OnUpdate();
@@ -129,7 +131,25 @@ public abstract class StatsComponent : MonoBehaviour
         hpAdd += ((level - 1) * levelScaling) * hpLevelUp;
         damageAdd += ((level - 1) * levelScaling) * damageLevelUp;
 
+        CalculateLevel();
+
+     
+
         // UPGRADES
+    }
+    public void CalculateLevel()
+    {
+        float tempLevel = 1 + (float)Math.Floor(xpAmount / 50);
+        if(tempLevel > level)
+        {
+            level++;
+            OnLevelUp();
+        }
+    }
+
+    private void OnLevelUp()
+    {
+        
     }
 
     // Deals damage here

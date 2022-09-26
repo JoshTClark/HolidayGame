@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   XPAmount: 10
+  index: 0
 --- !u!50 &6095600392329713379
 Rigidbody2D:
   serializedVersion: 4

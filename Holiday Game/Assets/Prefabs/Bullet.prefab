@@ -125,6 +125,7 @@ MonoBehaviour:
   baseLifetime: 10
   basePierce: 0
   projectileTeam: 1
+  shooter: {fileID: 0}
 --- !u!50 &3503085336231578201
 Rigidbody2D:
   serializedVersion: 4

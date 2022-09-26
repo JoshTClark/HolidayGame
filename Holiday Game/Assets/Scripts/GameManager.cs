@@ -4,6 +4,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+// can be called from anywhere !!!!!
+
 public class GameManager : MonoBehaviour
 {
     public enum WeaponIndex

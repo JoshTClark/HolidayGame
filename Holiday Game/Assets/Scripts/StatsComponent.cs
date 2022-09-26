@@ -46,7 +46,7 @@ public abstract class StatsComponent : MonoBehaviour
 
 
     // Don't use this to do damage there should be a damage method
-    public float CurrentHP { get; set; }
+    public float CurrentHP { get { return currentHP; } }
 
     // Level
     public float XP { get { return xpAmount; } }

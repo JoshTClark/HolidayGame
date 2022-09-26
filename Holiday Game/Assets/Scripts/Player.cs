@@ -9,11 +9,15 @@ public class Player : StatsComponent
     [SerializeField]
     private InputActionReference movement;
 
+    [SerializeField]
+    private HealthBar healthBar;
+
     public float pickupRange;
     public float attackActivationRange;
 
     public override void OnStart()
     {
+        healthBar.SetMaxHealth(MaxHp);
     }
 
     public override void OnDeath()
@@ -28,6 +32,8 @@ public class Player : StatsComponent
         Vector2 movementInput = movement.action.ReadValue<Vector2>();
         movementInput = movementInput * Speed;
         GetComponent<Rigidbody2D>().velocity = movementInput;
+
+        healthBar.SetHealth(CurrentHP);
     }
 
     private void OnDrawGizmos()

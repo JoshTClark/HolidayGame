@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 // can be called from anywhere !!!!!
 
@@ -21,15 +22,32 @@ public class GameManager : MonoBehaviour
     private Canvas ui;
 
     [SerializeField]
-    private TMP_Text timerDisplay, difficultyDisplay;
+    private TMP_Text timerDisplay, difficultyDisplay, playerStats;
+
+    [SerializeField]
+    private CanvasRenderer statsPanel;
+
+    [SerializeField]
+    private Player playerPrefab;
+
+    [SerializeField]
+    private float timeToDifficultyIncrease;
 
     [SerializeField]
     private List<Weapon> weaponPrefabs = new List<Weapon>();
 
+    [SerializeField]
+    private InputActionReference displayStats;
+
     private float time = 0.0f;
     private float currentDifficulty = 1;
 
-    public Player player;
+    public Player Player
+    {
+        get { return player; }
+    }
+
+    private Player player;
 
     public float CurrentDifficulty
     {
@@ -48,6 +66,8 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
 
+        player = Instantiate<Player>(playerPrefab, new Vector2(), Quaternion.identity);
+
         // Testing giving player a weapon
         GivePlayerWeapon(WeaponIndex.Snowball);
     }
@@ -56,7 +76,7 @@ public class GameManager : MonoBehaviour
     {
         // Updating the timer and difficulty
         time += Time.deltaTime;
-        currentDifficulty = Mathf.Floor(1 + (time / 5));
+        currentDifficulty = Mathf.Floor(1 + (time / timeToDifficultyIncrease));
 
         // Updating displays
         string minutes = Mathf.Floor(time / 60).ToString("00");
@@ -64,8 +84,18 @@ public class GameManager : MonoBehaviour
         timerDisplay.text = minutes + ":" + seconds;
         difficultyDisplay.text = currentDifficulty.ToString();
 
+        if (displayStats.action.ReadValue<float>() > 0)
+        {
+            statsPanel.gameObject.SetActive(true);
+            DisplayPlayerStats();
+        }
+        else
+        {
+            statsPanel.gameObject.SetActive(false);
+        }
+
         // Moving the camera
-        Vector3 camPos = new Vector3(player.transform.position.x, player.transform.position.y, cam.transform.position.z);
+        Vector3 camPos = new Vector3(Player.transform.position.x, Player.transform.position.y, cam.transform.position.z);
         cam.transform.position = camPos;
     }
 
@@ -86,16 +116,30 @@ public class GameManager : MonoBehaviour
     public void GivePlayerWeapon(WeaponIndex index)
     {
         Weapon weapon = GetWeaponFromIndex(index);
-        player.AddAttack(weapon);
+        Player.AddAttack(weapon);
     }
 
     // Random check
     public static bool RollCheck(float chance)
     {
         float roll = Random.value;
-        if (roll < chance) {
+        if (roll < chance)
+        {
             return true;
         }
         return false;
+    }
+
+    private void DisplayPlayerStats()
+    {
+        playerStats.text =
+            "Max HP = " + player.MaxHp +
+            "\nSpeed = " + player.Speed +
+            "\nDamage = " + player.Damage +
+            "\nAttack Speed = " + player.AttackSpeed +
+            "\nArmor = " + player.Armor +
+            "\nRegen = " + player.Regen +
+            "\nCritical Chance = " + player.CritDamage +
+            "\nCritical Damage = " + player.CritDamage;
     }
 }

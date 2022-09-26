@@ -6,6 +6,7 @@ public class SnowballWeapon : Weapon
 {
     void Update()
     {
+
         float delta = Time.deltaTime;
 
         // Basic targetting for now just targets the closest enemy
@@ -19,7 +20,7 @@ public class SnowballWeapon : Weapon
 
         // Attack timer it will do the attack every "delay" seconds
         timer += delta;
-        if (timer >= delay)
+        if (timer >= delay && e)
         {
             ProjectileBase p = Instantiate<ProjectileBase>(projectile, transform.position, Quaternion.identity);
             p.Direction = transform.right;

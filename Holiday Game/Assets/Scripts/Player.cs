@@ -12,6 +12,9 @@ public class Player : StatsComponent
     [SerializeField]
     private HealthBar healthBar;
 
+    public float pickupRange;
+    public float attackActivationRange;
+
     public override void OnStart()
     {
         healthBar.SetMaxHealth(MaxHp);
@@ -31,5 +34,11 @@ public class Player : StatsComponent
         GetComponent<Rigidbody2D>().velocity = movementInput;
 
         healthBar.SetHealth(CurrentHP);
+    }
+
+    private void OnDrawGizmos()
+    {
+        // Showing attack range
+        Gizmos.DrawWireSphere(transform.position, attackActivationRange);
     }
 }

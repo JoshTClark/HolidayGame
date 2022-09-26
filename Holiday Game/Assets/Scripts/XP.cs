@@ -10,6 +10,14 @@ public class XP : MonoBehaviour
     [SerializeField]
     public EnemyManager.XPIndex index;
 
+    private void Update()
+    {
+        if (PlayerDistance() <= GameManager.instance.Player.pickupRange)
+        {
+            SeekPlayer();
+        }
+    }
+
     private void OnTriggerStay2D(Collider2D other)
     {
         HandleCollision(other);
@@ -25,5 +33,27 @@ public class XP : MonoBehaviour
             //remove the xp gem
             Destroy(gameObject);
         }
+    }
+
+    /// <summary>
+    /// Moves towards the player
+    /// </summary>
+    protected void SeekPlayer()
+    {
+        // Get the players position
+        Vector2 desiredVelocity = ((Vector2)GameManager.instance.Player.transform.position - (Vector2)transform.position).normalized;
+
+        // Get the players position, seek that point, apply forces, and move
+        Vector2 velocity = desiredVelocity * 20;
+        GetComponent<Rigidbody2D>().velocity = velocity;
+    }
+
+    /// <summary>
+    /// Calculates the distance between player & XP
+    /// </summary>
+    /// <returns>Distance between</returns>
+    public float PlayerDistance()
+    {
+        return Vector2.Distance((Vector2)GameManager.instance.Player.transform.position, (Vector2)transform.position);
     }
 }

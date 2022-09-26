@@ -147,8 +147,9 @@ MonoBehaviour:
   levelScaling: 1
   hpLevelUp: 5
   damageLevelUp: 0
+  currentHP: 0
   isDead: 0
   player: {fileID: 0}
   index: 1
-  spawnWeight: 0
+  spawnWeight: 1
   XPType: 0

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+// can be called from anywhere !!!!!
+
 public class GameManager : MonoBehaviour
 {
     public enum WeaponIndex

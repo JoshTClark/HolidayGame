@@ -38,4 +38,19 @@ public abstract class Weapon : MonoBehaviour
             return null;
         }
     }
+
+    protected Enemy GetRandomEnemy()
+    {
+        List<Enemy> enemies = EnemyManager.instance.CurrentEnemies;
+        if (enemies.Count > 0)
+        {
+            int rngEnemy = Random.Range(0, EnemyManager.instance.CurrentEnemies.Count - 1);
+            Enemy closest = enemies[rngEnemy];
+            return closest;
+        }
+        else
+        {
+            return null;
+        }
+    }
 }

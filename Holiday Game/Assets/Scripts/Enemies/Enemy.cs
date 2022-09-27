@@ -102,23 +102,26 @@ public abstract class Enemy : StatsComponent
     /// <param name="collision"></param>
     private void HandleCollision(Collider2D collision)
     {
+        /*
         Debug.Log("Here");
         if (!GameManager.instance.Player.Invincible)
         {
             GameManager.instance.Player.DealDamage(Damage);
         }
+        */
 
         // Getting Component from the collider doesn't work properly for some reason
         // The code inside of the if statements will never be called for some reason
 
-        //if (collision.gameObject.GetComponent<Player>())
-        //{
-        //    Debug.Log("Hurt");
-        //    // We hit the player, so they take damage
-        //}
-        //else if (collision.gameObject.GetComponent<Enemy>())
-        //{
-        //    Debug.Log("Other Enemy");
-        //}
+        if (collision.gameObject.GetComponent<Player>())
+        {
+            Debug.Log("Hurt");
+            // We hit the player, so they take damage
+            GameManager.instance.Player.DealDamage(Damage);
+        }
+        else if (collision.gameObject.GetComponent<Enemy>())
+        {
+            Debug.Log("Other Enemy");
+        }
     }
 }

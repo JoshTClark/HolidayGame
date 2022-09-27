@@ -38,6 +38,7 @@ public class Player : StatsComponent
         movementInput = movementInput * Speed;
         GetComponent<Rigidbody2D>().velocity = movementInput;
 
+        healthBar.SetMaxHealth(MaxHp);
         healthBar.SetHealth(CurrentHP);
         UpdateiFrames();
     }

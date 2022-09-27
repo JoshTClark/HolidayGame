@@ -138,7 +138,7 @@ MonoBehaviour:
   baseRegen: 0
   baseCritChance: 0
   baseCritDamage: 0
-  levelScaling: 1
+  levelScaling: 2
   hpLevelUp: 10
   damageLevelUp: 1
   currentHP: 0

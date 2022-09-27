@@ -137,10 +137,10 @@ public abstract class StatsComponent : MonoBehaviour
     //Checks to see if leveled up since last tick
     public void CalculateLevel()
     {
-        
-        float tempLevel = 1 + (float)Math.Floor(xpAmount / 50); // what the level should be based on xp gained
-        
-        if(tempLevel > level) // if the calculated level is higher than the plaers level, then level up
+
+        float tempLevel = level + (float)Math.Floor(xpAmount / GetXpToNextLevel()); // what the level should be based on xp gained
+
+        if (tempLevel > level) // if the calculated level is higher than the plaers level, then level up
         {
             level++;
             OnLevelUp();
@@ -174,7 +174,7 @@ public abstract class StatsComponent : MonoBehaviour
     public void AddXP(float amount)
     {
         xpAmount += amount;
-        
+
         if (currentHP < MaxHp) // heals for 5 when pick up xp // should be removed once health drops/health regen are incorporated.
         {
             currentHP += 5;
@@ -188,6 +188,18 @@ public abstract class StatsComponent : MonoBehaviour
         level = i;
         CalculateStats();
         currentHP = MaxHp;
+    }
+
+    public float GetXpToNextLevel()
+    {
+        // Testing for right now until we get an actual level curve
+        return 50 * Level;
+    }
+
+    public float GetPercentToNextLevel()
+    {
+        // Testing for right now until we get an actual level curve
+        return (XP - (50 * (level - 1))) / (GetXpToNextLevel() - (50 * (level - 1)));
     }
 
     public abstract void OnUpdate();

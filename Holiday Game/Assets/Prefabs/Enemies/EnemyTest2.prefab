@@ -159,4 +159,4 @@ MonoBehaviour:
   isDead: 0
   player: {fileID: 0}
   index: 2
-  XPType: 0
+  XPType: 1

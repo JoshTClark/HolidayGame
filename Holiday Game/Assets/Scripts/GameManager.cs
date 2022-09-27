@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 // can be called from anywhere !!!!!
 
@@ -29,7 +30,10 @@ public class GameManager : MonoBehaviour
     private Canvas ui;
 
     [SerializeField]
-    private TMP_Text timerDisplay, difficultyDisplay, playerStats;
+    private TMP_Text timerDisplay, difficultyDisplay, playerStats, playerLevel;
+
+    [SerializeField]
+    private Image xpBar;
 
     [SerializeField]
     private CanvasRenderer statsPanel;
@@ -98,6 +102,9 @@ public class GameManager : MonoBehaviour
                 string seconds = (time % 60).ToString("00");
                 timerDisplay.text = minutes + ":" + seconds;
                 difficultyDisplay.text = currentDifficulty.ToString();
+                float xpAmount = Mathf.Clamp((player.GetPercentToNextLevel() * 0.8f) + 0.1f, 0.1f, 0.9f);
+                xpBar.GetComponent<RectTransform>().anchorMax = new Vector2(xpAmount, xpBar.GetComponent<RectTransform>().anchorMax.y);
+                playerLevel.text = player.Level.ToString();
 
                 // Displaying stats
                 if (displayStats.action.ReadValue<float>() > 0)

@@ -153,7 +153,7 @@ public abstract class StatsComponent : MonoBehaviour
     }
 
     // Deals damage here
-    public void DealDamage(float damage)
+    public virtual void DealDamage(float damage)
     {
         currentHP -= damage;
     }

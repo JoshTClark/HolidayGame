@@ -85,7 +85,6 @@ public abstract class StatsComponent : MonoBehaviour
 
     protected void Update()
     {
-        
         CalculateStats();
 
         OnUpdate();
@@ -130,26 +129,33 @@ public abstract class StatsComponent : MonoBehaviour
         // LEVELS
         hpAdd += ((level - 1) * levelScaling) * hpLevelUp;
         damageAdd += ((level - 1) * levelScaling) * damageLevelUp;
-
         CalculateLevel();
-
-     
 
         // UPGRADES
     }
+
+    //Checks to see if leveled up since last tick
     public void CalculateLevel()
     {
-        float tempLevel = 1 + (float)Math.Floor(xpAmount / 50);
-        if(tempLevel > level)
+        
+        float tempLevel = 1 + (float)Math.Floor(xpAmount / 50); // what the level should be based on xp gained
+        
+        if(tempLevel > level) // if the calculated level is higher than the plaers level, then level up
         {
             level++;
             OnLevelUp();
         }
     }
 
+    //What happens when the player levels up
     private void OnLevelUp()
     {
-        
+        //checks if missing hp, heals for 20 if so
+        if (currentHP < MaxHp)
+        {
+            currentHP += 20;
+        }
+        else currentHP = MaxHp;
     }
 
     // Deals damage here
@@ -164,9 +170,17 @@ public abstract class StatsComponent : MonoBehaviour
         attacks.Add(Instantiate(attack, transform));
     }
 
+    //Called when xp collides with player, adds an amount of xp to players total
     public void AddXP(float amount)
     {
         xpAmount += amount;
+        
+        if (currentHP < MaxHp) // heals for 5 when pick up xp // should be removed once health drops/health regen are incorporated.
+        {
+            currentHP += 5;
+        }
+        else currentHP = MaxHp;
+
     }
 
     public void SetLevel(int i)

@@ -138,7 +138,7 @@ MonoBehaviour:
   baseRegen: 0
   baseCritChance: 0
   baseCritDamage: 0
-  levelScaling: 1
+  levelScaling: 2
   hpLevelUp: 10
   damageLevelUp: 1
   currentHP: 0
@@ -152,6 +152,7 @@ MonoBehaviour:
   critDamageAdd: 0
   isDead: 0
   movement: {fileID: -8801911651582695651, guid: 46c5d35181ff19744bbe64637b663d10, type: 3}
+  healthBar: {fileID: 0}
   pickupRange: 5
   attackActivationRange: 10
 --- !u!61 &1069143796030833450

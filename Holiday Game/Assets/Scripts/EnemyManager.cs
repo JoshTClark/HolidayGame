@@ -13,7 +13,8 @@ public class EnemyManager : MonoBehaviour
 
     public enum XPIndex
     {
-        XP1
+        XP1,
+        XP2
     }
 
     [SerializeField]

@@ -45,7 +45,11 @@ public class EnemyManager : MonoBehaviour
     public void Start()
     {
         instance = this;
+
         FindCurrentPhase();
+
+        //enemyPrefabs = new List<Enemy>();
+        //enemyPrefabs.AddRange((Enemy[])Resources.LoadAll("Assets/Prefabs/Enemies"));
     }
 
     private void Update()

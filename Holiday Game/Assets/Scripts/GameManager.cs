@@ -53,6 +53,9 @@ public class GameManager : MonoBehaviour
     private List<Weapon> weaponPrefabs = new List<Weapon>();
 
     [SerializeField]
+    private List<Upgrade> upgradeDefinitions = new List<Upgrade>();
+
+    [SerializeField]
     private InputActionReference displayStats;
 
     [SerializeField]
@@ -103,7 +106,7 @@ public class GameManager : MonoBehaviour
                 currentDifficulty = Mathf.Floor(1 + (time / timeToDifficultyIncrease));
 
                 // Updating displays
-                string minutes = Mathf.Floor(time / 60).ToString("00");
+                string minutes = Mathf.Floor(time / 60).ToString();
                 string seconds = (time % 60).ToString("00");
                 timerDisplay.text = minutes + ":" + seconds;
                 difficultyDisplay.text = currentDifficulty.ToString();
@@ -175,5 +178,17 @@ public class GameManager : MonoBehaviour
             "\nRegen = " + player.Regen +
             "\nCritical Chance = " + player.CritDamage +
             "\nCritical Damage = " + player.CritDamage;
+    }
+
+    public Upgrade GetUpgrade(UpgradeIndex index)
+    {
+        foreach (Upgrade i in upgradeDefinitions)
+        {
+            if (i.index == index)
+            {
+                return i;
+            }
+        }
+        return null;
     }
 }

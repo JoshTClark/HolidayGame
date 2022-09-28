@@ -15,3 +15,5 @@ MonoBehaviour:
   upgradeName: 
   upgradeDescription: 
   index: 0
+  tier: 0
+  levels: 1

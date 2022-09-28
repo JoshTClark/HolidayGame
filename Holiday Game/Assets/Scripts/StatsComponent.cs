@@ -35,6 +35,9 @@ public abstract class StatsComponent : MonoBehaviour
     // Weapon List
     private List<Weapon> attacks = new List<Weapon>();
 
+    // Inventory for upgrades
+    private List<Upgrade> inventory = new List<Upgrade>();
+
     // Used to get the base stats without changing them at all
     public float BaseMaxHp { get; }
     public float BaseSpeed { get; }
@@ -200,6 +203,23 @@ public abstract class StatsComponent : MonoBehaviour
     {
         // Testing for right now until we get an actual level curve
         return (XP - (50 * (level - 1))) / (GetXpToNextLevel() - (50 * (level - 1)));
+    }
+
+    /// <summary>
+    /// Returns true if the upgrade is in the inventory
+    /// </summary>
+    /// <param name="index"></param>
+    /// <returns></returns>
+    public bool HasUpgrade(GameManager.UpgradeIndex index)
+    {
+        foreach (Upgrade i in inventory)
+        {
+            if (i.index == index)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public abstract void OnUpdate();

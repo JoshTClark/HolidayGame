@@ -35,20 +35,27 @@ public abstract class ProjectileBase : MonoBehaviour
 
     private void Update()
     {
-        float delta = Time.deltaTime;
-
-        // Timer for the projectile expiring
-        timeAlive += delta;
-        if (timeAlive >= Lifetime)
+        if (GameManager.instance.State == GameManager.GameState.Normal)
         {
-            DestroyProjectile();
+            float delta = Time.deltaTime;
+
+            // Timer for the projectile expiring
+            timeAlive += delta;
+            if (timeAlive >= Lifetime)
+            {
+                DestroyProjectile();
+            }
+
+            // Update stuff
+            OnUpdate();
+
+            // Moving the projectile
+            Move();
         }
-
-        // Update stuff
-        OnUpdate();
-
-        // Moving the projectile
-        Move();
+        else
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2();
+        }
     }
 
     // Called when a projectile collides with anything

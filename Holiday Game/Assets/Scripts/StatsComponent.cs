@@ -88,19 +88,26 @@ public abstract class StatsComponent : MonoBehaviour
 
     protected void Update()
     {
-        CalculateStats();
-
-        OnUpdate();
-
-        // Checks if should be dead
-        if (currentHP <= 0)
+        if (GameManager.instance.State == GameManager.GameState.Normal)
         {
-            isDead = true;
+            CalculateStats();
+
+            OnUpdate();
+
+            // Checks if should be dead
+            if (currentHP <= 0)
+            {
+                isDead = true;
+            }
+
+            if (IsDead)
+            {
+                OnDeath();
+            }
         }
-
-        if (IsDead)
+        else
         {
-            OnDeath();
+            GetComponent<Rigidbody2D>().velocity = new Vector2();
         }
     }
 

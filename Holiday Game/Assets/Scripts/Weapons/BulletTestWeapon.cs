@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BulletTestWeapon : Weapon
 {
-    void Update()
+    public override void OnUpdate()
     {
         float delta = Time.deltaTime;
 

@@ -29,29 +29,24 @@ public class GameManager : MonoBehaviour
     private Image xpBar;
 
     [SerializeField]
-    private CanvasRenderer statsPanel;
-
-    [SerializeField]
-    private Player playerPrefab;
+    private CanvasRenderer statsPanel, pausedPanel, gamePanel, upgradePanel;
 
     [SerializeField]
     private float timeToDifficultyIncrease;
 
     [SerializeField]
-    private List<Weapon> weaponPrefabs = new List<Weapon>();
-
-    [SerializeField]
-    private List<Upgrade> upgradeDefinitions = new List<Upgrade>();
-
-    [SerializeField]
-    private InputActionReference displayStats;
+    private InputActionReference displayStats, pauseGame;
 
     [SerializeField]
     private HealthBar healthBar;
 
+    private List<Weapon> weaponPrefabs;
+    private List<Upgrade> upgradeDefinitions;
+
     private float time = 0.0f;
     private float currentDifficulty = 1;
     private GameState state = GameState.Normal;
+    private bool paused = false;
 
     public Player Player
     {
@@ -70,6 +65,11 @@ public class GameManager : MonoBehaviour
         get { return time; }
     }
 
+    public GameState State
+    {
+        get { return state; }
+    }
+
     // Only a single gamemanger should ever exist so we can always get it here
     public static GameManager instance;
 
@@ -78,8 +78,17 @@ public class GameManager : MonoBehaviour
         instance = this;
         ResourceManager.Init();
 
-        player = Instantiate<Player>(playerPrefab, new Vector2(), Quaternion.identity);
+        pauseGame.action.performed += (InputAction.CallbackContext callback) =>
+        {
+            paused = !paused;
+        };
+        pausedPanel.gameObject.SetActive(false);
+        upgradePanel.gameObject.SetActive(false);
+
+        player = Instantiate<Player>(ResourceManager.playerPrefab, new Vector2(), Quaternion.identity);
         player.healthBar = healthBar;
+        weaponPrefabs = ResourceManager.weaponPrefabs;
+        upgradeDefinitions = ResourceManager.upgradeDefinitions;
 
         // Testing giving player a weapon
         GivePlayerWeapon(ResourceManager.WeaponIndex.Snowball);
@@ -117,8 +126,20 @@ public class GameManager : MonoBehaviour
                 // Moving the camera
                 Vector3 camPos = new Vector3(Player.transform.position.x, Player.transform.position.y, cam.transform.position.z);
                 cam.transform.position = camPos;
+
+                // Pause screen
+                if (paused)
+                {
+                    state = GameState.Paused;
+                    pausedPanel.gameObject.SetActive(true);
+                }
                 break;
             case GameState.Paused:
+                if (!paused)
+                {
+                    state = GameState.Normal;
+                    pausedPanel.gameObject.SetActive(false);
+                }
                 break;
             case GameState.UpgradeMenu:
                 break;

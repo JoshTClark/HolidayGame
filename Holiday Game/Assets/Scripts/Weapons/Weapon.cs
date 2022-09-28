@@ -14,6 +14,14 @@ public abstract class Weapon : MonoBehaviour
 
     protected float timer = 0.0f;
 
+    void Update()
+    {
+        if (GameManager.instance.State == GameManager.GameState.Normal)
+        {
+            OnUpdate();
+        }
+    }
+
     /// <summary>
     /// Finds the closest enemy
     /// </summary>
@@ -56,4 +64,6 @@ public abstract class Weapon : MonoBehaviour
             return null;
         }
     }
+
+    public abstract void OnUpdate();
 }

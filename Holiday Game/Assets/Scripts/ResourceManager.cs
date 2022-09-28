@@ -27,10 +27,13 @@ public class ResourceManager
     }
 
     public static List<Enemy> enemyPrefabs = new List<Enemy>();
-    public static List<GameObject> weaponPrefabs = new List<GameObject>();
-    public static List<GameObject> upgradeDefinitions = new List<GameObject>();
-    public static List<GameObject> phaseDefinitions = new List<GameObject>();
-    public static List<GameObject> pickupPrefabs = new List<GameObject>();
+    public static List<Weapon> weaponPrefabs = new List<Weapon>();
+    public static List<Upgrade> upgradeDefinitions = new List<Upgrade>();
+    public static List<SpawnPhaseScriptableObject> phaseDefinitions = new List<SpawnPhaseScriptableObject>();
+    public static List<XP> pickupPrefabs = new List<XP>();
+    public static Player playerPrefab;
+
+    public static bool isLoaded = false;
 
     /// <summary>
     /// Should be called to load everything that needs to be loaded
@@ -38,6 +41,12 @@ public class ResourceManager
     public static void Init()
     {
         LoadEnemies();
+        LoadWeapons();
+        LoadUpgrades();
+        LoadPhases();
+        LoadPickups();
+        LoadPlayableCharacters();
+        isLoaded = true;
     }
 
     public static void LoadEnemies()
@@ -49,10 +58,9 @@ public class ResourceManager
         }
     }
 
-    /*
     public static void LoadWeapons()
     {
-        Weapon[] arr = (Weapon[])Resources.LoadAll("", typeof(Weapon));
+        Weapon[] arr = Resources.LoadAll<Weapon>("");
         foreach (Weapon i in arr)
         {
             weaponPrefabs.Add(i);
@@ -61,29 +69,34 @@ public class ResourceManager
 
     public static void LoadUpgrades()
     {
-        Enemy[] arr = (Enemy[])Resources.LoadAll("", typeof(Enemy));
-        foreach (Enemy e in arr)
+        Upgrade[] arr = Resources.LoadAll<Upgrade>("");
+        foreach (Upgrade i in arr)
         {
-            enemyPrefabs.Add(e);
+            upgradeDefinitions.Add(i);
         }
     }
 
     public static void LoadPhases()
     {
-        Enemy[] arr = (Enemy[])Resources.LoadAll("", typeof(Enemy));
-        foreach (Enemy e in arr)
+        SpawnPhaseScriptableObject[] arr = Resources.LoadAll<SpawnPhaseScriptableObject>("");
+        foreach (SpawnPhaseScriptableObject i in arr)
         {
-            enemyPrefabs.Add(e);
+            phaseDefinitions.Add(i);
         }
     }
 
     public static void LoadPickups()
     {
-        Enemy[] arr = (Enemy[])Resources.LoadAll("", typeof(Enemy));
-        foreach (Enemy e in arr)
+        XP[] arr = Resources.LoadAll<XP>("");
+        foreach (XP i in arr)
         {
-            enemyPrefabs.Add(e);
+            pickupPrefabs.Add(i);
         }
     }
-    */
+
+    public static void LoadPlayableCharacters()
+    {
+        Player[] arr = Resources.LoadAll<Player>("");
+        playerPrefab = arr[0];
+    }
 }

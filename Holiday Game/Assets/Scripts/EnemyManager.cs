@@ -5,16 +5,11 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     [SerializeField]
-    private List<Enemy> enemyPrefabs;
-
-    [SerializeField]
-    private List<SpawnPhaseScriptableObject> phases = new List<SpawnPhaseScriptableObject>();
-
-    [SerializeField]
-    private List<XP> xpPrefabs = new List<XP>();
-
-    [SerializeField]
     private Vector2 minSpawnDistance, maxSpawnDistance;
+
+    private List<Enemy> enemyPrefabs;
+    private List<SpawnPhaseScriptableObject> phases;
+    private List<XP> pickupPrefabs;
 
     private float spawnTimer = 0;
 
@@ -32,28 +27,28 @@ public class EnemyManager : MonoBehaviour
     public void Start()
     {
         instance = this;
-
+        enemyPrefabs = ResourceManager.enemyPrefabs;
+        phases = ResourceManager.phaseDefinitions;
+        pickupPrefabs = ResourceManager.pickupPrefabs;
         FindCurrentPhase();
-    }
-
-    public void Init()
-    {
-        //enemyPrefabs = ResourceManager.enemyPrefabs;
     }
 
     private void Update()
     {
-        float delta = Time.deltaTime;
-        spawnTimer += delta;
-        if (spawnTimer >= currentPhase.spawnInterval)
+        if (GameManager.instance.State == GameManager.GameState.Normal)
         {
-            SpawnEnemiesByPhase();
-            spawnTimer = 0;
+            float delta = Time.deltaTime;
+            spawnTimer += delta;
+            if (spawnTimer >= currentPhase.spawnInterval)
+            {
+                SpawnEnemiesByPhase();
+                spawnTimer = 0;
+            }
+
+            RemoveDeadEnemies();
+
+            FindCurrentPhase();
         }
-
-        RemoveDeadEnemies();
-
-        FindCurrentPhase();
     }
 
     // Removes dead enemies from the game
@@ -120,7 +115,7 @@ public class EnemyManager : MonoBehaviour
 
     public XP GetXPFromIndex(ResourceManager.PickupIndex index)
     {
-        foreach (XP i in xpPrefabs)
+        foreach (XP i in pickupPrefabs)
         {
             if (i.index == index)
             {

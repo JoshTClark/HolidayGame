@@ -13,11 +13,15 @@ public class EnemyManager : MonoBehaviour
 
     public enum XPIndex
     {
-        XP1
+        XP1,
+        XP2
     }
 
     [SerializeField]
     private List<Enemy> enemyPrefabs = new List<Enemy>();
+
+    [SerializeField]
+    private List<SpawnPhaseScriptableObject> phases = new List<SpawnPhaseScriptableObject>();
 
     [SerializeField]
     private List<XP> xpPrefabs = new List<XP>();
@@ -25,10 +29,9 @@ public class EnemyManager : MonoBehaviour
     [SerializeField]
     private Vector2 minSpawnDistance, maxSpawnDistance;
 
-    [SerializeField]
-    private float spawnInterval;
-
     private float spawnTimer = 0;
+
+    private SpawnPhaseScriptableObject currentPhase;
 
     private List<Enemy> currentEnemies = new List<Enemy>();
 
@@ -42,18 +45,22 @@ public class EnemyManager : MonoBehaviour
     public void Start()
     {
         instance = this;
+        FindCurrentPhase();
     }
 
     private void Update()
     {
-        spawnTimer += Time.deltaTime;
-        if (spawnTimer >= spawnInterval)
+        float delta = Time.deltaTime;
+        spawnTimer += delta;
+        if (spawnTimer >= currentPhase.spawnInterval)
         {
-            SpawnEnemy(EnemyIndex.Test);
+            SpawnEnemiesByPhase();
             spawnTimer = 0;
         }
 
         RemoveDeadEnemies();
+
+        FindCurrentPhase();
     }
 
     // Removes dead enemies from the game
@@ -77,7 +84,7 @@ public class EnemyManager : MonoBehaviour
         Vector2 spawnPos = new Vector2();
         float pX = Random.Range(minSpawnDistance.x, maxSpawnDistance.x);
         float pY = Random.Range(minSpawnDistance.y, maxSpawnDistance.y);
-        Vector2 playerPos = GameManager.instance.player.transform.position;
+        Vector2 playerPos = GameManager.instance.Player.transform.position;
         if (GameManager.RollCheck(0.5f))
         {
             pX *= -1;
@@ -91,9 +98,18 @@ public class EnemyManager : MonoBehaviour
         spawnPos.y = playerPos.y + pY;
 
         Enemy spawned = Instantiate(prefab, spawnPos, Quaternion.identity);
-        spawned.player = GameManager.instance.player;
+        spawned.player = GameManager.instance.Player;
         spawned.SetLevel((int)GameManager.instance.CurrentDifficulty);
         currentEnemies.Add(spawned);
+    }
+
+    private void SpawnEnemiesByPhase()
+    {
+        EnemyIndex[] indices = currentPhase.GetSpawnWave();
+        for (int i = 0; i < indices.Length; i++)
+        {
+            SpawnEnemy(indices[i]);
+        }
     }
 
     // Gets an enemy prefab from the list using the index
@@ -119,5 +135,21 @@ public class EnemyManager : MonoBehaviour
             }
         }
         return null;
+    }
+
+    /// <summary>
+    /// Finds which phase it should be on
+    /// </summary>
+    private void FindCurrentPhase()
+    {
+        for (int i = 0; i < phases.Count; i++)
+        {
+            if (phases[i].startTime <= GameManager.instance.GameTime)
+            {
+                currentPhase = phases[i];
+                phases.RemoveAt(i);
+                break;
+            }
+        }
     }
 }

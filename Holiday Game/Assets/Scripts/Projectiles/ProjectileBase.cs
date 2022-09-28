@@ -21,6 +21,9 @@ public abstract class ProjectileBase : MonoBehaviour
     public float Lifetime { get { return baseLifetime; } }
     public float Pierce { get { return basePierce; } }
 
+    [SerializeField]
+    public StatsComponent shooter;
+
 
     // Decides what the projectile can damage
     public enum Team
@@ -112,7 +115,7 @@ public abstract class ProjectileBase : MonoBehaviour
     private void Hit(StatsComponent receiver)
     {
         OnHit(receiver);
-        receiver.DealDamage(Damage);
+        receiver.DealDamage(Damage + GameManager.instance.Player.Damage);
     }
 
     // Rotates the direction the projectile is moving by a certain degree

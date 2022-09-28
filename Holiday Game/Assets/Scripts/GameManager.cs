@@ -2,14 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
+
+// can be called from anywhere !!!!!
 
 public class GameManager : MonoBehaviour
 {
     public enum WeaponIndex
     {
-        None,
         Snowball,
-        Test
+        Test,
+        Count
+    }
+
+    public enum GameState
+    {
+        Normal,
+        Paused,
+        UpgradeMenu
     }
 
     [SerializeField]
@@ -19,15 +30,39 @@ public class GameManager : MonoBehaviour
     private Canvas ui;
 
     [SerializeField]
-    private TMP_Text timerDisplay, difficultyDisplay;
+    private TMP_Text timerDisplay, difficultyDisplay, playerStats, playerLevel;
+
+    [SerializeField]
+    private Image xpBar;
+
+    [SerializeField]
+    private CanvasRenderer statsPanel;
+
+    [SerializeField]
+    private Player playerPrefab;
+
+    [SerializeField]
+    private float timeToDifficultyIncrease;
 
     [SerializeField]
     private List<Weapon> weaponPrefabs = new List<Weapon>();
 
+    [SerializeField]
+    private InputActionReference displayStats;
+
+    [SerializeField]
+    private HealthBar healthBar;
+
     private float time = 0.0f;
     private float currentDifficulty = 1;
+    private GameState state = GameState.Normal;
 
-    public Player player;
+    public Player Player
+    {
+        get { return player; }
+    }
+
+    private Player player;
 
     public float CurrentDifficulty
     {
@@ -46,25 +81,51 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
 
+        player = Instantiate<Player>(playerPrefab, new Vector2(), Quaternion.identity);
+        player.healthBar = healthBar;
+
         // Testing giving player a weapon
         GivePlayerWeapon(WeaponIndex.Snowball);
     }
 
     void Update()
     {
-        // Updating the timer and difficulty
-        time += Time.deltaTime;
-        currentDifficulty = Mathf.Floor(1 + (time / 5));
+        switch (state)
+        {
+            case GameState.Normal:
+                // Updating the timer and difficulty
+                time += Time.deltaTime;
+                currentDifficulty = Mathf.Floor(1 + (time / timeToDifficultyIncrease));
 
-        // Updating displays
-        string minutes = Mathf.Floor(time / 60).ToString("00");
-        string seconds = (time % 60).ToString("00");
-        timerDisplay.text = minutes + ":" + seconds;
-        difficultyDisplay.text = currentDifficulty.ToString();
+                // Updating displays
+                string minutes = Mathf.Floor(time / 60).ToString("00");
+                string seconds = (time % 60).ToString("00");
+                timerDisplay.text = minutes + ":" + seconds;
+                difficultyDisplay.text = currentDifficulty.ToString();
+                float xpAmount = Mathf.Clamp((player.GetPercentToNextLevel() * 0.8f) + 0.1f, 0.1f, 0.9f);
+                xpBar.GetComponent<RectTransform>().anchorMax = new Vector2(xpAmount, xpBar.GetComponent<RectTransform>().anchorMax.y);
+                playerLevel.text = player.Level.ToString();
 
-        // Moving the camera
-        Vector3 camPos = new Vector3(player.transform.position.x, player.transform.position.y, cam.transform.position.z);
-        cam.transform.position = camPos;
+                // Displaying stats
+                if (displayStats.action.ReadValue<float>() > 0)
+                {
+                    statsPanel.gameObject.SetActive(true);
+                    DisplayPlayerStats();
+                }
+                else
+                {
+                    statsPanel.gameObject.SetActive(false);
+                }
+
+                // Moving the camera
+                Vector3 camPos = new Vector3(Player.transform.position.x, Player.transform.position.y, cam.transform.position.z);
+                cam.transform.position = camPos;
+                break;
+            case GameState.Paused:
+                break;
+            case GameState.UpgradeMenu:
+                break;
+        }
     }
 
     // Gets a weapon prefab from the list using the index
@@ -84,16 +145,30 @@ public class GameManager : MonoBehaviour
     public void GivePlayerWeapon(WeaponIndex index)
     {
         Weapon weapon = GetWeaponFromIndex(index);
-        player.AddAttack(weapon);
+        Player.AddAttack(weapon);
     }
 
     // Random check
     public static bool RollCheck(float chance)
     {
         float roll = Random.value;
-        if (roll < chance) {
+        if (roll < chance)
+        {
             return true;
         }
         return false;
+    }
+
+    private void DisplayPlayerStats()
+    {
+        playerStats.text =
+            "Max HP = " + player.MaxHp +
+            "\nSpeed = " + player.Speed +
+            "\nDamage = " + player.Damage +
+            "\nAttack Speed = " + player.AttackSpeed +
+            "\nArmor = " + player.Armor +
+            "\nRegen = " + player.Regen +
+            "\nCritical Chance = " + player.CritDamage +
+            "\nCritical Damage = " + player.CritDamage;
     }
 }

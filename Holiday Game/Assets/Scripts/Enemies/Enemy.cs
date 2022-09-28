@@ -10,9 +10,6 @@ public abstract class Enemy : StatsComponent
 
     protected Vector2 velocity = Vector2.zero;
 
-    [SerializeField]
-    private float spawnWeight;
-
 
     /// <summary>
     /// Minimum distance between enemy & player
@@ -27,11 +24,6 @@ public abstract class Enemy : StatsComponent
     //Which XP prefab this enemy will drop
     [SerializeField]
     public EnemyManager.XPIndex XPType;
-
-    public float SpawnWeight
-    {
-        get { return spawnWeight; }
-    }
 
     /// <summary>
     /// Moves the Enemy towards the player
@@ -70,11 +62,13 @@ public abstract class Enemy : StatsComponent
             // Player is too far away, move closer
             SeekPlayer();
         }
+        /*
         else if (PlayerDistance() <= minPlayerDist)
         {
             //player is too close, move away
             FleePlayer();
         }
+        */
         else
         {
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
@@ -94,5 +88,40 @@ public abstract class Enemy : StatsComponent
     {
         //Drops XP
         Instantiate<XP>(EnemyManager.instance.GetXPFromIndex(XPType), transform.position, Quaternion.identity);
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        HandleCollision(collision);
+    }
+
+    /// <summary>
+    /// NEEDS WORK, CAN BE BETTER:
+    /// Handles the logic for colliding with a player
+    /// </summary>
+    /// <param name="collision"></param>
+    private void HandleCollision(Collider2D collision)
+    {
+        /*
+        Debug.Log("Here");
+        if (!GameManager.instance.Player.Invincible)
+        {
+            GameManager.instance.Player.DealDamage(Damage);
+        }
+        */
+
+        // Getting Component from the collider doesn't work properly for some reason
+        // The code inside of the if statements will never be called for some reason
+
+        if (collision.gameObject.GetComponent<Player>())
+        {
+            Debug.Log("Hurt");
+            // We hit the player, so they take damage
+            GameManager.instance.Player.DealDamage(Damage);
+        }
+        else if (collision.gameObject.GetComponent<Enemy>())
+        {
+            Debug.Log("Other Enemy");
+        }
     }
 }

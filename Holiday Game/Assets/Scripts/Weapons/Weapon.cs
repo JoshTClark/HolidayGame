@@ -14,14 +14,17 @@ public abstract class Weapon : MonoBehaviour
 
     protected float timer = 0.0f;
 
-    // Gets the closest enemy
+    /// <summary>
+    /// Finds the closest enemy
+    /// </summary>
+    /// <returns>The closest enemy to the player or null if none are within the player's range</returns>
     protected Enemy GetClosestEnemy()
     {
         List<Enemy> enemies = EnemyManager.instance.CurrentEnemies;
         if (enemies.Count > 0)
         {
-            Enemy closest = enemies[0];
-            float distance = closest.PlayerDistance();
+            Enemy closest = null;
+            float distance = GameManager.instance.Player.attackActivationRange;
             foreach (Enemy e in enemies)
             {
                 float newDistance = e.PlayerDistance();
@@ -31,6 +34,21 @@ public abstract class Weapon : MonoBehaviour
                     distance = newDistance;
                 }
             }
+            return closest;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    protected Enemy GetRandomEnemy()
+    {
+        List<Enemy> enemies = EnemyManager.instance.CurrentEnemies;
+        if (enemies.Count > 0)
+        {
+            int rngEnemy = Random.Range(0, EnemyManager.instance.CurrentEnemies.Count - 1);
+            Enemy closest = enemies[rngEnemy];
             return closest;
         }
         else

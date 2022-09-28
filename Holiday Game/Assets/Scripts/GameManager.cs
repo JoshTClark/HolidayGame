@@ -16,6 +16,11 @@ public class GameManager : MonoBehaviour
         Count
     }
 
+    public enum UpgradeIndex
+    {
+        Test
+    }
+
     public enum GameState
     {
         Normal,

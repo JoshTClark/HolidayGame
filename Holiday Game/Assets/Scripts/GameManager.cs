@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 // can be called from anywhere !!!!!
 
@@ -29,7 +30,10 @@ public class GameManager : MonoBehaviour
     private Canvas ui;
 
     [SerializeField]
-    private TMP_Text timerDisplay, difficultyDisplay, playerStats, pausedText;
+    private TMP_Text timerDisplay, difficultyDisplay, playerStats, playerLevel;
+
+    [SerializeField]
+    private Image xpBar;
 
     [SerializeField]
     private CanvasRenderer statsPanel;
@@ -45,6 +49,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private InputActionReference displayStats;
+
+    [SerializeField]
+    private HealthBar healthBar;
 
     private float time = 0.0f;
     private float currentDifficulty = 1;
@@ -75,6 +82,7 @@ public class GameManager : MonoBehaviour
         instance = this;
 
         player = Instantiate<Player>(playerPrefab, new Vector2(), Quaternion.identity);
+        player.healthBar = healthBar;
 
         // Testing giving player a weapon
         GivePlayerWeapon(WeaponIndex.Snowball);
@@ -94,7 +102,9 @@ public class GameManager : MonoBehaviour
                 string seconds = (time % 60).ToString("00");
                 timerDisplay.text = minutes + ":" + seconds;
                 difficultyDisplay.text = currentDifficulty.ToString();
-                pausedText.gameObject.SetActive(false);
+                float xpAmount = Mathf.Clamp((player.GetPercentToNextLevel() * 0.8f) + 0.1f, 0.1f, 0.9f);
+                xpBar.GetComponent<RectTransform>().anchorMax = new Vector2(xpAmount, xpBar.GetComponent<RectTransform>().anchorMax.y);
+                playerLevel.text = player.Level.ToString();
 
                 // Displaying stats
                 if (displayStats.action.ReadValue<float>() > 0)
@@ -112,7 +122,6 @@ public class GameManager : MonoBehaviour
                 cam.transform.position = camPos;
                 break;
             case GameState.Paused:
-                pausedText.gameObject.SetActive(true);
                 break;
             case GameState.UpgradeMenu:
                 break;

@@ -210,7 +210,7 @@ public abstract class StatsComponent : MonoBehaviour
     /// </summary>
     /// <param name="index"></param>
     /// <returns></returns>
-    public bool HasUpgrade(GameManager.UpgradeIndex index)
+    public bool HasUpgrade(ResourceManager.UpgradeIndex index)
     {
         foreach (Upgrade i in inventory)
         {

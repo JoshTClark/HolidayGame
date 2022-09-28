@@ -10,7 +10,7 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField]
     protected ProjectileBase projectile;
 
-    public GameManager.WeaponIndex index;
+    public ResourceManager.WeaponIndex index;
 
     protected float timer = 0.0f;
 

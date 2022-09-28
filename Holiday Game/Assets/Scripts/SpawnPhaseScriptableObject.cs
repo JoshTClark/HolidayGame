@@ -20,7 +20,7 @@ public class SpawnPhaseScriptableObject : ScriptableObject
     /// Finds a random enemy index from the phase based on how likely it is to spawn
     /// </summary>
     /// <returns></returns>
-    public EnemyManager.EnemyIndex GetRandomEnemy()
+    public ResourceManager.EnemyIndex GetRandomEnemy()
     {
         float value = Random.value;
 
@@ -33,17 +33,17 @@ public class SpawnPhaseScriptableObject : ScriptableObject
             value -= weights[i];
         }
 
-        return EnemyManager.EnemyIndex.None;
+        return ResourceManager.EnemyIndex.None;
     }
 
     /// <summary>
     /// Returns an array of enemy indices
     /// </summary>
     /// <returns></returns>
-    public EnemyManager.EnemyIndex[] GetSpawnWave()
+    public ResourceManager.EnemyIndex[] GetSpawnWave()
     {
         ResetSpawnWeights();
-        EnemyManager.EnemyIndex[] indices = new EnemyManager.EnemyIndex[numberOfEnemiesPerSpawn];
+        ResourceManager.EnemyIndex[] indices = new ResourceManager.EnemyIndex[numberOfEnemiesPerSpawn];
 
         for (int i = 0; i < numberOfEnemiesPerSpawn; i++)
         {
@@ -75,7 +75,7 @@ public class SpawnPhaseScriptableObject : ScriptableObject
 [System.Serializable]
 public class SpawnConfig
 {
-    public EnemyManager.EnemyIndex index;
+    public ResourceManager.EnemyIndex index;
 
     [Range(0, 1)]
     public float weight;

@@ -14,7 +14,7 @@ public class Upgrade : ScriptableObject
 
     public string upgradeName;
     public string upgradeDescription;
-    public GameManager.UpgradeIndex index;
+    public ResourceManager.UpgradeIndex index;
     public Tier tier;
     [Range(1,5)]
     public int levels;

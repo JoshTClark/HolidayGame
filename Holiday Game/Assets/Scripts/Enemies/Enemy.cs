@@ -6,7 +6,7 @@ public abstract class Enemy : StatsComponent
 {
     public Player player;
 
-    public EnemyManager.EnemyIndex index;
+    public ResourceManager.EnemyIndex index;
 
     protected Vector2 velocity = Vector2.zero;
 
@@ -23,7 +23,7 @@ public abstract class Enemy : StatsComponent
 
     //Which XP prefab this enemy will drop
     [SerializeField]
-    public EnemyManager.XPIndex XPType;
+    public ResourceManager.PickupIndex XPType;
 
     /// <summary>
     /// Moves the Enemy towards the player

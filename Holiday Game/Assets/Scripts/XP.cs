@@ -8,7 +8,7 @@ public class XP : MonoBehaviour
     private float XPAmount;
 
     [SerializeField]
-    public EnemyManager.XPIndex index;
+    public ResourceManager.PickupIndex index;
 
     private void Update()
     {

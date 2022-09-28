@@ -9,18 +9,6 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public enum WeaponIndex
-    {
-        Snowball,
-        Test,
-        Count
-    }
-
-    public enum UpgradeIndex
-    {
-        Test
-    }
-
     public enum GameState
     {
         Normal,
@@ -88,12 +76,13 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         instance = this;
+        ResourceManager.Init();
 
         player = Instantiate<Player>(playerPrefab, new Vector2(), Quaternion.identity);
         player.healthBar = healthBar;
 
         // Testing giving player a weapon
-        GivePlayerWeapon(WeaponIndex.Snowball);
+        GivePlayerWeapon(ResourceManager.WeaponIndex.Snowball);
     }
 
     void Update()
@@ -137,7 +126,7 @@ public class GameManager : MonoBehaviour
     }
 
     // Gets a weapon prefab from the list using the index
-    public Weapon GetWeaponFromIndex(WeaponIndex index)
+    public Weapon GetWeaponFromIndex(ResourceManager.WeaponIndex index)
     {
         foreach (Weapon i in weaponPrefabs)
         {
@@ -150,7 +139,7 @@ public class GameManager : MonoBehaviour
     }
 
     // Gives the player the desired weapon
-    public void GivePlayerWeapon(WeaponIndex index)
+    public void GivePlayerWeapon(ResourceManager.WeaponIndex index)
     {
         Weapon weapon = GetWeaponFromIndex(index);
         Player.AddAttack(weapon);
@@ -180,7 +169,7 @@ public class GameManager : MonoBehaviour
             "\nCritical Damage = " + player.CritDamage;
     }
 
-    public Upgrade GetUpgrade(UpgradeIndex index)
+    public Upgrade GetUpgrade(ResourceManager.UpgradeIndex index)
     {
         foreach (Upgrade i in upgradeDefinitions)
         {

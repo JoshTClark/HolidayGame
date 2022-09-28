@@ -4,21 +4,8 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    public enum EnemyIndex
-    {
-        None,
-        Test,
-        Test2
-    }
-
-    public enum XPIndex
-    {
-        XP1,
-        XP2
-    }
-
     [SerializeField]
-    private List<Enemy> enemyPrefabs = new List<Enemy>();
+    private List<Enemy> enemyPrefabs;
 
     [SerializeField]
     private List<SpawnPhaseScriptableObject> phases = new List<SpawnPhaseScriptableObject>();
@@ -47,9 +34,11 @@ public class EnemyManager : MonoBehaviour
         instance = this;
 
         FindCurrentPhase();
+    }
 
-        //enemyPrefabs = new List<Enemy>();
-        //enemyPrefabs.AddRange((Enemy[])Resources.LoadAll("Assets/Prefabs/Enemies"));
+    public void Init()
+    {
+        //enemyPrefabs = ResourceManager.enemyPrefabs;
     }
 
     private void Update()
@@ -82,7 +71,7 @@ public class EnemyManager : MonoBehaviour
     }
 
     // Spawns enemies
-    public void SpawnEnemy(EnemyIndex index)
+    public void SpawnEnemy(ResourceManager.EnemyIndex index)
     {
         Enemy prefab = GetEnemyFromIndex(index);
         Vector2 spawnPos = new Vector2();
@@ -109,7 +98,7 @@ public class EnemyManager : MonoBehaviour
 
     private void SpawnEnemiesByPhase()
     {
-        EnemyIndex[] indices = currentPhase.GetSpawnWave();
+        ResourceManager.EnemyIndex[] indices = currentPhase.GetSpawnWave();
         for (int i = 0; i < indices.Length; i++)
         {
             SpawnEnemy(indices[i]);
@@ -117,7 +106,7 @@ public class EnemyManager : MonoBehaviour
     }
 
     // Gets an enemy prefab from the list using the index
-    public Enemy GetEnemyFromIndex(EnemyManager.EnemyIndex index)
+    public Enemy GetEnemyFromIndex(ResourceManager.EnemyIndex index)
     {
         foreach (Enemy i in enemyPrefabs)
         {
@@ -129,7 +118,7 @@ public class EnemyManager : MonoBehaviour
         return null;
     }
 
-    public XP GetXPFromIndex(EnemyManager.XPIndex index)
+    public XP GetXPFromIndex(ResourceManager.PickupIndex index)
     {
         foreach (XP i in xpPrefabs)
         {

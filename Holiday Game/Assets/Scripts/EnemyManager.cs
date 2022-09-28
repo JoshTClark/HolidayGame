@@ -8,8 +8,7 @@ public class EnemyManager : MonoBehaviour
     {
         None,
         Test,
-        Test2,
-        End
+        Test2
     }
 
     public enum XPIndex
@@ -50,7 +49,7 @@ public class EnemyManager : MonoBehaviour
         spawnTimer += Time.deltaTime;
         if (spawnTimer >= spawnInterval)
         {
-            SpawnEnemy();
+            SpawnEnemy(EnemyIndex.Test);
             spawnTimer = 0;
         }
 
@@ -97,15 +96,8 @@ public class EnemyManager : MonoBehaviour
         currentEnemies.Add(spawned);
     }
 
-    // Spawns a random enemy
-    public void SpawnEnemy()
-    {
-        int index = (int)Random.Range(1, (int)EnemyIndex.End);
-        SpawnEnemy((EnemyIndex)index);
-    }
-
-        // Gets an enemy prefab from the list using the index
-        public Enemy GetEnemyFromIndex(EnemyManager.EnemyIndex index)
+    // Gets an enemy prefab from the list using the index
+    public Enemy GetEnemyFromIndex(EnemyManager.EnemyIndex index)
     {
         foreach (Enemy i in enemyPrefabs)
         {

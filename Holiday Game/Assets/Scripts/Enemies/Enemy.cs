@@ -70,11 +70,11 @@ public abstract class Enemy : StatsComponent
             // Player is too far away, move closer
             SeekPlayer();
         }
-        //else if (PlayerDistance() <= minPlayerDist)
-        //{
-        //player is too close, move away
-        //    FleePlayer();
-        //}
+        else if (PlayerDistance() <= minPlayerDist)
+        {
+            //player is too close, move away
+            FleePlayer();
+        }
         else
         {
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;

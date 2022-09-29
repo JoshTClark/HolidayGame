@@ -365,7 +365,8 @@ MonoBehaviour:
   nameObject: {fileID: 880771226364245137}
   desriptionObject: {fileID: 2861747316495858767}
   button: {fileID: 7693643573253641268}
-  upgrade: {fileID: 0}
+  upgrade: 0
+  manager: {fileID: 0}
 --- !u!1 &4264490911568034504
 GameObject:
   m_ObjectHideFlags: 0

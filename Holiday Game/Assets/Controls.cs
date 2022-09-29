@@ -53,6 +53,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ButtonThatGivesXP"",
+                    ""type"": ""Button"",
+                    ""id"": ""e2aabd56-83cc-471b-acf0-c93d7db5a29a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -187,6 +196,17 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""306073dc-7beb-499b-a7aa-867a906ad112"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ButtonThatGivesXP"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -198,6 +218,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_GameMap_Movement = m_GameMap.FindAction("Movement", throwIfNotFound: true);
         m_GameMap_DisplayStats = m_GameMap.FindAction("DisplayStats", throwIfNotFound: true);
         m_GameMap_Pause = m_GameMap.FindAction("Pause", throwIfNotFound: true);
+        m_GameMap_ButtonThatGivesXP = m_GameMap.FindAction("ButtonThatGivesXP", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -260,6 +281,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_GameMap_Movement;
     private readonly InputAction m_GameMap_DisplayStats;
     private readonly InputAction m_GameMap_Pause;
+    private readonly InputAction m_GameMap_ButtonThatGivesXP;
     public struct GameMapActions
     {
         private @Controls m_Wrapper;
@@ -267,6 +289,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_GameMap_Movement;
         public InputAction @DisplayStats => m_Wrapper.m_GameMap_DisplayStats;
         public InputAction @Pause => m_Wrapper.m_GameMap_Pause;
+        public InputAction @ButtonThatGivesXP => m_Wrapper.m_GameMap_ButtonThatGivesXP;
         public InputActionMap Get() { return m_Wrapper.m_GameMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -285,6 +308,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Pause.started -= m_Wrapper.m_GameMapActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_GameMapActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_GameMapActionsCallbackInterface.OnPause;
+                @ButtonThatGivesXP.started -= m_Wrapper.m_GameMapActionsCallbackInterface.OnButtonThatGivesXP;
+                @ButtonThatGivesXP.performed -= m_Wrapper.m_GameMapActionsCallbackInterface.OnButtonThatGivesXP;
+                @ButtonThatGivesXP.canceled -= m_Wrapper.m_GameMapActionsCallbackInterface.OnButtonThatGivesXP;
             }
             m_Wrapper.m_GameMapActionsCallbackInterface = instance;
             if (instance != null)
@@ -298,6 +324,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @ButtonThatGivesXP.started += instance.OnButtonThatGivesXP;
+                @ButtonThatGivesXP.performed += instance.OnButtonThatGivesXP;
+                @ButtonThatGivesXP.canceled += instance.OnButtonThatGivesXP;
             }
         }
     }
@@ -307,5 +336,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnDisplayStats(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnButtonThatGivesXP(InputAction.CallbackContext context);
     }
 }

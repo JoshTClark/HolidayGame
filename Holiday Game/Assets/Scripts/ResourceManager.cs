@@ -23,14 +23,31 @@ public class ResourceManager
     }
     public enum UpgradeIndex
     {
-        Test
+        Health1,
+        Health2,
+        Health3,
+        Damage1,
+        Damage2,
+        Damage3,
+        Speed1,
+        Speed2,
+        Speed3,
+        AttackSpeed1,
+        AttackSpeed2,
+        AttackSpeed3
+    }
+
+    public enum UpgradePoolIndex
+    {
+        Basic
     }
 
     public static List<Enemy> enemyPrefabs = new List<Enemy>();
     public static List<Weapon> weaponPrefabs = new List<Weapon>();
     public static List<Upgrade> upgradeDefinitions = new List<Upgrade>();
-    public static List<SpawnPhaseScriptableObject> phaseDefinitions = new List<SpawnPhaseScriptableObject>();
+    public static List<SpawnPhase> phaseDefinitions = new List<SpawnPhase>();
     public static List<XP> pickupPrefabs = new List<XP>();
+    public static List<UpgradePool> upgradePools = new List<UpgradePool>();
     public static Player playerPrefab;
 
     public static bool isLoaded = false;
@@ -45,6 +62,7 @@ public class ResourceManager
         LoadUpgrades();
         LoadPhases();
         LoadPickups();
+        LoadUpgradePools();
         LoadPlayableCharacters();
         isLoaded = true;
     }
@@ -78,8 +96,8 @@ public class ResourceManager
 
     public static void LoadPhases()
     {
-        SpawnPhaseScriptableObject[] arr = Resources.LoadAll<SpawnPhaseScriptableObject>("");
-        foreach (SpawnPhaseScriptableObject i in arr)
+        SpawnPhase[] arr = Resources.LoadAll<SpawnPhase>("");
+        foreach (SpawnPhase i in arr)
         {
             phaseDefinitions.Add(i);
         }
@@ -94,9 +112,42 @@ public class ResourceManager
         }
     }
 
+    public static void LoadUpgradePools()
+    {
+        UpgradePool[] arr = Resources.LoadAll<UpgradePool>("");
+        foreach (UpgradePool i in arr)
+        {
+            upgradePools.Add(i);
+        }
+    }
+
     public static void LoadPlayableCharacters()
     {
         Player[] arr = Resources.LoadAll<Player>("");
         playerPrefab = arr[0];
+    }
+
+    public static Upgrade GetUpgrade(ResourceManager.UpgradeIndex index)
+    {
+        foreach (Upgrade i in upgradeDefinitions)
+        {
+            if (i.index == index)
+            {
+                return i;
+            }
+        }
+        return null;
+    }
+
+    public static UpgradePool GetUpgradePool(ResourceManager.UpgradePoolIndex index)
+    {
+        foreach (UpgradePool i in upgradePools)
+        {
+            if (i.index == index)
+            {
+                return i;
+            }
+        }
+        return null;
     }
 }

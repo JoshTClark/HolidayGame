@@ -8,12 +8,12 @@ public class EnemyManager : MonoBehaviour
     private Vector2 minSpawnDistance, maxSpawnDistance;
 
     private List<Enemy> enemyPrefabs;
-    private List<SpawnPhaseScriptableObject> phases;
+    private List<SpawnPhase> phases;
     private List<XP> pickupPrefabs;
 
     private float spawnTimer = 0;
 
-    private SpawnPhaseScriptableObject currentPhase;
+    private SpawnPhase currentPhase;
 
     private List<Enemy> currentEnemies = new List<Enemy>();
 

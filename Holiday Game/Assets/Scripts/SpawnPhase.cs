@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Spawn Phase Config", menuName = "ScriptableObject/Spawn Phase Config")]
-public class SpawnPhaseScriptableObject : ScriptableObject
+public class SpawnPhase : ScriptableObject
 {
     public int numberOfEnemiesPerSpawn;
     public float spawnInterval;

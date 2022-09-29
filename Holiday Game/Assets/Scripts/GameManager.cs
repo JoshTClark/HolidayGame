@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     private float timeToDifficultyIncrease;
 
     [SerializeField]
-    private InputActionReference displayStats, pauseGame;
+    private InputActionReference displayStats, pauseGame, giveXP;
 
     [SerializeField]
     private HealthBar healthBar;
@@ -82,6 +82,12 @@ public class GameManager : MonoBehaviour
         {
             paused = !paused;
         };
+
+        giveXP.action.performed += (InputAction.CallbackContext callback) =>
+        {
+            player.AddXP(50);
+        };
+
         pausedPanel.gameObject.SetActive(false);
         upgradePanel.gameObject.SetActive(false);
 
@@ -142,6 +148,20 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameState.UpgradeMenu:
+                upgradePanel.gameObject.SetActive(true);
+                UpgradePanelManager upgradeManager = upgradePanel.GetComponent<UpgradePanelManager>();
+                if (!upgradeManager.displaying)
+                {
+                    upgradeManager.player = player;
+                    upgradeManager.SetUpgradesByPool(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Basic), 3);
+                    upgradeManager.ShowOptions();
+                }
+                if (upgradeManager.selected)
+                {
+                    state = GameState.Normal;
+                    upgradePanel.gameObject.SetActive(false);
+                    upgradeManager.Clear();
+                }
                 break;
         }
     }
@@ -190,15 +210,8 @@ public class GameManager : MonoBehaviour
             "\nCritical Damage = " + player.CritDamage;
     }
 
-    public Upgrade GetUpgrade(ResourceManager.UpgradeIndex index)
+    public void DoPlayerLevelUp()
     {
-        foreach (Upgrade i in upgradeDefinitions)
-        {
-            if (i.index == index)
-            {
-                return i;
-            }
-        }
-        return null;
+        this.state = GameState.UpgradeMenu;
     }
 }

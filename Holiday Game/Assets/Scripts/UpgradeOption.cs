@@ -12,12 +12,25 @@ public class UpgradeOption : MonoBehaviour
     [SerializeField]
     private Button button;
 
-    public Upgrade upgrade;
+    public ResourceManager.UpgradeIndex upgrade;
 
     public UpgradePanelManager manager;
+
+    private void Start()
+    {
+        button.onClick.AddListener(OnButtonClick);
+    }
 
     public void OnButtonClick()
     {
         manager.Select(upgrade);
+    }
+
+    public void SetUpgrade(ResourceManager.UpgradeIndex u)
+    {
+        upgrade = u;
+        Upgrade upgradeObject = ResourceManager.GetUpgrade(u);
+        nameObject.text = upgradeObject.upgradeName;
+        desriptionObject.text = upgradeObject.upgradeDescription;
     }
 }

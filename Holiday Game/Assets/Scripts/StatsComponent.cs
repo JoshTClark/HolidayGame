@@ -161,11 +161,17 @@ public abstract class StatsComponent : MonoBehaviour
     private void OnLevelUp()
     {
         //checks if missing hp, heals for 20 if so
+        CalculateStats();
         if (currentHP < MaxHp)
         {
             currentHP += 20;
         }
         else currentHP = MaxHp;
+
+        if (this.gameObject.GetComponent<Player>())
+        {
+            GameManager.instance.DoPlayerLevelUp();
+        }
     }
 
     // Deals damage here
@@ -213,6 +219,21 @@ public abstract class StatsComponent : MonoBehaviour
     }
 
     /// <summary>
+    /// Adds the upgrade to the players inventory
+    /// </summary>
+    public void AddUpgrade(ResourceManager.UpgradeIndex index)
+    {
+        if (HasUpgrade(index)) 
+        {
+            GetUpgrade(index).CurrentLevel++;
+        }
+        else
+        {
+            inventory.Add(ResourceManager.GetUpgrade(index));
+        }
+    }
+
+    /// <summary>
     /// Returns true if the upgrade is in the inventory
     /// </summary>
     /// <param name="index"></param>
@@ -227,6 +248,18 @@ public abstract class StatsComponent : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public Upgrade GetUpgrade(ResourceManager.UpgradeIndex index)
+    {
+        foreach (Upgrade i in inventory)
+        {
+            if (i.index == index)
+            {
+                return i;
+            }
+        }
+        return null;
     }
 
     public abstract void OnUpdate();

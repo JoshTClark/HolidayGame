@@ -1214,6 +1214,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8aec316caf581a4bae02a191beb7f29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  optionPrefab: {fileID: 300411208856834322, guid: 1011e614cffb4334585a28f8b245569f, type: 3}
+  player: {fileID: 0}
+  selected: 0
+  displaying: 0
+  commonOdds: 0.65
+  uncommonOdds: 0.25
+  rareOdds: 0.1
 --- !u!1 &1208856397
 GameObject:
   m_ObjectHideFlags: 0
@@ -1545,6 +1552,7 @@ MonoBehaviour:
   timeToDifficultyIncrease: 30
   displayStats: {fileID: -3315458106627893903, guid: 46c5d35181ff19744bbe64637b663d10, type: 3}
   pauseGame: {fileID: -1963865644356622557, guid: 46c5d35181ff19744bbe64637b663d10, type: 3}
+  giveXP: {fileID: 2895607889120616862, guid: 46c5d35181ff19744bbe64637b663d10, type: 3}
   healthBar: {fileID: 44808605}
 --- !u!114 &1529754981
 MonoBehaviour:

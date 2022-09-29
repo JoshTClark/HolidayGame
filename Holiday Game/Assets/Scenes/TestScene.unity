@@ -1136,6 +1136,7 @@ GameObject:
   - component: {fileID: 1070208861}
   - component: {fileID: 1070208863}
   - component: {fileID: 1070208862}
+  - component: {fileID: 1070208864}
   m_Layer: 0
   m_Name: UpgradePanel
   m_TagString: Untagged
@@ -1201,6 +1202,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1070208860}
   m_CullTransparentMesh: 1
+--- !u!114 &1070208864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1070208860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8aec316caf581a4bae02a191beb7f29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1208856397
 GameObject:
   m_ObjectHideFlags: 0
@@ -1527,6 +1540,8 @@ MonoBehaviour:
   xpBar: {fileID: 2078058655}
   statsPanel: {fileID: 318532946}
   pausedPanel: {fileID: 590758504}
+  gamePanel: {fileID: 699812814}
+  upgradePanel: {fileID: 1070208863}
   timeToDifficultyIncrease: 30
   displayStats: {fileID: -3315458106627893903, guid: 46c5d35181ff19744bbe64637b663d10, type: 3}
   pauseGame: {fileID: -1963865644356622557, guid: 46c5d35181ff19744bbe64637b663d10, type: 3}

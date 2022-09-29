@@ -14,6 +14,8 @@ public class UpgradeOption : MonoBehaviour
 
     public Upgrade upgrade;
 
+    public UpgradePanelManager manager;
+
     public void OnButtonClick()
     {
         

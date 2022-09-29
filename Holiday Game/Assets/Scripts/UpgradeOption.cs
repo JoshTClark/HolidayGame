@@ -18,6 +18,6 @@ public class UpgradeOption : MonoBehaviour
 
     public void OnButtonClick()
     {
-        
+        manager.Select(upgrade);
     }
 }

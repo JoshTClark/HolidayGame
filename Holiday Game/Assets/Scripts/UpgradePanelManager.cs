@@ -18,7 +18,6 @@ public class UpgradePanelManager : MonoBehaviour
     /// <param name="upgrade"></param>
     public void Select(ResourceManager.UpgradeIndex upgrade)
     {
-        Debug.Log("Check");
         player.AddUpgrade(upgrade);
         selected = true;
     }
@@ -83,19 +82,19 @@ public class UpgradePanelManager : MonoBehaviour
             float roll = Random.value;
             if (roll <= commonOdds)
             {
-                int random = Random.Range(0, commons.Count - 1);
+                int random = Random.Range(0, commons.Count);
                 ResourceManager.UpgradeIndex upgrade = commons[random];
                 AddUpgrade(upgrade);
             }
-            else if (roll <= uncommonOdds)
+            else if (roll - commonOdds <= uncommonOdds)
             {
-                int random = Random.Range(0, uncommons.Count - 1);
+                int random = Random.Range(0, uncommons.Count);
                 ResourceManager.UpgradeIndex upgrade = uncommons[random];
                 AddUpgrade(upgrade);
             }
             else
             {
-                int random = Random.Range(0, rares.Count - 1);
+                int random = Random.Range(0, rares.Count);
                 ResourceManager.UpgradeIndex upgrade = rares[random];
                 AddUpgrade(upgrade);
             }

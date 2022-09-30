@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Weapon : MonoBehaviour
 {
     [SerializeField]
-    protected float delay;
+    private float delay;
 
     [SerializeField]
     protected ProjectileBase projectile;
@@ -13,6 +13,13 @@ public abstract class Weapon : MonoBehaviour
     public ResourceManager.WeaponIndex index;
 
     protected float timer = 0.0f;
+
+    public StatsComponent owner;
+
+    public float Delay
+    {
+        get { return delay * (1/owner.AttackSpeed); }
+    }
 
     void Update()
     {

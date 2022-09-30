@@ -18,7 +18,6 @@ public class UpgradeOption : MonoBehaviour
 
     private void Start()
     {
-        button.onClick.AddListener(OnButtonClick);
     }
 
     public void OnButtonClick()

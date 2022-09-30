@@ -15,7 +15,7 @@ public class BulletTestWeapon : Weapon
 
         // Attack timer it will do the attack every "delay" seconds
         timer += delta;
-        if (timer >= delay)
+        if (timer >= Delay)
         {
             ProjectileBase p1 = Instantiate<ProjectileBase>(projectile, transform.position, Quaternion.identity);
             p1.Direction = transform.right;

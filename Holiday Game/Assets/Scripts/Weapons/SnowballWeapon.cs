@@ -19,7 +19,7 @@ public class SnowballWeapon : Weapon
 
         // Attack timer it will do the attack every "delay" seconds
         timer += delta;
-        if (timer >= delay && e)
+        if (timer >= Delay && e)
         {
             ProjectileBase p = Instantiate<ProjectileBase>(projectile, transform.position, Quaternion.identity);
             p.Direction = transform.right;

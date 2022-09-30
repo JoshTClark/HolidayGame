@@ -111,39 +111,6 @@ public abstract class StatsComponent : MonoBehaviour
         }
     }
 
-    // This method is where all the stat multipliers and additions are calculated based on upgrades
-    // Every frame all the stat changes are set to their default values and then recaclculated
-    // This makes it so this is the only place that we need to check for stat changes because of upgrades
-    // It also makes the whole system much more expandable
-    private void CalculateStats()
-    {
-        // Resetting stats
-        hpAdd = 0f;
-        speedAdd = 0f;
-        damageAdd = 0f;
-        attackSpeedAdd = 0f;
-        armorAdd = 0f;
-        regenAdd = 0f;
-        critChanceAdd = 0f;
-        critDamageAdd = 0f;
-
-        hpMult = 1.0f;
-        speedMult = 1.0f;
-        damageMult = 1.0f;
-        attackSpeedMult = 1.0f;
-        armorMult = 1.0f;
-        regenMult = 1.0f;
-        critChanceMult = 1.0f;
-        critDamageMult = 1.0f;
-
-        // LEVELS
-        hpAdd += ((level - 1) * levelScaling) * hpLevelUp;
-        damageAdd += ((level - 1) * levelScaling) * damageLevelUp;
-        CalculateLevel();
-
-        // UPGRADES
-    }
-
     //Checks to see if leveled up since last tick
     public void CalculateLevel()
     {
@@ -183,6 +150,7 @@ public abstract class StatsComponent : MonoBehaviour
     // Adds an attack
     public void AddAttack(Weapon attack)
     {
+        attack.owner = this;
         attacks.Add(Instantiate(attack, transform));
     }
 
@@ -223,7 +191,7 @@ public abstract class StatsComponent : MonoBehaviour
     /// </summary>
     public void AddUpgrade(ResourceManager.UpgradeIndex index)
     {
-        if (HasUpgrade(index)) 
+        if (HasUpgrade(index))
         {
             GetUpgrade(index).CurrentLevel++;
         }
@@ -267,4 +235,93 @@ public abstract class StatsComponent : MonoBehaviour
     public abstract void OnDeath();
 
     public abstract void OnStart();
+
+    // This method is where all the stat multipliers and additions are calculated based on upgrades
+    // Every frame all the stat changes are set to their default values and then recaclculated
+    // This makes it so this is the only place that we need to check for stat changes because of upgrades
+    // It also makes the whole system much more expandable
+    private void CalculateStats()
+    {
+        // Resetting stats
+        hpAdd = 0f;
+        speedAdd = 0f;
+        damageAdd = 0f;
+        attackSpeedAdd = 0f;
+        armorAdd = 0f;
+        regenAdd = 0f;
+        critChanceAdd = 0f;
+        critDamageAdd = 0f;
+
+        hpMult = 1.0f;
+        speedMult = 1.0f;
+        damageMult = 1.0f;
+        attackSpeedMult = 1.0f;
+        armorMult = 1.0f;
+        regenMult = 1.0f;
+        critChanceMult = 1.0f;
+        critDamageMult = 1.0f;
+
+        // LEVELS
+        CalculateLevel();
+        hpAdd += ((level - 1) * levelScaling) * hpLevelUp;
+        damageAdd += ((level - 1) * levelScaling) * damageLevelUp;
+
+        // UPGRADES
+
+        // HP1 - HP3
+        if (HasUpgrade(ResourceManager.UpgradeIndex.Health1))
+        {
+            hpAdd += 15 * GetUpgrade(ResourceManager.UpgradeIndex.Health1).CurrentLevel;
+        }
+        if (HasUpgrade(ResourceManager.UpgradeIndex.Health2))
+        {
+            hpAdd += 30 * GetUpgrade(ResourceManager.UpgradeIndex.Health2).CurrentLevel;
+        }
+        if (HasUpgrade(ResourceManager.UpgradeIndex.Health3))
+        {
+            hpAdd += 45 * GetUpgrade(ResourceManager.UpgradeIndex.Health3).CurrentLevel;
+        }
+
+        // Damage1 - Damage3
+        if (HasUpgrade(ResourceManager.UpgradeIndex.Damage1))
+        {
+            damageAdd += 5 * GetUpgrade(ResourceManager.UpgradeIndex.Damage1).CurrentLevel;
+        }
+        if (HasUpgrade(ResourceManager.UpgradeIndex.Damage2))
+        {
+            damageAdd += 10 * GetUpgrade(ResourceManager.UpgradeIndex.Damage2).CurrentLevel;
+        }
+        if (HasUpgrade(ResourceManager.UpgradeIndex.Damage3))
+        {
+            damageAdd += 15 * GetUpgrade(ResourceManager.UpgradeIndex.Damage3).CurrentLevel;
+        }
+
+        // Speed1 - Speed3
+        if (HasUpgrade(ResourceManager.UpgradeIndex.Speed1))
+        {
+            speedMult += 0.1f * GetUpgrade(ResourceManager.UpgradeIndex.Speed1).CurrentLevel;
+        }
+        if (HasUpgrade(ResourceManager.UpgradeIndex.Speed2))
+        {
+            speedMult += 0.2f * GetUpgrade(ResourceManager.UpgradeIndex.Speed2).CurrentLevel;
+        }
+        if (HasUpgrade(ResourceManager.UpgradeIndex.Speed3))
+        {
+            speedMult += 0.3f * GetUpgrade(ResourceManager.UpgradeIndex.Speed3).CurrentLevel;
+        }
+
+        // AttackSpeed1 - AttackSpeed3
+        if (HasUpgrade(ResourceManager.UpgradeIndex.AttackSpeed1))
+        {
+            attackSpeedMult += 0.15f * GetUpgrade(ResourceManager.UpgradeIndex.AttackSpeed1).CurrentLevel;
+        }
+        if (HasUpgrade(ResourceManager.UpgradeIndex.AttackSpeed2))
+        {
+            attackSpeedMult += 0.30f * GetUpgrade(ResourceManager.UpgradeIndex.AttackSpeed2).CurrentLevel;
+        }
+        if (HasUpgrade(ResourceManager.UpgradeIndex.AttackSpeed3))
+        {
+            attackSpeedMult += 0.45f * GetUpgrade(ResourceManager.UpgradeIndex.AttackSpeed3).CurrentLevel;
+        }
+    }
 }

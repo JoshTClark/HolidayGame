@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fd5b3d5f81cda044a61b17d6158420a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 1
+  delay: 5
   projectile: {fileID: 2198510103596972710, guid: 3cca2b20c1f90644ebc798eea4666eec, type: 3}
   index: 0
+  owner: {fileID: 0}

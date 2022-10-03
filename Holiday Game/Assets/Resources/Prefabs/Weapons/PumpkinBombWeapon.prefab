@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7437570591776178512
+--- !u!1 &729426162223084971
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7549989900676399040}
-  - component: {fileID: 7954688961587838055}
+  - component: {fileID: 4750928250726215136}
+  - component: {fileID: 6917608498732563009}
   m_Layer: 0
-  m_Name: BulletTestWeapon
+  m_Name: PumpkinBombWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7549989900676399040
+--- !u!4 &4750928250726215136
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7437570591776178512}
+  m_GameObject: {fileID: 729426162223084971}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,19 +32,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7954688961587838055
+--- !u!114 &6917608498732563009
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7437570591776178512}
+  m_GameObject: {fileID: 729426162223084971}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 360765c825631d84c96f57a49839c126, type: 3}
+  m_Script: {fileID: 11500000, guid: a52d167cd5bc77b4fbae581c8750ad5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 4
-  projectile: {fileID: 4520824908635731440, guid: ffac36bb446f16342bf8db7cf71be2d4, type: 3}
-  index: 2
+  delay: 5
+  projectile: {fileID: 6243427137443032006, guid: 5582b3d6bd185314b8592afa04cd00ca, type: 3}
+  index: 1
   owner: {fileID: 0}

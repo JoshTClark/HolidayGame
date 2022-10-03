@@ -98,6 +98,7 @@ public class GameManager : MonoBehaviour
 
         // Testing giving player a weapon
         GivePlayerWeapon(ResourceManager.WeaponIndex.Snowball);
+        GivePlayerWeapon(ResourceManager.WeaponIndex.PumpkinBomb);
     }
 
     void Update()

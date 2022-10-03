@@ -18,6 +18,7 @@ public class ResourceManager
     public enum WeaponIndex
     {
         Snowball,
+        PumpkinBomb,
         Test,
         Count
     }

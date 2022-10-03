@@ -31,11 +31,11 @@ public abstract class Enemy : StatsComponent
     protected void SeekPlayer()
     {
         // Get the players position
-        Vector2 desiredVelocity = ((Vector2)player.transform.position - (Vector2)transform.position).normalized;
+        Vector2 desiredVelocity = (Vector2)player.transform.position - (Vector2)transform.position;
 
         // Get the players position, seek that point, apply forces, and move
-        velocity = desiredVelocity * Speed;
-        GetComponent<Rigidbody2D>().velocity = velocity;
+        // Add Desired Velocity to velocity
+        velocity += desiredVelocity;
     }
 
     /// <summary>
@@ -47,8 +47,7 @@ public abstract class Enemy : StatsComponent
         Vector2 desiredVelocity = (Vector2)transform.position - (Vector2)player.transform.position;
 
         // Take the Player's position, flee from it and move
-        velocity = desiredVelocity * Speed;
-        GetComponent<Rigidbody2D>().velocity = velocity;
+        velocity += desiredVelocity;
     }
 
     /// <summary>
@@ -73,6 +72,14 @@ public abstract class Enemy : StatsComponent
         {
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
+    }
+
+    protected void Move()
+    {
+        // Take Velocity normalize it so it's a heading vector
+        // scale that by speed, then apply movement
+        GetComponent<Rigidbody2D>().velocity = velocity.normalized*Speed;
+        velocity = Vector2.zero;
     }
 
     /// <summary>

@@ -25,6 +25,9 @@ public abstract class StatsComponent : MonoBehaviour
     // Flat additions to stats
     private float hpAdd, speedAdd, damageAdd, attackSpeedAdd, armorAdd, regenAdd, critChanceAdd, critDamageAdd;
 
+    [SerializeField]
+    private AnimationCurve expCurve;
+
     // Multipliers to stats
     private float hpMult, speedMult, damageMult, attackSpeedMult, armorMult, regenMult, critChanceMult, critDamageMult;
 
@@ -115,7 +118,7 @@ public abstract class StatsComponent : MonoBehaviour
     public void CalculateLevel()
     {
 
-        float tempLevel = level + (float)Math.Floor(xpAmount / GetXpToNextLevel()); // what the level should be based on xp gained
+        float tempLevel = (int)expCurve.Evaluate(XP); // what the level should be based on xp gained
 
         if (tempLevel > level) // if the calculated level is higher than the plaers level, then level up
         {
@@ -176,14 +179,26 @@ public abstract class StatsComponent : MonoBehaviour
 
     public float GetXpToNextLevel()
     {
-        // Testing for right now until we get an actual level curve
-        return 50 * Level;
+        //create inverse speedcurve
+        AnimationCurve inverseCurve = new AnimationCurve();
+        for (int i = 0; i < expCurve.length; i++)
+        {
+            Keyframe inverseKey = new Keyframe(expCurve.keys[i].value, expCurve.keys[i].time);
+            inverseCurve.AddKey(inverseKey);
+        }
+        return inverseCurve.Evaluate(level + 1);
     }
 
     public float GetPercentToNextLevel()
     {
         // Testing for right now until we get an actual level curve
-        return (XP - (50 * (level - 1))) / (GetXpToNextLevel() - (50 * (level - 1)));
+        AnimationCurve inverseCurve = new AnimationCurve();
+        for (int i = 0; i < expCurve.length; i++)
+        {
+            Keyframe inverseKey = new Keyframe(expCurve.keys[i].value, expCurve.keys[i].time);
+            inverseCurve.AddKey(inverseKey);
+        }
+        return (float)(XP - inverseCurve.Evaluate(level)) / (float)(GetXpToNextLevel() - inverseCurve.Evaluate(level));
     }
 
     /// <summary>

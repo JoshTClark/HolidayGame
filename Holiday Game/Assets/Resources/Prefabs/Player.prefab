@@ -150,6 +150,30 @@ MonoBehaviour:
   regenAdd: 0
   critChanceAdd: 0
   critDamageAdd: 0
+  expCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0.29683656
+      outSlope: 0.29683656
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.04653225
+    - serializedVersion: 3
+      time: 999.9292
+      value: 99.251785
+      inSlope: 0.017306589
+      outSlope: 0.017306589
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.063925974
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   isDead: 0
   movement: {fileID: -8801911651582695651, guid: 46c5d35181ff19744bbe64637b663d10, type: 3}
   healthBar: {fileID: 0}

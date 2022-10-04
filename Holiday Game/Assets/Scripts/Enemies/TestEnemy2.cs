@@ -7,6 +7,7 @@ public class TestEnemy2 : Enemy
     public override void OnUpdate()
     {
         ShooterMove();
+        Move();
     }
 
     public override void OnStart()

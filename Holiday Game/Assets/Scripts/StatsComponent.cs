@@ -19,6 +19,7 @@ public abstract class StatsComponent : MonoBehaviour
     public float currentHP;
 
     // Level
+    [SerializeField]
     private float xpAmount, level;
 
     [SerializeField]

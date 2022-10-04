@@ -20,3 +20,5 @@ MonoBehaviour:
     weight: 0.85
   - index: 2
     weight: 0.5
+  - index: 3
+    weight: 0.5

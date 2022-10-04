@@ -44,7 +44,7 @@ public class PumpkinBombBehavior : ProjectileBase
 
     public override void OnUpdate()
     {
-        sr.color = Color.Lerp(Color.white, Color.red, Mathf.PingPong(Mathf.Pow(TimeAlive, 2.25f), 1));
+        sr.color = Color.Lerp(Color.white, Color.red, Mathf.PingPong(TimeAlive * TimeAlive * 1.2f, 1));
         
     }
 

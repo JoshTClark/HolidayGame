@@ -8,7 +8,8 @@ public class ResourceManager
     {
         None,
         Test,
-        Test2
+        Test2,
+        BigBoy
     }
     public enum PickupIndex
     {

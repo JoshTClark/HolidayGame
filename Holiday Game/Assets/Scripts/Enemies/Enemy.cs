@@ -76,7 +76,10 @@ public abstract class Enemy : StatsComponent
 
     protected void Move()
     {
-        // Take Velocity normalize it so it's a heading vector
+        // Make Sure that enemies are keeping separte first
+        Separation();
+
+        // Then take Velocity normalize it so it's a heading vector
         // scale that by speed, then apply movement
         GetComponent<Rigidbody2D>().velocity = velocity.normalized*Speed;
         velocity = Vector2.zero;
@@ -129,6 +132,33 @@ public abstract class Enemy : StatsComponent
         else if (collision.gameObject.GetComponent<Enemy>())
         {
             Debug.Log("Other Enemy");
+        }
+    }
+
+    /// <summary>
+    /// Has each enemy flee every other enemy scaled by it's distance from each other
+    /// </summary>
+    private void Separation()
+    {
+        // Set an empty Desired Velocity
+        Vector2 desiredVelocity = Vector2.zero;
+
+        // Loop through all enemies
+        foreach(Enemy e in EnemyManager.instance.CurrentEnemies)
+        {
+            float sqrDistance = Vector2.SqrMagnitude(transform.position - e.transform.position);
+            if(sqrDistance <= Mathf.Epsilon)
+            {
+                continue;
+            }
+            // Flee the Enemy
+            desiredVelocity = (Vector2)transform.position - (Vector2)e.transform.position;
+
+            // Scale it by how close it is
+            desiredVelocity = desiredVelocity * (1f / sqrDistance);
+
+            // Apply to running velocity
+            velocity += desiredVelocity;
         }
     }
 }

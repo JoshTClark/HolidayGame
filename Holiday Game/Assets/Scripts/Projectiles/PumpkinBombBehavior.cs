@@ -1,11 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class PumpkinBombBehavior : ProjectileBase
 {
     [SerializeField]
     float ExploRadius;
+
+    SpriteRenderer sr;
+
+    public void Start()
+    {
+        sr = gameObject.GetComponent<SpriteRenderer>();
+    }
 
     public override void Move()
     {
@@ -36,7 +44,14 @@ public class PumpkinBombBehavior : ProjectileBase
 
     public override void OnUpdate()
     {
+        sr.color = Color.Lerp(Color.white, Color.red, Mathf.PingPong(Mathf.Pow(TimeAlive, 2.25f), 1));
         
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, ExploRadius);
     }
 
 }

@@ -10,6 +10,7 @@ public abstract class ProjectileBase : MonoBehaviour
     [SerializeField]
     private Team projectileTeam;
 
+    [SerializeField]
     private float timeAlive = 0.0f;
     private float usedPierce = 0f;
     private List<StatsComponent> hitTargets = new List<StatsComponent>();
@@ -20,6 +21,7 @@ public abstract class ProjectileBase : MonoBehaviour
     public float Damage { get { return baseDamage; } }
     public float Lifetime { get { return baseLifetime; } }
     public float Pierce { get { return basePierce; } }
+    public float TimeAlive { get { return timeAlive; } }
 
     [SerializeField]
     public StatsComponent shooter;

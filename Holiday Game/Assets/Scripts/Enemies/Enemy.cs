@@ -100,7 +100,7 @@ public abstract class Enemy : StatsComponent
         Instantiate<XP>(EnemyManager.instance.GetXPFromIndex(XPType), transform.position, Quaternion.identity);
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    virtual protected void OnTriggerStay2D(Collider2D collision)
     {
         HandleCollision(collision);
     }

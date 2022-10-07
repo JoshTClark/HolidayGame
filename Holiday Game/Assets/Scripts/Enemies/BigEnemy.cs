@@ -16,4 +16,13 @@ public class BigEnemy : Enemy
         SeekPlayer();
         Move();
     }
+
+    protected override void OnTriggerStay2D(Collider2D collision)
+    {
+        // For testing purposes
+        base.OnTriggerStay2D(collision);
+
+        //Debug.Break();
+
+    }
 }

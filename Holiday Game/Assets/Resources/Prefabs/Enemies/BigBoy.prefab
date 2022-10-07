@@ -111,6 +111,8 @@ MonoBehaviour:
   hpLevelUp: 0
   damageLevelUp: 0
   currentHP: 0
+  xpAmount: 0
+  level: 0
   hpAdd: 0
   speedAdd: 0
   damageAdd: 0
@@ -144,7 +146,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 0.24
 --- !u!50 &4156725529473995661
 Rigidbody2D:
   serializedVersion: 4

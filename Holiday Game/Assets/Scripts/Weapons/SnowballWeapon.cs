@@ -17,13 +17,11 @@ public class SnowballWeapon : Weapon
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
 
-        // Attack timer it will do the attack every "delay" seconds
-        timer += delta;
-        if (timer >= Delay && e)
+        if (CanFire && e)
         {
             ProjectileBase p = Instantiate<ProjectileBase>(projectile, transform.position, Quaternion.identity);
             p.Direction = transform.right;
-            timer = 0.0f;
+            ResetTimer();
         }
     }
 }

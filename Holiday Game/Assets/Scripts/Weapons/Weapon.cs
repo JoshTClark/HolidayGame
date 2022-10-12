@@ -16,15 +16,23 @@ public abstract class Weapon : MonoBehaviour
 
     public StatsComponent owner;
 
+    public bool CanFire = false;
+
     public float Delay
     {
-        get { return delay * (1/owner.AttackSpeed); }
+        get { return delay * (1 / owner.AttackSpeed); }
     }
 
     void Update()
     {
         if (GameManager.instance.State == GameManager.GameState.Normal)
         {
+            float delta = Time.deltaTime;
+            timer += delta;
+            if (timer >= Delay)
+            {
+                CanFire = true;
+            }
             OnUpdate();
         }
     }
@@ -70,6 +78,12 @@ public abstract class Weapon : MonoBehaviour
         {
             return null;
         }
+    }
+
+    public void ResetTimer()
+    {
+        timer = 0.0f;
+        CanFire = false;
     }
 
     public abstract void OnUpdate();

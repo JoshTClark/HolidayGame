@@ -37,7 +37,7 @@ public abstract class StatsComponent : MonoBehaviour
     private bool isDead = false;
 
     // Weapon List
-    private List<Weapon> attacks = new List<Weapon>();
+    private List<Weapon> weapons = new List<Weapon>();
 
     // Inventory for upgrades
     private List<Upgrade> inventory = new List<Upgrade>();
@@ -95,6 +95,7 @@ public abstract class StatsComponent : MonoBehaviour
         if (GameManager.instance.State == GameManager.GameState.Normal)
         {
             CalculateStats();
+            CheckWeapons();
 
             OnUpdate();
 
@@ -112,6 +113,28 @@ public abstract class StatsComponent : MonoBehaviour
         else
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2();
+        }
+    }
+
+    /// <summary>
+    /// Checks what weapons the player should have
+    /// </summary>
+    private void CheckWeapons()
+    {
+        if (HasUpgrade(ResourceManager.UpgradeIndex.SnowballWeaponUpgrade))
+        {
+            bool giveSnowball = true;
+            foreach (Weapon w in weapons)
+            {
+                if (w.GetType() == typeof(SnowballWeapon))
+                {
+                    giveSnowball = false;
+                }
+            }
+            if (giveSnowball)
+            {
+                AddAttack(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.Snowball));
+            }
         }
     }
 
@@ -153,7 +176,7 @@ public abstract class StatsComponent : MonoBehaviour
     public void AddAttack(Weapon attack)
     {
         attack.owner = this;
-        attacks.Add(Instantiate(attack, transform));
+        weapons.Add(Instantiate(attack, transform));
     }
 
     //Called when xp collides with player, adds an amount of xp to players total

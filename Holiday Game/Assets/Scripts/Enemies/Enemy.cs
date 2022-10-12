@@ -125,13 +125,13 @@ public abstract class Enemy : StatsComponent
 
         if (collision.gameObject.GetComponent<Player>())
         {
-            Debug.Log("Hurt");
+            //Debug.Log("Hurt");
             // We hit the player, so they take damage
             GameManager.instance.Player.DealDamage(Damage);
         }
         else if (collision.gameObject.GetComponent<Enemy>())
         {
-            Debug.Log("Other Enemy");
+            //Debug.Log("Other Enemy");
         }
     }
 

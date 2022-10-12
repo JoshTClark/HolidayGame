@@ -14,8 +14,7 @@ public class BulletTestWeapon : Weapon
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
         // Attack timer it will do the attack every "delay" seconds
-        timer += delta;
-        if (timer >= Delay)
+        if (CanFire)
         {
             ProjectileBase p1 = Instantiate<ProjectileBase>(projectile, transform.position, Quaternion.identity);
             p1.Direction = transform.right;
@@ -37,7 +36,7 @@ public class BulletTestWeapon : Weapon
             p5.Direction = transform.right;
             p5.RotateDirection(0);
 
-            timer = 0.0f;
+            ResetTimer();
         }
     }
 }

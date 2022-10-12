@@ -142,6 +142,8 @@ MonoBehaviour:
   hpLevelUp: 10
   damageLevelUp: 1
   currentHP: 0
+  xpAmount: 0
+  level: 0
   hpAdd: 0
   speedAdd: 0
   damageAdd: 0
@@ -154,22 +156,22 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 1
+      time: 1
+      value: 0
       inSlope: 0.29683656
-      outSlope: 0.29683656
-      tangentMode: 0
+      outSlope: 2.8103158
+      tangentMode: 5
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.04653225
+      outWeight: 0.0009147856
     - serializedVersion: 3
-      time: 999.9292
-      value: 99.251785
-      inSlope: 0.017306589
-      outSlope: 0.017306589
+      time: 100
+      value: 1000
+      inSlope: 32.882347
+      outSlope: 32.882347
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.063925974
+      inWeight: 0.06120547
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2

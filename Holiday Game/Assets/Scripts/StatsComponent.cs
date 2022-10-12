@@ -118,10 +118,8 @@ public abstract class StatsComponent : MonoBehaviour
     //Checks to see if leveled up since last tick
     public void CalculateLevel()
     {
-
-        float tempLevel = (int)expCurve.Evaluate(XP); // what the level should be based on xp gained
-
-        if (tempLevel > level) // if the calculated level is higher than the plaers level, then level up
+        float expToLevelUp = GetXpToNextLevel();
+        if (XP > expToLevelUp)
         {
             level++;
             OnLevelUp();
@@ -181,25 +179,13 @@ public abstract class StatsComponent : MonoBehaviour
     public float GetXpToNextLevel()
     {
         //create inverse speedcurve
-        AnimationCurve inverseCurve = new AnimationCurve();
-        for (int i = 0; i < expCurve.length; i++)
-        {
-            Keyframe inverseKey = new Keyframe(expCurve.keys[i].value, expCurve.keys[i].time);
-            inverseCurve.AddKey(inverseKey);
-        }
-        return inverseCurve.Evaluate(level + 1);
+        return expCurve.Evaluate(level + 1);
     }
 
     public float GetPercentToNextLevel()
     {
         // Testing for right now until we get an actual level curve
-        AnimationCurve inverseCurve = new AnimationCurve();
-        for (int i = 0; i < expCurve.length; i++)
-        {
-            Keyframe inverseKey = new Keyframe(expCurve.keys[i].value, expCurve.keys[i].time);
-            inverseCurve.AddKey(inverseKey);
-        }
-        return (float)(XP - inverseCurve.Evaluate(level)) / (float)(GetXpToNextLevel() - inverseCurve.Evaluate(level));
+        return (XP - expCurve.Evaluate(level)) / (GetXpToNextLevel() - expCurve.Evaluate(level));
     }
 
     /// <summary>

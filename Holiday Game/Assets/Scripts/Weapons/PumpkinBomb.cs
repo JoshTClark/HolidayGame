@@ -8,10 +8,13 @@ public class PumpkinBomb : Weapon
     {
         float delta = Time.deltaTime;
 
-        if (CanFire)
+        if (canFire)
         {
             ProjectileBase p = Instantiate<ProjectileBase>(projectile, transform.position, Quaternion.identity);
             p.Direction = Vector2.zero;
+            DamageInfo info = new DamageInfo();
+            info.damage = damageMultiplier * owner.Damage;
+            p.SetDamageInfo(info);
             ResetTimer();
         }
     }

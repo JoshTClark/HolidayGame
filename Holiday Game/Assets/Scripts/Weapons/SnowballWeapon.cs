@@ -17,10 +17,13 @@ public class SnowballWeapon : Weapon
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
 
-        if (CanFire && e)
+        if (canFire && e)
         {
             ProjectileBase p = Instantiate<ProjectileBase>(projectile, transform.position, Quaternion.identity);
             p.Direction = transform.right;
+            DamageInfo info = new DamageInfo();
+            info.damage = damageMultiplier * owner.Damage;
+            p.SetDamageInfo(info);
             ResetTimer();
         }
     }

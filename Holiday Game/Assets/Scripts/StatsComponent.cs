@@ -167,9 +167,9 @@ public abstract class StatsComponent : MonoBehaviour
     }
 
     // Deals damage here
-    public virtual void DealDamage(float damage)
+    public virtual void DealDamage(DamageInfo info)
     {
-        currentHP -= damage;
+        currentHP -= info.damage;
     }
 
     // Adds an attack

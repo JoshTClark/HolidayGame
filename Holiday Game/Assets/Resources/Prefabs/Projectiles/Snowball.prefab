@@ -137,8 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseSpeed: 6
-  baseDamage: 4
   baseLifetime: 5
   basePierce: 0
+  damageMultiplier: 1
   projectileTeam: 0
-  shooter: {fileID: 0}

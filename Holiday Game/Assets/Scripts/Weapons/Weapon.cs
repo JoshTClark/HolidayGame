@@ -16,7 +16,9 @@ public abstract class Weapon : MonoBehaviour
 
     public StatsComponent owner;
 
-    public bool CanFire = false;
+    public bool canFire = false;
+
+    public float damageMultiplier = 1f;
 
     public float Delay
     {
@@ -31,7 +33,7 @@ public abstract class Weapon : MonoBehaviour
             timer += delta;
             if (timer >= Delay)
             {
-                CanFire = true;
+                canFire = true;
             }
             OnUpdate();
         }
@@ -83,7 +85,7 @@ public abstract class Weapon : MonoBehaviour
     public void ResetTimer()
     {
         timer = 0.0f;
-        CanFire = false;
+        canFire = false;
     }
 
     public abstract void OnUpdate();

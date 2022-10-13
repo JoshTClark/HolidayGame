@@ -64,6 +64,7 @@ public abstract class ProjectileBase : MonoBehaviour
         else
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2();
+            GetComponent<Rigidbody2D>().angularVelocity = 0.0f;
         }
     }
 

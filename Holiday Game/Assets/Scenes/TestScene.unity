@@ -608,7 +608,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 8
+  orthographic size: 12
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1777,8 +1777,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dfb5fd19eda36e4ab2c7261b16e081a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minSpawnDistance: {x: 16, y: 9}
-  maxSpawnDistance: {x: 20, y: 15}
+  minSpawnDistance: {x: 20, y: 14}
+  maxSpawnDistance: {x: 24, y: 18}
 --- !u!1 &1806207264
 GameObject:
   m_ObjectHideFlags: 0

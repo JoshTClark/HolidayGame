@@ -195,10 +195,11 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   isDead: 0
+  fadeTotalTime: 0
   movement: {fileID: -8801911651582695651, guid: 46c5d35181ff19744bbe64637b663d10, type: 3}
   healthBar: {fileID: 0}
   pickupRange: 5
-  attackActivationRange: 10
+  attackActivationRange: 20
   iFrames: 0
 --- !u!61 &1069143796030833450
 BoxCollider2D:

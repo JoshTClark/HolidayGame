@@ -42,6 +42,15 @@ public abstract class StatsComponent : MonoBehaviour
     // Inventory for upgrades
     private List<Upgrade> inventory = new List<Upgrade>();
 
+    SpriteRenderer sr;
+    Color ogColor;
+    bool damaged;
+    float fadeTimer;
+    float vFade;
+
+    [SerializeField]
+    float fadeTotalTime;
+
     // Used to get the base stats without changing them at all
     public float BaseMaxHp { get; }
     public float BaseSpeed { get; }
@@ -83,9 +92,15 @@ public abstract class StatsComponent : MonoBehaviour
         critChanceMult = 1.0f;
         critDamageMult = 1.0f;
 
+        fadeTotalTime = .15f;
+        damaged = false;
+
         currentHP = MaxHp;
         xpAmount = 0;
         level = 1;
+
+        sr = gameObject.GetComponent<SpriteRenderer>();
+        ogColor = sr.color;
 
         OnStart();
     }
@@ -97,6 +112,17 @@ public abstract class StatsComponent : MonoBehaviour
             CalculateStats();
 
             OnUpdate();
+
+            if (damaged)
+            {
+                fadeTimer += Time.deltaTime;
+                sr.color = Color.Lerp(Color.red, ogColor, fadeTimer / fadeTotalTime);
+                if (fadeTimer > fadeTotalTime)
+                {
+                    damaged = false;
+                }
+            }
+
 
             // Checks if should be dead
             if (currentHP <= 0)
@@ -149,6 +175,9 @@ public abstract class StatsComponent : MonoBehaviour
     public virtual void DealDamage(float damage)
     {
         currentHP -= damage;
+        sr.color = Color.red;
+        damaged = true;
+        fadeTimer = 0;
     }
 
     // Adds an attack

@@ -32,7 +32,7 @@ public class PumpkinBombBehavior : ProjectileBase
         {
             if (Vector2.Distance((Vector2)e.transform.position, (Vector2)transform.position) <= ExploRadius)
             {
-                e.DealDamage(Damage);
+                Hit(e);
             }
         }
     }

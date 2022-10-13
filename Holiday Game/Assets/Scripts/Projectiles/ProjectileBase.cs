@@ -121,7 +121,7 @@ public abstract class ProjectileBase : MonoBehaviour
     }
 
     // Called when the projectile hits something
-    private void Hit(StatsComponent receiver)
+    protected void Hit(StatsComponent receiver)
     {
         OnHit(receiver);
         receiver.DealDamage(Damage + GameManager.instance.Player.Damage);

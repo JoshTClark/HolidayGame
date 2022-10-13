@@ -10,7 +10,6 @@ public abstract class Enemy : StatsComponent
 
     protected Vector2 velocity = Vector2.zero;
 
-
     /// <summary>
     /// Minimum distance between enemy & player
     /// </summary>

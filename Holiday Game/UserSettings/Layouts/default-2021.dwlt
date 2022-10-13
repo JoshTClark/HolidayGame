@@ -189,8 +189,8 @@ MonoBehaviour:
     y: 0
     width: 258.4
     height: 501.6
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -464,9 +464,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: a6630000
       m_LastClickedID: 0
-      m_ExpandedIDs: 2afaffff
+      m_ExpandedIDs: 78faffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -737,9 +737,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 3.4287987, y: 2.1027374, z: 0.14091432}
+    m_Target: {x: 16.850965, y: 12.575505, z: 1.421063}
     speed: 2
-    m_Value: {x: 3.4287987, y: 2.1027374, z: 0.14091432}
+    m_Value: {x: 16.850965, y: 12.575505, z: 1.421063}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -790,9 +790,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 7.459154
+    m_Target: 23.682264
     speed: 2
-    m_Value: 7.459154
+    m_Value: 23.682264
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -858,22 +858,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources/Prefabs/Enemies
+    - Assets/Resources/Upgrades/Pools
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Resources/Prefabs/Enemies
+  - Assets/Resources/Upgrades/Pools
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Users\dschi\Documents\GitHub\HolidayGame\Holiday Game
+  m_LastProjectPath: C:\Users\drago\Desktop\HolidayGame\HolidayGame\Holiday Game
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 105.99982}
-    m_SelectedIDs: 3e5a0000
-    m_LastClickedID: 23102
-    m_ExpandedIDs: 00000000ce580000d0580000d2580000de58000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 115.80002}
+    m_SelectedIDs: a6630000
+    m_LastClickedID: 25510
+    m_ExpandedIDs: 000000009e580000a0580000a2580000aa5800002c6b000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -901,7 +901,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000ce580000d0580000d2580000
+    m_ExpandedIDs: 000000009e580000a0580000a2580000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

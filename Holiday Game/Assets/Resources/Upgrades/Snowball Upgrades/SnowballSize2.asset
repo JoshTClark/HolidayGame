@@ -9,8 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e1f92e0d4b4fa74fb5b8efb09df32c9, type: 3}
-  m_Name: SnowballPool
+  m_Script: {fileID: 11500000, guid: 296cfc9b7513a864aab005e7da6bfa8f, type: 3}
+  m_Name: SnowballSize2
   m_EditorClassIdentifier: 
-  index: 1
-  upgrades: 0d0000000e0000000f00000010000000110000001200000013000000
+  upgradeName: Snowball Size++
+  upgradeDescription: Increases the size of the snowball by 20%.
+  index: 17
+  tier: 1
+  CanTakeMultiple: 1
+  IsWeapon: 0

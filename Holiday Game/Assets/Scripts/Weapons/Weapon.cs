@@ -18,7 +18,8 @@ public abstract class Weapon : MonoBehaviour
 
     public bool canFire = false;
 
-    public float damageMultiplier = 1f;
+    [SerializeField]
+    public float baseDamageMultiplier, baseSizeMultiplier;
 
     public float Delay
     {

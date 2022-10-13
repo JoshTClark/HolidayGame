@@ -39,7 +39,12 @@ public class ResourceManager
         AttackSpeed3,
         SnowballWeaponUpgrade,
         SnowballDamage1,
-        SnowballSize1
+        SnowballDamage2,
+        SnowballDamage3,
+        SnowballSize1,
+        SnowballSize2,
+        SnowballSize3,
+        SnowballSpeed1,
     }
 
     public enum UpgradePoolIndex

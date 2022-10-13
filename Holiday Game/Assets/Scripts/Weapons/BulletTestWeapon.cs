@@ -17,7 +17,7 @@ public class BulletTestWeapon : Weapon
         if (canFire)
         {
             DamageInfo info = new DamageInfo();
-            info.damage = damageMultiplier * owner.Damage;
+            info.damage = baseDamageMultiplier * owner.Damage;
 
             ProjectileBase p1 = Instantiate<ProjectileBase>(projectile, transform.position, Quaternion.identity);
             p1.Direction = transform.right;

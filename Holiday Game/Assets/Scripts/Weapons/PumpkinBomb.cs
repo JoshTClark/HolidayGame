@@ -13,7 +13,7 @@ public class PumpkinBomb : Weapon
             ProjectileBase p = Instantiate<ProjectileBase>(projectile, transform.position, Quaternion.identity);
             p.Direction = Vector2.zero;
             DamageInfo info = new DamageInfo();
-            info.damage = damageMultiplier * owner.Damage;
+            info.damage = baseDamageMultiplier * owner.Damage;
             p.SetDamageInfo(info);
             ResetTimer();
         }

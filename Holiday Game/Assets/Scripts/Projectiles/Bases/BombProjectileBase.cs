@@ -7,6 +7,7 @@ public abstract class BombProjectileBase : ProjectileBase
     public bool explodeOnContact;
     public float explosionRadius;
     public float explosionLifetime;
+    public Team explosionTeam;
     public ParticleSystem explosionEffect;
 
     public override void OnDeath()
@@ -17,13 +18,14 @@ public abstract class BombProjectileBase : ProjectileBase
         ProjectileBase projectile = gameObject.GetComponent<ProjectileBase>();
         gameObject.transform.position = this.gameObject.transform.position;
         projectile.SetDamageInfo(damageInfo);
-        projectile.SetSize(explosionRadius);
         projectile.DamageMultiplier = DamageMultiplier;
         projectile.Lifetime = explosionLifetime;
         projectile.Pierce = 999f;
-        projectile.projectileTeam = this.projectileTeam;
+        projectile.Size = explosionRadius;
+        projectile.SizeMultiplier = 1f;
+        projectile.projectileTeam = explosionTeam;
         ParticleSystem effect = GameObject.Instantiate(explosionEffect, this.gameObject.transform.position, Quaternion.identity);
-        effect.gameObject.transform.localScale = new Vector3(explosionRadius, explosionRadius);
+        effect.gameObject.transform.localScale = new Vector3(projectile.Size, projectile.Size);
         effect.Play();
     }
 

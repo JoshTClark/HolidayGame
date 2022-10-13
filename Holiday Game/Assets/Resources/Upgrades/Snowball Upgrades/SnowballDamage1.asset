@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: SnowballDamage1
   m_EditorClassIdentifier: 
   upgradeName: Snowball Damage+
-  upgradeDescription: The snowball weapon does 10% more damage.
+  upgradeDescription: The snowball does 10% more damage.
   index: 13
   tier: 0
   CanTakeMultiple: 1
+  IsWeapon: 0

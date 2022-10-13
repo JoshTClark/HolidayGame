@@ -310,43 +310,43 @@ public abstract class StatsComponent : MonoBehaviour
         // Damage1 - Damage3
         if (HasUpgrade(ResourceManager.UpgradeIndex.Damage1))
         {
-            damageAdd += 5 * GetUpgrade(ResourceManager.UpgradeIndex.Damage1).CurrentLevel;
+            damageAdd += 1 * GetUpgrade(ResourceManager.UpgradeIndex.Damage1).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.Damage2))
         {
-            damageAdd += 10 * GetUpgrade(ResourceManager.UpgradeIndex.Damage2).CurrentLevel;
+            damageAdd += 2 * GetUpgrade(ResourceManager.UpgradeIndex.Damage2).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.Damage3))
         {
-            damageAdd += 15 * GetUpgrade(ResourceManager.UpgradeIndex.Damage3).CurrentLevel;
+            damageAdd += 4 * GetUpgrade(ResourceManager.UpgradeIndex.Damage3).CurrentLevel;
         }
 
         // Speed1 - Speed3
         if (HasUpgrade(ResourceManager.UpgradeIndex.Speed1))
         {
-            speedMult += 0.1f * GetUpgrade(ResourceManager.UpgradeIndex.Speed1).CurrentLevel;
+            speedMult += 0.05f * GetUpgrade(ResourceManager.UpgradeIndex.Speed1).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.Speed2))
         {
-            speedMult += 0.2f * GetUpgrade(ResourceManager.UpgradeIndex.Speed2).CurrentLevel;
+            speedMult += 0.1f * GetUpgrade(ResourceManager.UpgradeIndex.Speed2).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.Speed3))
         {
-            speedMult += 0.3f * GetUpgrade(ResourceManager.UpgradeIndex.Speed3).CurrentLevel;
+            speedMult += 0.2f * GetUpgrade(ResourceManager.UpgradeIndex.Speed3).CurrentLevel;
         }
 
         // AttackSpeed1 - AttackSpeed3
         if (HasUpgrade(ResourceManager.UpgradeIndex.AttackSpeed1))
         {
-            attackSpeedMult += 0.15f * GetUpgrade(ResourceManager.UpgradeIndex.AttackSpeed1).CurrentLevel;
+            attackSpeedMult += 0.5f * GetUpgrade(ResourceManager.UpgradeIndex.AttackSpeed1).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.AttackSpeed2))
         {
-            attackSpeedMult += 0.30f * GetUpgrade(ResourceManager.UpgradeIndex.AttackSpeed2).CurrentLevel;
+            attackSpeedMult += 0.10f * GetUpgrade(ResourceManager.UpgradeIndex.AttackSpeed2).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.AttackSpeed3))
         {
-            attackSpeedMult += 0.45f * GetUpgrade(ResourceManager.UpgradeIndex.AttackSpeed3).CurrentLevel;
+            attackSpeedMult += 0.20f * GetUpgrade(ResourceManager.UpgradeIndex.AttackSpeed3).CurrentLevel;
         }
     }
 }

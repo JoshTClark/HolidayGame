@@ -5,7 +5,11 @@ using UnityEngine;
 public abstract class ProjectileBase : MonoBehaviour
 {
     [SerializeField]
-    private float baseSpeed, baseLifetime, basePierce, damageMultiplier;
+    private float baseSpeed, baseLifetime, basePierce, baseSize;
+
+    private float sizeMultiplier = 1f;
+    private float speedMultiplier = 1f;
+    private float damageMultiplier = 1f;
 
     [SerializeField]
     public Team projectileTeam;
@@ -16,11 +20,14 @@ public abstract class ProjectileBase : MonoBehaviour
     private Vector2 direction = new Vector2();
 
     public Vector2 Direction { get { return direction; } set { direction = value; } }
-    public float Speed { get { return baseSpeed; } set { baseSpeed = value; } }
+    public float Speed { get { return baseSpeed * speedMultiplier; } set { baseSpeed = value; } }
     public float Lifetime { get { return baseLifetime; } set { baseLifetime = value; } }
     public float Pierce { get { return basePierce; } set { basePierce = value; } }
     public float TimeAlive { get { return timeAlive; } set { timeAlive = value; } }
     public float DamageMultiplier { get { return damageMultiplier; } set { damageMultiplier = value; } }
+    public float Size { get { return baseSize * sizeMultiplier; } set { baseSize = value; } }
+    public float SizeMultiplier { get { return sizeMultiplier; } set { sizeMultiplier = value; } }
+    public float SpeedMultiplier { get { return speedMultiplier; } set { speedMultiplier = value; } }
 
     protected DamageInfo damageInfo;
 
@@ -38,6 +45,8 @@ public abstract class ProjectileBase : MonoBehaviour
         if (GameManager.instance.State == GameManager.GameState.Normal)
         {
             float delta = Time.deltaTime;
+
+            this.gameObject.transform.localScale = new Vector3(Size, Size);
 
             // Timer for the projectile expiring
             timeAlive += delta;
@@ -68,7 +77,7 @@ public abstract class ProjectileBase : MonoBehaviour
     private void DestroyProjectile()
     {
         OnDeath();
-        Destroy(gameObject);
+        Destroy(this.gameObject);
     }
 
     // Handles the projectiles collision
@@ -157,11 +166,6 @@ public abstract class ProjectileBase : MonoBehaviour
         projectile.AddComponent<EmptyProjectile>();
 
         return projectile;
-    }
-
-    public void SetSize(float size)
-    {
-        this.gameObject.transform.localScale = new Vector3(size, size);
     }
 
     /// <summary>

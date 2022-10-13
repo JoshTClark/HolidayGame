@@ -48,3 +48,6 @@ MonoBehaviour:
   projectile: {fileID: 6243427137443032006, guid: 5582b3d6bd185314b8592afa04cd00ca, type: 3}
   index: 1
   owner: {fileID: 0}
+  canFire: 0
+  baseDamageMultiplier: 5
+  baseSizeMultiplier: 1

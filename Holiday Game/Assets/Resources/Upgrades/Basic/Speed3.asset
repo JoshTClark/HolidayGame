@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 296cfc9b7513a864aab005e7da6bfa8f, type: 3}
-  m_Name: AttackSpeed1
+  m_Name: Speed3
   m_EditorClassIdentifier: 
-  upgradeName: Attack Speed+
-  upgradeDescription: Increases Attack Speed by 15%
-  index: 9
-  tier: 0
+  upgradeName: Speed+++
+  upgradeDescription: Increases Speed by 20%
+  index: 8
+  tier: 2
   CanTakeMultiple: 1
+  IsWeapon: 0

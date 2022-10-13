@@ -34,8 +34,8 @@ public abstract class Enemy : StatsComponent
         Vector2 desiredVelocity = (Vector2)player.transform.position - (Vector2)transform.position;
 
         // Get the players position, seek that point, apply forces, and move
-        // Add Desired Velocity to velocity
-        velocity += desiredVelocity;
+        // Scale Desired Velocity by inverse player distance then add to velocity
+        velocity += desiredVelocity * (3f/PlayerDistance());
     }
 
     /// <summary>

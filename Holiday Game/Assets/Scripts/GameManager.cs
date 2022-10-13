@@ -13,7 +13,8 @@ public class GameManager : MonoBehaviour
     {
         Normal,
         Paused,
-        UpgradeMenu
+        UpgradeMenu,
+        Title
     }
 
     [SerializeField]
@@ -29,7 +30,7 @@ public class GameManager : MonoBehaviour
     private Image xpBar;
 
     [SerializeField]
-    private CanvasRenderer statsMenu, playerStatsPanel, pausedPanel, gamePanel, upgradePanel;
+    private CanvasRenderer statsMenu, playerStatsPanel, pausedPanel, gamePanel, upgradePanel, titlePanel;
 
     [SerializeField]
     private float timeToDifficultyIncrease;
@@ -42,7 +43,7 @@ public class GameManager : MonoBehaviour
 
     private float time = 0.0f;
     private float currentDifficulty = 1;
-    private GameState state = GameState.Normal;
+    private GameState state = GameState.Title;
     private bool paused = false;
 
     public Player Player
@@ -87,19 +88,16 @@ public class GameManager : MonoBehaviour
 
         pausedPanel.gameObject.SetActive(false);
         upgradePanel.gameObject.SetActive(false);
-
-        player = Instantiate<Player>(ResourceManager.playerPrefab, new Vector2(), Quaternion.identity);
-        player.healthBar = healthBar;
-
-        // Testing giving player a weapon
-        player.AddUpgrade(ResourceManager.UpgradeIndex.SnowballWeaponUpgrade);
-        //GivePlayerWeapon(ResourceManager.WeaponIndex.PumpkinBomb);
+        gamePanel.gameObject.SetActive(false);
+        titlePanel.gameObject.SetActive(true);
     }
 
     void Update()
     {
         switch (state)
         {
+            case GameState.Title:
+                break;
             case GameState.Normal:
                 // Updating the timer and difficulty
                 time += Time.deltaTime;
@@ -208,5 +206,32 @@ public class GameManager : MonoBehaviour
             pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Snowball));
         }
         return pools;
+    }
+
+    public void ChooseSnowball()
+    {
+        StartGame(ResourceManager.UpgradeIndex.SnowballWeaponUpgrade);
+    }
+
+    public void ChoosePumpkin()
+    {
+        StartGame(ResourceManager.UpgradeIndex.PumpkinBombWeaponUpgrade);
+    }
+
+    public void ChooseFirework()
+    {
+        StartGame(ResourceManager.UpgradeIndex.FireworkWeaponUpgrade);
+    }
+
+    public void StartGame(ResourceManager.UpgradeIndex weapon)
+    {
+        player = Instantiate<Player>(ResourceManager.playerPrefab, new Vector2(), Quaternion.identity);
+        player.healthBar = healthBar;
+
+        player.AddUpgrade(weapon);
+
+        titlePanel.gameObject.SetActive(false);
+        gamePanel.gameObject.SetActive(true);
+        state = GameState.Normal;
     }
 }

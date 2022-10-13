@@ -277,6 +277,8 @@ public abstract class StatsComponent : MonoBehaviour
         {
             inventory.Add(ResourceManager.GetUpgrade(index));
         }
+        CalculateStats();
+        OnGainUpgrade(ResourceManager.GetUpgrade(index));
     }
 
     /// <summary>
@@ -306,6 +308,12 @@ public abstract class StatsComponent : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public void Heal(float amount) 
+    {
+        currentHP += amount;
+        currentHP = Mathf.Clamp(currentHP, 0, MaxHp);
     }
 
     public abstract void OnUpdate();
@@ -363,15 +371,15 @@ public abstract class StatsComponent : MonoBehaviour
         // Damage1 - Damage3
         if (HasUpgrade(ResourceManager.UpgradeIndex.Damage1))
         {
-            damageAdd += 1 * GetUpgrade(ResourceManager.UpgradeIndex.Damage1).CurrentLevel;
+            damageAdd += 2 * GetUpgrade(ResourceManager.UpgradeIndex.Damage1).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.Damage2))
         {
-            damageAdd += 2 * GetUpgrade(ResourceManager.UpgradeIndex.Damage2).CurrentLevel;
+            damageAdd += 4 * GetUpgrade(ResourceManager.UpgradeIndex.Damage2).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.Damage3))
         {
-            damageAdd += 4 * GetUpgrade(ResourceManager.UpgradeIndex.Damage3).CurrentLevel;
+            damageAdd += 6 * GetUpgrade(ResourceManager.UpgradeIndex.Damage3).CurrentLevel;
         }
 
         // Speed1 - Speed3
@@ -400,6 +408,23 @@ public abstract class StatsComponent : MonoBehaviour
         if (HasUpgrade(ResourceManager.UpgradeIndex.AttackSpeed3))
         {
             attackSpeedMult += 0.20f * GetUpgrade(ResourceManager.UpgradeIndex.AttackSpeed3).CurrentLevel;
+        }
+    }
+
+    public void OnGainUpgrade(Upgrade upgrade) 
+    {
+        // Heal when taking these upgrades
+        if (upgrade.index == ResourceManager.UpgradeIndex.Health1)
+        {
+            Heal(20);
+        }
+        if (upgrade.index == ResourceManager.UpgradeIndex.Health2)
+        {
+            Heal(40);
+        }
+        if (upgrade.index == ResourceManager.UpgradeIndex.Health3)
+        {
+            Heal(60);
         }
     }
 }

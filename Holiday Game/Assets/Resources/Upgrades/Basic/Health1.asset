@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Health1
   m_EditorClassIdentifier: 
   upgradeName: HP+
-  upgradeDescription: Increases HP by 15 points
+  upgradeDescription: Increases HP by 15 points and heals for 20 points
   index: 0
   tier: 0
   CanTakeMultiple: 1
+  IsWeapon: 0

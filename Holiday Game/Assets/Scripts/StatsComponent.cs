@@ -92,7 +92,7 @@ public abstract class StatsComponent : MonoBehaviour
         critChanceMult = 1.0f;
         critDamageMult = 1.0f;
 
-        fadeTotalTime = .15f;
+        fadeTotalTime = .2f;
         damaged = false;
 
         currentHP = MaxHp;
@@ -195,8 +195,8 @@ public abstract class StatsComponent : MonoBehaviour
     // Deals damage here
     public virtual void DealDamage(DamageInfo info)
     {
-        currentHP -= damage;
-        sr.color.Color.red;
+        currentHP -= info.damage;
+        sr.color = Color.red;
         damaged = true;
         fadeTimer = 0;
     }

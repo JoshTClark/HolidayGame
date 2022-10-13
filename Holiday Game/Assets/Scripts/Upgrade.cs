@@ -16,11 +16,9 @@ public class Upgrade : ScriptableObject
     public string upgradeDescription;
     public ResourceManager.UpgradeIndex index;
     public Tier tier;
-    /*
-    [Range(0, 1), Tooltip("Overrides the weight given by the tier. Leave at 1 to not have it overriden.")]
-    public float weight;
-    */
     public bool CanTakeMultiple;
+    public bool IsWeapon;
+
 
     private int currentLevel = 1;
     public int CurrentLevel

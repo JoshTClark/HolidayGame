@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class SnowballBehavior : ProjectileBase
 {
+    public ParticleSystem effects;
+
+
+    private void Start()
+    {
+        GameObject.Instantiate(effects, this.gameObject.transform);
+    }
 
     public override void Move()
     {

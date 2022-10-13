@@ -31,5 +31,16 @@ public class UpgradeOption : MonoBehaviour
         Upgrade upgradeObject = ResourceManager.GetUpgrade(u);
         nameObject.text = upgradeObject.upgradeName;
         desriptionObject.text = upgradeObject.upgradeDescription;
+
+        if (upgradeObject.tier == Upgrade.Tier.Common)
+        {
+            this.gameObject.GetComponent<Image>().color = new Color(0f, 1f, 0f, 0.5f);
+        } else if (upgradeObject.tier == Upgrade.Tier.Uncommon)
+        {
+            this.gameObject.GetComponent<Image>().color = new Color(0f, 0f, 1f, 0.5f);
+        }else if (upgradeObject.tier == Upgrade.Tier.Rare)
+        {
+            this.gameObject.GetComponent<Image>().color = new Color(1f, 0f, 1f, 0.5f);
+        }
     }
 }

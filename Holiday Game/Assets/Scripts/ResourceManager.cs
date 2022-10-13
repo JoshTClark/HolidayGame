@@ -36,12 +36,21 @@ public class ResourceManager
         Speed3,
         AttackSpeed1,
         AttackSpeed2,
-        AttackSpeed3
+        AttackSpeed3,
+        SnowballWeaponUpgrade,
+        SnowballDamage1,
+        SnowballDamage2,
+        SnowballDamage3,
+        SnowballSize1,
+        SnowballSize2,
+        SnowballSize3,
+        SnowballSpeed1,
     }
 
     public enum UpgradePoolIndex
     {
-        Basic
+        Basic,
+        Snowball
     }
 
     public static List<Enemy> enemyPrefabs = new List<Enemy>();
@@ -144,6 +153,17 @@ public class ResourceManager
     public static UpgradePool GetUpgradePool(ResourceManager.UpgradePoolIndex index)
     {
         foreach (UpgradePool i in upgradePools)
+        {
+            if (i.index == index)
+            {
+                return i;
+            }
+        }
+        return null;
+    }
+    public static Weapon GetWeapon(ResourceManager.WeaponIndex index)
+    {
+        foreach (Weapon i in weaponPrefabs)
         {
             if (i.index == index)
             {

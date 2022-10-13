@@ -137,10 +137,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseSpeed: 0
-  baseDamage: 10
   baseLifetime: 3
   basePierce: 999
+  baseSize: 1
   projectileTeam: 2
-  timeAlive: 0
-  shooter: {fileID: 0}
-  ExploRadius: 4
+  explodeOnContact: 0
+  explosionRadius: 4
+  explosionLifetime: 0.5
+  explosionTeam: 0
+  explosionEffect: {fileID: -2186267711908558283, guid: 4a2307de8d29b5a41be5b046aff42b06, type: 3}

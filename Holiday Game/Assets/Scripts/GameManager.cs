@@ -40,9 +40,6 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private HealthBar healthBar;
 
-    private List<Weapon> weaponPrefabs;
-    private List<Upgrade> upgradeDefinitions;
-
     private float time = 0.0f;
     private float currentDifficulty = 1;
     private GameState state = GameState.Normal;
@@ -85,7 +82,7 @@ public class GameManager : MonoBehaviour
 
         giveXP.action.performed += (InputAction.CallbackContext callback) =>
         {
-            player.AddXP(50);
+            player.AddXP(player.GetXpToNextLevel() - player.XP + 1);
         };
 
         pausedPanel.gameObject.SetActive(false);
@@ -93,11 +90,9 @@ public class GameManager : MonoBehaviour
 
         player = Instantiate<Player>(ResourceManager.playerPrefab, new Vector2(), Quaternion.identity);
         player.healthBar = healthBar;
-        weaponPrefabs = ResourceManager.weaponPrefabs;
-        upgradeDefinitions = ResourceManager.upgradeDefinitions;
 
         // Testing giving player a weapon
-        GivePlayerWeapon(ResourceManager.WeaponIndex.Snowball);
+        player.AddUpgrade(ResourceManager.UpgradeIndex.SnowballWeaponUpgrade);
         GivePlayerWeapon(ResourceManager.WeaponIndex.PumpkinBomb);
     }
 
@@ -154,7 +149,7 @@ public class GameManager : MonoBehaviour
                 if (!upgradeManager.displaying)
                 {
                     upgradeManager.player = player;
-                    upgradeManager.SetUpgradesByPool(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Basic), 3);
+                    upgradeManager.SetUpgradesByPools(GetPossiblePools(), 4);
                     upgradeManager.ShowOptions();
                 }
                 if (upgradeManager.selected)
@@ -167,23 +162,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Gets a weapon prefab from the list using the index
-    public Weapon GetWeaponFromIndex(ResourceManager.WeaponIndex index)
-    {
-        foreach (Weapon i in weaponPrefabs)
-        {
-            if (i.index == index)
-            {
-                return i;
-            }
-        }
-        return null;
-    }
-
     // Gives the player the desired weapon
     public void GivePlayerWeapon(ResourceManager.WeaponIndex index)
     {
-        Weapon weapon = GetWeaponFromIndex(index);
+        Weapon weapon = ResourceManager.GetWeapon(index);
         Player.AddAttack(weapon);
     }
 
@@ -214,5 +196,16 @@ public class GameManager : MonoBehaviour
     public void DoPlayerLevelUp()
     {
         this.state = GameState.UpgradeMenu;
+    }
+
+    private List<UpgradePool> GetPossiblePools()
+    {
+        List<UpgradePool> pools = new List<UpgradePool>();
+        pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Basic));
+        if (player.HasUpgrade(ResourceManager.UpgradeIndex.SnowballWeaponUpgrade))
+        {
+            pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Snowball));
+        }
+        return pools;
     }
 }

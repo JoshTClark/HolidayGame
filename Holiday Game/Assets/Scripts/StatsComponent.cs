@@ -37,7 +37,7 @@ public abstract class StatsComponent : MonoBehaviour
     private bool isDead = false;
 
     // Weapon List
-    private List<Weapon> attacks = new List<Weapon>();
+    private List<Weapon> weapons = new List<Weapon>();
 
     // Inventory for upgrades
     private List<Upgrade> inventory = new List<Upgrade>();
@@ -110,6 +110,7 @@ public abstract class StatsComponent : MonoBehaviour
         if (GameManager.instance.State == GameManager.GameState.Normal)
         {
             CalculateStats();
+            CheckWeapons();
 
             OnUpdate();
 
@@ -141,13 +142,33 @@ public abstract class StatsComponent : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Checks what weapons the player should have
+    /// </summary>
+    private void CheckWeapons()
+    {
+        if (HasUpgrade(ResourceManager.UpgradeIndex.SnowballWeaponUpgrade))
+        {
+            bool giveSnowball = true;
+            foreach (Weapon w in weapons)
+            {
+                if (w.GetType() == typeof(SnowballWeapon))
+                {
+                    giveSnowball = false;
+                }
+            }
+            if (giveSnowball)
+            {
+                AddAttack(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.Snowball));
+            }
+        }
+    }
+
     //Checks to see if leveled up since last tick
     public void CalculateLevel()
     {
-
-        float tempLevel = (int)expCurve.Evaluate(XP); // what the level should be based on xp gained
-
-        if (tempLevel > level) // if the calculated level is higher than the plaers level, then level up
+        float expToLevelUp = GetXpToNextLevel();
+        if (XP > expToLevelUp)
         {
             level++;
             OnLevelUp();
@@ -172,10 +193,10 @@ public abstract class StatsComponent : MonoBehaviour
     }
 
     // Deals damage here
-    public virtual void DealDamage(float damage)
+    public virtual void DealDamage(DamageInfo info)
     {
         currentHP -= damage;
-        sr.color = Color.red;
+        sr.color.Color.red;
         damaged = true;
         fadeTimer = 0;
     }
@@ -184,7 +205,7 @@ public abstract class StatsComponent : MonoBehaviour
     public void AddAttack(Weapon attack)
     {
         attack.owner = this;
-        attacks.Add(Instantiate(attack, transform));
+        weapons.Add(Instantiate(attack, transform));
     }
 
     //Called when xp collides with player, adds an amount of xp to players total
@@ -210,25 +231,13 @@ public abstract class StatsComponent : MonoBehaviour
     public float GetXpToNextLevel()
     {
         //create inverse speedcurve
-        AnimationCurve inverseCurve = new AnimationCurve();
-        for (int i = 0; i < expCurve.length; i++)
-        {
-            Keyframe inverseKey = new Keyframe(expCurve.keys[i].value, expCurve.keys[i].time);
-            inverseCurve.AddKey(inverseKey);
-        }
-        return inverseCurve.Evaluate(level + 1);
+        return expCurve.Evaluate(level + 1);
     }
 
     public float GetPercentToNextLevel()
     {
         // Testing for right now until we get an actual level curve
-        AnimationCurve inverseCurve = new AnimationCurve();
-        for (int i = 0; i < expCurve.length; i++)
-        {
-            Keyframe inverseKey = new Keyframe(expCurve.keys[i].value, expCurve.keys[i].time);
-            inverseCurve.AddKey(inverseKey);
-        }
-        return (float)(XP - inverseCurve.Evaluate(level)) / (float)(GetXpToNextLevel() - inverseCurve.Evaluate(level));
+        return (XP - expCurve.Evaluate(level)) / (GetXpToNextLevel() - expCurve.Evaluate(level));
     }
 
     /// <summary>
@@ -330,43 +339,43 @@ public abstract class StatsComponent : MonoBehaviour
         // Damage1 - Damage3
         if (HasUpgrade(ResourceManager.UpgradeIndex.Damage1))
         {
-            damageAdd += 5 * GetUpgrade(ResourceManager.UpgradeIndex.Damage1).CurrentLevel;
+            damageAdd += 1 * GetUpgrade(ResourceManager.UpgradeIndex.Damage1).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.Damage2))
         {
-            damageAdd += 10 * GetUpgrade(ResourceManager.UpgradeIndex.Damage2).CurrentLevel;
+            damageAdd += 2 * GetUpgrade(ResourceManager.UpgradeIndex.Damage2).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.Damage3))
         {
-            damageAdd += 15 * GetUpgrade(ResourceManager.UpgradeIndex.Damage3).CurrentLevel;
+            damageAdd += 4 * GetUpgrade(ResourceManager.UpgradeIndex.Damage3).CurrentLevel;
         }
 
         // Speed1 - Speed3
         if (HasUpgrade(ResourceManager.UpgradeIndex.Speed1))
         {
-            speedMult += 0.1f * GetUpgrade(ResourceManager.UpgradeIndex.Speed1).CurrentLevel;
+            speedMult += 0.05f * GetUpgrade(ResourceManager.UpgradeIndex.Speed1).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.Speed2))
         {
-            speedMult += 0.2f * GetUpgrade(ResourceManager.UpgradeIndex.Speed2).CurrentLevel;
+            speedMult += 0.1f * GetUpgrade(ResourceManager.UpgradeIndex.Speed2).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.Speed3))
         {
-            speedMult += 0.3f * GetUpgrade(ResourceManager.UpgradeIndex.Speed3).CurrentLevel;
+            speedMult += 0.2f * GetUpgrade(ResourceManager.UpgradeIndex.Speed3).CurrentLevel;
         }
 
         // AttackSpeed1 - AttackSpeed3
         if (HasUpgrade(ResourceManager.UpgradeIndex.AttackSpeed1))
         {
-            attackSpeedMult += 0.15f * GetUpgrade(ResourceManager.UpgradeIndex.AttackSpeed1).CurrentLevel;
+            attackSpeedMult += 0.5f * GetUpgrade(ResourceManager.UpgradeIndex.AttackSpeed1).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.AttackSpeed2))
         {
-            attackSpeedMult += 0.30f * GetUpgrade(ResourceManager.UpgradeIndex.AttackSpeed2).CurrentLevel;
+            attackSpeedMult += 0.10f * GetUpgrade(ResourceManager.UpgradeIndex.AttackSpeed2).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.AttackSpeed3))
         {
-            attackSpeedMult += 0.45f * GetUpgrade(ResourceManager.UpgradeIndex.AttackSpeed3).CurrentLevel;
+            attackSpeedMult += 0.20f * GetUpgrade(ResourceManager.UpgradeIndex.AttackSpeed3).CurrentLevel;
         }
     }
 }

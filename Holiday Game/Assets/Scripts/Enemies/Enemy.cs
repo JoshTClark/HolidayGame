@@ -33,8 +33,8 @@ public abstract class Enemy : StatsComponent
         Vector2 desiredVelocity = (Vector2)player.transform.position - (Vector2)transform.position;
 
         // Get the players position, seek that point, apply forces, and move
-        // Add Desired Velocity to velocity
-        velocity += desiredVelocity;
+        // Scale Desired Velocity by inverse player distance then add to velocity
+        velocity += desiredVelocity * (3f/PlayerDistance());
     }
 
     /// <summary>
@@ -124,13 +124,15 @@ public abstract class Enemy : StatsComponent
 
         if (collision.gameObject.GetComponent<Player>())
         {
-            Debug.Log("Hurt");
+            //Debug.Log("Hurt");
             // We hit the player, so they take damage
-            GameManager.instance.Player.DealDamage(Damage);
+            DamageInfo info = new DamageInfo();
+            info.damage = Damage;
+            GameManager.instance.Player.DealDamage(info);
         }
         else if (collision.gameObject.GetComponent<Enemy>())
         {
-            Debug.Log("Other Enemy");
+            //Debug.Log("Other Enemy");
         }
     }
 

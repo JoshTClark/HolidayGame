@@ -13,16 +13,16 @@ public class Player : StatsComponent
 
     public float pickupRange;
     public float attackActivationRange;
-
+    [SerializeField]
     private float iFrames;
-    private bool invincible;
-    public bool Invincible { get { return invincible; } }
+    private bool isInvincible;
+    public bool IsInvincible { get { return isInvincible; } }
 
     public override void OnStart()
     {
         healthBar.SetMaxHealth(MaxHp);
-        invincible = false;
-        iFrames = 3f;
+        isInvincible = false;
+        iFrames = .5f;
     }
 
     public override void OnDeath()
@@ -47,40 +47,39 @@ public class Player : StatsComponent
     /// </summary>
     void UpdateiFrames()
     {
-        // see if we have less health than max
-        if(currentHP < MaxHp)
+        // See if we should be invincible
+        if (isInvincible)
         {
-            // See if we should be invincible
-            if (invincible)
-            {
-                // if we're invincible count down the timer
-                iFrames -= Time.deltaTime;
-            }
-
-            if(iFrames <= 0)
-            {
-                // Invincible time is up we can take damage again
-                // No longer invincible
-                invincible = false;
-
-                // Reset iframes
-                iFrames = 3f;
-            }
-            
+            // if we're invincible count down the timer
+            iFrames -= Time.deltaTime;
         }
-        else
+
+        if (iFrames <= 0)
         {
-            invincible = false;
+            // Invincible time is up we can take damage again
+            // No longer invincible
+            isInvincible = false;
+
+            // Reset iframes
+            iFrames = 3f;
         }
     }
     /// <summary>
     /// Checks if the player can take damage first
     /// </summary>
     /// <param name="damage"></param>
-    public override void DealDamage(float damage)
+    public override void DealDamage(DamageInfo info)
     {
-        invincible = true;
-        base.DealDamage(damage);
+        if (isInvincible)
+        {
+            UpdateiFrames();
+        }
+        else
+        {
+            // take damage & become invincible
+            base.DealDamage(info);
+            isInvincible = true;
+        }
     }
     private void OnDrawGizmos()
     {

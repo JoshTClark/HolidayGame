@@ -139,9 +139,11 @@ MonoBehaviour:
   baseCritChance: 0
   baseCritDamage: 0
   levelScaling: 2
-  hpLevelUp: 10
-  damageLevelUp: 1
+  hpLevelUp: 0
+  damageLevelUp: 0
   currentHP: 0
+  xpAmount: 0
+  level: 0
   hpAdd: 0
   speedAdd: 0
   damageAdd: 0
@@ -155,22 +157,40 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
-      inSlope: 0.29683656
-      outSlope: 0.29683656
+      value: 0
+      inSlope: 1.4583758
+      outSlope: 1.4583758
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.04653225
+      outWeight: 0.0030155694
     - serializedVersion: 3
-      time: 999.9292
-      value: 99.251785
-      inSlope: 0.017306589
-      outSlope: 0.017306589
+      time: 10
+      value: 42.992554
+      inSlope: 12.0863
+      outSlope: 12.0863
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 25
+      value: 341.0927
+      inSlope: 16.730629
+      outSlope: 16.730629
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.063925974
-      outWeight: 0.33333334
+      inWeight: 0.33333334
+      outWeight: 0.07476644
+    - serializedVersion: 3
+      time: 100
+      value: 5000
+      inSlope: 108.727585
+      outSlope: 108.727585
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.24986157
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -179,6 +199,7 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   pickupRange: 5
   attackActivationRange: 10
+  iFrames: 0
 --- !u!61 &1069143796030833450
 BoxCollider2D:
   m_ObjectHideFlags: 0

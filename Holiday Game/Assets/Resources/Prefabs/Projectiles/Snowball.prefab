@@ -137,8 +137,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseSpeed: 6
-  baseDamage: 4
   baseLifetime: 5
   basePierce: 0
+  baseSize: 1
   projectileTeam: 0
-  shooter: {fileID: 0}
+  effects: {fileID: 9077300760987636928, guid: 74cffb353dcc8cf4398ce4e54d8ca1a2, type: 3}

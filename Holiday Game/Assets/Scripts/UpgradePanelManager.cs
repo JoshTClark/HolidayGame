@@ -106,12 +106,51 @@ public class UpgradePanelManager : MonoBehaviour
     /// </summary>
     public void SetUpgradesByPools(List<UpgradePool> pools, int numOptions)
     {
-        UpgradePool pool = new UpgradePool();
-        foreach (UpgradePool p in pools)
+        ResetOdds();
+        List<ResourceManager.UpgradeIndex> commons = new List<ResourceManager.UpgradeIndex>();
+        List<ResourceManager.UpgradeIndex> uncommons = new List<ResourceManager.UpgradeIndex>();
+        List<ResourceManager.UpgradeIndex> rares = new List<ResourceManager.UpgradeIndex>();
+        foreach (UpgradePool pool in pools)
         {
-            pool.upgrades.AddRange(p.upgrades);
+            foreach (ResourceManager.UpgradeIndex u in pool.upgrades)
+            {
+                Upgrade upgrade = ResourceManager.GetUpgrade(u);
+                if (upgrade.tier == Upgrade.Tier.Common)
+                {
+                    commons.Add(u);
+                }
+                else if (upgrade.tier == Upgrade.Tier.Uncommon)
+                {
+                    uncommons.Add(u);
+                }
+                else if (upgrade.tier == Upgrade.Tier.Rare)
+                {
+                    rares.Add(u);
+                }
+            }
         }
-        SetUpgradesByPool(pool, numOptions);
+        for (int i = 0; i < numOptions; i++)
+        {
+            float roll = Random.value;
+            if (roll <= commonOdds)
+            {
+                int random = Random.Range(0, commons.Count);
+                ResourceManager.UpgradeIndex upgrade = commons[random];
+                AddUpgrade(upgrade);
+            }
+            else if (roll - commonOdds <= uncommonOdds)
+            {
+                int random = Random.Range(0, uncommons.Count);
+                ResourceManager.UpgradeIndex upgrade = uncommons[random];
+                AddUpgrade(upgrade);
+            }
+            else
+            {
+                int random = Random.Range(0, rares.Count);
+                ResourceManager.UpgradeIndex upgrade = rares[random];
+                AddUpgrade(upgrade);
+            }
+        }
     }
 
     /// <summary>

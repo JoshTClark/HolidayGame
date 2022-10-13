@@ -5,26 +5,31 @@ using UnityEngine;
 public abstract class ProjectileBase : MonoBehaviour
 {
     [SerializeField]
-    private float baseSpeed, baseDamage, baseLifetime, basePierce;
+    private float baseSpeed, baseLifetime, basePierce, baseSize;
+
+    private float sizeMultiplier = 1f;
+    private float speedMultiplier = 1f;
+    private float damageMultiplier = 1f;
 
     [SerializeField]
-    private Team projectileTeam;
+    public Team projectileTeam;
 
-    [SerializeField]
     private float timeAlive = 0.0f;
     private float usedPierce = 0f;
     private List<StatsComponent> hitTargets = new List<StatsComponent>();
     private Vector2 direction = new Vector2();
 
     public Vector2 Direction { get { return direction; } set { direction = value; } }
-    public float Speed { get { return baseSpeed; } }
-    public float Damage { get { return baseDamage; } }
-    public float Lifetime { get { return baseLifetime; } }
-    public float Pierce { get { return basePierce; } }
-    public float TimeAlive { get { return timeAlive; } }
+    public float Speed { get { return baseSpeed * speedMultiplier; } set { baseSpeed = value; } }
+    public float Lifetime { get { return baseLifetime; } set { baseLifetime = value; } }
+    public float Pierce { get { return basePierce; } set { basePierce = value; } }
+    public float TimeAlive { get { return timeAlive; } set { timeAlive = value; } }
+    public float DamageMultiplier { get { return damageMultiplier; } set { damageMultiplier = value; } }
+    public float Size { get { return baseSize * sizeMultiplier; } set { baseSize = value; } }
+    public float SizeMultiplier { get { return sizeMultiplier; } set { sizeMultiplier = value; } }
+    public float SpeedMultiplier { get { return speedMultiplier; } set { speedMultiplier = value; } }
 
-    [SerializeField]
-    public StatsComponent shooter;
+    protected DamageInfo damageInfo;
 
 
     // Decides what the projectile can damage
@@ -40,6 +45,8 @@ public abstract class ProjectileBase : MonoBehaviour
         if (GameManager.instance.State == GameManager.GameState.Normal)
         {
             float delta = Time.deltaTime;
+
+            this.gameObject.transform.localScale = new Vector3(Size, Size);
 
             // Timer for the projectile expiring
             timeAlive += delta;
@@ -70,7 +77,7 @@ public abstract class ProjectileBase : MonoBehaviour
     private void DestroyProjectile()
     {
         OnDeath();
-        Destroy(gameObject);
+        Destroy(this.gameObject);
     }
 
     // Handles the projectiles collision
@@ -85,9 +92,15 @@ public abstract class ProjectileBase : MonoBehaviour
                 StatsComponent receiver = other.gameObject.GetComponent<StatsComponent>();
                 if (!hitTargets.Contains(receiver))
                 {
+                    if (this.GetType() == typeof(BombProjectileBase))
+                    {
+                        if (((BombProjectileBase)this).explodeOnContact)
+                        {
+                            DestroyProjectile();
+                        }
+                    }
                     Hit(receiver);
                     hitTargets.Add(receiver);
-
                     if (Pierce > 0 && usedPierce < Pierce)
                     {
                         usedPierce++;
@@ -124,13 +137,35 @@ public abstract class ProjectileBase : MonoBehaviour
     protected void Hit(StatsComponent receiver)
     {
         OnHit(receiver);
-        receiver.DealDamage(Damage + GameManager.instance.Player.Damage);
+        damageInfo.damage *= damageMultiplier;
+        receiver.DealDamage(damageInfo);
     }
 
     // Rotates the direction the projectile is moving by a certain degree
     public void RotateDirection(float degrees)
     {
         direction = Quaternion.Euler(0f, 0f, degrees) * direction;
+    }
+
+    public void SetDamageInfo(DamageInfo info)
+    {
+        damageInfo = info;
+    }
+
+    public static GameObject CreateEmptyProjectile()
+    {
+        GameObject projectile = new GameObject("Explosion");
+
+        CircleCollider2D collider = projectile.AddComponent<CircleCollider2D>();
+        collider.radius = 1f;
+        collider.isTrigger = true;
+
+        Rigidbody2D body = projectile.AddComponent<Rigidbody2D>();
+        body.bodyType = RigidbodyType2D.Dynamic;
+
+        projectile.AddComponent<EmptyProjectile>();
+
+        return projectile;
     }
 
     /// <summary>

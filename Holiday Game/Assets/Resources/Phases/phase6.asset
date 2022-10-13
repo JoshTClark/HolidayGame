@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7084332a92f40be458c9ae8a9f8683db, type: 3}
-  m_Name: phase3
+  m_Name: phase6
   m_EditorClassIdentifier: 
   numberOfEnemiesPerSpawn: 5
-  spawnInterval: 4
-  startTime: 30
+  spawnInterval: 5
+  startTime: 180
   enemies:
   - index: 1
-    weight: 0.65
+    weight: 0.5
   - index: 2
-    weight: 0.3
+    weight: 0.4
   - index: 3
-    weight: 0.05
+    weight: 0.1

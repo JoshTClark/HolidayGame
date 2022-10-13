@@ -63,18 +63,21 @@ public class UpgradePanelManager : MonoBehaviour
         List<ResourceManager.UpgradeIndex> rares = new List<ResourceManager.UpgradeIndex>();
         foreach (ResourceManager.UpgradeIndex u in pool.upgrades)
         {
-            Upgrade upgrade = ResourceManager.GetUpgrade(u);
-            if (upgrade.tier == Upgrade.Tier.Common)
+            if (!(player.HasUpgrade(u) && !ResourceManager.GetUpgrade(u).CanTakeMultiple))
             {
-                commons.Add(u);
-            }
-            else if (upgrade.tier == Upgrade.Tier.Uncommon)
-            {
-                uncommons.Add(u);
-            }
-            else if (upgrade.tier == Upgrade.Tier.Rare)
-            {
-                rares.Add(u);
+                Upgrade upgrade = ResourceManager.GetUpgrade(u);
+                if (upgrade.tier == Upgrade.Tier.Common)
+                {
+                    commons.Add(u);
+                }
+                else if (upgrade.tier == Upgrade.Tier.Uncommon)
+                {
+                    uncommons.Add(u);
+                }
+                else if (upgrade.tier == Upgrade.Tier.Rare)
+                {
+                    rares.Add(u);
+                }
             }
         }
         for (int i = 0; i < numOptions; i++)
@@ -114,18 +117,21 @@ public class UpgradePanelManager : MonoBehaviour
         {
             foreach (ResourceManager.UpgradeIndex u in pool.upgrades)
             {
-                Upgrade upgrade = ResourceManager.GetUpgrade(u);
-                if (upgrade.tier == Upgrade.Tier.Common)
+                if (!(player.HasUpgrade(u) && !ResourceManager.GetUpgrade(u).CanTakeMultiple))
                 {
-                    commons.Add(u);
-                }
-                else if (upgrade.tier == Upgrade.Tier.Uncommon)
-                {
-                    uncommons.Add(u);
-                }
-                else if (upgrade.tier == Upgrade.Tier.Rare)
-                {
-                    rares.Add(u);
+                    Upgrade upgrade = ResourceManager.GetUpgrade(u);
+                    if (upgrade.tier == Upgrade.Tier.Common)
+                    {
+                        commons.Add(u);
+                    }
+                    else if (upgrade.tier == Upgrade.Tier.Uncommon)
+                    {
+                        uncommons.Add(u);
+                    }
+                    else if (upgrade.tier == Upgrade.Tier.Rare)
+                    {
+                        rares.Add(u);
+                    }
                 }
             }
         }

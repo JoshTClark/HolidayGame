@@ -21,6 +21,7 @@ public class ResourceManager
         Snowball,
         PumpkinBomb,
         Test,
+        Fireworks,
         Count
     }
     public enum UpgradeIndex
@@ -45,11 +46,14 @@ public class ResourceManager
         SnowballSize2,
         SnowballSize3,
         SnowballSpeed1,
+        PumpkinBombWeaponUpgrade,
+        FireworkWeaponUpgrade
     }
 
     public enum UpgradePoolIndex
     {
         Basic,
+        Weapons,
         Snowball
     }
 

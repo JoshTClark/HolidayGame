@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     private Image xpBar;
 
     [SerializeField]
-    private CanvasRenderer statsPanel, pausedPanel, gamePanel, upgradePanel;
+    private CanvasRenderer statsMenu, playerStatsPanel, pausedPanel, gamePanel, upgradePanel;
 
     [SerializeField]
     private float timeToDifficultyIncrease;
@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
 
         // Testing giving player a weapon
         player.AddUpgrade(ResourceManager.UpgradeIndex.SnowballWeaponUpgrade);
-        GivePlayerWeapon(ResourceManager.WeaponIndex.PumpkinBomb);
+        //GivePlayerWeapon(ResourceManager.WeaponIndex.PumpkinBomb);
     }
 
     void Update()
@@ -117,12 +117,12 @@ public class GameManager : MonoBehaviour
                 // Displaying stats
                 if (displayStats.action.ReadValue<float>() > 0)
                 {
-                    statsPanel.gameObject.SetActive(true);
-                    DisplayPlayerStats();
+                    statsMenu.gameObject.SetActive(true);
+                    DisplayStats();
                 }
                 else
                 {
-                    statsPanel.gameObject.SetActive(false);
+                    statsMenu.gameObject.SetActive(false);
                 }
 
                 // Moving the camera
@@ -180,17 +180,17 @@ public class GameManager : MonoBehaviour
         return false;
     }
 
-    private void DisplayPlayerStats()
+    private void DisplayStats()
     {
         playerStats.text =
-            "Max HP = " + player.MaxHp +
-            "\nSpeed = " + player.Speed +
-            "\nDamage = " + player.Damage +
-            "\nAttack Speed = " + player.AttackSpeed +
-            "\nArmor = " + player.Armor +
-            "\nRegen = " + player.Regen +
-            "\nCritical Chance = " + player.CritDamage +
-            "\nCritical Damage = " + player.CritDamage;
+            "Max HP: " + player.MaxHp +
+            "\nSpeed: " + player.Speed +
+            "\nDamage: " + player.Damage +
+            "\nAttack Speed:" + player.AttackSpeed +
+            "\nArmor: " + player.Armor +
+            "\nRegen: " + player.Regen +
+            "\nCrit Chance: " + player.CritDamage +
+            "\nCrit Damage: " + player.CritDamage;
     }
 
     public void DoPlayerLevelUp()
@@ -202,6 +202,7 @@ public class GameManager : MonoBehaviour
     {
         List<UpgradePool> pools = new List<UpgradePool>();
         pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Basic));
+        pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Weapons));
         if (player.HasUpgrade(ResourceManager.UpgradeIndex.SnowballWeaponUpgrade))
         {
             pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Snowball));

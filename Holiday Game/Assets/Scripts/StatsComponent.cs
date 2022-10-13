@@ -136,6 +136,36 @@ public abstract class StatsComponent : MonoBehaviour
                 AddAttack(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.Snowball));
             }
         }
+        if (HasUpgrade(ResourceManager.UpgradeIndex.PumpkinBombWeaponUpgrade))
+        {
+            bool givePumkin = true;
+            foreach (Weapon w in weapons)
+            {
+                if (w.GetType() == typeof(PumpkinBomb))
+                {
+                    givePumkin = false;
+                }
+            }
+            if (givePumkin)
+            {
+                AddAttack(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.PumpkinBomb));
+            }
+        }
+        if (HasUpgrade(ResourceManager.UpgradeIndex.FireworkWeaponUpgrade))
+        {
+            bool giveFirework = true;
+            foreach (Weapon w in weapons)
+            {
+                if (w.GetType() == typeof(FireworkWeapon))
+                {
+                    giveFirework = false;
+                }
+            }
+            if (giveFirework)
+            {
+                AddAttack(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.Fireworks));
+            }
+        }
     }
 
     //Checks to see if leveled up since last tick

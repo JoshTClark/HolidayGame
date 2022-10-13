@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseMaxHP: 10
-  baseSpeed: 2
+  baseSpeed: 1.5
   baseDamage: 5
   baseAttackSpeed: 1
   baseArmor: 0

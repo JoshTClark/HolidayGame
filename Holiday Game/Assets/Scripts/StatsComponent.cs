@@ -210,12 +210,6 @@ public abstract class StatsComponent : MonoBehaviour
     {
         //checks if missing hp, heals for 20 if so
         CalculateStats();
-        if (currentHP < MaxHp)
-        {
-            currentHP += 20;
-        }
-        else currentHP = MaxHp;
-
         if (this.gameObject.GetComponent<Player>())
         {
             GameManager.instance.DoPlayerLevelUp();
@@ -397,7 +391,7 @@ public abstract class StatsComponent : MonoBehaviour
         // AttackSpeed1 - AttackSpeed3
         if (HasUpgrade(ResourceManager.UpgradeIndex.AttackSpeed1))
         {
-            attackSpeedMult += 0.5f * GetUpgrade(ResourceManager.UpgradeIndex.AttackSpeed1).CurrentLevel;
+            attackSpeedMult += 0.05f * GetUpgrade(ResourceManager.UpgradeIndex.AttackSpeed1).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.AttackSpeed2))
         {

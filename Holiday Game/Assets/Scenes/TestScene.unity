@@ -3188,7 +3188,7 @@ MonoBehaviour:
   difficultyDisplay: {fileID: 118963396}
   playerStats: {fileID: 774071707}
   playerLevel: {fileID: 1218707938}
-  damageNumberEffect: {fileID: 544883974048588148, guid: 12a4ba8ef8792474baa70815ef538c11, type: 3}
+  numberEffect: {fileID: 544883974048588148, guid: 12a4ba8ef8792474baa70815ef538c11, type: 3}
   xpBar: {fileID: 2078058655}
   statsMenu: {fileID: 247289368}
   playerStatsPanel: {fileID: 318532946}

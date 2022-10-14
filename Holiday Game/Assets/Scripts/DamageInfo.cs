@@ -18,11 +18,14 @@ public class DamageInfo
 
     public void CalculateAll()
     {
-        isCrit = GameManager.RollCheck(attacker.CritChance);
-        if (isCrit)
+        if (attacker)
         {
-            damage *= attacker.CritDamage;
-            damageColor = DamageColor.Crit;
+            isCrit = GameManager.RollCheck(attacker.CritChance);
+            if (isCrit)
+            {
+                damage *= attacker.CritDamage;
+                damageColor = DamageColor.Crit;
+            }
         }
     }
 

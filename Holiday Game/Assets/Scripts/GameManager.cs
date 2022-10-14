@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     private Canvas ui;
 
     [SerializeField]
-    private TMP_Text timerDisplay, difficultyDisplay, playerStats, playerLevel, damageNumberEffect;
+    private TMP_Text timerDisplay, difficultyDisplay, playerStats, playerLevel, numberEffect;
 
     [SerializeField]
     private Image xpBar;
@@ -271,21 +271,31 @@ public class GameManager : MonoBehaviour
         {
             if (info.receiver.GetType() != typeof(Player))
             {
-                TMP_Text effect = Instantiate<TMP_Text>(damageNumberEffect, effectsPanel.gameObject.transform);
-                effect.text = info.damage.ToString("0.0");
+                TMP_Text effect = Instantiate<TMP_Text>(numberEffect, effectsPanel.gameObject.transform);
+                effect.text = info.damage.ToString();
                 effect.color = info.GetColor();
                 if (info.damageColor == DamageInfo.DamageColor.Crit)
                 {
                     effect.fontStyle = FontStyles.Bold;
                 }
-                effect.GetComponent<DamageNumber>().spawnPosition = info.receiver.gameObject.transform.position;
-                effect.GetComponent<DamageNumber>().canvas = ui;
-                effect.GetComponent<DamageNumber>().cam = cam;
+                effect.GetComponent<NumberEffect>().spawnPosition = info.receiver.gameObject.transform.position;
+                effect.GetComponent<NumberEffect>().canvas = ui;
+                effect.GetComponent<NumberEffect>().cam = cam;
             }
         }
     }
 
-    public void ShowDamageNumbers(bool show)
+    public void DisplayHealing(float amount, StatsComponent receiver)
+    {
+        TMP_Text effect = Instantiate<TMP_Text>(numberEffect, effectsPanel.gameObject.transform);
+        effect.text = amount.ToString();
+        effect.color = new Color(0f, 1f, 0f, 1f);
+        effect.GetComponent<NumberEffect>().spawnPosition = receiver.gameObject.transform.position;
+        effect.GetComponent<NumberEffect>().canvas = ui;
+        effect.GetComponent<NumberEffect>().cam = cam;
+    }
+
+        public void ShowDamageNumbers(bool show)
     {
         showDamageNumbers = show;
     }

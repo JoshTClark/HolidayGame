@@ -9,7 +9,7 @@ public abstract class StatsComponent : MonoBehaviour
     // They shouldn't be changed during runtime and should be set in the inspector
     // If you add a new stat you shuld also add an add and mult variable and a property for the base and true values
     [SerializeField]
-    private float baseMaxHP, baseSpeed, baseDamage, baseAttackSpeed, baseArmor, baseRegen, baseCritChance, baseCritDamage;
+    private float baseMaxHP, baseSpeed, baseDamage, baseAttackSpeed, baseArmor, baseRegen, baseRegenInterval, baseCritChance, baseCritDamage;
 
     // Level up stuff
     [SerializeField]
@@ -30,7 +30,7 @@ public abstract class StatsComponent : MonoBehaviour
     private AnimationCurve expCurve;
 
     // Multipliers to stats
-    private float hpMult, speedMult, damageMult, attackSpeedMult, armorMult, regenMult, critChanceMult, critDamageMult;
+    private float hpMult, speedMult, damageMult, attackSpeedMult, armorMult, regenMult, regenIntervalMult, critChanceMult, critDamageMult;
 
     // Flags
     [SerializeField]
@@ -47,6 +47,7 @@ public abstract class StatsComponent : MonoBehaviour
     bool damaged;
     float fadeTimer;
     float vFade;
+    float regenTimer = 0f;
 
     [SerializeField]
     float fadeTotalTime;
@@ -57,6 +58,7 @@ public abstract class StatsComponent : MonoBehaviour
     public float BaseDamage { get; }
     public float BaseArmor { get; }
     public float BaseRegen { get; }
+    public float BaseRegenInterval { get; }
     public float BaseCritChance { get; }
     public float BaseCritDamage { get; }
 
@@ -75,6 +77,8 @@ public abstract class StatsComponent : MonoBehaviour
     public float AttackSpeed { get { return (baseAttackSpeed + attackSpeedAdd) * attackSpeedMult; } }
     public float Armor { get { return (baseArmor + armorAdd) * armorMult; } }
     public float Regen { get { return (baseRegen + regenAdd) * regenMult; } }
+
+    public float RegenInterval { get { return (baseRegenInterval * regenIntervalMult); } }
     public float CritChance { get { return (baseCritChance + critChanceAdd) * critChanceMult; } }
     public float CritDamage { get { return (baseCritDamage + critDamageAdd) * critDamageMult; } }
 
@@ -91,6 +95,7 @@ public abstract class StatsComponent : MonoBehaviour
         regenMult = 1.0f;
         critChanceMult = 1.0f;
         critDamageMult = 1.0f;
+        regenIntervalMult = 1.0f;
 
         fadeTotalTime = .2f;
         damaged = false;
@@ -102,6 +107,11 @@ public abstract class StatsComponent : MonoBehaviour
         sr = gameObject.GetComponent<SpriteRenderer>();
         ogColor = sr.color;
 
+        if (baseRegenInterval <= 0)
+        {
+            baseRegenInterval = 10;
+        }
+
         OnStart();
     }
 
@@ -109,6 +119,7 @@ public abstract class StatsComponent : MonoBehaviour
     {
         if (GameManager.instance.State == GameManager.GameState.Normal)
         {
+            float delta = Time.deltaTime;
             CalculateStats();
             CheckWeapons();
 
@@ -116,7 +127,7 @@ public abstract class StatsComponent : MonoBehaviour
 
             if (damaged)
             {
-                fadeTimer += Time.deltaTime;
+                fadeTimer += delta;
                 sr.color = Color.Lerp(Color.red, ogColor, fadeTimer / fadeTotalTime);
                 if (fadeTimer > fadeTotalTime)
                 {
@@ -124,6 +135,16 @@ public abstract class StatsComponent : MonoBehaviour
                 }
             }
 
+            // Doing regen
+            regenTimer += delta;
+            if (regenTimer >= RegenInterval)
+            {
+                regenTimer = 0;
+                if (Regen > 0) 
+                {
+                    Heal(Regen);
+                }
+            }
 
             // Checks if should be dead
             if (currentHP <= 0)
@@ -317,6 +338,7 @@ public abstract class StatsComponent : MonoBehaviour
     {
         currentHP += amount;
         currentHP = Mathf.Clamp(currentHP, 0, MaxHp);
+        GameManager.instance.DisplayHealing(amount, this);
     }
 
     public abstract void OnUpdate();

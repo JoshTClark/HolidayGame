@@ -136,6 +136,7 @@ MonoBehaviour:
   baseAttackSpeed: 1
   baseArmor: 0
   baseRegen: 0
+  baseRegenInterval: 5
   baseCritChance: 0.01
   baseCritDamage: 2
   levelScaling: 0

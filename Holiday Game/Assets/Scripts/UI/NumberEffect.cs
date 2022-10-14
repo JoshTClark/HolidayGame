@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class DamageNumber : MonoBehaviour
+public class NumberEffect : MonoBehaviour
 {
     public Canvas canvas;
     public Camera cam;

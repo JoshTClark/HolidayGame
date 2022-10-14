@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 544883974048588148}
   - component: {fileID: -128349128941071655}
   m_Layer: 0
-  m_Name: DamageNumberEffect
+  m_Name: NumberEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

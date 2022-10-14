@@ -25,9 +25,12 @@ public abstract class BombProjectileBase : ProjectileBase
         projectile.Size = explosionRadius;
         projectile.SizeMultiplier = explosionSizeMultiplier;
         projectile.projectileTeam = explosionTeam;
-        ParticleSystem effect = GameObject.Instantiate(explosionEffect, this.gameObject.transform.position, Quaternion.identity);
-        effect.gameObject.transform.localScale = new Vector3(projectile.Size, projectile.Size);
-        effect.Play();
+        if (explosionEffect)
+        {
+            ParticleSystem effect = GameObject.Instantiate(explosionEffect, this.gameObject.transform.position, Quaternion.identity);
+            effect.gameObject.transform.localScale = new Vector3(projectile.Size, projectile.Size);
+            effect.Play();
+        }
     }
 
     void OnDrawGizmos()

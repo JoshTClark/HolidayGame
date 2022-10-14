@@ -219,6 +219,13 @@ public abstract class StatsComponent : MonoBehaviour
     // Deals damage here
     public virtual void TakeDamage(DamageInfo info)
     {
+        if (Armor > 0)
+        {
+            float damageReduction = (-1f / ((0.1f * Mathf.Sqrt(Armor)) + 1f)) + 1f;
+            info.damage *= damageReduction;
+        }
+
+        // reducing health
         currentHP -= info.damage;
         info.receiver = this;
         GameManager.instance.DisplayDamage(info);
@@ -305,7 +312,7 @@ public abstract class StatsComponent : MonoBehaviour
         return null;
     }
 
-    public void Heal(float amount) 
+    public void Heal(float amount)
     {
         currentHP += amount;
         currentHP = Mathf.Clamp(currentHP, 0, MaxHp);
@@ -406,7 +413,7 @@ public abstract class StatsComponent : MonoBehaviour
         }
     }
 
-    public void OnGainUpgrade(Upgrade upgrade) 
+    public void OnGainUpgrade(Upgrade upgrade)
     {
         // Heal when taking these upgrades
         if (upgrade.index == ResourceManager.UpgradeIndex.Health1)

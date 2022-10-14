@@ -148,7 +148,7 @@ public class EnemyManager : MonoBehaviour
     {
         for(int i = currentEnemies.Count-1; i >= 0; i--)
         {
-            Destroy(currentEnemies[i]);
+            Destroy(currentEnemies[i].gameObject);
         }
         currentEnemies.Clear();
         phases = ResourceManager.phaseDefinitions;

@@ -239,7 +239,7 @@ public class GameManager : MonoBehaviour
     {
         gameOverPanel.gameObject.SetActive(false);
         EnemyManager.instance.Reset();
-        Destroy(player);
+        Destroy(player.gameObject);
         state = GameState.Title;
     }
 

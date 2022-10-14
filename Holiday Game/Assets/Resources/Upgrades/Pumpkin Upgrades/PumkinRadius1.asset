@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 296cfc9b7513a864aab005e7da6bfa8f, type: 3}
-  m_Name: SnowballSize2
+  m_Name: PumkinRadius1
   m_EditorClassIdentifier: 
-  upgradeName: Snowball Size++
-  upgradeDescription: Increases the size of the snowball by 20% and pierce by 1
-  index: 17
-  tier: 1
+  upgradeName: Pumkin Explosion+
+  upgradeDescription: Increases the size of the explosion by 10%
+  index: 22
+  tier: 0
   CanTakeMultiple: 1
   IsWeapon: 0

@@ -12,7 +12,13 @@ public class FireworkWeapon : Weapon
         {
             // Calculating stats
             float damageMult = baseDamageMultiplier;
-            for (int i = 0; i < 3; i++)
+            float countAdd = 0f;
+            if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.FireworkCount))
+            {
+                countAdd += 1f * (GameManager.instance.Player.GetUpgrade(ResourceManager.UpgradeIndex.FireworkCount).CurrentLevel);
+            }
+
+            for (int i = 0; i < 3 + countAdd; i++)
             {
                 FireworkProjectile p = Instantiate<FireworkProjectile>((FireworkProjectile)projectile, transform.position, Quaternion.identity);
                 p.target = e;

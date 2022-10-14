@@ -218,6 +218,14 @@ public class GameManager : MonoBehaviour
         {
             pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Snowball));
         }
+        if (player.HasUpgrade(ResourceManager.UpgradeIndex.PumpkinBombWeaponUpgrade))
+        {
+            pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Pumkin));
+        }
+        if (player.HasUpgrade(ResourceManager.UpgradeIndex.FireworkWeaponUpgrade))
+        {
+            pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Fireworks));
+        }
         return pools;
     }
 

@@ -35,8 +35,9 @@ public class SnowballWeapon : Weapon
                 damageMult += 0.3f * owner.GetUpgrade(ResourceManager.UpgradeIndex.SnowballDamage3).CurrentLevel;
             }
 
-            // Size
+            // Size and pierce
             float sizeMult = baseSizeMultiplier;
+            float pierceAdd = 0;
             if (owner.HasUpgrade(ResourceManager.UpgradeIndex.SnowballSize1))
             {
                 sizeMult += 0.1f * owner.GetUpgrade(ResourceManager.UpgradeIndex.SnowballSize1).CurrentLevel;
@@ -44,10 +45,12 @@ public class SnowballWeapon : Weapon
             if (owner.HasUpgrade(ResourceManager.UpgradeIndex.SnowballSize2))
             {
                 sizeMult += 0.2f * owner.GetUpgrade(ResourceManager.UpgradeIndex.SnowballSize2).CurrentLevel;
+                pierceAdd += 1 * owner.GetUpgrade(ResourceManager.UpgradeIndex.SnowballSize2).CurrentLevel;
             }
             if (owner.HasUpgrade(ResourceManager.UpgradeIndex.SnowballSize3))
             {
                 sizeMult += 0.3f * owner.GetUpgrade(ResourceManager.UpgradeIndex.SnowballSize3).CurrentLevel;
+                pierceAdd += 2 * owner.GetUpgrade(ResourceManager.UpgradeIndex.SnowballSize3).CurrentLevel;
             }
 
             // Speed
@@ -63,6 +66,7 @@ public class SnowballWeapon : Weapon
             DamageInfo info = new DamageInfo();
             info.damage = damageMult * owner.Damage;
             p.SetDamageInfo(info);
+            p.Pierce += pierceAdd;
             p.SizeMultiplier = sizeMult;
             p.SpeedMultiplier = speedMult;
             ResetTimer();

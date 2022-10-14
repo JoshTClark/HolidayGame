@@ -14,7 +14,8 @@ public class GameManager : MonoBehaviour
         Normal,
         Paused,
         UpgradeMenu,
-        Title
+        Title,
+        GameOver
     }
 
     [SerializeField]
@@ -30,7 +31,7 @@ public class GameManager : MonoBehaviour
     private Image xpBar;
 
     [SerializeField]
-    private CanvasRenderer statsMenu, playerStatsPanel, pausedPanel, gamePanel, upgradePanel, titlePanel;
+    private CanvasRenderer statsMenu, playerStatsPanel, pausedPanel, gamePanel, upgradePanel, titlePanel, gameOverPanel;
 
     [SerializeField]
     private float timeToDifficultyIncrease;
@@ -89,6 +90,7 @@ public class GameManager : MonoBehaviour
         pausedPanel.gameObject.SetActive(false);
         upgradePanel.gameObject.SetActive(false);
         gamePanel.gameObject.SetActive(false);
+        gameOverPanel.gameObject.SetActive(false);
         titlePanel.gameObject.SetActive(true);
     }
 
@@ -97,6 +99,11 @@ public class GameManager : MonoBehaviour
         switch (state)
         {
             case GameState.Title:
+                titlePanel.gameObject.SetActive(true);
+                break;
+            case GameState.GameOver:
+                gamePanel.gameObject.SetActive(false);
+                gameOverPanel.gameObject.SetActive(true);
                 break;
             case GameState.Normal:
                 // Updating the timer and difficulty
@@ -132,6 +139,12 @@ public class GameManager : MonoBehaviour
                 {
                     state = GameState.Paused;
                     pausedPanel.gameObject.SetActive(true);
+                }
+
+                // GameOver
+                if (player.IsDead)
+                {
+                    state = GameState.GameOver;
                 }
                 break;
             case GameState.Paused:
@@ -221,6 +234,13 @@ public class GameManager : MonoBehaviour
     public void ChooseFirework()
     {
         StartGame(ResourceManager.UpgradeIndex.FireworkWeaponUpgrade);
+    }
+    public void Retry()
+    {
+        gameOverPanel.gameObject.SetActive(false);
+        EnemyManager.instance.Reset();
+        Destroy(player);
+        state = GameState.Title;
     }
 
     public void StartGame(ResourceManager.UpgradeIndex weapon)

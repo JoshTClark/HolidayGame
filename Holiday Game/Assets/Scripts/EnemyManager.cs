@@ -140,4 +140,17 @@ public class EnemyManager : MonoBehaviour
             }
         }
     }
+
+    /// <summary>
+    /// Removes all enemies
+    /// </summary>
+    public void Reset()
+    {
+        for(int i = currentEnemies.Count-1; i >= 0; i--)
+        {
+            Destroy(currentEnemies[i]);
+        }
+        currentEnemies.Clear();
+        phases = ResourceManager.phaseDefinitions;
+    }
 }

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberOfEnemiesPerSpawn: 5
   spawnInterval: 4
-  startTime: 20
+  startTime: 60
   enemies:
   - index: 1
     weight: 0.85

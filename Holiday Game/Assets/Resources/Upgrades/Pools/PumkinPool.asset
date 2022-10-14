@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e1f92e0d4b4fa74fb5b8efb09df32c9, type: 3}
   m_Name: PumkinPool
   m_EditorClassIdentifier: 
-  index: 0
-  upgrades: 
+  index: 3
+  upgrades: 160000001700000018000000

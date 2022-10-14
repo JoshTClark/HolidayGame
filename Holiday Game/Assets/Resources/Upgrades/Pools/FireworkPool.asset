@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e1f92e0d4b4fa74fb5b8efb09df32c9, type: 3}
   m_Name: FireworkPool
   m_EditorClassIdentifier: 
-  index: 0
-  upgrades: 
+  index: 4
+  upgrades: 19000000

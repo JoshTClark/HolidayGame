@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeName: More Fireworks
   upgradeDescription: Shoot 1 additional firework
-  index: 0
-  tier: 0
+  index: 25
+  tier: 2
   CanTakeMultiple: 0
   IsWeapon: 0

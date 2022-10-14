@@ -24,6 +24,7 @@ public class FireworkWeapon : Weapon
                 p.target = e;
                 DamageInfo info = new DamageInfo();
                 info.damage = damageMult * owner.Damage;
+                info.attacker = owner;
                 p.SetDamageInfo(info);
                 p.SizeMultiplier = baseSizeMultiplier;
                 p.SpeedMultiplier = baseSizeMultiplier;

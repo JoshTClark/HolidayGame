@@ -101,6 +101,7 @@ public abstract class ProjectileBase : MonoBehaviour
                         }
                     }
                     Hit(receiver);
+                    this.damageInfo.receiver = receiver;
                     hitTargets.Add(receiver);
                     if (Pierce > 0 && usedPierce < Pierce)
                     {
@@ -120,6 +121,7 @@ public abstract class ProjectileBase : MonoBehaviour
             if (other.gameObject.GetComponent<Player>())
             {
                 StatsComponent receiver = other.gameObject.GetComponent<StatsComponent>();
+                this.damageInfo.receiver = receiver;
                 Hit(receiver);
                 DestroyProjectile();
                 OnCollision();

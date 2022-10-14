@@ -14,6 +14,7 @@ public class PumpkinBomb : Weapon
             p.Direction = Vector2.zero;
             DamageInfo info = new DamageInfo();
             info.damage = baseDamageMultiplier * owner.Damage;
+            info.attacker = owner;
             p.SetDamageInfo(info);
             if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.PumkinRadius1))
             {

@@ -201,7 +201,7 @@ public class GameManager : MonoBehaviour
             "\nAttack Speed:" + player.AttackSpeed +
             "\nArmor: " + player.Armor +
             "\nRegen: " + player.Regen +
-            "\nCrit Chance: " + player.CritDamage +
+            "\nCrit Chance: " + (player.CritChance*100) + "% " +
             "\nCrit Damage: " + player.CritDamage;
     }
 
@@ -273,6 +273,11 @@ public class GameManager : MonoBehaviour
             {
                 TMP_Text effect = Instantiate<TMP_Text>(damageNumberEffect, effectsPanel.gameObject.transform);
                 effect.text = info.damage.ToString("0.0");
+                effect.color = info.GetColor();
+                if (info.damageColor == DamageInfo.DamageColor.Crit)
+                {
+                    effect.fontStyle = FontStyles.Bold;
+                }
                 effect.GetComponent<DamageNumber>().spawnPosition = info.receiver.gameObject.transform.position;
                 effect.GetComponent<DamageNumber>().canvas = ui;
                 effect.GetComponent<DamageNumber>().cam = cam;
@@ -280,7 +285,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void ShowDamageNumbers(bool show) 
+    public void ShowDamageNumbers(bool show)
     {
         showDamageNumbers = show;
     }

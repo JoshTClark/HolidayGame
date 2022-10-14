@@ -219,6 +219,7 @@ public abstract class StatsComponent : MonoBehaviour
     // Deals damage here
     public virtual void TakeDamage(DamageInfo info)
     {
+        info.CalculateAll();
         if (Armor > 0)
         {
             float damageReduction = (-1f / ((0.1f * Mathf.Sqrt(Armor)) + 1f)) + 1f;

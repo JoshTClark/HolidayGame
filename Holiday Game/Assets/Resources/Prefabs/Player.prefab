@@ -136,9 +136,9 @@ MonoBehaviour:
   baseAttackSpeed: 1
   baseArmor: 0
   baseRegen: 0
-  baseCritChance: 0
-  baseCritDamage: 0
-  levelScaling: 2
+  baseCritChance: 0.01
+  baseCritDamage: 2
+  levelScaling: 0
   hpLevelUp: 0
   damageLevelUp: 0
   currentHP: 0

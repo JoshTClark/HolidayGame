@@ -9,6 +9,7 @@ public abstract class BombProjectileBase : ProjectileBase
     public float explosionLifetime;
     public Team explosionTeam;
     public ParticleSystem explosionEffect;
+    public float explosionSizeMultiplier = 1f;
 
     public override void OnDeath()
     {
@@ -22,7 +23,7 @@ public abstract class BombProjectileBase : ProjectileBase
         projectile.Lifetime = explosionLifetime;
         projectile.Pierce = 999f;
         projectile.Size = explosionRadius;
-        projectile.SizeMultiplier = 1f;
+        projectile.SizeMultiplier = explosionSizeMultiplier;
         projectile.projectileTeam = explosionTeam;
         ParticleSystem effect = GameObject.Instantiate(explosionEffect, this.gameObject.transform.position, Quaternion.identity);
         effect.gameObject.transform.localScale = new Vector3(projectile.Size, projectile.Size);

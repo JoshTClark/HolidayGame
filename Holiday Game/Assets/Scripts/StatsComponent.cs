@@ -217,9 +217,11 @@ public abstract class StatsComponent : MonoBehaviour
     }
 
     // Deals damage here
-    public virtual void DealDamage(DamageInfo info)
+    public virtual void TakeDamage(DamageInfo info)
     {
         currentHP -= info.damage;
+        info.receiver = this;
+        GameManager.instance.DisplayDamage(info);
         sr.color = Color.red;
         damaged = true;
         fadeTimer = 0;
@@ -236,13 +238,6 @@ public abstract class StatsComponent : MonoBehaviour
     public void AddXP(float amount)
     {
         xpAmount += amount;
-
-        if (currentHP < MaxHp) // heals for 5 when pick up xp // should be removed once health drops/health regen are incorporated.
-        {
-            currentHP += 5;
-        }
-        else currentHP = MaxHp;
-
     }
 
     public void SetLevel(int i)

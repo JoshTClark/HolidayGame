@@ -14,7 +14,8 @@ public class GameManager : MonoBehaviour
         Normal,
         Paused,
         UpgradeMenu,
-        Title
+        Title,
+        GameOver
     }
 
     [SerializeField]
@@ -24,13 +25,13 @@ public class GameManager : MonoBehaviour
     private Canvas ui;
 
     [SerializeField]
-    private TMP_Text timerDisplay, difficultyDisplay, playerStats, playerLevel;
+    private TMP_Text timerDisplay, difficultyDisplay, playerStats, playerLevel, damageNumberEffect;
 
     [SerializeField]
     private Image xpBar;
 
     [SerializeField]
-    private CanvasRenderer statsMenu, playerStatsPanel, pausedPanel, gamePanel, upgradePanel, titlePanel;
+    private CanvasRenderer statsMenu, playerStatsPanel, pausedPanel, gamePanel, upgradePanel, titlePanel, gameOverPanel, effectsPanel;
 
     [SerializeField]
     private float timeToDifficultyIncrease;
@@ -41,6 +42,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private HealthBar healthBar;
 
+    public bool showDamageNumbers = true;
     private float time = 0.0f;
     private float currentDifficulty = 1;
     private GameState state = GameState.Title;
@@ -89,6 +91,7 @@ public class GameManager : MonoBehaviour
         pausedPanel.gameObject.SetActive(false);
         upgradePanel.gameObject.SetActive(false);
         gamePanel.gameObject.SetActive(false);
+        gameOverPanel.gameObject.SetActive(false);
         titlePanel.gameObject.SetActive(true);
     }
 
@@ -97,6 +100,11 @@ public class GameManager : MonoBehaviour
         switch (state)
         {
             case GameState.Title:
+                titlePanel.gameObject.SetActive(true);
+                break;
+            case GameState.GameOver:
+                gamePanel.gameObject.SetActive(false);
+                gameOverPanel.gameObject.SetActive(true);
                 break;
             case GameState.Normal:
                 // Updating the timer and difficulty
@@ -132,6 +140,12 @@ public class GameManager : MonoBehaviour
                 {
                     state = GameState.Paused;
                     pausedPanel.gameObject.SetActive(true);
+                }
+
+                // GameOver
+                if (player.IsDead)
+                {
+                    state = GameState.GameOver;
                 }
                 break;
             case GameState.Paused:
@@ -205,6 +219,14 @@ public class GameManager : MonoBehaviour
         {
             pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Snowball));
         }
+        if (player.HasUpgrade(ResourceManager.UpgradeIndex.PumpkinBombWeaponUpgrade))
+        {
+            pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Pumkin));
+        }
+        if (player.HasUpgrade(ResourceManager.UpgradeIndex.FireworkWeaponUpgrade))
+        {
+            pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Fireworks));
+        }
         return pools;
     }
 
@@ -222,6 +244,14 @@ public class GameManager : MonoBehaviour
     {
         StartGame(ResourceManager.UpgradeIndex.FireworkWeaponUpgrade);
     }
+    public void Retry()
+    {
+        gameOverPanel.gameObject.SetActive(false);
+        EnemyManager.instance.Reset();
+        Destroy(player.gameObject);
+        time = 0.0f;
+        state = GameState.Title;
+    }
 
     public void StartGame(ResourceManager.UpgradeIndex weapon)
     {
@@ -233,5 +263,25 @@ public class GameManager : MonoBehaviour
         titlePanel.gameObject.SetActive(false);
         gamePanel.gameObject.SetActive(true);
         state = GameState.Normal;
+    }
+
+    public void DisplayDamage(DamageInfo info)
+    {
+        if (info.receiver && showDamageNumbers)
+        {
+            if (info.receiver.GetType() != typeof(Player))
+            {
+                TMP_Text effect = Instantiate<TMP_Text>(damageNumberEffect, effectsPanel.gameObject.transform);
+                effect.text = info.damage.ToString("0.0");
+                effect.GetComponent<DamageNumber>().spawnPosition = info.receiver.gameObject.transform.position;
+                effect.GetComponent<DamageNumber>().canvas = ui;
+                effect.GetComponent<DamageNumber>().cam = cam;
+            }
+        }
+    }
+
+    public void ShowDamageNumbers(bool show) 
+    {
+        showDamageNumbers = show;
     }
 }

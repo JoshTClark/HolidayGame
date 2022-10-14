@@ -47,14 +47,20 @@ public class ResourceManager
         SnowballSize3,
         SnowballSpeed1,
         PumpkinBombWeaponUpgrade,
-        FireworkWeaponUpgrade
+        FireworkWeaponUpgrade,
+        PumkinRadius1,
+        PumkinRadius2,
+        PumkinRadius3,
+        FireworkCount
     }
 
     public enum UpgradePoolIndex
     {
         Basic,
         Weapons,
-        Snowball
+        Snowball,
+        Pumkin,
+        Fireworks
     }
 
     public static List<Enemy> enemyPrefabs = new List<Enemy>();

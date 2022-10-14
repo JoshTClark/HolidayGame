@@ -139,7 +139,7 @@ public abstract class ProjectileBase : MonoBehaviour
     {
         OnHit(receiver);
         damageInfo.damage *= damageMultiplier;
-        receiver.DealDamage(damageInfo);
+        receiver.TakeDamage(damageInfo);
     }
 
     // Rotates the direction the projectile is moving by a certain degree

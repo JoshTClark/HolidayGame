@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SnowballSize3
   m_EditorClassIdentifier: 
   upgradeName: Snowball Size+++
-  upgradeDescription: Increases the size of the snowball by 30%.
+  upgradeDescription: Increases the size of the snowball by 30% and pierce by 2
   index: 18
   tier: 2
   CanTakeMultiple: 1

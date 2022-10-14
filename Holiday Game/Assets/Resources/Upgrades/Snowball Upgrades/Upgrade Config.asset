@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 296cfc9b7513a864aab005e7da6bfa8f, type: 3}
   m_Name: Upgrade Config
   m_EditorClassIdentifier: 
-  upgradeName: Snowball Speed
+  upgradeName: Snowball Speed+
   upgradeDescription: Increases how fast the snowball moves by 15%.
   index: 19
   tier: 0

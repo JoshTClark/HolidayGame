@@ -68,7 +68,7 @@ public class Player : StatsComponent
     /// Checks if the player can take damage first
     /// </summary>
     /// <param name="damage"></param>
-    public override void DealDamage(DamageInfo info)
+    public override void TakeDamage(DamageInfo info)
     {
         if (isInvincible)
         {
@@ -77,7 +77,7 @@ public class Player : StatsComponent
         else
         {
             // take damage & become invincible
-            base.DealDamage(info);
+            base.TakeDamage(info);
             isInvincible = true;
         }
     }

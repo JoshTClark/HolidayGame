@@ -25,13 +25,13 @@ public class GameManager : MonoBehaviour
     private Canvas ui;
 
     [SerializeField]
-    private TMP_Text timerDisplay, difficultyDisplay, playerStats, playerLevel;
+    private TMP_Text timerDisplay, difficultyDisplay, playerStats, playerLevel, damageNumberEffect;
 
     [SerializeField]
     private Image xpBar;
 
     [SerializeField]
-    private CanvasRenderer statsMenu, playerStatsPanel, pausedPanel, gamePanel, upgradePanel, titlePanel, gameOverPanel;
+    private CanvasRenderer statsMenu, playerStatsPanel, pausedPanel, gamePanel, upgradePanel, titlePanel, gameOverPanel, effectsPanel;
 
     [SerializeField]
     private float timeToDifficultyIncrease;
@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private HealthBar healthBar;
 
+    public bool showDamageNumbers = true;
     private float time = 0.0f;
     private float currentDifficulty = 1;
     private GameState state = GameState.Title;
@@ -262,5 +263,25 @@ public class GameManager : MonoBehaviour
         titlePanel.gameObject.SetActive(false);
         gamePanel.gameObject.SetActive(true);
         state = GameState.Normal;
+    }
+
+    public void DisplayDamage(DamageInfo info)
+    {
+        if (info.receiver && showDamageNumbers)
+        {
+            if (info.receiver.GetType() != typeof(Player))
+            {
+                TMP_Text effect = Instantiate<TMP_Text>(damageNumberEffect, effectsPanel.gameObject.transform);
+                effect.text = info.damage.ToString("0.0");
+                effect.GetComponent<DamageNumber>().spawnPosition = info.receiver.gameObject.transform.position;
+                effect.GetComponent<DamageNumber>().canvas = ui;
+                effect.GetComponent<DamageNumber>().cam = cam;
+            }
+        }
+    }
+
+    public void ShowDamageNumbers(bool show) 
+    {
+        showDamageNumbers = show;
     }
 }

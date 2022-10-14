@@ -217,9 +217,11 @@ public abstract class StatsComponent : MonoBehaviour
     }
 
     // Deals damage here
-    public virtual void DealDamage(DamageInfo info)
+    public virtual void TakeDamage(DamageInfo info)
     {
         currentHP -= info.damage;
+        info.receiver = this;
+        GameManager.instance.DisplayDamage(info);
         sr.color = Color.red;
         damaged = true;
         fadeTimer = 0;

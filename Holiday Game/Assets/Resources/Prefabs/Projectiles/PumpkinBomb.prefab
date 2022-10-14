@@ -145,4 +145,5 @@ MonoBehaviour:
   explosionRadius: 4
   explosionLifetime: 0.5
   explosionTeam: 0
-  explosionEffect: {fileID: -2186267711908558283, guid: 4a2307de8d29b5a41be5b046aff42b06, type: 3}
+  explosionEffect: {fileID: -2186267711908558283, guid: 82eb3a088bb77db4d8e206b4642dc787, type: 3}
+  explosion: {fileID: 7626580761896396394, guid: 7240eba55b787c042b905deb42848489, type: 3}

@@ -248,6 +248,7 @@ public class GameManager : MonoBehaviour
         gameOverPanel.gameObject.SetActive(false);
         EnemyManager.instance.Reset();
         Destroy(player.gameObject);
+        time = 0.0f;
         state = GameState.Title;
     }
 

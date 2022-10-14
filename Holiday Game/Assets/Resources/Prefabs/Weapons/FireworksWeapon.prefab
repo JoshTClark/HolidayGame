@@ -44,10 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f0b1657903159644b9fce38959635ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 4
+  delay: 3.5
   projectile: {fileID: 5491713004324386633, guid: 11e8240a6ec403448b7e8bcefca1c852, type: 3}
   index: 3
   owner: {fileID: 0}
   canFire: 0
-  baseDamageMultiplier: 0.2
+  baseDamageMultiplier: 0.4
   baseSizeMultiplier: 1

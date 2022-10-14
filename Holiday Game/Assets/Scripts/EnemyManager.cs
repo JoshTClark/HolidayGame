@@ -130,15 +130,15 @@ public class EnemyManager : MonoBehaviour
     /// </summary>
     private void FindCurrentPhase()
     {
+        SpawnPhase phase = phases[0];
         for (int i = 0; i < phases.Count; i++)
         {
-            if (phases[i].startTime <= GameManager.instance.GameTime)
+            if (phases[i].startTime <= GameManager.instance.GameTime && phases[i].startTime >= phase.startTime)
             {
-                currentPhase = phases[i];
-                phases.RemoveAt(i);
-                break;
+                phase = phases[i];
             }
         }
+        currentPhase = phase;
     }
 
     /// <summary>

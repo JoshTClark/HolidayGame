@@ -25,13 +25,13 @@ public class GameManager : MonoBehaviour
     private Canvas ui;
 
     [SerializeField]
-    private TMP_Text timerDisplay, difficultyDisplay, playerStats, playerLevel, numberEffect;
+    private TMP_Text timerDisplay, playerStats, playerLevel, hpText, numberEffect;
 
     [SerializeField]
-    private Image xpBar;
+    private Image xpBar, hpBar;
 
     [SerializeField]
-    private CanvasRenderer statsMenu, playerStatsPanel, pausedPanel, gamePanel, upgradePanel, titlePanel, gameOverPanel, effectsPanel;
+    private CanvasRenderer playerStatsPanel, pausedPanel, gamePanel, upgradePanel, titlePanel, gameOverPanel, effectsPanel;
 
     [SerializeField]
     private float timeToDifficultyIncrease;
@@ -39,14 +39,18 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private InputActionReference displayStats, pauseGame, giveXP;
 
+    /*
     [SerializeField]
     private HealthBar healthBar;
+    */
 
     public bool showDamageNumbers = true;
     private float time = 0.0f;
     private float currentDifficulty = 1;
     private GameState state = GameState.Title;
     private bool paused = false;
+    private int month, day, hour;
+    private float secondToHourRation = 1 / 1;
 
     public Player Player
     {
@@ -110,26 +114,21 @@ public class GameManager : MonoBehaviour
                 // Updating the timer and difficulty
                 time += Time.deltaTime;
                 currentDifficulty = Mathf.Floor(1 + (time / timeToDifficultyIncrease));
+                CalculateDate();
 
                 // Updating displays
-                string minutes = Mathf.Floor(time / 60).ToString();
-                string seconds = (time % 60).ToString("00");
-                timerDisplay.text = minutes + ":" + seconds;
-                difficultyDisplay.text = currentDifficulty.ToString();
-                float xpAmount = Mathf.Clamp((player.GetPercentToNextLevel() * 0.8f) + 0.1f, 0.1f, 0.9f);
-                xpBar.GetComponent<RectTransform>().anchorMax = new Vector2(xpAmount, xpBar.GetComponent<RectTransform>().anchorMax.y);
-                playerLevel.text = player.Level.ToString();
-
-                // Displaying stats
-                if (displayStats.action.ReadValue<float>() > 0)
+                if (hour > 12)
                 {
-                    statsMenu.gameObject.SetActive(true);
-                    DisplayStats();
+                    timerDisplay.text = (hour - 12) + " PM";
                 }
                 else
                 {
-                    statsMenu.gameObject.SetActive(false);
+                    timerDisplay.text = hour + " AM";
                 }
+                xpBar.GetComponent<RectTransform>().anchorMax = new Vector2(player.GetPercentToNextLevel(), xpBar.GetComponent<RectTransform>().anchorMax.y);
+                playerLevel.text = "Level: " + player.Level;
+                hpBar.rectTransform.anchorMax = new Vector2(player.GetPercentHealth(), hpBar.rectTransform.anchorMax.y);
+                hpText.text = player.CurrentHP + "/" + player.MaxHp;
 
                 // Moving the camera
                 Vector3 camPos = new Vector3(Player.transform.position.x, Player.transform.position.y, cam.transform.position.z);
@@ -138,6 +137,7 @@ public class GameManager : MonoBehaviour
                 // Pause screen
                 if (paused)
                 {
+                    DisplayStats();
                     state = GameState.Paused;
                     pausedPanel.gameObject.SetActive(true);
                 }
@@ -194,6 +194,8 @@ public class GameManager : MonoBehaviour
 
     private void DisplayStats()
     {
+        string minutes = Mathf.Floor(time / 60).ToString();
+        string seconds = (time % 60).ToString("00");
         playerStats.text =
             "Max HP: " + player.MaxHp +
             "\nSpeed: " + player.Speed +
@@ -201,8 +203,10 @@ public class GameManager : MonoBehaviour
             "\nAttack Speed:" + player.AttackSpeed +
             "\nArmor: " + player.Armor +
             "\nRegen: " + player.Regen +
-            "\nCrit Chance: " + (player.CritChance*100) + "% " +
-            "\nCrit Damage: " + player.CritDamage;
+            "\nCrit Chance: " + (player.CritChance * 100) + "% " +
+            "\nCrit Damage: " + player.CritDamage +
+            "\nTime Alive " + minutes + ":" + seconds +
+            "\nGame Difficulty: " + currentDifficulty.ToString();
     }
 
     public void DoPlayerLevelUp()
@@ -256,7 +260,7 @@ public class GameManager : MonoBehaviour
     public void StartGame(ResourceManager.UpgradeIndex weapon)
     {
         player = Instantiate<Player>(ResourceManager.playerPrefab, new Vector2(), Quaternion.identity);
-        player.healthBar = healthBar;
+        //player.healthBar = healthBar;
 
         player.AddUpgrade(weapon);
 
@@ -295,8 +299,34 @@ public class GameManager : MonoBehaviour
         effect.GetComponent<NumberEffect>().cam = cam;
     }
 
-        public void ShowDamageNumbers(bool show)
+    public void ShowDamageNumbers(bool show)
     {
         showDamageNumbers = show;
+    }
+
+    /* 
+     * Calculates the date of the in game timer
+     * 1 second = 1 hour
+     * 24 seconds = 1 Day
+     * 
+     * 744 hours in January - Starts at 0
+     * 672 hours in Febuary - Starts at 744
+     * 744 hours in March - Starts at 1416
+     * 720 hours in April - Starts at 2160
+     * 744 hours in May - Starts at 2880
+     * 720 hours in June - Starts at 3624
+     * 744 hours in July - Starts at 4344
+     * 744 hours in August - Starts at 5088
+     * 720 hours in September - Starts at 5832
+     * 744 hours in October - Starts at 6552
+     * 720 hours in November - Starts at 7296
+     * 744 hours in December - Starts at 8016
+     * Ends at 8760
+    */
+    public void CalculateDate()
+    {
+
+        int totalHours = (int)Mathf.Floor(time * secondToHourRation);
+        hour = (totalHours % 24) + 1;
     }
 }

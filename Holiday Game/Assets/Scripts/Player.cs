@@ -9,7 +9,7 @@ public class Player : StatsComponent
     [SerializeField]
     private InputActionReference movement;
 
-    public HealthBar healthBar;
+    //public HealthBar healthBar;
 
     public float pickupRange;
     public float attackActivationRange;
@@ -20,7 +20,7 @@ public class Player : StatsComponent
 
     public override void OnStart()
     {
-        healthBar.SetMaxHealth(MaxHp);
+        //healthBar.SetMaxHealth(MaxHp);
         isInvincible = false;
         iFrames = .5f;
     }
@@ -37,9 +37,10 @@ public class Player : StatsComponent
         Vector2 movementInput = movement.action.ReadValue<Vector2>();
         movementInput = movementInput * Speed;
         GetComponent<Rigidbody2D>().velocity = movementInput;
-
+        /*
         healthBar.SetMaxHealth(MaxHp);
         healthBar.SetHealth(CurrentHP);
+        */
         UpdateiFrames();
     }
     /// <summary>

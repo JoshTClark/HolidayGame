@@ -288,6 +288,12 @@ public abstract class StatsComponent : MonoBehaviour
         return (XP - expCurve.Evaluate(level)) / (GetXpToNextLevel() - expCurve.Evaluate(level));
     }
 
+    public float GetPercentHealth()
+    {
+        // Testing for right now until we get an actual level curve
+        return CurrentHP/MaxHp;
+    }
+
     /// <summary>
     /// Adds the upgrade to the players inventory
     /// </summary>

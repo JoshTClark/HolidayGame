@@ -10,6 +10,7 @@ public abstract class BombProjectileBase : ProjectileBase
     public Team explosionTeam;
     public ParticleSystem explosionEffect;
     public float explosionSizeMultiplier = 1f;
+    public GameObject explosionPrefab;
 
     public override void OnDeath()
     {
@@ -30,6 +31,12 @@ public abstract class BombProjectileBase : ProjectileBase
             ParticleSystem effect = GameObject.Instantiate(explosionEffect, this.gameObject.transform.position, Quaternion.identity);
             effect.gameObject.transform.localScale = new Vector3(projectile.Size, projectile.Size);
             effect.Play();
+        }
+        if (explosionPrefab) 
+        {
+            GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            explosion.GetComponent<SpriteRenderer>().size = new Vector3(explosionRadius, explosionRadius);
+            explosion.gameObject.transform.localScale = new Vector3(projectile.Size, projectile.Size);
         }
     }
 

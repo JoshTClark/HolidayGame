@@ -7,9 +7,6 @@ public class PumpkinBombBehavior : BombProjectileBase
 {
     SpriteRenderer sr;
 
-    [SerializeField]
-    GameObject explosion;
-
     public void Start()
     {
         sr = gameObject.GetComponent<SpriteRenderer>();
@@ -27,10 +24,6 @@ public class PumpkinBombBehavior : BombProjectileBase
 
     public override void OnDeath()
     {
-        if (explosion)
-        {
-            Instantiate(explosion, transform.position, Quaternion.identity);
-        }
         base.OnDeath();
     }
 

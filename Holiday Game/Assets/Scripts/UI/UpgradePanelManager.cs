@@ -9,8 +9,12 @@ public class UpgradePanelManager : MonoBehaviour
     public Player player;
     public bool selected = false;
     public bool displaying = false;
-    [Range(0, 1)]
     public float commonOdds, uncommonOdds, rareOdds, epicOdds, legendaryOdds;
+
+    private void Start()
+    {
+        ResetOdds();
+    }
 
     /// <summary>
     /// Called when the player hits the accept upgrade button
@@ -57,7 +61,6 @@ public class UpgradePanelManager : MonoBehaviour
     /// </summary>
     public void SetUpgradesByPool(UpgradePool pool, int numOptions)
     {
-        ResetOdds();
         List<ResourceManager.UpgradeIndex> commons = new List<ResourceManager.UpgradeIndex>();
         List<ResourceManager.UpgradeIndex> uncommons = new List<ResourceManager.UpgradeIndex>();
         List<ResourceManager.UpgradeIndex> rares = new List<ResourceManager.UpgradeIndex>();
@@ -80,11 +83,11 @@ public class UpgradePanelManager : MonoBehaviour
                 {
                     rares.Add(u);
                 }
-                else if (upgrade.tier == Upgrade.Tier.Rare)
+                else if (upgrade.tier == Upgrade.Tier.Epic)
                 {
                     epics.Add(u);
                 }
-                else if (upgrade.tier == Upgrade.Tier.Rare)
+                else if (upgrade.tier == Upgrade.Tier.Legendary)
                 {
                     legendaries.Add(u);
                 }
@@ -93,34 +96,34 @@ public class UpgradePanelManager : MonoBehaviour
         for (int i = 0; i < numOptions; i++)
         {
             float roll = Random.value;
-            if (roll <= commonOdds)
+            if (roll <= legendaryOdds && legendaries.Count > 0)
             {
-                int random = Random.Range(0, commons.Count);
-                ResourceManager.UpgradeIndex upgrade = commons[random];
+                int random = Random.Range(0, legendaries.Count);
+                ResourceManager.UpgradeIndex upgrade = legendaries[random];
                 AddUpgrade(upgrade);
             }
-            else if (roll - commonOdds <= uncommonOdds)
-            {
-                int random = Random.Range(0, uncommons.Count);
-                ResourceManager.UpgradeIndex upgrade = uncommons[random];
-                AddUpgrade(upgrade);
-            }
-            else if(roll - commonOdds - uncommonOdds <= rareOdds)
-            {
-                int random = Random.Range(0, rares.Count);
-                ResourceManager.UpgradeIndex upgrade = rares[random];
-                AddUpgrade(upgrade);
-            }
-            else if (roll - commonOdds - uncommonOdds - rareOdds <= epicOdds)
+            else if (roll <= epicOdds && epics.Count > 0)
             {
                 int random = Random.Range(0, epics.Count);
                 ResourceManager.UpgradeIndex upgrade = epics[random];
                 AddUpgrade(upgrade);
             }
-            else
+            else if (roll <= rareOdds && rares.Count > 0)
             {
-                int random = Random.Range(0, legendaries.Count);
-                ResourceManager.UpgradeIndex upgrade = legendaries[random];
+                int random = Random.Range(0, rares.Count);
+                ResourceManager.UpgradeIndex upgrade = rares[random];
+                AddUpgrade(upgrade);
+            }
+            else if (roll <= uncommonOdds && uncommons.Count > 0)
+            {
+                int random = Random.Range(0, uncommons.Count);
+                ResourceManager.UpgradeIndex upgrade = uncommons[random];
+                AddUpgrade(upgrade);
+            }
+            else if (roll <= commonOdds && commons.Count > 0)
+            {
+                int random = Random.Range(0, commons.Count);
+                ResourceManager.UpgradeIndex upgrade = commons[random];
                 AddUpgrade(upgrade);
             }
         }
@@ -131,10 +134,11 @@ public class UpgradePanelManager : MonoBehaviour
     /// </summary>
     public void SetUpgradesByPools(List<UpgradePool> pools, int numOptions)
     {
-        ResetOdds();
         List<ResourceManager.UpgradeIndex> commons = new List<ResourceManager.UpgradeIndex>();
         List<ResourceManager.UpgradeIndex> uncommons = new List<ResourceManager.UpgradeIndex>();
         List<ResourceManager.UpgradeIndex> rares = new List<ResourceManager.UpgradeIndex>();
+        List<ResourceManager.UpgradeIndex> epics = new List<ResourceManager.UpgradeIndex>();
+        List<ResourceManager.UpgradeIndex> legendaries = new List<ResourceManager.UpgradeIndex>();
         foreach (UpgradePool pool in pools)
         {
             foreach (ResourceManager.UpgradeIndex u in pool.upgrades)
@@ -154,28 +158,48 @@ public class UpgradePanelManager : MonoBehaviour
                     {
                         rares.Add(u);
                     }
+                    else if (upgrade.tier == Upgrade.Tier.Epic)
+                    {
+                        epics.Add(u);
+                    }
+                    else if (upgrade.tier == Upgrade.Tier.Legendary)
+                    {
+                        legendaries.Add(u);
+                    }
                 }
             }
         }
         for (int i = 0; i < numOptions; i++)
         {
             float roll = Random.value;
-            if (roll <= commonOdds)
+            if (roll <= legendaryOdds && legendaries.Count > 0)
             {
-                int random = Random.Range(0, commons.Count);
-                ResourceManager.UpgradeIndex upgrade = commons[random];
+                int random = Random.Range(0, legendaries.Count);
+                ResourceManager.UpgradeIndex upgrade = legendaries[random];
                 AddUpgrade(upgrade);
             }
-            else if (roll - commonOdds <= uncommonOdds)
+            else if (roll <= epicOdds && epics.Count > 0)
+            {
+                int random = Random.Range(0, epics.Count);
+                ResourceManager.UpgradeIndex upgrade = epics[random];
+                AddUpgrade(upgrade);
+            }
+            else if (roll <= rareOdds && rares.Count > 0)
+            {
+                int random = Random.Range(0, rares.Count);
+                ResourceManager.UpgradeIndex upgrade = rares[random];
+                AddUpgrade(upgrade);
+            }
+            else if (roll <= uncommonOdds && uncommons.Count > 0)
             {
                 int random = Random.Range(0, uncommons.Count);
                 ResourceManager.UpgradeIndex upgrade = uncommons[random];
                 AddUpgrade(upgrade);
             }
-            else
+            else if (roll <= commonOdds && commons.Count > 0)
             {
-                int random = Random.Range(0, rares.Count);
-                ResourceManager.UpgradeIndex upgrade = rares[random];
+                int random = Random.Range(0, commons.Count);
+                ResourceManager.UpgradeIndex upgrade = commons[random];
                 AddUpgrade(upgrade);
             }
         }
@@ -197,9 +221,16 @@ public class UpgradePanelManager : MonoBehaviour
 
     private void ResetOdds()
     {
-        float totalWeight = commonOdds + uncommonOdds + rareOdds;
-        commonOdds = commonOdds / totalWeight;
-        uncommonOdds = uncommonOdds / totalWeight;
+        float totalWeight = commonOdds + uncommonOdds + rareOdds + epicOdds + legendaryOdds;
+        legendaryOdds = legendaryOdds / totalWeight;
+        epicOdds = epicOdds / totalWeight;
         rareOdds = rareOdds / totalWeight;
+        uncommonOdds = uncommonOdds / totalWeight;
+        commonOdds = commonOdds / totalWeight;
+
+        epicOdds += legendaryOdds;
+        rareOdds += epicOdds;
+        uncommonOdds += rareOdds;
+        commonOdds += uncommonOdds;
     }
 }

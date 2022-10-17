@@ -133,7 +133,7 @@ public class GameManager : MonoBehaviour
                 xpBar.GetComponent<RectTransform>().anchorMax = new Vector2(player.GetPercentToNextLevel(), xpBar.GetComponent<RectTransform>().anchorMax.y);
                 playerLevel.text = "Level: " + player.Level;
                 hpBar.rectTransform.anchorMax = new Vector2(player.GetPercentHealth(), hpBar.rectTransform.anchorMax.y);
-                hpText.text = player.CurrentHP + "/" + player.MaxHp;
+                hpText.text = player.CurrentHP.ToString("0") + "/" + player.MaxHp.ToString("0");
 
                 // Moving the camera
                 Vector3 camPos = new Vector3(Player.transform.position.x, Player.transform.position.y, cam.transform.position.z);
@@ -304,7 +304,7 @@ public class GameManager : MonoBehaviour
             if (info.receiver.GetType() != typeof(Player))
             {
                 TMP_Text effect = Instantiate<TMP_Text>(numberEffect, effectsPanel.gameObject.transform);
-                effect.text = info.damage.ToString();
+                effect.text = info.damage.ToString("0.0");
                 effect.color = info.GetColor();
                 if (info.damageColor == DamageInfo.DamageColor.Crit)
                 {
@@ -320,7 +320,7 @@ public class GameManager : MonoBehaviour
     public void DisplayHealing(float amount, StatsComponent receiver)
     {
         TMP_Text effect = Instantiate<TMP_Text>(numberEffect, effectsPanel.gameObject.transform);
-        effect.text = amount.ToString();
+        effect.text = amount.ToString("0.0");
         effect.color = new Color(0f, 1f, 0f, 1f);
         effect.GetComponent<NumberEffect>().spawnPosition = receiver.gameObject.transform.position;
         effect.GetComponent<NumberEffect>().canvas = ui;

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: GlassCannon
   m_EditorClassIdentifier: 
   upgradeName: Glass Cannon
-  upgradeDescription: 200% more attack speed but 25% less damage and health
+  upgradeDescription: 2X attack speed but 25% less damage and health
   index: 26
   tier: 3
-  CanTakeMultiple: 0
+  CanTakeMultiple: 1
   IsWeapon: 0

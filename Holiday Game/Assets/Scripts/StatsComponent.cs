@@ -430,15 +430,34 @@ public abstract class StatsComponent : MonoBehaviour
         // AttackSpeed1 - AttackSpeed3
         if (HasUpgrade(ResourceManager.UpgradeIndex.AttackSpeed1))
         {
-            attackSpeedMult += 0.05f * GetUpgrade(ResourceManager.UpgradeIndex.AttackSpeed1).CurrentLevel;
+            attackSpeedAdd += 0.05f * GetUpgrade(ResourceManager.UpgradeIndex.AttackSpeed1).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.AttackSpeed2))
         {
-            attackSpeedMult += 0.10f * GetUpgrade(ResourceManager.UpgradeIndex.AttackSpeed2).CurrentLevel;
+            attackSpeedAdd += 0.10f * GetUpgrade(ResourceManager.UpgradeIndex.AttackSpeed2).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.AttackSpeed3))
         {
-            attackSpeedMult += 0.20f * GetUpgrade(ResourceManager.UpgradeIndex.AttackSpeed3).CurrentLevel;
+            attackSpeedAdd += 0.20f * GetUpgrade(ResourceManager.UpgradeIndex.AttackSpeed3).CurrentLevel;
+        }
+
+        // Glass Cannon
+        if (HasUpgrade(ResourceManager.UpgradeIndex.GlassCannon1))
+        {
+            attackSpeedMult *= 2f * GetUpgrade(ResourceManager.UpgradeIndex.GlassCannon1).CurrentLevel;
+            damageMult *= MathF.Pow(0.75f, GetUpgrade(ResourceManager.UpgradeIndex.GlassCannon1).CurrentLevel);
+            hpMult *= MathF.Pow(0.75f, GetUpgrade(ResourceManager.UpgradeIndex.GlassCannon1).CurrentLevel);
+        }
+        if (HasUpgrade(ResourceManager.UpgradeIndex.GlassCannon2))
+        {
+            attackSpeedAdd *= 4f * GetUpgrade(ResourceManager.UpgradeIndex.GlassCannon2).CurrentLevel;
+            damageMult *= MathF.Pow(0.50f, GetUpgrade(ResourceManager.UpgradeIndex.GlassCannon2).CurrentLevel);
+            hpMult *= MathF.Pow(0.50f, GetUpgrade(ResourceManager.UpgradeIndex.GlassCannon2).CurrentLevel);
+        }
+
+        // Making sure hp is <= maxHP
+        if (currentHP > MaxHp) {
+            currentHP = MaxHp;
         }
     }
 

@@ -2455,9 +2455,11 @@ MonoBehaviour:
   player: {fileID: 0}
   selected: 0
   displaying: 0
-  commonOdds: 0.7
-  uncommonOdds: 0.25
-  rareOdds: 0.05
+  commonOdds: 0.3
+  uncommonOdds: 0.3
+  rareOdds: 0.2
+  epicOdds: 0.15
+  legendaryOdds: 0.05
 --- !u!1 &1218707936
 GameObject:
   m_ObjectHideFlags: 0

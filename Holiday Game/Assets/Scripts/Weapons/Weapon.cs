@@ -12,7 +12,9 @@ public abstract class Weapon : MonoBehaviour
 
     public ResourceManager.WeaponIndex index;
 
-    protected float timer = 0.0f;
+    public Sprite icon;
+
+    public float timer = 0.0f;
 
     public StatsComponent owner;
 
@@ -87,6 +89,11 @@ public abstract class Weapon : MonoBehaviour
     {
         timer = 0.0f;
         canFire = false;
+    }
+
+    public float PercentTimeLeft() 
+    {
+        return timer / Delay;
     }
 
     public abstract void OnUpdate();

@@ -31,13 +31,16 @@ public class GameManager : MonoBehaviour
     private Image xpBar, hpBar;
 
     [SerializeField]
-    private CanvasRenderer playerStatsPanel, pausedPanel, gamePanel, upgradePanel, titlePanel, gameOverPanel, effectsPanel;
+    private CanvasRenderer playerStatsPanel, pausedPanel, gamePanel, upgradePanel, titlePanel, gameOverPanel, effectsPanel, iconPanel;
 
     [SerializeField]
     private float timeToDifficultyIncrease;
 
     [SerializeField]
     private InputActionReference displayStats, pauseGame, giveXP;
+
+    [SerializeField]
+    private WeaponIcon iconPrefab;
 
     /*
     [SerializeField]
@@ -51,6 +54,7 @@ public class GameManager : MonoBehaviour
     private bool paused = false;
     private int month, day, hour;
     private float secondToHourRation = 1 / 1;
+    private List<WeaponIcon> weaponIcons = new List<WeaponIcon>();
 
     public Player Player
     {
@@ -117,13 +121,14 @@ public class GameManager : MonoBehaviour
                 CalculateDate();
 
                 // Updating displays
+                timerDisplay.text = GetMonthName() + "\n Day " + day;
                 if (hour > 12)
                 {
-                    timerDisplay.text = (hour - 12) + " PM";
+                    timerDisplay.text += "\n" + (hour - 12) + " PM";
                 }
                 else
                 {
-                    timerDisplay.text = hour + " AM";
+                    timerDisplay.text += "\n" + hour + " AM";
                 }
                 xpBar.GetComponent<RectTransform>().anchorMax = new Vector2(player.GetPercentToNextLevel(), xpBar.GetComponent<RectTransform>().anchorMax.y);
                 playerLevel.text = "Level: " + player.Level;
@@ -133,6 +138,29 @@ public class GameManager : MonoBehaviour
                 // Moving the camera
                 Vector3 camPos = new Vector3(Player.transform.position.x, Player.transform.position.y, cam.transform.position.z);
                 cam.transform.position = camPos;
+
+                // Weapon icon checking
+                foreach (Weapon weapon in player.weapons)
+                {
+                    bool hasIcon = false;
+                    foreach (WeaponIcon icon in weaponIcons)
+                    {
+                        if (weapon.index == icon.weaponIndex)
+                        {
+                            hasIcon = true;
+                        }
+                    }
+
+                    if (!hasIcon)
+                    {
+                        WeaponIcon newIcon = Instantiate(iconPrefab, iconPanel.transform);
+                        newIcon.sprite = weapon.icon;
+                        newIcon.weaponIndex = weapon.index;
+                        newIcon.GetComponent<RectTransform>().anchorMin = new Vector2(0.15f*weaponIcons.Count, newIcon.GetComponent<RectTransform>().anchorMin.y);
+                        newIcon.GetComponent<RectTransform>().anchorMax = new Vector2(0.15f * (weaponIcons.Count+1), newIcon.GetComponent<RectTransform>().anchorMax.y);
+                        weaponIcons.Add(newIcon);
+                    }
+                }
 
                 // Pause screen
                 if (paused)
@@ -194,8 +222,8 @@ public class GameManager : MonoBehaviour
 
     private void DisplayStats()
     {
-        string minutes = Mathf.Floor(time / 60).ToString();
-        string seconds = (time % 60).ToString("00");
+        string minutes = Mathf.Floor(time / 60f).ToString();
+        string seconds = (time % 60f).ToString("00");
         playerStats.text =
             "Max HP: " + player.MaxHp +
             "\nSpeed: " + player.Speed +
@@ -325,8 +353,115 @@ public class GameManager : MonoBehaviour
     */
     public void CalculateDate()
     {
-
         int totalHours = (int)Mathf.Floor(time * secondToHourRation);
+        if (totalHours < 744)
+        {
+            month = 1;
+            day = (int)Mathf.Floor(totalHours / 24f) + 1;
+        }
+        else if (totalHours < 1416)
+        {
+            month = 2;
+            day = (int)Mathf.Floor((totalHours - 744) / 24f) + 1;
+        }
+        else if (totalHours < 2160)
+        {
+            month = 3;
+            day = (int)Mathf.Floor((totalHours - 1416) / 24f) + 1;
+        }
+        else if (totalHours < 2880)
+        {
+            month = 4;
+            day = (int)Mathf.Floor((totalHours - 2160) / 24f) + 1;
+        }
+        else if (totalHours < 3624)
+        {
+            month = 5;
+            day = (int)Mathf.Floor((totalHours - 2880) / 24f) + 1;
+        }
+        else if (totalHours < 4344)
+        {
+            month = 6;
+            day = (int)Mathf.Floor((totalHours - 3624) / 24f) + 1;
+        }
+        else if (totalHours < 5088)
+        {
+            month = 7;
+            day = (int)Mathf.Floor((totalHours - 4344) / 24f) + 1;
+        }
+        else if (totalHours < 5832)
+        {
+            month = 8;
+            day = (int)Mathf.Floor((totalHours - 5088) / 24f) + 1;
+        }
+        else if (totalHours < 6552)
+        {
+            month = 9;
+            day = (int)Mathf.Floor((totalHours - 5832) / 24f) + 1;
+        }
+        else if (totalHours < 7296)
+        {
+            month = 10;
+            day = (int)Mathf.Floor((totalHours - 6552) / 24f) + 1;
+        }
+        else if (totalHours < 8016)
+        {
+            month = 11;
+            day = (int)Mathf.Floor((totalHours - 7296) / 24f) + 1;
+        }
+        else if (totalHours < 8760)
+        {
+            month = 12;
+            day = (int)Mathf.Floor((totalHours - 8016) / 24f) + 1;
+        }
+
         hour = (totalHours % 24) + 1;
+
+
+    }
+
+    public string GetMonthName()
+    {
+        string name = "Oops";
+        switch (month)
+        {
+            case 1:
+                name = "January";
+                break;
+            case 2:
+                name = "Febuary";
+                break;
+            case 3:
+                name = "March";
+                break;
+            case 4:
+                name = "April";
+                break;
+            case 5:
+                name = "May";
+                break;
+            case 6:
+                name = "June";
+                break;
+            case 7:
+                name = "July";
+                break;
+            case 8:
+                name = "August";
+                break;
+            case 9:
+                name = "September";
+                break;
+            case 10:
+                name = "October";
+                break;
+            case 11:
+                name = "November";
+                break;
+            case 12:
+                name = "December";
+                break;
+        }
+        return name;
     }
 }

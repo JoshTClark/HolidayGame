@@ -37,10 +37,10 @@ public abstract class StatsComponent : MonoBehaviour
     private bool isDead = false;
 
     // Weapon List
-    private List<Weapon> weapons = new List<Weapon>();
+    public List<Weapon> weapons = new List<Weapon>();
 
     // Inventory for upgrades
-    private List<Upgrade> inventory = new List<Upgrade>();
+    public List<Upgrade> inventory = new List<Upgrade>();
 
     SpriteRenderer sr;
     Color ogColor;

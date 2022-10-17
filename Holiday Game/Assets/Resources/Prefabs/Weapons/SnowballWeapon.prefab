@@ -47,6 +47,7 @@ MonoBehaviour:
   delay: 1.5
   projectile: {fileID: 2198510103596972710, guid: 3cca2b20c1f90644ebc798eea4666eec, type: 3}
   index: 0
+  icon: {fileID: 21300000, guid: 3d458aca5a1ce524ea243b16f676bd34, type: 3}
   owner: {fileID: 0}
   canFire: 0
   baseDamageMultiplier: 1

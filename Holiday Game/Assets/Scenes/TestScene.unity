@@ -2455,11 +2455,11 @@ MonoBehaviour:
   player: {fileID: 0}
   selected: 0
   displaying: 0
-  commonOdds: 30
-  uncommonOdds: 12
-  rareOdds: 6
-  epicOdds: 3
-  legendaryOdds: 1
+  commonOdds: 40
+  uncommonOdds: 25
+  rareOdds: 10
+  epicOdds: 4
+  legendaryOdds: 2
 --- !u!1 &1218707936
 GameObject:
   m_ObjectHideFlags: 0

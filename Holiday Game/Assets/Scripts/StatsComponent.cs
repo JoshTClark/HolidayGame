@@ -459,6 +459,46 @@ public abstract class StatsComponent : MonoBehaviour
         if (currentHP > MaxHp) {
             currentHP = MaxHp;
         }
+
+        // Crit Chance
+        if (HasUpgrade(ResourceManager.UpgradeIndex.CritChance1))
+        {
+            critChanceAdd += 0.05f * GetUpgrade(ResourceManager.UpgradeIndex.CritChance1).CurrentLevel;
+        }
+        if (HasUpgrade(ResourceManager.UpgradeIndex.CritChance2))
+        {
+            critChanceAdd += 0.1f * GetUpgrade(ResourceManager.UpgradeIndex.CritChance2).CurrentLevel;
+        }
+        if (HasUpgrade(ResourceManager.UpgradeIndex.CritChance3))
+        {
+            critChanceAdd += 0.15f * GetUpgrade(ResourceManager.UpgradeIndex.CritChance3).CurrentLevel;
+        }
+        if (HasUpgrade(ResourceManager.UpgradeIndex.CritChance4))
+        {
+            critChanceAdd += 0.2f * GetUpgrade(ResourceManager.UpgradeIndex.CritChance4).CurrentLevel;
+        }
+
+        // Crit Damage
+        if (HasUpgrade(ResourceManager.UpgradeIndex.CritDamage1))
+        {
+            critDamageAdd += 0.25f * GetUpgrade(ResourceManager.UpgradeIndex.CritDamage1).CurrentLevel;
+        }
+        if (HasUpgrade(ResourceManager.UpgradeIndex.CritDamage2))
+        {
+            critDamageAdd += 0.5f * GetUpgrade(ResourceManager.UpgradeIndex.CritDamage2).CurrentLevel;
+        }
+        if (HasUpgrade(ResourceManager.UpgradeIndex.CritDamage3))
+        {
+            critDamageAdd += 0.75f * GetUpgrade(ResourceManager.UpgradeIndex.CritDamage3).CurrentLevel;
+        }
+        if (HasUpgrade(ResourceManager.UpgradeIndex.CritDamage4))
+        {
+            critDamageAdd += 1.5f * GetUpgrade(ResourceManager.UpgradeIndex.CritDamage4).CurrentLevel;
+        }
+        if (HasUpgrade(ResourceManager.UpgradeIndex.CritDamage5))
+        {
+            critDamageAdd += 2.5f * GetUpgrade(ResourceManager.UpgradeIndex.CritDamage5).CurrentLevel;
+        }
     }
 
     public void OnGainUpgrade(Upgrade upgrade)

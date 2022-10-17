@@ -53,7 +53,16 @@ public class ResourceManager
         PumkinRadius3,
         FireworkCount,
         GlassCannon1,
-        GlassCannon2
+        GlassCannon2,
+        CritDamage1, 
+        CritDamage2, 
+        CritDamage3, 
+        CritDamage4, 
+        CritDamage5,
+        CritChance1,
+        CritChance2,
+        CritChance3,
+        CritChance4
     }
 
     public enum UpgradePoolIndex

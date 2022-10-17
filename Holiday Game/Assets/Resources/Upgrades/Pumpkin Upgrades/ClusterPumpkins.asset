@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 296cfc9b7513a864aab005e7da6bfa8f, type: 3}
-  m_Name: PumkinRadius2
+  m_Name: ClusterPumpkins
   m_EditorClassIdentifier: 
-  upgradeName: Pumkin Explosion++
-  upgradeDescription: Increases the size of the explosion by 20%
-  index: 23
-  tier: 1
-  CanTakeMultiple: 1
+  upgradeName: Cluster Pumpkins
+  upgradeDescription: When pumpkins explode they send out smaller pumpkins that also
+    explode
+  index: 41
+  tier: 4
+  CanTakeMultiple: 0
   IsWeapon: 0

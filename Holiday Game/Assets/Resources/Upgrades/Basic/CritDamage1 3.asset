@@ -15,6 +15,6 @@ MonoBehaviour:
   upgradeName: Critical Damage+++
   upgradeDescription: 75% more damage on critical strikes
   index: 30
-  tier: 0
+  tier: 2
   CanTakeMultiple: 1
   IsWeapon: 0

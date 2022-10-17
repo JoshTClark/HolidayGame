@@ -85,13 +85,37 @@ public abstract class Weapon : MonoBehaviour
         }
     }
 
+    protected Enemy GetRandomEnemyInRange(float range)
+    {
+        List<Enemy> enemies = EnemyManager.instance.CurrentEnemies;
+        List<Enemy> filtered = new List<Enemy>();
+        if (enemies.Count > 0)
+        {
+            Vector2 pos = owner.gameObject.transform.position;
+            foreach (Enemy e in enemies)
+            {
+                if (Vector2.Distance(pos, e.transform.position) <= range)
+                {
+                    filtered.Add(e);
+                }
+            }
+            int rngEnemy = Random.Range(0, filtered.Count - 1);
+            Enemy enemy = enemies[rngEnemy];
+            return enemy;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     public void ResetTimer()
     {
         timer = 0.0f;
         canFire = false;
     }
 
-    public float PercentTimeLeft() 
+    public float PercentTimeLeft()
     {
         return timer / Delay;
     }

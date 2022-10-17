@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     private Image xpBar, hpBar;
 
     [SerializeField]
-    private CanvasRenderer playerStatsPanel, pausedPanel, gamePanel, upgradePanel, titlePanel, gameOverPanel, effectsPanel, iconPanel;
+    private CanvasRenderer playerStatsPanel, pausedPanel, gamePanel, upgradePanel, titlePanel, gameOverPanel, effectsPanel, iconPanel, debugPanel;
 
     [SerializeField]
     private float timeToDifficultyIncrease;
@@ -85,10 +85,16 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
         ResourceManager.Init();
+        debugPanel.GetComponent<DebugPanel>().Init();
 
         pauseGame.action.performed += (InputAction.CallbackContext callback) =>
         {
             paused = !paused;
+        };
+
+        displayStats.action.performed += (InputAction.CallbackContext callback) =>
+        {
+            debugPanel.gameObject.SetActive(!debugPanel.gameObject.activeSelf);
         };
 
         giveXP.action.performed += (InputAction.CallbackContext callback) =>
@@ -101,6 +107,7 @@ public class GameManager : MonoBehaviour
         gamePanel.gameObject.SetActive(false);
         gameOverPanel.gameObject.SetActive(false);
         titlePanel.gameObject.SetActive(true);
+        debugPanel.gameObject.SetActive(false);
     }
 
     void Update()

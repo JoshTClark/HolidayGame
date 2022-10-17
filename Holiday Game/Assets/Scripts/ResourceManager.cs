@@ -22,6 +22,7 @@ public class ResourceManager
         PumpkinBomb,
         Test,
         Fireworks,
+        PumpkinCluster,
         Count
     }
     public enum UpgradeIndex
@@ -54,15 +55,20 @@ public class ResourceManager
         FireworkCount,
         GlassCannon1,
         GlassCannon2,
-        CritDamage1, 
-        CritDamage2, 
-        CritDamage3, 
-        CritDamage4, 
+        CritDamage1,
+        CritDamage2,
+        CritDamage3,
+        CritDamage4,
         CritDamage5,
         CritChance1,
         CritChance2,
         CritChance3,
-        CritChance4
+        CritChance4,
+        PumpkinDamage1,
+        PumpkinDamage2,
+        PumpkinDamage3,
+        PumpkinLauncher,
+        ClusterPumkins
     }
 
     public enum UpgradePoolIndex
@@ -123,6 +129,7 @@ public class ResourceManager
         foreach (Upgrade i in arr)
         {
             upgradeDefinitions.Add(i);
+            i.CurrentLevel = 1;
         }
     }
 
@@ -192,5 +199,20 @@ public class ResourceManager
             }
         }
         return null;
+    }
+
+    public static UpgradeIndex UpgradeIndexFromName(string name)
+    {
+        UpgradeIndex index = UpgradeIndex.AttackSpeed1;
+
+        foreach (Upgrade i in upgradeDefinitions)
+        {
+            if (i.upgradeName == name)
+            {
+                index = i.index;
+            }
+        }
+
+        return index;
     }
 }

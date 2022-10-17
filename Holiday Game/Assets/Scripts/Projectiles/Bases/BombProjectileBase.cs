@@ -19,7 +19,7 @@ public abstract class BombProjectileBase : ProjectileBase
         gameObject.layer = this.gameObject.layer;
         ProjectileBase projectile = gameObject.GetComponent<ProjectileBase>();
         gameObject.transform.position = this.gameObject.transform.position;
-        projectile.SetDamageInfo(damageInfo);
+        projectile.SetDamageInfo(damageInfo.CreateCopy());
         projectile.DamageMultiplier = DamageMultiplier;
         projectile.Lifetime = explosionLifetime;
         projectile.Pierce = 999f;
@@ -43,6 +43,6 @@ public abstract class BombProjectileBase : ProjectileBase
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(this.gameObject.transform.position, explosionRadius);
+        Gizmos.DrawWireSphere(this.gameObject.transform.position, explosionRadius * explosionSizeMultiplier);
     }
 }

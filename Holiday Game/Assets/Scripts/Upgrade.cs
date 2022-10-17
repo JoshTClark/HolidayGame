@@ -9,7 +9,9 @@ public class Upgrade : ScriptableObject
     {
         Common,
         Uncommon,
-        Rare
+        Rare,
+        Epic,
+        Legendary
     }
 
     public string upgradeName;

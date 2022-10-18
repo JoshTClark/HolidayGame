@@ -10,7 +10,12 @@ public class TestEnemy : Enemy
 
     public override void OnUpdate()
     {
-        SeekPlayer();
         Move();
+    }
+    protected override void CalcMoves()
+    {
+        // Basic enemy just wants to seek the player & to separate from other enemies
+        movements.Add(SeekPlayer() * 2f);
+        movements.Add(Separation() * .01f);
     }
 }

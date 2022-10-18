@@ -6,8 +6,13 @@ public class TestEnemy2 : Enemy
 {
     public override void OnUpdate()
     {
-        ShooterMove();
         Move();
+    }
+    protected override void CalcMoves()
+    {
+        movements.Add(ShooterMove() * 1.5f);
+        movements.Add(Separation() * .01f);
+
     }
 
     public override void OnStart()

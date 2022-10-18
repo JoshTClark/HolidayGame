@@ -13,8 +13,13 @@ public class BigEnemy : Enemy
     // Update is called once per frame
     public override void OnUpdate()
     {
-        SeekPlayer();
         Move();
+    }
+    protected override void CalcMoves()
+    {
+        // Seek & Separate
+        movements.Add(SeekPlayer() * 3f);
+        movements.Add(Separation() * .01f);
     }
 
     protected override void OnTriggerStay2D(Collider2D collision)

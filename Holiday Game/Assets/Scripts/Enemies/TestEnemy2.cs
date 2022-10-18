@@ -11,7 +11,7 @@ public class TestEnemy2 : Enemy
     protected override void CalcMoves()
     {
         movements.Add(ShooterMove() * 1.5f);
-        movements.Add(Separation() * .01f);
+        movements.Add(Separation() * .1f);
 
     }
 

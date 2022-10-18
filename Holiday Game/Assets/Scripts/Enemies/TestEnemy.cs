@@ -16,6 +16,6 @@ public class TestEnemy : Enemy
     {
         // Basic enemy just wants to seek the player & to separate from other enemies
         movements.Add(SeekPlayer() * 2f);
-        movements.Add(Separation() * .01f);
+        movements.Add(Separation() * .1f);
     }
 }

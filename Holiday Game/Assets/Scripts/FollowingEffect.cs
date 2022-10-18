@@ -32,7 +32,7 @@ public class FollowingEffect : MonoBehaviour
             }
             if (done)
             {
-                Destroy(this);
+                Destroy(this.gameObject);
             }
         }
     }

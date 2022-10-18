@@ -15,6 +15,6 @@ MonoBehaviour:
   upgradeName: Glass Cannon
   upgradeDescription: 2X attack speed but 25% less damage and health
   index: 26
-  tier: 3
+  tier: 4
   CanTakeMultiple: 1
   IsWeapon: 0

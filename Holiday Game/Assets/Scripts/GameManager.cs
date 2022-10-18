@@ -86,6 +86,7 @@ public class GameManager : MonoBehaviour
         instance = this;
         ResourceManager.Init();
         debugPanel.GetComponent<DebugPanel>().Init();
+        ResourceManager.GetBuffDef(ResourceManager.BuffIndex.Burning);
 
         pauseGame.action.performed += (InputAction.CallbackContext callback) =>
         {

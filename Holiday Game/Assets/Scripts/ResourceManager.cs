@@ -80,12 +80,18 @@ public class ResourceManager
         Fireworks
     }
 
+    public enum BuffIndex
+    {
+        Burning
+    }
+
     public static List<Enemy> enemyPrefabs = new List<Enemy>();
     public static List<Weapon> weaponPrefabs = new List<Weapon>();
     public static List<Upgrade> upgradeDefinitions = new List<Upgrade>();
     public static List<SpawnPhase> phaseDefinitions = new List<SpawnPhase>();
     public static List<XP> pickupPrefabs = new List<XP>();
     public static List<UpgradePool> upgradePools = new List<UpgradePool>();
+    public static List<BuffDef> buffs = new List<BuffDef>();
     public static Player playerPrefab;
 
     public static bool isLoaded = false;
@@ -101,6 +107,7 @@ public class ResourceManager
         LoadPhases();
         LoadPickups();
         LoadUpgradePools();
+        LoadBuffs();
         LoadPlayableCharacters();
         isLoaded = true;
     }
@@ -160,6 +167,15 @@ public class ResourceManager
         }
     }
 
+    public static void LoadBuffs()
+    {
+        BuffDef[] arr = Resources.LoadAll<BuffDef>("");
+        foreach (BuffDef i in arr)
+        {
+            buffs.Add(i);
+        }
+    }
+
     public static void LoadPlayableCharacters()
     {
         Player[] arr = Resources.LoadAll<Player>("");
@@ -172,7 +188,8 @@ public class ResourceManager
         {
             if (i.index == index)
             {
-                return i;
+                Upgrade b = GameObject.Instantiate<Upgrade>(i);
+                return b;
             }
         }
         return null;
@@ -184,7 +201,8 @@ public class ResourceManager
         {
             if (i.index == index)
             {
-                return i;
+                UpgradePool b = GameObject.Instantiate<UpgradePool>(i);
+                return b;
             }
         }
         return null;
@@ -196,6 +214,19 @@ public class ResourceManager
             if (i.index == index)
             {
                 return i;
+            }
+        }
+        return null;
+    }
+
+    public static BuffDef GetBuffDef(ResourceManager.BuffIndex index)
+    {
+        foreach (BuffDef i in buffs)
+        {
+            if (i.index == index)
+            {
+                BuffDef b = GameObject.Instantiate<BuffDef>(i);
+                return b;
             }
         }
         return null;

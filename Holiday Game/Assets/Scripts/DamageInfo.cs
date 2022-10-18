@@ -15,6 +15,7 @@ public class DamageInfo
     public StatsComponent receiver;
     public StatsComponent attacker;
     public bool isCrit;
+    public List<ResourceManager.BuffIndex> debuffs = new List<ResourceManager.BuffIndex>();
 
     public void CalculateAll()
     {
@@ -36,6 +37,7 @@ public class DamageInfo
         info.receiver = this.receiver;
         info.attacker = this.attacker;
         info.isCrit = this.isCrit;
+        info.debuffs = debuffs;
         return info;
     }
 

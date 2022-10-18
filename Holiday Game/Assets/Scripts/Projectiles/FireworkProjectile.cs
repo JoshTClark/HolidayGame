@@ -40,6 +40,6 @@ public class FireworkProjectile : BombProjectileBase
         {
             homing = true;
         }
-        SpeedMultiplier += 0.5f * delta;
+        SpeedMultiplier += 1f * delta;
     }
 }

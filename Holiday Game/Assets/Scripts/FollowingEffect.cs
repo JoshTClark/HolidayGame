@@ -5,10 +5,11 @@ using UnityEngine;
 public class FollowingEffect : MonoBehaviour
 {
     public GameObject following;
+    public bool on = true;
 
     void Update()
     {
-        if (following)
+        if (following && on)
         {
             this.gameObject.transform.position = following.transform.position;
             this.gameObject.transform.localScale = following.transform.localScale;

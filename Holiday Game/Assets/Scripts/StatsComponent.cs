@@ -42,6 +42,9 @@ public abstract class StatsComponent : MonoBehaviour
     // Inventory for upgrades
     public List<Upgrade> inventory = new List<Upgrade>();
 
+    // Debuffs and Buffs
+    public List<BuffDef> buffs;
+
     SpriteRenderer sr;
     Color ogColor;
     bool damaged;
@@ -140,7 +143,7 @@ public abstract class StatsComponent : MonoBehaviour
             if (regenTimer >= RegenInterval)
             {
                 regenTimer = 0;
-                if (Regen > 0) 
+                if (Regen > 0)
                 {
                     Heal(Regen);
                 }
@@ -240,6 +243,7 @@ public abstract class StatsComponent : MonoBehaviour
     // Deals damage here
     public virtual void TakeDamage(DamageInfo info)
     {
+        info.receiver = this;
         info.CalculateAll();
         if (Armor > 0)
         {
@@ -247,9 +251,24 @@ public abstract class StatsComponent : MonoBehaviour
             info.damage *= damageReduction;
         }
 
+        foreach (ResourceManager.BuffIndex i in info.debuffs)
+        {
+            BuffDef def = ResourceManager.GetBuffDef(i);
+            Buff buff = this.gameObject.AddComponent<Buff>();
+            buff.index = i;
+            DamageInfo buffInfo = new DamageInfo();
+            buffInfo.attacker = info.attacker;
+            buffInfo.receiver = info.receiver;
+            buff.infoTemplate = buffInfo;
+            buff.afflicting = this;
+            if (i == ResourceManager.BuffIndex.Burning)
+            {
+                buff.totalDamage = info.attacker.Damage;
+            }
+        }
+
         // reducing health
         currentHP -= info.damage;
-        info.receiver = this;
         GameManager.instance.DisplayDamage(info);
         sr.color = Color.red;
         damaged = true;
@@ -291,7 +310,7 @@ public abstract class StatsComponent : MonoBehaviour
     public float GetPercentHealth()
     {
         // Testing for right now until we get an actual level curve
-        return CurrentHP/MaxHp;
+        return CurrentHP / MaxHp;
     }
 
     /// <summary>
@@ -456,7 +475,8 @@ public abstract class StatsComponent : MonoBehaviour
         }
 
         // Making sure hp is <= maxHP
-        if (currentHP > MaxHp) {
+        if (currentHP > MaxHp)
+        {
             currentHP = MaxHp;
         }
 

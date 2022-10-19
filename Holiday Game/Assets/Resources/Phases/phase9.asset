@@ -16,9 +16,9 @@ MonoBehaviour:
   spawnInterval: 5
   startTime: 320
   enemies:
-  - index: 0
+  - index: 1
     weight: 0.6
-  - index: 0
+  - index: 2
     weight: 0.3
-  - index: 0
+  - index: 3
     weight: 0.1

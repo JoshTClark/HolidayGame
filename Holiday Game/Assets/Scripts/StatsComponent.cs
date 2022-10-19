@@ -45,7 +45,7 @@ public abstract class StatsComponent : MonoBehaviour
     // Debuffs and Buffs
     public List<BuffDef> buffs;
 
-    SpriteRenderer sr;
+    protected SpriteRenderer sr;
     Color ogColor;
     bool damaged;
     float fadeTimer;

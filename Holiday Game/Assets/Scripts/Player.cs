@@ -15,6 +15,10 @@ public class Player : StatsComponent
     [SerializeField]
     private float iFrames;
     private bool isInvincible;
+
+    private Animator an;
+
+    
     public bool IsInvincible { get { return isInvincible; } }
     public float PickupRange { get { return pickupRange * pickupRangeIncrease; } }
 
@@ -22,6 +26,7 @@ public class Player : StatsComponent
     {
         isInvincible = false;
         iFrames = .5f;
+        an = gameObject.GetComponent<Animator>();
     }
 
     public override void OnDeath()
@@ -36,6 +41,23 @@ public class Player : StatsComponent
         Vector2 movementInput = movement.action.ReadValue<Vector2>();
         movementInput = movementInput * Speed;
         GetComponent<Rigidbody2D>().velocity = movementInput;
+        if (movementInput != Vector2.zero)
+        {
+            an.speed = 1;
+            if (movementInput.x > 0)
+            {
+                sr.flipX = true;
+            }
+            if (movementInput.x < 0)
+            {
+                sr.flipX = false;
+            }
+        }
+        else
+        {
+            an.speed = 0;
+        }
+
         UpdateiFrames();
 
         pickupRangeIncrease = 1f;

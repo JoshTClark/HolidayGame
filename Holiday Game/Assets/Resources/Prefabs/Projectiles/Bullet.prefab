@@ -123,8 +123,7 @@ MonoBehaviour:
   baseSpeed: 3
   baseLifetime: 5
   basePierce: 0
-  damageMultiplier: 1
-  baseSize: 1
+  baseSize: 2
   projectileTeam: 1
 --- !u!50 &3503085336231578201
 Rigidbody2D:

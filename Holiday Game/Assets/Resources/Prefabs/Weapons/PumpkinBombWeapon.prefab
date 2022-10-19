@@ -44,7 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a52d167cd5bc77b4fbae581c8750ad5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 5
+  delay: 8
   projectile: {fileID: 6243427137443032006, guid: 5582b3d6bd185314b8592afa04cd00ca, type: 3}
   index: 1
+  icon: {fileID: 21300000, guid: 64554ce95a34ac6489ac9898d9b9561c, type: 3}
+  timer: 0
   owner: {fileID: 0}
+  canFire: 0
+  baseDamageMultiplier: 5
+  baseSizeMultiplier: 1

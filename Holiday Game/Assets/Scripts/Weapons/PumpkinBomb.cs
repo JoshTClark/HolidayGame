@@ -8,12 +8,64 @@ public class PumpkinBomb : Weapon
     {
         float delta = Time.deltaTime;
 
-        timer += delta;
-        if (timer >= Delay)
+        if (canFire)
         {
-            ProjectileBase p = Instantiate<ProjectileBase>(projectile, transform.position, Quaternion.identity);
+            BombProjectileBase p = Instantiate<BombProjectileBase>((BombProjectileBase)projectile, transform.position, Quaternion.identity);
             p.Direction = Vector2.zero;
-            timer = 0.0f;
+            DamageInfo info = new DamageInfo();
+            info.damage = baseDamageMultiplier * owner.Damage;
+            info.attacker = owner;
+            p.SetDamageInfo(info);
+
+            // Pumkin Launcher
+            if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.PumpkinLauncher))
+            {
+                Enemy e = GetRandomEnemyInRange(10f);
+                if (e)
+                {
+                    p.Direction = (e.transform.position - transform.position).normalized;
+                }
+                else
+                {
+                    p.RotateDirection(Random.Range(0, 360));
+                }
+                p.Speed = 10f;
+                p.SpeedMultiplier = 1f;
+                float torque = Random.Range(-500f, 500f);
+                p.gameObject.GetComponent<Rigidbody2D>().AddTorque(torque);
+                p.gameObject.GetComponent<Rigidbody2D>().angularDrag = 1.75f;
+                p.Lifetime = p.Lifetime * 0.8f;
+            }
+
+            // Explosion size boost
+            if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.PumkinRadius1))
+            {
+                p.explosionSizeMultiplier += 0.1f * (GameManager.instance.Player.GetUpgrade(ResourceManager.UpgradeIndex.PumkinRadius1).CurrentLevel);
+            }
+            if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.PumkinRadius2))
+            {
+                p.explosionSizeMultiplier += 0.2f * (GameManager.instance.Player.GetUpgrade(ResourceManager.UpgradeIndex.PumkinRadius2).CurrentLevel);
+            }
+            if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.PumkinRadius3))
+            {
+                p.explosionSizeMultiplier += 0.3f * (GameManager.instance.Player.GetUpgrade(ResourceManager.UpgradeIndex.PumkinRadius3).CurrentLevel);
+            }
+
+            // Damage
+            if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.PumpkinDamage1))
+            {
+                p.DamageMultiplier += 0.5f * (GameManager.instance.Player.GetUpgrade(ResourceManager.UpgradeIndex.PumpkinDamage1).CurrentLevel);
+            }
+            if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.PumpkinDamage2))
+            {
+                p.DamageMultiplier += 1f * (GameManager.instance.Player.GetUpgrade(ResourceManager.UpgradeIndex.PumpkinDamage2).CurrentLevel);
+            }
+            if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.PumpkinDamage3))
+            {
+                p.DamageMultiplier += 1.5f * (GameManager.instance.Player.GetUpgrade(ResourceManager.UpgradeIndex.PumpkinDamage3).CurrentLevel);
+            }
+
+            ResetTimer();
         }
     }
 

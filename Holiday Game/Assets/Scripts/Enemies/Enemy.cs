@@ -8,8 +8,7 @@ public abstract class Enemy : StatsComponent
 
     public ResourceManager.EnemyIndex index;
 
-    protected Vector2 velocity = Vector2.zero;
-
+    protected List<Vector2> movements = new List<Vector2>();
 
     /// <summary>
     /// Minimum distance between enemy & player
@@ -28,38 +27,37 @@ public abstract class Enemy : StatsComponent
     /// <summary>
     /// Moves the Enemy towards the player
     /// </summary>
-    protected void SeekPlayer()
+    protected Vector2 SeekPlayer()
     {
         // Get the players position
         Vector2 desiredVelocity = (Vector2)player.transform.position - (Vector2)transform.position;
 
         // Get the players position, seek that point, apply forces, and move
-        // Add Desired Velocity to velocity
-        velocity += desiredVelocity;
+        return desiredVelocity;
     }
 
     /// <summary>
     /// Moves the Enemy away from the player
     /// </summary>
-    protected void FleePlayer()
+    protected Vector2 FleePlayer()
     {
         // Get Player Position
         Vector2 desiredVelocity = (Vector2)transform.position - (Vector2)player.transform.position;
 
         // Take the Player's position, flee from it and move
-        velocity += desiredVelocity;
+        return desiredVelocity;
     }
 
     /// <summary>
     /// Stays within a certain distance of the player, either fleeing or seeking
     /// </summary>
-    protected void ShooterMove()
+    protected Vector2 ShooterMove()
     {
         // Calculate the distance & compare it to the values
         if (PlayerDistance() >= maxPlayerDist)
         {
             // Player is too far away, move closer
-            SeekPlayer();
+            return SeekPlayer();
         }
         /*
         else if (PlayerDistance() <= minPlayerDist)
@@ -70,20 +68,34 @@ public abstract class Enemy : StatsComponent
         */
         else
         {
-            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            return Vector2.zero;
         }
     }
 
     protected void Move()
     {
-        // Make Sure that enemies are keeping separte first
-        Separation();
-
+        CalcMoves();
         // Then take Velocity normalize it so it's a heading vector
         // scale that by speed, then apply movement
+        Vector2 velocity = Vector2.zero;
+        if(movements.Count > 0)
+        {
+            foreach (Vector2 v in movements)
+            {
+                velocity += v;
+            }
+        }
+
         GetComponent<Rigidbody2D>().velocity = velocity.normalized*Speed;
-        velocity = Vector2.zero;
+        movements.Clear();
     }
+
+    /// <summary>
+    /// Put the actual movement logic in here
+    /// Do this by adding the vectors to the lists,
+    /// REMEMBER: scale Separation down, and Scale up Seek
+    /// </summary>
+    abstract protected void CalcMoves();
 
     /// <summary>
     /// Calculates the distance between player & enemy
@@ -125,40 +137,42 @@ public abstract class Enemy : StatsComponent
 
         if (collision.gameObject.GetComponent<Player>())
         {
-            Debug.Log("Hurt");
+            //Debug.Log("Hurt");
             // We hit the player, so they take damage
-            GameManager.instance.Player.DealDamage(Damage);
+            DamageInfo info = new DamageInfo();
+            info.damage = Damage;
+            GameManager.instance.Player.TakeDamage(info);
         }
         else if (collision.gameObject.GetComponent<Enemy>())
         {
-            Debug.Log("Other Enemy");
+            //Debug.Log("Other Enemy");
         }
     }
 
     /// <summary>
     /// Has each enemy flee every other enemy scaled by it's distance from each other
     /// </summary>
-    private void Separation()
+    protected Vector2 Separation()
     {
         // Set an empty Desired Velocity
         Vector2 desiredVelocity = Vector2.zero;
+        Vector2 currentVelocity = Vector2.zero;
 
         // Loop through all enemies
         foreach(Enemy e in EnemyManager.instance.CurrentEnemies)
         {
+            currentVelocity = Vector2.zero;
             float sqrDistance = Vector2.SqrMagnitude(transform.position - e.transform.position);
             if(sqrDistance <= Mathf.Epsilon)
             {
                 continue;
             }
             // Flee the Enemy
-            desiredVelocity = (Vector2)transform.position - (Vector2)e.transform.position;
+            currentVelocity = (Vector2)transform.position - (Vector2)e.transform.position;
 
-            // Scale it by how close it is
-            desiredVelocity = desiredVelocity * (1f / sqrDistance);
-
-            // Apply to running velocity
-            velocity += desiredVelocity;
+            // Scale it by how close it is & apply it to the desired velocity
+            desiredVelocity = currentVelocity * (1f / sqrDistance);
         }
+        return desiredVelocity.normalized;
     }
 }

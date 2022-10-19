@@ -12,19 +12,32 @@ public abstract class Weapon : MonoBehaviour
 
     public ResourceManager.WeaponIndex index;
 
-    protected float timer = 0.0f;
+    public Sprite icon;
+
+    public float timer = 0.0f;
 
     public StatsComponent owner;
 
+    public bool canFire = false;
+
+    [SerializeField]
+    public float baseDamageMultiplier, baseSizeMultiplier;
+
     public float Delay
     {
-        get { return delay * (1/owner.AttackSpeed); }
+        get { return delay * (1 / owner.AttackSpeed); }
     }
 
     void Update()
     {
         if (GameManager.instance.State == GameManager.GameState.Normal)
         {
+            float delta = Time.deltaTime;
+            timer += delta;
+            if (timer >= Delay)
+            {
+                canFire = true;
+            }
             OnUpdate();
         }
     }
@@ -70,6 +83,41 @@ public abstract class Weapon : MonoBehaviour
         {
             return null;
         }
+    }
+
+    protected Enemy GetRandomEnemyInRange(float range)
+    {
+        List<Enemy> enemies = EnemyManager.instance.CurrentEnemies;
+        List<Enemy> filtered = new List<Enemy>();
+        if (enemies.Count > 0)
+        {
+            Vector2 pos = owner.gameObject.transform.position;
+            foreach (Enemy e in enemies)
+            {
+                if (Vector2.Distance(pos, e.transform.position) <= range)
+                {
+                    filtered.Add(e);
+                }
+            }
+            int rngEnemy = Random.Range(0, filtered.Count - 1);
+            Enemy enemy = enemies[rngEnemy];
+            return enemy;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public void ResetTimer()
+    {
+        timer = 0.0f;
+        canFire = false;
+    }
+
+    public float PercentTimeLeft()
+    {
+        return timer / Delay;
     }
 
     public abstract void OnUpdate();

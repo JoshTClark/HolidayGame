@@ -9,7 +9,7 @@ public class Player : StatsComponent
     [SerializeField]
     private InputActionReference movement;
 
-    public HealthBar healthBar;
+    //public HealthBar healthBar;
 
     public float pickupRange;
     public float attackActivationRange;
@@ -20,7 +20,7 @@ public class Player : StatsComponent
 
     public override void OnStart()
     {
-        healthBar.SetMaxHealth(MaxHp);
+        //healthBar.SetMaxHealth(MaxHp);
         isInvincible = false;
         iFrames = .5f;
     }
@@ -37,9 +37,10 @@ public class Player : StatsComponent
         Vector2 movementInput = movement.action.ReadValue<Vector2>();
         movementInput = movementInput * Speed;
         GetComponent<Rigidbody2D>().velocity = movementInput;
-
+        /*
         healthBar.SetMaxHealth(MaxHp);
         healthBar.SetHealth(CurrentHP);
+        */
         UpdateiFrames();
     }
     /// <summary>
@@ -68,7 +69,7 @@ public class Player : StatsComponent
     /// Checks if the player can take damage first
     /// </summary>
     /// <param name="damage"></param>
-    public override void DealDamage(float damage)
+    public override void TakeDamage(DamageInfo info)
     {
         if (isInvincible)
         {
@@ -77,7 +78,7 @@ public class Player : StatsComponent
         else
         {
             // take damage & become invincible
-            base.DealDamage(damage);
+            base.TakeDamage(info);
             isInvincible = true;
         }
     }

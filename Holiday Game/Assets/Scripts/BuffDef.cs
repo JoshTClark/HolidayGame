@@ -1,0 +1,20 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "BuffDef Config", menuName = "ScriptableObject/BuffDef Config")]
+public class BuffDef : ScriptableObject
+{
+    public enum BuffType
+    {
+        Debuff,
+        Buff,
+        DOT
+    }
+    public ResourceManager.BuffIndex index;
+    public BuffType type;
+    public string buffName;
+    public float duration;
+    public float tickRate;
+    public FollowingEffect effect;
+}

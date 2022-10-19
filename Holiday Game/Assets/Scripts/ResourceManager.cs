@@ -68,7 +68,10 @@ public class ResourceManager
         PumpkinDamage2,
         PumpkinDamage3,
         PumpkinLauncher,
-        ClusterPumkins
+        ClusterPumkins,
+        XP1,
+        XP2,
+        XP3
     }
 
     public enum UpgradePoolIndex

@@ -285,6 +285,21 @@ public abstract class StatsComponent : MonoBehaviour
     //Called when xp collides with player, adds an amount of xp to players total
     public void AddXP(float amount)
     {
+        float increase = 1f;
+        if (HasUpgrade(ResourceManager.UpgradeIndex.XP1)) 
+        {
+            increase += 0.05f * GetUpgrade(ResourceManager.UpgradeIndex.XP1).CurrentLevel;
+        }
+        if (HasUpgrade(ResourceManager.UpgradeIndex.XP2))
+        {
+            increase += 0.1f * GetUpgrade(ResourceManager.UpgradeIndex.XP2).CurrentLevel;
+        }
+        if (HasUpgrade(ResourceManager.UpgradeIndex.XP3))
+        {
+            increase += 0.15f * GetUpgrade(ResourceManager.UpgradeIndex.XP3).CurrentLevel;
+        }
+        amount *= increase;
+
         xpAmount += amount;
     }
 

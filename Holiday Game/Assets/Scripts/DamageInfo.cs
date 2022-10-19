@@ -11,6 +11,8 @@ public class DamageInfo
     }
 
     public float damage;
+    public float knockback = 1f;
+    public Vector2 damagePos;
     public DamageColor damageColor = DamageColor.Basic;
     public StatsComponent receiver;
     public StatsComponent attacker;

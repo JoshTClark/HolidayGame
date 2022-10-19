@@ -251,6 +251,13 @@ public abstract class StatsComponent : MonoBehaviour
             info.damage *= damageReduction;
         }
 
+        if (this.gameObject.GetComponent<Enemy>())
+        {
+            Vector2 knockbackDirection = info.damagePos - (Vector2)this.transform.position;
+            Debug.Log("Knockback");
+            this.gameObject.GetComponent<Enemy>().AddKnockback(knockbackDirection * info.knockback);
+        }
+
         foreach (ResourceManager.BuffIndex i in info.debuffs)
         {
             BuffDef def = ResourceManager.GetBuffDef(i);
@@ -286,7 +293,7 @@ public abstract class StatsComponent : MonoBehaviour
     public void AddXP(float amount)
     {
         float increase = 1f;
-        if (HasUpgrade(ResourceManager.UpgradeIndex.XP1)) 
+        if (HasUpgrade(ResourceManager.UpgradeIndex.XP1))
         {
             increase += 0.05f * GetUpgrade(ResourceManager.UpgradeIndex.XP1).CurrentLevel;
         }

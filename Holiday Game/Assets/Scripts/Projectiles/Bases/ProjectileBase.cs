@@ -10,6 +10,7 @@ public abstract class ProjectileBase : MonoBehaviour
     private float sizeMultiplier = 1f;
     private float speedMultiplier = 1f;
     private float damageMultiplier = 1f;
+    private float knockbackMultiplier = 1f;
 
     [SerializeField]
     public Team projectileTeam;
@@ -100,8 +101,10 @@ public abstract class ProjectileBase : MonoBehaviour
                             DestroyProjectile();
                         }
                     }
-                    Hit(receiver);
+                    this.damageInfo.damagePos = this.transform.position;
                     this.damageInfo.receiver = receiver;
+                    this.damageInfo.knockback *= knockbackMultiplier;
+                    Hit(receiver);
                     hitTargets.Add(receiver);
                     if (Pierce > 0 && usedPierce < Pierce)
                     {
@@ -122,6 +125,7 @@ public abstract class ProjectileBase : MonoBehaviour
             {
                 StatsComponent receiver = other.gameObject.GetComponent<StatsComponent>();
                 this.damageInfo.receiver = receiver;
+                this.damageInfo.knockback *= knockbackMultiplier;
                 Hit(receiver);
                 DestroyProjectile();
                 OnCollision();

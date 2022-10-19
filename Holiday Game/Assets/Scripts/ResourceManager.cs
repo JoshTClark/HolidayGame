@@ -249,4 +249,19 @@ public class ResourceManager
 
         return index;
     }
+
+    public static Enemy EnemyFromName(string name)
+    {
+        Enemy e = null;
+
+        foreach (Enemy i in enemyPrefabs)
+        {
+            if (i.name == name)
+            {
+                e = i;
+            }
+        }
+
+        return e;
+    }
 }

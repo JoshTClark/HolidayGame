@@ -8,19 +8,18 @@ public class Player : StatsComponent
 {
     [SerializeField]
     private InputActionReference movement;
-
-    //public HealthBar healthBar;
-
-    public float pickupRange;
+    [SerializeField]
+    private float pickupRange;
+    private float pickupRangeIncrease;
     public float attackActivationRange;
     [SerializeField]
     private float iFrames;
     private bool isInvincible;
     public bool IsInvincible { get { return isInvincible; } }
+    public float PickupRange { get { return pickupRange * pickupRangeIncrease; } }
 
     public override void OnStart()
     {
-        //healthBar.SetMaxHealth(MaxHp);
         isInvincible = false;
         iFrames = .5f;
     }
@@ -37,11 +36,21 @@ public class Player : StatsComponent
         Vector2 movementInput = movement.action.ReadValue<Vector2>();
         movementInput = movementInput * Speed;
         GetComponent<Rigidbody2D>().velocity = movementInput;
-        /*
-        healthBar.SetMaxHealth(MaxHp);
-        healthBar.SetHealth(CurrentHP);
-        */
         UpdateiFrames();
+
+        pickupRangeIncrease = 1f;
+        if (HasUpgrade(ResourceManager.UpgradeIndex.XP1))
+        {
+            pickupRangeIncrease += 0.05f * GetUpgrade(ResourceManager.UpgradeIndex.XP1).CurrentLevel;
+        }
+        if (HasUpgrade(ResourceManager.UpgradeIndex.XP2))
+        {
+            pickupRangeIncrease += 0.1f * GetUpgrade(ResourceManager.UpgradeIndex.XP2).CurrentLevel;
+        }
+        if (HasUpgrade(ResourceManager.UpgradeIndex.XP3))
+        {
+            pickupRangeIncrease += 0.15f * GetUpgrade(ResourceManager.UpgradeIndex.XP3).CurrentLevel;
+        }
     }
     /// <summary>
     /// Updates
@@ -86,5 +95,6 @@ public class Player : StatsComponent
     {
         // Showing attack range
         Gizmos.DrawWireSphere(transform.position, attackActivationRange);
+        Gizmos.DrawWireSphere(transform.position, PickupRange);
     }
 }

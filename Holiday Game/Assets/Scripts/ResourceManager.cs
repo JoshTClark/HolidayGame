@@ -68,7 +68,10 @@ public class ResourceManager
         PumpkinDamage2,
         PumpkinDamage3,
         PumpkinLauncher,
-        ClusterPumkins
+        ClusterPumkins,
+        XP1,
+        XP2,
+        XP3
     }
 
     public enum UpgradePoolIndex
@@ -245,5 +248,20 @@ public class ResourceManager
         }
 
         return index;
+    }
+
+    public static Enemy EnemyFromName(string name)
+    {
+        Enemy e = null;
+
+        foreach (Enemy i in enemyPrefabs)
+        {
+            if (i.name == name)
+            {
+                e = i;
+            }
+        }
+
+        return e;
     }
 }

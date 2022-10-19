@@ -7,16 +7,24 @@ using static ResourceManager;
 public class DebugPanel : MonoBehaviour
 {
     public TMP_Dropdown upgradeSelector;
+    public TMP_Dropdown enemySelector;
     public TMP_Text inventoryDisplay;
 
     public void Init()
     {
-        List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
+        List<TMP_Dropdown.OptionData> optionsUpgrades = new List<TMP_Dropdown.OptionData>();
         foreach (Upgrade i in ResourceManager.upgradeDefinitions)
         {
-            options.Add(new TMP_Dropdown.OptionData(i.upgradeName));
+            optionsUpgrades.Add(new TMP_Dropdown.OptionData(i.upgradeName));
         }
-        upgradeSelector.AddOptions(options);
+        upgradeSelector.AddOptions(optionsUpgrades);
+
+        List<TMP_Dropdown.OptionData> optionsEnemies = new List<TMP_Dropdown.OptionData>();
+        foreach (Enemy i in ResourceManager.enemyPrefabs)
+        {
+            optionsEnemies.Add(new TMP_Dropdown.OptionData(i.name));
+        }
+        enemySelector.AddOptions(optionsEnemies);
     }
 
     private void Update()
@@ -28,10 +36,17 @@ public class DebugPanel : MonoBehaviour
         }
     }
 
-    public void ButtonPressed()
+    public void GiveUpgrade()
     {
         UpgradeIndex index = ResourceManager.UpgradeIndexFromName(upgradeSelector.options[upgradeSelector.value].text);
         Debug.Log("Giving player " + ResourceManager.GetUpgrade(index).upgradeName);
         GameManager.instance.Player.AddUpgrade(index);
+    }
+
+    public void SpawnEnemy()
+    {
+        Enemy e = ResourceManager.EnemyFromName(enemySelector.options[enemySelector.value].text);
+        Debug.Log("Spawning " + e.name);
+        EnemyManager.instance.SpawnEnemy(e.index);
     }
 }

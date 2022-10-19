@@ -9,16 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7084332a92f40be458c9ae8a9f8683db, type: 3}
-  m_Name: phase9
+  m_Script: {fileID: 11500000, guid: 296cfc9b7513a864aab005e7da6bfa8f, type: 3}
+  m_Name: XP3
   m_EditorClassIdentifier: 
-  numberOfEnemiesPerSpawn: 5
-  spawnInterval: 5
-  startTime: 320
-  enemies:
-  - index: 1
-    weight: 0.6
-  - index: 2
-    weight: 0.3
-  - index: 3
-    weight: 0.1
+  upgradeName: More XP+++
+  upgradeDescription: Increases XP gained and pickup range by 15%
+  index: 44
+  tier: 2
+  CanTakeMultiple: 1
+  IsWeapon: 0

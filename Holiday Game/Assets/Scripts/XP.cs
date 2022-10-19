@@ -14,7 +14,7 @@ public class XP : MonoBehaviour
     {
         if (GameManager.instance.State == GameManager.GameState.Normal)
         {
-            if (PlayerDistance() <= GameManager.instance.Player.pickupRange)
+            if (PlayerDistance() <= GameManager.instance.Player.PickupRange)
             {
                 SeekPlayer();
             }

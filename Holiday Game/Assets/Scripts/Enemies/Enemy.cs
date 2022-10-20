@@ -188,6 +188,6 @@ public abstract class Enemy : StatsComponent
 
     public void AddKnockback(Vector2 vec)
     {
-        knockback.Add(vec);
+        //knockback.Add(vec);
     }
 }

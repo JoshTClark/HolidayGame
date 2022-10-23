@@ -42,4 +42,9 @@ public class FireworkProjectile : BombProjectileBase
         }
         SpeedMultiplier += 1f * delta;
     }
+
+    public override void OnClean()
+    {
+        this.gameObject.SetActive(true);
+    }
 }

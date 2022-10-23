@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class BulletTestWeapon : Weapon
 {
@@ -20,17 +21,20 @@ public class BulletTestWeapon : Weapon
             info.damage = baseDamageMultiplier * owner.Damage;
             info.attacker = owner;
 
-            ProjectileBase p1 = Instantiate<ProjectileBase>(projectile, transform.position, Quaternion.identity);
+            ProjectileBase p1 = pool.Get();
+            p1.transform.position = this.transform.position;
             p1.Direction = transform.right;
             p1.RotateDirection(15);
             p1.SetDamageInfo(info.CreateCopy());
 
-            ProjectileBase p2 = Instantiate<ProjectileBase>(projectile, transform.position, Quaternion.identity);
+            ProjectileBase p2 = pool.Get();
+            p2.transform.position = this.transform.position;
             p2.Direction = transform.right;
             p2.RotateDirection(-15);
             p2.SetDamageInfo(info.CreateCopy());
 
-            ProjectileBase p3 = Instantiate<ProjectileBase>(projectile, transform.position, Quaternion.identity);
+            ProjectileBase p3 = pool.Get();
+            p3.transform.position = this.transform.position;
             p3.Direction = transform.right;
             p3.RotateDirection(0);
             p3.SetDamageInfo(info.CreateCopy());

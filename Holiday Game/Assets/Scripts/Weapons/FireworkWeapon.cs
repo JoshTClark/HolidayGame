@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class FireworkWeapon : Weapon
 {
@@ -21,7 +22,8 @@ public class FireworkWeapon : Weapon
 
             for (int i = 0; i < 3 + countAdd; i++)
             {
-                FireworkProjectile p = Instantiate<FireworkProjectile>((FireworkProjectile)projectile, transform.position, Quaternion.identity);
+                FireworkProjectile p = (FireworkProjectile)pool.Get();
+                p.transform.position = this.transform.position;
                 p.target = e;
                 DamageInfo info = new DamageInfo();
                 info.damage = baseDamageMultiplier * owner.Damage;

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public abstract class Weapon : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public abstract class Weapon : MonoBehaviour
 
     [SerializeField]
     protected ProjectileBase projectile;
+
+    public ObjectPool<ProjectileBase> pool;
 
     public ResourceManager.WeaponIndex index;
 
@@ -26,6 +29,11 @@ public abstract class Weapon : MonoBehaviour
     public float Delay
     {
         get { return delay * (1 / owner.AttackSpeed); }
+    }
+
+    private void Start()
+    {
+        pool = new ObjectPool<ProjectileBase>(createFunc: () => Instantiate(projectile), actionOnGet: (obj) => obj.Clean(this), actionOnRelease: (obj) => obj.gameObject.SetActive(false), actionOnDestroy: (obj) => Destroy(obj.gameObject), collectionCheck: false, defaultCapacity: 50);
     }
 
     void Update()

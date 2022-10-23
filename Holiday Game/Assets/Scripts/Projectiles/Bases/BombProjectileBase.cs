@@ -14,8 +14,11 @@ public abstract class BombProjectileBase : ProjectileBase
 
     public override void OnDeath()
     {
-        GameObject gameObject = CreateEmptyProjectile();
-        gameObject.AddComponent<SpriteRenderer>();
+        GameObject gameObject = GetEmptyProjectile();
+        if (!gameObject.GetComponent<SpriteRenderer>())
+        {
+            gameObject.AddComponent<SpriteRenderer>();
+        }
         gameObject.layer = this.gameObject.layer;
         ProjectileBase projectile = gameObject.GetComponent<ProjectileBase>();
         gameObject.transform.position = this.gameObject.transform.position;
@@ -32,7 +35,7 @@ public abstract class BombProjectileBase : ProjectileBase
             effect.gameObject.transform.localScale = new Vector3(projectile.Size, projectile.Size);
             effect.Play();
         }
-        if (explosionPrefab) 
+        if (explosionPrefab)
         {
             GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
             explosion.GetComponent<SpriteRenderer>().size = new Vector3(explosionRadius, explosionRadius);

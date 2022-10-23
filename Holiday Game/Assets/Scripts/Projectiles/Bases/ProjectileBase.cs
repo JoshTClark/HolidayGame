@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public abstract class ProjectileBase : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public abstract class ProjectileBase : MonoBehaviour
     private List<StatsComponent> hitTargets = new List<StatsComponent>();
     private Vector2 direction = new Vector2();
 
+    public static ObjectPool<ProjectileBase> emptyPool = new ObjectPool<ProjectileBase>(createFunc: () => CreateEmptyProjectile().GetComponent<ProjectileBase>(), actionOnGet: (obj) => obj.Clean(null), actionOnRelease: (obj) => obj.gameObject.SetActive(false), actionOnDestroy: (obj) => Destroy(obj.gameObject), collectionCheck: false, defaultCapacity: 50);
+
     public Vector2 Direction { get { return direction; } set { direction = value; } }
     public float Speed { get { return baseSpeed * speedMultiplier; } set { baseSpeed = value; } }
     public float Lifetime { get { return baseLifetime; } set { baseLifetime = value; } }
@@ -31,6 +34,8 @@ public abstract class ProjectileBase : MonoBehaviour
     public float SpeedMultiplier { get { return speedMultiplier; } set { speedMultiplier = value; } }
 
     protected DamageInfo damageInfo;
+
+    public ObjectPool<ProjectileBase> pool;
 
 
     // Decides what the projectile can damage
@@ -79,7 +84,7 @@ public abstract class ProjectileBase : MonoBehaviour
     private void DestroyProjectile()
     {
         OnDeath();
-        Destroy(this.gameObject);
+        pool.Release(this);
     }
 
     // Handles the projectiles collision
@@ -159,8 +164,11 @@ public abstract class ProjectileBase : MonoBehaviour
     {
         damageInfo = info;
     }
-
-    public static GameObject CreateEmptyProjectile()
+    public GameObject GetEmptyProjectile() 
+    {
+        return emptyPool.Get().gameObject;
+    }
+    private static GameObject CreateEmptyProjectile()
     {
         GameObject projectile = new GameObject("Explosion");
 
@@ -174,6 +182,29 @@ public abstract class ProjectileBase : MonoBehaviour
         projectile.AddComponent<EmptyProjectile>();
 
         return projectile;
+    }
+
+    public void Clean(Weapon w)
+    {
+        this.gameObject.SetActive(true);
+        damageInfo = new DamageInfo();
+        timeAlive = 0.0f;
+        usedPierce = 0f;
+        hitTargets = new List<StatsComponent>();
+        direction = new Vector2();
+        sizeMultiplier = 1f;
+        speedMultiplier = 1f;
+        damageMultiplier = 1f;
+        knockbackMultiplier = 1f;
+        if (w)
+        {
+            this.pool = w.pool;
+        }
+        else
+        {
+            this.pool = emptyPool;
+        }
+        OnClean();
     }
 
     /// <summary>
@@ -200,4 +231,6 @@ public abstract class ProjectileBase : MonoBehaviour
     /// Any special behavior for when the projectile collides with something goes here
     /// </summary>
     public abstract void OnCollision();
+
+    public abstract void OnClean();
 }

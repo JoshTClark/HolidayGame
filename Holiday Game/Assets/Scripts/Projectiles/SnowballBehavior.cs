@@ -38,4 +38,10 @@ public class SnowballBehavior : ProjectileBase
     {
         // Nothing special
     }
+
+    public override void OnClean()
+    {
+        FollowingEffect e = GameObject.Instantiate(effects);
+        e.following = this.gameObject;
+    }
 }

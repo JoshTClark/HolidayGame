@@ -79,4 +79,9 @@ public class PumpkinBombBehavior : BombProjectileBase
             body.angularVelocity = 0;
         }
     }
+
+    public override void OnClean()
+    {
+        this.gameObject.SetActive(true);
+    }
 }

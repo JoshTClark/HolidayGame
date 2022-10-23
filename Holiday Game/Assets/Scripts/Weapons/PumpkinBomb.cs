@@ -36,7 +36,7 @@ public class PumpkinBomb : Weapon
                 float torque = Random.Range(-500f, 500f);
                 p.gameObject.GetComponent<Rigidbody2D>().AddTorque(torque);
                 p.gameObject.GetComponent<Rigidbody2D>().angularDrag = 1.75f;
-                p.Lifetime = p.Lifetime * 0.8f;
+                p.LifetimeMultiplier = 0.8f;
             }
 
             // Explosion size boost

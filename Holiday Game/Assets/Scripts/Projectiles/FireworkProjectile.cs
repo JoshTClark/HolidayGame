@@ -23,7 +23,7 @@ public class FireworkProjectile : BombProjectileBase
         body.velocity = transform.right * Speed;
     }
 
-    public override void OnCollision()
+    public override void OnCollision(Collider2D other)
     {
     }
 

@@ -253,9 +253,15 @@ public abstract class StatsComponent : MonoBehaviour
 
         if (this.gameObject.GetComponent<Enemy>())
         {
-            Vector2 knockbackDirection = info.damagePos - (Vector2)this.transform.position;
-            Debug.Log("Knockback");
-            this.gameObject.GetComponent<Enemy>().AddKnockback(knockbackDirection * info.knockback);
+            if (info.radialKnockback) 
+            {
+                Vector2 knockbackDirection = (info.damagePos - (Vector2)this.gameObject.transform.position).normalized;
+                this.gameObject.GetComponent<Enemy>().AddKnockback(knockbackDirection * info.knockback);
+            }
+            else
+            {
+                this.gameObject.GetComponent<Enemy>().AddKnockback(info.knockbackDirection * info.knockback);
+            }
         }
 
         foreach (ResourceManager.BuffIndex i in info.debuffs)

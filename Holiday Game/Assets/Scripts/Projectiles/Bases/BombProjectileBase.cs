@@ -22,7 +22,10 @@ public abstract class BombProjectileBase : ProjectileBase
         gameObject.layer = this.gameObject.layer;
         ProjectileBase projectile = gameObject.GetComponent<ProjectileBase>();
         gameObject.transform.position = this.gameObject.transform.position;
-        projectile.SetDamageInfo(damageInfo.CreateCopy());
+        DamageInfo info = damageInfo.CreateCopy();
+        info.radialKnockback = true;
+        info.damagePos = this.transform.position;
+        projectile.SetDamageInfo(info);
         projectile.DamageMultiplier = DamageMultiplier;
         projectile.Lifetime = explosionLifetime;
         projectile.Pierce = 999f;

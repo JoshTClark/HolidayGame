@@ -86,16 +86,17 @@ public abstract class Enemy : StatsComponent
                 velocity += v;
             }
         }
-        Vector2 knockbackVelocity = Vector2.zero;
+        Vector2 knockbackAmount = Vector2.zero;
         if (knockback.Count > 0)
         {
             foreach (Vector2 v in knockback)
             {
-                knockbackVelocity += v;
+                knockbackAmount += v;
             }
         }
 
-        GetComponent<Rigidbody2D>().velocity = (velocity.normalized * Speed) + knockbackVelocity;
+        GetComponent<Rigidbody2D>().velocity = (velocity.normalized * Speed);
+        GetComponent<Rigidbody2D>().position = GetComponent<Rigidbody2D>().position + (knockbackAmount);
         movements.Clear();
         knockback.Clear();
     }
@@ -188,6 +189,6 @@ public abstract class Enemy : StatsComponent
 
     public void AddKnockback(Vector2 vec)
     {
-        //knockback.Add(vec);
+        knockback.Add(vec);
     }
 }

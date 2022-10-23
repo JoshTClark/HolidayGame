@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
     */
 
     public bool showDamageNumbers = true;
-    private float time = 0.0f;
+    private float time = 0f;
     private float currentDifficulty = 1;
     private GameState state = GameState.Title;
     private bool paused = false;

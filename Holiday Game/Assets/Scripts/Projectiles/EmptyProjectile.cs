@@ -8,7 +8,7 @@ public class EmptyProjectile : ProjectileBase
     {
     }
 
-    public override void OnCollision()
+    public override void OnCollision(Collider2D other)
     {
     }
 

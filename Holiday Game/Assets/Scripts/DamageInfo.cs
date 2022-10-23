@@ -11,7 +11,9 @@ public class DamageInfo
     }
 
     public float damage;
+    public bool radialKnockback = false;
     public float knockback = 1f;
+    public Vector2 knockbackDirection = new Vector2(0, 0);
     public Vector2 damagePos;
     public DamageColor damageColor = DamageColor.Basic;
     public StatsComponent receiver;
@@ -40,6 +42,9 @@ public class DamageInfo
         info.attacker = this.attacker;
         info.isCrit = this.isCrit;
         info.debuffs = debuffs;
+        info.knockback = this.knockback;
+        info.knockbackDirection = this.knockbackDirection;
+        info.radialKnockback = this.radialKnockback;
         return info;
     }
 

@@ -14,7 +14,7 @@ public class Bullet : ProjectileBase
         GetComponent<Rigidbody2D>().velocity = velocity;
     }
 
-    public override void OnCollision()
+    public override void OnCollision(Collider2D other)
     {
         // Nothing special
     }

@@ -12,6 +12,7 @@ public abstract class ProjectileBase : MonoBehaviour
     private float speedMultiplier = 1f;
     private float damageMultiplier = 1f;
     private float knockbackMultiplier = 1f;
+    private float lifetimeMultiplier = 1f;
 
     [SerializeField]
     public Team projectileTeam;
@@ -25,13 +26,14 @@ public abstract class ProjectileBase : MonoBehaviour
 
     public Vector2 Direction { get { return direction; } set { direction = value; } }
     public float Speed { get { return baseSpeed * speedMultiplier; } set { baseSpeed = value; } }
-    public float Lifetime { get { return baseLifetime; } set { baseLifetime = value; } }
+    public float Lifetime { get { return baseLifetime * LifetimeMultiplier; } set { baseLifetime = value; } }
     public float Pierce { get { return basePierce; } set { basePierce = value; } }
     public float TimeAlive { get { return timeAlive; } set { timeAlive = value; } }
     public float DamageMultiplier { get { return damageMultiplier; } set { damageMultiplier = value; } }
     public float Size { get { return baseSize * sizeMultiplier; } set { baseSize = value; } }
     public float SizeMultiplier { get { return sizeMultiplier; } set { sizeMultiplier = value; } }
     public float SpeedMultiplier { get { return speedMultiplier; } set { speedMultiplier = value; } }
+    public float LifetimeMultiplier { get { return lifetimeMultiplier; } set { lifetimeMultiplier = value; } }
 
     protected DamageInfo damageInfo;
 
@@ -97,6 +99,7 @@ public abstract class ProjectileBase : MonoBehaviour
             if (other.gameObject.GetComponent<Enemy>())
             {
                 StatsComponent receiver = other.gameObject.GetComponent<StatsComponent>();
+                OnCollision(other);
                 if (!hitTargets.Contains(receiver))
                 {
                     if (this.GetType() == typeof(BombProjectileBase))
@@ -106,7 +109,7 @@ public abstract class ProjectileBase : MonoBehaviour
                             DestroyProjectile();
                         }
                     }
-                    this.damageInfo.damagePos = this.transform.position;
+                    this.damageInfo.damagePos = this.gameObject.transform.position;
                     this.damageInfo.receiver = receiver;
                     this.damageInfo.knockback *= knockbackMultiplier;
                     Hit(receiver);
@@ -119,7 +122,6 @@ public abstract class ProjectileBase : MonoBehaviour
                     {
                         DestroyProjectile();
                     }
-                    OnCollision();
                 }
             }
         }
@@ -133,7 +135,7 @@ public abstract class ProjectileBase : MonoBehaviour
                 this.damageInfo.knockback *= knockbackMultiplier;
                 Hit(receiver);
                 DestroyProjectile();
-                OnCollision();
+                OnCollision(other);
             }
         }
 
@@ -141,7 +143,7 @@ public abstract class ProjectileBase : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
             DestroyProjectile();
-            OnCollision();
+            OnCollision(other);
         }
     }
 
@@ -196,6 +198,7 @@ public abstract class ProjectileBase : MonoBehaviour
         speedMultiplier = 1f;
         damageMultiplier = 1f;
         knockbackMultiplier = 1f;
+        lifetimeMultiplier = 1f;
         if (w)
         {
             this.pool = w.pool;
@@ -230,7 +233,7 @@ public abstract class ProjectileBase : MonoBehaviour
     /// <summary>
     /// Any special behavior for when the projectile collides with something goes here
     /// </summary>
-    public abstract void OnCollision();
+    public abstract void OnCollision(Collider2D other);
 
     public abstract void OnClean();
 }

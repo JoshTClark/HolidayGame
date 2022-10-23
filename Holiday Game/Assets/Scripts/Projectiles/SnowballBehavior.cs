@@ -19,7 +19,7 @@ public class SnowballBehavior : ProjectileBase
         //Debug.Log(GetComponent<Rigidbody2D>().velocity);
     }
 
-    public override void OnCollision()
+    public override void OnCollision(Collider2D other)
     {
         // Nothing special
     }
@@ -36,7 +36,6 @@ public class SnowballBehavior : ProjectileBase
 
     public override void OnUpdate()
     {
-        // Nothing special
     }
 
     public override void OnClean()

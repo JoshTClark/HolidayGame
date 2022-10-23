@@ -68,6 +68,7 @@ public class SnowballWeapon : Weapon
             DamageInfo info = new DamageInfo();
             info.damage = damageMult * owner.Damage;
             info.attacker = owner;
+            info.knockbackDirection = p.Direction;
             p.SetDamageInfo(info);
             p.Pierce += pierceAdd;
             p.SizeMultiplier = sizeMult;

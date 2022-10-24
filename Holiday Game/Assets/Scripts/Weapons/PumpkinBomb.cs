@@ -33,9 +33,9 @@ public class PumpkinBomb : Weapon
                 }
                 p.Speed = 10f;
                 p.SpeedMultiplier = 1f;
-                float torque = Random.Range(-500f, 500f);
-                p.gameObject.GetComponent<Rigidbody2D>().AddTorque(torque);
-                p.gameObject.GetComponent<Rigidbody2D>().angularDrag = 1.75f;
+                //float torque = Random.Range(-500f, 500f);
+                //p.gameObject.GetComponent<Rigidbody2D>().AddTorque(torque);
+                //p.gameObject.GetComponent<Rigidbody2D>().angularDrag = 1.75f;
                 p.LifetimeMultiplier = 0.8f;
             }
 

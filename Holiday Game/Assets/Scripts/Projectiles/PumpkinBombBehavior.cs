@@ -62,7 +62,7 @@ public class PumpkinBombBehavior : BombProjectileBase
     public override void OnUpdate()
     {
         float delta = Time.deltaTime;
-        sr.color = Color.Lerp(Color.white, Color.red, Mathf.PingPong(TimeAlive * TimeAlive * 1.2f, 1));
+        sr.color = Color.Lerp(Color.white, Color.red, Mathf.PingPong(TimeAlive * TimeAlive * 1.5f, 1));
 
         if (SpeedMultiplier > 0)
         {

@@ -7,6 +7,7 @@ public abstract class Enemy : StatsComponent
     public Player player;
 
     public ResourceManager.EnemyIndex index;
+    public bool isBoss;
 
     protected List<Vector2> movements = new List<Vector2>();
     protected List<Vector2> knockback = new List<Vector2>();

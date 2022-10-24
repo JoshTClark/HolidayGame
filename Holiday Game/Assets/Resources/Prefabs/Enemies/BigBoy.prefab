@@ -108,6 +108,7 @@ MonoBehaviour:
   baseRegenInterval: 0
   baseCritChance: 0
   baseCritDamage: 0
+  knockbackMult: 0.5
   levelScaling: 0
   hpLevelUp: 10
   damageLevelUp: 2
@@ -135,6 +136,7 @@ MonoBehaviour:
   fadeTotalTime: 0
   player: {fileID: 0}
   index: 3
+  isBoss: 0
   XPType: 1
 --- !u!58 &-6971867487915864456
 CircleCollider2D:

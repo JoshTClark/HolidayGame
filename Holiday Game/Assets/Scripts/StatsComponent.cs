@@ -105,7 +105,11 @@ public abstract class StatsComponent : MonoBehaviour
 
         currentHP = MaxHp;
         xpAmount = 0;
-        level = 1;
+        if (!this.gameObject.GetComponent<Enemy>())
+        {
+            level = 1;
+        }
+
 
         sr = gameObject.GetComponent<SpriteRenderer>();
         ogColor = sr.color;
@@ -221,11 +225,14 @@ public abstract class StatsComponent : MonoBehaviour
     //Checks to see if leveled up since last tick
     public void CalculateLevel()
     {
-        float expToLevelUp = GetXpToNextLevel();
-        if (XP > expToLevelUp)
+        if (!this.gameObject.GetComponent<Enemy>())
         {
-            level++;
-            OnLevelUp();
+            float expToLevelUp = GetXpToNextLevel();
+            if (XP > expToLevelUp)
+            {
+                level++;
+                OnLevelUp();
+            }
         }
     }
 
@@ -253,7 +260,7 @@ public abstract class StatsComponent : MonoBehaviour
 
         if (this.gameObject.GetComponent<Enemy>())
         {
-            if (info.radialKnockback) 
+            if (info.radialKnockback)
             {
                 Vector2 knockbackDirection = (info.damagePos - (Vector2)this.gameObject.transform.position).normalized;
                 this.gameObject.GetComponent<Enemy>().AddKnockback(knockbackDirection * info.knockback * knockbackMult);

@@ -9,7 +9,8 @@ public class ResourceManager
         None,
         Test,
         Test2,
-        BigBoy
+        BigBoy,
+        Boss
     }
     public enum PickupIndex
     {

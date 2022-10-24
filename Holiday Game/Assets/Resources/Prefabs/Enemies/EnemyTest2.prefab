@@ -148,7 +148,7 @@ MonoBehaviour:
   knockbackMult: 1
   levelScaling: 1
   hpLevelUp: 7
-  damageLevelUp: 0
+  damageLevelUp: 1
   currentHP: 0
   xpAmount: 0
   level: 0

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7084332a92f40be458c9ae8a9f8683db, type: 3}
   m_Name: Phase2
   m_EditorClassIdentifier: 
-  numberOfEnemiesPerSpawn: 3
+  numberOfEnemiesPerSpawn: 4
   spawnInterval: 5
   startTime: 30
   enemies:

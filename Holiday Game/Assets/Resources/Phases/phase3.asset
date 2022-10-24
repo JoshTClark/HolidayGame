@@ -17,8 +17,8 @@ MonoBehaviour:
   startTime: 60
   enemies:
   - index: 1
-    weight: 0.85
+    weight: 0.6
   - index: 2
-    weight: 0.5
+    weight: 0.25
   - index: 3
-    weight: 0.5
+    weight: 0.15

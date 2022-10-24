@@ -109,7 +109,7 @@ MonoBehaviour:
   baseCritChance: 0
   baseCritDamage: 0
   knockbackMult: 0.5
-  levelScaling: 0
+  levelScaling: 1
   hpLevelUp: 10
   damageLevelUp: 2
   currentHP: 0

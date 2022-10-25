@@ -86,7 +86,8 @@ public class ResourceManager
 
     public enum BuffIndex
     {
-        Burning
+        Burning,
+        Stunned
     }
 
     public static List<Enemy> enemyPrefabs = new List<Enemy>();

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 296cfc9b7513a864aab005e7da6bfa8f, type: 3}
   m_Name: CritChance1
   m_EditorClassIdentifier: 
-  upgradeName: Critical Chance +
+  upgradeName: Weak-spots
   upgradeDescription: 2.5% increased critical strike chance
   index: 33
   tier: 1

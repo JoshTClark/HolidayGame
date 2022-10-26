@@ -173,6 +173,7 @@ public abstract class ProjectileBase : MonoBehaviour
         //this.transform.rotation = Quaternion.identity;
         damageInfo = new DamageInfo();
         timeAlive = 0.0f;
+        basePierce = 0f;
         usedPierce = 0f;
         hitTargets = new List<StatsComponent>();
         direction = new Vector2();

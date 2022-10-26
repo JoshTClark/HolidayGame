@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 296cfc9b7513a864aab005e7da6bfa8f, type: 3}
   m_Name: CritDamage1 4
   m_EditorClassIdentifier: 
-  upgradeName: Critical Damage X
+  upgradeName: Big Red Numbers X
   upgradeDescription: 30% more damage on critical strikes
   index: 31
   tier: 3

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 296cfc9b7513a864aab005e7da6bfa8f, type: 3}
   m_Name: Health1
   m_EditorClassIdentifier: 
-  upgradeName: HP+
+  upgradeName: Health Haver+
   upgradeDescription: Increases HP by 15 points and heals for 20 points
   index: 0
   tier: 0

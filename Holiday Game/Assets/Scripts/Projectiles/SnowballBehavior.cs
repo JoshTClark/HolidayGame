@@ -42,5 +42,7 @@ public class SnowballBehavior : ProjectileBase
     {
         FollowingEffect e = GameObject.Instantiate(effects);
         e.following = this.gameObject;
+
+
     }
 }

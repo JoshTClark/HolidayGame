@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 296cfc9b7513a864aab005e7da6bfa8f, type: 3}
   m_Name: Health3
   m_EditorClassIdentifier: 
-  upgradeName: HP+++
+  upgradeName: Fortitude+++
   upgradeDescription: Increases HP by 45 points and heals for 60 points
   index: 2
   tier: 2

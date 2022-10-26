@@ -14,14 +14,8 @@ public abstract class BombProjectileBase : ProjectileBase
 
     public override void OnDeath()
     {
-        GameObject gameObject = GetEmptyProjectile();
-        if (!gameObject.GetComponent<SpriteRenderer>())
-        {
-            gameObject.AddComponent<SpriteRenderer>();
-        }
-        gameObject.layer = this.gameObject.layer;
-        ProjectileBase projectile = gameObject.GetComponent<ProjectileBase>();
-        gameObject.transform.position = this.gameObject.transform.position;
+        ProjectileBase projectile = ProjectileManager.GetProjectile(ResourceManager.ProjectileIndex.Explosion);
+        projectile.gameObject.transform.position = this.gameObject.transform.position;
         DamageInfo info = damageInfo.CreateCopy();
         info.radialKnockback = true;
         info.damagePos = this.transform.position;

@@ -11,7 +11,7 @@ public class PumpkinBomb : Weapon
 
         if (canFire)
         {
-            BombProjectileBase p = (BombProjectileBase)pool.Get();
+            BombProjectileBase p = (BombProjectileBase)ProjectileManager.GetProjectile(ResourceManager.ProjectileIndex.PumpkinBomb);
             p.transform.position = this.transform.position;
             p.Direction = Vector2.zero;
             DamageInfo info = new DamageInfo();

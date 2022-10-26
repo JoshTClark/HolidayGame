@@ -8,11 +8,6 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField]
     private float delay;
 
-    [SerializeField]
-    protected ProjectileBase projectile;
-
-    public ObjectPool<ProjectileBase> pool;
-
     public ResourceManager.WeaponIndex index;
 
     public Sprite icon;
@@ -33,7 +28,6 @@ public abstract class Weapon : MonoBehaviour
 
     private void Start()
     {
-        pool = new ObjectPool<ProjectileBase>(createFunc: () => Instantiate(projectile), actionOnGet: (obj) => obj.Clean(this), actionOnRelease: (obj) => obj.gameObject.SetActive(false), actionOnDestroy: (obj) => Destroy(obj.gameObject), collectionCheck: false, defaultCapacity: 50);
     }
 
     void Update()

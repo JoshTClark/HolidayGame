@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static ResourceManager;
 
 public abstract class StatsComponent : MonoBehaviour
 {
@@ -54,6 +55,8 @@ public abstract class StatsComponent : MonoBehaviour
 
     [SerializeField]
     float fadeTotalTime;
+
+    private List<FollowingEffect> followingEffects = new List<FollowingEffect>();
 
     // Used to get the base stats without changing them at all
     public float BaseMaxHp { get; }
@@ -159,6 +162,13 @@ public abstract class StatsComponent : MonoBehaviour
                 isDead = true;
             }
 
+            // Adding things for burning effects
+            if (HasBuff(ResourceManager.BuffIndex.Burning))
+            {
+
+            }
+
+            // Checking if dead
             if (IsDead)
             {
                 OnDeath();
@@ -468,15 +478,15 @@ public abstract class StatsComponent : MonoBehaviour
         // Damage1 - Damage3
         if (HasUpgrade(ResourceManager.UpgradeIndex.Damage1))
         {
-            damageAdd += 2 * GetUpgrade(ResourceManager.UpgradeIndex.Damage1).CurrentLevel;
+            damageAdd += (0.05f * baseDamage) * GetUpgrade(ResourceManager.UpgradeIndex.Damage1).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.Damage2))
         {
-            damageAdd += 4 * GetUpgrade(ResourceManager.UpgradeIndex.Damage2).CurrentLevel;
+            damageAdd += (0.1f * baseDamage) * GetUpgrade(ResourceManager.UpgradeIndex.Damage2).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.Damage3))
         {
-            damageAdd += 6 * GetUpgrade(ResourceManager.UpgradeIndex.Damage3).CurrentLevel;
+            damageAdd += (0.15f * baseDamage) * GetUpgrade(ResourceManager.UpgradeIndex.Damage3).CurrentLevel;
         }
 
         // Speed1 - Speed3

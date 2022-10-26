@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static ResourceManager;
 
 public class FollowingEffect : MonoBehaviour
 {
     public GameObject following;
     public bool on = true;
+    public FollowingEffectIndex index;
 
     void Update()
     {

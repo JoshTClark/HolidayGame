@@ -22,7 +22,7 @@ public class FireworkWeapon : Weapon
 
             for (int i = 0; i < 3 + countAdd; i++)
             {
-                FireworkProjectile p = (FireworkProjectile)pool.Get();
+                FireworkProjectile p = (FireworkProjectile)ProjectileManager.GetProjectile(ResourceManager.ProjectileIndex.Firework);
                 p.transform.position = this.transform.position;
                 p.target = e;
                 DamageInfo info = new DamageInfo();

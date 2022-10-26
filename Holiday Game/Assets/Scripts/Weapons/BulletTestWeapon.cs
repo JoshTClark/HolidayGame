@@ -21,19 +21,19 @@ public class BulletTestWeapon : Weapon
             info.damage = baseDamageMultiplier * owner.Damage;
             info.attacker = owner;
 
-            ProjectileBase p1 = pool.Get();
+            ProjectileBase p1 = ProjectileManager.GetProjectile(ResourceManager.ProjectileIndex.EnemyProjectile);
             p1.transform.position = this.transform.position;
             p1.Direction = transform.right;
             p1.RotateDirection(15);
             p1.SetDamageInfo(info.CreateCopy());
 
-            ProjectileBase p2 = pool.Get();
+            ProjectileBase p2 = ProjectileManager.GetProjectile(ResourceManager.ProjectileIndex.EnemyProjectile);
             p2.transform.position = this.transform.position;
             p2.Direction = transform.right;
             p2.RotateDirection(-15);
             p2.SetDamageInfo(info.CreateCopy());
 
-            ProjectileBase p3 = pool.Get();
+            ProjectileBase p3 = ProjectileManager.GetProjectile(ResourceManager.ProjectileIndex.EnemyProjectile);
             p3.transform.position = this.transform.position;
             p3.Direction = transform.right;
             p3.RotateDirection(0);

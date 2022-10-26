@@ -12,6 +12,20 @@ public class ResourceManager
         BigBoy,
         Boss
     }
+    public enum ProjectileIndex
+    {
+        Snowball,
+        PumpkinBomb,
+        Firework,
+        EnemyProjectile,
+        Explosion
+    }
+    public enum FollowingEffectIndex
+    {
+        None,
+        Burning,
+        SnowballEffect
+    }
     public enum PickupIndex
     {
         XP1,
@@ -90,6 +104,7 @@ public class ResourceManager
     }
 
     public static List<Enemy> enemyPrefabs = new List<Enemy>();
+    public static List<ProjectileBase> projectilePrefabs = new List<ProjectileBase>();
     public static List<Weapon> weaponPrefabs = new List<Weapon>();
     public static List<Upgrade> upgradeDefinitions = new List<Upgrade>();
     public static List<SpawnPhase> phaseDefinitions = new List<SpawnPhase>();
@@ -97,6 +112,7 @@ public class ResourceManager
     public static List<XP> pickupPrefabs = new List<XP>();
     public static List<UpgradePool> upgradePools = new List<UpgradePool>();
     public static List<BuffDef> buffs = new List<BuffDef>();
+    public static List<FollowingEffect> effects = new List<FollowingEffect>();
     public static Player playerPrefab;
 
     public static bool isLoaded = false;
@@ -107,6 +123,7 @@ public class ResourceManager
     public static void Init()
     {
         LoadEnemies();
+        LoadProjectiles();
         LoadWeapons();
         LoadUpgrades();
         LoadPhases();
@@ -114,6 +131,7 @@ public class ResourceManager
         LoadPickups();
         LoadUpgradePools();
         LoadBuffs();
+        LoadEffects();
         LoadPlayableCharacters();
         isLoaded = true;
     }
@@ -124,6 +142,15 @@ public class ResourceManager
         foreach (Enemy i in arr)
         {
             enemyPrefabs.Add(i);
+        }
+    }
+
+    public static void LoadProjectiles()
+    {
+        ProjectileBase[] arr = Resources.LoadAll<ProjectileBase>("");
+        foreach (ProjectileBase i in arr)
+        {
+            projectilePrefabs.Add(i);
         }
     }
 
@@ -143,6 +170,15 @@ public class ResourceManager
         {
             upgradeDefinitions.Add(i);
             i.CurrentLevel = 1;
+        }
+    }
+
+    public static void LoadEffects()
+    {
+        FollowingEffect[] arr = Resources.LoadAll<FollowingEffect>("");
+        foreach (FollowingEffect i in arr)
+        {
+            effects.Add(i);
         }
     }
 
@@ -240,6 +276,32 @@ public class ResourceManager
             if (i.index == index)
             {
                 BuffDef b = GameObject.Instantiate<BuffDef>(i);
+                return b;
+            }
+        }
+        return null;
+    }
+
+    public static ProjectileBase GetProjectile(ResourceManager.ProjectileIndex index)
+    {
+        foreach (ProjectileBase i in projectilePrefabs)
+        {
+            if (i.index == index)
+            {
+                ProjectileBase b = GameObject.Instantiate<ProjectileBase>(i);
+                return b;
+            }
+        }
+        return null;
+    }
+
+    public static FollowingEffect GetEffect(ResourceManager.FollowingEffectIndex index)
+    {
+        foreach (FollowingEffect i in effects)
+        {
+            if (i.index == index)
+            {
+                FollowingEffect b = GameObject.Instantiate<FollowingEffect>(i);
                 return b;
             }
         }

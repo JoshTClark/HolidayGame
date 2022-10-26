@@ -62,7 +62,7 @@ public class SnowballWeapon : Weapon
             }
 
             // Making the projectile
-            ProjectileBase p = pool.Get();
+            ProjectileBase p = ProjectileManager.GetProjectile(ResourceManager.ProjectileIndex.Snowball);
             p.transform.position = this.transform.position;
             p.Direction = transform.right;
             DamageInfo info = new DamageInfo();

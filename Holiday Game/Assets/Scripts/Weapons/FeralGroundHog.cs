@@ -34,7 +34,7 @@ public class FeralGroundHog : Weapon
                 // speed upgrades
 
                 // Make the projectile
-                ProjectileBase p = (ProjectileBase)pool.Get();
+                ProjectileBase p = (ProjectileBase)ProjectileManager.GetProjectile(ResourceManager.ProjectileIndex.EnemyProjectile);
                 p.Direction = transform.right;
                 // Create damage info
                 DamageInfo info = new DamageInfo();

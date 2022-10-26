@@ -138,8 +138,9 @@ MonoBehaviour:
   baseArmor: 0
   baseRegen: 0
   baseRegenInterval: 5
-  baseCritChance: 0.01
+  baseCritChance: 0.05
   baseCritDamage: 2
+  knockbackMult: 0
   levelScaling: 0
   hpLevelUp: 0
   damageLevelUp: 0
@@ -222,7 +223,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.84, y: 3.6}
+    oldSize: {x: 2.56, y: 2.4}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

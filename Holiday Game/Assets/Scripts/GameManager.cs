@@ -237,11 +237,11 @@ public class GameManager : MonoBehaviour
             "Max HP: " + player.MaxHp +
             "\nSpeed: " + player.Speed +
             "\nDamage: " + player.Damage +
-            "\nAttack Speed:" + player.AttackSpeed +
+            "\nAttack Speed:" + player.AttackSpeed + "x" +
             "\nArmor: " + player.Armor +
             "\nRegen: " + player.Regen +
             "\nCrit Chance: " + (player.CritChance * 100) + "% " +
-            "\nCrit Damage: " + player.CritDamage +
+            "\nCrit Damage: " + player.CritDamage + "x" +
             "\nTime Alive " + minutes + ":" + seconds +
             "\nGame Difficulty: " + currentDifficulty.ToString();
     }

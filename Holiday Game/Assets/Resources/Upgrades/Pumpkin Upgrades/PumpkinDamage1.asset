@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PumpkinDamage1
   m_EditorClassIdentifier: 
   upgradeName: Pumkin Damage+
-  upgradeDescription: Explosion damage increased by 50%
+  upgradeDescription: Explosion damage increased by 30%
   index: 37
   tier: 1
   CanTakeMultiple: 1

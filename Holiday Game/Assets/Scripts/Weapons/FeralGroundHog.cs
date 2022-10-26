@@ -9,11 +9,6 @@ public class FeralGroundHog : Weapon
         // Check to see if you can fire
         if (canFire)
         {
-            // Create the projectile
-            //Projectile p = instantiate 
-
-
-
             // Launched towards closest enemy
             Enemy e = GetClosestEnemy();
             if (e)
@@ -39,12 +34,13 @@ public class FeralGroundHog : Weapon
                 // speed upgrades
 
                 // Make the projectile
-                ProjectileBase p = Instantiate<ProjectileBase>(projectile, transform.position, Quaternion.identity);
+                ProjectileBase p = (ProjectileBase)pool.Get();
                 p.Direction = transform.right;
                 // Create damage info
                 DamageInfo info = new DamageInfo();
                 info.damage = baseDamageMultiplier * owner.Damage;
                 info.attacker = owner;
+                info.debuffs.Add(ResourceManager.BuffIndex.Stunned);
                 p.SetDamageInfo(info);
                 //p.SizeMultiplier = sizeMult;
                 //p.SpeedMultiplier = speedMult;

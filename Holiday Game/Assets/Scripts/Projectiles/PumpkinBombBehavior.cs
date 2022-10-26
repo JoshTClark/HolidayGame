@@ -35,7 +35,9 @@ public class PumpkinBombBehavior : BombProjectileBase
         {
             for (int i = 0; i < 4; i++)
             {
-                PumpkinBombBehavior p = Instantiate(selfPrefab, this.transform.position, this.transform.rotation);
+                PumpkinBombBehavior p = (PumpkinBombBehavior)pool.Get();
+                p.transform.position = this.transform.position;
+                p.pool = pool;
                 p.isCluster = true;
                 p.Speed = clusterSpeed;
                 p.Direction = p.transform.right;
@@ -83,8 +85,10 @@ public class PumpkinBombBehavior : BombProjectileBase
     public override void OnClean()
     {
         Rigidbody2D body = this.gameObject.GetComponent<Rigidbody2D>();
+        explosionSizeMultiplier = 1f;
         body.angularVelocity = 0;
         body.velocity = Vector2.zero;
+        this.isCluster = false;
         this.gameObject.SetActive(true);
     }
 }

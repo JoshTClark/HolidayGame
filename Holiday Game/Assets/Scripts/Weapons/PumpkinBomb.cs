@@ -56,15 +56,15 @@ public class PumpkinBomb : Weapon
             // Damage
             if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.PumpkinDamage1))
             {
-                p.DamageMultiplier += 0.5f * (GameManager.instance.Player.GetUpgrade(ResourceManager.UpgradeIndex.PumpkinDamage1).CurrentLevel);
+                p.DamageMultiplier += 0.3f * (GameManager.instance.Player.GetUpgrade(ResourceManager.UpgradeIndex.PumpkinDamage1).CurrentLevel);
             }
             if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.PumpkinDamage2))
             {
-                p.DamageMultiplier += 1f * (GameManager.instance.Player.GetUpgrade(ResourceManager.UpgradeIndex.PumpkinDamage2).CurrentLevel);
+                p.DamageMultiplier += 0.6f * (GameManager.instance.Player.GetUpgrade(ResourceManager.UpgradeIndex.PumpkinDamage2).CurrentLevel);
             }
             if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.PumpkinDamage3))
             {
-                p.DamageMultiplier += 1.5f * (GameManager.instance.Player.GetUpgrade(ResourceManager.UpgradeIndex.PumpkinDamage3).CurrentLevel);
+                p.DamageMultiplier += 1f * (GameManager.instance.Player.GetUpgrade(ResourceManager.UpgradeIndex.PumpkinDamage3).CurrentLevel);
             }
 
             ResetTimer();

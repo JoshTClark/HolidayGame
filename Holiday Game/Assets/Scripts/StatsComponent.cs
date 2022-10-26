@@ -105,7 +105,11 @@ public abstract class StatsComponent : MonoBehaviour
 
         currentHP = MaxHp;
         xpAmount = 0;
-        level = 1;
+        if (!this.gameObject.GetComponent<Enemy>())
+        {
+            level = 1;
+        }
+
 
         sr = gameObject.GetComponent<SpriteRenderer>();
         ogColor = sr.color;
@@ -221,11 +225,14 @@ public abstract class StatsComponent : MonoBehaviour
     //Checks to see if leveled up since last tick
     public void CalculateLevel()
     {
-        float expToLevelUp = GetXpToNextLevel();
-        if (XP > expToLevelUp)
+        if (!this.gameObject.GetComponent<Enemy>())
         {
-            level++;
-            OnLevelUp();
+            float expToLevelUp = GetXpToNextLevel();
+            if (XP > expToLevelUp)
+            {
+                level++;
+                OnLevelUp();
+            }
         }
     }
 
@@ -253,7 +260,7 @@ public abstract class StatsComponent : MonoBehaviour
 
         if (this.gameObject.GetComponent<Enemy>())
         {
-            if (info.radialKnockback) 
+            if (info.radialKnockback)
             {
                 Vector2 knockbackDirection = (info.damagePos - (Vector2)this.gameObject.transform.position).normalized;
                 this.gameObject.GetComponent<Enemy>().AddKnockback(knockbackDirection * info.knockback * knockbackMult);
@@ -523,41 +530,41 @@ public abstract class StatsComponent : MonoBehaviour
         // Crit Chance
         if (HasUpgrade(ResourceManager.UpgradeIndex.CritChance1))
         {
-            critChanceAdd += 0.05f * GetUpgrade(ResourceManager.UpgradeIndex.CritChance1).CurrentLevel;
+            critChanceAdd += 0.025f * GetUpgrade(ResourceManager.UpgradeIndex.CritChance1).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.CritChance2))
         {
-            critChanceAdd += 0.1f * GetUpgrade(ResourceManager.UpgradeIndex.CritChance2).CurrentLevel;
+            critChanceAdd += 0.05f * GetUpgrade(ResourceManager.UpgradeIndex.CritChance2).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.CritChance3))
         {
-            critChanceAdd += 0.15f * GetUpgrade(ResourceManager.UpgradeIndex.CritChance3).CurrentLevel;
+            critChanceAdd += 0.075f * GetUpgrade(ResourceManager.UpgradeIndex.CritChance3).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.CritChance4))
         {
-            critChanceAdd += 0.2f * GetUpgrade(ResourceManager.UpgradeIndex.CritChance4).CurrentLevel;
+            critChanceAdd += 0.1f * GetUpgrade(ResourceManager.UpgradeIndex.CritChance4).CurrentLevel;
         }
 
         // Crit Damage
         if (HasUpgrade(ResourceManager.UpgradeIndex.CritDamage1))
         {
-            critDamageAdd += 0.25f * GetUpgrade(ResourceManager.UpgradeIndex.CritDamage1).CurrentLevel;
+            critDamageAdd += 0.05f * GetUpgrade(ResourceManager.UpgradeIndex.CritDamage1).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.CritDamage2))
         {
-            critDamageAdd += 0.5f * GetUpgrade(ResourceManager.UpgradeIndex.CritDamage2).CurrentLevel;
+            critDamageAdd += 0.1f * GetUpgrade(ResourceManager.UpgradeIndex.CritDamage2).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.CritDamage3))
         {
-            critDamageAdd += 0.75f * GetUpgrade(ResourceManager.UpgradeIndex.CritDamage3).CurrentLevel;
+            critDamageAdd += 0.2f * GetUpgrade(ResourceManager.UpgradeIndex.CritDamage3).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.CritDamage4))
         {
-            critDamageAdd += 1.5f * GetUpgrade(ResourceManager.UpgradeIndex.CritDamage4).CurrentLevel;
+            critDamageAdd += 0.3f * GetUpgrade(ResourceManager.UpgradeIndex.CritDamage4).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.CritDamage5))
         {
-            critDamageAdd += 2.5f * GetUpgrade(ResourceManager.UpgradeIndex.CritDamage5).CurrentLevel;
+            critDamageAdd += 0.5f * GetUpgrade(ResourceManager.UpgradeIndex.CritDamage5).CurrentLevel;
         }
     }
 

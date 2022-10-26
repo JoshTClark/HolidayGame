@@ -72,6 +72,50 @@ public abstract class Weapon : MonoBehaviour
         }
     }
 
+    protected List<Enemy> GetClosestEnemies(int num)
+    {
+        List<Enemy> enemies = EnemyManager.instance.CurrentEnemies;
+        List<Enemy> targetList = new List<Enemy>();
+
+        float closestDist = 9999999;
+        if (enemies.Count > 0)
+        {
+            float distance = GameManager.instance.Player.attackActivationRange;
+            Enemy closest = null;
+            foreach (Enemy e in enemies)
+            {
+                float newDistance = e.PlayerDistance();
+                if (newDistance < distance)
+                {
+                    closest = e;
+                    distance = newDistance;
+                    closestDist = newDistance;
+                }
+            }
+            targetList.Add(closest);
+            for (int i = 1; i < num; i++)
+            {
+                distance = GameManager.instance.Player.attackActivationRange;
+                foreach (Enemy e in enemies)
+                {
+                    float newDistance = e.PlayerDistance();
+                    if (newDistance < distance && newDistance > closestDist)
+                    {
+                        closest = e;
+                        distance = newDistance;
+                    }
+                }
+                targetList.Add(closest);
+                closestDist = targetList[i].PlayerDistance();
+            }
+            return targetList;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     protected Enemy GetRandomEnemy()
     {
         List<Enemy> enemies = EnemyManager.instance.CurrentEnemies;

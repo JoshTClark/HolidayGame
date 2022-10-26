@@ -141,4 +141,5 @@ MonoBehaviour:
   basePierce: 0
   baseSize: 1
   projectileTeam: 0
+  weapon: {fileID: 0}
   effects: {fileID: 6125135307708369886, guid: 74cffb353dcc8cf4398ce4e54d8ca1a2, type: 3}

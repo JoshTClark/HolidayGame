@@ -9,7 +9,7 @@ public class FollowingEffect : MonoBehaviour
 
     void Update()
     {
-        if (following && on)
+        if (following && following.activeSelf && on)
         {
             this.gameObject.transform.position = following.transform.position;
             this.gameObject.transform.localScale = following.transform.localScale;
@@ -20,20 +20,28 @@ public class FollowingEffect : MonoBehaviour
             bool done = true;
             foreach (ParticleSystem s in systems)
             {
-                if (s)
+                if (s.particleCount > 0)
                 {
                     done = false;
                     s.Stop(true, ParticleSystemStopBehavior.StopEmitting);
-                    if (s.particleCount == 0)
-                    {
-                        Destroy(s);
-                    }
                 }
             }
             if (done)
             {
+                on = false;
                 Destroy(this.gameObject);
             }
+        }
+    }
+
+    public void Activate(bool isActive)
+    {
+        //Debug.Log("Activating effect");
+        on = isActive;
+        ParticleSystem[] systems = this.GetComponents<ParticleSystem>();
+        foreach (ParticleSystem s in systems)
+        {
+            s.Play();
         }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public abstract class ProjectileBase : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public abstract class ProjectileBase : MonoBehaviour
     private float sizeMultiplier = 1f;
     private float speedMultiplier = 1f;
     private float damageMultiplier = 1f;
+    private float knockbackMultiplier = 1f;
+    private float lifetimeMultiplier = 1f;
 
     [SerializeField]
     public Team projectileTeam;
@@ -19,17 +22,22 @@ public abstract class ProjectileBase : MonoBehaviour
     private List<StatsComponent> hitTargets = new List<StatsComponent>();
     private Vector2 direction = new Vector2();
 
+    public static ObjectPool<ProjectileBase> emptyPool = new ObjectPool<ProjectileBase>(createFunc: () => CreateEmptyProjectile().GetComponent<ProjectileBase>(), actionOnGet: (obj) => obj.Clean(null), actionOnRelease: (obj) => obj.gameObject.SetActive(false), actionOnDestroy: (obj) => Destroy(obj.gameObject), collectionCheck: false, defaultCapacity: 50);
+
     public Vector2 Direction { get { return direction; } set { direction = value; } }
     public float Speed { get { return baseSpeed * speedMultiplier; } set { baseSpeed = value; } }
-    public float Lifetime { get { return baseLifetime; } set { baseLifetime = value; } }
+    public float Lifetime { get { return baseLifetime * LifetimeMultiplier; } set { baseLifetime = value; } }
     public float Pierce { get { return basePierce; } set { basePierce = value; } }
     public float TimeAlive { get { return timeAlive; } set { timeAlive = value; } }
     public float DamageMultiplier { get { return damageMultiplier; } set { damageMultiplier = value; } }
     public float Size { get { return baseSize * sizeMultiplier; } set { baseSize = value; } }
     public float SizeMultiplier { get { return sizeMultiplier; } set { sizeMultiplier = value; } }
     public float SpeedMultiplier { get { return speedMultiplier; } set { speedMultiplier = value; } }
+    public float LifetimeMultiplier { get { return lifetimeMultiplier; } set { lifetimeMultiplier = value; } }
 
     protected DamageInfo damageInfo;
+
+    public ObjectPool<ProjectileBase> pool;
 
 
     // Decides what the projectile can damage
@@ -78,7 +86,7 @@ public abstract class ProjectileBase : MonoBehaviour
     private void DestroyProjectile()
     {
         OnDeath();
-        Destroy(this.gameObject);
+        pool.Release(this);
     }
 
     // Handles the projectiles collision
@@ -91,6 +99,7 @@ public abstract class ProjectileBase : MonoBehaviour
             if (other.gameObject.GetComponent<Enemy>())
             {
                 StatsComponent receiver = other.gameObject.GetComponent<StatsComponent>();
+                OnCollision(other);
                 if (!hitTargets.Contains(receiver))
                 {
                     if (this.GetType() == typeof(BombProjectileBase))
@@ -100,8 +109,10 @@ public abstract class ProjectileBase : MonoBehaviour
                             DestroyProjectile();
                         }
                     }
-                    Hit(receiver);
+                    this.damageInfo.damagePos = this.gameObject.transform.position;
                     this.damageInfo.receiver = receiver;
+                    this.damageInfo.knockback *= knockbackMultiplier;
+                    Hit(receiver);
                     hitTargets.Add(receiver);
                     if (Pierce > 0 && usedPierce < Pierce)
                     {
@@ -111,7 +122,6 @@ public abstract class ProjectileBase : MonoBehaviour
                     {
                         DestroyProjectile();
                     }
-                    OnCollision();
                 }
             }
         }
@@ -122,9 +132,10 @@ public abstract class ProjectileBase : MonoBehaviour
             {
                 StatsComponent receiver = other.gameObject.GetComponent<StatsComponent>();
                 this.damageInfo.receiver = receiver;
+                this.damageInfo.knockback *= knockbackMultiplier;
                 Hit(receiver);
                 DestroyProjectile();
-                OnCollision();
+                OnCollision(other);
             }
         }
 
@@ -132,7 +143,7 @@ public abstract class ProjectileBase : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
             DestroyProjectile();
-            OnCollision();
+            OnCollision(other);
         }
     }
 
@@ -155,8 +166,11 @@ public abstract class ProjectileBase : MonoBehaviour
     {
         damageInfo = info;
     }
-
-    public static GameObject CreateEmptyProjectile()
+    public GameObject GetEmptyProjectile() 
+    {
+        return emptyPool.Get().gameObject;
+    }
+    private static GameObject CreateEmptyProjectile()
     {
         GameObject projectile = new GameObject("Explosion");
 
@@ -170,6 +184,30 @@ public abstract class ProjectileBase : MonoBehaviour
         projectile.AddComponent<EmptyProjectile>();
 
         return projectile;
+    }
+
+    public void Clean(Weapon w)
+    {
+        this.gameObject.SetActive(true);
+        damageInfo = new DamageInfo();
+        timeAlive = 0.0f;
+        usedPierce = 0f;
+        hitTargets = new List<StatsComponent>();
+        direction = new Vector2();
+        sizeMultiplier = 1f;
+        speedMultiplier = 1f;
+        damageMultiplier = 1f;
+        knockbackMultiplier = 1f;
+        lifetimeMultiplier = 1f;
+        if (w)
+        {
+            this.pool = w.pool;
+        }
+        else
+        {
+            this.pool = emptyPool;
+        }
+        OnClean();
     }
 
     /// <summary>
@@ -195,5 +233,7 @@ public abstract class ProjectileBase : MonoBehaviour
     /// <summary>
     /// Any special behavior for when the projectile collides with something goes here
     /// </summary>
-    public abstract void OnCollision();
+    public abstract void OnCollision(Collider2D other);
+
+    public abstract void OnClean();
 }

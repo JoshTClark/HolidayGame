@@ -23,7 +23,7 @@ public class FireworkProjectile : BombProjectileBase
         body.velocity = transform.right * Speed;
     }
 
-    public override void OnCollision()
+    public override void OnCollision(Collider2D other)
     {
     }
 
@@ -41,5 +41,10 @@ public class FireworkProjectile : BombProjectileBase
             homing = true;
         }
         SpeedMultiplier += 1f * delta;
+    }
+
+    public override void OnClean()
+    {
+        this.gameObject.SetActive(true);
     }
 }

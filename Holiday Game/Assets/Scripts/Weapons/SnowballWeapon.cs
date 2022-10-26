@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class SnowballWeapon : Weapon
-{
+{ 
     public override void OnUpdate()
     {
         float delta = Time.deltaTime;
@@ -61,11 +62,13 @@ public class SnowballWeapon : Weapon
             }
 
             // Making the projectile
-            ProjectileBase p = Instantiate<ProjectileBase>(projectile, transform.position, Quaternion.identity);
+            ProjectileBase p = pool.Get();
+            p.transform.position = this.transform.position;
             p.Direction = transform.right;
             DamageInfo info = new DamageInfo();
             info.damage = damageMult * owner.Damage;
             info.attacker = owner;
+            info.knockbackDirection = p.Direction;
             p.SetDamageInfo(info);
             p.Pierce += pierceAdd;
             p.SizeMultiplier = sizeMult;

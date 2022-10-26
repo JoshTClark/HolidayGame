@@ -9,7 +9,7 @@ public abstract class StatsComponent : MonoBehaviour
     // They shouldn't be changed during runtime and should be set in the inspector
     // If you add a new stat you shuld also add an add and mult variable and a property for the base and true values
     [SerializeField]
-    private float baseMaxHP, baseSpeed, baseDamage, baseAttackSpeed, baseArmor, baseRegen, baseRegenInterval, baseCritChance, baseCritDamage;
+    private float baseMaxHP, baseSpeed, baseDamage, baseAttackSpeed, baseArmor, baseRegen, baseRegenInterval, baseCritChance, baseCritDamage, knockbackMult;
 
     // Level up stuff
     [SerializeField]
@@ -45,7 +45,7 @@ public abstract class StatsComponent : MonoBehaviour
     // Debuffs and Buffs
     public List<BuffDef> buffs;
 
-    SpriteRenderer sr;
+    protected SpriteRenderer sr;
     Color ogColor;
     bool damaged;
     float fadeTimer;
@@ -251,6 +251,19 @@ public abstract class StatsComponent : MonoBehaviour
             info.damage *= damageReduction;
         }
 
+        if (this.gameObject.GetComponent<Enemy>())
+        {
+            if (info.radialKnockback) 
+            {
+                Vector2 knockbackDirection = (info.damagePos - (Vector2)this.gameObject.transform.position).normalized;
+                this.gameObject.GetComponent<Enemy>().AddKnockback(knockbackDirection * info.knockback * knockbackMult);
+            }
+            else
+            {
+                this.gameObject.GetComponent<Enemy>().AddKnockback(info.knockbackDirection * info.knockback * knockbackMult);
+            }
+        }
+
         foreach (ResourceManager.BuffIndex i in info.debuffs)
         {
             BuffDef def = ResourceManager.GetBuffDef(i);
@@ -286,7 +299,7 @@ public abstract class StatsComponent : MonoBehaviour
     public void AddXP(float amount)
     {
         float increase = 1f;
-        if (HasUpgrade(ResourceManager.UpgradeIndex.XP1)) 
+        if (HasUpgrade(ResourceManager.UpgradeIndex.XP1))
         {
             increase += 0.05f * GetUpgrade(ResourceManager.UpgradeIndex.XP1).CurrentLevel;
         }
@@ -379,6 +392,18 @@ public abstract class StatsComponent : MonoBehaviour
         currentHP += amount;
         currentHP = Mathf.Clamp(currentHP, 0, MaxHp);
         GameManager.instance.DisplayHealing(amount, this);
+    }
+
+    public bool HasBuff(ResourceManager.BuffIndex index)
+    {
+        foreach (Buff b in this.gameObject.GetComponents<Buff>())
+        {
+            if (b.index == index)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public abstract void OnUpdate();

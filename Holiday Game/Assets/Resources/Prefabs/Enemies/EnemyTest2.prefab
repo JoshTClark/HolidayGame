@@ -142,8 +142,10 @@ MonoBehaviour:
   baseAttackSpeed: 1
   baseArmor: 0
   baseRegen: 0
+  baseRegenInterval: 0
   baseCritChance: 0
   baseCritDamage: 0
+  knockbackMult: 1
   levelScaling: 1
   hpLevelUp: 7
   damageLevelUp: 0
@@ -165,6 +167,11 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   isDead: 0
+  weapons: []
+  inventory: []
+  buffs: []
+  fadeTotalTime: 0
   player: {fileID: 0}
   index: 2
+  isBoss: 0
   XPType: 1

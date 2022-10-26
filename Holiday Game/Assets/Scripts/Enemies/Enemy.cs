@@ -7,8 +7,10 @@ public abstract class Enemy : StatsComponent
     public Player player;
 
     public ResourceManager.EnemyIndex index;
+    public bool isBoss;
 
     protected List<Vector2> movements = new List<Vector2>();
+    protected List<Vector2> knockback = new List<Vector2>();
 
     /// <summary>
     /// Minimum distance between enemy & player
@@ -78,16 +80,26 @@ public abstract class Enemy : StatsComponent
         // Then take Velocity normalize it so it's a heading vector
         // scale that by speed, then apply movement
         Vector2 velocity = Vector2.zero;
-        if(movements.Count > 0)
+        if (movements.Count > 0)
         {
             foreach (Vector2 v in movements)
             {
                 velocity += v;
             }
         }
+        Vector2 knockbackAmount = Vector2.zero;
+        if (knockback.Count > 0)
+        {
+            foreach (Vector2 v in knockback)
+            {
+                knockbackAmount += v;
+            }
+        }
 
-        GetComponent<Rigidbody2D>().velocity = velocity.normalized*Speed;
+        GetComponent<Rigidbody2D>().velocity = (velocity.normalized * Speed);
+        GetComponent<Rigidbody2D>().position = GetComponent<Rigidbody2D>().position + (knockbackAmount);
         movements.Clear();
+        knockback.Clear();
     }
 
     /// <summary>
@@ -159,11 +171,11 @@ public abstract class Enemy : StatsComponent
         Vector2 currentVelocity = Vector2.zero;
 
         // Loop through all enemies
-        foreach(Enemy e in EnemyManager.instance.CurrentEnemies)
+        foreach (Enemy e in EnemyManager.instance.CurrentEnemies)
         {
             currentVelocity = Vector2.zero;
             float sqrDistance = Vector2.SqrMagnitude(transform.position - e.transform.position);
-            if(sqrDistance <= Mathf.Epsilon)
+            if (sqrDistance <= Mathf.Epsilon)
             {
                 continue;
             }
@@ -174,5 +186,10 @@ public abstract class Enemy : StatsComponent
             desiredVelocity = currentVelocity * (1f / sqrDistance);
         }
         return desiredVelocity.normalized;
+    }
+
+    public void AddKnockback(Vector2 vec)
+    {
+        knockback.Add(vec);
     }
 }

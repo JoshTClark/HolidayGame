@@ -24,7 +24,7 @@ public class PumpkinBombBehavior : BombProjectileBase
         GetComponent<Rigidbody2D>().velocity = Direction * Speed;
     }
 
-    public override void OnCollision()
+    public override void OnCollision(Collider2D other)
     {
         // Nothing special
     }
@@ -78,5 +78,13 @@ public class PumpkinBombBehavior : BombProjectileBase
         {
             body.angularVelocity = 0;
         }
+    }
+
+    public override void OnClean()
+    {
+        Rigidbody2D body = this.gameObject.GetComponent<Rigidbody2D>();
+        body.angularVelocity = 0;
+        body.velocity = Vector2.zero;
+        this.gameObject.SetActive(true);
     }
 }

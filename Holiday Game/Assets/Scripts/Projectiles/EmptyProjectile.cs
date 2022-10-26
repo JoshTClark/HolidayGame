@@ -8,7 +8,7 @@ public class EmptyProjectile : ProjectileBase
     {
     }
 
-    public override void OnCollision()
+    public override void OnCollision(Collider2D other)
     {
     }
 
@@ -22,5 +22,10 @@ public class EmptyProjectile : ProjectileBase
 
     public override void OnUpdate()
     {
+    }
+
+    public override void OnClean()
+    {
+        this.gameObject.SetActive(true);
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class PumpkinBomb : Weapon
 {
@@ -10,7 +11,8 @@ public class PumpkinBomb : Weapon
 
         if (canFire)
         {
-            BombProjectileBase p = Instantiate<BombProjectileBase>((BombProjectileBase)projectile, transform.position, Quaternion.identity);
+            BombProjectileBase p = (BombProjectileBase)pool.Get();
+            p.transform.position = this.transform.position;
             p.Direction = Vector2.zero;
             DamageInfo info = new DamageInfo();
             info.damage = baseDamageMultiplier * owner.Damage;
@@ -34,7 +36,7 @@ public class PumpkinBomb : Weapon
                 float torque = Random.Range(-500f, 500f);
                 p.gameObject.GetComponent<Rigidbody2D>().AddTorque(torque);
                 p.gameObject.GetComponent<Rigidbody2D>().angularDrag = 1.75f;
-                p.Lifetime = p.Lifetime * 0.8f;
+                p.LifetimeMultiplier = 0.8f;
             }
 
             // Explosion size boost

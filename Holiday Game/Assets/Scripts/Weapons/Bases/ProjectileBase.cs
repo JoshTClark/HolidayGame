@@ -189,6 +189,7 @@ public abstract class ProjectileBase : MonoBehaviour
     public void Clean(Weapon w)
     {
         this.gameObject.SetActive(true);
+        this.transform.rotation = Quaternion.identity;
         damageInfo = new DamageInfo();
         timeAlive = 0.0f;
         usedPierce = 0f;

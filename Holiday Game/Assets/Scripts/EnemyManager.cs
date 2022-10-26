@@ -17,6 +17,8 @@ public class EnemyManager : MonoBehaviour
 
     private List<Enemy> currentEnemies = new List<Enemy>();
 
+    private List<BurstSpawn> spawnedBursts = new List<BurstSpawn>();
+
     public static EnemyManager instance;
 
     public List<Enemy> CurrentEnemies
@@ -44,6 +46,8 @@ public class EnemyManager : MonoBehaviour
                 SpawnEnemiesByPhase();
                 spawnTimer = 0;
             }
+
+            CheckBurstSpawns();
 
             RemoveDeadEnemies();
 
@@ -146,11 +150,30 @@ public class EnemyManager : MonoBehaviour
     /// </summary>
     public void Reset()
     {
-        for(int i = currentEnemies.Count-1; i >= 0; i--)
+        for (int i = currentEnemies.Count - 1; i >= 0; i--)
         {
             Destroy(currentEnemies[i].gameObject);
         }
         currentEnemies.Clear();
         phases = ResourceManager.phaseDefinitions;
+        spawnedBursts.Clear();
+    }
+
+    public void CheckBurstSpawns()
+    {
+        foreach (BurstSpawn i in ResourceManager.spawnDefinitions)
+        {
+            if (GameManager.instance.GameTime >= i.startTime && !spawnedBursts.Contains(i))
+            {
+                spawnedBursts.Add(i);
+                foreach (BurstSpawn.SpawnData s in i.enemies)
+                {
+                    for (int num = 0; num < s.count; num++)
+                    {
+                        SpawnEnemy(s.index);
+                    }
+                }
+            }
+        }
     }
 }

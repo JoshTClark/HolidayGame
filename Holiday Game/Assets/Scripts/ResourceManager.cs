@@ -23,7 +23,6 @@ public class ResourceManager
         PumpkinBomb,
         Test,
         Fireworks,
-        PumpkinCluster,
         Count
     }
     public enum UpgradeIndex
@@ -94,6 +93,7 @@ public class ResourceManager
     public static List<Weapon> weaponPrefabs = new List<Weapon>();
     public static List<Upgrade> upgradeDefinitions = new List<Upgrade>();
     public static List<SpawnPhase> phaseDefinitions = new List<SpawnPhase>();
+    public static List<BurstSpawn> spawnDefinitions = new List<BurstSpawn>();
     public static List<XP> pickupPrefabs = new List<XP>();
     public static List<UpgradePool> upgradePools = new List<UpgradePool>();
     public static List<BuffDef> buffs = new List<BuffDef>();
@@ -110,6 +110,7 @@ public class ResourceManager
         LoadWeapons();
         LoadUpgrades();
         LoadPhases();
+        LoadSpawns();
         LoadPickups();
         LoadUpgradePools();
         LoadBuffs();
@@ -151,6 +152,14 @@ public class ResourceManager
         foreach (SpawnPhase i in arr)
         {
             phaseDefinitions.Add(i);
+        }
+    }
+    public static void LoadSpawns()
+    {
+        BurstSpawn[] arr = Resources.LoadAll<BurstSpawn>("");
+        foreach (BurstSpawn i in arr)
+        {
+            spawnDefinitions.Add(i);
         }
     }
 

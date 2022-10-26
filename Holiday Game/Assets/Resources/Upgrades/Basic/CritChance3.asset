@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CritChance3
   m_EditorClassIdentifier: 
   upgradeName: Critical Chance X
-  upgradeDescription: 9% increased critical strike chance
+  upgradeDescription: 7.5% increased critical strike chance
   index: 35
   tier: 3
   CanTakeMultiple: 1

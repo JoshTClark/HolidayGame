@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delay: 0
   projectile: {fileID: 0}
-  index: 0
+  index: 4
   icon: {fileID: 2069981722, guid: 21c8b8240c0ad1246a03ebe0c914ceb4, type: 3}
   timer: 0
   owner: {fileID: 0}

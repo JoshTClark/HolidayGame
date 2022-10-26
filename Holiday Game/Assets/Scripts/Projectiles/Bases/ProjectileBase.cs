@@ -5,6 +5,8 @@ using UnityEngine.Pool;
 
 public abstract class ProjectileBase : MonoBehaviour
 {
+    public ResourceManager.ProjectileIndex index;
+
     [SerializeField]
     private float baseSpeed, baseLifetime, basePierce, baseSize;
 
@@ -21,8 +23,6 @@ public abstract class ProjectileBase : MonoBehaviour
     private float usedPierce = 0f;
     private List<StatsComponent> hitTargets = new List<StatsComponent>();
     private Vector2 direction = new Vector2();
-
-    public static ObjectPool<ProjectileBase> emptyPool = new ObjectPool<ProjectileBase>(createFunc: () => CreateEmptyProjectile().GetComponent<ProjectileBase>(), actionOnGet: (obj) => obj.Clean(null), actionOnRelease: (obj) => obj.gameObject.SetActive(false), actionOnDestroy: (obj) => Destroy(obj.gameObject), collectionCheck: false, defaultCapacity: 50);
 
     public Vector2 Direction { get { return direction; } set { direction = value; } }
     public float Speed { get { return baseSpeed * speedMultiplier; } set { baseSpeed = value; } }
@@ -166,29 +166,11 @@ public abstract class ProjectileBase : MonoBehaviour
     {
         damageInfo = info;
     }
-    public GameObject GetEmptyProjectile() 
-    {
-        return emptyPool.Get().gameObject;
-    }
-    private static GameObject CreateEmptyProjectile()
-    {
-        GameObject projectile = new GameObject("Explosion");
 
-        CircleCollider2D collider = projectile.AddComponent<CircleCollider2D>();
-        collider.radius = 1f;
-        collider.isTrigger = true;
-
-        Rigidbody2D body = projectile.AddComponent<Rigidbody2D>();
-        body.bodyType = RigidbodyType2D.Dynamic;
-
-        projectile.AddComponent<EmptyProjectile>();
-
-        return projectile;
-    }
-
-    public void Clean(Weapon w)
+    public void Clean(ObjectPool<ProjectileBase> pool)
     {
         this.gameObject.SetActive(true);
+        //this.transform.rotation = Quaternion.identity;
         damageInfo = new DamageInfo();
         timeAlive = 0.0f;
         usedPierce = 0f;
@@ -199,14 +181,7 @@ public abstract class ProjectileBase : MonoBehaviour
         damageMultiplier = 1f;
         knockbackMultiplier = 1f;
         lifetimeMultiplier = 1f;
-        if (w)
-        {
-            this.pool = w.pool;
-        }
-        else
-        {
-            this.pool = emptyPool;
-        }
+        this.pool = pool;
         OnClean();
     }
 

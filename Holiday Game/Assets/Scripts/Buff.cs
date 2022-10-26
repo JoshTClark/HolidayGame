@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static ResourceManager;
 
 public class Buff : MonoBehaviour
 {
@@ -12,15 +13,9 @@ public class Buff : MonoBehaviour
     public DamageInfo infoTemplate;
     private float durationTimer = 0.0f;
     private float tickTimer = 0.0f;
-    private FollowingEffect effect;
 
     private void Start()
     {
-        if (ResourceManager.GetBuffDef(index).effect)
-        {
-            effect = GameObject.Instantiate<FollowingEffect>(ResourceManager.GetBuffDef(index).effect);
-            effect.following = afflicting.gameObject;
-        }
     }
 
     // Update is called once per frame
@@ -28,7 +23,6 @@ public class Buff : MonoBehaviour
     {
         if (!active) 
         {
-            effect.on = false;
             Destroy(this);
         }
 

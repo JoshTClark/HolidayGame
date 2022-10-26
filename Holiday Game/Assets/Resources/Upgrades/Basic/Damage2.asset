@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Damage2
   m_EditorClassIdentifier: 
   upgradeName: Damage++
-  upgradeDescription: Increases Damage by 4 points
+  upgradeDescription: Increases base damage by 10%
   index: 4
   tier: 1
   CanTakeMultiple: 1

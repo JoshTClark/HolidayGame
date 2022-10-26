@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CritDamage1 1
   m_EditorClassIdentifier: 
   upgradeName: Critical Damage +
-  upgradeDescription: 25% more damage on critical strikes
+  upgradeDescription: 5% more damage on critical strikes
   index: 28
   tier: 0
   CanTakeMultiple: 1

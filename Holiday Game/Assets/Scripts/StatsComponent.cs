@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static ResourceManager;
 
 public abstract class StatsComponent : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public abstract class StatsComponent : MonoBehaviour
     // They shouldn't be changed during runtime and should be set in the inspector
     // If you add a new stat you shuld also add an add and mult variable and a property for the base and true values
     [SerializeField]
-    private float baseMaxHP, baseSpeed, baseDamage, baseAttackSpeed, baseArmor, baseRegen, baseRegenInterval, baseCritChance, baseCritDamage;
+    private float baseMaxHP, baseSpeed, baseDamage, baseAttackSpeed, baseArmor, baseRegen, baseRegenInterval, baseCritChance, baseCritDamage, knockbackMult;
 
     // Level up stuff
     [SerializeField]
@@ -54,6 +55,8 @@ public abstract class StatsComponent : MonoBehaviour
 
     [SerializeField]
     float fadeTotalTime;
+
+    private List<FollowingEffect> followingEffects = new List<FollowingEffect>();
 
     // Used to get the base stats without changing them at all
     public float BaseMaxHp { get; }
@@ -105,7 +108,11 @@ public abstract class StatsComponent : MonoBehaviour
 
         currentHP = MaxHp;
         xpAmount = 0;
-        level = 1;
+        if (!this.gameObject.GetComponent<Enemy>())
+        {
+            level = 1;
+        }
+
 
         sr = gameObject.GetComponent<SpriteRenderer>();
         ogColor = sr.color;
@@ -155,6 +162,13 @@ public abstract class StatsComponent : MonoBehaviour
                 isDead = true;
             }
 
+            // Adding things for burning effects
+            if (HasBuff(ResourceManager.BuffIndex.Burning))
+            {
+
+            }
+
+            // Checking if dead
             if (IsDead)
             {
                 OnDeath();
@@ -221,11 +235,14 @@ public abstract class StatsComponent : MonoBehaviour
     //Checks to see if leveled up since last tick
     public void CalculateLevel()
     {
-        float expToLevelUp = GetXpToNextLevel();
-        if (XP > expToLevelUp)
+        if (!this.gameObject.GetComponent<Enemy>())
         {
-            level++;
-            OnLevelUp();
+            float expToLevelUp = GetXpToNextLevel();
+            if (XP > expToLevelUp)
+            {
+                level++;
+                OnLevelUp();
+            }
         }
     }
 
@@ -253,14 +270,14 @@ public abstract class StatsComponent : MonoBehaviour
 
         if (this.gameObject.GetComponent<Enemy>())
         {
-            if (info.radialKnockback) 
+            if (info.radialKnockback)
             {
                 Vector2 knockbackDirection = (info.damagePos - (Vector2)this.gameObject.transform.position).normalized;
-                this.gameObject.GetComponent<Enemy>().AddKnockback(knockbackDirection * info.knockback);
+                this.gameObject.GetComponent<Enemy>().AddKnockback(knockbackDirection * info.knockback * knockbackMult);
             }
             else
             {
-                this.gameObject.GetComponent<Enemy>().AddKnockback(info.knockbackDirection * info.knockback);
+                this.gameObject.GetComponent<Enemy>().AddKnockback(info.knockbackDirection * info.knockback * knockbackMult);
             }
         }
 
@@ -394,6 +411,18 @@ public abstract class StatsComponent : MonoBehaviour
         GameManager.instance.DisplayHealing(amount, this);
     }
 
+    public bool HasBuff(ResourceManager.BuffIndex index)
+    {
+        foreach (Buff b in this.gameObject.GetComponents<Buff>())
+        {
+            if (b.index == index)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public abstract void OnUpdate();
 
     public abstract void OnDeath();
@@ -449,15 +478,15 @@ public abstract class StatsComponent : MonoBehaviour
         // Damage1 - Damage3
         if (HasUpgrade(ResourceManager.UpgradeIndex.Damage1))
         {
-            damageAdd += 2 * GetUpgrade(ResourceManager.UpgradeIndex.Damage1).CurrentLevel;
+            damageAdd += (0.05f * baseDamage) * GetUpgrade(ResourceManager.UpgradeIndex.Damage1).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.Damage2))
         {
-            damageAdd += 4 * GetUpgrade(ResourceManager.UpgradeIndex.Damage2).CurrentLevel;
+            damageAdd += (0.1f * baseDamage) * GetUpgrade(ResourceManager.UpgradeIndex.Damage2).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.Damage3))
         {
-            damageAdd += 6 * GetUpgrade(ResourceManager.UpgradeIndex.Damage3).CurrentLevel;
+            damageAdd += (0.15f * baseDamage) * GetUpgrade(ResourceManager.UpgradeIndex.Damage3).CurrentLevel;
         }
 
         // Speed1 - Speed3
@@ -511,41 +540,41 @@ public abstract class StatsComponent : MonoBehaviour
         // Crit Chance
         if (HasUpgrade(ResourceManager.UpgradeIndex.CritChance1))
         {
-            critChanceAdd += 0.05f * GetUpgrade(ResourceManager.UpgradeIndex.CritChance1).CurrentLevel;
+            critChanceAdd += 0.025f * GetUpgrade(ResourceManager.UpgradeIndex.CritChance1).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.CritChance2))
         {
-            critChanceAdd += 0.1f * GetUpgrade(ResourceManager.UpgradeIndex.CritChance2).CurrentLevel;
+            critChanceAdd += 0.05f * GetUpgrade(ResourceManager.UpgradeIndex.CritChance2).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.CritChance3))
         {
-            critChanceAdd += 0.15f * GetUpgrade(ResourceManager.UpgradeIndex.CritChance3).CurrentLevel;
+            critChanceAdd += 0.075f * GetUpgrade(ResourceManager.UpgradeIndex.CritChance3).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.CritChance4))
         {
-            critChanceAdd += 0.2f * GetUpgrade(ResourceManager.UpgradeIndex.CritChance4).CurrentLevel;
+            critChanceAdd += 0.1f * GetUpgrade(ResourceManager.UpgradeIndex.CritChance4).CurrentLevel;
         }
 
         // Crit Damage
         if (HasUpgrade(ResourceManager.UpgradeIndex.CritDamage1))
         {
-            critDamageAdd += 0.25f * GetUpgrade(ResourceManager.UpgradeIndex.CritDamage1).CurrentLevel;
+            critDamageAdd += 0.05f * GetUpgrade(ResourceManager.UpgradeIndex.CritDamage1).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.CritDamage2))
         {
-            critDamageAdd += 0.5f * GetUpgrade(ResourceManager.UpgradeIndex.CritDamage2).CurrentLevel;
+            critDamageAdd += 0.1f * GetUpgrade(ResourceManager.UpgradeIndex.CritDamage2).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.CritDamage3))
         {
-            critDamageAdd += 0.75f * GetUpgrade(ResourceManager.UpgradeIndex.CritDamage3).CurrentLevel;
+            critDamageAdd += 0.2f * GetUpgrade(ResourceManager.UpgradeIndex.CritDamage3).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.CritDamage4))
         {
-            critDamageAdd += 1.5f * GetUpgrade(ResourceManager.UpgradeIndex.CritDamage4).CurrentLevel;
+            critDamageAdd += 0.3f * GetUpgrade(ResourceManager.UpgradeIndex.CritDamage4).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.CritDamage5))
         {
-            critDamageAdd += 2.5f * GetUpgrade(ResourceManager.UpgradeIndex.CritDamage5).CurrentLevel;
+            critDamageAdd += 0.5f * GetUpgrade(ResourceManager.UpgradeIndex.CritDamage5).CurrentLevel;
         }
     }
 

@@ -165,8 +165,8 @@ public class GameManager : MonoBehaviour
                         WeaponIcon newIcon = Instantiate(iconPrefab, iconPanel.transform);
                         newIcon.sprite = weapon.icon;
                         newIcon.weaponIndex = weapon.index;
-                        newIcon.GetComponent<RectTransform>().anchorMin = new Vector2(0.15f*weaponIcons.Count, newIcon.GetComponent<RectTransform>().anchorMin.y);
-                        newIcon.GetComponent<RectTransform>().anchorMax = new Vector2(0.15f * (weaponIcons.Count+1), newIcon.GetComponent<RectTransform>().anchorMax.y);
+                        newIcon.GetComponent<RectTransform>().anchorMin = new Vector2(0.15f * weaponIcons.Count, newIcon.GetComponent<RectTransform>().anchorMin.y);
+                        newIcon.GetComponent<RectTransform>().anchorMax = new Vector2(0.15f * (weaponIcons.Count + 1), newIcon.GetComponent<RectTransform>().anchorMax.y);
                         weaponIcons.Add(newIcon);
                     }
                 }
@@ -237,11 +237,11 @@ public class GameManager : MonoBehaviour
             "Max HP: " + player.MaxHp +
             "\nSpeed: " + player.Speed +
             "\nDamage: " + player.Damage +
-            "\nAttack Speed:" + player.AttackSpeed +
+            "\nAttack Speed:" + player.AttackSpeed + "x" +
             "\nArmor: " + player.Armor +
             "\nRegen: " + player.Regen +
             "\nCrit Chance: " + (player.CritChance * 100) + "% " +
-            "\nCrit Damage: " + player.CritDamage +
+            "\nCrit Damage: " + player.CritDamage + "x" +
             "\nTime Alive " + minutes + ":" + seconds +
             "\nGame Difficulty: " + currentDifficulty.ToString();
     }

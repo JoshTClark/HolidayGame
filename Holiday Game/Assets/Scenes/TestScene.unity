@@ -3412,7 +3412,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 71.3
+  m_fontSize: 71.25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -6022,7 +6022,7 @@ MonoBehaviour:
   effectsPanel: {fileID: 325452978}
   iconPanel: {fileID: 1940358571}
   debugPanel: {fileID: 1158868005}
-  timeToDifficultyIncrease: 30
+  timeToDifficultyIncrease: 24
   displayStats: {fileID: -3315458106627893903, guid: 46c5d35181ff19744bbe64637b663d10, type: 3}
   pauseGame: {fileID: -1963865644356622557, guid: 46c5d35181ff19744bbe64637b663d10, type: 3}
   giveXP: {fileID: 2895607889120616862, guid: 46c5d35181ff19744bbe64637b663d10, type: 3}

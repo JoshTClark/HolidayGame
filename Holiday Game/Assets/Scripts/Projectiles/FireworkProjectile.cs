@@ -46,5 +46,8 @@ public class FireworkProjectile : BombProjectileBase
     public override void OnClean()
     {
         this.gameObject.SetActive(true);
+        homing = false;
+        target = null;
+        timer = 0f;
     }
 }

@@ -29,7 +29,8 @@ public class ResourceManager
     public enum PickupIndex
     {
         XP1,
-        XP2
+        XP2,
+        HealthDrop1
     }
     public enum WeaponIndex
     {
@@ -109,7 +110,7 @@ public class ResourceManager
     public static List<Upgrade> upgradeDefinitions = new List<Upgrade>();
     public static List<SpawnPhase> phaseDefinitions = new List<SpawnPhase>();
     public static List<BurstSpawn> spawnDefinitions = new List<BurstSpawn>();
-    public static List<XP> pickupPrefabs = new List<XP>();
+    public static List<DropBase> pickupPrefabs = new List<DropBase>();
     public static List<UpgradePool> upgradePools = new List<UpgradePool>();
     public static List<BuffDef> buffs = new List<BuffDef>();
     public static List<FollowingEffect> effects = new List<FollowingEffect>();
@@ -201,8 +202,9 @@ public class ResourceManager
 
     public static void LoadPickups()
     {
-        XP[] arr = Resources.LoadAll<XP>("");
-        foreach (XP i in arr)
+        DropBase[] arr = Resources.LoadAll<DropBase>("");
+        
+        foreach (DropBase i in arr)
         {
             pickupPrefabs.Add(i);
         }

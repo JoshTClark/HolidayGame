@@ -25,6 +25,7 @@ public abstract class Enemy : StatsComponent
     //Which XP prefab this enemy will drop
     [SerializeField]
     public ResourceManager.PickupIndex XPType;
+    public ResourceManager.PickupIndex Drop;
 
     /// <summary>
     /// Moves the Enemy towards the player
@@ -121,7 +122,31 @@ public abstract class Enemy : StatsComponent
     public override void OnDeath()
     {
         //Drops XP
-        Instantiate<XP>(EnemyManager.instance.GetXPFromIndex(XPType), transform.position, Quaternion.identity);
+        Instantiate<DropBase>(EnemyManager.instance.GetDropFromIndex(XPType), transform.position, Quaternion.identity);
+
+        //Health Drop
+        int healthRandomizer = Random.Range(1, 100); //Randomize to get chance
+
+        if (index == ResourceManager.EnemyIndex.Test)
+        {
+            // Base enemies have 1% chance to drop
+            if (healthRandomizer == 1) Instantiate<DropBase>(EnemyManager.instance.GetDropFromIndex(Drop), transform.position, Quaternion.identity);
+        }
+        else if (index == ResourceManager.EnemyIndex.Test2)
+        {
+            // Shooter enemies have 5% chance to drop
+            if (healthRandomizer < 5) Instantiate<DropBase>(EnemyManager.instance.GetDropFromIndex(Drop), transform.position, Quaternion.identity);
+        }
+        else if (index == ResourceManager.EnemyIndex.Test2)
+        {
+            // Large enemies have 15% chance to drop
+            if (healthRandomizer < 15) Instantiate<DropBase>(EnemyManager.instance.GetDropFromIndex(Drop), transform.position, Quaternion.identity);
+        }
+        else if (index == ResourceManager.EnemyIndex.Test2)
+        {
+            // Boss enemies have 100% chance to drop
+            Instantiate<DropBase>(EnemyManager.instance.GetDropFromIndex(Drop), transform.position, Quaternion.identity);
+        }
     }
 
     virtual protected void OnTriggerStay2D(Collider2D collision)

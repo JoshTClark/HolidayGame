@@ -9,7 +9,7 @@ public class EnemyManager : MonoBehaviour
 
     private List<Enemy> enemyPrefabs;
     private List<SpawnPhase> phases;
-    private List<XP> pickupPrefabs;
+    private List<DropBase> pickupPrefabs;
 
     private float spawnTimer = 0;
 
@@ -117,9 +117,9 @@ public class EnemyManager : MonoBehaviour
         return null;
     }
 
-    public XP GetXPFromIndex(ResourceManager.PickupIndex index)
+    public DropBase GetDropFromIndex(ResourceManager.PickupIndex index)
     {
-        foreach (XP i in pickupPrefabs)
+        foreach (DropBase i in pickupPrefabs)
         {
             if (i.index == index)
             {

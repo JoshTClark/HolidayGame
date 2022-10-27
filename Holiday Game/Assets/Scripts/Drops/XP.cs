@@ -2,13 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class XP : MonoBehaviour
+public class XP : DropBase
 {
     [SerializeField]
     private float XPAmount;
-
-    [SerializeField]
-    public ResourceManager.PickupIndex index;
 
     private void Update()
     {

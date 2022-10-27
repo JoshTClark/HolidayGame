@@ -77,7 +77,7 @@ public abstract class Weapon : MonoBehaviour
         List<Enemy> enemies = EnemyManager.instance.CurrentEnemies;
         List<Enemy> targetList = new List<Enemy>();
 
-        float closestDist = 9999999;
+        float closestDist = enemies[0].PlayerDistance();
         if (enemies.Count > 0)
         {
             float distance = GameManager.instance.Player.attackActivationRange;

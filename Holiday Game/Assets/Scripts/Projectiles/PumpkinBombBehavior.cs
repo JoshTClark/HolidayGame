@@ -13,6 +13,8 @@ public class PumpkinBombBehavior : BombProjectileBase
     private float clusterLifetime = 0.8f;
     private float clusterDamage = 0.25f;
     private float clusterSize = 0.8f;
+    //[SerializeField]
+    //protected AudioSource explosionSound;
 
     public void Start()
     {

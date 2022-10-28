@@ -12,6 +12,8 @@ public abstract class BombProjectileBase : ProjectileBase
     public float explosionSizeMultiplier = 1f;
     public GameObject explosionPrefab;
 
+
+
     public override void OnDeath()
     {
         ProjectileBase projectile = ProjectileManager.GetProjectile(ResourceManager.ProjectileIndex.Explosion);

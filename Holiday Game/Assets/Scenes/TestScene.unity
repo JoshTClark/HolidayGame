@@ -3412,7 +3412,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 71.3
+  m_fontSize: 71.25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7498,13 +7498,13 @@ SpriteRenderer:
   m_SortingLayerID: -627940319
   m_SortingLayer: -1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 51a1386133a314a4a985fe78252d506b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7a7a633c82ba6f44084271cbe2e3360c, type: 3}
   m_Color: {r: 0.43574616, g: 0.509434, b: 0.41091138, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 50, y: 50}
-  m_AdaptiveModeThreshold: 0.5
+  m_Size: {x: 100, y: 100}
+  m_AdaptiveModeThreshold: 1
   m_SpriteTileMode: 1
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0

@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 296cfc9b7513a864aab005e7da6bfa8f, type: 3}
   m_Name: AttackSpeed2
   m_EditorClassIdentifier: 
-  upgradeName: Tactical Reload++
+  upgradeName: Tactical Reload
   upgradeDescription: Increases Attack Speed by 10%
   index: 10
   tier: 1
   CanTakeMultiple: 1
   IsWeapon: 0
+  icon: {fileID: 0}

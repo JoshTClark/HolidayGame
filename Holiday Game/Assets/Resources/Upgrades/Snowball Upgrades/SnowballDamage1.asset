@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 296cfc9b7513a864aab005e7da6bfa8f, type: 3}
   m_Name: SnowballDamage1
   m_EditorClassIdentifier: 
-  upgradeName: Harder Snow+
+  upgradeName: Packed Snow
   upgradeDescription: The snowball does 10% more damage.
   index: 13
   tier: 0
   CanTakeMultiple: 1
   IsWeapon: 0
+  icon: {fileID: 0}

@@ -19,3 +19,4 @@ MonoBehaviour:
   tier: 1
   CanTakeMultiple: 0
   IsWeapon: 1
+  icon: {fileID: 21300000, guid: 64554ce95a34ac6489ac9898d9b9561c, type: 3}

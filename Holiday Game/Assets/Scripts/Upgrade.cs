@@ -20,6 +20,7 @@ public class Upgrade : ScriptableObject
     public Tier tier;
     public bool CanTakeMultiple;
     public bool IsWeapon;
+    public Sprite icon;
 
 
     private int currentLevel = 1;

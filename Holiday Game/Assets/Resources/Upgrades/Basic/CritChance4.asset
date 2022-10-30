@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 296cfc9b7513a864aab005e7da6bfa8f, type: 3}
   m_Name: CritChance4
   m_EditorClassIdentifier: 
-  upgradeName: Weakest-er-spots?
+  upgradeName: Weaker Weakest spots
   upgradeDescription: 10% increased critical strike chance
   index: 36
   tier: 4
   CanTakeMultiple: 0
   IsWeapon: 0
+  icon: {fileID: 0}

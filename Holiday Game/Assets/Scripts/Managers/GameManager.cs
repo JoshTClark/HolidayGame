@@ -194,6 +194,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.UpgradeMenu:
                 upgradePanel.gameObject.SetActive(true);
+                gamePanel.gameObject.SetActive(false);
                 UpgradePanelManager upgradeManager = upgradePanel.GetComponent<UpgradePanelManager>();
                 if (!upgradeManager.displaying)
                 {
@@ -205,6 +206,7 @@ public class GameManager : MonoBehaviour
                 {
                     state = GameState.Normal;
                     upgradePanel.gameObject.SetActive(false);
+                    gamePanel.gameObject.SetActive(true);
                     upgradeManager.Clear();
                 }
                 break;

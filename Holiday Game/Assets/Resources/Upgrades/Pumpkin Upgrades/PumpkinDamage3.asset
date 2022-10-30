@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 296cfc9b7513a864aab005e7da6bfa8f, type: 3}
   m_Name: PumpkinDamage3
   m_EditorClassIdentifier: 
-  upgradeName: Powerful Pumkins X
+  upgradeName: Powerful Pumkins
   upgradeDescription: Explosion damage increased by 100%
   index: 39
   tier: 3
   CanTakeMultiple: 1
   IsWeapon: 0
+  icon: {fileID: 0}

@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UpgradePanelManager : MonoBehaviour
 {
     private List<UpgradeOption> options = new List<UpgradeOption>();
-    public UpgradeOption optionPrefab;
+    public UpgradeOption prefab;
     public Player player;
     public bool selected = false;
     public bool displaying = false;
     public float commonOdds, uncommonOdds, rareOdds, epicOdds, legendaryOdds;
+    public TMP_Text textName, tier, desc;
 
     private void Start()
     {
@@ -31,15 +34,17 @@ public class UpgradePanelManager : MonoBehaviour
     /// </summary>
     public void ShowOptions()
     {
+        textName.text = "";
+        tier.text = "";
+        desc.text = "";
         for (int i = 0; i < options.Count; i++)
         {
             UpgradeOption option = options[i];
 
-            RectTransform rect = option.GetComponent<RectTransform>();
-            rect.sizeDelta = new Vector2(0, 0);
-            rect.anchoredPosition = new Vector2(0, 0);
-            rect.anchorMin = new Vector2(((float)i / (float)options.Count) + 0.01f, 0.2f);
-            rect.anchorMax = new Vector2(((float)(i + 1) / (float)options.Count) - 0.01f, 0.8f);
+            RectTransform upgradeRect = option.GetComponent<RectTransform>();
+            RectTransform panelRect = this.gameObject.GetComponent<RectTransform>();
+
+            upgradeRect.SetPositionAndRotation(new Vector3((panelRect.rect.width / (options.Count + 1)) * (i + 1), panelRect.rect.height / 4, 0), Quaternion.identity);
         }
         displaying = true;
     }
@@ -50,9 +55,17 @@ public class UpgradePanelManager : MonoBehaviour
     /// <param name="upgrade"></param>
     public void AddUpgrade(ResourceManager.UpgradeIndex upgrade)
     {
-        UpgradeOption option = Instantiate<UpgradeOption>(optionPrefab, new Vector3(), new Quaternion(), this.gameObject.transform);
-        option.manager = this;
-        option.SetUpgrade(upgrade);
+        UpgradeOption option = Instantiate<UpgradeOption>(prefab, new Vector3(), new Quaternion(), this.gameObject.transform);
+        option.upgrade = upgrade;
+        option.tier = tier;
+        option.textName = textName;
+        option.desc = desc;
+        RectTransform upgradeRect = option.GetComponent<RectTransform>();
+        upgradeRect.localScale = new Vector3(2, 2, 1);
+        option.gameObject.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            Select(upgrade);
+        });
         options.Add(option);
     }
 

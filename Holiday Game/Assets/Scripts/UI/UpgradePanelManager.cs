@@ -44,7 +44,7 @@ public class UpgradePanelManager : MonoBehaviour
             RectTransform upgradeRect = option.GetComponent<RectTransform>();
             RectTransform panelRect = this.gameObject.GetComponent<RectTransform>();
 
-            upgradeRect.SetPositionAndRotation(new Vector3((panelRect.rect.width / (options.Count + 1)) * (i + 1), panelRect.rect.height / 4, 0), Quaternion.identity);
+            upgradeRect.SetPositionAndRotation(new Vector3(((panelRect.rect.width / (options.Count + 1)) * (i + 1)) * panelRect.lossyScale.x, (panelRect.rect.height / 4) * panelRect.lossyScale.y, 0), Quaternion.identity);
         }
         displaying = true;
     }

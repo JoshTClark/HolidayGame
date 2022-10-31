@@ -44,7 +44,7 @@ public abstract class StatsComponent : MonoBehaviour
     public List<Upgrade> inventory = new List<Upgrade>();
 
     // Debuffs and Buffs
-    public List<BuffDef> buffs;
+    public List<BuffInfo> buffs = new List<BuffInfo>();
 
     protected SpriteRenderer sr;
     Color ogColor;
@@ -168,6 +168,16 @@ public abstract class StatsComponent : MonoBehaviour
 
             }
 
+            // Buff updating
+            for (int i = buffs.Count - 1; i >= 0; i--)
+            {
+                buffs[i].DoTick();
+                if (!buffs[i].active)
+                {
+                    buffs.RemoveAt(i);
+                }
+            }
+
             // Checking if dead
             if (IsDead)
             {
@@ -284,8 +294,8 @@ public abstract class StatsComponent : MonoBehaviour
         foreach (ResourceManager.BuffIndex i in info.debuffs)
         {
             BuffDef def = ResourceManager.GetBuffDef(i);
-            Buff buff = this.gameObject.AddComponent<Buff>();
-            buff.index = i;
+            BuffInfo buff = new BuffInfo();
+            buff.def = def;
             DamageInfo buffInfo = new DamageInfo();
             buffInfo.attacker = info.attacker;
             buffInfo.receiver = info.receiver;
@@ -295,6 +305,7 @@ public abstract class StatsComponent : MonoBehaviour
             {
                 buff.totalDamage = info.attacker.Damage;
             }
+            buffs.Add(buff);
         }
 
         // reducing health
@@ -413,9 +424,9 @@ public abstract class StatsComponent : MonoBehaviour
 
     public bool HasBuff(ResourceManager.BuffIndex index)
     {
-        foreach (Buff b in this.gameObject.GetComponents<Buff>())
+        foreach (BuffInfo b in buffs)
         {
-            if (b.index == index)
+            if (b.def.index == index)
             {
                 return true;
             }

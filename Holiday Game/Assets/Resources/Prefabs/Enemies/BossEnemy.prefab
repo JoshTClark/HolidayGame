@@ -97,7 +97,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -169,10 +169,10 @@ MonoBehaviour:
   isDead: 0
   weapons: []
   inventory: []
-  buffs: []
   fadeTotalTime: 0
   player: {fileID: 0}
   index: 4
   isBoss: 1
   XPType: 0
   Drop: 2
+  onHitSound: {fileID: 0}

@@ -56,7 +56,7 @@ public abstract class StatsComponent : MonoBehaviour
     [SerializeField]
     float fadeTotalTime;
 
-    private List<FollowingEffect> followingEffects = new List<FollowingEffect>();
+    private List<Overlay> overlays = new List<Overlay>();
 
     // Used to get the base stats without changing them at all
     public float BaseMaxHp { get; }
@@ -165,7 +165,6 @@ public abstract class StatsComponent : MonoBehaviour
             // Adding things for burning effects
             if (HasBuff(ResourceManager.BuffIndex.Burning))
             {
-
             }
 
             // Buff updating

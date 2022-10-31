@@ -104,6 +104,11 @@ public class ResourceManager
         Stunned
     }
 
+    public enum OverlayIndex
+    {
+        Burning
+    }
+
     public static List<Enemy> enemyPrefabs = new List<Enemy>();
     public static List<ProjectileBase> projectilePrefabs = new List<ProjectileBase>();
     public static List<Weapon> weaponPrefabs = new List<Weapon>();
@@ -114,6 +119,7 @@ public class ResourceManager
     public static List<UpgradePool> upgradePools = new List<UpgradePool>();
     public static List<BuffDef> buffs = new List<BuffDef>();
     public static List<FollowingEffect> effects = new List<FollowingEffect>();
+    public static List<Overlay> overlays = new List<Overlay>();
     public static Player playerPrefab;
 
     public static bool isLoaded = false;
@@ -134,6 +140,7 @@ public class ResourceManager
         LoadBuffs();
         LoadEffects();
         LoadPlayableCharacters();
+        LoadOverlays();
         isLoaded = true;
     }
 
@@ -234,6 +241,15 @@ public class ResourceManager
         playerPrefab = arr[0];
     }
 
+    public static void LoadOverlays()
+    {
+        Overlay[] arr = Resources.LoadAll<Overlay>("");
+        foreach (Overlay i in arr)
+        {
+            overlays.Add(i);
+        }
+    }
+
     public static Upgrade GetUpgrade(ResourceManager.UpgradeIndex index)
     {
         foreach (Upgrade i in upgradeDefinitions)
@@ -241,6 +257,19 @@ public class ResourceManager
             if (i.index == index)
             {
                 Upgrade b = GameObject.Instantiate<Upgrade>(i);
+                return b;
+            }
+        }
+        return null;
+    }
+
+    public static Overlay GetOverlay (ResourceManager.OverlayIndex index)
+    {
+        foreach (Overlay i in overlays)
+        {
+            if (i.index == index)
+            {
+                Overlay b = GameObject.Instantiate<Overlay>(i);
                 return b;
             }
         }

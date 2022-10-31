@@ -47,7 +47,7 @@ public class PumpkinBombBehavior : BombProjectileBase
                 p.isCluster = true;
                 p.damageInfo = damageInfo.CreateCopy();
                 p.DamageMultiplier = clusterDamage * DamageMultiplier;
-                p.Lifetime = Lifetime * clusterLifetime;
+                p.LifetimeMultiplier = clusterLifetime;
                 float torque = Random.Range(-500f, 500f);
                 p.gameObject.GetComponent<Rigidbody2D>().AddTorque(torque);
                 p.gameObject.GetComponent<Rigidbody2D>().angularDrag = 1.75f;

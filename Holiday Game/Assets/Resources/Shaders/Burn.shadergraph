@@ -5,9 +5,6 @@
     "m_Properties": [
         {
             "m_Id": "8d2fb5856ac94ae98792b7e757f0133b"
-        },
-        {
-            "m_Id": "fc85acda1f114806b84ba3bf3503ca20"
         }
     ],
     "m_Keywords": [],
@@ -573,7 +570,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "Scale",
     "m_StageCapability": 3,
-    "m_Value": 3.0,
+    "m_Value": 10.0,
     "m_DefaultValue": 10.0,
     "m_Labels": []
 }
@@ -842,7 +839,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "Scale",
     "m_StageCapability": 3,
-    "m_Value": 10.0,
+    "m_Value": 100.0,
     "m_DefaultValue": 500.0,
     "m_Labels": []
 }
@@ -962,9 +959,6 @@
     "m_ChildObjectList": [
         {
             "m_Id": "8d2fb5856ac94ae98792b7e757f0133b"
-        },
-        {
-            "m_Id": "fc85acda1f114806b84ba3bf3503ca20"
         }
     ]
 }
@@ -1060,7 +1054,7 @@
     "m_ZTestMode": 4,
     "m_ZWriteControl": 0,
     "m_AlphaMode": 0,
-    "m_RenderFace": 2,
+    "m_RenderFace": 0,
     "m_AlphaClip": false,
     "m_CastShadows": true,
     "m_ReceiveShadows": true,
@@ -1769,10 +1763,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 453.0,
-            "y": -552.0000610351563,
-            "width": 208.0,
-            "height": 302.0000305175781
+            "x": 433.3333740234375,
+            "y": -328.66668701171877,
+            "width": 209.33331298828126,
+            "height": 304.0000305175781
         }
     },
     "m_Slots": [
@@ -2730,32 +2724,6 @@
         "b": 0.5,
         "a": 1.0
     }
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Internal.Texture2DArrayShaderProperty",
-    "m_ObjectId": "fc85acda1f114806b84ba3bf3503ca20",
-    "m_Guid": {
-        "m_GuidSerialized": "8333289a-27b8-4286-961c-3f5c5d0d6e09"
-    },
-    "m_Name": "Texture2D Array",
-    "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "Texture2D Array",
-    "m_DefaultReferenceName": "_Texture2D_Array",
-    "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": true,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
-    "m_Hidden": false,
-    "m_Value": {
-        "m_SerializedTexture": "{\"textureArray\":{\"instanceID\":0}}",
-        "m_Guid": ""
-    },
-    "m_Modifiable": true
 }
 
 {

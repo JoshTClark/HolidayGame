@@ -56,8 +56,6 @@ public abstract class StatsComponent : MonoBehaviour
     [SerializeField]
     float fadeTotalTime;
 
-    private List<Overlay> overlays = new List<Overlay>();
-
     // Used to get the base stats without changing them at all
     public float BaseMaxHp { get; }
     public float BaseSpeed { get; }
@@ -93,6 +91,7 @@ public abstract class StatsComponent : MonoBehaviour
 
     protected void Start()
     {
+
         hpMult = 1.0f;
         speedMult = 1.0f;
         damageMult = 1.0f;

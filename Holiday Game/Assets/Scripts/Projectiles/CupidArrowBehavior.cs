@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class CupidArrowBehavior : ProjectileBase
 {
-    List<Enemy> enemies;
+    Enemy e;
     private void Start()
     {
-        enemies = EnemyManager.instance.CurrentEnemies;
     }
 
     public override void Move()
@@ -27,13 +26,11 @@ public class CupidArrowBehavior : ProjectileBase
 
     public override void OnHit(StatsComponent receiver)
     {
-        Enemy e = GetClosestEnemyForArrow();
+        e = GetClosestEnemyForArrow();
 
         Vector2 direction = e.transform.position - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
-        transform.position = this.transform.position;
         Direction = transform.right;
     }
 
@@ -52,10 +49,10 @@ public class CupidArrowBehavior : ProjectileBase
         if (enemies.Count > 0)
         {
             Enemy closest = null;
-            float distance = GameManager.instance.Player.attackActivationRange;
+            float distance = 1000;
             foreach (Enemy e in enemies)
             {
-                float newDistance = e.PlayerDistance();
+                float newDistance = Vector2.Distance(transform.position, e.transform.position);
                 if (newDistance < distance && !hitTargets.Contains(e))
                 {
                     closest = e;
@@ -63,10 +60,19 @@ public class CupidArrowBehavior : ProjectileBase
                 }
             }
             return closest;
-        } 
+        }
         else
         {
-                return null;
+            return null;
+        }
+    }
+
+    void OnDrawGizmos()
+    {
+        if (e)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(e.gameObject.transform.position, 1);
         }
     }
 }

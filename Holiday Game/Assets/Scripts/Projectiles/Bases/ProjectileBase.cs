@@ -112,8 +112,8 @@ public abstract class ProjectileBase : MonoBehaviour
                     this.damageInfo.damagePos = this.gameObject.transform.position;
                     this.damageInfo.receiver = receiver;
                     this.damageInfo.knockback *= knockbackMultiplier;
-                    Hit(receiver);
                     hitTargets.Add(receiver);
+                    Hit(receiver);
                     if (Pierce > 0 && usedPierce < Pierce)
                     {
                         usedPierce++;
@@ -174,7 +174,7 @@ public abstract class ProjectileBase : MonoBehaviour
         damageInfo = new DamageInfo();
         timeAlive = 0.0f;
         usedPierce = 0f;
-        hitTargets = new List<StatsComponent>();
+        hitTargets.Clear();
         direction = new Vector2();
         sizeMultiplier = 1f;
         speedMultiplier = 1f;

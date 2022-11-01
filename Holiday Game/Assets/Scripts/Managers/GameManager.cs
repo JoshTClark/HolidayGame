@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
     private Image xpBar, hpBar;
 
     [SerializeField]
-    private CanvasRenderer playerStatsPanel, pausedPanel, gamePanel, upgradePanel, titlePanel, gameOverPanel, effectsPanel, iconPanel, debugPanel;
+    private CanvasRenderer playerStatsPanel, pausedPanel, gamePanel, upgradePanel, titlePanel, gameOverPanel, effectsPanel, debugPanel;
 
     [SerializeField]
     private float timeToDifficultyIncrease;
@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
     private InputActionReference displayStats, pauseGame, giveXP;
 
     [SerializeField]
-    private WeaponIcon iconPrefab;
+    private List<WeaponIcon> weaponIcons;
 
     /*
     [SerializeField]
@@ -55,7 +55,6 @@ public class GameManager : MonoBehaviour
     private bool paused = false;
     private int month, day, hour;
     private float secondToHourRation = 1 / 1;
-    private List<WeaponIcon> weaponIcons = new List<WeaponIcon>();
 
     public Player Player
     {
@@ -162,12 +161,14 @@ public class GameManager : MonoBehaviour
 
                     if (!hasIcon)
                     {
-                        WeaponIcon newIcon = Instantiate(iconPrefab, iconPanel.transform);
-                        newIcon.sprite = weapon.icon;
-                        newIcon.weaponIndex = weapon.index;
-                        newIcon.GetComponent<RectTransform>().anchorMin = new Vector2(0.15f * weaponIcons.Count, newIcon.GetComponent<RectTransform>().anchorMin.y);
-                        newIcon.GetComponent<RectTransform>().anchorMax = new Vector2(0.15f * (weaponIcons.Count + 1), newIcon.GetComponent<RectTransform>().anchorMax.y);
-                        weaponIcons.Add(newIcon);
+                        int i = 0;
+                        while (weaponIcons[i].weaponIndex != ResourceManager.WeaponIndex.Count)
+                        {
+                            i++;
+                        }
+                        weaponIcons[i].weaponIndex = weapon.index;
+                        weaponIcons[i].sprite = weapon.icon;
+                        weaponIcons[i].gameObject.SetActive(true);
                     }
                 }
 

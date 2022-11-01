@@ -13,12 +13,13 @@ public class WeaponIcon : MonoBehaviour
 
     private void Start()
     {
-        displaySprite.sprite = sprite;
-        mask.sprite = sprite;
+        this.gameObject.SetActive(false);
     }
 
     private void Update()
     {
+        displaySprite.sprite = sprite;
+        mask.sprite = sprite;
         float percentLeft = 1f;
         foreach (Weapon weapon in GameManager.instance.Player.weapons) 
         {

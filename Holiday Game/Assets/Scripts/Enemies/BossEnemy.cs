@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BossEnemy : Enemy
 {
+    [SerializeField]
+    protected AudioSource spawnSound;
     public override void OnStart()
     {
     }

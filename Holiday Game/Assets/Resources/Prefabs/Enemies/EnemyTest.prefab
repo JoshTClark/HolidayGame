@@ -170,7 +170,6 @@ MonoBehaviour:
   isDead: 0
   weapons: []
   inventory: []
-  buffs: []
   fadeTotalTime: 0
   player: {fileID: 0}
   index: 1
@@ -189,7 +188,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 51a8c763a183d824ea47d7c8c0cb5965, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

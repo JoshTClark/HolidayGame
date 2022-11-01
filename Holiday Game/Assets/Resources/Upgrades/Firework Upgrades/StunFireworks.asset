@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeName: Stunning Fireworks
   upgradeDescription: 5% chance for fireworks to stun on hit
-  index: 47
+  index: 51
   tier: 1
   CanTakeMultiple: 1
   IsWeapon: 0

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeName: Snowballing Snowballs
   upgradeDescription: Snowballs gain more damage the further they travel
-  index: 46
+  index: 50
   tier: 3
   CanTakeMultiple: 0
   IsWeapon: 0

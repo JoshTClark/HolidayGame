@@ -288,8 +288,11 @@ public class GameManager : MonoBehaviour
     {
         StartGame(ResourceManager.UpgradeIndex.FireworkWeaponUpgrade);
     }
+
     public void Retry()
     {
+        ProjectileManager.Clean();
+        DropManager.Clean();
         gameOverPanel.gameObject.SetActive(false);
         EnemyManager.instance.Reset();
         Destroy(player.gameObject);
@@ -304,6 +307,7 @@ public class GameManager : MonoBehaviour
 
         player.AddUpgrade(weapon);
 
+        ProjectileManager.Clean();
         titlePanel.gameObject.SetActive(false);
         gamePanel.gameObject.SetActive(true);
         state = GameState.Normal;

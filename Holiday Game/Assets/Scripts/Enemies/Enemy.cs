@@ -129,30 +129,44 @@ public abstract class Enemy : StatsComponent
     public override void OnDeath()
     {
         //Drops XP
-        Instantiate<DropBase>(EnemyManager.instance.GetDropFromIndex(XPType), transform.position, Quaternion.identity);
+        DropBase xp = DropManager.GetPickup(XPType);
+        xp.gameObject.transform.position = transform.position;
 
         //Health Drop
-        int healthRandomizer = Random.Range(1, 100); //Randomize to get chance
+        float healthRandomizer = Random.value; //Randomize to get chance
 
         if (index == ResourceManager.EnemyIndex.Test)
         {
             // Base enemies have 1% chance to drop
-            if (healthRandomizer == 1) Instantiate<DropBase>(EnemyManager.instance.GetDropFromIndex(Drop), transform.position, Quaternion.identity);
+            if (healthRandomizer <= 0.01)
+            {
+                DropBase b = DropManager.GetPickup(ResourceManager.PickupIndex.HealthDrop1);
+                b.gameObject.transform.position = transform.position;
+            }
         }
         else if (index == ResourceManager.EnemyIndex.Test2)
         {
             // Shooter enemies have 5% chance to drop
-            if (healthRandomizer < 5) Instantiate<DropBase>(EnemyManager.instance.GetDropFromIndex(Drop), transform.position, Quaternion.identity);
+            if (healthRandomizer <= 0.05)
+            {
+                DropBase b = DropManager.GetPickup(ResourceManager.PickupIndex.HealthDrop1);
+                b.gameObject.transform.position = transform.position;
+            }
         }
-        else if (index == ResourceManager.EnemyIndex.Test2)
+        else if (index == ResourceManager.EnemyIndex.BigBoy)
         {
             // Large enemies have 15% chance to drop
-            if (healthRandomizer < 15) Instantiate<DropBase>(EnemyManager.instance.GetDropFromIndex(Drop), transform.position, Quaternion.identity);
+            if (healthRandomizer <= 0.15)
+            {
+                DropBase b = DropManager.GetPickup(ResourceManager.PickupIndex.HealthDrop1);
+                b.gameObject.transform.position = transform.position;
+            }
         }
-        else if (index == ResourceManager.EnemyIndex.Test2)
+        else if (index == ResourceManager.EnemyIndex.Boss)
         {
             // Boss enemies have 100% chance to drop
-            Instantiate<DropBase>(EnemyManager.instance.GetDropFromIndex(Drop), transform.position, Quaternion.identity);
+            DropBase b = DropManager.GetPickup(ResourceManager.PickupIndex.HealthDrop1);
+            b.gameObject.transform.position = transform.position;
         }
     }
 

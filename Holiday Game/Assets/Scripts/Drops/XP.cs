@@ -18,11 +18,7 @@ public class XP : DropBase
         }
     }
 
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        HandleCollision(other);
-    }
-    private void HandleCollision(Collider2D other)
+    public override void HandleCollision(Collider2D other)
     {
         //if colliding with player
         if (other.gameObject.GetComponent<Player>())
@@ -31,7 +27,7 @@ public class XP : DropBase
             StatsComponent receiver = other.gameObject.GetComponent<StatsComponent>();
             receiver.AddXP(XPAmount);
             //remove the xp gem
-            Destroy(gameObject);
+            pool.Release(this);
         }
     }
 

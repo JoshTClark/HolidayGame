@@ -7,6 +7,7 @@ using static ResourceManager;
 public class ProjectileManager : MonoBehaviour
 {
     public static Dictionary<ProjectileIndex, ObjectPool<ProjectileBase>> pools = new Dictionary<ProjectileIndex, ObjectPool<ProjectileBase>>();
+    public static List<ProjectileBase> allProjectiles = new List<ProjectileBase>();
 
     private static void CreateNewPool(ProjectileIndex index)
     {
@@ -26,13 +27,31 @@ public class ProjectileManager : MonoBehaviour
         ObjectPool<ProjectileBase> pool;
         if (pools.TryGetValue(index, out pool))
         {
-            return pool.Get();
+            ProjectileBase p = pool.Get();
+            if (!allProjectiles.Contains(p))
+            {
+                allProjectiles.Add(p);
+            }
+            return p;
         }
         else
         {
             CreateNewPool(index);
             pools.TryGetValue(index, out pool);
-            return pool.Get();
+            ProjectileBase p = pool.Get();
+            if (!allProjectiles.Contains(p))
+            {
+                allProjectiles.Add(p);
+            }
+            return p;
+        }
+    }
+
+    public static void Clean()
+    {
+        foreach (ProjectileBase p in allProjectiles)
+        {
+            p.pool.Release(p);
         }
     }
 }

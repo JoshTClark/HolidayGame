@@ -322,6 +322,19 @@ public class ResourceManager
         return null;
     }
 
+    public static DropBase GetPickup(ResourceManager.PickupIndex index)
+    {
+        foreach (DropBase i in pickupPrefabs)
+        {
+            if (i.index == index)
+            {
+                DropBase b = GameObject.Instantiate<DropBase>(i);
+                return b;
+            }
+        }
+        return null;
+    }
+
     public static UpgradeIndex UpgradeIndexFromName(string name)
     {
         UpgradeIndex index = UpgradeIndex.AttackSpeed1;

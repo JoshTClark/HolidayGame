@@ -32,6 +32,15 @@ public class CupidArrowBehavior : ProjectileBase
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         Direction = transform.right;
+
+        if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.CupidArrowSwiftFlight))
+        {
+            SpeedMultiplier += .5f;
+        }
+        if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.ArrowBounceDamage))
+        {
+            DamageMultiplier += .2f;
+        }
     }
 
     public override void OnUpdate()

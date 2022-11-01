@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0e1f92e0d4b4fa74fb5b8efb09df32c9, type: 3}
-  m_Name: WeaponsPool
+  m_Name: CupidArrowPool
   m_EditorClassIdentifier: 
-  index: 1
-  upgrades: 0c00000014000000150000002d000000
+  index: 5
+  upgrades: 

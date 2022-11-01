@@ -90,6 +90,10 @@ public class ResourceManager
         XP2,
         XP3,
         CupidArrowWeaponUpgrade,
+        CupidArrowSwiftFlight,
+        ArrowPierce1,
+        ArrowPierce2,
+        ArrowBounceDamage
     }
 
     public enum UpgradePoolIndex
@@ -98,7 +102,8 @@ public class ResourceManager
         Weapons,
         Snowball,
         Pumkin,
-        Fireworks
+        Fireworks,
+        CupidArrow
     }
 
     public enum BuffIndex

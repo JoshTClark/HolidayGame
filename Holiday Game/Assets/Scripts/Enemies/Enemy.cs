@@ -27,6 +27,10 @@ public abstract class Enemy : StatsComponent
     public ResourceManager.PickupIndex XPType;
     public ResourceManager.PickupIndex Drop;
 
+    // SoundEffects
+    [SerializeField]
+    protected AudioSource onHitSound;
+
     /// <summary>
     /// Moves the Enemy towards the player
     /// </summary>
@@ -216,5 +220,11 @@ public abstract class Enemy : StatsComponent
     public void AddKnockback(Vector2 vec)
     {
         knockback.Add(vec);
+    }
+    public override void TakeDamage(DamageInfo info)
+    {
+        // Play Audio
+        //onHitSound.Play();
+        base.TakeDamage(info);
     }
 }

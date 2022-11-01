@@ -44,7 +44,7 @@ public abstract class StatsComponent : MonoBehaviour
     public List<Upgrade> inventory = new List<Upgrade>();
 
     // Debuffs and Buffs
-    public List<BuffDef> buffs;
+    public List<BuffInfo> buffs = new List<BuffInfo>();
 
     protected SpriteRenderer sr;
     Color ogColor;
@@ -55,8 +55,6 @@ public abstract class StatsComponent : MonoBehaviour
 
     [SerializeField]
     float fadeTotalTime;
-
-    private List<FollowingEffect> followingEffects = new List<FollowingEffect>();
 
     // Used to get the base stats without changing them at all
     public float BaseMaxHp { get; }
@@ -93,6 +91,7 @@ public abstract class StatsComponent : MonoBehaviour
 
     protected void Start()
     {
+
         hpMult = 1.0f;
         speedMult = 1.0f;
         damageMult = 1.0f;
@@ -165,7 +164,16 @@ public abstract class StatsComponent : MonoBehaviour
             // Adding things for burning effects
             if (HasBuff(ResourceManager.BuffIndex.Burning))
             {
+            }
 
+            // Buff updating
+            for (int i = buffs.Count - 1; i >= 0; i--)
+            {
+                buffs[i].DoTick();
+                if (!buffs[i].active)
+                {
+                    buffs.RemoveAt(i);
+                }
             }
 
             // Checking if dead
@@ -299,8 +307,8 @@ public abstract class StatsComponent : MonoBehaviour
         foreach (ResourceManager.BuffIndex i in info.debuffs)
         {
             BuffDef def = ResourceManager.GetBuffDef(i);
-            Buff buff = this.gameObject.AddComponent<Buff>();
-            buff.index = i;
+            BuffInfo buff = new BuffInfo();
+            buff.def = def;
             DamageInfo buffInfo = new DamageInfo();
             buffInfo.attacker = info.attacker;
             buffInfo.receiver = info.receiver;
@@ -310,6 +318,7 @@ public abstract class StatsComponent : MonoBehaviour
             {
                 buff.totalDamage = info.attacker.Damage;
             }
+            buffs.Add(buff);
         }
 
         // reducing health
@@ -428,9 +437,9 @@ public abstract class StatsComponent : MonoBehaviour
 
     public bool HasBuff(ResourceManager.BuffIndex index)
     {
-        foreach (Buff b in this.gameObject.GetComponents<Buff>())
+        foreach (BuffInfo b in buffs)
         {
-            if (b.index == index)
+            if (b.def.index == index)
             {
                 return true;
             }

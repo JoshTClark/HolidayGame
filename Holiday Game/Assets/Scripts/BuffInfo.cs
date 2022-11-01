@@ -3,37 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using static ResourceManager;
 
-public class Buff : MonoBehaviour
+public class BuffInfo
 {
-    public ResourceManager.BuffIndex index;
+    public BuffDef def;
     public float totalDamage;
-    public DoTick action;
+    public DoTickAction action;
     public bool active = true;
     public StatsComponent afflicting;
     public DamageInfo infoTemplate;
     private float durationTimer = 0.0f;
     private float tickTimer = 0.0f;
 
-    private void Start()
-    {
-    }
-
     // Update is called once per frame
-    private void Update()
+    public void DoTick()
     {
-        if (!active) 
-        {
-            Destroy(this);
-        }
-
         if (GameManager.instance.State == GameManager.GameState.Normal && active)
         {
             durationTimer += Time.deltaTime;
 
-            if (ResourceManager.GetBuffDef(index).type == BuffDef.BuffType.DOT)
+            if (def.type == BuffDef.BuffType.DOT)
             {
                 tickTimer += Time.deltaTime;
-                if (tickTimer >= ResourceManager.GetBuffDef(index).tickRate)
+                if (tickTimer >= def.tickRate)
                 {
                     if (action != null)
                     {
@@ -46,7 +37,7 @@ public class Buff : MonoBehaviour
                 }
             }
 
-            if (durationTimer >= ResourceManager.GetBuffDef(index).duration)
+            if (durationTimer >= ResourceManager.GetBuffDef(def.index).duration)
             {
                 active = false;
             }
@@ -55,8 +46,8 @@ public class Buff : MonoBehaviour
 
     public float DamagePerTick()
     {
-        return (ResourceManager.GetBuffDef(index).tickRate / ResourceManager.GetBuffDef(index).duration) * totalDamage;
+        return (def.tickRate / def.duration * totalDamage);
     }
 
-    public delegate void DoTick();
+    public delegate void DoTickAction();
 }

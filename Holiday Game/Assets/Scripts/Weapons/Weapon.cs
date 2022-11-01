@@ -93,6 +93,10 @@ public abstract class Weapon : MonoBehaviour
                 }
             }
             targetList.Add(closest);
+            if (enemies.Count < num)
+            {
+                num = enemies.Count;
+            }
             for (int i = 1; i < num; i++)
             {
                 distance = GameManager.instance.Player.attackActivationRange;

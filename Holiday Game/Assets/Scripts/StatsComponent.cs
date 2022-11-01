@@ -208,6 +208,21 @@ public abstract class StatsComponent : MonoBehaviour
                 AddAttack(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.Snowball));
             }
         }
+        if (HasUpgrade(ResourceManager.UpgradeIndex.CupidArrowWeaponUpgrade))
+        {
+            bool giveArrow = true;
+            foreach (Weapon w in weapons)
+            {
+                if (w.GetType() == typeof(CupidArrow))
+                {
+                    giveArrow = false;
+                }
+            }
+            if (giveArrow)
+            {
+                AddAttack(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.CupidArrow));
+            }
+        }
         if (HasUpgrade(ResourceManager.UpgradeIndex.PumpkinBombWeaponUpgrade))
         {
             bool givePumkin = true;

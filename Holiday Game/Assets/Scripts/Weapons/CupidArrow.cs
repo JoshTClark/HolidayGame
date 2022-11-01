@@ -18,6 +18,7 @@ public class CupidArrow : Weapon
         {
             ProjectileBase p = ProjectileManager.GetProjectile(ResourceManager.ProjectileIndex.CupidArrow);
             p.transform.position = this.transform.position;
+            p.transform.rotation = transform.rotation;
             p.Direction = transform.right;
             DamageInfo info = new DamageInfo();
             info.damage = owner.Damage;

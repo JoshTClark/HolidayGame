@@ -92,6 +92,10 @@ public class ResourceManager
         XP2,
         XP3,
         CupidArrowWeaponUpgrade,
+        CupidArrowSwiftFlight,
+        ArrowPierce1,
+        ArrowPierce2,
+        ArrowBounceDamage,
         Snowballing,
         StunningFireworks
     }
@@ -102,7 +106,8 @@ public class ResourceManager
         Weapons,
         Snowball,
         Pumkin,
-        Fireworks
+        Fireworks,
+        CupidArrow
     }
 
     public enum BuffIndex

@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
         get { return state; }
     }
 
-    // Only a single gamemanger should ever exist so we can always get it here
+    // Only a single gamemanager should ever exist so we can always get it here
     public static GameManager instance;
 
     void Start()
@@ -274,21 +274,6 @@ public class GameManager : MonoBehaviour
         return pools;
     }
 
-    public void ChooseSnowball()
-    {
-        StartGame(ResourceManager.UpgradeIndex.SnowballWeaponUpgrade);
-    }
-
-    public void ChoosePumpkin()
-    {
-        StartGame(ResourceManager.UpgradeIndex.PumpkinBombWeaponUpgrade);
-    }
-
-    public void ChooseFirework()
-    {
-        StartGame(ResourceManager.UpgradeIndex.FireworkWeaponUpgrade);
-    }
-
     public void Retry()
     {
         ProjectileManager.Clean();
@@ -432,8 +417,6 @@ public class GameManager : MonoBehaviour
         }
 
         hour = (totalHours % 24) + 1;
-
-
     }
 
     public string GetMonthName()

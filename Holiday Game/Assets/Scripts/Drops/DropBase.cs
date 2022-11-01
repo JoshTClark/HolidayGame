@@ -19,6 +19,7 @@ public abstract class DropBase : MonoBehaviour
     // Resets the pickup for use again in the pool
     public void Clean(ObjectPool<DropBase> p)
     {
+        this.gameObject.SetActive(true);
         pool = p;
     }
 

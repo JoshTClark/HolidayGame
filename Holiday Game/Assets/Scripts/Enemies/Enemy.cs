@@ -223,8 +223,11 @@ public abstract class Enemy : StatsComponent
     }
     public override void TakeDamage(DamageInfo info)
     {
-        // Play Audio
-        //onHitSound.Play();
         base.TakeDamage(info);
+        if (CurrentHP > 0)
+        {
+            // Play Audio
+            onHitSound.Play();
+        }
     }
 }

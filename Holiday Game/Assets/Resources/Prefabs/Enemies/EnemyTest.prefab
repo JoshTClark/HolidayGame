@@ -176,7 +176,7 @@ MonoBehaviour:
   isBoss: 0
   XPType: 0
   Drop: 2
-  onHitSound: {fileID: 0}
+  onHitSound: {fileID: 5837166522233771523}
 --- !u!82 &5837166522233771523
 AudioSource:
   m_ObjectHideFlags: 0
@@ -187,9 +187,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 51a8c763a183d824ea47d7c8c0cb5965, type: 3}
+  m_audioClip: {fileID: 8300000, guid: e0b3564fc6cf60a4badc5ccb599b5976, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.608
   m_Pitch: 1
   Loop: 0
   Mute: 0

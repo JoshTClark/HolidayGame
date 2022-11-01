@@ -18,7 +18,8 @@ public class ResourceManager
         PumpkinBomb,
         Firework,
         EnemyProjectile,
-        Explosion
+        Explosion,
+        CupidArrow
     }
     public enum FollowingEffectIndex
     {
@@ -38,7 +39,8 @@ public class ResourceManager
         PumpkinBomb,
         Test,
         Fireworks,
-        Count
+        Count,
+        CupidArrow
     }
     public enum UpgradeIndex
     {
@@ -86,7 +88,8 @@ public class ResourceManager
         ClusterPumkins,
         XP1,
         XP2,
-        XP3
+        XP3,
+        CupidArrowWeaponUpgrade,
     }
 
     public enum UpgradePoolIndex

@@ -21,8 +21,8 @@ public abstract class ProjectileBase : MonoBehaviour
 
     private float timeAlive = 0.0f;
     private float usedPierce = 0f;
-    private List<StatsComponent> hitTargets = new List<StatsComponent>();
     private Vector2 direction = new Vector2();
+    protected List<StatsComponent> hitTargets = new List<StatsComponent>();
 
     public Vector2 Direction { get { return direction; } set { direction = value; } }
     public float Speed { get { return baseSpeed * speedMultiplier; } set { baseSpeed = value; } }
@@ -212,4 +212,5 @@ public abstract class ProjectileBase : MonoBehaviour
     public abstract void OnCollision(Collider2D other);
 
     public abstract void OnClean();
+
 }

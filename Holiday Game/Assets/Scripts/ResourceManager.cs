@@ -93,7 +93,9 @@ public class ResourceManager
         CupidArrowSwiftFlight,
         ArrowPierce1,
         ArrowPierce2,
-        ArrowBounceDamage
+        ArrowBounceDamage,
+        Snowballing,
+        StunningFireworks
     }
 
     public enum UpgradePoolIndex

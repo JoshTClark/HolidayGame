@@ -123,7 +123,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!114 &2198510103596972710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,10 +136,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62a5d4014656189429e0d87ac3e7a3e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 0
   baseSpeed: 6
   baseLifetime: 5
   basePierce: 0
   baseSize: 1
   projectileTeam: 0
-  weapon: {fileID: 0}
   effects: {fileID: 6125135307708369886, guid: 74cffb353dcc8cf4398ce4e54d8ca1a2, type: 3}

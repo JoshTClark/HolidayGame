@@ -81,7 +81,10 @@ public abstract class Enemy : StatsComponent
 
     protected void Move()
     {
-        CalcMoves();
+        if (!HasBuff(ResourceManager.BuffIndex.Stunned))
+        {
+            CalcMoves();
+        }
         // Then take Velocity normalize it so it's a heading vector
         // scale that by speed, then apply movement
         Vector2 velocity = Vector2.zero;

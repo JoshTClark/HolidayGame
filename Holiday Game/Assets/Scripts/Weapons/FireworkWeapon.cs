@@ -26,6 +26,13 @@ public class FireworkWeapon : Weapon
                 p.transform.position = this.transform.position;
                 p.target = e;
                 DamageInfo info = new DamageInfo();
+                if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.StunningFireworks))
+                {
+                    if (GameManager.RollCheck(GameManager.instance.Player.GetUpgrade(ResourceManager.UpgradeIndex.StunningFireworks).CurrentLevel * 0.05f))
+                    {
+                        info.debuffs.Add(ResourceManager.BuffIndex.Stunned);
+                    }
+                }
                 info.damage = baseDamageMultiplier * owner.Damage;
                 info.attacker = owner;
                 info.debuffs.Add(ResourceManager.BuffIndex.Burning);

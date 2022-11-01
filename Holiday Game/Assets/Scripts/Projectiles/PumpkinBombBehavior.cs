@@ -85,6 +85,7 @@ public class PumpkinBombBehavior : BombProjectileBase
     public override void OnClean()
     {
         Rigidbody2D body = this.gameObject.GetComponent<Rigidbody2D>();
+        this.transform.rotation = Quaternion.identity;
         explosionSizeMultiplier = 1f;
         body.angularVelocity = 0;
         body.velocity = Vector2.zero;

@@ -171,11 +171,12 @@ public abstract class ProjectileBase : MonoBehaviour
     {
         this.gameObject.SetActive(true);
         //this.transform.rotation = Quaternion.identity;
+        gameObject.GetComponent<Rigidbody2D>().angularVelocity = 0f;
         damageInfo = new DamageInfo();
         timeAlive = 0.0f;
         usedPierce = 0f;
         hitTargets.Clear();
-        direction = new Vector2();
+        direction = Vector3.forward;
         sizeMultiplier = 1f;
         speedMultiplier = 1f;
         damageMultiplier = 1f;

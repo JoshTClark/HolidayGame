@@ -39,8 +39,10 @@ public class ResourceManager
         PumpkinBomb,
         Test,
         Fireworks,
-        Count,
-        CupidArrow
+        Null,
+        CupidArrow,
+        BossAttack,
+        BossAttack2
     }
     public enum UpgradeIndex
     {

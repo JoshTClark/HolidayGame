@@ -12,7 +12,6 @@ public class TestEnemy2 : Enemy
     {
         movements.Add(ShooterMove() * 1.5f);
         movements.Add(Separation() * .1f);
-
     }
 
     public override void OnStart()

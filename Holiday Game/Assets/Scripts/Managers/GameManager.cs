@@ -162,7 +162,7 @@ public class GameManager : MonoBehaviour
                     if (!hasIcon)
                     {
                         int i = 0;
-                        while (weaponIcons[i].weaponIndex != ResourceManager.WeaponIndex.Count)
+                        while (weaponIcons[i].weaponIndex != ResourceManager.WeaponIndex.Null)
                         {
                             i++;
                         }

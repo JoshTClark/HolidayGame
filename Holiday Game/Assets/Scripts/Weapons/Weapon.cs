@@ -34,13 +34,16 @@ public abstract class Weapon : MonoBehaviour
     {
         if (GameManager.instance.State == GameManager.GameState.Normal)
         {
-            float delta = Time.deltaTime;
-            timer += delta;
-            if (timer >= Delay)
+            if (!owner.HasBuff(ResourceManager.BuffIndex.Stunned))
             {
-                canFire = true;
+                float delta = Time.deltaTime;
+                timer += delta;
+                if (timer >= Delay)
+                {
+                    canFire = true;
+                }
+                OnUpdate();
             }
-            OnUpdate();
         }
     }
 

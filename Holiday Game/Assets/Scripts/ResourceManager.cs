@@ -90,6 +90,8 @@ public class ResourceManager
         XP2,
         XP3,
         CupidArrowWeaponUpgrade,
+        Snowballing,
+        StunningFireworks
     }
 
     public enum UpgradePoolIndex

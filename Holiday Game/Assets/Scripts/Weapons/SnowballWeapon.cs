@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Pool;
 
 public class SnowballWeapon : Weapon
-{ 
+{
     public override void OnUpdate()
     {
         float delta = Time.deltaTime;
@@ -63,6 +63,15 @@ public class SnowballWeapon : Weapon
 
             // Making the projectile
             ProjectileBase p = ProjectileManager.GetProjectile(ResourceManager.ProjectileIndex.Snowball);
+
+            // Making it spin if it has the snowballing upgrade
+            if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.Snowballing))
+            {
+                float torque = 250f;
+                p.gameObject.GetComponent<Rigidbody2D>().AddTorque(torque);
+                p.gameObject.GetComponent<Rigidbody2D>().angularDrag = 0f;
+            }
+
             p.transform.position = this.transform.position;
             p.Direction = transform.right;
             DamageInfo info = new DamageInfo();

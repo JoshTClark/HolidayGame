@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeName: Cupid Arrow
   upgradeDescription: Fire a homing arrow that flies between enemies.
-  index: 20
+  index: 45
   tier: 1
   CanTakeMultiple: 0
   IsWeapon: 1

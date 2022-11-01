@@ -15,6 +15,6 @@ MonoBehaviour:
   index: 1
   type: 0
   buffName: Stunned
-  duration: 5
+  duration: 0.5
   tickRate: 1
-  effect: {fileID: 0}
+  effect: 0

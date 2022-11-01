@@ -36,13 +36,16 @@ public class SnowballBehavior : ProjectileBase
 
     public override void OnUpdate()
     {
+        if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.Snowballing))
+        {
+            DamageMultiplier += 0.5f * Time.deltaTime * SpeedMultiplier;
+            SizeMultiplier += 0.5f * Time.deltaTime * SpeedMultiplier;
+        }
     }
 
     public override void OnClean()
     {
         FollowingEffect e = GameObject.Instantiate(effects);
         e.following = this.gameObject;
-
-
     }
 }

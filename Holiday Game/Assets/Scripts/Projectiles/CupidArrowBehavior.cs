@@ -28,18 +28,21 @@ public class CupidArrowBehavior : ProjectileBase
     {
         e = GetClosestEnemyForArrow();
 
-        Vector2 direction = e.transform.position - transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        Direction = transform.right;
+        if (e)
+        {
+            Vector2 direction = e.transform.position - transform.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            Direction = transform.right;
 
-        if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.CupidArrowSwiftFlight))
-        {
-            SpeedMultiplier += .5f;
-        }
-        if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.ArrowBounceDamage))
-        {
-            DamageMultiplier += .2f;
+            if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.CupidArrowSwiftFlight))
+            {
+                SpeedMultiplier += .5f;
+            }
+            if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.ArrowBounceDamage))
+            {
+                DamageMultiplier += .2f;
+            }
         }
     }
 

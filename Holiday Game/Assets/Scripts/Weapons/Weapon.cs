@@ -9,6 +9,7 @@ public abstract class Weapon : MonoBehaviour
     private float delay;
 
     public ResourceManager.WeaponIndex index;
+    public ResourceManager.UpgradeIndex upgradeIndex;
 
     public Sprite icon;
 

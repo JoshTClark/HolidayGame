@@ -22,7 +22,7 @@ public class SnowballWeapon : Weapon
         {
             // Calculating stats
             // Damage
-            float damageMult = baseDamageMultiplier;
+            float damageMult = 1f;
             if (owner.HasUpgrade(ResourceManager.UpgradeIndex.SnowballDamage1))
             {
                 damageMult += 0.1f * owner.GetUpgrade(ResourceManager.UpgradeIndex.SnowballDamage1).CurrentLevel;

@@ -193,6 +193,7 @@ public abstract class StatsComponent : MonoBehaviour
     /// </summary>
     private void CheckWeapons()
     {
+        // Snowball
         if (HasUpgrade(ResourceManager.UpgradeIndex.SnowballWeaponUpgrade))
         {
             bool giveSnowball = true;
@@ -208,6 +209,20 @@ public abstract class StatsComponent : MonoBehaviour
                 AddAttack(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.Snowball));
             }
         }
+        else
+        {
+            for (int i = weapons.Count - 1; i >= 0; i--)
+            {
+                if (weapons[i].index == WeaponIndex.Snowball)
+                {
+                    Weapon w = weapons[i];
+                    weapons.RemoveAt(i);
+                    Destroy(w.gameObject);
+                }
+            }
+        }
+
+        // Cupid Arrow
         if (HasUpgrade(ResourceManager.UpgradeIndex.CupidArrowWeaponUpgrade))
         {
             bool giveArrow = true;
@@ -223,6 +238,20 @@ public abstract class StatsComponent : MonoBehaviour
                 AddAttack(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.CupidArrow));
             }
         }
+        else
+        {
+            for (int i = weapons.Count - 1; i >= 0; i--)
+            {
+                if (weapons[i].index == WeaponIndex.CupidArrow)
+                {
+                    Weapon w = weapons[i];
+                    weapons.RemoveAt(i);
+                    Destroy(w.gameObject);
+                }
+            }
+        }
+
+        // Pumpkin Bomb
         if (HasUpgrade(ResourceManager.UpgradeIndex.PumpkinBombWeaponUpgrade))
         {
             bool givePumkin = true;
@@ -238,6 +267,20 @@ public abstract class StatsComponent : MonoBehaviour
                 AddAttack(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.PumpkinBomb));
             }
         }
+        else
+        {
+            for (int i = weapons.Count - 1; i >= 0; i--)
+            {
+                if (weapons[i].index == WeaponIndex.PumpkinBomb)
+                {
+                    Weapon w = weapons[i];
+                    weapons.RemoveAt(i);
+                    Destroy(w.gameObject);
+                }
+            }
+        }
+
+        // Fireworks
         if (HasUpgrade(ResourceManager.UpgradeIndex.FireworkWeaponUpgrade))
         {
             bool giveFirework = true;
@@ -253,6 +296,19 @@ public abstract class StatsComponent : MonoBehaviour
                 AddAttack(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.Fireworks));
             }
         }
+        else
+        {
+            for (int i = weapons.Count - 1; i >= 0; i--)
+            {
+                if (weapons[i].index == WeaponIndex.Fireworks)
+                {
+                    Weapon w = weapons[i];
+                    weapons.RemoveAt(i);
+                    Destroy(w.gameObject);
+                }
+            }
+        }
+        // Candy Corn Rifle
         if (HasUpgrade(ResourceManager.UpgradeIndex.CandyCornWeaponUpgrade))
         {
             bool giveCorn = true;
@@ -266,6 +322,18 @@ public abstract class StatsComponent : MonoBehaviour
             if (giveCorn)
             {
                 AddAttack(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.CandyCornRifle));
+            }
+        }
+        else
+        {
+            for (int i = weapons.Count - 1; i >= 0; i--)
+            {
+                if (weapons[i].index == WeaponIndex.CandyCornRifle)
+                {
+                    Weapon w = weapons[i];
+                    weapons.RemoveAt(i);
+                    Destroy(w.gameObject);
+                }
             }
         }
     }
@@ -460,6 +528,30 @@ public abstract class StatsComponent : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public bool HasWeapon(ResourceManager.WeaponIndex index)
+    {
+        foreach (Weapon w in weapons)
+        {
+            if (w.index == index)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void RemoveUpgrade(ResourceManager.UpgradeIndex index)
+    {
+        for (int i = inventory.Count - 1; i >= 0; i--)
+        {
+            if (inventory[i].index == index)
+            {
+                inventory.RemoveAt(i);
+                break;
+            }
+        }
     }
 
     public abstract void OnUpdate();

@@ -339,6 +339,12 @@ public class ResourceManager
         return null;
     }
 
+    public static UpgradeIndex GetUpgradeFromWeapon(WeaponIndex index)
+    {
+        return GetWeapon(index).upgradeIndex;
+    }
+
+
     public static UpgradeIndex UpgradeIndexFromName(string name)
     {
         UpgradeIndex index = UpgradeIndex.AttackSpeed1;

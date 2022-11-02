@@ -147,7 +147,17 @@ public class GameManager : MonoBehaviour
                 Vector3 camPos = new Vector3(Player.transform.position.x, Player.transform.position.y, cam.transform.position.z);
                 cam.transform.position = camPos;
 
-                // Weapon icon checking
+                // Removing icons
+                foreach (WeaponIcon icon in weaponIcons)
+                {
+                    if (!player.HasWeapon(icon.weaponIndex))
+                    {
+                        icon.weaponIndex = ResourceManager.WeaponIndex.Null;
+                        icon.gameObject.SetActive(false);
+                    }
+                }
+
+                // Adding new icons
                 foreach (Weapon weapon in player.weapons)
                 {
                     bool hasIcon = false;

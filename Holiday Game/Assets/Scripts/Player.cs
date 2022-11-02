@@ -13,19 +13,22 @@ public class Player : StatsComponent
     private float pickupRangeIncrease;
     public float attackActivationRange;
     [SerializeField]
-    private float iFrames = 1f;
+    private float iFrames;
     private bool isInvincible;
 
     private Animator an;
-    private List<StatsComponent> hitBy = new List<StatsComponent>();
-    private List<float> invincibilityTimes = new List<float>();
 
+    [SerializeField]
+    private AudioSource hitEffect;
+
+    
     public bool IsInvincible { get { return isInvincible; } }
     public float PickupRange { get { return pickupRange * pickupRangeIncrease; } }
 
     public override void OnStart()
     {
         isInvincible = false;
+        iFrames = .5f;
         an = gameObject.GetComponent<Animator>();
     }
 
@@ -79,33 +82,41 @@ public class Player : StatsComponent
     /// </summary>
     void UpdateiFrames()
     {
-        float delta = Time.deltaTime;
-        for (int i = hitBy.Count - 1; i >= 0; i--)
+        // See if we should be invincible
+        if (isInvincible)
         {
-            invincibilityTimes[i] -= delta;
-            if (invincibilityTimes[i] <= 0)
-            {
-                hitBy.RemoveAt(i);
-                invincibilityTimes.RemoveAt(i);
-            }
+            // if we're invincible count down the timer
+            iFrames -= Time.deltaTime;
+        }
+
+        if (iFrames <= 0)
+        {
+            // Invincible time is up we can take damage again
+            // No longer invincible
+            isInvincible = false;
+
+            // Reset iframes
+            iFrames = 3f;
         }
     }
-
     /// <summary>
     /// Checks if the player can take damage first
     /// </summary>
     /// <param name="damage"></param>
     public override void TakeDamage(DamageInfo info)
     {
-        if (!hitBy.Contains(info.attacker))
+        if (isInvincible)
         {
+            UpdateiFrames();
+        }
+        else
+        {
+            hitEffect.Play();
             // take damage & become invincible
-            hitBy.Add(info.attacker);
-            invincibilityTimes.Add(iFrames);
             base.TakeDamage(info);
+            isInvincible = true;
         }
     }
-
     private void OnDrawGizmos()
     {
         // Showing attack range

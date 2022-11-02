@@ -18,6 +18,9 @@ public class Player : StatsComponent
 
     private Animator an;
 
+    [SerializeField]
+    private AudioSource hitEffect;
+
     
     public bool IsInvincible { get { return isInvincible; } }
     public float PickupRange { get { return pickupRange * pickupRangeIncrease; } }
@@ -108,6 +111,7 @@ public class Player : StatsComponent
         }
         else
         {
+            hitEffect.Play();
             // take damage & become invincible
             base.TakeDamage(info);
             isInvincible = true;

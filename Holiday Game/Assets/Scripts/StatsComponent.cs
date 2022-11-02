@@ -253,6 +253,21 @@ public abstract class StatsComponent : MonoBehaviour
                 AddAttack(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.Fireworks));
             }
         }
+        if (HasUpgrade(ResourceManager.UpgradeIndex.CandyCornWeaponUpgrade))
+        {
+            bool giveCorn = true;
+            foreach (Weapon w in weapons)
+            {
+                if (w.GetType() == typeof(CandyCornWeapon))
+                {
+                    giveCorn = false;
+                }
+            }
+            if (giveCorn)
+            {
+                AddAttack(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.CandyCornRifle));
+            }
+        }
     }
 
     //Checks to see if leveled up since last tick

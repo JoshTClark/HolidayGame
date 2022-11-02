@@ -178,7 +178,7 @@ public class TitleScreen : MonoBehaviour
     {
         if (slot == 1)
         {
-            GameManager.instance.StartGame(ResourceManager.UpgradeIndex.SnowballWeaponUpgrade);
+            GameManager.instance.StartGame(ResourceManager.UpgradeIndex.CandyCornWeaponUpgrade);
         }
     }
 }

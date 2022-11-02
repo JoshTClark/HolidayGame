@@ -19,7 +19,8 @@ public class ResourceManager
         Firework,
         EnemyProjectile,
         Explosion,
-        CupidArrow
+        CupidArrow,
+        CandyCorn
     }
     public enum FollowingEffectIndex
     {
@@ -42,7 +43,8 @@ public class ResourceManager
         Null,
         CupidArrow,
         BossAttack,
-        BossAttack2
+        BossAttack2,
+        CandyCornRifle
     }
     public enum UpgradeIndex
     {
@@ -97,7 +99,8 @@ public class ResourceManager
         ArrowPierce2,
         ArrowBounceDamage,
         Snowballing,
-        StunningFireworks
+        StunningFireworks,
+        CandyCornWeaponUpgrade
     }
 
     public enum UpgradePoolIndex
@@ -107,7 +110,8 @@ public class ResourceManager
         Snowball,
         Pumkin,
         Fireworks,
-        CupidArrow
+        CupidArrow,
+        CandyCorn
     }
 
     public enum BuffIndex

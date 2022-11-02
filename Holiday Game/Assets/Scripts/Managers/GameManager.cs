@@ -252,7 +252,7 @@ public class GameManager : MonoBehaviour
     public void DoPlayerLevelUp()
     {
         this.state = GameState.UpgradeMenu;
-        SoundManager.Instance.LevelUp();
+        //SoundManager.Instance.LevelUp();
     }
 
     private List<UpgradePool> GetPossiblePools()

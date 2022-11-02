@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AttackSpeed2
   m_EditorClassIdentifier: 
   upgradeName: Tactical Reload
-  upgradeDescription: Increases Attack Speed by 10%
+  upgradeDescription: Increases Attack Speed by 20%
   index: 10
   tier: 1
   CanTakeMultiple: 1

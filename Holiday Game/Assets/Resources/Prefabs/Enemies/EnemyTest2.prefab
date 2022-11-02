@@ -148,8 +148,8 @@ MonoBehaviour:
   baseCritDamage: 0
   knockbackMult: 1
   levelScaling: 1
-  hpLevelUp: 7
-  damageLevelUp: 1
+  hpLevelUp: 6
+  damageLevelUp: 0.5
   currentHP: 0
   xpAmount: 0
   level: 0

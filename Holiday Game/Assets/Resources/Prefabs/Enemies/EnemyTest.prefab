@@ -138,7 +138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseMaxHP: 10
-  baseSpeed: 1.5
+  baseSpeed: 2.25
   baseDamage: 5
   baseAttackSpeed: 1
   baseArmor: 0
@@ -148,8 +148,8 @@ MonoBehaviour:
   baseCritDamage: 0
   knockbackMult: 1
   levelScaling: 1
-  hpLevelUp: 5
-  damageLevelUp: 1
+  hpLevelUp: 4
+  damageLevelUp: 0.5
   currentHP: 0
   xpAmount: 0
   level: 0

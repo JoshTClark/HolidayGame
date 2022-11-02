@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Damage3
   m_EditorClassIdentifier: 
   upgradeName: Improved Ammo
-  upgradeDescription: Increases base damage by 15%
+  upgradeDescription: Increases base damage by 30%
   index: 5
   tier: 2
   CanTakeMultiple: 1

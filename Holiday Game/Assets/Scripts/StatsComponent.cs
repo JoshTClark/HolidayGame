@@ -502,15 +502,15 @@ public abstract class StatsComponent : MonoBehaviour
         // Damage1 - Damage3
         if (HasUpgrade(ResourceManager.UpgradeIndex.Damage1))
         {
-            damageAdd += (0.05f * baseDamage) * GetUpgrade(ResourceManager.UpgradeIndex.Damage1).CurrentLevel;
+            damageAdd += (0.1f * baseDamage) * GetUpgrade(ResourceManager.UpgradeIndex.Damage1).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.Damage2))
         {
-            damageAdd += (0.1f * baseDamage) * GetUpgrade(ResourceManager.UpgradeIndex.Damage2).CurrentLevel;
+            damageAdd += (0.2f * baseDamage) * GetUpgrade(ResourceManager.UpgradeIndex.Damage2).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.Damage3))
         {
-            damageAdd += (0.15f * baseDamage) * GetUpgrade(ResourceManager.UpgradeIndex.Damage3).CurrentLevel;
+            damageAdd += (0.3f * baseDamage) * GetUpgrade(ResourceManager.UpgradeIndex.Damage3).CurrentLevel;
         }
 
         // Speed1 - Speed3
@@ -530,15 +530,15 @@ public abstract class StatsComponent : MonoBehaviour
         // AttackSpeed1 - AttackSpeed3
         if (HasUpgrade(ResourceManager.UpgradeIndex.AttackSpeed1))
         {
-            attackSpeedAdd += 0.05f * GetUpgrade(ResourceManager.UpgradeIndex.AttackSpeed1).CurrentLevel;
+            attackSpeedAdd += 0.1f * GetUpgrade(ResourceManager.UpgradeIndex.AttackSpeed1).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.AttackSpeed2))
         {
-            attackSpeedAdd += 0.10f * GetUpgrade(ResourceManager.UpgradeIndex.AttackSpeed2).CurrentLevel;
+            attackSpeedAdd += 0.20f * GetUpgrade(ResourceManager.UpgradeIndex.AttackSpeed2).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.AttackSpeed3))
         {
-            attackSpeedAdd += 0.20f * GetUpgrade(ResourceManager.UpgradeIndex.AttackSpeed3).CurrentLevel;
+            attackSpeedAdd += 0.30f * GetUpgrade(ResourceManager.UpgradeIndex.AttackSpeed3).CurrentLevel;
         }
 
         // Glass Cannon

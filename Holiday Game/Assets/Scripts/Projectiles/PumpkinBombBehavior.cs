@@ -31,6 +31,7 @@ public class PumpkinBombBehavior : BombProjectileBase
 
     public override void OnDeath()
     {
+        
         if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.ClusterPumkins) && !isCluster)
         {
             for (int i = 0; i < 4; i++)
@@ -53,6 +54,7 @@ public class PumpkinBombBehavior : BombProjectileBase
                 p.explosionSizeMultiplier = clusterSize * explosionSizeMultiplier;
             }
         }
+        //SoundManager.Instance.PumpkinExplosion();
         base.OnDeath();
     }
 

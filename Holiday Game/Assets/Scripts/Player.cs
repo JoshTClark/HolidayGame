@@ -20,15 +20,17 @@ public class Player : StatsComponent
 
     [SerializeField]
     private AudioSource hitEffect;
+    private List<StatsComponent> hitBy = new List<StatsComponent>();
+    private List<float> invincibilityTimes = new List<float>();
 
-    
+
     public bool IsInvincible { get { return isInvincible; } }
     public float PickupRange { get { return pickupRange * pickupRangeIncrease; } }
 
     public override void OnStart()
     {
         isInvincible = false;
-        iFrames = .5f;
+        iFrames = 0.4f;
         an = gameObject.GetComponent<Animator>();
     }
 
@@ -82,21 +84,16 @@ public class Player : StatsComponent
     /// </summary>
     void UpdateiFrames()
     {
-        // See if we should be invincible
-        if (isInvincible)
+        float delta = Time.deltaTime;
+        for (int i = hitBy.Count - 1; i >= 0; i--)
         {
-            // if we're invincible count down the timer
-            iFrames -= Time.deltaTime;
-        }
 
-        if (iFrames <= 0)
-        {
-            // Invincible time is up we can take damage again
-            // No longer invincible
-            isInvincible = false;
-
-            // Reset iframes
-            iFrames = 3f;
+            invincibilityTimes[i] -= delta;
+            if (invincibilityTimes[i] <= 0)
+            {
+                hitBy.RemoveAt(i);
+                invincibilityTimes.RemoveAt(i);
+            }
         }
     }
     /// <summary>
@@ -105,14 +102,12 @@ public class Player : StatsComponent
     /// <param name="damage"></param>
     public override void TakeDamage(DamageInfo info)
     {
-        if (isInvincible)
+        if (!hitBy.Contains(info.attacker))
         {
-            UpdateiFrames();
-        }
-        else
-        {
-            hitEffect.Play();
             // take damage & become invincible
+            hitBy.Add(info.attacker);
+            invincibilityTimes.Add(iFrames);
+            //hitEffect.Play();
             base.TakeDamage(info);
             isInvincible = true;
         }

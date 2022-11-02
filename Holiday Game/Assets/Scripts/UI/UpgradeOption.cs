@@ -10,6 +10,7 @@ public class UpgradeOption : MonoBehaviour
     public TMP_Text textName, tier, desc;
     public Image iconHolder;
     public bool isHover = false;
+    public bool isWeaponReplacement = false;
     private float scale = 2;
 
     private void Start()
@@ -76,62 +77,70 @@ public class UpgradeOption : MonoBehaviour
     {
         isHover = true;
         Upgrade upgradeObject = ResourceManager.GetUpgrade(upgrade);
-        textName.text = upgradeObject.upgradeName;
-        desc.text = upgradeObject.upgradeDescription;
-        tier.enableVertexGradient = false;
-        textName.enableVertexGradient = false;
-        if (upgradeObject.tier == Upgrade.Tier.Common)
+        if (isWeaponReplacement)
         {
-            tier.text = "Common";
-            tier.color = new Color(0f, 1f, 0f, 1f);
-            textName.color = new Color(0f, 1f, 0f, 1f);
+            textName.text = upgradeObject.upgradeName;
+            desc.text = "Replace this weapon?";
         }
-        else if (upgradeObject.tier == Upgrade.Tier.Uncommon)
+        else
         {
-            tier.text = "Uncommon";
-            tier.color = new Color(0f, 0f, 1f, 1f);
-            textName.color = new Color(0f, 0f, 1f, 1f);
-        }
-        else if (upgradeObject.tier == Upgrade.Tier.Rare)
-        {
-            tier.text = "Rare";
-            tier.color = new Color(1f, 0f, 1f, 1f);
-            textName.color = new Color(1f, 0f, 1f, 1f);
-        }
-        else if (upgradeObject.tier == Upgrade.Tier.Epic)
-        {
-            VertexGradient grad = new VertexGradient();
-            grad.topLeft = new Color(1f, 0.5f, 0f, 1f);
-            grad.bottomLeft = new Color(0.75f, 0.35f, 0f, 1f);
-            grad.topRight = new Color(0.75f, 0.35f, 0f, 1f);
-            grad.bottomRight = new Color(0.5f, 0.25f, 0f, 1f);
-            tier.enableVertexGradient = true;
-            textName.enableVertexGradient = true;
-            tier.color = new Color(1f, 1f, 1f, 1f);
-            textName.color = new Color(1f, 1f, 1f, 1f);
-            tier.text = "Epic";
-            tier.colorGradient = grad;
-            textName.colorGradient = grad;
-        }
-        else if (upgradeObject.tier == Upgrade.Tier.Legendary)
-        {
-            VertexGradient grad = new VertexGradient();
-            grad.topLeft = new Color(1f, 0f, 0f, 1f);
-            grad.bottomLeft = new Color(0.75f, 0f, 0f, 1f);
-            grad.topRight = new Color(0.75f, 0f, 0f, 1f);
-            grad.bottomRight = new Color(0.5f, 0f, 0f, 1f);
-            tier.enableVertexGradient = true;
-            textName.enableVertexGradient = true;
-            tier.text = "Legendary";
-            tier.color = new Color(1f, 1f, 1f, 1f);
-            textName.color = new Color(1f, 1f, 1f, 1f);
-            tier.colorGradient = grad;
-            textName.colorGradient = grad;
-        }
+            textName.text = upgradeObject.upgradeName;
+            desc.text = upgradeObject.upgradeDescription;
+            tier.enableVertexGradient = false;
+            textName.enableVertexGradient = false;
+            if (upgradeObject.tier == Upgrade.Tier.Common)
+            {
+                tier.text = "Common";
+                tier.color = new Color(0f, 1f, 0f, 1f);
+                textName.color = new Color(0f, 1f, 0f, 1f);
+            }
+            else if (upgradeObject.tier == Upgrade.Tier.Uncommon)
+            {
+                tier.text = "Uncommon";
+                tier.color = new Color(0f, 0f, 1f, 1f);
+                textName.color = new Color(0f, 0f, 1f, 1f);
+            }
+            else if (upgradeObject.tier == Upgrade.Tier.Rare)
+            {
+                tier.text = "Rare";
+                tier.color = new Color(1f, 0f, 1f, 1f);
+                textName.color = new Color(1f, 0f, 1f, 1f);
+            }
+            else if (upgradeObject.tier == Upgrade.Tier.Epic)
+            {
+                VertexGradient grad = new VertexGradient();
+                grad.topLeft = new Color(1f, 0.5f, 0f, 1f);
+                grad.bottomLeft = new Color(0.75f, 0.35f, 0f, 1f);
+                grad.topRight = new Color(0.75f, 0.35f, 0f, 1f);
+                grad.bottomRight = new Color(0.5f, 0.25f, 0f, 1f);
+                tier.enableVertexGradient = true;
+                textName.enableVertexGradient = true;
+                tier.color = new Color(1f, 1f, 1f, 1f);
+                textName.color = new Color(1f, 1f, 1f, 1f);
+                tier.text = "Epic";
+                tier.colorGradient = grad;
+                textName.colorGradient = grad;
+            }
+            else if (upgradeObject.tier == Upgrade.Tier.Legendary)
+            {
+                VertexGradient grad = new VertexGradient();
+                grad.topLeft = new Color(1f, 0f, 0f, 1f);
+                grad.bottomLeft = new Color(0.75f, 0f, 0f, 1f);
+                grad.topRight = new Color(0.75f, 0f, 0f, 1f);
+                grad.bottomRight = new Color(0.5f, 0f, 0f, 1f);
+                tier.enableVertexGradient = true;
+                textName.enableVertexGradient = true;
+                tier.text = "Legendary";
+                tier.color = new Color(1f, 1f, 1f, 1f);
+                textName.color = new Color(1f, 1f, 1f, 1f);
+                tier.colorGradient = grad;
+                textName.colorGradient = grad;
+            }
 
-        if (upgradeObject.IsWeapon)
-        {
-            tier.text = "New Weapon";
+            if (upgradeObject.IsWeapon)
+            {
+                tier.text = "New Weapon";
+            }
         }
     }
 

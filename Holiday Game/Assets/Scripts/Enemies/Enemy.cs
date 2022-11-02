@@ -199,6 +199,7 @@ public abstract class Enemy : StatsComponent
             // We hit the player, so they take damage
             DamageInfo info = new DamageInfo();
             info.damage = Damage;
+            info.attacker = this;
             GameManager.instance.Player.TakeDamage(info);
         }
         else if (collision.gameObject.GetComponent<Enemy>())

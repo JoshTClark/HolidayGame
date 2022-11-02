@@ -1,18 +1,19 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static ResourceManager;
 
 public class UpgradePanelManager : MonoBehaviour
 {
     private List<UpgradeOption> options = new List<UpgradeOption>();
+    private List<UpgradeOption> replaceWeapons = new List<UpgradeOption>();
     public UpgradeOption prefab;
     public Player player;
     public bool selected = false;
     public bool displaying = false;
     public float commonOdds, uncommonOdds, rareOdds, epicOdds, legendaryOdds;
-    public TMP_Text textName, tier, desc;
+    public TMP_Text textName, tier, desc, titleText;
 
     private void Start()
     {
@@ -25,7 +26,57 @@ public class UpgradePanelManager : MonoBehaviour
     /// <param name="upgrade"></param>
     public void Select(ResourceManager.UpgradeIndex upgrade)
     {
-        player.AddUpgrade(upgrade);
+        if (ResourceManager.GetUpgrade(upgrade).IsWeapon && player.weapons.Count >= 4)
+        {
+            foreach (UpgradeOption i in options)
+            {
+                i.gameObject.SetActive(false);
+            }
+            textName.text = "";
+            tier.text = "";
+            desc.text = "";
+            titleText.text = "Replace a weapon";
+
+            // Adding replace weapon options
+            for (int i = 0; i < player.weapons.Count; i++)
+            {
+                UpgradeOption option = Instantiate<UpgradeOption>(prefab, new Vector3(), new Quaternion(), this.gameObject.transform);
+                UpgradeIndex replacement = player.weapons[i].upgradeIndex;
+                option.upgrade = replacement;
+                option.tier = tier;
+                option.textName = textName;
+                option.desc = desc;
+                RectTransform upgradeRect = option.GetComponent<RectTransform>();
+                upgradeRect.localScale = new Vector3(2, 2, 1);
+                option.isWeaponReplacement = true;
+                option.gameObject.GetComponent<Button>().onClick.AddListener(() =>
+                {
+                    SelectWeapon(upgrade, replacement);
+                });
+                replaceWeapons.Add(option);
+            }
+
+            for (int i = 0; i < replaceWeapons.Count; i++)
+            {
+                UpgradeOption option = replaceWeapons[i];
+
+                RectTransform upgradeRect = option.GetComponent<RectTransform>();
+                RectTransform panelRect = this.gameObject.GetComponent<RectTransform>();
+
+                upgradeRect.SetPositionAndRotation(new Vector3(((panelRect.rect.width / (replaceWeapons.Count + 1)) * (i + 1)) * panelRect.lossyScale.x, (panelRect.rect.height / 4) * panelRect.lossyScale.y, 0), Quaternion.identity);
+            }
+        }
+        else
+        {
+            player.AddUpgrade(upgrade);
+            selected = true;
+        }
+    }
+
+    public void SelectWeapon(ResourceManager.UpgradeIndex add, ResourceManager.UpgradeIndex remove)
+    {
+        player.RemoveUpgrade(remove);
+        player.AddUpgrade(add);
         selected = true;
     }
 
@@ -237,7 +288,13 @@ public class UpgradePanelManager : MonoBehaviour
         {
             Destroy(options[i].gameObject);
         }
+        for (int i = replaceWeapons.Count - 1; i >= 0; i--)
+        {
+            Destroy(replaceWeapons[i].gameObject);
+        }
+        titleText.text = "Select an Upgrade";
         options.Clear();
+        replaceWeapons.Clear();
         selected = false;
         displaying = false;
     }

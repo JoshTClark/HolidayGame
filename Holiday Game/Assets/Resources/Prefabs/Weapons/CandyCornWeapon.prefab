@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7878656858360610088
+--- !u!1 &2870242568929779014
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1193300277584286022}
-  - component: {fileID: -2503272579112278794}
+  - component: {fileID: 5310597426760342082}
+  - component: {fileID: 130564432471187322}
   m_Layer: 0
-  m_Name: FireworksWeapon
+  m_Name: CandyCornWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1193300277584286022
+--- !u!4 &5310597426760342082
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7878656858360610088}
+  m_GameObject: {fileID: 2870242568929779014}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,22 +32,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-2503272579112278794
+--- !u!114 &130564432471187322
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7878656858360610088}
+  m_GameObject: {fileID: 2870242568929779014}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f0b1657903159644b9fce38959635ab, type: 3}
+  m_Script: {fileID: 11500000, guid: 70605d7495d740a44a869ce4212c2ba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 3.5
-  index: 3
-  upgradeIndex: 21
-  icon: {fileID: 21300000, guid: e067a997fa7d04b4e9706a9936c9b47f, type: 3}
+  delay: 2.5
+  index: 8
+  upgradeIndex: 52
+  icon: {fileID: 21300000, guid: 5af9b80bc6e5344418cdd46fe0df301b, type: 3}
   timer: 0
   owner: {fileID: 0}
   canFire: 0

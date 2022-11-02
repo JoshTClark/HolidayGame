@@ -32,7 +32,7 @@ public class CupidArrow : Weapon
             p.transform.rotation = transform.rotation;
             p.Direction = transform.right;
             DamageInfo info = new DamageInfo();
-            info.damage = owner.Damage;
+            info.damage = owner.Damage * baseDamageMultiplier;
             info.attacker = owner;
             info.knockbackDirection = p.Direction;
             p.SetDamageInfo(info);

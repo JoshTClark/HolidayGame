@@ -22,7 +22,7 @@ public class SnowballWeapon : Weapon
         {
             // Calculating stats
             // Damage
-            float damageMult = baseDamageMultiplier;
+            float damageMult = 1f;
             if (owner.HasUpgrade(ResourceManager.UpgradeIndex.SnowballDamage1))
             {
                 damageMult += 0.1f * owner.GetUpgrade(ResourceManager.UpgradeIndex.SnowballDamage1).CurrentLevel;
@@ -75,11 +75,12 @@ public class SnowballWeapon : Weapon
             p.transform.position = this.transform.position;
             p.Direction = transform.right;
             DamageInfo info = new DamageInfo();
-            info.damage = damageMult * owner.Damage;
+            info.damage = owner.Damage * baseDamageMultiplier;
             info.attacker = owner;
             info.knockbackDirection = p.Direction;
             p.SetDamageInfo(info);
             p.Pierce += pierceAdd;
+            p.DamageMultiplier = damageMult;
             p.SizeMultiplier = sizeMult;
             p.SpeedMultiplier = speedMult;
             ResetTimer();

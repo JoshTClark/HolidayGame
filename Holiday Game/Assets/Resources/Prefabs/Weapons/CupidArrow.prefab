@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delay: 3
   index: 5
+  upgradeIndex: 45
   icon: {fileID: 21300000, guid: 337314307b4a0094bbb48f5cab57ba4e, type: 3}
   timer: 0
   owner: {fileID: 0}

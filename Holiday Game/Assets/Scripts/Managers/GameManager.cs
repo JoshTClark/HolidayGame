@@ -153,7 +153,7 @@ public class GameManager : MonoBehaviour
                     if (!player.HasWeapon(icon.weaponIndex))
                     {
                         icon.weaponIndex = ResourceManager.WeaponIndex.Null;
-                        icon.gameObject.SetActive(false);
+                        //icon.gameObject.SetActive(false);
                     }
                 }
 

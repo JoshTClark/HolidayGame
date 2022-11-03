@@ -12,6 +12,11 @@ public class CandyCornWeapon : Weapon
 
     public override void OnUpdate()
     {
+        if (owner.HasUpgrade(ResourceManager.UpgradeIndex.CandyCornSpray))
+        {
+            this.attackSpeedMultiplier = 1.5f + 0.5f * (owner.GetUpgrade(ResourceManager.UpgradeIndex.CandyCornSpray).CurrentLevel - 1);
+        }
+
         Enemy e = GetClosestEnemy();
         if (e)
         {
@@ -30,12 +35,18 @@ public class CandyCornWeapon : Weapon
             if (firedShots < shotsPerVolley)
             {
                 volleyTimer += Time.deltaTime;
-                if (volleyTimer >= shotDelay / owner.AttackSpeed)
+                if (volleyTimer >= (shotDelay / owner.AttackSpeed) / attackSpeedMultiplier)
                 {
+                    float accuracyOff = 0;
+                    if (owner.HasUpgrade(ResourceManager.UpgradeIndex.CandyCornSpray))
+                    {
+                        accuracyOff = Random.Range(-20 * (owner.GetUpgrade(ResourceManager.UpgradeIndex.CandyCornSpray).CurrentLevel), 20 * (owner.GetUpgrade(ResourceManager.UpgradeIndex.CandyCornSpray).CurrentLevel));
+                    }
                     ProjectileBase p = ProjectileManager.GetProjectile(ResourceManager.ProjectileIndex.CandyCorn);
                     p.transform.position = this.transform.position;
                     p.transform.rotation = transform.rotation;
                     p.Direction = transform.right;
+                    p.RotateDirection(accuracyOff);
                     DamageInfo info = new DamageInfo();
                     info.damage = owner.Damage * baseDamageMultiplier;
                     info.attacker = owner;

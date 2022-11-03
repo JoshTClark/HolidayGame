@@ -282,6 +282,14 @@ public class GameManager : MonoBehaviour
         {
             pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Fireworks));
         }
+        if (player.HasUpgrade(ResourceManager.UpgradeIndex.CupidArrowWeaponUpgrade))
+        {
+            pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.CupidArrow));
+        }
+        if (player.HasUpgrade(ResourceManager.UpgradeIndex.CandyCornWeaponUpgrade))
+        {
+            pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.CandyCorn));
+        }
         return pools;
     }
 

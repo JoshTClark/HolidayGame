@@ -253,7 +253,7 @@ public abstract class Enemy : StatsComponent
         if (CurrentHP > 0)
         {
             // Play Audio
-            onHitSound.Play();
+            //onHitSound.Play();
         }
     }
 }

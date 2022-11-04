@@ -347,6 +347,11 @@ public class GameManager : MonoBehaviour
         effect.GetComponent<NumberEffect>().cam = cam;
     }
 
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
     public void ShowDamageNumbers(bool show)
     {
         showDamageNumbers = show;

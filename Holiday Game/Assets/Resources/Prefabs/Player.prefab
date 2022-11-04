@@ -143,7 +143,7 @@ MonoBehaviour:
   baseArmor: 0
   baseRegen: 0
   baseRegenInterval: 5
-  baseCritChance: 0.1
+  baseCritChance: 0.01
   baseCritDamage: 2
   knockbackMult: 0
   levelScaling: 0
@@ -210,6 +210,7 @@ MonoBehaviour:
   pickupRange: 5
   attackActivationRange: 20
   iFrames: 0.4
+  hitEffect: {fileID: 0}
 --- !u!61 &1069143796030833450
 BoxCollider2D:
   m_ObjectHideFlags: 0

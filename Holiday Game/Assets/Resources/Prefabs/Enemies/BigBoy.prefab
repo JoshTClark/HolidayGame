@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 8543657870624659441}
   - component: {fileID: 3796714693130446672}
   - component: {fileID: -2874685305454354068}
-  - component: {fileID: -6971867487915864456}
+  - component: {fileID: 9056888587313460342}
   - component: {fileID: 4156725529473995661}
   - component: {fileID: -1947996119439005389}
+  - component: {fileID: 1386517319}
   m_Layer: 0
   m_Name: BigBoy
   m_TagString: Untagged
@@ -29,9 +30,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8434561644210671787}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.3573503, y: -6.1309485, z: 0}
-  m_LocalScale: {x: 2.5, y: 5.0781245, z: 1.5873015}
-  m_ConstrainProportionsScale: 1
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -77,8 +78,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 3625043607559282579, guid: 19fb86013d8c24d6cb8410c0aadf30fa, type: 3}
-  m_Color: {r: 0.5030992, g: 0.22922742, b: 0.8867924, a: 1}
+  m_Sprite: {fileID: 21300000, guid: b7202f45af1d33941adf501c11475928, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -140,8 +141,8 @@ MonoBehaviour:
   XPType: 1
   Drop: 2
   onHitSound: {fileID: -1947996119439005389}
---- !u!58 &-6971867487915864456
-CircleCollider2D:
+--- !u!61 &9056888587313460342
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -153,9 +154,19 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0071754754, y: -0.19404423}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.5142858, y: 2.5142858}
+    newSize: {x: 1, y: 0.5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.24
+  m_Size: {x: 1.0135555, y: 2.1261976}
+  m_EdgeRadius: 0
 --- !u!50 &4156725529473995661
 Rigidbody2D:
   serializedVersion: 4
@@ -273,3 +284,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &1386517319
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8434561644210671787}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fbcde42aa39e2ac40a45452a35f8b33b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

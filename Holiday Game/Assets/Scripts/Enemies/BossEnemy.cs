@@ -5,7 +5,7 @@ using UnityEngine;
 public class BossEnemy : Enemy
 {
     [SerializeField]
-    protected AudioSource spawnSound;
+    //protected AudioSource spawnSound;
     public override void OnStart()
     {
         AddAttack(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.BossAttack));

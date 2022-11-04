@@ -100,7 +100,8 @@ public class ResourceManager
         ArrowBounceDamage,
         Snowballing,
         StunningFireworks,
-        CandyCornWeaponUpgrade
+        CandyCornWeaponUpgrade,
+        CandyCornSpray
     }
 
     public enum UpgradePoolIndex

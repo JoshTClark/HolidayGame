@@ -153,7 +153,7 @@ public class GameManager : MonoBehaviour
                     if (!player.HasWeapon(icon.weaponIndex))
                     {
                         icon.weaponIndex = ResourceManager.WeaponIndex.Null;
-                        icon.gameObject.SetActive(false);
+                        //icon.gameObject.SetActive(false);
                     }
                 }
 
@@ -282,6 +282,14 @@ public class GameManager : MonoBehaviour
         {
             pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Fireworks));
         }
+        if (player.HasUpgrade(ResourceManager.UpgradeIndex.CupidArrowWeaponUpgrade))
+        {
+            pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.CupidArrow));
+        }
+        if (player.HasUpgrade(ResourceManager.UpgradeIndex.CandyCornWeaponUpgrade))
+        {
+            pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.CandyCorn));
+        }
         return pools;
     }
 
@@ -337,6 +345,11 @@ public class GameManager : MonoBehaviour
         effect.GetComponent<NumberEffect>().spawnPosition = receiver.gameObject.transform.position;
         effect.GetComponent<NumberEffect>().canvas = ui;
         effect.GetComponent<NumberEffect>().cam = cam;
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 
     public void ShowDamageNumbers(bool show)

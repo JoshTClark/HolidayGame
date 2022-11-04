@@ -20,15 +20,16 @@ public abstract class Weapon : MonoBehaviour
     public bool canFire = false;
 
     [SerializeField]
-    public float baseDamageMultiplier, baseSizeMultiplier;
+    public float baseDamageMultiplier, baseSizeMultiplier, attackSpeedMultiplier;
 
     public float Delay
     {
-        get { return delay * (1 / owner.AttackSpeed); }
+        get { return (delay * (1 / owner.AttackSpeed)) / attackSpeedMultiplier; }
     }
 
     private void Start()
     {
+        attackSpeedMultiplier = 1f;
     }
 
     void Update()

@@ -85,6 +85,14 @@ public abstract class Enemy : StatsComponent
         {
             CalcMoves();
         }
+        if (transform.position.x < player.transform.position.x)
+        {
+            sr.flipX = true;
+        }
+        else
+        {
+            sr.flipX = false;
+        }
         // Then take Velocity normalize it so it's a heading vector
         // scale that by speed, then apply movement
         Vector2 velocity = Vector2.zero;
@@ -245,7 +253,7 @@ public abstract class Enemy : StatsComponent
         if (CurrentHP > 0)
         {
             // Play Audio
-            onHitSound.Play();
+            //onHitSound.Play();
         }
     }
 }

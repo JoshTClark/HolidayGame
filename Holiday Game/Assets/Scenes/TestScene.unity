@@ -723,7 +723,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36.7
+  m_fontSize: 36.65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -8166,7 +8166,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 8fd99cd0242fb554a91a1012e8e1d430, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -8458,6 +8458,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelUpEffect: {fileID: 1529754984}
   pumpkinExplosionEffect: {fileID: 1529754985}
+  arrowEffect: {fileID: 1529754983}
 --- !u!1 &1541221320
 GameObject:
   m_ObjectHideFlags: 0
@@ -9204,7 +9205,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 73.4
+  m_fontSize: 73.35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

@@ -16,6 +16,8 @@ public class CupidArrow : Weapon
 
         if (canFire && e)
         {
+            // Play weapon sound
+            SoundManager.instance.ArrowHit();
             float pierceAdd = 0;
             if (owner.HasUpgrade(ResourceManager.UpgradeIndex.ArrowPierce1))
             {

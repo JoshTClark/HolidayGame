@@ -136,6 +136,12 @@ public abstract class Enemy : StatsComponent
 
     public override void OnDeath()
     {
+        // Stop the hit sound
+        if (onHitSound.isPlaying)
+        {
+            onHitSound.Stop();
+        }
+
         //Drops XP
         DropBase xp = DropManager.GetPickup(XPType);
         xp.gameObject.transform.position = transform.position;
@@ -250,10 +256,10 @@ public abstract class Enemy : StatsComponent
     public override void TakeDamage(DamageInfo info)
     {
         base.TakeDamage(info);
-        if (CurrentHP > 0)
+        if (!onHitSound.isPlaying)
         {
             // Play Audio
-            //onHitSound.Play();
+            onHitSound.Play();
         }
     }
 }

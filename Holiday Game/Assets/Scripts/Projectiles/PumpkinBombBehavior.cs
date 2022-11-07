@@ -54,7 +54,7 @@ public class PumpkinBombBehavior : BombProjectileBase
                 p.explosionSizeMultiplier = clusterSize * explosionSizeMultiplier;
             }
         }
-        //SoundManager.Instance.PumpkinExplosion();
+        SoundManager.instance.PumpkinExplosion();
         base.OnDeath();
     }
 

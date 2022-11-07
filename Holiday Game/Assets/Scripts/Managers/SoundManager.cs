@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    public static SoundManager Instance;
+    public static SoundManager instance;
 
     [SerializeField]
     AudioSource levelUpEffect;
@@ -18,8 +18,8 @@ public class SoundManager : MonoBehaviour
     //[SerializeField]
     //AudioSource snowballEffect;
     //
-    //[SerializeField]
-    //AudioSource arrowEffect;
+    [SerializeField]
+    AudioSource arrowEffect;
 
 
 
@@ -27,6 +27,7 @@ public class SoundManager : MonoBehaviour
     void Start()
     {
         // Nothing Special
+        instance = this; 
     }
 
     // Update is called once per frame
@@ -37,7 +38,10 @@ public class SoundManager : MonoBehaviour
 
     public void PumpkinExplosion()
     {
-        pumpkinExplosionEffect.Play();
+        if (!pumpkinExplosionEffect.isPlaying)
+        {
+            pumpkinExplosionEffect.Play();
+        }
     }
     public void RocketExplosion()
     {
@@ -49,10 +53,16 @@ public class SoundManager : MonoBehaviour
     }
     public void ArrowHit()
     {
-        //arrowEffect.Play();
+        if (!arrowEffect.isPlaying)
+        {
+            arrowEffect.Play();
+        }
     }
     public void LevelUp()
     {
-        levelUpEffect.Play();
+        if (!levelUpEffect.isPlaying)
+        {
+            levelUpEffect.Play();
+        }
     }
 }

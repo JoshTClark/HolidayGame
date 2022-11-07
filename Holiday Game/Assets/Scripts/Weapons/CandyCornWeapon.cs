@@ -6,7 +6,7 @@ public class CandyCornWeapon : Weapon
 {
     private bool doVolley = false;
     private float volleyTimer = 0.2f;
-    private float shotDelay = 0.2f;
+    private float shotDelay = 0.6f;
     private int shotsPerVolley = 3;
     private int firedShots = 0;
 
@@ -18,7 +18,7 @@ public class CandyCornWeapon : Weapon
         }
 
         Enemy e = GetClosestEnemy();
-        if (e)
+        if (e && !doVolley)
         {
             Vector2 direction = e.transform.position - transform.position;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -32,10 +32,15 @@ public class CandyCornWeapon : Weapon
 
         if (doVolley)
         {
-            if (firedShots < shotsPerVolley)
+            int extra = 0;
+            if (owner.HasUpgrade(ResourceManager.UpgradeIndex.MoreCorn))
+            {
+                extra = owner.GetUpgrade(ResourceManager.UpgradeIndex.MoreCorn).CurrentLevel;
+            }
+            if (firedShots < shotsPerVolley + extra)
             {
                 volleyTimer += Time.deltaTime;
-                if (volleyTimer >= (shotDelay / owner.AttackSpeed) / attackSpeedMultiplier)
+                if (volleyTimer >= (((shotDelay / (shotsPerVolley + extra)) / owner.AttackSpeed) / attackSpeedMultiplier))
                 {
                     float accuracyOff = 0;
                     if (owner.HasUpgrade(ResourceManager.UpgradeIndex.CandyCornSpray))

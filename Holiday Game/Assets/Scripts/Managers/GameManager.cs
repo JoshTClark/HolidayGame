@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
     private GameState state = GameState.Title;
     private bool paused = false;
     private int month, day, hour;
-    private float secondToHourRation = 1 / 1;
+    private float secondToHourRation = 3 / 1;
 
     public Player Player
     {

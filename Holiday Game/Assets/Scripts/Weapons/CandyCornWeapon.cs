@@ -40,7 +40,7 @@ public class CandyCornWeapon : Weapon
                     float accuracyOff = 0;
                     if (owner.HasUpgrade(ResourceManager.UpgradeIndex.CandyCornSpray))
                     {
-                        accuracyOff = Random.Range(-20 * (owner.GetUpgrade(ResourceManager.UpgradeIndex.CandyCornSpray).CurrentLevel), 20 * (owner.GetUpgrade(ResourceManager.UpgradeIndex.CandyCornSpray).CurrentLevel));
+                        accuracyOff = Random.Range(-10 * (owner.GetUpgrade(ResourceManager.UpgradeIndex.CandyCornSpray).CurrentLevel), 10 * (owner.GetUpgrade(ResourceManager.UpgradeIndex.CandyCornSpray).CurrentLevel));
                     }
                     ProjectileBase p = ProjectileManager.GetProjectile(ResourceManager.ProjectileIndex.CandyCorn);
                     p.transform.position = this.transform.position;

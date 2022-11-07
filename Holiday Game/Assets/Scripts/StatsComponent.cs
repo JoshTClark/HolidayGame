@@ -355,12 +355,12 @@ public abstract class StatsComponent : MonoBehaviour
     //What happens when the player levels up
     private void OnLevelUp()
     {
-        //checks if missing hp, heals for 20 if so
         CalculateStats();
         if (this.gameObject.GetComponent<Player>())
         {
             GameManager.instance.DoPlayerLevelUp();
         }
+        SoundManager.instance.LevelUp();
     }
 
     // Deals damage here

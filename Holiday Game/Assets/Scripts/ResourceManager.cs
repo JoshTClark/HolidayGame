@@ -10,7 +10,8 @@ public class ResourceManager
         Test,
         Test2,
         BigBoy,
-        Boss
+        Boss,
+        Ghost
     }
     public enum ProjectileIndex
     {

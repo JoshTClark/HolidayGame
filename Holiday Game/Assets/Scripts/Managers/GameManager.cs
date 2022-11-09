@@ -223,6 +223,7 @@ public class GameManager : MonoBehaviour
                         state = GameState.Normal;
                         upgradePanel.gameObject.SetActive(false);
                         gamePanel.gameObject.SetActive(true);
+                        doSpecialUpgrade = false;
                     }
                     else
                     {
@@ -270,8 +271,9 @@ public class GameManager : MonoBehaviour
             "\nGame Difficulty: " + currentDifficulty.ToString();
     }
 
-    public void PlayerPickupBossDrop()
+    public void PlayerPickupBossDrop(int upgrades)
     {
+        upgradesToGive = upgrades;
         doSpecialUpgrade = true;
         state = GameState.UpgradeMenu;
     }

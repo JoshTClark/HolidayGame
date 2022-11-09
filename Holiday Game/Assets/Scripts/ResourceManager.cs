@@ -104,7 +104,10 @@ public class ResourceManager
         StunningFireworks,
         CandyCornWeaponUpgrade,
         CandyCornSpray,
-        MoreCorn
+        MoreCorn,
+        Reflector,
+        Patience,
+        LowHPDamage
     }
 
     public enum UpgradePoolIndex

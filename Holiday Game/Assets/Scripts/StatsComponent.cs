@@ -108,9 +108,10 @@ public abstract class StatsComponent : MonoBehaviour
 
         currentHP = MaxHp;
         xpAmount = 0;
-        if (!this.gameObject.GetComponent<Enemy>())
+        if (this.gameObject.GetComponent<Player>())
         {
             level = 1;
+            xpAmount = expCurve.Evaluate(1);
         }
 
 

@@ -32,7 +32,7 @@ public abstract class StatsComponent : MonoBehaviour
     private AnimationCurve expCurve;
 
     // Multipliers to stats
-    private float hpMult, speedMult, damageMult, attackSpeedMult, armorMult, regenMult, regenIntervalMult, critChanceMult, critDamageMult;
+    private float hpMult, speedMult, damageMult, attackSpeedMult, armorMult, regenMult, regenIntervalMult, critChanceMult, critDamageMult, coolDownMult;
 
     // Flags
     [SerializeField]
@@ -53,6 +53,8 @@ public abstract class StatsComponent : MonoBehaviour
     float fadeTimer;
     float vFade;
     float regenTimer = 0f;
+    private float patienceTimer = 0.0f;
+    protected bool isMoving = true;
 
     [SerializeField]
     float fadeTotalTime;
@@ -86,6 +88,7 @@ public abstract class StatsComponent : MonoBehaviour
     public float RegenInterval { get { return (baseRegenInterval * regenIntervalMult); } }
     public float CritChance { get { return (baseCritChance + critChanceAdd) * critChanceMult; } }
     public float CritDamage { get { return (baseCritDamage + critDamageAdd) * critDamageMult; } }
+    public float CooldownMultiplier { get { return coolDownMult; } }
 
     // Flags
     public bool IsDead { get { return isDead; } }
@@ -102,6 +105,7 @@ public abstract class StatsComponent : MonoBehaviour
         critChanceMult = 1.0f;
         critDamageMult = 1.0f;
         regenIntervalMult = 1.0f;
+        coolDownMult = 1.0f;
 
         fadeTotalTime = .2f;
         damaged = false;
@@ -131,6 +135,17 @@ public abstract class StatsComponent : MonoBehaviour
         if (GameManager.instance.State == GameManager.GameState.Normal)
         {
             float delta = Time.deltaTime;
+
+            // Patience
+            if (HasUpgrade(ResourceManager.UpgradeIndex.Patience) && !isMoving)
+            {
+                patienceTimer += delta;
+            }
+            else if (isMoving)
+            {
+                patienceTimer = 0;
+            }
+
             CalculateStats();
             CheckWeapons();
 
@@ -715,6 +730,23 @@ public abstract class StatsComponent : MonoBehaviour
         {
             critDamageAdd += 0.5f * GetUpgrade(ResourceManager.UpgradeIndex.CritDamage5).CurrentLevel;
         }
+
+        // Low HP Damage
+        if (HasUpgrade(ResourceManager.UpgradeIndex.LowHPDamage))
+        {
+            if (currentHP != 0)
+            {
+                damageMult *= 1 + ((MaxHp - currentHP) / 100);
+                speedMult *= 1 + (1 - (currentHP / MaxHp));
+                attackSpeedMult *= 1 + ((MaxHp - currentHP) / 100);
+            }
+        }
+
+        // Patience
+        if (HasUpgrade(ResourceManager.UpgradeIndex.Patience))
+        {
+            attackSpeedMult *= Mathf.Clamp(1 + (4 * (patienceTimer / (30f * CooldownMultiplier))), 1f, 4f);
+        }
     }
 
     public void OnGainUpgrade(Upgrade upgrade)
@@ -731,6 +763,11 @@ public abstract class StatsComponent : MonoBehaviour
         if (upgrade.index == ResourceManager.UpgradeIndex.Health3)
         {
             Heal(60);
+        }
+
+        if (upgrade.index == ResourceManager.UpgradeIndex.Reflector)
+        {
+            Instantiate<OrbitalBase>(GetOrbital(OrbitalIndex.IceShield), transform);
         }
     }
 }

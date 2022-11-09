@@ -45,6 +45,16 @@ public class Player : StatsComponent
         // Basic movement
         Vector2 movementInput = movement.action.ReadValue<Vector2>();
         movementInput = movementInput * Speed;
+
+        if (movementInput.x == 0 && movementInput.y == 0)
+        {
+            isMoving = false;
+        }
+        else
+        {
+            isMoving = true;
+        }
+
         GetComponent<Rigidbody2D>().velocity = movementInput;
         if (movementInput != Vector2.zero)
         {

@@ -152,7 +152,6 @@ MonoBehaviour:
   damageLevelUp: 0
   currentHP: 0
   xpAmount: 1
-  level: 0
   hpAdd: 0
   speedAdd: 0
   damageAdd: 0

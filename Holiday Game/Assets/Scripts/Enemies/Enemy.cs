@@ -202,6 +202,9 @@ public abstract class Enemy : StatsComponent
             xp5.gameObject.transform.position = new Vector2(transform.position.x + Random.Range(-2.5f, 2.5f), transform.position.y + Random.Range(-2.5f, 2.5f));
             DropBase xp6 = DropManager.GetPickup(ResourceManager.PickupIndex.XP1);
             xp6.gameObject.transform.position = new Vector2(transform.position.x + Random.Range(-2.5f, 2.5f), transform.position.y + Random.Range(-2.5f, 2.5f));
+
+            DropBase drop = DropManager.GetPickup(ResourceManager.PickupIndex.BossDrop);
+            drop.gameObject.transform.position = new Vector2(transform.position.x, transform.position.y);
         }
     }
 

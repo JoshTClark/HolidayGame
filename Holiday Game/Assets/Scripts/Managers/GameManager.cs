@@ -43,6 +43,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private List<WeaponIcon> weaponIcons;
 
+    private bool doSpecialUpgrade = false;
+
     /*
     [SerializeField]
     private HealthBar healthBar;
@@ -262,6 +264,12 @@ public class GameManager : MonoBehaviour
             "\nGame Difficulty: " + currentDifficulty.ToString();
     }
 
+    public void PlayerPickupBossDrop()
+    {
+        doSpecialUpgrade = true;
+        state = GameState.UpgradeMenu;
+    }
+
     public void DoPlayerLevelUp()
     {
         this.state = GameState.UpgradeMenu;
@@ -271,7 +279,11 @@ public class GameManager : MonoBehaviour
     private List<UpgradePool> GetPossiblePools()
     {
         List<UpgradePool> pools = new List<UpgradePool>();
-        if (player.Level % garunteedWeaponLevel == 0)
+        if (doSpecialUpgrade)
+        {
+            pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.SpecialUpgrades));
+        }
+        else if (player.Level % garunteedWeaponLevel == 0)
         {
             pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Weapons));
         }

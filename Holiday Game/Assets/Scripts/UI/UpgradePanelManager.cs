@@ -130,6 +130,7 @@ public class UpgradePanelManager : MonoBehaviour
         List<ResourceManager.UpgradeIndex> rares = new List<ResourceManager.UpgradeIndex>();
         List<ResourceManager.UpgradeIndex> epics = new List<ResourceManager.UpgradeIndex>();
         List<ResourceManager.UpgradeIndex> legendaries = new List<ResourceManager.UpgradeIndex>();
+        List<ResourceManager.UpgradeIndex> all = new List<ResourceManager.UpgradeIndex>();
         foreach (ResourceManager.UpgradeIndex u in pool.upgrades)
         {
             if (!(player.HasUpgrade(u) && !ResourceManager.GetUpgrade(u).CanTakeMultiple))
@@ -155,6 +156,7 @@ public class UpgradePanelManager : MonoBehaviour
                 {
                     legendaries.Add(u);
                 }
+                all.Add(u);
             }
         }
         for (int i = 0; i < numOptions; i++)
@@ -165,6 +167,7 @@ public class UpgradePanelManager : MonoBehaviour
                 int random = Random.Range(0, legendaries.Count);
                 ResourceManager.UpgradeIndex upgrade = legendaries[random];
                 legendaries.RemoveAt(random);
+                all.Remove(upgrade);
                 AddUpgrade(upgrade);
             }
             else if (roll <= epicOdds && epics.Count > 0)
@@ -172,6 +175,7 @@ public class UpgradePanelManager : MonoBehaviour
                 int random = Random.Range(0, epics.Count);
                 ResourceManager.UpgradeIndex upgrade = epics[random];
                 epics.RemoveAt(random);
+                all.Remove(upgrade);
                 AddUpgrade(upgrade);
             }
             else if (roll <= rareOdds && rares.Count > 0)
@@ -179,6 +183,7 @@ public class UpgradePanelManager : MonoBehaviour
                 int random = Random.Range(0, rares.Count);
                 ResourceManager.UpgradeIndex upgrade = rares[random];
                 rares.RemoveAt(random);
+                all.Remove(upgrade);
                 AddUpgrade(upgrade);
             }
             else if (roll <= uncommonOdds && uncommons.Count > 0)
@@ -186,6 +191,7 @@ public class UpgradePanelManager : MonoBehaviour
                 int random = Random.Range(0, uncommons.Count);
                 ResourceManager.UpgradeIndex upgrade = uncommons[random];
                 uncommons.RemoveAt(random);
+                all.Remove(upgrade);
                 AddUpgrade(upgrade);
             }
             else if (roll <= commonOdds && commons.Count > 0)
@@ -193,6 +199,14 @@ public class UpgradePanelManager : MonoBehaviour
                 int random = Random.Range(0, commons.Count);
                 ResourceManager.UpgradeIndex upgrade = commons[random];
                 commons.RemoveAt(random);
+                all.Remove(upgrade);
+                AddUpgrade(upgrade);
+            }
+            else if (all.Count > 0)
+            {
+                int random = Random.Range(0, all.Count);
+                ResourceManager.UpgradeIndex upgrade = all[random];
+                all.RemoveAt(random);
                 AddUpgrade(upgrade);
             }
         }

@@ -33,7 +33,8 @@ public class ResourceManager
     {
         XP1,
         XP2,
-        HealthDrop1
+        HealthDrop1,
+        BossDrop
     }
     public enum WeaponIndex
     {
@@ -114,7 +115,8 @@ public class ResourceManager
         Pumkin,
         Fireworks,
         CupidArrow,
-        CandyCorn
+        CandyCorn,
+        SpecialUpgrades
     }
 
     public enum BuffIndex

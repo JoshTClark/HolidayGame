@@ -8,6 +8,7 @@ public class DebugPanel : MonoBehaviour
 {
     public TMP_Dropdown upgradeSelector;
     public TMP_Dropdown enemySelector;
+    public TMP_Dropdown dropSelector;
     public TMP_Text inventoryDisplay;
 
     public void Init()
@@ -25,6 +26,13 @@ public class DebugPanel : MonoBehaviour
             optionsEnemies.Add(new TMP_Dropdown.OptionData(i.name));
         }
         enemySelector.AddOptions(optionsEnemies);
+
+        List<TMP_Dropdown.OptionData> optionsDrops = new List<TMP_Dropdown.OptionData>();
+        foreach (DropBase i in ResourceManager.pickupPrefabs)
+        {
+            optionsDrops.Add(new TMP_Dropdown.OptionData(i.name));
+        }
+        dropSelector.AddOptions(optionsDrops);
     }
 
     private void Update()
@@ -48,5 +56,13 @@ public class DebugPanel : MonoBehaviour
         Enemy e = ResourceManager.EnemyFromName(enemySelector.options[enemySelector.value].text);
         Debug.Log("Spawning " + e.name);
         EnemyManager.instance.SpawnEnemy(e.index);
+    }
+
+    public void SpawnDrop()
+    {
+        DropBase d = ResourceManager.DropFromName(dropSelector.options[dropSelector.value].text);
+        Debug.Log("Spawning " + d.name);
+        DropBase drop = DropManager.GetPickup(d.index);
+        drop.gameObject.transform.position = new Vector2(GameManager.instance.Player.transform.position.x, GameManager.instance.Player.transform.position.y + 10);
     }
 }

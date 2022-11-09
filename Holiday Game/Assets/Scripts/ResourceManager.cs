@@ -379,4 +379,19 @@ public class ResourceManager
 
         return e;
     }
+
+    public static DropBase DropFromName(string name)
+    {
+        DropBase drop = null;
+
+        foreach (DropBase i in pickupPrefabs)
+        {
+            if (i.name == name)
+            {
+                drop = i;
+            }
+        }
+
+        return drop;
+    }
 }

@@ -8,7 +8,7 @@ public class HoverButton : MonoBehaviour
     private float scale = 1;
     public void Update()
     {
-        float delta = Time.deltaTime;
+        float delta = Time.unscaledDeltaTime;
 
         // Hover animation
         RectTransform rectTransform = this.gameObject.GetComponent<RectTransform>();

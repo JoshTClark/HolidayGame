@@ -12,12 +12,9 @@ public abstract class DropBase : MonoBehaviour
     public ObjectPool<DropBase> pool;
     private void Update()
     {
-        if (GameManager.instance.State == GameManager.GameState.Normal)
+        if (PlayerDistance() <= GameManager.instance.Player.PickupRange * pickupRangeMultiplier)
         {
-            if (PlayerDistance() <= GameManager.instance.Player.PickupRange * pickupRangeMultiplier)
-            {
-                SeekPlayer();
-            }
+            SeekPlayer();
         }
     }
 

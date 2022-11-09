@@ -127,6 +127,7 @@ public class GameManager : MonoBehaviour
                 gameOverPanel.gameObject.SetActive(true);
                 break;
             case GameState.Normal:
+                Time.timeScale = 1f;
                 // Updating the timer and difficulty
                 time += Time.deltaTime;
                 currentDifficulty = Mathf.Floor(1 + (time / timeToDifficultyIncrease));
@@ -201,6 +202,7 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameState.Paused:
+                Time.timeScale = 0f;
                 if (!paused)
                 {
                     state = GameState.Normal;
@@ -208,6 +210,7 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameState.UpgradeMenu:
+                Time.timeScale = 0f;
                 upgradePanel.gameObject.SetActive(true);
                 gamePanel.gameObject.SetActive(false);
                 UpgradePanelManager upgradeManager = upgradePanel.GetComponent<UpgradePanelManager>();

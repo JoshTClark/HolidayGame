@@ -69,11 +69,6 @@ public abstract class ProjectileBase : MonoBehaviour
             // Moving the projectile
             Move();
         }
-        else
-        {
-            GetComponent<Rigidbody2D>().velocity = new Vector2();
-            GetComponent<Rigidbody2D>().angularVelocity = 0.0f;
-        }
     }
 
     // Called when a projectile collides with anything

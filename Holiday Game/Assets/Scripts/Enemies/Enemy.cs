@@ -143,8 +143,11 @@ public abstract class Enemy : StatsComponent
         }
 
         //Drops XP
-        DropBase xp = DropManager.GetPickup(XPType);
-        xp.gameObject.transform.position = transform.position;
+        if (index != ResourceManager.EnemyIndex.Boss)
+        {
+            DropBase xp = DropManager.GetPickup(XPType);
+            xp.gameObject.transform.position = transform.position;
+        }
 
         //Health Drop
         float healthRandomizer = Random.value; //Randomize to get chance
@@ -179,8 +182,26 @@ public abstract class Enemy : StatsComponent
         else if (index == ResourceManager.EnemyIndex.Boss)
         {
             // Boss enemies have 100% chance to drop
-            DropBase b = DropManager.GetPickup(ResourceManager.PickupIndex.HealthDrop1);
-            b.gameObject.transform.position = transform.position;
+            DropBase b1 = DropManager.GetPickup(ResourceManager.PickupIndex.HealthDrop1);
+            b1.gameObject.transform.position = new Vector2(transform.position.x + Random.Range(-2.5f, 2.5f), transform.position.y + Random.Range(-2.5f, 2.5f));
+            DropBase b2 = DropManager.GetPickup(ResourceManager.PickupIndex.HealthDrop1);
+            b2.gameObject.transform.position = new Vector2(transform.position.x + Random.Range(-2.5f, 2.5f), transform.position.y + Random.Range(-2.5f, 2.5f));
+            DropBase b3 = DropManager.GetPickup(ResourceManager.PickupIndex.HealthDrop1);
+            b3.gameObject.transform.position = new Vector2(transform.position.x + Random.Range(-2.5f, 2.5f), transform.position.y + Random.Range(-2.5f, 2.5f));
+
+            // Boss xp drops
+            DropBase xp1 = DropManager.GetPickup(ResourceManager.PickupIndex.XP2);
+            xp1.gameObject.transform.position = new Vector2(transform.position.x + Random.Range(-2.5f, 2.5f), transform.position.y + Random.Range(-2.5f, 2.5f));
+            DropBase xp2 = DropManager.GetPickup(ResourceManager.PickupIndex.XP2);
+            xp2.gameObject.transform.position = new Vector2(transform.position.x + Random.Range(-2.5f, 2.5f), transform.position.y + Random.Range(-2.5f, 2.5f));
+            DropBase xp3 = DropManager.GetPickup(ResourceManager.PickupIndex.XP1);
+            xp3.gameObject.transform.position = new Vector2(transform.position.x + Random.Range(-2.5f, 2.5f), transform.position.y + Random.Range(-2.5f, 2.5f));
+            DropBase xp4 = DropManager.GetPickup(ResourceManager.PickupIndex.XP1);
+            xp4.gameObject.transform.position = new Vector2(transform.position.x + Random.Range(-2.5f, 2.5f), transform.position.y + Random.Range(-2.5f, 2.5f));
+            DropBase xp5 = DropManager.GetPickup(ResourceManager.PickupIndex.XP1);
+            xp5.gameObject.transform.position = new Vector2(transform.position.x + Random.Range(-2.5f, 2.5f), transform.position.y + Random.Range(-2.5f, 2.5f));
+            DropBase xp6 = DropManager.GetPickup(ResourceManager.PickupIndex.XP1);
+            xp6.gameObject.transform.position = new Vector2(transform.position.x + Random.Range(-2.5f, 2.5f), transform.position.y + Random.Range(-2.5f, 2.5f));
         }
     }
 

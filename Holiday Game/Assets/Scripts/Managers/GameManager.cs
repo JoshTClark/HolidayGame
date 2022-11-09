@@ -43,13 +43,6 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private List<WeaponIcon> weaponIcons;
 
-    private bool doSpecialUpgrade = false;
-
-    /*
-    [SerializeField]
-    private HealthBar healthBar;
-    */
-
     public bool showDamageNumbers = true;
     private float time = 0f;
     private float currentDifficulty = 1;
@@ -58,7 +51,8 @@ public class GameManager : MonoBehaviour
     private int month, day, hour;
     private float secondToHourRation = 3 / 1;
     private int garunteedWeaponLevel = 5;
-    private int upgradesTaken = 0;
+    private bool doSpecialUpgrade = false;
+    private int upgradesToGive = 0;
 
     public Player Player
     {
@@ -218,15 +212,24 @@ public class GameManager : MonoBehaviour
                 {
                     upgradeManager.player = player;
                     upgradeManager.SetUpgradesByPools(GetPossiblePools(), 4);
-                    upgradeManager.ShowOptions();
+                    upgradeManager.ShowOptions(upgradesToGive);
                 }
                 if (upgradeManager.selected)
                 {
-                    upgradesTaken++;
-                    state = GameState.Normal;
-                    upgradePanel.gameObject.SetActive(false);
-                    gamePanel.gameObject.SetActive(true);
+                    upgradesToGive--;
                     upgradeManager.Clear();
+                    if (upgradesToGive <= 0)
+                    {
+                        state = GameState.Normal;
+                        upgradePanel.gameObject.SetActive(false);
+                        gamePanel.gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        upgradeManager.player = player;
+                        upgradeManager.SetUpgradesByPools(GetPossiblePools(), 4);
+                        upgradeManager.ShowOptions(upgradesToGive);
+                    }
                 }
                 break;
         }
@@ -273,10 +276,10 @@ public class GameManager : MonoBehaviour
         state = GameState.UpgradeMenu;
     }
 
-    public void DoPlayerLevelUp()
+    public void DoPlayerLevelUp(int levels)
     {
         this.state = GameState.UpgradeMenu;
-        //SoundManager.Instance.LevelUp();
+        upgradesToGive = levels;
     }
 
     private List<UpgradePool> GetPossiblePools()
@@ -286,7 +289,7 @@ public class GameManager : MonoBehaviour
         {
             pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.SpecialUpgrades));
         }
-        else if (player.Level % garunteedWeaponLevel == 0)
+        else if ((player.Level - (upgradesToGive - 1)) % garunteedWeaponLevel == 0)
         {
             pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Weapons));
         }
@@ -326,7 +329,7 @@ public class GameManager : MonoBehaviour
         EnemyManager.instance.Reset();
         Destroy(player.gameObject);
         time = 0.0f;
-        upgradesTaken = 0;
+        upgradesToGive = 0;
         state = GameState.Title;
     }
 

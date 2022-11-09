@@ -83,8 +83,17 @@ public class UpgradePanelManager : MonoBehaviour
     /// <summary>
     /// Sets up the panel with the given options
     /// </summary>
-    public void ShowOptions()
+    public void ShowOptions(int levels)
     {
+        if (levels == 1)
+        {
+            titleText.text = "Select <b><color=#00D4FF>" + levels + "</color></b> Upgrade";
+        }
+        else
+        {
+            titleText.text = "Select <b><color=#00D4FF>" + levels + "</color></b> Upgrades";
+        }
+
         textName.text = "";
         tier.text = "";
         desc.text = "";
@@ -297,7 +306,7 @@ public class UpgradePanelManager : MonoBehaviour
                 all.Remove(upgrade);
                 AddUpgrade(upgrade);
             }
-            else if(all.Count > 0)
+            else if (all.Count > 0)
             {
                 int random = Random.Range(0, all.Count);
                 ResourceManager.UpgradeIndex upgrade = all[random];

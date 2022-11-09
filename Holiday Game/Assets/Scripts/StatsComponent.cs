@@ -21,7 +21,8 @@ public abstract class StatsComponent : MonoBehaviour
 
     // Level
     [SerializeField]
-    private float xpAmount, level;
+    private float xpAmount;
+    private int level;
 
     [SerializeField]
     // Flat additions to stats
@@ -164,6 +165,7 @@ public abstract class StatsComponent : MonoBehaviour
             // Adding things for burning effects
             if (HasBuff(ResourceManager.BuffIndex.Burning))
             {
+                // Nothing
             }
 
             // Buff updating
@@ -343,24 +345,29 @@ public abstract class StatsComponent : MonoBehaviour
     {
         if (!this.gameObject.GetComponent<Enemy>())
         {
-            float expToLevelUp = GetXpToNextLevel();
-            if (XP > expToLevelUp)
+            int tempLevel = level;
+            float xpToLevelUp = expCurve.Evaluate(tempLevel + 1);
+            while (XP > xpToLevelUp)
             {
-                level++;
-                OnLevelUp();
+                tempLevel++;
+                xpToLevelUp = expCurve.Evaluate(tempLevel + 1);
+            }
+            if (tempLevel > level)
+            {
+                OnLevelUp(tempLevel - level);
+                level = tempLevel;
             }
         }
     }
 
     //What happens when the player levels up
-    private void OnLevelUp()
+    private void OnLevelUp(int levels)
     {
-        CalculateStats();
         if (this.gameObject.GetComponent<Player>())
         {
-            GameManager.instance.DoPlayerLevelUp();
+            GameManager.instance.DoPlayerLevelUp(levels);
+            SoundManager.instance.LevelUp();
         }
-        SoundManager.instance.LevelUp();
     }
 
     // Deals damage here

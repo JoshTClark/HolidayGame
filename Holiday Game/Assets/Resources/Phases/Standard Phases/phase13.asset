@@ -9,14 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cdfefd5d469e9d46ae106443d881495, type: 3}
-  m_Name: Phase10-Burst
+  m_Script: {fileID: 11500000, guid: 7084332a92f40be458c9ae8a9f8683db, type: 3}
+  m_Name: phase13
   m_EditorClassIdentifier: 
-  startTime: 600
+  numberOfEnemiesPerSpawn: 7
+  spawnInterval: 5
+  startTime: 903
   enemies:
   - index: 1
-    count: 20
+    weight: 0.5
   - index: 2
-    count: 8
+    weight: 0.2
   - index: 3
-    count: 5
+    weight: 0.2
+  - index: 5
+    weight: 0.1

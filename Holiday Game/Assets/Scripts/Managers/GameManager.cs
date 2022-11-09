@@ -55,6 +55,8 @@ public class GameManager : MonoBehaviour
     private bool paused = false;
     private int month, day, hour;
     private float secondToHourRation = 3 / 1;
+    private int garunteedWeaponLevel = 5;
+    private int upgradesTaken = 0;
 
     public Player Player
     {
@@ -215,6 +217,7 @@ public class GameManager : MonoBehaviour
                 }
                 if (upgradeManager.selected)
                 {
+                    upgradesTaken++;
                     state = GameState.Normal;
                     upgradePanel.gameObject.SetActive(false);
                     gamePanel.gameObject.SetActive(true);
@@ -268,27 +271,34 @@ public class GameManager : MonoBehaviour
     private List<UpgradePool> GetPossiblePools()
     {
         List<UpgradePool> pools = new List<UpgradePool>();
-        pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Basic));
-        pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Weapons));
-        if (player.HasUpgrade(ResourceManager.UpgradeIndex.SnowballWeaponUpgrade))
+        if (player.Level % garunteedWeaponLevel == 0)
         {
-            pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Snowball));
+            pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Weapons));
         }
-        if (player.HasUpgrade(ResourceManager.UpgradeIndex.PumpkinBombWeaponUpgrade))
+        else
         {
-            pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Pumkin));
-        }
-        if (player.HasUpgrade(ResourceManager.UpgradeIndex.FireworkWeaponUpgrade))
-        {
-            pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Fireworks));
-        }
-        if (player.HasUpgrade(ResourceManager.UpgradeIndex.CupidArrowWeaponUpgrade))
-        {
-            pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.CupidArrow));
-        }
-        if (player.HasUpgrade(ResourceManager.UpgradeIndex.CandyCornWeaponUpgrade))
-        {
-            pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.CandyCorn));
+            pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Basic));
+            pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Weapons));
+            if (player.HasUpgrade(ResourceManager.UpgradeIndex.SnowballWeaponUpgrade))
+            {
+                pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Snowball));
+            }
+            if (player.HasUpgrade(ResourceManager.UpgradeIndex.PumpkinBombWeaponUpgrade))
+            {
+                pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Pumkin));
+            }
+            if (player.HasUpgrade(ResourceManager.UpgradeIndex.FireworkWeaponUpgrade))
+            {
+                pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Fireworks));
+            }
+            if (player.HasUpgrade(ResourceManager.UpgradeIndex.CupidArrowWeaponUpgrade))
+            {
+                pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.CupidArrow));
+            }
+            if (player.HasUpgrade(ResourceManager.UpgradeIndex.CandyCornWeaponUpgrade))
+            {
+                pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.CandyCorn));
+            }
         }
         return pools;
     }
@@ -301,6 +311,7 @@ public class GameManager : MonoBehaviour
         EnemyManager.instance.Reset();
         Destroy(player.gameObject);
         time = 0.0f;
+        upgradesTaken = 0;
         state = GameState.Title;
     }
 

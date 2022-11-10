@@ -14,9 +14,14 @@ public class UpgradePanelManager : MonoBehaviour
     public bool displaying = false;
     public float commonOdds, uncommonOdds, rareOdds, epicOdds, legendaryOdds;
     public TMP_Text textName, tier, desc, titleText;
+    public Button replaceWeaponButton, rerollButton, backButton;
+    private int levels = 1;
 
     private void Start()
     {
+        replaceWeaponButton.gameObject.SetActive(false);
+        rerollButton.gameObject.SetActive(false);
+        backButton.gameObject.SetActive(false);
         ResetOdds();
     }
 
@@ -28,6 +33,10 @@ public class UpgradePanelManager : MonoBehaviour
     {
         if (ResourceManager.GetUpgrade(upgrade).IsWeapon && player.weapons.Count >= 4)
         {
+            replaceWeaponButton.gameObject.SetActive(false);
+            rerollButton.gameObject.SetActive(false);
+            backButton.gameObject.SetActive(true);
+
             foreach (UpgradeOption i in options)
             {
                 i.gameObject.SetActive(false);
@@ -83,8 +92,25 @@ public class UpgradePanelManager : MonoBehaviour
     /// <summary>
     /// Sets up the panel with the given options
     /// </summary>
-    public void ShowOptions(int levels)
+    public void ShowOptions(int levels, bool isWeapons)
     {
+        this.levels = levels;
+        if (isWeapons)
+        {
+            rerollButton.gameObject.SetActive(false);
+            replaceWeaponButton.gameObject.SetActive(true);
+        }
+        else if (player.rerolls > 0)
+        {
+            rerollButton.gameObject.SetActive(true);
+            rerollButton.GetComponentInChildren<TMP_Text>().text = "Reroll Upgrades\n" + player.rerolls + " rerolls left";
+            replaceWeaponButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            rerollButton.gameObject.SetActive(false);
+            replaceWeaponButton.gameObject.SetActive(false);
+        }
         if (levels == 1)
         {
             titleText.text = "Select <b><color=#00D4FF>" + levels + "</color></b> Upgrade";
@@ -349,5 +375,47 @@ public class UpgradePanelManager : MonoBehaviour
         rareOdds += epicOdds;
         uncommonOdds += rareOdds;
         commonOdds += uncommonOdds;
+    }
+
+    public void Reroll()
+    {
+        player.rerolls--;
+        Clear();
+        SetUpgradesByPools(GameManager.instance.GetPossiblePools(true), 4);
+        ShowOptions(levels, false);
+    }
+
+    public void ReplaceWeapons()
+    {
+        Clear();
+        SetUpgradesByPools(GameManager.instance.GetPossiblePools(true), 4);
+        ShowOptions(levels, false);
+    }
+
+    public void GoBack()
+    {
+        for (int i = replaceWeapons.Count - 1; i >= 0; i--)
+        {
+            Destroy(replaceWeapons[i].gameObject);
+        }
+
+        foreach (UpgradeOption i in options)
+        {
+            i.gameObject.SetActive(true);
+        }
+
+        backButton.gameObject.SetActive(false);
+        replaceWeaponButton.gameObject.SetActive(true);
+        textName.text = "";
+        tier.text = "";
+        desc.text = "";
+        if (levels == 1)
+        {
+            titleText.text = "Select <b><color=#00D4FF>" + levels + "</color></b> Upgrade";
+        }
+        else
+        {
+            titleText.text = "Select <b><color=#00D4FF>" + levels + "</color></b> Upgrades";
+        }
     }
 }

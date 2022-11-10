@@ -211,8 +211,13 @@ public class GameManager : MonoBehaviour
                 if (!upgradeManager.displaying)
                 {
                     upgradeManager.player = player;
-                    upgradeManager.SetUpgradesByPools(GetPossiblePools(), 4);
-                    upgradeManager.ShowOptions(upgradesToGive);
+                    upgradeManager.SetUpgradesByPools(GetPossiblePools(false), 4);
+                    bool check = false;
+                    if ((player.Level - (upgradesToGive - 1)) % garunteedWeaponLevel == 0)
+                    {
+                        check = true;
+                    }
+                    upgradeManager.ShowOptions(upgradesToGive, check);
                 }
                 if (upgradeManager.selected)
                 {
@@ -228,8 +233,13 @@ public class GameManager : MonoBehaviour
                     else
                     {
                         upgradeManager.player = player;
-                        upgradeManager.SetUpgradesByPools(GetPossiblePools(), 4);
-                        upgradeManager.ShowOptions(upgradesToGive);
+                        upgradeManager.SetUpgradesByPools(GetPossiblePools(false), 4);
+                        bool check = false;
+                        if ((player.Level - (upgradesToGive - 1)) % garunteedWeaponLevel == 0)
+                        {
+                            check = true;
+                        }
+                        upgradeManager.ShowOptions(upgradesToGive, check);
                     }
                 }
                 break;
@@ -284,14 +294,14 @@ public class GameManager : MonoBehaviour
         upgradesToGive = levels;
     }
 
-    private List<UpgradePool> GetPossiblePools()
+    public List<UpgradePool> GetPossiblePools(bool ignoreWeapons)
     {
         List<UpgradePool> pools = new List<UpgradePool>();
         if (doSpecialUpgrade)
         {
             pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.SpecialUpgrades));
         }
-        else if ((player.Level - (upgradesToGive - 1)) % garunteedWeaponLevel == 0)
+        else if ((player.Level - (upgradesToGive - 1)) % garunteedWeaponLevel == 0 && !ignoreWeapons)
         {
             pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Weapons));
         }

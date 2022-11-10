@@ -23,6 +23,8 @@ public class Player : StatsComponent
     private List<StatsComponent> hitBy = new List<StatsComponent>();
     private List<float> invincibilityTimes = new List<float>();
 
+    public int rerolls = 3;
+
 
     public bool IsInvincible { get { return isInvincible; } }
     public float PickupRange { get { return pickupRange * pickupRangeIncrease; } }

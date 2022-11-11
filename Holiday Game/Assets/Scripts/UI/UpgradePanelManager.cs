@@ -19,9 +19,9 @@ public class UpgradePanelManager : MonoBehaviour
 
     private void Start()
     {
-        replaceWeaponButton.gameObject.SetActive(false);
-        rerollButton.gameObject.SetActive(false);
-        backButton.gameObject.SetActive(false);
+        //replaceWeaponButton.gameObject.SetActive(false);
+        //rerollButton.gameObject.SetActive(false);
+        //backButton.gameObject.SetActive(false);
         ResetOdds();
     }
 
@@ -95,22 +95,22 @@ public class UpgradePanelManager : MonoBehaviour
     public void ShowOptions(int levels, bool isWeapons)
     {
         this.levels = levels;
-        if (isWeapons)
-        {
-            rerollButton.gameObject.SetActive(false);
-            replaceWeaponButton.gameObject.SetActive(true);
-        }
-        else if (player.rerolls > 0)
-        {
-            rerollButton.gameObject.SetActive(true);
-            rerollButton.GetComponentInChildren<TMP_Text>().text = "Reroll Upgrades\n" + player.rerolls + " rerolls left";
-            replaceWeaponButton.gameObject.SetActive(false);
-        }
-        else
-        {
-            rerollButton.gameObject.SetActive(false);
-            replaceWeaponButton.gameObject.SetActive(false);
-        }
+        //if (isWeapons)
+        //{
+        //    rerollButton.gameObject.SetActive(false);
+        //    replaceWeaponButton.gameObject.SetActive(true);
+        //}
+        //else if (player.rerolls > 0)
+        //{
+        //    rerollButton.gameObject.SetActive(true);
+        //    rerollButton.GetComponentInChildren<TMP_Text>().text = "Reroll Upgrades\n" + player.rerolls + " rerolls left";
+        //    replaceWeaponButton.gameObject.SetActive(false);
+        //}
+        //else
+        //{
+        //    rerollButton.gameObject.SetActive(false);
+        //    replaceWeaponButton.gameObject.SetActive(false);
+        //}
         if (levels == 1)
         {
             titleText.text = "Select <b><color=#00D4FF>" + levels + "</color></b> Upgrade";

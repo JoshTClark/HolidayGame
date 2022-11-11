@@ -17,15 +17,15 @@ public class CandyCornWeapon : Weapon
             this.attackSpeedMultiplier = 1.5f + 0.5f * (owner.GetUpgrade(ResourceManager.UpgradeIndex.CandyCornSpray).CurrentLevel - 1);
         }
 
-        Enemy e = GetClosestEnemy();
-        if (e && !doVolley)
+        Vector3 target = MousePosition();
+        if (!doVolley)
         {
-            Vector2 direction = e.transform.position - transform.position;
+            Vector2 direction = target - transform.position;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
 
-        if (canFire && e)
+        if (canFire)
         {
             doVolley = true;
         }

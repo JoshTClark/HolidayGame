@@ -54,6 +54,8 @@ public class GameManager : MonoBehaviour
     private bool doSpecialUpgrade = false;
     private int upgradesToGive = 0;
 
+    public Texture2D cursorTexture;
+
     public Player Player
     {
         get { return player; }
@@ -82,6 +84,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         instance = this;
+        Cursor.SetCursor(cursorTexture, new Vector2(15, 15), CursorMode.Auto);
         ResourceManager.Init();
         debugPanel.GetComponent<DebugPanel>().Init();
         ResourceManager.GetBuffDef(ResourceManager.BuffIndex.Burning);

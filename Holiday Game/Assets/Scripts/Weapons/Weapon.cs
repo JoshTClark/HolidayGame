@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Pool;
 
 public abstract class Weapon : MonoBehaviour
@@ -173,6 +174,13 @@ public abstract class Weapon : MonoBehaviour
     public float PercentTimeLeft()
     {
         return timer / Delay;
+    }
+
+    public Vector3 MousePosition() 
+    {
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        mousePosition.z = 0.0f;
+        return mousePosition;
     }
 
     public abstract void OnUpdate();

@@ -9,16 +9,13 @@ public class SnowballWeapon : Weapon
     {
         float delta = Time.deltaTime;
 
-        // Basic targetting for now just targets the closest enemy
-        Enemy e = GetClosestEnemy();
-        if (e)
-        {
-            Vector2 direction = e.transform.position - transform.position;
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        }
 
-        if (canFire && e)
+        Vector3 target = MousePosition();
+        Vector2 direction = target - transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+        if (canFire)
         {
             // Calculating stats
             // Damage

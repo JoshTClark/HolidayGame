@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SnowballWeapon
   m_EditorClassIdentifier: 
   upgradeName: Snowball
-  upgradeDescription: Adds a new weapon that periodically fires a snowball.
+  upgradeDescription: Throw a snowball towards the cursor
   index: 12
   tier: 1
   CanTakeMultiple: 0

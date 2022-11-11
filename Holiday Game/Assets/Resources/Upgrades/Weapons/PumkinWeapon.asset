@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeName: Pumkin Bomb
   upgradeDescription: Drop a pumkin behind you that explodes after a short amount
-    of time.
+    of time
   index: 20
   tier: 1
   CanTakeMultiple: 0

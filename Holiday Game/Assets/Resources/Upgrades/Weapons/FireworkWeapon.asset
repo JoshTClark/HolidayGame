@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FireworkWeapon
   m_EditorClassIdentifier: 
   upgradeName: Firework Launcher
-  upgradeDescription: Launch multiple seeking fireworks that light enemies on fire.
+  upgradeDescription: Launch multiple seeking fireworks that light enemies on fire
   index: 21
   tier: 1
   CanTakeMultiple: 0

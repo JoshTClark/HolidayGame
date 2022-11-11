@@ -15,6 +15,7 @@ public class Upgrade : ScriptableObject
     }
 
     public string upgradeName;
+    [TextArea (15, 20)]
     public string upgradeDescription;
     public ResourceManager.UpgradeIndex index;
     public Tier tier;

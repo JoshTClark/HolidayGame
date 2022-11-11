@@ -26,10 +26,10 @@ public class GameManager : MonoBehaviour
     private Canvas ui;
 
     [SerializeField]
-    private TMP_Text timerDisplay, playerStats, playerLevel, hpText, numberEffect;
+    private TMP_Text timerDisplay, playerStats, playerLevel, hpText, numberEffect, dashText;
 
     [SerializeField]
-    private Image xpBar, hpBar;
+    private Image xpBar, hpBar, dashTimer;
 
     [SerializeField]
     private CanvasRenderer playerStatsPanel, pausedPanel, gamePanel, upgradePanel, titlePanel, gameOverPanel, effectsPanel, debugPanel;
@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
     private InputActionReference displayStats, pauseGame, giveXP, playerDash;
 
     [SerializeField]
-    private List<WeaponIcon> weaponIcons;
+    public List<WeaponIcon> weaponIcons;
 
     public bool showDamageNumbers = true;
     private float time = 0f;
@@ -145,7 +145,9 @@ public class GameManager : MonoBehaviour
                 {
                     timerDisplay.text += "\n" + hour + " AM";
                 }
+                dashText.text = player.currentDashes.ToString();
                 xpBar.GetComponent<RectTransform>().anchorMax = new Vector2(player.GetPercentToNextLevel(), xpBar.GetComponent<RectTransform>().anchorMax.y);
+                dashTimer.GetComponent<RectTransform>().anchorMax = new Vector2(1 - (player.dashCooldownTimer / player.DashCooldown), dashTimer.GetComponent<RectTransform>().anchorMax.y);
                 playerLevel.text = "Level: " + player.Level;
                 hpBar.rectTransform.anchorMax = new Vector2(player.GetPercentHealth(), hpBar.rectTransform.anchorMax.y);
                 hpText.text = player.CurrentHP.ToString("0") + "/" + player.MaxHp.ToString("0");

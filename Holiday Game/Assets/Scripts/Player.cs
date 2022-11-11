@@ -30,10 +30,10 @@ public class Player : StatsComponent
     private bool isDash = false;
     private float dashLength = 0.1f;
     private float dashTimer = 0.0f;
-    private float dashCooldownTimer = 0.0f;
+    public float dashCooldownTimer = 0.0f;
     private float baseDashCooldown = 5f;
     private float baseDashes = 1f;
-    private float currentDashes = 1f;
+    public float currentDashes = 1f;
     private Vector2 dashDirection;
     private int extraDashes = 0;
     private float dashCooldownMultiplier = 1f;
@@ -72,12 +72,12 @@ public class Player : StatsComponent
             if (dashCooldownTimer >= DashCooldown)
             {
                 currentDashes++;
-                dashCooldownTimer = 0.0f;
+                dashCooldownTimer = DashCooldown;
             }
         }
         else
         {
-            dashCooldownTimer = 0.0f;
+            dashCooldownTimer = DashCooldown;
         }
 
         if (isDash)
@@ -211,6 +211,7 @@ public class Player : StatsComponent
         dashDirection = movement.action.ReadValue<Vector2>();
         if ((dashDirection.x != 0 || dashDirection.y != 0) && !isDash && currentDashes > 0)
         {
+            dashCooldownTimer = 0.0f;
             currentDashes--;
             isDash = true;
         }

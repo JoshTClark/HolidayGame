@@ -84,7 +84,7 @@ public class TitleScreen : MonoBehaviour
                 }
             }
 
-            if (rectT.position.y < 1000)
+            if (rectT.position.y < 1000 * GetComponent<RectTransform>().lossyScale.y)
             {
                 animationSpeedT += animationAccel * delta;
                 rectT.SetPositionAndRotation(new Vector3(rectT.position.x, rectT.position.y + delta * animationSpeedT, 0), Quaternion.identity);

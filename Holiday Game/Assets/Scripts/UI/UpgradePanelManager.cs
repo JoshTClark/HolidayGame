@@ -31,7 +31,7 @@ public class UpgradePanelManager : MonoBehaviour
     /// <param name="upgrade"></param>
     public void Select(ResourceManager.UpgradeIndex upgrade)
     {
-        if (ResourceManager.GetUpgrade(upgrade).IsWeapon && player.weapons.Count >= 4)
+        if (ResourceManager.GetUpgrade(upgrade).IsWeapon && player.weapons.Count >= GameManager.instance.weaponIcons.Count)
         {
             replaceWeaponButton.gameObject.SetActive(false);
             rerollButton.gameObject.SetActive(false);

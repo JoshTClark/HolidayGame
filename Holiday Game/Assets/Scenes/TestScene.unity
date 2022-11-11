@@ -9715,6 +9715,7 @@ MonoBehaviour:
   displayStats: {fileID: -3315458106627893903, guid: 46c5d35181ff19744bbe64637b663d10, type: 3}
   pauseGame: {fileID: -1963865644356622557, guid: 46c5d35181ff19744bbe64637b663d10, type: 3}
   giveXP: {fileID: 2895607889120616862, guid: 46c5d35181ff19744bbe64637b663d10, type: 3}
+  playerDash: {fileID: -1360119876740320047, guid: 46c5d35181ff19744bbe64637b663d10, type: 3}
   weaponIcons:
   - {fileID: 2017323480}
   - {fileID: 393821007}

@@ -60,14 +60,14 @@ public abstract class StatsComponent : MonoBehaviour
     float fadeTotalTime;
 
     // Used to get the base stats without changing them at all
-    public float BaseMaxHp { get; }
-    public float BaseSpeed { get; }
-    public float BaseDamage { get; }
-    public float BaseArmor { get; }
-    public float BaseRegen { get; }
-    public float BaseRegenInterval { get; }
-    public float BaseCritChance { get; }
-    public float BaseCritDamage { get; }
+    public float BaseMaxHp { get { return baseMaxHP; } }
+    public float BaseSpeed { get { return baseSpeed; } }
+    public float BaseDamage { get { return baseDamage; } }
+    public float BaseArmor { get { return baseArmor; } }
+    public float BaseRegen { get { return baseRegen; } }
+    public float BaseRegenInterval { get { return baseRegenInterval; } }
+    public float BaseCritChance { get { return baseCritChance; } }
+    public float BaseCritDamage { get { return baseCritDamage; } }
 
 
     // Don't use this to do damage there should be a damage method

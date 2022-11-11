@@ -211,6 +211,8 @@ MonoBehaviour:
   attackActivationRange: 20
   iFrames: 0.4
   hitEffect: {fileID: 0}
+  rerolls: 3
+  dashParticlePrefab: {fileID: 4572045033489371254, guid: db44441cc0110434e8f3adddde8fb195, type: 3}
 --- !u!61 &1069143796030833450
 BoxCollider2D:
   m_ObjectHideFlags: 0

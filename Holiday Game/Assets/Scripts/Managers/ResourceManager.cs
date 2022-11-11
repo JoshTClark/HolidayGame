@@ -145,6 +145,7 @@ public class ResourceManager
     public static List<FollowingEffect> effects = new List<FollowingEffect>();
     public static List<OrbitalBase> orbitals = new List<OrbitalBase>();
     public static Player playerPrefab;
+    public static DashParticle playerDashEffect;
 
     public static bool isLoaded = false;
 
@@ -270,8 +271,11 @@ public class ResourceManager
 
     public static void LoadPlayableCharacters()
     {
-        Player[] arr = Resources.LoadAll<Player>("");
-        playerPrefab = arr[0];
+        Player[] arr1 = Resources.LoadAll<Player>("");
+        playerPrefab = arr1[0];
+
+        DashParticle[] arr2 = Resources.LoadAll<DashParticle>("");
+        playerDashEffect = arr2[0];
     }
 
     public static Upgrade GetUpgrade(ResourceManager.UpgradeIndex index)

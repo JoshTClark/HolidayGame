@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Pool;
 
 // Player now derives from StatsComponent. This helps it keep track of all of its stats and helps organize things a lot
 public class Player : StatsComponent
@@ -25,9 +26,28 @@ public class Player : StatsComponent
 
     public int rerolls = 3;
 
+    private float dashSpeed = 65.0f;
+    private bool isDash = false;
+    private float dashLength = 0.1f;
+    private float dashTimer = 0.0f;
+    private float dashCooldownTimer = 0.0f;
+    private float baseDashCooldown = 5f;
+    private float baseDashes = 1f;
+    private float currentDashes = 1f;
+    private Vector2 dashDirection;
+    private int extraDashes = 0;
+    private float dashCooldownMultiplier = 1f;
+    private float particleTimer = 0.0f;
+    private float particleDelay = 0.02f;
+
+    public float DashCooldown { get { return baseDashCooldown * dashCooldownMultiplier; } }
+    public float Dashes { get { return baseDashes + extraDashes; } }
 
     public bool IsInvincible { get { return isInvincible; } }
     public float PickupRange { get { return pickupRange * pickupRangeIncrease; } }
+
+    private List<DashParticle> dashParticles = new List<DashParticle>();
+    private ObjectPool<DashParticle> dashParticlePool = new ObjectPool<DashParticle>(createFunc: () => Instantiate<DashParticle>(ResourceManager.playerDashEffect), actionOnGet: (obj) => obj.gameObject.SetActive(true), actionOnRelease: (obj) => obj.gameObject.SetActive(false), actionOnDestroy: (obj) => Destroy(obj.gameObject), collectionCheck: false, defaultCapacity: 10);
 
     public override void OnStart()
     {
@@ -43,36 +63,80 @@ public class Player : StatsComponent
     public override void OnUpdate()
     {
         float delta = Time.deltaTime;
+        extraDashes = 0;
+        dashCooldownMultiplier = 1f;
 
-        // Basic movement
-        Vector2 movementInput = movement.action.ReadValue<Vector2>();
-        movementInput = movementInput * Speed;
-
-        if (movementInput.x == 0 && movementInput.y == 0)
+        if (currentDashes < Dashes)
         {
-            isMoving = false;
+            dashCooldownTimer += delta;
+            if (dashCooldownTimer >= DashCooldown)
+            {
+                currentDashes++;
+                dashCooldownTimer = 0.0f;
+            }
         }
         else
         {
+            dashCooldownTimer = 0.0f;
+        }
+
+        if (isDash)
+        {
+            // Dash
             isMoving = true;
-        }
+            isInvincible = true;
+            dashTimer += delta;
+            particleTimer += delta;
+            GetComponent<Rigidbody2D>().velocity = dashDirection * dashSpeed;
 
-        GetComponent<Rigidbody2D>().velocity = movementInput;
-        if (movementInput != Vector2.zero)
-        {
-            an.speed = 1;
-            if (movementInput.x > 0)
+            if (particleTimer >= particleDelay)
             {
-                sr.flipX = true;
+                particleTimer = 0.0f;
+                DashParticle p = dashParticlePool.Get();
+                p.SetSprite(GetComponent<SpriteRenderer>().sprite, GetComponent<SpriteRenderer>().flipX);
+                p.transform.position = transform.position;
+                dashParticles.Add(p);
             }
-            if (movementInput.x < 0)
+
+            if (dashTimer >= dashLength)
             {
-                sr.flipX = false;
+                isDash = false;
+                dashTimer = 0.0f;
+                particleTimer = 0.0f;
+                isInvincible = false;
             }
         }
         else
         {
-            an.speed = 0;
+            // Basic movement
+            Vector2 movementInput = movement.action.ReadValue<Vector2>();
+            movementInput = movementInput * Speed;
+            if (movementInput.x == 0 && movementInput.y == 0)
+            {
+                isMoving = false;
+            }
+            else
+            {
+                isMoving = true;
+            }
+
+            GetComponent<Rigidbody2D>().velocity = movementInput;
+            if (movementInput != Vector2.zero)
+            {
+                an.speed = 1;
+                if (movementInput.x > 0)
+                {
+                    sr.flipX = true;
+                }
+                if (movementInput.x < 0)
+                {
+                    sr.flipX = false;
+                }
+            }
+            else
+            {
+                an.speed = 0;
+            }
         }
 
         UpdateiFrames();
@@ -90,7 +154,18 @@ public class Player : StatsComponent
         {
             pickupRangeIncrease += 0.15f * GetUpgrade(ResourceManager.UpgradeIndex.XP3).CurrentLevel;
         }
+
+        for (int i = dashParticles.Count - 1; i >= 0; i--)
+        {
+            DashParticle p = dashParticles[i];
+            if (p.finished)
+            {
+                dashParticlePool.Release(p);
+                dashParticles.RemoveAt(i);
+            }
+        }
     }
+
     /// <summary>
     /// Updates
     /// </summary>
@@ -114,7 +189,7 @@ public class Player : StatsComponent
     /// <param name="damage"></param>
     public override void TakeDamage(DamageInfo info)
     {
-        if (!hitBy.Contains(info.attacker))
+        if (!hitBy.Contains(info.attacker) && !isInvincible)
         {
             // take damage & become invincible
             hitBy.Add(info.attacker);
@@ -129,5 +204,15 @@ public class Player : StatsComponent
         // Showing attack range
         Gizmos.DrawWireSphere(transform.position, attackActivationRange);
         Gizmos.DrawWireSphere(transform.position, PickupRange);
+    }
+
+    public void DoDash()
+    {
+        dashDirection = movement.action.ReadValue<Vector2>();
+        if ((dashDirection.x != 0 || dashDirection.y != 0) && !isDash && currentDashes > 0)
+        {
+            currentDashes--;
+            isDash = true;
+        }
     }
 }

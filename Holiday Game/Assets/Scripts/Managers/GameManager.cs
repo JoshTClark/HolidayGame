@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
     private float timeToDifficultyIncrease;
 
     [SerializeField]
-    private InputActionReference displayStats, pauseGame, giveXP;
+    private InputActionReference displayStats, pauseGame, giveXP, playerDash;
 
     [SerializeField]
     private List<WeaponIcon> weaponIcons;
@@ -99,6 +99,14 @@ public class GameManager : MonoBehaviour
         giveXP.action.performed += (InputAction.CallbackContext callback) =>
         {
             player.AddXP(player.GetXpToNextLevel() - player.XP + 1);
+        };
+
+        playerDash.action.performed += (InputAction.CallbackContext callback) =>
+        {
+            if (state == GameState.Normal)
+            {
+                player.DoDash();
+            }
         };
 
         pausedPanel.gameObject.SetActive(false);

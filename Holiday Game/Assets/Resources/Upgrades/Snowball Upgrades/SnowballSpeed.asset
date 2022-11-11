@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SnowballSpeed
   m_EditorClassIdentifier: 
   upgradeName: Faster Throwing
-  upgradeDescription: Increases how fast the snowball moves by 15%.
+  upgradeDescription: Increases snowball speed by 15%.
   index: 19
   tier: 0
   CanTakeMultiple: 1

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PumpkinRadius2
   m_EditorClassIdentifier: 
   upgradeName: Pumped-Up Pumkins
-  upgradeDescription: Increases the size of the explosion by 20%
+  upgradeDescription: Increases the size of pumpkin explosions by 20%
   index: 23
   tier: 1
   CanTakeMultiple: 1

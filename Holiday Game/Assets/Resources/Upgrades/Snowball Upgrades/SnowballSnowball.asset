@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: SnowballSnowball
   m_EditorClassIdentifier: 
   upgradeName: Snowballing Snowballs
-  upgradeDescription: Snowballs gain more damage the further they travel
+  upgradeDescription: Snowballs gain more damage and size the further they travel
   index: 50
-  tier: 3
+  tier: 4
   CanTakeMultiple: 0
   IsWeapon: 0
   icon: {fileID: 21300000, guid: 76021090c241e0f4aafba6b1e7fd8644, type: 3}

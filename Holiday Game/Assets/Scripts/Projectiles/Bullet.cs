@@ -74,5 +74,6 @@ public class Bullet : ProjectileBase
     {
         this.gameObject.SetActive(true);
         isCluster = false;
+        projectileTeam = Team.Enemy;
     }
 }

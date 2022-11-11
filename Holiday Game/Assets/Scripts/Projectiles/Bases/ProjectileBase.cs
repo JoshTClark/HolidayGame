@@ -134,6 +134,19 @@ public abstract class ProjectileBase : MonoBehaviour
             }
         }
 
+        if (other.gameObject.layer == LayerMask.NameToLayer("Orbital"))
+        {
+            if (projectileTeam == Team.Enemy)
+            {
+                Enemy e = GetClosestEnemy();
+                Direction = (e.transform.position - transform.position).normalized;
+                projectileTeam = ProjectileBase.Team.Player;
+                damageMultiplier *= 2f;
+                speedMultiplier *= 2f;
+                LifetimeMultiplier *= 2f;
+            }
+        }
+
         // Destroys the projectile if it hits a wall
         if (other.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
@@ -179,6 +192,34 @@ public abstract class ProjectileBase : MonoBehaviour
         lifetimeMultiplier = 1f;
         this.pool = pool;
         OnClean();
+    }
+
+    /// <summary>
+    /// Finds the closest enemy
+    /// </summary>
+    /// <returns>The closest enemy to the player or null if none are within the player's range</returns>
+    protected Enemy GetClosestEnemy()
+    {
+        List<Enemy> enemies = EnemyManager.instance.CurrentEnemies;
+        if (enemies.Count > 0)
+        {
+            Enemy closest = null;
+            float distance = GameManager.instance.Player.attackActivationRange;
+            foreach (Enemy e in enemies)
+            {
+                float newDistance = e.PlayerDistance();
+                if (newDistance < distance)
+                {
+                    closest = e;
+                    distance = newDistance;
+                }
+            }
+            return closest;
+        }
+        else
+        {
+            return null;
+        }
     }
 
     /// <summary>

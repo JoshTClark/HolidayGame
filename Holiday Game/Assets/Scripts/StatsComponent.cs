@@ -675,14 +675,7 @@ public abstract class StatsComponent : MonoBehaviour
         if (HasUpgrade(ResourceManager.UpgradeIndex.GlassCannon1))
         {
             attackSpeedMult *= 2f * GetUpgrade(ResourceManager.UpgradeIndex.GlassCannon1).CurrentLevel;
-            damageMult *= MathF.Pow(0.75f, GetUpgrade(ResourceManager.UpgradeIndex.GlassCannon1).CurrentLevel);
-            hpMult *= MathF.Pow(0.75f, GetUpgrade(ResourceManager.UpgradeIndex.GlassCannon1).CurrentLevel);
-        }
-        if (HasUpgrade(ResourceManager.UpgradeIndex.GlassCannon2))
-        {
-            attackSpeedAdd *= 4f * GetUpgrade(ResourceManager.UpgradeIndex.GlassCannon2).CurrentLevel;
-            damageMult *= MathF.Pow(0.50f, GetUpgrade(ResourceManager.UpgradeIndex.GlassCannon2).CurrentLevel);
-            hpMult *= MathF.Pow(0.50f, GetUpgrade(ResourceManager.UpgradeIndex.GlassCannon2).CurrentLevel);
+            hpMult *= MathF.Pow(0.5f, GetUpgrade(ResourceManager.UpgradeIndex.GlassCannon1).CurrentLevel);
         }
 
         // Making sure hp is <= maxHP

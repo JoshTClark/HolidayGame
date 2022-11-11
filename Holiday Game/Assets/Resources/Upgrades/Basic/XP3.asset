@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 296cfc9b7513a864aab005e7da6bfa8f, type: 3}
   m_Name: XP3
   m_EditorClassIdentifier: 
-  upgradeName: XP Collector
+  upgradeName: XP Connoisseur
   upgradeDescription: Increases XP gained and pickup range by 15%
   index: 44
   tier: 2

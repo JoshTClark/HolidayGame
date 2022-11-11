@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 296cfc9b7513a864aab005e7da6bfa8f, type: 3}
   m_Name: SnowballSize3
   m_EditorClassIdentifier: 
-  upgradeName: Bigger Balls
-  upgradeDescription: Increases the size of the snowball by 30% and pierce by 2
+  upgradeName: Biggest Balls
+  upgradeDescription: Increases snowball size by 30% and pierce by 2
   index: 18
   tier: 2
   CanTakeMultiple: 1

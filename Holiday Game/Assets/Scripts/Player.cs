@@ -196,7 +196,6 @@ public class Player : StatsComponent
             invincibilityTimes.Add(iFrames);
             //hitEffect.Play();
             base.TakeDamage(info);
-            isInvincible = true;
         }
     }
     private void OnDrawGizmos()

@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     private TMP_Text timerDisplay, playerStats, playerLevel, hpText, numberEffect, dashText;
 
     [SerializeField]
-    private Image xpBar, hpBar, dashTimer;
+    private Image xpBar, hpBar, dashTimer, dayBar1, dayBar2, dayBar3;
 
     [SerializeField]
     private CanvasRenderer playerStatsPanel, pausedPanel, gamePanel, upgradePanel, titlePanel, gameOverPanel, effectsPanel, debugPanel;
@@ -45,14 +45,17 @@ public class GameManager : MonoBehaviour
 
     public bool showDamageNumbers = true;
     private float time = 0f;
-    private float currentDifficulty = 1;
+    private float enemyLevel = 1;
     private GameState state = GameState.Title;
     private bool paused = false;
-    private int month, day, hour;
-    private float secondToHourRation = 3 / 1;
     private int garunteedWeaponLevel = 5;
     private bool doSpecialUpgrade = false;
     private int upgradesToGive = 0;
+    private float dayLength = 120f;
+    private int currentDay = 1;
+    private int currentSeason = 0;
+    private int currentHour = 12;
+    private List<string> seasonsOrdered = new List<string>();
 
     public Texture2D cursorTexture;
 
@@ -65,7 +68,7 @@ public class GameManager : MonoBehaviour
 
     public float CurrentDifficulty
     {
-        get { return currentDifficulty; }
+        get { return enemyLevel; }
     }
 
     public float GameTime
@@ -88,6 +91,11 @@ public class GameManager : MonoBehaviour
         ResourceManager.Init();
         debugPanel.GetComponent<DebugPanel>().Init();
         ResourceManager.GetBuffDef(ResourceManager.BuffIndex.Burning);
+
+        seasonsOrdered.Add("Fall");
+        seasonsOrdered.Add("Winter");
+        seasonsOrdered.Add("Spring");
+        seasonsOrdered.Add("Summer");
 
         pauseGame.action.performed += (InputAction.CallbackContext callback) =>
         {
@@ -135,19 +143,11 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 1f;
                 // Updating the timer and difficulty
                 time += Time.deltaTime;
-                currentDifficulty = Mathf.Floor(1 + (time / timeToDifficultyIncrease));
-                CalculateDate();
+                enemyLevel = Mathf.Floor(1 + (time / timeToDifficultyIncrease));
+                UpdateDate();
 
                 // Updating displays
-                timerDisplay.text = GetMonthName() + "\n Day " + day;
-                if (hour > 12)
-                {
-                    timerDisplay.text += "\n" + (hour - 12) + " PM";
-                }
-                else
-                {
-                    timerDisplay.text += "\n" + hour + " AM";
-                }
+                timerDisplay.text = seasonsOrdered[currentSeason] + ": Day " + currentDay;
                 dashText.text = player.currentDashes.ToString();
                 xpBar.GetComponent<RectTransform>().anchorMax = new Vector2(player.GetPercentToNextLevel(), xpBar.GetComponent<RectTransform>().anchorMax.y);
                 dashTimer.GetComponent<RectTransform>().anchorMax = new Vector2(1 - (player.dashCooldownTimer / player.DashCooldown), dashTimer.GetComponent<RectTransform>().anchorMax.y);
@@ -291,7 +291,7 @@ public class GameManager : MonoBehaviour
             "\nCrit Chance: " + (player.CritChance * 100) + "% " +
             "\nCrit Damage: " + player.CritDamage + "x" +
             "\nTime Alive " + minutes + ":" + seconds +
-            "\nGame Difficulty: " + currentDifficulty.ToString();
+            "\nGame Difficulty: " + enemyLevel.ToString();
     }
 
     public void PlayerPickupBossDrop(int upgrades)
@@ -412,133 +412,34 @@ public class GameManager : MonoBehaviour
     }
 
     /* 
-     * Calculates the date of the in game timer
-     * 1 second = 1 hour
-     * 24 seconds = 1 Day
-     * 
-     * 744 hours in January - Starts at 0
-     * 672 hours in Febuary - Starts at 744
-     * 744 hours in March - Starts at 1416
-     * 720 hours in April - Starts at 2160
-     * 744 hours in May - Starts at 2880
-     * 720 hours in June - Starts at 3624
-     * 744 hours in July - Starts at 4344
-     * 744 hours in August - Starts at 5088
-     * 720 hours in September - Starts at 5832
-     * 744 hours in October - Starts at 6552
-     * 720 hours in November - Starts at 7296
-     * 744 hours in December - Starts at 8016
-     * Ends at 8760
+     * 4 Seasons
+     * Each season is 10 minutes
+     * 5 Days per season
+     * Each day is 2 minutes
     */
-    public void CalculateDate()
+    public void UpdateDate()
     {
-        int totalHours = (int)Mathf.Floor(time * secondToHourRation);
-        if (totalHours < 744)
-        {
-            month = 1;
-            day = (int)Mathf.Floor(totalHours / 24f) + 1;
-        }
-        else if (totalHours < 1416)
-        {
-            month = 2;
-            day = (int)Mathf.Floor((totalHours - 744) / 24f) + 1;
-        }
-        else if (totalHours < 2160)
-        {
-            month = 3;
-            day = (int)Mathf.Floor((totalHours - 1416) / 24f) + 1;
-        }
-        else if (totalHours < 2880)
-        {
-            month = 4;
-            day = (int)Mathf.Floor((totalHours - 2160) / 24f) + 1;
-        }
-        else if (totalHours < 3624)
-        {
-            month = 5;
-            day = (int)Mathf.Floor((totalHours - 2880) / 24f) + 1;
-        }
-        else if (totalHours < 4344)
-        {
-            month = 6;
-            day = (int)Mathf.Floor((totalHours - 3624) / 24f) + 1;
-        }
-        else if (totalHours < 5088)
-        {
-            month = 7;
-            day = (int)Mathf.Floor((totalHours - 4344) / 24f) + 1;
-        }
-        else if (totalHours < 5832)
-        {
-            month = 8;
-            day = (int)Mathf.Floor((totalHours - 5088) / 24f) + 1;
-        }
-        else if (totalHours < 6552)
-        {
-            month = 9;
-            day = (int)Mathf.Floor((totalHours - 5832) / 24f) + 1;
-        }
-        else if (totalHours < 7296)
-        {
-            month = 10;
-            day = (int)Mathf.Floor((totalHours - 6552) / 24f) + 1;
-        }
-        else if (totalHours < 8016)
-        {
-            month = 11;
-            day = (int)Mathf.Floor((totalHours - 7296) / 24f) + 1;
-        }
-        else if (totalHours < 8760)
-        {
-            month = 12;
-            day = (int)Mathf.Floor((totalHours - 8016) / 24f) + 1;
-        }
+        currentSeason = (int)Mathf.Floor(time / (dayLength * 5));
+        currentDay = (int)Mathf.Floor((time - ((currentSeason - 1) * 5)) / dayLength) + 1;
+        currentHour = (int)((time % dayLength) / (dayLength / 24));
 
-        hour = (totalHours % 24) + 1;
+        float percentThroughDay = (time % dayLength) / dayLength;
+
+        dayBar1.rectTransform.anchorMin = new Vector2(0f - percentThroughDay - 0.5f, dayBar1.rectTransform.anchorMin.y);
+        dayBar1.rectTransform.anchorMax = new Vector2(1f - percentThroughDay - 0.5f, dayBar1.rectTransform.anchorMax.y);
+        dayBar2.rectTransform.anchorMin = new Vector2(1f - percentThroughDay - 0.5f, dayBar2.rectTransform.anchorMin.y);
+        dayBar2.rectTransform.anchorMax = new Vector2(2f - percentThroughDay - 0.5f, dayBar2.rectTransform.anchorMax.y);
+        dayBar3.rectTransform.anchorMin = new Vector2(2f - percentThroughDay - 0.5f, dayBar3.rectTransform.anchorMin.y);
+        dayBar3.rectTransform.anchorMax = new Vector2(3f - percentThroughDay - 0.5f, dayBar3.rectTransform.anchorMax.y);
     }
 
-    public string GetMonthName()
+    public bool IsDayLight()
     {
-        string name = "Oops";
-        switch (month)
+        if (Mathf.RoundToInt((time - (dayLength / 4)) / dayLength) % 2 == 0)
         {
-            case 1:
-                name = "January";
-                break;
-            case 2:
-                name = "Febuary";
-                break;
-            case 3:
-                name = "March";
-                break;
-            case 4:
-                name = "April";
-                break;
-            case 5:
-                name = "May";
-                break;
-            case 6:
-                name = "June";
-                break;
-            case 7:
-                name = "July";
-                break;
-            case 8:
-                name = "August";
-                break;
-            case 9:
-                name = "September";
-                break;
-            case 10:
-                name = "October";
-                break;
-            case 11:
-                name = "November";
-                break;
-            case 12:
-                name = "December";
-                break;
+            return true;
         }
-        return name;
+
+        return false;
     }
 }

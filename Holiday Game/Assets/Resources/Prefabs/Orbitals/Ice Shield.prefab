@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2678150896085066133}
-  - component: {fileID: 6200157428395054535}
+  - component: {fileID: 8070002770647533162}
   m_Layer: 0
   m_Name: Ice Shield
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6200157428395054535
+--- !u!114 &8070002770647533162
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,13 +42,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2678150896085066129}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c964ec57b489bb46ad23bfe4fef5935, type: 3}
+  m_Script: {fileID: 11500000, guid: c234f97a759106544ae284f882183c9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
-  speed: 1.5
-  distance: 5
-  child: {fileID: 7791206445351120847}
+  owner: {fileID: 0}
 --- !u!1 &7791206445351120847
 GameObject:
   m_ObjectHideFlags: 0
@@ -60,7 +58,8 @@ GameObject:
   - component: {fileID: 1734465029366502959}
   - component: {fileID: 4454375830328955413}
   - component: {fileID: 7444750382914216066}
-  - component: {fileID: 1271619015006451983}
+  - component: {fileID: 8180283926398624643}
+  - component: {fileID: 6707750089175333298}
   m_Layer: 10
   m_Name: Shield
   m_TagString: Untagged
@@ -75,14 +74,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7791206445351120847}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2678150896085066133}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4454375830328955413
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -124,12 +123,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 3625043607559282579, guid: 045b15ec09bba42448d89db77fa6f20a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2b645f57f51d2484eb49da422d3b2cd1, type: 3}
   m_Color: {r: 0, g: 1, b: 0.8542311, a: 0.5019608}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.16, y: 0.16}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -156,8 +155,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!70 &1271619015006451983
-CapsuleCollider2D:
+--- !u!114 &8180283926398624643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7791206445351120847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c964ec57b489bb46ad23bfe4fef5935, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1.5
+  distance: 5
+  parent: {fileID: 8070002770647533162}
+--- !u!58 &6707750089175333298
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -170,5 +184,5 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.0000002, y: 0.5}
-  m_Direction: 1
+  serializedVersion: 2
+  m_Radius: 0.8

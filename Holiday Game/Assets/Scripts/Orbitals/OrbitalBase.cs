@@ -2,18 +2,45 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OrbitalBase : MonoBehaviour
+public abstract class OrbitalBase : MonoBehaviour
 {
-    public ResourceManager.OrbitalIndex index;
     public float speed = 1f;
     public float distance = 5f;
-    public GameObject child;
+    public OrbitalParent parent;
 
     private void Update()
     {
         float delta = Time.deltaTime;
-        child.transform.localPosition = new Vector2(distance, 0);
+        transform.localPosition = new Vector2(distance, 0);
 
-        transform.Rotate(new Vector3(0, 0, delta * speed * Mathf.Rad2Deg));
+        parent.transform.Rotate(new Vector3(0, 0, delta * speed * Mathf.Rad2Deg));
+
+        OnUpdate();
     }
+
+    protected Enemy GetClosestEnemy()
+    {
+        List<Enemy> enemies = EnemyManager.instance.CurrentEnemies;
+        if (enemies.Count > 0)
+        {
+            Enemy closest = null;
+            float distance = GameManager.instance.Player.attackActivationRange;
+            foreach (Enemy e in enemies)
+            {
+                float newDistance = e.PlayerDistance();
+                if (newDistance < distance)
+                {
+                    closest = e;
+                    distance = newDistance;
+                }
+            }
+            return closest;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public abstract void OnUpdate();
 }

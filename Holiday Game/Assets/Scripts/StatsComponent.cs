@@ -760,7 +760,8 @@ public abstract class StatsComponent : MonoBehaviour
 
         if (upgrade.index == ResourceManager.UpgradeIndex.Reflector)
         {
-            Instantiate<OrbitalBase>(GetOrbital(OrbitalIndex.IceShield), transform);
+            OrbitalParent p = Instantiate<OrbitalParent>(GetOrbital(OrbitalIndex.IceShield), transform);
+            p.owner = this;
         }
     }
 }

@@ -138,12 +138,11 @@ public abstract class ProjectileBase : MonoBehaviour
         {
             if (projectileTeam == Team.Enemy)
             {
-                Enemy e = GetClosestEnemy();
-                Direction = (e.transform.position - transform.position).normalized;
-                projectileTeam = ProjectileBase.Team.Player;
-                damageMultiplier *= 2f;
-                speedMultiplier *= 2f;
-                LifetimeMultiplier *= 2f;
+                if (other.gameObject.GetComponent<IceShield>())
+                {
+                    other.gameObject.GetComponent<IceShield>().Shoot(damageInfo);
+                    DestroyProjectile();
+                }
             }
         }
 

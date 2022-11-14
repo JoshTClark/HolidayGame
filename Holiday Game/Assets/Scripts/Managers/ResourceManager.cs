@@ -21,7 +21,8 @@ public class ResourceManager
         EnemyProjectile,
         Explosion,
         CupidArrow,
-        CandyCorn
+        CandyCorn,
+        IceShard
     }
     public enum FollowingEffectIndex
     {
@@ -143,7 +144,7 @@ public class ResourceManager
     public static List<UpgradePool> upgradePools = new List<UpgradePool>();
     public static List<BuffDef> buffs = new List<BuffDef>();
     public static List<FollowingEffect> effects = new List<FollowingEffect>();
-    public static List<OrbitalBase> orbitals = new List<OrbitalBase>();
+    public static List<OrbitalParent> orbitals = new List<OrbitalParent>();
     public static Player playerPrefab;
     public static DashParticle playerDashEffect;
 
@@ -180,8 +181,8 @@ public class ResourceManager
 
     public static void LoadOrbitals()
     {
-        OrbitalBase[] arr = Resources.LoadAll<OrbitalBase>("");
-        foreach (OrbitalBase i in arr)
+        OrbitalParent[] arr = Resources.LoadAll<OrbitalParent>("");
+        foreach (OrbitalParent i in arr)
         {
             orbitals.Add(i);
         }
@@ -367,9 +368,9 @@ public class ResourceManager
         return null;
     }
 
-    public static OrbitalBase GetOrbital(ResourceManager.OrbitalIndex index)
+    public static OrbitalParent GetOrbital(ResourceManager.OrbitalIndex index)
     {
-        foreach (OrbitalBase i in orbitals)
+        foreach (OrbitalParent i in orbitals)
         {
             if (i.index == index)
             {

@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Reflector
   m_EditorClassIdentifier: 
   upgradeName: Ice Shield
-  upgradeDescription: Gain an orbiting ice shield that reflects enemy projectiles
+  upgradeDescription: Gain an orbiting ice shield that shoots ice shards at nearby
+    enemies when projectiles are blocked
   index: 55
   tier: 3
   CanTakeMultiple: 0

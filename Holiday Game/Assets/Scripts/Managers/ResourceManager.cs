@@ -108,7 +108,9 @@ public class ResourceManager
         MoreCorn,
         Reflector,
         Patience,
-        LowHPDamage
+        LowHPDamage,
+        CupidArrowHealth,
+        SharpShadow
     }
 
     public enum UpgradePoolIndex

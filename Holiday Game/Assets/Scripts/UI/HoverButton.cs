@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class HoverButton : MonoBehaviour
 {
+    [SerializeField]
+    AudioSource hoverSound;
     public bool isHover = false;
     private float scale = 1;
     public float scaleMax = 1.25f;
@@ -21,6 +23,10 @@ public class HoverButton : MonoBehaviour
             {
                 scale = scaleMax;
             }
+            if (!hoverSound.isPlaying)
+            {
+                hoverSound.Play();
+            }
         }
         else if (!isHover && scale > 1f)
         {
@@ -29,6 +35,7 @@ public class HoverButton : MonoBehaviour
             {
                 scale = 1f;
             }
+            hoverSound.Stop();
         }
 
         rectTransform.localScale = new Vector3(scale, scale, 1);

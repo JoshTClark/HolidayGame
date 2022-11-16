@@ -151,34 +151,69 @@ public abstract class Enemy : StatsComponent
 
         //Health Drop
         float healthRandomizer = Random.value; //Randomize to get chance
-
-        if (index == ResourceManager.EnemyIndex.Test)
+        // If the player has the Cupid Health upgrade enemies have a higher chance of dropping health pickups
+        if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.CupidArrowHealth))
         {
-            // Base enemies have 1% chance to drop
-            if (healthRandomizer <= 0.01)
+            // Enemies have + 5% chance of getting a health drop
+            if (index == ResourceManager.EnemyIndex.Test)
             {
-                DropBase b = DropManager.GetPickup(ResourceManager.PickupIndex.HealthDrop1);
-                b.gameObject.transform.position = transform.position;
+                // Base enemies have 6% chance to drop
+                if (healthRandomizer <= 0.06)
+                {
+                    DropBase b = DropManager.GetPickup(ResourceManager.PickupIndex.HealthDrop1);
+                    b.gameObject.transform.position = transform.position;
+                }
+            }
+            else if (index == ResourceManager.EnemyIndex.Test2)
+            {
+                // Shooter enemies have 10% chance to drop
+                if (healthRandomizer <= 0.10)
+                {
+                    DropBase b = DropManager.GetPickup(ResourceManager.PickupIndex.HealthDrop1);
+                    b.gameObject.transform.position = transform.position;
+                }
+            }
+            else if (index == ResourceManager.EnemyIndex.BigBoy)
+            {
+                // Large enemies have 20% chance to drop
+                if (healthRandomizer <= 0.20)
+                {
+                    DropBase b = DropManager.GetPickup(ResourceManager.PickupIndex.HealthDrop1);
+                    b.gameObject.transform.position = transform.position;
+                }
             }
         }
-        else if (index == ResourceManager.EnemyIndex.Test2)
+        else if(!GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.CupidArrowHealth)) 
         {
-            // Shooter enemies have 5% chance to drop
-            if (healthRandomizer <= 0.05)
+            if (index == ResourceManager.EnemyIndex.Test)
             {
-                DropBase b = DropManager.GetPickup(ResourceManager.PickupIndex.HealthDrop1);
-                b.gameObject.transform.position = transform.position;
+                // Base enemies have 1% chance to drop
+                if (healthRandomizer <= 0.01)
+                {
+                    DropBase b = DropManager.GetPickup(ResourceManager.PickupIndex.HealthDrop1);
+                    b.gameObject.transform.position = transform.position;
+                }
+            }
+            else if (index == ResourceManager.EnemyIndex.Test2)
+            {
+                // Shooter enemies have 5% chance to drop
+                if (healthRandomizer <= 0.05)
+                {
+                    DropBase b = DropManager.GetPickup(ResourceManager.PickupIndex.HealthDrop1);
+                    b.gameObject.transform.position = transform.position;
+                }
+            }
+            else if (index == ResourceManager.EnemyIndex.BigBoy)
+            {
+                // Large enemies have 15% chance to drop
+                if (healthRandomizer <= 0.15)
+                {
+                    DropBase b = DropManager.GetPickup(ResourceManager.PickupIndex.HealthDrop1);
+                    b.gameObject.transform.position = transform.position;
+                }
             }
         }
-        else if (index == ResourceManager.EnemyIndex.BigBoy)
-        {
-            // Large enemies have 15% chance to drop
-            if (healthRandomizer <= 0.15)
-            {
-                DropBase b = DropManager.GetPickup(ResourceManager.PickupIndex.HealthDrop1);
-                b.gameObject.transform.position = transform.position;
-            }
-        }
+        
         else if (index == ResourceManager.EnemyIndex.Boss)
         {
             // Boss enemies have 100% chance to drop
@@ -214,7 +249,6 @@ public abstract class Enemy : StatsComponent
     }
 
     /// <summary>
-    /// NEEDS WORK, CAN BE BETTER:
     /// Handles the logic for colliding with a player
     /// </summary>
     /// <param name="collision"></param>

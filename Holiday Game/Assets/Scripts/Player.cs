@@ -215,4 +215,18 @@ public class Player : StatsComponent
             isDash = true;
         }
     }
+    virtual protected void OnTriggerStay2D(Collider2D collision)
+    {
+        HandleCollision(collision);
+    }
+    private void HandleCollision(Collider2D collision)
+    {
+        // if the player has SharpShadow Upgrade, and they dash through an enemy
+        // Enemy takes [DAMAGE] (should it be scalable? should it be constant? is it just the player's damage stat?)
+        if(isDash && HasUpgrade(ResourceManager.UpgradeIndex.SharpShadow))
+        {
+            // deal the damage
+            Debug.Log("Sharp Shadow!!!!!");
+        }
+    }
 }

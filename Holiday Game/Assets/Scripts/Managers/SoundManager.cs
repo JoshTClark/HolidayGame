@@ -21,6 +21,9 @@ public class SoundManager : MonoBehaviour
     [SerializeField]
     AudioSource arrowEffect;
 
+    [SerializeField]
+    AudioSource buttonPress;
+
 
 
     // Start is called before the first frame update
@@ -64,5 +67,9 @@ public class SoundManager : MonoBehaviour
         {
             levelUpEffect.Play();
         }
+    }
+    public void ButtonPress()
+    {
+        if (!buttonPress.isPlaying) { buttonPress.Play(); }
     }
 }

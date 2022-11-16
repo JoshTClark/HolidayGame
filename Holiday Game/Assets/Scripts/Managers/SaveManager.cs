@@ -7,9 +7,11 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class SaveManager
 {
+    private static string path = Application.persistentDataPath + "/" + "saves" + "/";
+
     public static void SaveFile(string saveName, GameData data)
     {
-        string destination = Application.persistentDataPath + "/" + saveName + ".dat";
+        string destination = path + saveName + ".dat";
         FileStream file;
 
         if (File.Exists(destination)) file = File.OpenWrite(destination);
@@ -22,7 +24,7 @@ public static class SaveManager
 
     public static GameData LoadFile(string saveName)
     {
-        string destination = Application.persistentDataPath + "/" + saveName + ".dat";
+        string destination = path + saveName + ".dat";
         FileStream file;
 
         if (File.Exists(destination)) file = File.OpenRead(destination);
@@ -51,5 +53,16 @@ public static class SaveManager
         {
             return false;
         }
+    }
+
+    public static FileInfo[] LoadAllSaves() 
+    {
+        if (!Directory.Exists(Application.persistentDataPath + "/" + "saves"))
+        {
+            Directory.CreateDirectory(Application.persistentDataPath + "/" + "saves");
+        }
+        DirectoryInfo dir = new DirectoryInfo(Application.persistentDataPath + "/" + "saves");
+        FileInfo[] info = dir.GetFiles("*.dat");
+        return info;
     }
 }

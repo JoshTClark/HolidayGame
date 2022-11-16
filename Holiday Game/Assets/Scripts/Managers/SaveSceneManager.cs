@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SaveSceneManager : MonoBehaviour
 {
@@ -11,7 +14,19 @@ public class SaveSceneManager : MonoBehaviour
     }
 
     [SerializeField]
-    private CanvasRenderer saveSelectPanel, newSavePanel; 
+    private CanvasRenderer saveSelectPanel, newSavePanel, selectSlotPanel;
+
+    [SerializeField]
+    private Button createSaveButton;
+
+    [SerializeField]
+    private TMP_Text errorText;
+
+    [SerializeField]
+    private TMP_InputField nameField;
+
+    [SerializeField]
+    private SaveSelector selector;
 
     public SceneState state = SceneState.SelectSave;
 
@@ -20,6 +35,25 @@ public class SaveSceneManager : MonoBehaviour
     private void Start()
     {
         instance = this;
+
+        FileInfo[] info = SaveManager.LoadAllSaves();
+        foreach (FileInfo i in info)
+        {
+            selector.AddSlot(SaveManager.LoadFile(i.Name.Replace(i.Extension, "")));
+        }
+
+
+        createSaveButton.onClick.AddListener(() =>
+        {
+            if (nameField.text != "")
+            {
+                FinalizeSave(nameField.text);
+            }
+            else
+            {
+                errorText.gameObject.SetActive(true);
+            }
+        });
     }
 
     private void Update()
@@ -29,6 +63,7 @@ public class SaveSceneManager : MonoBehaviour
             case SceneState.SelectSave:
                 saveSelectPanel.gameObject.SetActive(true);
                 newSavePanel.gameObject.SetActive(false);
+                errorText.gameObject.SetActive(false);
                 break;
             case SceneState.NewSave:
                 saveSelectPanel.gameObject.SetActive(false);
@@ -37,13 +72,17 @@ public class SaveSceneManager : MonoBehaviour
         }
     }
 
-    public void CreateNewSave(int slot)
+    public void CreateNewSave()
     {
         state = SceneState.NewSave;
     }
 
-    public void FinalizeSave()
+    private void FinalizeSave(string name)
     {
-        //SaveManager.SaveFile("save" + slot, new GameData());
+        GameData data = new GameData();
+        data.saveName = name;
+        SaveManager.SaveFile("save_" + name, data);
+        selector.AddSlot(data);
+        state = SceneState.SelectSave;
     }
 }

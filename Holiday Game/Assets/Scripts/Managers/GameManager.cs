@@ -84,6 +84,9 @@ public class GameManager : MonoBehaviour
     // Only a single gamemanager should ever exist so we can always get it here
     public static GameManager instance;
 
+    // The save game data to use
+    public static GameData data;
+
     void Start()
     {
         instance = this;

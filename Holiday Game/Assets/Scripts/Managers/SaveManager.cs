@@ -55,7 +55,7 @@ public static class SaveManager
         }
     }
 
-    public static FileInfo[] LoadAllSaves() 
+    public static FileInfo[] LoadAllSaves()
     {
         if (!Directory.Exists(Application.persistentDataPath + "/" + "saves"))
         {
@@ -64,5 +64,22 @@ public static class SaveManager
         DirectoryInfo dir = new DirectoryInfo(Application.persistentDataPath + "/" + "saves");
         FileInfo[] info = dir.GetFiles("*.dat");
         return info;
+    }
+
+    public static void Delete(string saveName)
+    {
+        string destination = path + saveName + ".dat";
+        FileStream file;
+
+        if (File.Exists(destination)) file = File.OpenRead(destination);
+        else
+        {
+            Debug.LogError("File " + destination + " not found");
+            return;
+        }
+
+        FileInfo info = new FileInfo(file.Name);
+        file.Close();
+        info.Delete();
     }
 }

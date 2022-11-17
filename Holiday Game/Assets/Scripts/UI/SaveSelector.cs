@@ -54,4 +54,27 @@ public class SaveSelector : MonoBehaviour
     {
         slots.Add(data);
     }
+
+    public GameData GetSelected()
+    {
+        if (slots.Count > 0)
+        {
+            return slots[selectedSlot];
+        }
+        return null;
+    }
+
+    public void DeleteSlot()
+    {
+        SaveManager.Delete(slots[selectedSlot].saveName);
+        slots.RemoveAt(selectedSlot);
+        if (slots.Count == 0)
+        {
+            displayText = "No saves found";
+        }
+        else
+        {
+            displayText = slots[selectedSlot].saveName;
+        }
+    }
 }

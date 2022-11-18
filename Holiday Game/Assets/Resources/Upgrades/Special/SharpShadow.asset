@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 296cfc9b7513a864aab005e7da6bfa8f, type: 3}
   m_Name: SharpShadow
   m_EditorClassIdentifier: 
-  upgradeName: Sharp Shadow [name in progress]
-  upgradeDescription: When you dash through an enemy, they take damage
+  upgradeName: Sharp Shadow
+  upgradeDescription: When you dash through an enemy, you deal your Player Damage
+    to them
   index: 59
   tier: 3
   CanTakeMultiple: 0

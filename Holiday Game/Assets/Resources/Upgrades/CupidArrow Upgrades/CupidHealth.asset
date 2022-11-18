@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: CupidHealth
   m_EditorClassIdentifier: 
   upgradeName: Cupid Health
-  upgradeDescription: Enemies killed by the Cupid Arrow have [INCREASED] Chance of
-    dropping a health pickup
+  upgradeDescription: Enemies killed by the Cupid Arrow have + 5% Chance of dropping
+    a health pickup
   index: 58
   tier: 3
-  CanTakeMultiple: 0
+  CanTakeMultiple: 1
   IsWeapon: 0
   icon: {fileID: 0}

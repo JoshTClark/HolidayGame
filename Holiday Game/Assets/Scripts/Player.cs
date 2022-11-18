@@ -226,7 +226,15 @@ public class Player : StatsComponent
         if(isDash && HasUpgrade(ResourceManager.UpgradeIndex.SharpShadow))
         {
             // deal the damage
-            Debug.Log("Sharp Shadow!!!!!");
+            if (collision.gameObject.GetComponent<Enemy>())
+            {
+                // Deal Damage to the enemy
+                DamageInfo info = new DamageInfo();
+                info.damage = Damage;
+                info.attacker = this;
+                Enemy e = collision.gameObject.GetComponent<Enemy>();
+                e.TakeDamage(info);
+            }
         }
     }
 }

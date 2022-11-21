@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     private TMP_Text timerDisplay, playerStats, playerLevel, hpText, numberEffect, dashText;
 
     [SerializeField]
-    private Image xpBar, hpBar, dashTimer, dayBar1, dayBar2, dayBar3;
+    private Image xpBar, hpBar, dashTimer, dayBar1, dayBar2, dayBar3, cursor;
 
     [SerializeField]
     private CanvasRenderer playerStatsPanel, pausedPanel, gamePanel, upgradePanel, titlePanel, gameOverPanel, effectsPanel, debugPanel;
@@ -56,8 +56,6 @@ public class GameManager : MonoBehaviour
     private int currentSeason = 0;
     private int currentHour = 12;
     private List<string> seasonsOrdered = new List<string>();
-
-    public Texture2D cursorTexture;
 
     public Player Player
     {
@@ -90,7 +88,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         instance = this;
-        Cursor.SetCursor(cursorTexture, new Vector2(15, 15), CursorMode.Auto);
+        //Cursor.SetCursor(cursorTexture, new Vector2(15, 15), CursorMode.Auto);    
+        Cursor.visible = false;
         ResourceManager.Init();
         debugPanel.GetComponent<DebugPanel>().Init();
         ResourceManager.GetBuffDef(ResourceManager.BuffIndex.Burning);
@@ -133,6 +132,8 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        cursor.rectTransform.position = new Vector3(Mouse.current.position.ReadValue().x, Mouse.current.position.ReadValue().y, 0);
+
         switch (state)
         {
             case GameState.Title:

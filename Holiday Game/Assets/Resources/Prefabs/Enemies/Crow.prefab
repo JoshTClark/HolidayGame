@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2607233927834169681
+--- !u!1 &8339426843530204243
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,27 +8,26 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3923565319528828769}
-  - component: {fileID: 1295272149194423359}
-  - component: {fileID: 5188392587077244646}
-  - component: {fileID: -2218388735599687297}
-  - component: {fileID: 7431447368233517244}
-  - component: {fileID: -5865313985130163075}
-  - component: {fileID: 1758532831}
-  m_Layer: 0
-  m_Name: GhostEnemy
+  - component: {fileID: 1293721253286366565}
+  - component: {fileID: 3733785161081831671}
+  - component: {fileID: 7055244312649482479}
+  - component: {fileID: 5257267426856902351}
+  - component: {fileID: -457166863736185644}
+  - component: {fileID: 4775803851074352135}
+  m_Layer: 7
+  m_Name: Crow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3923565319528828769
+--- !u!4 &1293721253286366565
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2607233927834169681}
+  m_GameObject: {fileID: 8339426843530204243}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -37,13 +36,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &1295272149194423359
+--- !u!212 &3733785161081831671
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2607233927834169681}
+  m_GameObject: {fileID: 8339426843530204243}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -78,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4637663f9d8b87a468e7c0869fde7bc1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1115ec189574c584ebbf0d1c44addd7f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -89,40 +88,30 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &5188392587077244646
-BoxCollider2D:
+--- !u!58 &7055244312649482479
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2607233927834169681}
+  m_GameObject: {fileID: 8339426843530204243}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0014789104, y: 0.05252683}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.3466666, y: 2.3466666}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 1.4982841, y: 2.096999}
-  m_EdgeRadius: 0
---- !u!50 &-2218388735599687297
+  m_Radius: 0.3
+--- !u!50 &5257267426856902351
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2607233927834169681}
+  m_GameObject: {fileID: 8339426843530204243}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -136,21 +125,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &7431447368233517244
+--- !u!114 &-457166863736185644
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2607233927834169681}
+  m_GameObject: {fileID: 8339426843530204243}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23ce62d7ff186e2429cd5cb44921f249, type: 3}
+  m_Script: {fileID: 11500000, guid: 4599ad408be4b1c4382a7c4c2b0ba1d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMaxHP: 5
-  baseSpeed: 4
-  baseDamage: 5
+  baseMaxHP: 2
+  baseSpeed: 8
+  baseDamage: 4
   baseAttackSpeed: 1
   baseArmor: 0
   baseRegen: 0
@@ -159,13 +148,13 @@ MonoBehaviour:
   baseCritDamage: 0
   knockbackMult: 0
   levelScaling: 1
-  hpLevelUp: 3
-  damageLevelUp: 1
+  hpLevelUp: 2
+  damageLevelUp: 0
   currentHP: 0
   xpAmount: 0
   hpAdd: 0
   speedAdd: 0
-  damageAdd: 0
+  damageAdd: 2
   attackSpeedAdd: 0
   armorAdd: 0
   regenAdd: 0
@@ -182,29 +171,24 @@ MonoBehaviour:
   inventory: []
   fadeTotalTime: 0
   player: {fileID: 0}
-  index: 5
+  index: 6
   isBoss: 0
-  drops:
-  - index: 0
-    chance: 1
-  - index: 1
-    chance: 0.25
-  - index: 2
-    chance: 0.05
-  onHitSound: {fileID: -5865313985130163075}
---- !u!82 &-5865313985130163075
+  XPType: 0
+  Drop: 0
+  onHitSound: {fileID: 4775803851074352135}
+--- !u!82 &4775803851074352135
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2607233927834169681}
+  m_GameObject: {fileID: 8339426843530204243}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e0b3564fc6cf60a4badc5ccb599b5976, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 0.505
+  m_PlayOnAwake: 0
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -288,23 +272,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!95 &1758532831
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2607233927834169681}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bed18f75c0735ea47bffc3126d2199c4, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0

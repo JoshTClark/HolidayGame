@@ -133,6 +133,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         cursor.rectTransform.position = new Vector3(Mouse.current.position.ReadValue().x, Mouse.current.position.ReadValue().y, 0);
+        cursor.transform.SetAsLastSibling();
 
         switch (state)
         {

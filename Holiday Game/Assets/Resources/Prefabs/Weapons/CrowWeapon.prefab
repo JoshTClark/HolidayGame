@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7549989900676399040}
   - component: {fileID: 7954688961587838055}
   m_Layer: 0
-  m_Name: BulletTestWeapon
+  m_Name: CrowWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,12 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 360765c825631d84c96f57a49839c126, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 8
-  projectile: {fileID: 4520824908635731440, guid: ffac36bb446f16342bf8db7cf71be2d4, type: 3}
+  delay: 10
   index: 2
+  upgradeIndex: 0
   icon: {fileID: 0}
   timer: 0
   owner: {fileID: 0}
   canFire: 0
   baseDamageMultiplier: 1
   baseSizeMultiplier: 1
+  attackSpeedMultiplier: 1

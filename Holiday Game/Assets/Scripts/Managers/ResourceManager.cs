@@ -11,7 +11,8 @@ public class ResourceManager
         Test2,
         BigBoy,
         Boss,
-        Ghost
+        Ghost,
+        Crow
     }
     public enum ProjectileIndex
     {
@@ -41,7 +42,7 @@ public class ResourceManager
     {
         Snowball,
         PumpkinBomb,
-        Test,
+        Crows,
         Fireworks,
         Null,
         CupidArrow,

@@ -20,6 +20,6 @@ public class TestEnemy2 : Enemy
         minPlayerDist = 6f;
         maxPlayerDist = 8f;
 
-        AddAttack(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.Test));
+        AddAttack(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.Crows));
     }
 }

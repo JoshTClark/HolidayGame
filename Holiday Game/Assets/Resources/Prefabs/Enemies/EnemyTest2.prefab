@@ -138,8 +138,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78af1bccb59846148bb08d8db1eb0790, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMaxHP: 20
-  baseSpeed: 2
+  baseMaxHP: 15
+  baseSpeed: 1
   baseDamage: 5
   baseAttackSpeed: 1
   baseArmor: 0
@@ -149,11 +149,10 @@ MonoBehaviour:
   baseCritDamage: 0
   knockbackMult: 1
   levelScaling: 1
-  hpLevelUp: 6
+  hpLevelUp: 3
   damageLevelUp: 0.5
   currentHP: 0
   xpAmount: 0
-  level: 0
   hpAdd: 0
   speedAdd: 0
   damageAdd: 0
@@ -175,8 +174,11 @@ MonoBehaviour:
   player: {fileID: 0}
   index: 2
   isBoss: 0
-  XPType: 1
-  Drop: 2
+  drops:
+  - index: 1
+    chance: 1
+  - index: 2
+    chance: 0.05
   onHitSound: {fileID: 5181472191143963359}
 --- !u!82 &5181472191143963359
 AudioSource:

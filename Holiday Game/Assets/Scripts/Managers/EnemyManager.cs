@@ -95,6 +95,17 @@ public class EnemyManager : MonoBehaviour
         currentEnemies.Add(spawned);
     }
 
+    public Enemy SpawnEnemy(ResourceManager.EnemyIndex index, Vector2 pos)
+    {
+        Enemy prefab = GetEnemyFromIndex(index);
+        Vector2 spawnPos = pos;
+        Enemy spawned = Instantiate(prefab, spawnPos, Quaternion.identity);
+        spawned.player = GameManager.instance.Player;
+        spawned.SetLevel((int)GameManager.instance.CurrentDifficulty);
+        currentEnemies.Add(spawned);
+        return spawned;
+    }
+
     private void SpawnEnemiesByPhase()
     {
         ResourceManager.EnemyIndex[] indices = currentPhase.GetSpawnWave();

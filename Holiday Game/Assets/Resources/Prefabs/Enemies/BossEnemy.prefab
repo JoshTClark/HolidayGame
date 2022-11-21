@@ -153,7 +153,6 @@ MonoBehaviour:
   damageLevelUp: 0
   currentHP: 0
   xpAmount: 0
-  level: 0
   hpAdd: 0
   speedAdd: 0
   damageAdd: 0
@@ -175,8 +174,27 @@ MonoBehaviour:
   player: {fileID: 0}
   index: 4
   isBoss: 1
-  XPType: 0
-  Drop: 2
+  drops:
+  - index: 1
+    chance: 1
+  - index: 1
+    chance: 1
+  - index: 1
+    chance: 1
+  - index: 1
+    chance: 1
+  - index: 2
+    chance: 1
+  - index: 2
+    chance: 1
+  - index: 3
+    chance: 1
+  - index: 1
+    chance: 0.5
+  - index: 2
+    chance: 0.5
+  - index: 2
+    chance: 0.5
   onHitSound: {fileID: 3070028910593412658}
 --- !u!82 &7789479764836828628
 AudioSource:

@@ -116,7 +116,6 @@ MonoBehaviour:
   damageLevelUp: 1
   currentHP: 0
   xpAmount: 0
-  level: 0
   hpAdd: 0
   speedAdd: 0
   damageAdd: 0
@@ -138,8 +137,15 @@ MonoBehaviour:
   player: {fileID: 0}
   index: 3
   isBoss: 0
-  XPType: 1
-  Drop: 2
+  drops:
+  - index: 1
+    chance: 1
+  - index: 0
+    chance: 0.25
+  - index: 0
+    chance: 0.25
+  - index: 2
+    chance: 0.1
   onHitSound: {fileID: -1947996119439005389}
 --- !u!61 &9056888587313460342
 BoxCollider2D:

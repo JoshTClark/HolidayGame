@@ -22,10 +22,9 @@ public abstract class Enemy : StatsComponent
     /// </summary>
     protected float maxPlayerDist;
 
-    //Which XP prefab this enemy will drop
+    // Drops
     [SerializeField]
-    public ResourceManager.PickupIndex XPType;
-    public ResourceManager.PickupIndex Drop;
+    private List<DropInfo> drops;
 
     // SoundEffects
     [SerializeField]
@@ -142,107 +141,22 @@ public abstract class Enemy : StatsComponent
             onHitSound.Stop();
         }
 
-        //Drops XP
-        if (index != ResourceManager.EnemyIndex.Boss)
+        foreach (DropInfo info in drops)
         {
-            DropBase xp = DropManager.GetPickup(XPType);
-            xp.gameObject.transform.position = transform.position;
-        }
-
-        //Health Drop
-        float healthRandomizer = Random.value; //Randomize to get chance
-        // If the player has the Cupid Health upgrade enemies have a higher chance of dropping health pickups
-        if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.CupidArrowHealth))
-        {
-            // Enemies have + 5% chance of getting a health drop
-            if (index == ResourceManager.EnemyIndex.Test)
+            Vector2 dropPosition = new Vector2(transform.position.x + Random.Range(-sr.sprite.rect.size.x / sr.sprite.pixelsPerUnit, sr.sprite.rect.size.x / sr.sprite.pixelsPerUnit) * transform.localScale.x * (2f / 3f), transform.position.y + Random.Range(-sr.sprite.rect.size.y / sr.sprite.pixelsPerUnit, sr.sprite.rect.size.y / sr.sprite.pixelsPerUnit) * transform.localScale.y * (2f / 3f));
+            float ran = Random.value;
+            if (info.index == ResourceManager.PickupIndex.HealthDrop1)
             {
-                // Base enemies have 1% chance to drop
-                // Get an extra 5% per level of upgrade
-                if (healthRandomizer <= 0.01 + (0.05 * GameManager.instance.Player.GetUpgrade(ResourceManager.UpgradeIndex.CupidArrowHealth).CurrentLevel))
+                if (player.HasUpgrade(ResourceManager.UpgradeIndex.CupidArrowHealth))
                 {
-                    DropBase b = DropManager.GetPickup(ResourceManager.PickupIndex.HealthDrop1);
-                    b.gameObject.transform.position = transform.position;
+                    ran += (float)(0.05 * GameManager.instance.Player.GetUpgrade(ResourceManager.UpgradeIndex.CupidArrowHealth).CurrentLevel);
                 }
             }
-            else if (index == ResourceManager.EnemyIndex.Test2)
+            if (ran <= info.chance)
             {
-                // Shooter enemies have 5% chance to drop
-                // Plus 5% per level of ArrowHealth Upgrade
-                if (healthRandomizer <= 0.05 + (0.05 * GameManager.instance.Player.GetUpgrade(ResourceManager.UpgradeIndex.CupidArrowHealth).CurrentLevel))
-                {
-                    DropBase b = DropManager.GetPickup(ResourceManager.PickupIndex.HealthDrop1);
-                    b.gameObject.transform.position = transform.position;
-                }
+                DropBase b = DropManager.GetPickup(info.index);
+                b.gameObject.transform.position = dropPosition;
             }
-            else if (index == ResourceManager.EnemyIndex.BigBoy)
-            {
-                // Large enemies have 15% chance to drop
-                // Plus 5% per level of ArrowHealth Upgrade
-                if (healthRandomizer <= 0.15 + (0.05 * GameManager.instance.Player.GetUpgrade(ResourceManager.UpgradeIndex.CupidArrowHealth).CurrentLevel))
-                {
-                    DropBase b = DropManager.GetPickup(ResourceManager.PickupIndex.HealthDrop1);
-                    b.gameObject.transform.position = transform.position;
-                }
-            }
-        }
-        else if(!GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.CupidArrowHealth)) 
-        {
-            if (index == ResourceManager.EnemyIndex.Test)
-            {
-                // Base enemies have 1% chance to drop
-                if (healthRandomizer <= 0.01)
-                {
-                    DropBase b = DropManager.GetPickup(ResourceManager.PickupIndex.HealthDrop1);
-                    b.gameObject.transform.position = transform.position;
-                }
-            }
-            else if (index == ResourceManager.EnemyIndex.Test2)
-            {
-                // Shooter enemies have 5% chance to drop
-                if (healthRandomizer <= 0.05)
-                {
-                    DropBase b = DropManager.GetPickup(ResourceManager.PickupIndex.HealthDrop1);
-                    b.gameObject.transform.position = transform.position;
-                }
-            }
-            else if (index == ResourceManager.EnemyIndex.BigBoy)
-            {
-                // Large enemies have 15% chance to drop
-                if (healthRandomizer <= 0.15)
-                {
-                    DropBase b = DropManager.GetPickup(ResourceManager.PickupIndex.HealthDrop1);
-                    b.gameObject.transform.position = transform.position;
-                }
-            }
-        }
-        
-        if (index == ResourceManager.EnemyIndex.Boss)
-        {
-            // Boss enemies have 100% chance to drop
-            DropBase b1 = DropManager.GetPickup(ResourceManager.PickupIndex.HealthDrop1);
-            b1.gameObject.transform.position = new Vector2(transform.position.x + Random.Range(-2.5f, 2.5f), transform.position.y + Random.Range(-2.5f, 2.5f));
-            DropBase b2 = DropManager.GetPickup(ResourceManager.PickupIndex.HealthDrop1);
-            b2.gameObject.transform.position = new Vector2(transform.position.x + Random.Range(-2.5f, 2.5f), transform.position.y + Random.Range(-2.5f, 2.5f));
-            DropBase b3 = DropManager.GetPickup(ResourceManager.PickupIndex.HealthDrop1);
-            b3.gameObject.transform.position = new Vector2(transform.position.x + Random.Range(-2.5f, 2.5f), transform.position.y + Random.Range(-2.5f, 2.5f));
-
-            // Boss xp drops
-            DropBase xp1 = DropManager.GetPickup(ResourceManager.PickupIndex.XP2);
-            xp1.gameObject.transform.position = new Vector2(transform.position.x + Random.Range(-2.5f, 2.5f), transform.position.y + Random.Range(-2.5f, 2.5f));
-            DropBase xp2 = DropManager.GetPickup(ResourceManager.PickupIndex.XP2);
-            xp2.gameObject.transform.position = new Vector2(transform.position.x + Random.Range(-2.5f, 2.5f), transform.position.y + Random.Range(-2.5f, 2.5f));
-            DropBase xp3 = DropManager.GetPickup(ResourceManager.PickupIndex.XP1);
-            xp3.gameObject.transform.position = new Vector2(transform.position.x + Random.Range(-2.5f, 2.5f), transform.position.y + Random.Range(-2.5f, 2.5f));
-            DropBase xp4 = DropManager.GetPickup(ResourceManager.PickupIndex.XP1);
-            xp4.gameObject.transform.position = new Vector2(transform.position.x + Random.Range(-2.5f, 2.5f), transform.position.y + Random.Range(-2.5f, 2.5f));
-            DropBase xp5 = DropManager.GetPickup(ResourceManager.PickupIndex.XP1);
-            xp5.gameObject.transform.position = new Vector2(transform.position.x + Random.Range(-2.5f, 2.5f), transform.position.y + Random.Range(-2.5f, 2.5f));
-            DropBase xp6 = DropManager.GetPickup(ResourceManager.PickupIndex.XP1);
-            xp6.gameObject.transform.position = new Vector2(transform.position.x + Random.Range(-2.5f, 2.5f), transform.position.y + Random.Range(-2.5f, 2.5f));
-
-            DropBase drop = DropManager.GetPickup(ResourceManager.PickupIndex.BossDrop);
-            drop.gameObject.transform.position = new Vector2(transform.position.x, transform.position.y);
         }
     }
 
@@ -322,5 +236,13 @@ public abstract class Enemy : StatsComponent
             // Play Audio
             onHitSound.Play();
         }
+    }
+
+    [System.Serializable]
+    private class DropInfo
+    {
+        public ResourceManager.PickupIndex index;
+        [Range(0, 1)]
+        public float chance;
     }
 }

@@ -146,7 +146,7 @@ MonoBehaviour:
   baseRegenInterval: 0
   baseCritChance: 0
   baseCritDamage: 0
-  knockbackMult: 0
+  knockbackMult: 0.5
   levelScaling: 1
   hpLevelUp: 2
   damageLevelUp: 0
@@ -173,8 +173,7 @@ MonoBehaviour:
   player: {fileID: 0}
   index: 6
   isBoss: 0
-  XPType: 0
-  Drop: 0
+  drops: []
   onHitSound: {fileID: 4775803851074352135}
 --- !u!82 &4775803851074352135
 AudioSource:

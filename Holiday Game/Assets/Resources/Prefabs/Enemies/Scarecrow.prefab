@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5181472191143963359}
   - component: {fileID: 4090499408758386724}
   m_Layer: 7
-  m_Name: EnemyTest2
+  m_Name: Scarecrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,7 +147,7 @@ MonoBehaviour:
   baseRegenInterval: 0
   baseCritChance: 0
   baseCritDamage: 0
-  knockbackMult: 1
+  knockbackMult: 0.5
   levelScaling: 1
   hpLevelUp: 3
   damageLevelUp: 0.5

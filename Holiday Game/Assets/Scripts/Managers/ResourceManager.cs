@@ -7,8 +7,8 @@ public class ResourceManager
     public enum EnemyIndex
     {
         None,
-        Test,
-        Test2,
+        Bat,
+        Scarecrow,
         BigBoy,
         Boss,
         Ghost,

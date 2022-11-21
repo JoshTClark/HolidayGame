@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestEnemy2 : Enemy
+public class Scarecrow : Enemy
 {
     public override void OnUpdate()
     {
@@ -10,8 +10,8 @@ public class TestEnemy2 : Enemy
     }
     protected override void CalcMoves()
     {
-        movements.Add(ShooterMove() * 1.5f);
-        movements.Add(Separation() * .1f);
+        movements.Add(SeekPlayer() * 1.5f);
+        movements.Add(Separation() * 2f);
     }
 
     public override void OnStart()

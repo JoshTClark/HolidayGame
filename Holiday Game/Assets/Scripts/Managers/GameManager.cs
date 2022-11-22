@@ -46,6 +46,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     public List<WeaponIcon> weaponIcons;
 
+    [SerializeField]
+    public LevelData level;
+
     public bool showDamageNumbers = true;
     private float time = 0f;
     private float enemyLevel = 1;
@@ -374,6 +377,8 @@ public class GameManager : MonoBehaviour
         player.AddUpgrade(weapon);
 
         ProjectileManager.Clean();
+        level.Clean();
+        level.CreateLevel();
         titlePanel.gameObject.SetActive(false);
         gamePanel.gameObject.SetActive(true);
         state = GameState.Normal;

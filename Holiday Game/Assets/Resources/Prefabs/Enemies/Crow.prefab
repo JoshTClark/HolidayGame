@@ -138,7 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4599ad408be4b1c4382a7c4c2b0ba1d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMaxHP: 2
+  baseMaxHP: 1
   baseSpeed: 8
   baseDamage: 4
   baseAttackSpeed: 1
@@ -149,8 +149,8 @@ MonoBehaviour:
   baseCritDamage: 0
   knockbackMult: 0.5
   levelScaling: 1
-  hpLevelUp: 2
-  damageLevelUp: 0
+  hpLevelUp: 0.25
+  damageLevelUp: 0.5
   currentHP: 0
   xpAmount: 0
   hpAdd: 0

@@ -20,6 +20,7 @@ public class DamageInfo
     public StatsComponent attacker;
     public bool isCrit;
     public List<ResourceManager.BuffIndex> debuffs = new List<ResourceManager.BuffIndex>();
+    public ResourceManager.WeaponIndex weapon;
 
     public void CalculateAll()
     {
@@ -45,6 +46,7 @@ public class DamageInfo
         info.knockback = this.knockback;
         info.knockbackDirection = this.knockbackDirection;
         info.radialKnockback = this.radialKnockback;
+        info.weapon = this.weapon;
         return info;
     }
 

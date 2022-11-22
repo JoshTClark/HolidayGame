@@ -57,6 +57,7 @@ public class CandyCornWeapon : Weapon
                     info.attacker = owner;
                     info.knockbackDirection = p.Direction;
                     info.knockback = 0.2f;
+                    info.weapon = ResourceManager.WeaponIndex.CandyCornRifle;
                     p.SetDamageInfo(info);
                     float torque = 500f;
                     p.gameObject.GetComponent<Rigidbody2D>().AddTorque(torque);

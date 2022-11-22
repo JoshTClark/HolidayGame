@@ -141,6 +141,15 @@ public abstract class Enemy : StatsComponent
             onHitSound.Stop();
         }
 
+        if(dmgInfo.weapon == ResourceManager.WeaponIndex.PumpkinBomb)
+        {
+            Debug.Log("Killed by a pumpkin");
+        }
+        else
+        {
+            Debug.Log("Something Else Killed Me.");
+        }
+
         foreach (DropInfo info in drops)
         {
             Vector2 dropPosition = new Vector2(transform.position.x + Random.Range(-sr.sprite.rect.size.x / sr.sprite.pixelsPerUnit, sr.sprite.rect.size.x / sr.sprite.pixelsPerUnit) * transform.localScale.x * (2f / 3f), transform.position.y + Random.Range(-sr.sprite.rect.size.y / sr.sprite.pixelsPerUnit, sr.sprite.rect.size.y / sr.sprite.pixelsPerUnit) * transform.localScale.y * (2f / 3f));

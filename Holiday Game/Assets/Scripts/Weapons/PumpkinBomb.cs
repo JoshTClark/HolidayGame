@@ -17,6 +17,7 @@ public class PumpkinBomb : Weapon
             DamageInfo info = new DamageInfo();
             info.damage = baseDamageMultiplier * owner.Damage;
             info.attacker = owner;
+            info.weapon = ResourceManager.WeaponIndex.PumpkinBomb;
             p.SetDamageInfo(info);
 
             // Pumkin Launcher

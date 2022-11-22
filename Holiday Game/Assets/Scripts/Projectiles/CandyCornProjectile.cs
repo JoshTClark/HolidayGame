@@ -15,7 +15,6 @@ public class CandyCornProjectile : ProjectileBase
         this.transform.rotation = Quaternion.identity;
         body.angularVelocity = 0;
         body.velocity = Vector2.zero;
-        this.gameObject.SetActive(true);
     }
 
     public override void OnCollision(Collider2D other)

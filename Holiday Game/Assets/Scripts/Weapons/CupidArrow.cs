@@ -37,6 +37,7 @@ public class CupidArrow : Weapon
             info.damage = owner.Damage * baseDamageMultiplier;
             info.attacker = owner;
             info.knockbackDirection = p.Direction;
+            info.weapon = ResourceManager.WeaponIndex.CupidArrow;
             p.SetDamageInfo(info);
             ResetTimer();
         }

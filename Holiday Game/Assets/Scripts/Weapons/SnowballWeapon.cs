@@ -75,6 +75,7 @@ public class SnowballWeapon : Weapon
             info.damage = owner.Damage * baseDamageMultiplier;
             info.attacker = owner;
             info.knockbackDirection = p.Direction;
+            info.weapon = ResourceManager.WeaponIndex.Snowball;
             p.SetDamageInfo(info);
             p.Pierce += pierceAdd;
             p.DamageMultiplier = damageMult;

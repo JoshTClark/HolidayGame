@@ -56,7 +56,7 @@ public class Player : StatsComponent
         an = gameObject.GetComponent<Animator>();
     }
 
-    public override void OnDeath()
+    public override void OnDeath(DamageInfo info)
     {
     }
 

@@ -149,12 +149,7 @@ public abstract class Enemy : StatsComponent
             {
                 if (player.HasUpgrade(ResourceManager.UpgradeIndex.CupidArrowHealth) && dmgInfo.weapon == ResourceManager.WeaponIndex.CupidArrow)
                 {
-                    Debug.Log("Health Upgrades");
                     ran -= (float)(0.05 * GameManager.instance.Player.GetUpgrade(ResourceManager.UpgradeIndex.CupidArrowHealth).CurrentLevel);
-                }
-                else
-                {
-                    Debug.Log("Not Working");
                 }
             }
             if (ran <= info.chance)

@@ -41,6 +41,9 @@ public class GameManager : MonoBehaviour
     private InputActionReference displayStats, pauseGame, giveXP, playerDash;
 
     [SerializeField]
+    private UnityEngine.Rendering.Universal.Light2D globalLight;
+
+    [SerializeField]
     public List<WeaponIcon> weaponIcons;
 
     public bool showDamageNumbers = true;
@@ -52,9 +55,9 @@ public class GameManager : MonoBehaviour
     private bool doSpecialUpgrade = false;
     private int upgradesToGive = 0;
     private float dayLength = 120f;
-    private int currentDay = 1;
-    private int currentSeason = 0;
-    private int currentHour = 12;
+    public int currentDay = 1;
+    public int currentSeason = 0;
+    public int currentHour = 12;
     private List<string> seasonsOrdered = new List<string>();
 
     public Player Player
@@ -436,6 +439,10 @@ public class GameManager : MonoBehaviour
         dayBar2.rectTransform.anchorMax = new Vector2(2f - percentThroughDay - 0.5f, dayBar2.rectTransform.anchorMax.y);
         dayBar3.rectTransform.anchorMin = new Vector2(2f - percentThroughDay - 0.5f, dayBar3.rectTransform.anchorMin.y);
         dayBar3.rectTransform.anchorMax = new Vector2(3f - percentThroughDay - 0.5f, dayBar3.rectTransform.anchorMax.y);
+
+        float currentHourFloat = ((time % dayLength) / (dayLength / 24));
+        //globalLight.intensity = 0.1f;
+        globalLight.intensity = Mathf.Clamp(1f - Mathf.Pow(Mathf.Abs(currentHourFloat - 12) / 12f, 3f/4f) + (0.2f * (0.9f - Mathf.Abs(currentHourFloat - 12) / 12f)), 0f, 1f);
     }
 
     public bool IsDayLight()

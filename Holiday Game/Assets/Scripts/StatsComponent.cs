@@ -173,10 +173,10 @@ public abstract class StatsComponent : MonoBehaviour
             }
 
             // Checks if should be dead
-            if (currentHP <= 0)
-            {
-                isDead = true;
-            }
+            //if (currentHP <= 0)
+            //{
+            //    isDead = true;
+            //}
 
             // Adding things for burning effects
             if (HasBuff(ResourceManager.BuffIndex.Burning))
@@ -195,10 +195,10 @@ public abstract class StatsComponent : MonoBehaviour
             }
 
             // Checking if dead
-            if (IsDead)
-            {
-                OnDeath();
-            }
+            //if (IsDead)
+            //{
+            //    OnDeath(DamageInfo info);
+            //}
         }
         else
         {
@@ -433,6 +433,12 @@ public abstract class StatsComponent : MonoBehaviour
         sr.color = Color.red;
         damaged = true;
         fadeTimer = 0;
+        if(currentHP <= 0)
+        {
+            isDead = true;
+            OnDeath(info);
+            //Debug.Log("I'm Dying");
+        }
     }
 
     // Adds an attack
@@ -579,7 +585,7 @@ public abstract class StatsComponent : MonoBehaviour
 
     public abstract void OnUpdate();
 
-    public abstract void OnDeath();
+    public abstract void OnDeath(DamageInfo info);
 
     public abstract void OnStart();
 

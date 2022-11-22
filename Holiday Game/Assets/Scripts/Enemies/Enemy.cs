@@ -133,12 +133,21 @@ public abstract class Enemy : StatsComponent
         return Vector2.Distance((Vector2)player.transform.position, (Vector2)transform.position);
     }
 
-    public override void OnDeath()
+    public override void OnDeath(DamageInfo dmgInfo)
     {
         // Stop the hit sound
         if (onHitSound.isPlaying)
         {
             onHitSound.Stop();
+        }
+
+        if(dmgInfo.weapon == ResourceManager.WeaponIndex.PumpkinBomb)
+        {
+            Debug.Log("Killed by a pumpkin");
+        }
+        else
+        {
+            Debug.Log("Something Else Killed Me.");
         }
 
         foreach (DropInfo info in drops)

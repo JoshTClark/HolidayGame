@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 12036
+  controlID: 12710
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 12037
+  controlID: 12661
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 12038
+  controlID: 12632
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -226,7 +226,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: b48dffff94f8ffff98770000e8780000608c0000
+      m_ExpandedIDs: b48dffff94f8ffff98770000e8780000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -524,9 +524,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 7.351873, y: 15.089415, z: 0.03812772}
+    m_Target: {x: -46.27436, y: 6.3662186, z: -1.0060275}
     speed: 2
-    m_Value: {x: 7.351873, y: 15.089415, z: 0.03812772}
+    m_Value: {x: -46.27436, y: 6.3662186, z: -1.0060275}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -577,9 +577,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 2.1719165
+    m_Target: 107.07802
     speed: 2
-    m_Value: 2.1719165
+    m_Value: 107.07802
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -672,21 +672,21 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources/Prefabs/Enemies
+    - Assets/Resources/Prefabs/Weapons
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Resources/Prefabs/Enemies
+  - Assets/Resources/Prefabs/Weapons
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Profiles\jtc2365\Desktop\HolidayGame\Holiday Game
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 50a00000
-    m_LastClickedID: 41040
+    m_SelectedIDs: 38b30000
+    m_LastClickedID: 45880
     m_ExpandedIDs: 00000000849e0000869e0000889e00008a9e00008c9e00008e9e00009c9e00006ab6000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0

@@ -49,6 +49,12 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     public LevelData level;
 
+    [SerializeField]
+    public float cornDamageDone, snowballDamageDone, arrowDamageDone, pumpkinDamageDone, fireworkDamageDone;
+
+    [SerializeField]
+    public float cornKills, snowballKills, arrowKills, pumpkinKills, fireworkKills;
+
     public bool showDamageNumbers = true;
     private float time = 0f;
     private float enemyLevel = 1;

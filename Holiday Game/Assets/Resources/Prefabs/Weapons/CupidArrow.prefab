@@ -51,5 +51,6 @@ MonoBehaviour:
   timer: 0
   owner: {fileID: 0}
   canFire: 0
-  baseDamageMultiplier: 1
+  baseDamageMultiplier: 0.8
   baseSizeMultiplier: 1
+  attackSpeedMultiplier: 0

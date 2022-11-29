@@ -427,6 +427,28 @@ public abstract class StatsComponent : MonoBehaviour
             buffs.Add(buff);
         }
 
+        // Damage Tracking
+        if(info.weapon == WeaponIndex.CandyCornRifle)
+        {
+            GameManager.instance.cornDamageDone += info.damage;
+        }
+        else if (info.weapon == WeaponIndex.Snowball)
+        {
+            GameManager.instance.snowballDamageDone += info.damage;
+        }
+        else if (info.weapon == WeaponIndex.PumpkinBomb)
+        {
+            GameManager.instance.pumpkinDamageDone += info.damage;
+        }
+        else if (info.weapon == WeaponIndex.CupidArrow)
+        {
+            GameManager.instance.arrowDamageDone += info.damage;
+        }
+        else if (info.weapon == WeaponIndex.Fireworks)
+        {
+            GameManager.instance.fireworkDamageDone += info.damage;
+        }
+
         // reducing health
         currentHP -= info.damage;
         GameManager.instance.DisplayDamage(info);
@@ -436,9 +458,34 @@ public abstract class StatsComponent : MonoBehaviour
         if(currentHP <= 0)
         {
             isDead = true;
+
+            // Kill Tracking
+            if (info.weapon == WeaponIndex.CandyCornRifle)
+            {
+                GameManager.instance.cornKills++;
+            }
+            else if (info.weapon == WeaponIndex.Snowball)
+            {
+                GameManager.instance.snowballKills++;
+            }
+            else if (info.weapon == WeaponIndex.PumpkinBomb)
+            {
+                GameManager.instance.pumpkinKills++;
+            }
+            else if (info.weapon == WeaponIndex.CupidArrow)
+            {
+                GameManager.instance.arrowKills++;
+            }
+            else if (info.weapon == WeaponIndex.Fireworks)
+            {
+                GameManager.instance.fireworkKills++;
+            }
+
             OnDeath(info);
             //Debug.Log("I'm Dying");
         }
+
+
     }
 
     // Adds an attack

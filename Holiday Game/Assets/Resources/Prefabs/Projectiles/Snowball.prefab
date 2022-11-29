@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
-  baseSpeed: 6
+  baseSpeed: 8
   baseLifetime: 5
   basePierce: 0
   baseSize: 1

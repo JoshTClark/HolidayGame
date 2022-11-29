@@ -158,6 +158,8 @@ public abstract class Enemy : StatsComponent
                 b.gameObject.transform.position = dropPosition;
             }
         }
+
+        
     }
 
     virtual protected void OnTriggerStay2D(Collider2D collision)

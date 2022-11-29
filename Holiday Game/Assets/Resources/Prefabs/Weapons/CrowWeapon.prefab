@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 360765c825631d84c96f57a49839c126, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 10
+  delay: 15
   index: 2
   upgradeIndex: 0
   icon: {fileID: 0}

@@ -26,13 +26,13 @@ public abstract class StatsComponent : MonoBehaviour
 
     [SerializeField]
     // Flat additions to stats
-    private float hpAdd, speedAdd, damageAdd, attackSpeedAdd, armorAdd, regenAdd, critChanceAdd, critDamageAdd;
+    public float hpAdd, speedAdd, damageAdd, attackSpeedAdd, armorAdd, regenAdd, critChanceAdd, critDamageAdd;
 
     [SerializeField]
     private AnimationCurve expCurve;
 
     // Multipliers to stats
-    private float hpMult, speedMult, damageMult, attackSpeedMult, armorMult, regenMult, regenIntervalMult, critChanceMult, critDamageMult, coolDownMult;
+    public float hpMult, speedMult, damageMult, attackSpeedMult, armorMult, regenMult, regenIntervalMult, critChanceMult, critDamageMult, coolDownMult;
 
     // Flags
     [SerializeField]
@@ -63,6 +63,7 @@ public abstract class StatsComponent : MonoBehaviour
     public float BaseMaxHp { get { return baseMaxHP; } }
     public float BaseSpeed { get { return baseSpeed; } }
     public float BaseDamage { get { return baseDamage; } }
+    public float BaseAttackSpeed { get { return baseAttackSpeed; } }
     public float BaseArmor { get { return baseArmor; } }
     public float BaseRegen { get { return baseRegen; } }
     public float BaseRegenInterval { get { return baseRegenInterval; } }
@@ -685,15 +686,15 @@ public abstract class StatsComponent : MonoBehaviour
         // Damage1 - Damage3
         if (HasUpgrade(ResourceManager.UpgradeIndex.Damage1))
         {
-            damageAdd += (0.1f * baseDamage) * GetUpgrade(ResourceManager.UpgradeIndex.Damage1).CurrentLevel;
+            damageAdd += (0.5f) * GetUpgrade(ResourceManager.UpgradeIndex.Damage1).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.Damage2))
         {
-            damageAdd += (0.2f * baseDamage) * GetUpgrade(ResourceManager.UpgradeIndex.Damage2).CurrentLevel;
+            damageAdd += (1f) * GetUpgrade(ResourceManager.UpgradeIndex.Damage2).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.Damage3))
         {
-            damageAdd += (0.3f * baseDamage) * GetUpgrade(ResourceManager.UpgradeIndex.Damage3).CurrentLevel;
+            damageAdd += (2f) * GetUpgrade(ResourceManager.UpgradeIndex.Damage3).CurrentLevel;
         }
 
         // Speed1 - Speed3

@@ -23,6 +23,8 @@ public class Upgrade : ScriptableObject
     public bool IsWeapon;
     public Sprite icon;
 
+    public StatChange statChange;
+
 
     private int currentLevel = 1;
     public int CurrentLevel
@@ -35,5 +37,12 @@ public class Upgrade : ScriptableObject
         {
             currentLevel = value;
         }
+    }
+
+    [System.Serializable]
+    public class StatChange 
+    {
+        public float hpAdd, speedAdd, damageAdd, attackSpeedAdd, armorAdd, regenAdd, critChanceAdd, critDamageAdd;
+        public float hpMult = 1, speedMult = 1, damageMult = 1, attackSpeedMult = 1, armorMult = 1, regenMult = 1, critChanceMult = 1, critDamageMult = 1;
     }
 }

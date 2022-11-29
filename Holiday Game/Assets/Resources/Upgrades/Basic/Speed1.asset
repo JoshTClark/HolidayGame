@@ -19,3 +19,20 @@ MonoBehaviour:
   CanTakeMultiple: 1
   IsWeapon: 0
   icon: {fileID: 21300000, guid: 95c5d80c50a5f014aa63b2caeed3a70e, type: 3}
+  statChange:
+    hpAdd: 0
+    speedAdd: 0
+    damageAdd: 0
+    attackSpeedAdd: 0
+    armorAdd: 0
+    regenAdd: 0
+    critChanceAdd: 0
+    critDamageAdd: 0
+    hpMult: 1
+    speedMult: 1.05
+    damageMult: 1
+    attackSpeedMult: 1
+    armorMult: 1
+    regenMult: 1
+    critChanceMult: 1
+    critDamageMult: 1

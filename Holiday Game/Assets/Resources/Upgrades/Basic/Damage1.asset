@@ -13,9 +13,26 @@ MonoBehaviour:
   m_Name: Damage1
   m_EditorClassIdentifier: 
   upgradeName: Improved Ammo
-  upgradeDescription: Increases base damage by 10%
+  upgradeDescription: Increases base damage by 0.5
   index: 3
   tier: 0
   CanTakeMultiple: 1
   IsWeapon: 0
   icon: {fileID: 0}
+  statChange:
+    hpAdd: 0
+    speedAdd: 0
+    damageAdd: 0.5
+    attackSpeedAdd: 0
+    armorAdd: 0
+    regenAdd: 0
+    critChanceAdd: 0
+    critDamageAdd: 0
+    hpMult: 1
+    speedMult: 1
+    damageMult: 1
+    attackSpeedMult: 1
+    armorMult: 1
+    regenMult: 1
+    critChanceMult: 1
+    critDamageMult: 1

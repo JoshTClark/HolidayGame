@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class UpgradeOption : MonoBehaviour
 {
     public ResourceManager.UpgradeIndex upgrade;
-    public TMP_Text textName, tier, desc;
+    public TMP_Text textName, tier, desc, baseStatsTxt, weaponStatsTxt;
     public Image iconHolder;
     public bool isHover = false;
     public bool isWeaponReplacement = false;
@@ -142,6 +142,139 @@ public class UpgradeOption : MonoBehaviour
                 tier.text = "New Weapon";
             }
         }
+
+        Player player = GameManager.instance.Player;
+        Upgrade u = ResourceManager.GetUpgrade(upgrade);
+
+        float newHPf = (player.BaseMaxHp + u.statChange.hpAdd + player.hpAdd) * player.hpMult * u.statChange.hpMult;
+        string newHP;
+        if (newHPf > player.MaxHp)
+        {
+            newHP = "<color=#27FF00>" + newHPf + "</color>";
+        }
+        else if (newHPf < player.MaxHp)
+        {
+            newHP = "<color=#BD0000>" + newHPf + "</color>";
+        }
+        else
+        {
+            newHP = newHPf.ToString();
+        }
+
+        float newSpeedf = (player.BaseSpeed + u.statChange.speedAdd + player.speedAdd) * player.speedMult * u.statChange.speedMult;
+        string newSpeed;
+        if (newSpeedf > player.Speed)
+        {
+            newSpeed = "<color=#27FF00>" + newSpeedf + "</color>";
+        }
+        else if (newSpeedf < player.Speed)
+        {
+            newSpeed = "<color=#BD0000>" + newSpeedf + "</color>";
+        }
+        else
+        {
+            newSpeed = newSpeedf.ToString();
+        }
+
+        float newDamagef = (player.BaseDamage + u.statChange.damageAdd + player.damageAdd) * player.damageMult * u.statChange.damageMult;
+        string newDamage;
+        if (newDamagef > player.Damage)
+        {
+            newDamage = "<color=#27FF00>" + newDamagef + "</color>";
+        }
+        else if (newDamagef < player.Damage)
+        {
+            newDamage = "<color=#BD0000>" + newDamagef + "</color>";
+        }
+        else
+        {
+            newDamage = newDamagef.ToString();
+        }
+
+        float newAtckSpdf = (player.BaseAttackSpeed + u.statChange.attackSpeedAdd + player.attackSpeedAdd) * player.attackSpeedMult * u.statChange.attackSpeedMult;
+        string newAtckSpd;
+        if (newAtckSpdf > player.AttackSpeed)
+        {
+            newAtckSpd = "<color=#27FF00>" + newAtckSpdf * 100 + "%" + "</color>";
+        }
+        else if (newAtckSpdf < player.AttackSpeed)
+        {
+            newAtckSpd = "<color=#BD0000>" + newAtckSpdf + "</color>";
+        }
+        else
+        {
+            newAtckSpd = newAtckSpdf * 100 + "%";
+        }
+
+        float newArmorf = (player.BaseArmor + u.statChange.armorAdd + player.armorAdd) * player.armorMult * u.statChange.armorMult;
+        string newArmor;
+        if (newArmorf > player.Armor)
+        {
+            newArmor = "<color=#27FF00>" + newArmorf + "</color>";
+        }
+        else if (newArmorf < player.Armor)
+        {
+            newArmor = "<color=#BD0000>" + newArmorf + "</color>";
+        }
+        else
+        {
+            newArmor = newArmorf.ToString();
+        }
+
+        float newRegenf = (player.BaseRegen + u.statChange.regenAdd + player.regenAdd) * player.regenMult * u.statChange.regenMult;
+        string newRegen;
+        if (newRegenf > player.Regen)
+        {
+            newRegen = "<color=#27FF00>" + newRegenf + "</color>";
+        }
+        else if (newRegenf < player.Regen)
+        {
+            newRegen = "<color=#BD0000>" + newRegenf + "</color>";
+        }
+        else
+        {
+            newRegen = newRegenf.ToString();
+        }
+
+        float newCritChancef = (player.BaseCritChance + u.statChange.critChanceAdd + player.critChanceAdd) * player.critChanceMult * u.statChange.critChanceMult;
+        string newCritChance;
+        if (newCritChancef > player.CritChance)
+        {
+            newCritChance = "<color=#27FF00>" + newCritChancef * 100 + "%" + "</color>";
+        }
+        else if (newCritChancef < player.CritChance)
+        {
+            newCritChance = "<color=#BD0000>" + newCritChancef * 100 + "%" + "</color>";
+        }
+        else
+        {
+            newCritChance = newCritChancef * 100 + "%";
+        }
+
+        float newCritDmgf = (player.BaseCritDamage + u.statChange.critDamageAdd + player.critDamageAdd) * player.critDamageMult * u.statChange.critDamageMult;
+        string newCritDmg;
+        if (newCritDmgf > player.CritDamage)
+        {
+            newCritDmg = "<color=#27FF00>" + newCritDmgf * 100 + "%" + "</color>";
+        }
+        else if (newCritDmgf < player.CritDamage)
+        {
+            newCritDmg = "<color=#BD0000>" + newCritDmgf * 100 + "%" + "</color>";
+        }
+        else
+        {
+            newCritDmg = newCritDmgf * 100 + "%";
+        }
+
+        baseStatsTxt.text =
+            "HP: " + player.MaxHp + " -> " + newHP +
+            "\nSpeed: " + player.Speed + " -> " + newSpeed +
+            "\nDamage: " + player.Damage + " -> " + newDamage +
+            "\nAttack Speed: " + player.AttackSpeed * 100 + "%" + " -> " + newAtckSpd +
+            "\nArmor: " + player.Armor + " -> " + newArmor +
+            "\nRegen: " + player.Regen + " -> " + newRegen +
+            "\nCrit Chance: " + (player.CritChance * 100) + "%" + " -> " + newCritChance +
+            "\nCrit Damage: " + player.CritDamage * 100 + "%" + " -> " + newCritDmg;
     }
 
     public void OnHoverStop()

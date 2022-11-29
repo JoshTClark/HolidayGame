@@ -13,9 +13,10 @@ public class UpgradePanelManager : MonoBehaviour
     public bool selected = false;
     public bool displaying = false;
     public float commonOdds, uncommonOdds, rareOdds, epicOdds, legendaryOdds;
-    public TMP_Text textName, tier, desc, titleText;
+    public TMP_Text textName, tier, desc, titleText, baseStatsTxt, weaponStatsTxt;
     public Button replaceWeaponButton, rerollButton, backButton;
     private int levels = 1;
+    public CanvasRenderer infoPanel, statsPanel;
 
     private void Start()
     {
@@ -49,7 +50,7 @@ public class UpgradePanelManager : MonoBehaviour
             // Adding replace weapon options
             for (int i = 0; i < player.weapons.Count; i++)
             {
-                UpgradeOption option = Instantiate<UpgradeOption>(prefab, new Vector3(), new Quaternion(), this.gameObject.transform);
+                UpgradeOption option = Instantiate<UpgradeOption>(prefab, new Vector3(), new Quaternion(), infoPanel.gameObject.transform);
                 UpgradeIndex replacement = player.weapons[i].upgradeIndex;
                 option.upgrade = replacement;
                 option.tier = tier;
@@ -70,9 +71,10 @@ public class UpgradePanelManager : MonoBehaviour
                 UpgradeOption option = replaceWeapons[i];
 
                 RectTransform upgradeRect = option.GetComponent<RectTransform>();
-                RectTransform panelRect = this.gameObject.GetComponent<RectTransform>();
 
-                upgradeRect.SetPositionAndRotation(new Vector3(((panelRect.rect.width / (replaceWeapons.Count + 1)) * (i + 1)) * panelRect.lossyScale.x, (panelRect.rect.height / 4) * panelRect.lossyScale.y, 0), Quaternion.identity);
+                upgradeRect.anchorMax = new Vector2(0.125f + (i * 0.25f), 0.2f);
+                upgradeRect.anchorMin = new Vector2(0.125f + (i * 0.25f), 0.2f);
+                upgradeRect.localPosition = new Vector3(0, 0);
             }
         }
         else
@@ -104,7 +106,7 @@ public class UpgradePanelManager : MonoBehaviour
         {
             rerollButton.gameObject.SetActive(true);
             rerollButton.GetComponentInChildren<TMP_Text>().text = "Reroll Upgrades\n" + player.rerolls + " rerolls left";
-          replaceWeaponButton.gameObject.SetActive(false);
+            replaceWeaponButton.gameObject.SetActive(false);
         }
         else
         {
@@ -128,9 +130,10 @@ public class UpgradePanelManager : MonoBehaviour
             UpgradeOption option = options[i];
 
             RectTransform upgradeRect = option.GetComponent<RectTransform>();
-            RectTransform panelRect = this.gameObject.GetComponent<RectTransform>();
 
-            upgradeRect.SetPositionAndRotation(new Vector3(((panelRect.rect.width / (options.Count + 1)) * (i + 1)) * panelRect.lossyScale.x, (panelRect.rect.height / 4) * panelRect.lossyScale.y, 0), Quaternion.identity);
+            upgradeRect.localPosition = new Vector3(0, 0);
+            upgradeRect.anchorMax = new Vector2(0.125f + (i * 0.25f), 0.3f);
+            upgradeRect.anchorMin = new Vector2(0.125f + (i * 0.25f), 0.3f);
         }
         displaying = true;
     }
@@ -139,13 +142,15 @@ public class UpgradePanelManager : MonoBehaviour
     /// Adds an upgrade to the set of chooseable ones
     /// </summary>
     /// <param name="upgrade"></param>
-    public void AddUpgrade(ResourceManager.UpgradeIndex upgrade)
+    public void AddUpgrade(UpgradeIndex upgrade)
     {
-        UpgradeOption option = Instantiate<UpgradeOption>(prefab, new Vector3(), new Quaternion(), this.gameObject.transform);
+        UpgradeOption option = Instantiate<UpgradeOption>(prefab, new Vector3(), new Quaternion(), infoPanel.gameObject.transform);
         option.upgrade = upgrade;
         option.tier = tier;
         option.textName = textName;
         option.desc = desc;
+        option.baseStatsTxt = baseStatsTxt;
+        option.weaponStatsTxt = weaponStatsTxt;
         RectTransform upgradeRect = option.GetComponent<RectTransform>();
         upgradeRect.localScale = new Vector3(2, 2, 1);
         option.gameObject.GetComponent<Button>().onClick.AddListener(() =>

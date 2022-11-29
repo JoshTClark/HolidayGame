@@ -13,8 +13,14 @@ MonoBehaviour:
   m_Name: PumkinWeapon
   m_EditorClassIdentifier: 
   upgradeName: Pumkin Bomb
-  upgradeDescription: Drop a pumkin behind you that explodes after a short amount
+  upgradeDescription: 'Drop a pumkin behind you that explodes after a short amount
     of time
+
+    Pierce: N/A
+
+    Damage: 500% Base Damage
+
+    Weapon Delay: 8s'
   index: 20
   tier: 1
   CanTakeMultiple: 0

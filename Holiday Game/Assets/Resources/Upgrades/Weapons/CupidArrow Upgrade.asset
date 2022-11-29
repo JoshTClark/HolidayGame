@@ -13,7 +13,14 @@ MonoBehaviour:
   m_Name: CupidArrow Upgrade
   m_EditorClassIdentifier: 
   upgradeName: Cupid Arrow
-  upgradeDescription: Fire a homing arrow that flies between enemies
+  upgradeDescription: 'Fire a homing arrow that flies between enemies
+
+    Pierce:
+    4
+
+    Damage: 80% Base Damage
+
+    Weapon Delay: 3s'
   index: 45
   tier: 1
   CanTakeMultiple: 0

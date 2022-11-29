@@ -13,7 +13,14 @@ MonoBehaviour:
   m_Name: SnowballWeapon
   m_EditorClassIdentifier: 
   upgradeName: Snowball
-  upgradeDescription: Throw a snowball towards the cursor
+  upgradeDescription: 'Throw a snowball towards the cursor
+
+    Pierce: 0
+
+    Damage:
+    120% Base Damage
+
+    Weapon Delay: 2s'
   index: 12
   tier: 1
   CanTakeMultiple: 0

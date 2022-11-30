@@ -69,6 +69,10 @@ public class GameManager : MonoBehaviour
     public int currentHour = 12;
     private List<string> seasonsOrdered = new List<string>();
 
+    //Saved data
+    [SerializeField]
+    public int goldTotal;
+
     public Player Player
     {
         get { return player; }
@@ -464,5 +468,11 @@ public class GameManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    //Currency Management
+    public void GainGold(int amount)
+    {
+        goldTotal += amount;
     }
 }

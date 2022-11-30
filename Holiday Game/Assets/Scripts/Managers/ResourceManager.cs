@@ -36,7 +36,8 @@ public class ResourceManager
         XP1,
         XP2,
         HealthDrop1,
-        BossDrop
+        BossDrop, 
+        Coin
     }
     public enum WeaponIndex
     {

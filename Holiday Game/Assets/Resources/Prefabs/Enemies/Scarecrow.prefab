@@ -168,6 +168,16 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  hpMult: 0
+  speedMult: 0
+  damageMult: 0
+  attackSpeedMult: 0
+  armorMult: 0
+  regenMult: 0
+  regenIntervalMult: 0
+  critChanceMult: 0
+  critDamageMult: 0
+  coolDownMult: 0
   isDead: 0
   weapons: []
   inventory: []
@@ -179,6 +189,10 @@ MonoBehaviour:
   - index: 1
     chance: 1
   - index: 2
+    chance: 0.05
+  - index: 4
+    chance: 0.05
+  - index: 4
     chance: 0.05
   onHitSound: {fileID: 5181472191143963359}
   lights: {fileID: 6732873839557532573}

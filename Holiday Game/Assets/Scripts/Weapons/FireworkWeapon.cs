@@ -5,22 +5,34 @@ using UnityEngine.Pool;
 
 public class FireworkWeapon : Weapon
 {
+    public override void CalcStats()
+    {
+        // Calculating stats
+        float count = GetBaseStat("Projectiles");
+        float chance = GetBaseStat("Stun Chance");
+
+        // More fireworks upgrade
+        if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.FireworkCount))
+        {
+            count += 1f * (GameManager.instance.Player.GetUpgrade(ResourceManager.UpgradeIndex.FireworkCount).CurrentLevel);
+        }
+
+        if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.StunningFireworks))
+        {
+            chance += GameManager.instance.Player.GetUpgrade(ResourceManager.UpgradeIndex.StunningFireworks).CurrentLevel * 0.05f;
+        }
+
+        trueStats["Projectiles"] = count;
+        trueStats["Stun Chance"] = chance;
+    }
+
     public override void OnUpdate()
     {
         float delta = Time.deltaTime;
         Enemy e = GetClosestEnemy();
         if (e && canFire)
         {
-            // Calculating stats
-            float countAdd = 0f;
-
-            // More fireworks upgrade
-            if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.FireworkCount))
-            {
-                countAdd += 1f * (GameManager.instance.Player.GetUpgrade(ResourceManager.UpgradeIndex.FireworkCount).CurrentLevel);
-            }
-
-            for (int i = 0; i < 3 + countAdd; i++)
+            for (int i = 0; i < GetStat("Projectiles"); i++)
             {
                 FireworkProjectile p = (FireworkProjectile)ProjectileManager.GetProjectile(ResourceManager.ProjectileIndex.Firework);
                 p.transform.position = this.transform.position;
@@ -28,21 +40,21 @@ public class FireworkWeapon : Weapon
                 DamageInfo info = new DamageInfo();
                 if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.StunningFireworks))
                 {
-                    if (GameManager.RollCheck(GameManager.instance.Player.GetUpgrade(ResourceManager.UpgradeIndex.StunningFireworks).CurrentLevel * 0.05f))
+                    if (GameManager.RollCheck(GetStat("Stun Chance")))
                     {
                         info.debuffs.Add(ResourceManager.BuffIndex.Stunned);
                     }
                 }
-                info.damage = baseDamageMultiplier * owner.Damage;
+                info.damage = GetStat("Damage") * owner.Damage;
                 info.attacker = owner;
                 info.debuffs.Add(ResourceManager.BuffIndex.Burning);
                 info.weapon = ResourceManager.WeaponIndex.Fireworks;
                 p.SetDamageInfo(info);
-                p.SizeMultiplier = baseSizeMultiplier;
+                p.SizeMultiplier = GetStat("Size");
                 float rotation = Random.Range(0, 360);
                 p.gameObject.GetComponent<Rigidbody2D>().SetRotation(rotation);
                 p.RotateDirection(rotation);
-                if (i < (3 + countAdd) / 2)
+                if (i < GetStat("Projectiles") / 2f)
                 {
                     e = GetClosestEnemy();
                 }

@@ -7,15 +7,28 @@ public class CandyCornWeapon : Weapon
     private bool doVolley = false;
     private float volleyTimer = 0.2f;
     private float shotDelay = 0.6f;
-    private int shotsPerVolley = 3;
     private int firedShots = 0;
 
-    public override void OnUpdate()
+    public override void CalcStats()
     {
         if (owner.HasUpgrade(ResourceManager.UpgradeIndex.CandyCornSpray))
         {
-            this.attackSpeedMultiplier = 1.5f + 0.5f * (owner.GetUpgrade(ResourceManager.UpgradeIndex.CandyCornSpray).CurrentLevel - 1);
+            trueStats["Attack Speed"] = 1.5f + 0.5f * (owner.GetUpgrade(ResourceManager.UpgradeIndex.CandyCornSpray).CurrentLevel - 1);
         }
+
+        float count = GetBaseStat("Projectiles");
+
+        // More fireworks upgrade
+        if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.MoreCorn))
+        {
+            count += 1f * (GameManager.instance.Player.GetUpgrade(ResourceManager.UpgradeIndex.MoreCorn).CurrentLevel);
+        }
+
+        trueStats["Projectiles"] = count;
+    }
+
+    public override void OnUpdate()
+    {
 
         Vector3 target = MousePosition();
         if (!doVolley)
@@ -32,15 +45,10 @@ public class CandyCornWeapon : Weapon
 
         if (doVolley)
         {
-            int extra = 0;
-            if (owner.HasUpgrade(ResourceManager.UpgradeIndex.MoreCorn))
-            {
-                extra = owner.GetUpgrade(ResourceManager.UpgradeIndex.MoreCorn).CurrentLevel;
-            }
-            if (firedShots < shotsPerVolley + extra)
+            if (firedShots < GetStat("Projectiles"))
             {
                 volleyTimer += Time.deltaTime;
-                if (volleyTimer >= (((shotDelay / (shotsPerVolley + extra)) / owner.AttackSpeed) / attackSpeedMultiplier))
+                if (volleyTimer >= (((shotDelay / GetStat("Projectiles")) / owner.AttackSpeed) / GetStat("Attack Speed")))
                 {
                     float accuracyOff = 0;
                     if (owner.HasUpgrade(ResourceManager.UpgradeIndex.CandyCornSpray))
@@ -53,7 +61,7 @@ public class CandyCornWeapon : Weapon
                     p.Direction = transform.right;
                     p.RotateDirection(accuracyOff);
                     DamageInfo info = new DamageInfo();
-                    info.damage = owner.Damage * baseDamageMultiplier;
+                    info.damage = owner.Damage * GetStat("Damage");
                     info.attacker = owner;
                     info.knockbackDirection = p.Direction;
                     info.knockback = 0.2f;

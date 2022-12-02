@@ -46,9 +46,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delay: 4.5
   index: 7
+  upgradeIndex: 0
   icon: {fileID: 0}
   timer: 0
   owner: {fileID: 0}
   canFire: 0
   baseDamageMultiplier: 1
   baseSizeMultiplier: 2
+  attackSpeedMultiplier: 1
+  pierce: 0
+  extraStats: []

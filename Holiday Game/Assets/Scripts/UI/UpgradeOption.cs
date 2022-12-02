@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class UpgradeOption : MonoBehaviour
 {
     public ResourceManager.UpgradeIndex upgrade;
-    public TMP_Text textName, tier, desc, baseStatsTxt, weaponStatsTxt;
+    public TMP_Text textName, tier, desc, baseStatsTxt, weaponStatsTxt, weaponStatsLabel;
     public Image iconHolder;
     public bool isHover = false;
     public bool isWeaponReplacement = false;
@@ -275,6 +275,64 @@ public class UpgradeOption : MonoBehaviour
             "\nRegen: " + player.Regen + " -> " + newRegen +
             "\nCrit Chance: " + (player.CritChance * 100) + "%" + " -> " + newCritChance +
             "\nCrit Damage: " + player.CritDamage * 100 + "%" + " -> " + newCritDmg;
+
+        if (u.weaponStatChanges.Count > 0)
+        {
+            Weapon w = player.GetWeapon(u.weaponStatIndex);
+            if (weaponStatsLabel)
+            {
+                weaponStatsLabel.text = ResourceManager.GetUpgrade(w.upgradeIndex).upgradeName;
+            }
+            string text = "";
+            foreach (string key in w.GetAllStats())
+            {
+                Upgrade.WeaponStatChange weaponStatChange = u.GetWeaponStatChange(key);
+
+                float newStat = (w.GetStat(key) + weaponStatChange.add) * weaponStatChange.mult;
+                string newStatTxt;
+                if (weaponStatChange.isPercent)
+                {
+                    if (newStat > w.GetStat(key))
+                    {
+                        newStatTxt = "<color=#27FF00>" + newStat * 100 + "%" + "</color>";
+                    }
+                    else if (newStat < w.GetStat(key))
+                    {
+                        newStatTxt = "<color=#BD0000>" + newStat * 100 + "%" + "</color>";
+                    }
+                    else
+                    {
+                        newStatTxt = newStat * 100 + "%";
+                    }
+                    text += key + ": " + w.GetStat(key) * 100 + "%" + " -> " + newStatTxt + "\n";
+                }
+                else 
+                {
+                    if (newStat > w.GetStat(key))
+                    {
+                        newStatTxt = "<color=#27FF00>" + newStat + "</color>";
+                    }
+                    else if (newStat < w.GetStat(key))
+                    {
+                        newStatTxt = "<color=#BD0000>" + newStat + "</color>";
+                    }
+                    else
+                    {
+                        newStatTxt = newStat + "";
+                    }
+                    text += key + ": " + w.GetStat(key) + " -> " + newStatTxt + "\n";
+                }
+            }
+            weaponStatsTxt.text = text;
+        }
+        else
+        {
+            weaponStatsTxt.text = "";
+            if (weaponStatsLabel)
+            {
+                weaponStatsLabel.text = "";
+            }
+        }
     }
 
     public void OnHoverStop()

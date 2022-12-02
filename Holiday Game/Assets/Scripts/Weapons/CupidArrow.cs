@@ -4,6 +4,21 @@ using UnityEngine;
 
 public class CupidArrow : Weapon
 {
+    public override void CalcStats()
+    {
+        float pierce = GetBaseStat("Pierce");
+        if (owner.HasUpgrade(ResourceManager.UpgradeIndex.ArrowPierce1))
+        {
+            pierce += 1 * owner.GetUpgrade(ResourceManager.UpgradeIndex.ArrowPierce1).CurrentLevel;
+        }
+        if (owner.HasUpgrade(ResourceManager.UpgradeIndex.ArrowPierce2))
+        {
+            pierce += 2 * owner.GetUpgrade(ResourceManager.UpgradeIndex.ArrowPierce2).CurrentLevel;
+        }
+
+        trueStats["Pierce"] = pierce;
+    }
+
     public override void OnUpdate()
     {
         Enemy e = GetClosestEnemy();
@@ -18,15 +33,6 @@ public class CupidArrow : Weapon
         {
             // Play weapon sound
             SoundManager.instance.ArrowHit();
-            float pierceAdd = 0;
-            if (owner.HasUpgrade(ResourceManager.UpgradeIndex.ArrowPierce1))
-            {
-                pierceAdd += 1 * owner.GetUpgrade(ResourceManager.UpgradeIndex.ArrowPierce1).CurrentLevel;
-            }
-            if (owner.HasUpgrade(ResourceManager.UpgradeIndex.ArrowPierce2))
-            {   
-                pierceAdd += 2 * owner.GetUpgrade(ResourceManager.UpgradeIndex.ArrowPierce2).CurrentLevel;
-            }
             
 
             ProjectileBase p = ProjectileManager.GetProjectile(ResourceManager.ProjectileIndex.CupidArrow);
@@ -34,7 +40,7 @@ public class CupidArrow : Weapon
             p.transform.rotation = transform.rotation;
             p.Direction = transform.right;
             DamageInfo info = new DamageInfo();
-            info.damage = owner.Damage * baseDamageMultiplier;
+            info.damage = owner.Damage * GetStat("Damage");
             info.attacker = owner;
             info.knockbackDirection = p.Direction;
             info.weapon = ResourceManager.WeaponIndex.CupidArrow;

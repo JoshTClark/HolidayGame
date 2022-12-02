@@ -8,13 +8,14 @@ public abstract class ProjectileBase : MonoBehaviour
     public ResourceManager.ProjectileIndex index;
 
     [SerializeField]
-    private float baseSpeed, baseLifetime, basePierce, baseSize;
+    private float baseSpeed, baseLifetime, baseSize;
 
     private float sizeMultiplier = 1f;
     private float speedMultiplier = 1f;
     private float damageMultiplier = 1f;
     private float knockbackMultiplier = 1f;
     private float lifetimeMultiplier = 1f;
+    private float pierce = 1f;
 
     [SerializeField]
     public Team projectileTeam;
@@ -27,7 +28,7 @@ public abstract class ProjectileBase : MonoBehaviour
     public Vector2 Direction { get { return direction; } set { direction = value; } }
     public float Speed { get { return baseSpeed * speedMultiplier; } set { baseSpeed = value; } }
     public float Lifetime { get { return baseLifetime * LifetimeMultiplier; } set { baseLifetime = value; } }
-    public float Pierce { get { return basePierce; } set { basePierce = value; } }
+    public float Pierce { get { return pierce; } set { pierce = value; } }
     public float TimeAlive { get { return timeAlive; } set { timeAlive = value; } }
     public float DamageMultiplier { get { return damageMultiplier; } set { damageMultiplier = value; } }
     public float Size { get { return baseSize * sizeMultiplier; } set { baseSize = value; } }

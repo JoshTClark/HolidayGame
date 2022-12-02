@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class BossWeapon2 : Weapon
 {
+    public override void CalcStats()
+    {
+    }
+
     public override void OnUpdate()
     {
         float delta = Time.deltaTime;
@@ -17,7 +21,7 @@ public class BossWeapon2 : Weapon
         if (canFire)
         {
             DamageInfo info = new DamageInfo();
-            info.damage = baseDamageMultiplier * owner.Damage;
+            info.damage = GetStat("Damage") * owner.Damage;
             info.attacker = owner;
 
             ProjectileBase p1 = ProjectileManager.GetProjectile(ResourceManager.ProjectileIndex.EnemyProjectile);

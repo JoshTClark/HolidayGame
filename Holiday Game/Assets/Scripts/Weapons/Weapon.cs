@@ -21,7 +21,14 @@ public abstract class Weapon : MonoBehaviour
     public bool canFire = false;
 
     [SerializeField]
-    public float baseDamageMultiplier, baseSizeMultiplier, attackSpeedMultiplier;
+    private float baseDamageMultiplier = 1, baseSizeMultiplier = 1, attackSpeedMultiplier = 1, pierce = 1;
+
+    [SerializeField]
+    private List<WeaponStat> extraStats = new List<WeaponStat>();
+
+    protected Dictionary<string, float> baseStats = new Dictionary<string, float>();
+
+    protected Dictionary<string, float> trueStats = new Dictionary<string, float>();
 
     public float Delay
     {
@@ -31,10 +38,30 @@ public abstract class Weapon : MonoBehaviour
     private void Start()
     {
         attackSpeedMultiplier = 1f;
+
+        baseStats.Add("Damage", baseDamageMultiplier);
+        baseStats.Add("Attack Speed", attackSpeedMultiplier);
+        baseStats.Add("Size", baseSizeMultiplier);
+        baseStats.Add("Pierce", pierce);
+
+        foreach (WeaponStat stat in extraStats)
+        {
+            string key = stat.statName;
+            float val = stat.value;
+            baseStats.Add(key, val);
+        }
+
+        foreach (string key in baseStats.Keys)
+        {
+            float val;
+            baseStats.TryGetValue(key, out val);
+            trueStats.Add(key, val);
+        }
     }
 
     void Update()
     {
+        CalcStats();
         if (GameManager.instance.State == GameManager.GameState.Normal)
         {
             if (!owner.HasBuff(ResourceManager.BuffIndex.Stunned))
@@ -176,12 +203,48 @@ public abstract class Weapon : MonoBehaviour
         return timer / Delay;
     }
 
-    public Vector3 MousePosition() 
+    public Vector3 MousePosition()
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         mousePosition.z = 0.0f;
         return mousePosition;
     }
 
+    public float GetStat(string statName)
+    {
+        float val;
+        if (trueStats.TryGetValue(statName, out val))
+        {
+            return val;
+        }
+        throw new System.Exception("Error in weapon " + this.name + ": cannot find stat " + statName);
+    }
+
+    public float GetBaseStat(string statName)
+    {
+        float val;
+        if (baseStats.TryGetValue(statName, out val))
+        {
+            return val;
+        }
+        throw new System.Exception("Error in weapon " + this.name + ": cannot find stat " + statName);
+    }
+
+    public string[] GetAllStats()
+    {
+        string[] ar = new string[trueStats.Keys.Count];
+        trueStats.Keys.CopyTo(ar, 0);
+        return ar;
+    }
+
     public abstract void OnUpdate();
+
+    public abstract void CalcStats();
+
+    [System.Serializable]
+    private class WeaponStat
+    {
+        public string statName;
+        public float value;
+    }
 }

@@ -620,6 +620,18 @@ public abstract class StatsComponent : MonoBehaviour
         return false;
     }
 
+    public Weapon GetWeapon(ResourceManager.WeaponIndex index)
+    {
+        foreach (Weapon w in weapons)
+        {
+            if (w.index == index)
+            {
+                return w;
+            }
+        }
+        return null;
+    }
+
     public void RemoveUpgrade(ResourceManager.UpgradeIndex index)
     {
         for (int i = inventory.Count - 1; i >= 0; i--)

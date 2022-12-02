@@ -12,6 +12,10 @@ public class BossWeapon : Weapon
     private float volleySpeed = 3f;
     private float volleySeperation = 15f;
 
+    public override void CalcStats()
+    {
+    }
+
     public override void OnUpdate()
     {
         float delta = Time.deltaTime;
@@ -31,7 +35,7 @@ public class BossWeapon : Weapon
             if (volleyTimer >= volleyDelay)
             {
                 DamageInfo info = new DamageInfo();
-                info.damage = baseDamageMultiplier * owner.Damage;
+                info.damage = owner.Damage * GetStat("Damage");
                 info.attacker = owner;
 
                 ProjectileBase p1 = ProjectileManager.GetProjectile(ResourceManager.ProjectileIndex.EnemyProjectile);

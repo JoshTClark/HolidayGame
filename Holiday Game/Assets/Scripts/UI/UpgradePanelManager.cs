@@ -13,7 +13,7 @@ public class UpgradePanelManager : MonoBehaviour
     public bool selected = false;
     public bool displaying = false;
     public float commonOdds, uncommonOdds, rareOdds, epicOdds, legendaryOdds;
-    public TMP_Text textName, tier, desc, titleText, baseStatsTxt, weaponStatsTxt;
+    public TMP_Text textName, tier, desc, titleText, baseStatsTxt, weaponStatsTxt, weaponStatsLabel;
     public Button replaceWeaponButton, rerollButton, backButton;
     private int levels = 1;
     public CanvasRenderer infoPanel, statsPanel;
@@ -61,6 +61,7 @@ public class UpgradePanelManager : MonoBehaviour
                 option.isWeaponReplacement = true;
                 option.baseStatsTxt = baseStatsTxt;
                 option.weaponStatsTxt = weaponStatsTxt;
+                option.weaponStatsLabel = weaponStatsLabel;
                 option.gameObject.GetComponent<Button>().onClick.AddListener(() =>
                 {
                     SelectWeapon(upgrade, replacement);
@@ -153,6 +154,7 @@ public class UpgradePanelManager : MonoBehaviour
         option.desc = desc;
         option.baseStatsTxt = baseStatsTxt;
         option.weaponStatsTxt = weaponStatsTxt;
+        option.weaponStatsLabel = weaponStatsLabel;
         RectTransform upgradeRect = option.GetComponent<RectTransform>();
         upgradeRect.localScale = new Vector3(2, 2, 1);
         option.gameObject.GetComponent<Button>().onClick.AddListener(() =>
@@ -367,6 +369,9 @@ public class UpgradePanelManager : MonoBehaviour
         replaceWeapons.Clear();
         selected = false;
         displaying = false;
+        baseStatsTxt.text = "";
+        weaponStatsLabel.text = "";
+        weaponStatsTxt.text = "";
     }
 
     private void ResetOdds()

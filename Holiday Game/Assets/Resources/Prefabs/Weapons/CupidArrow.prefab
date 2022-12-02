@@ -54,3 +54,5 @@ MonoBehaviour:
   baseDamageMultiplier: 0.8
   baseSizeMultiplier: 1
   attackSpeedMultiplier: 0
+  pierce: 3
+  extraStats: []

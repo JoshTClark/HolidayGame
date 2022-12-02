@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class FeralGroundHog : Weapon
 {
+    public override void CalcStats()
+    {
+    }
+
     public override void OnUpdate()
     {
         // Check to see if you can fire
@@ -24,7 +28,6 @@ public class FeralGroundHog : Weapon
             {
                 // calculate Stats
                 // Damage
-                float damageMult = baseDamageMultiplier;
                 // Check for relevant upgrades
 
                 // Damage upgrades
@@ -38,7 +41,7 @@ public class FeralGroundHog : Weapon
                 p.Direction = transform.right;
                 // Create damage info
                 DamageInfo info = new DamageInfo();
-                info.damage = baseDamageMultiplier * owner.Damage;
+                info.damage = GetStat("Damage") * owner.Damage;
                 info.attacker = owner;
                 info.debuffs.Add(ResourceManager.BuffIndex.Stunned);
                 p.SetDamageInfo(info);

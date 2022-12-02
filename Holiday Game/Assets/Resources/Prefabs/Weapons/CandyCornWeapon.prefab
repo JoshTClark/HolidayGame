@@ -54,3 +54,7 @@ MonoBehaviour:
   baseDamageMultiplier: 0.4
   baseSizeMultiplier: 1
   attackSpeedMultiplier: 0
+  pierce: 0
+  extraStats:
+  - statName: Projectiles
+    value: 3

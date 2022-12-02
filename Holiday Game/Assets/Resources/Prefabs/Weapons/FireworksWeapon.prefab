@@ -53,3 +53,10 @@ MonoBehaviour:
   canFire: 0
   baseDamageMultiplier: 0.4
   baseSizeMultiplier: 1
+  attackSpeedMultiplier: 1
+  pierce: 0
+  extraStats:
+  - statName: Projectiles
+    value: 3
+  - statName: Stun Chance
+    value: 0

@@ -53,4 +53,8 @@ MonoBehaviour:
   canFire: 0
   baseDamageMultiplier: 1.2
   baseSizeMultiplier: 1
-  attackSpeedMultiplier: 0
+  attackSpeedMultiplier: 1
+  pierce: 0
+  extraStats:
+  - statName: Speed
+    value: 1

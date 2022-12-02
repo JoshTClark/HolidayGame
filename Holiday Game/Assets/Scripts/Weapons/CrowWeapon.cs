@@ -5,6 +5,10 @@ using UnityEngine.Pool;
 
 public class CrowWeapon : Weapon
 {
+    public override void CalcStats()
+    {
+    }
+
     public override void OnUpdate()
     {
         float delta = Time.deltaTime;

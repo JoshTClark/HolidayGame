@@ -53,3 +53,8 @@ MonoBehaviour:
   canFire: 0
   baseDamageMultiplier: 5
   baseSizeMultiplier: 1
+  attackSpeedMultiplier: 1
+  pierce: 99
+  extraStats:
+  - statName: Explosion Size
+    value: 1

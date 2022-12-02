@@ -59,6 +59,8 @@ public class UpgradePanelManager : MonoBehaviour
                 RectTransform upgradeRect = option.GetComponent<RectTransform>();
                 upgradeRect.localScale = new Vector3(2, 2, 1);
                 option.isWeaponReplacement = true;
+                option.baseStatsTxt = baseStatsTxt;
+                option.weaponStatsTxt = weaponStatsTxt;
                 option.gameObject.GetComponent<Button>().onClick.AddListener(() =>
                 {
                     SelectWeapon(upgrade, replacement);
@@ -72,9 +74,9 @@ public class UpgradePanelManager : MonoBehaviour
 
                 RectTransform upgradeRect = option.GetComponent<RectTransform>();
 
-                upgradeRect.anchorMax = new Vector2(0.125f + (i * 0.25f), 0.2f);
-                upgradeRect.anchorMin = new Vector2(0.125f + (i * 0.25f), 0.2f);
                 upgradeRect.localPosition = new Vector3(0, 0);
+                upgradeRect.anchorMax = new Vector2(0.125f + (i * 0.25f), 0.3f);
+                upgradeRect.anchorMin = new Vector2(0.125f + (i * 0.25f), 0.3f);
             }
         }
         else

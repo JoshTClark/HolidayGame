@@ -66,6 +66,11 @@ public class Player : StatsComponent
         extraDashes = 0;
         dashCooldownMultiplier = 1f;
 
+        if (HasUpgrade(ResourceManager.UpgradeIndex.ExtraDash))
+        {
+            extraDashes = GetUpgrade(ResourceManager.UpgradeIndex.ExtraDash).CurrentLevel;
+        }
+
         if (currentDashes < Dashes)
         {
             dashCooldownTimer += delta;
@@ -223,7 +228,7 @@ public class Player : StatsComponent
     {
         // if the player has SharpShadow Upgrade, and they dash through an enemy
         // Enemy takes [DAMAGE] (should it be scalable? should it be constant? is it just the player's damage stat?)
-        if(isDash && HasUpgrade(ResourceManager.UpgradeIndex.SharpShadow))
+        if (isDash && HasUpgrade(ResourceManager.UpgradeIndex.SharpShadow))
         {
             // deal the damage
             if (collision.gameObject.GetComponent<Enemy>())

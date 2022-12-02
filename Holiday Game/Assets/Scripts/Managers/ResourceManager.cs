@@ -112,7 +112,8 @@ public class ResourceManager
         Patience,
         LowHPDamage,
         CupidArrowHealth,
-        SharpShadow
+        SharpShadow,
+        ExtraDash
     }
 
     public enum UpgradePoolIndex

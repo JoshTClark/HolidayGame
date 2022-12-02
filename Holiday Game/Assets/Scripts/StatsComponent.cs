@@ -14,7 +14,7 @@ public abstract class StatsComponent : MonoBehaviour
 
     // Level up stuff
     [SerializeField]
-    private float levelScaling, hpLevelUp, damageLevelUp;
+    private float levelScaling, hpLevelUp, damageLevelUp, speedLevelUp;
 
     // CurrentHP is here and is handled by this script
     public float currentHP;
@@ -666,6 +666,7 @@ public abstract class StatsComponent : MonoBehaviour
         CalculateLevel();
         hpAdd += ((level - 1) * levelScaling) * hpLevelUp;
         damageAdd += ((level - 1) * levelScaling) * damageLevelUp;
+        speedAdd += ((level - 1) * levelScaling) * speedLevelUp;
 
         // UPGRADES
 
@@ -788,7 +789,7 @@ public abstract class StatsComponent : MonoBehaviour
                 attackSpeedMult *= 1 + ((MaxHp - currentHP) / 100);
             }
         }
-
+        
         // Patience
         if (HasUpgrade(ResourceManager.UpgradeIndex.Patience))
         {

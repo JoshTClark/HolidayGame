@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Menus
 {
+    /*
     private const string MANAGER_PATH = "Assets/Resources/Editor Prefabs.asset";
 
     private static void SafeInstantiate(Func<EditorPrefabManager, GameObject> itemSelector)
@@ -34,4 +35,5 @@ public class Menus
     [MenuItem(Constants.MENU_ITEM_PATH + "UI/Tab Menu", true)]
     private static bool SelectionHasCanvasValidate() =>
     Selection.activeGameObject && Selection.activeGameObject.GetComponentInParent<Canvas>();
+    */
 }

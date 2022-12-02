@@ -466,6 +466,7 @@ MonoBehaviour:
   levelScaling: 1
   hpLevelUp: 1.5
   damageLevelUp: 0.5
+  speedLevelUp: 0.1
   currentHP: 0
   xpAmount: 0
   hpAdd: 0

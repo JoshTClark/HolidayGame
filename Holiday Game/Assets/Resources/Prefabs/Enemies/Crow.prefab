@@ -263,6 +263,7 @@ MonoBehaviour:
   levelScaling: 1
   hpLevelUp: 0.25
   damageLevelUp: 0.5
+  speedLevelUp: 0.25
   currentHP: 0
   xpAmount: 0
   hpAdd: 0
@@ -279,6 +280,16 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  hpMult: 0
+  speedMult: 0
+  damageMult: 0
+  attackSpeedMult: 0
+  armorMult: 0
+  regenMult: 0
+  regenIntervalMult: 0
+  critChanceMult: 0
+  critDamageMult: 0
+  coolDownMult: 0
   isDead: 0
   weapons: []
   inventory: []

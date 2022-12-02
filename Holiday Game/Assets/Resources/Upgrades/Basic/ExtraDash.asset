@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 296cfc9b7513a864aab005e7da6bfa8f, type: 3}
+  m_Name: ExtraDash
+  m_EditorClassIdentifier: 
+  upgradeName: Extra Dash
+  upgradeDescription: +1 max dashes
+  index: 60
+  tier: 2
+  CanTakeMultiple: 1
+  IsWeapon: 0
+  icon: {fileID: 0}
+  statChange:
+    hpAdd: 0
+    speedAdd: 0
+    damageAdd: 0
+    attackSpeedAdd: 0
+    armorAdd: 0
+    regenAdd: 0
+    critChanceAdd: 0
+    critDamageAdd: 0
+    hpMult: 1
+    speedMult: 1
+    damageMult: 1
+    attackSpeedMult: 1
+    armorMult: 1
+    regenMult: 1
+    critChanceMult: 1
+    critDamageMult: 1

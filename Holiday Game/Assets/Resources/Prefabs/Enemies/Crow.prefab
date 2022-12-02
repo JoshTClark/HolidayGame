@@ -255,8 +255,8 @@ MonoBehaviour:
   baseDamage: 4
   baseAttackSpeed: 1
   baseArmor: 0
-  baseRegen: 0
-  baseRegenInterval: 0
+  baseRegen: -0.1
+  baseRegenInterval: 3
   baseCritChance: 0
   baseCritDamage: 0
   knockbackMult: 0.5

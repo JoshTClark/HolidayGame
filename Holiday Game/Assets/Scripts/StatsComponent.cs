@@ -167,7 +167,7 @@ public abstract class StatsComponent : MonoBehaviour
             if (regenTimer >= RegenInterval)
             {
                 regenTimer = 0;
-                if (Regen > 0)
+                if (Regen != 0)
                 {
                     Heal(Regen);
                 }
@@ -429,7 +429,7 @@ public abstract class StatsComponent : MonoBehaviour
         }
 
         // Damage Tracking
-        if(info.weapon == WeaponIndex.CandyCornRifle)
+        if (info.weapon == WeaponIndex.CandyCornRifle)
         {
             GameManager.instance.cornDamageDone += info.damage;
         }
@@ -456,7 +456,7 @@ public abstract class StatsComponent : MonoBehaviour
         sr.color = Color.red;
         damaged = true;
         fadeTimer = 0;
-        if(currentHP <= 0)
+        if (currentHP <= 0)
         {
             isDead = true;
 
@@ -592,7 +592,8 @@ public abstract class StatsComponent : MonoBehaviour
     {
         currentHP += amount;
         currentHP = Mathf.Clamp(currentHP, 0, MaxHp);
-        GameManager.instance.DisplayHealing(amount, this);
+        if (amount > 0)
+            GameManager.instance.DisplayHealing(amount, this);
     }
 
     public bool HasBuff(ResourceManager.BuffIndex index)
@@ -789,7 +790,7 @@ public abstract class StatsComponent : MonoBehaviour
                 attackSpeedMult *= 1 + ((MaxHp - currentHP) / 100);
             }
         }
-        
+
         // Patience
         if (HasUpgrade(ResourceManager.UpgradeIndex.Patience))
         {

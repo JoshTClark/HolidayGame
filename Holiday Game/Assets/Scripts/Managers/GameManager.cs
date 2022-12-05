@@ -44,9 +44,6 @@ public class GameManager : MonoBehaviour
     private UnityEngine.Rendering.Universal.Light2D globalLight;
 
     [SerializeField]
-    public List<WeaponIcon> weaponIcons;
-
-    [SerializeField]
     public LevelData level;
 
     [SerializeField]
@@ -54,6 +51,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     public float cornKills, snowballKills, arrowKills, pumpkinKills, fireworkKills;
+
+    public GameObject weaponIconPrefab;
 
     public bool showDamageNumbers = true;
     private float time = 0f;
@@ -68,6 +67,8 @@ public class GameManager : MonoBehaviour
     public int currentSeason = 0;
     public int currentHour = 12;
     private List<string> seasonsOrdered = new List<string>();
+    public List<WeaponIcon> weaponIcons = new List<WeaponIcon>();
+    private float maxWeapons = 4;
 
     //Saved data
     [SerializeField]
@@ -137,6 +138,16 @@ public class GameManager : MonoBehaviour
                 player.DoDash();
             }
         };
+
+        for (int i = 0; i < maxWeapons; i++)
+        {
+            GameObject icon = Instantiate<GameObject>(weaponIconPrefab, gamePanel.transform);
+            float space = 0.08f * maxWeapons;
+
+            icon.GetComponent<RectTransform>().anchorMin = new Vector2((0.5f - (0.08f * maxWeapons) / 2) + (0.08f * i) + 0.04f, 0.05f);
+            icon.GetComponent<RectTransform>().anchorMax = new Vector2((0.5f - (0.08f * maxWeapons) / 2) + (0.08f * i) + 0.04f, 0.05f);
+            weaponIcons.Add(icon.GetComponentInChildren<WeaponIcon>());
+        }
 
         pausedPanel.gameObject.SetActive(false);
         upgradePanel.gameObject.SetActive(false);
@@ -457,7 +468,7 @@ public class GameManager : MonoBehaviour
 
         float currentHourFloat = ((time % dayLength) / (dayLength / 24));
         //globalLight.intensity = 0.1f;
-        globalLight.intensity = Mathf.Clamp(1f - Mathf.Pow(Mathf.Abs(currentHourFloat - 12) / 12f, 3f/4f) + (0.2f * (0.9f - Mathf.Abs(currentHourFloat - 12) / 12f)), 0f, 1f);
+        globalLight.intensity = Mathf.Clamp(1f - Mathf.Pow(Mathf.Abs(currentHourFloat - 12) / 12f, 3f / 4f) + (0.2f * (0.9f - Mathf.Abs(currentHourFloat - 12) / 12f)), 0f, 1f);
     }
 
     public bool IsDayLight()

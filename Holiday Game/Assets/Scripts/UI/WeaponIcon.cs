@@ -9,11 +9,10 @@ public class WeaponIcon : MonoBehaviour
     public Image mask;
     public Image displaySprite;
     public Image timerImage;
-    public ResourceManager.WeaponIndex weaponIndex;
+    public ResourceManager.WeaponIndex weaponIndex = ResourceManager.WeaponIndex.Null;
 
     private void Start()
     {
-        this.gameObject.SetActive(false);
     }
 
     private void Update()

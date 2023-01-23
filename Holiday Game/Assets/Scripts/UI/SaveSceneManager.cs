@@ -8,101 +8,135 @@ using UnityEngine.UI;
 
 public class SaveSceneManager : MonoBehaviour
 {
-    public enum SceneState
-    {
-        SelectSave,
-        NewSave,
-    }
+	public enum SceneState
+	{
+		SelectSave,
+		NewSave,
+		Title,
+		CharacterSelect
+	}
 
-    [SerializeField]
-    private CanvasRenderer saveSelectPanel, newSavePanel, selectSlotPanel;
+	[SerializeField]
+	private Camera mainCam;
 
-    [SerializeField]
-    private Button createSaveButton;
+	[SerializeField]
+	private CanvasRenderer saveSelectPanel, newSavePanel, selectSlotPanel, titleScreenPanel, saveScreenPanel, titleScreenSubPanel, charSelectPanel;
 
-    [SerializeField]
-    private TMP_Text errorText;
+	[SerializeField]
+	private Button createSaveButton;
 
-    [SerializeField]
-    private TMP_InputField nameField;
+	[SerializeField]
+	private TMP_Text errorText;
 
-    [SerializeField]
-    private SaveSelector selector;
+	[SerializeField]
+	private TMP_InputField nameField;
 
-    public SceneState state = SceneState.SelectSave;
+	[SerializeField]
+	private SaveSelector selector;
 
-    public static SaveSceneManager instance;
+	public SceneState state = SceneState.SelectSave;
 
-    private void Start()
-    {
-        instance = this;
+	public static SaveSceneManager instance;
 
-        FileInfo[] info = SaveManager.LoadAllSaves();
-        foreach (FileInfo i in info)
-        {
-            selector.AddSlot(SaveManager.LoadFile(i.Name.Replace(i.Extension, "")));
-        }
+	private void Start()
+	{
+		instance = this;
+
+		FileInfo[] info = SaveManager.LoadAllSaves();
+		foreach (FileInfo i in info)
+		{
+			selector.AddSlot(SaveManager.LoadFile(i.Name.Replace(i.Extension, "")));
+		}
 
 
-        createSaveButton.onClick.AddListener(() =>
-        {
-            if (nameField.text != "")
-            {
-                FinalizeSave(nameField.text);
-            }
-            else
-            {
-                errorText.gameObject.SetActive(true);
-            }
-        });
-    }
+		createSaveButton.onClick.AddListener(() =>
+		{
+			if (nameField.text != "")
+			{
+				FinalizeSave(nameField.text);
+			}
+			else
+			{
+				errorText.gameObject.SetActive(true);
+			}
+		});
+	}
 
-    private void Update()
-    {
-        switch (state)
-        {
-            case SceneState.SelectSave:
-                saveSelectPanel.gameObject.SetActive(true);
-                newSavePanel.gameObject.SetActive(false);
-                errorText.gameObject.SetActive(false);
-                break;
-            case SceneState.NewSave:
-                saveSelectPanel.gameObject.SetActive(false);
-                newSavePanel.gameObject.SetActive(true);
-                break;
-        }
-    }
+	private void Update()
+	{
+		switch (state)
+		{
+			case SceneState.SelectSave:
+				saveSelectPanel.gameObject.SetActive(true);
+				newSavePanel.gameObject.SetActive(false);
+				errorText.gameObject.SetActive(false);
+				titleScreenPanel.gameObject.SetActive(false);
+				saveScreenPanel.gameObject.SetActive(true);
+				break;
+			case SceneState.NewSave:
+				saveSelectPanel.gameObject.SetActive(false);
+				newSavePanel.gameObject.SetActive(true);
+				titleScreenPanel.gameObject.SetActive(false);
+				saveScreenPanel.gameObject.SetActive(true);
+				break;
+			case SceneState.Title:
+				saveSelectPanel.gameObject.SetActive(false);
+				newSavePanel.gameObject.SetActive(false);
+				titleScreenPanel.gameObject.SetActive(true);
+				saveScreenPanel.gameObject.SetActive(false);
+				titleScreenSubPanel.gameObject.SetActive(true);
+				charSelectPanel.gameObject.SetActive(false);
+				break;
+			case SceneState.CharacterSelect:
+				saveSelectPanel.gameObject.SetActive(false);
+				newSavePanel.gameObject.SetActive(false);
+				titleScreenPanel.gameObject.SetActive(true);
+				saveScreenPanel.gameObject.SetActive(false);
+				titleScreenSubPanel.gameObject.SetActive(false);
+				charSelectPanel.gameObject.SetActive(true);
+				break;
+		}
 
-    public void CreateNewSave()
-    {
-        state = SceneState.NewSave;
-    }
+		mainCam.transform.position = new Vector3(mainCam.transform.position.x + 1 * Time.deltaTime, mainCam.transform.position.y + 1 * Time.deltaTime, -10);
 
-    private void FinalizeSave(string name)
-    {
-        GameData data = new GameData();
-        data.saveName = name;
-        SaveManager.SaveFile(name, data);
-        selector.AddSlot(data);
-        state = SceneState.SelectSave;
-    }
+	}
 
-    public void PlayButtonClick()
-    {
-        GameData data = selector.GetSelected();
-        if (data != null)
-        {
-            GameManager.data = data;
-            SceneManager.LoadScene("TestScene");
-        }
-    }
+	public void CreateNewSave()
+	{
+		state = SceneState.NewSave;
+	}
 
-    public void DeleteButtonClick()
-    {
-        GameData data = selector.GetSelected();
-        if (data != null)
-        {
-            selector.DeleteSlot();
-        }
-    }
+	private void FinalizeSave(string name)
+	{
+		GameData data = new GameData();
+		data.saveName = name;
+		SaveManager.SaveFile(name, data);
+		selector.AddSlot(data);
+		state = SceneState.SelectSave;
+	}
+
+	public void ToTitleScreen()
+	{
+		GameData data = selector.GetSelected();
+		if (data != null)
+		{
+			state = SceneState.Title;
+		}
+	}
+
+	public void DeleteButtonClick()
+	{
+		GameData data = selector.GetSelected();
+		if (data != null)
+		{
+			selector.DeleteSlot();
+		}
+	}
+
+	public void ToCharacterSelect()
+	{
+		state = SceneState.CharacterSelect;
+	}
+
+	public void StartGame() { }
 }

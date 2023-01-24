@@ -229,6 +229,98 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Map Controls"",
+            ""id"": ""48d02fbd-a8bd-459f-ab9a-93f9d71af294"",
+            ""actions"": [
+                {
+                    ""name"": ""MapMovement"",
+                    ""type"": ""Value"",
+                    ""id"": ""1a025f5e-c626-4e36-b1c0-5511a76cf780"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""MouseClick"",
+                    ""type"": ""Value"",
+                    ""id"": ""485568e6-c685-46f5-ba0b-edbe7ab4d476"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""3f569666-3903-4282-992a-5a03eafe3ace"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MapMovement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""40f414d7-6e65-4cf2-b1dd-a037d48df798"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MapMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""e953385d-dc80-4a37-a098-76773020888f"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MapMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""f25bb0df-229c-414c-97d1-f0da190c27f9"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MapMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""726cb994-0835-48ee-aad5-df0a38dd04cd"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MapMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b1933957-2fb8-4bfa-865a-3569293214dc"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -240,6 +332,10 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_GameMap_Pause = m_GameMap.FindAction("Pause", throwIfNotFound: true);
         m_GameMap_ButtonThatGivesXP = m_GameMap.FindAction("ButtonThatGivesXP", throwIfNotFound: true);
         m_GameMap_Dash = m_GameMap.FindAction("Dash", throwIfNotFound: true);
+        // Map Controls
+        m_MapControls = asset.FindActionMap("Map Controls", throwIfNotFound: true);
+        m_MapControls_MapMovement = m_MapControls.FindAction("MapMovement", throwIfNotFound: true);
+        m_MapControls_MouseClick = m_MapControls.FindAction("MouseClick", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -360,6 +456,47 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         }
     }
     public GameMapActions @GameMap => new GameMapActions(this);
+
+    // Map Controls
+    private readonly InputActionMap m_MapControls;
+    private IMapControlsActions m_MapControlsActionsCallbackInterface;
+    private readonly InputAction m_MapControls_MapMovement;
+    private readonly InputAction m_MapControls_MouseClick;
+    public struct MapControlsActions
+    {
+        private @Controls m_Wrapper;
+        public MapControlsActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MapMovement => m_Wrapper.m_MapControls_MapMovement;
+        public InputAction @MouseClick => m_Wrapper.m_MapControls_MouseClick;
+        public InputActionMap Get() { return m_Wrapper.m_MapControls; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MapControlsActions set) { return set.Get(); }
+        public void SetCallbacks(IMapControlsActions instance)
+        {
+            if (m_Wrapper.m_MapControlsActionsCallbackInterface != null)
+            {
+                @MapMovement.started -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnMapMovement;
+                @MapMovement.performed -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnMapMovement;
+                @MapMovement.canceled -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnMapMovement;
+                @MouseClick.started -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnMouseClick;
+                @MouseClick.performed -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnMouseClick;
+                @MouseClick.canceled -= m_Wrapper.m_MapControlsActionsCallbackInterface.OnMouseClick;
+            }
+            m_Wrapper.m_MapControlsActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @MapMovement.started += instance.OnMapMovement;
+                @MapMovement.performed += instance.OnMapMovement;
+                @MapMovement.canceled += instance.OnMapMovement;
+                @MouseClick.started += instance.OnMouseClick;
+                @MouseClick.performed += instance.OnMouseClick;
+                @MouseClick.canceled += instance.OnMouseClick;
+            }
+        }
+    }
+    public MapControlsActions @MapControls => new MapControlsActions(this);
     public interface IGameMapActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -367,5 +504,10 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnPause(InputAction.CallbackContext context);
         void OnButtonThatGivesXP(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+    }
+    public interface IMapControlsActions
+    {
+        void OnMapMovement(InputAction.CallbackContext context);
+        void OnMouseClick(InputAction.CallbackContext context);
     }
 }

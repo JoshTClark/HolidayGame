@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee4d102efd0d48543a3cb4e1d2e7df3d, type: 3}
+  m_Name: Character1
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: cbc12454666d1e14497014fc57b6372d, type: 3}
+  inventory:
+  - {fileID: 11400000, guid: 8a10a9c70a553bc42b69bb2b4e339431, type: 2}
+  stats:
+    baseMaxHP: 50
+    baseSpeed: 5
+    baseDamage: 5
+    baseAttackSpeed: 1
+    baseArmor: 0
+    baseRegen: 0
+    baseRegenInterval: 5
+    baseCritChance: 0.01
+    baseCritDamage: 2

@@ -188,6 +188,7 @@ public class Player : StatsComponent
             }
         }
     }
+
     /// <summary>
     /// Checks if the player can take damage first
     /// </summary>

@@ -71,10 +71,12 @@ public class SaveSelector : MonoBehaviour
         if (slots.Count == 0)
         {
             displayText = "No saves found";
+            selectedSlot= 0;
         }
         else
         {
-            displayText = slots[selectedSlot].saveName;
+            //displayText = slots[selectedSlot].saveName;
+            ButtonLeft();
         }
     }
 }

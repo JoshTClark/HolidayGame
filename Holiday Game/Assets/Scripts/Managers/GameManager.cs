@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
     private float timeToDifficultyIncrease;
 
     [SerializeField]
-    private InputActionReference displayStats, pauseGame, giveXP, playerDash;
+    private InputActionReference displayStats, pauseGame, giveXP, playerDash, godMode;
 
     [SerializeField]
     private UnityEngine.Rendering.Universal.Light2D globalLight;
@@ -136,6 +136,14 @@ public class GameManager : MonoBehaviour
             if (state == GameState.Normal)
             {
                 player.DoDash();
+            }
+        };
+
+        godMode.action.performed += (InputAction.CallbackContext callback) =>
+        {
+            if (state == GameState.Normal)
+            {
+                player.godMode = !player.godMode;
             }
         };
 

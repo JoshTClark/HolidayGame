@@ -2482,7 +2482,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Holiday Survival
+  m_text: Survivors of\n<size=+20>Gaia</size>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b2add8b36b8829546b7061d806bad46d, type: 2}
   m_sharedMaterial: {fileID: 5637714439376686687, guid: b2add8b36b8829546b7061d806bad46d, type: 2}
@@ -2509,7 +2509,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 110
+  m_fontSize: 123.35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2521,7 +2521,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: -25
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -2574,7 +2574,7 @@ RectTransform:
   m_Father: {fileID: 1598686940}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.01, y: 0.75}
+  m_AnchorMin: {x: 0.01, y: 0.5}
   m_AnchorMax: {x: 0.99, y: 1}
   m_AnchoredPosition: {x: 0.000061035156, y: -0.74993896}
   m_SizeDelta: {x: 0, y: -0.5}

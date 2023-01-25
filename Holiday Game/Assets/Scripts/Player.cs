@@ -40,6 +40,8 @@ public class Player : StatsComponent
     private float particleTimer = 0.0f;
     private float particleDelay = 0.02f;
 
+    public bool godMode = false;
+
     public float DashCooldown { get { return baseDashCooldown * dashCooldownMultiplier; } }
     public float Dashes { get { return baseDashes + extraDashes; } }
 
@@ -195,7 +197,7 @@ public class Player : StatsComponent
     /// <param name="damage"></param>
     public override void TakeDamage(DamageInfo info)
     {
-        if (!hitBy.Contains(info.attacker) && !isInvincible)
+        if (!hitBy.Contains(info.attacker) && !isInvincible && !godMode)
         {
             // take damage & become invincible
             hitBy.Add(info.attacker);

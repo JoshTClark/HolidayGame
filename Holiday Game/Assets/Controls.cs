@@ -71,6 +71,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""God Mode"",
+                    ""type"": ""Button"",
+                    ""id"": ""93785e6c-b7d8-423d-80f3-d8a40912be9b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -227,6 +236,17 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""edaf8402-361b-4f31-a083-5dd99941d942"",
+                    ""path"": ""<Keyboard>/f1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""God Mode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -332,6 +352,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_GameMap_Pause = m_GameMap.FindAction("Pause", throwIfNotFound: true);
         m_GameMap_ButtonThatGivesXP = m_GameMap.FindAction("ButtonThatGivesXP", throwIfNotFound: true);
         m_GameMap_Dash = m_GameMap.FindAction("Dash", throwIfNotFound: true);
+        m_GameMap_GodMode = m_GameMap.FindAction("God Mode", throwIfNotFound: true);
         // Map Controls
         m_MapControls = asset.FindActionMap("Map Controls", throwIfNotFound: true);
         m_MapControls_MapMovement = m_MapControls.FindAction("MapMovement", throwIfNotFound: true);
@@ -400,6 +421,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_GameMap_Pause;
     private readonly InputAction m_GameMap_ButtonThatGivesXP;
     private readonly InputAction m_GameMap_Dash;
+    private readonly InputAction m_GameMap_GodMode;
     public struct GameMapActions
     {
         private @Controls m_Wrapper;
@@ -409,6 +431,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Pause => m_Wrapper.m_GameMap_Pause;
         public InputAction @ButtonThatGivesXP => m_Wrapper.m_GameMap_ButtonThatGivesXP;
         public InputAction @Dash => m_Wrapper.m_GameMap_Dash;
+        public InputAction @GodMode => m_Wrapper.m_GameMap_GodMode;
         public InputActionMap Get() { return m_Wrapper.m_GameMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -433,6 +456,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Dash.started -= m_Wrapper.m_GameMapActionsCallbackInterface.OnDash;
                 @Dash.performed -= m_Wrapper.m_GameMapActionsCallbackInterface.OnDash;
                 @Dash.canceled -= m_Wrapper.m_GameMapActionsCallbackInterface.OnDash;
+                @GodMode.started -= m_Wrapper.m_GameMapActionsCallbackInterface.OnGodMode;
+                @GodMode.performed -= m_Wrapper.m_GameMapActionsCallbackInterface.OnGodMode;
+                @GodMode.canceled -= m_Wrapper.m_GameMapActionsCallbackInterface.OnGodMode;
             }
             m_Wrapper.m_GameMapActionsCallbackInterface = instance;
             if (instance != null)
@@ -452,6 +478,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
+                @GodMode.started += instance.OnGodMode;
+                @GodMode.performed += instance.OnGodMode;
+                @GodMode.canceled += instance.OnGodMode;
             }
         }
     }
@@ -504,6 +533,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnPause(InputAction.CallbackContext context);
         void OnButtonThatGivesXP(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnGodMode(InputAction.CallbackContext context);
     }
     public interface IMapControlsActions
     {

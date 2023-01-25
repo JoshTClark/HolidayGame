@@ -72,5 +72,6 @@ public class SessionMap
         public int branch;
         public bool isEmpty = true;
         public List<MapNode> connections = new List<MapNode>();
+        public string scene = "GenericMap";
     }
 }

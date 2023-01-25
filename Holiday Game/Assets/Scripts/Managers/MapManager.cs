@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.TextCore.Text;
 using UnityEngine.UIElements;
 using static SessionMap;
@@ -113,6 +114,7 @@ public class MapManager : MonoBehaviour
         {
             Vector3 pos1 = NodeToCoords(node);
             GameObject point = Instantiate<GameObject>(mapPoint, pos1, Quaternion.identity);
+            point.GetComponent<MapPoint>().scene = node.scene;
             nodeArr[node.level][node.branch] = point;
             foreach (SessionMap.MapNode n in node.connections)
             {
@@ -130,6 +132,11 @@ public class MapManager : MonoBehaviour
         pos.y = node.level * 2;
         pos.z = 0;
         return pos;
+    }
+
+    public void StartLevel() 
+    {
+        SceneManager.LoadSceneAsync(selectedNode.GetComponent<MapPoint>().scene);
     }
 
     private void OnDrawGizmos()

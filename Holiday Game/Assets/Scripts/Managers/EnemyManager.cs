@@ -20,6 +20,9 @@ public class EnemyManager : MonoBehaviour
     private LevelData.Wave previousWave;
 
     private List<Enemy> currentWaveEnemies = new List<Enemy>();
+
+    public GameObject deathEffect;
+
     public List<Enemy> AllEnemies
     {
         get { return allEnemies; }
@@ -148,22 +151,7 @@ public class EnemyManager : MonoBehaviour
     public void SpawnEnemy(LevelData.SpawnInfo info)
     {
         Enemy enemy = GetEnemy(info.enemyIndex);
-        Vector2 spawnPos = new Vector2();
-        float pX = Random.Range(minSpawnDistance.x, maxSpawnDistance.x);
-        float pY = Random.Range(minSpawnDistance.y, maxSpawnDistance.y);
-        Vector2 playerPos = GameManager.instance.Player.transform.position;
-        if (GameManager.RollCheck(0.5f))
-        {
-            pX *= -1;
-        }
-        if (GameManager.RollCheck(0.5f))
-        {
-            pY *= -1;
-        }
-
-        spawnPos.x = playerPos.x + pX;
-        spawnPos.y = playerPos.y + pY;
-        enemy.gameObject.transform.position = spawnPos;
+        enemy.gameObject.transform.position = GetRandomPosition();
         enemy.player = GameManager.instance.Player;
         enemy.damageMultConst = info.damageMultiplier;
         enemy.hpMultConst = info.healthMultiplier;
@@ -171,6 +159,15 @@ public class EnemyManager : MonoBehaviour
 
         allEnemies.Add(enemy);
         currentWaveEnemies.Add(enemy);
+    }
+
+    private Vector2 GetRandomPosition()
+    {
+        Vector2 pos = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)).normalized;
+        pos.x = pos.x * Random.Range(minSpawnDistance.x, maxSpawnDistance.x) + GameManager.instance.player.transform.position.x;
+        pos.y = pos.y * Random.Range(minSpawnDistance.y, maxSpawnDistance.y) + GameManager.instance.player.transform.position.y;
+
+        return pos;
     }
 
     // Gets an enemy prefab from the list using the index

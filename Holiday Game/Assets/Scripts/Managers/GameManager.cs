@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     public LevelData levelData;
 
     [SerializeField]
-    private Camera cam;
+    public Camera cam;
 
     [SerializeField]
     private Canvas ui;

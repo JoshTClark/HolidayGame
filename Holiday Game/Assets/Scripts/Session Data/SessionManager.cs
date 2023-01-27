@@ -10,7 +10,10 @@ public class SessionManager
 
     public void SavePlayerData(Player player)
     {
-        playerData.inventory = player.inventory;
+        foreach (Upgrade i in player.inventory)
+        {
+            playerData.inventory.Add(i);
+        }
     }
 
     public void SetChosenCharacter(PlayableCharacterData chosenCharacter)
@@ -18,7 +21,11 @@ public class SessionManager
         if (!playerData.chosenCharacter)
         {
             playerData.chosenCharacter = chosenCharacter;
-            playerData.inventory = chosenCharacter.inventory;
+            playerData.inventory = new List<Upgrade>();
+            foreach (Upgrade i in chosenCharacter.inventory)
+            {
+                playerData.inventory.Add(i);
+            }
         }
     }
 
@@ -30,7 +37,10 @@ public class SessionManager
     public Player GetPlayerInstance()
     {
         Player player = GameObject.Instantiate<Player>(playerData.chosenCharacter.prefab);
-        player.inventory = playerData.inventory;
+        foreach (Upgrade i in playerData.inventory)
+        {
+            player.inventory.Add(i);
+        }
         return player;
     }
 

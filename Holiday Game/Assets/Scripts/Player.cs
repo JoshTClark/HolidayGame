@@ -39,6 +39,7 @@ public class Player : StatsComponent
     private float dashCooldownMultiplier = 1f;
     private float particleTimer = 0.0f;
     private float particleDelay = 0.02f;
+    public int maxWeapons = 4;
 
     public bool godMode = false;
 

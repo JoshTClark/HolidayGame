@@ -1,6 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
+using static ResourceManager;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -8,31 +9,27 @@ public class EnemyManager : MonoBehaviour
     private Vector2 minSpawnDistance, maxSpawnDistance;
 
     private List<Enemy> enemyPrefabs;
-    private List<SpawnPhase> phases;
     private List<DropBase> pickupPrefabs;
 
-    private float spawnTimer = 0;
+    private static List<Enemy> allEnemies = new List<Enemy>();
 
-    private SpawnPhase currentPhase;
-
-    private List<Enemy> currentEnemies = new List<Enemy>();
-
-    private List<BurstSpawn> spawnedBursts = new List<BurstSpawn>();
+    public static Dictionary<EnemyIndex, ObjectPool<Enemy>> pools = new Dictionary<EnemyIndex, ObjectPool<Enemy>>();
 
     public static EnemyManager instance;
 
-    public List<Enemy> CurrentEnemies
+    private LevelData.Wave previousWave;
+
+    private List<Enemy> currentWaveEnemies = new List<Enemy>();
+    public List<Enemy> AllEnemies
     {
-        get { return currentEnemies; }
+        get { return allEnemies; }
     }
 
     public void Start()
     {
         instance = this;
         enemyPrefabs = ResourceManager.enemyPrefabs;
-        phases = ResourceManager.phaseDefinitions;
         pickupPrefabs = ResourceManager.pickupPrefabs;
-        FindCurrentPhase();
     }
 
     private void Update()
@@ -40,31 +37,71 @@ public class EnemyManager : MonoBehaviour
         if (GameManager.instance.State == GameManager.GameState.Normal)
         {
             float delta = Time.deltaTime;
-            spawnTimer += delta;
-            if (spawnTimer >= currentPhase.spawnInterval)
-            {
-                SpawnEnemiesByPhase();
-                spawnTimer = 0;
-            }
-
-            CheckBurstSpawns();
 
             RemoveDeadEnemies();
 
-            FindCurrentPhase();
+            LevelData.Wave wave = GameManager.instance.levelData.GetWaveByTime(GameManager.instance.GameTime);
+
+            if (previousWave == null || wave != previousWave)
+            {
+                currentWaveEnemies.Clear();
+                foreach (LevelData.SpawnInfo info in wave.enemies)
+                {
+                    if (!info.respawn)
+                    {
+                        for (int i = 0; i < info.amountToSpawn; i++)
+                        {
+                            SpawnEnemy(info);
+                        }
+                    }
+                }
+                previousWave = wave;
+            }
+
+            foreach (LevelData.SpawnInfo info in wave.enemies)
+            {
+                if (info.respawn)
+                {
+                    int amount = 0;
+                    foreach (Enemy e in currentWaveEnemies)
+                    {
+                        if (e.index == info.enemyIndex)
+                        {
+                            amount++;
+                        }
+                    }
+
+                    for (int i = amount; i < info.amountToSpawn; i++)
+                    {
+                        SpawnEnemy(info);
+                    }
+                }
+            }
         }
     }
 
     // Removes dead enemies from the game
     public void RemoveDeadEnemies()
     {
-        for (int i = currentEnemies.Count - 1; i >= 0; i--)
+        for (int i = allEnemies.Count - 1; i >= 0; i--)
         {
-            Enemy e = currentEnemies[i];
+            Enemy e = allEnemies[i];
             if (e.IsDead)
             {
-                currentEnemies.RemoveAt(i);
-                Destroy(e.gameObject);
+                allEnemies.RemoveAt(i);
+                if (e.pool != null)
+                {
+                    e.pool.Release(e);
+                }
+            }
+        }
+
+        for (int i = currentWaveEnemies.Count - 1; i >= 0; i--)
+        {
+            Enemy e = currentWaveEnemies[i];
+            if (e.IsDead)
+            {
+                currentWaveEnemies.RemoveAt(i);
             }
         }
     }
@@ -72,7 +109,7 @@ public class EnemyManager : MonoBehaviour
     // Spawns enemies
     public void SpawnEnemy(ResourceManager.EnemyIndex index)
     {
-        Enemy prefab = GetEnemyFromIndex(index);
+        Enemy enemy = GetEnemy(index);
         Vector2 spawnPos = new Vector2();
         float pX = Random.Range(minSpawnDistance.x, maxSpawnDistance.x);
         float pY = Random.Range(minSpawnDistance.y, maxSpawnDistance.y);
@@ -88,31 +125,52 @@ public class EnemyManager : MonoBehaviour
 
         spawnPos.x = playerPos.x + pX;
         spawnPos.y = playerPos.y + pY;
-
-        Enemy spawned = Instantiate(prefab, spawnPos, Quaternion.identity);
-        spawned.player = GameManager.instance.Player;
-        spawned.SetLevel((int)GameManager.instance.CurrentDifficulty);
-        currentEnemies.Add(spawned);
+        enemy.gameObject.transform.position = spawnPos;
+        enemy.damageMultConst = 1f;
+        enemy.hpMultConst = 1f;
+        enemy.speedMultConst = 1f;
+        enemy.player = GameManager.instance.Player;
+        allEnemies.Add(enemy);
     }
 
     public Enemy SpawnEnemy(ResourceManager.EnemyIndex index, Vector2 pos)
     {
-        Enemy prefab = GetEnemyFromIndex(index);
-        Vector2 spawnPos = pos;
-        Enemy spawned = Instantiate(prefab, spawnPos, Quaternion.identity);
-        spawned.player = GameManager.instance.Player;
-        spawned.SetLevel((int)GameManager.instance.CurrentDifficulty);
-        currentEnemies.Add(spawned);
-        return spawned;
+        Enemy enemy = GetEnemy(index);
+        enemy.gameObject.transform.position = pos;
+        enemy.player = GameManager.instance.Player;
+        enemy.damageMultConst = 1f;
+        enemy.hpMultConst = 1f;
+        enemy.speedMultConst = 1f;
+        allEnemies.Add(enemy);
+        return enemy;
     }
 
-    private void SpawnEnemiesByPhase()
+    public void SpawnEnemy(LevelData.SpawnInfo info)
     {
-        ResourceManager.EnemyIndex[] indices = currentPhase.GetSpawnWave();
-        for (int i = 0; i < indices.Length; i++)
+        Enemy enemy = GetEnemy(info.enemyIndex);
+        Vector2 spawnPos = new Vector2();
+        float pX = Random.Range(minSpawnDistance.x, maxSpawnDistance.x);
+        float pY = Random.Range(minSpawnDistance.y, maxSpawnDistance.y);
+        Vector2 playerPos = GameManager.instance.Player.transform.position;
+        if (GameManager.RollCheck(0.5f))
         {
-            SpawnEnemy(indices[i]);
+            pX *= -1;
         }
+        if (GameManager.RollCheck(0.5f))
+        {
+            pY *= -1;
+        }
+
+        spawnPos.x = playerPos.x + pX;
+        spawnPos.y = playerPos.y + pY;
+        enemy.gameObject.transform.position = spawnPos;
+        enemy.player = GameManager.instance.Player;
+        enemy.damageMultConst = info.damageMultiplier;
+        enemy.hpMultConst = info.healthMultiplier;
+        enemy.speedMultConst = info.speedMultiplier;
+
+        allEnemies.Add(enemy);
+        currentWaveEnemies.Add(enemy);
     }
 
     // Gets an enemy prefab from the list using the index
@@ -141,50 +199,49 @@ public class EnemyManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Finds which phase it should be on
-    /// </summary>
-    private void FindCurrentPhase()
-    {
-        SpawnPhase phase = phases[0];
-        for (int i = 0; i < phases.Count; i++)
-        {
-            if (phases[i].startTime <= GameManager.instance.GameTime && phases[i].startTime >= phase.startTime)
-            {
-                phase = phases[i];
-            }
-        }
-        currentPhase = phase;
-    }
-
-    /// <summary>
     /// Removes all enemies
     /// </summary>
     public void Reset()
     {
-        for (int i = currentEnemies.Count - 1; i >= 0; i--)
-        {
-            Destroy(currentEnemies[i].gameObject);
-        }
-        currentEnemies.Clear();
-        phases = ResourceManager.phaseDefinitions;
-        spawnedBursts.Clear();
+        allEnemies.Clear();
+        currentWaveEnemies.Clear();
     }
 
-    public void CheckBurstSpawns()
+    private static void CreateNewPool(EnemyIndex index)
     {
-        foreach (BurstSpawn i in ResourceManager.spawnDefinitions)
+        ObjectPool<Enemy> pool = new ObjectPool<Enemy>(createFunc: () => GameObject.Instantiate<Enemy>(ResourceManager.GetEnemyFromIndex(index)), actionOnGet: (obj) => obj.Clean(GetPool(index)), actionOnRelease: (obj) => obj.gameObject.SetActive(false), actionOnDestroy: (obj) => Destroy(obj.gameObject), collectionCheck: false, defaultCapacity: 50);
+        pools.Add(index, pool);
+    }
+
+    public static ObjectPool<Enemy> GetPool(EnemyIndex index)
+    {
+        ObjectPool<Enemy> pool;
+        pools.TryGetValue(index, out pool);
+        return pool;
+    }
+
+    public static Enemy GetEnemy(EnemyIndex index)
+    {
+        ObjectPool<Enemy> pool;
+        if (pools.TryGetValue(index, out pool))
         {
-            if (GameManager.instance.GameTime >= i.startTime && !spawnedBursts.Contains(i))
-            {
-                spawnedBursts.Add(i);
-                foreach (BurstSpawn.SpawnData s in i.enemies)
-                {
-                    for (int num = 0; num < s.count; num++)
-                    {
-                        SpawnEnemy(s.index);
-                    }
-                }
-            }
+            Enemy p = pool.Get();
+            return p;
+        }
+        else
+        {
+            CreateNewPool(index);
+            pools.TryGetValue(index, out pool);
+            Enemy p = pool.Get();
+            return p;
+        }
+    }
+
+    public static void Clean()
+    {
+        foreach (Enemy p in allEnemies)
+        {
+            p.pool.Release(p);
         }
     }
 }

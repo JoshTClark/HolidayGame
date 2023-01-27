@@ -141,7 +141,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8434561644210671787}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 36.84524, y: 22.36428, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -223,10 +223,6 @@ MonoBehaviour:
   baseCritChance: 0
   baseCritDamage: 0
   knockbackMult: 0.5
-  levelScaling: 1
-  hpLevelUp: 10
-  damageLevelUp: 5
-  speedLevelUp: 0.05
   currentHP: 0
   xpAmount: 0
   hpAdd: 0
@@ -253,6 +249,9 @@ MonoBehaviour:
   critChanceMult: 0
   critDamageMult: 0
   coolDownMult: 0
+  hpMultConst: 1
+  damageMultConst: 1
+  speedMultConst: 1
   isDead: 0
   weapons: []
   inventory: []

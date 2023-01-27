@@ -160,8 +160,8 @@ public class ResourceManager
     /// </summary>
     public static void Init()
     {
-        LoadEnemies();
         LoadProjectiles();
+        LoadEnemies();
         LoadWeapons();
         LoadUpgrades();
         LoadPhases();
@@ -434,5 +434,17 @@ public class ResourceManager
         }
 
         return drop;
+    }
+
+    public static Enemy GetEnemyFromIndex(EnemyIndex index)
+    {
+        foreach (Enemy i in enemyPrefabs)
+        {
+            if (i.index == index)
+            {
+                return i;
+            }
+        }
+        return null;
     }
 }

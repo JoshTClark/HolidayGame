@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public abstract class Enemy : StatsComponent
 {
     public Player player;
-
+    public ObjectPool<Enemy> pool;
     public ResourceManager.EnemyIndex index;
     public bool isBoss;
 
@@ -209,7 +210,7 @@ public abstract class Enemy : StatsComponent
         Vector2 currentVelocity = Vector2.zero;
 
         // Loop through all enemies
-        foreach (Enemy e in EnemyManager.instance.CurrentEnemies)
+        foreach (Enemy e in EnemyManager.instance.AllEnemies)
         {
             currentVelocity = Vector2.zero;
             float sqrDistance = Vector2.SqrMagnitude(transform.position - e.transform.position);
@@ -238,6 +239,17 @@ public abstract class Enemy : StatsComponent
             // Play Audio
             onHitSound.Play();
         }
+    }
+    public virtual void Clean(ObjectPool<Enemy> pool)
+    {
+        movements.Clear();
+        knockback.Clear();
+        currentHP = MaxHp;
+        player = null;
+        inventory.Clear();
+        this.pool = pool;
+        this.gameObject.SetActive(true);
+        isDead = false;
     }
 
     [System.Serializable]

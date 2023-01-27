@@ -15,7 +15,7 @@ public abstract class ProjectileBase : MonoBehaviour
     private float damageMultiplier = 1f;
     private float knockbackMultiplier = 1f;
     private float lifetimeMultiplier = 1f;
-    private float pierce = 1f;
+    private float pierce = 0f;
 
     [SerializeField]
     public Team projectileTeam;
@@ -200,7 +200,7 @@ public abstract class ProjectileBase : MonoBehaviour
     /// <returns>The closest enemy to the player or null if none are within the player's range</returns>
     protected Enemy GetClosestEnemy()
     {
-        List<Enemy> enemies = EnemyManager.instance.CurrentEnemies;
+        List<Enemy> enemies = EnemyManager.instance.AllEnemies;
         if (enemies.Count > 0)
         {
             Enemy closest = null;

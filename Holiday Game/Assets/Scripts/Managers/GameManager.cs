@@ -15,9 +15,11 @@ public class GameManager : MonoBehaviour
         Normal,
         Paused,
         UpgradeMenu,
-        Title,
         GameOver
     }
+
+    [SerializeField]
+    public LevelData levelData;
 
     [SerializeField]
     private Camera cam;
@@ -32,19 +34,13 @@ public class GameManager : MonoBehaviour
     private Image xpBar, hpBar, dashTimer, dayBar1, dayBar2, dayBar3, cursor;
 
     [SerializeField]
-    private CanvasRenderer playerStatsPanel, pausedPanel, gamePanel, upgradePanel, titlePanel, gameOverPanel, effectsPanel, debugPanel;
-
-    [SerializeField]
-    private float timeToDifficultyIncrease;
+    private CanvasRenderer playerStatsPanel, pausedPanel, gamePanel, upgradePanel, gameOverPanel, effectsPanel, debugPanel;
 
     [SerializeField]
     private InputActionReference displayStats, pauseGame, giveXP, playerDash, godMode;
 
     [SerializeField]
     private UnityEngine.Rendering.Universal.Light2D globalLight;
-
-    [SerializeField]
-    public LevelData level;
 
     [SerializeField]
     public float cornDamageDone, snowballDamageDone, arrowDamageDone, pumpkinDamageDone, fireworkDamageDone;
@@ -56,8 +52,7 @@ public class GameManager : MonoBehaviour
 
     public bool showDamageNumbers = true;
     private float time = 0f;
-    private float enemyLevel = 1;
-    private GameState state = GameState.Title;
+    private GameState state = GameState.Normal;
     private bool paused = false;
     private int garunteedWeaponLevel = 5;
     private bool doSpecialUpgrade = false;
@@ -68,7 +63,6 @@ public class GameManager : MonoBehaviour
     public int currentHour = 12;
     private List<string> seasonsOrdered = new List<string>();
     public List<WeaponIcon> weaponIcons = new List<WeaponIcon>();
-    private float maxWeapons = 4;
 
     //Saved data
     [SerializeField]
@@ -79,12 +73,7 @@ public class GameManager : MonoBehaviour
         get { return player; }
     }
 
-    private Player player;
-
-    public float CurrentDifficulty
-    {
-        get { return enemyLevel; }
-    }
+    public Player player;
 
     public float GameTime
     {
@@ -105,9 +94,14 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         instance = this;
-        //Cursor.SetCursor(cursorTexture, new Vector2(15, 15), CursorMode.Auto);    
+
+        if (!player)
+        {
+            ResourceManager.Init();
+            player = GameObject.Instantiate<Player>(ResourceManager.playerPrefab);
+        }
+
         Cursor.visible = false;
-        ResourceManager.Init();
         debugPanel.GetComponent<DebugPanel>().Init();
         ResourceManager.GetBuffDef(ResourceManager.BuffIndex.Burning);
 
@@ -147,21 +141,20 @@ public class GameManager : MonoBehaviour
             }
         };
 
-        for (int i = 0; i < maxWeapons; i++)
+        for (int i = 0; i < player.maxWeapons; i++)
         {
             GameObject icon = Instantiate<GameObject>(weaponIconPrefab, gamePanel.transform);
-            float space = 0.08f * maxWeapons;
+            float space = 0.08f * player.maxWeapons;
 
-            icon.GetComponent<RectTransform>().anchorMin = new Vector2((0.5f - (0.08f * maxWeapons) / 2) + (0.08f * i) + 0.04f, 0.05f);
-            icon.GetComponent<RectTransform>().anchorMax = new Vector2((0.5f - (0.08f * maxWeapons) / 2) + (0.08f * i) + 0.04f, 0.05f);
+            icon.GetComponent<RectTransform>().anchorMin = new Vector2((0.5f - (0.08f * player.maxWeapons) / 2) + (0.08f * i) + 0.04f, 0.05f);
+            icon.GetComponent<RectTransform>().anchorMax = new Vector2((0.5f - (0.08f * player.maxWeapons) / 2) + (0.08f * i) + 0.04f, 0.05f);
             weaponIcons.Add(icon.GetComponentInChildren<WeaponIcon>());
         }
 
         pausedPanel.gameObject.SetActive(false);
         upgradePanel.gameObject.SetActive(false);
-        gamePanel.gameObject.SetActive(false);
+        gamePanel.gameObject.SetActive(true);
         gameOverPanel.gameObject.SetActive(false);
-        titlePanel.gameObject.SetActive(true);
         debugPanel.gameObject.SetActive(false);
     }
 
@@ -172,9 +165,6 @@ public class GameManager : MonoBehaviour
 
         switch (state)
         {
-            case GameState.Title:
-                titlePanel.gameObject.SetActive(true);
-                break;
             case GameState.GameOver:
                 gamePanel.gameObject.SetActive(false);
                 gameOverPanel.gameObject.SetActive(true);
@@ -183,7 +173,6 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 1f;
                 // Updating the timer and difficulty
                 time += Time.deltaTime;
-                enemyLevel = Mathf.Floor(1 + (time / timeToDifficultyIncrease));
                 UpdateDate();
 
                 // Updating displays
@@ -330,8 +319,7 @@ public class GameManager : MonoBehaviour
             "\nRegen: " + player.Regen +
             "\nCrit Chance: " + (player.CritChance * 100) + "% " +
             "\nCrit Damage: " + player.CritDamage + "x" +
-            "\nTime Alive " + minutes + ":" + seconds +
-            "\nGame Difficulty: " + enemyLevel.ToString();
+            "\nTime Alive " + minutes + ":" + seconds;
     }
 
     public void PlayerPickupBossDrop(int upgrades)
@@ -395,22 +383,6 @@ public class GameManager : MonoBehaviour
         Destroy(player.gameObject);
         time = 0.0f;
         upgradesToGive = 0;
-        state = GameState.Title;
-    }
-
-    public void StartGame(ResourceManager.UpgradeIndex weapon)
-    {
-        player = Instantiate<Player>(ResourceManager.playerPrefab, new Vector2(), Quaternion.identity);
-        //player.healthBar = healthBar;
-
-        player.AddUpgrade(weapon);
-
-        ProjectileManager.Clean();
-        level.Clean();
-        level.CreateLevel();
-        titlePanel.gameObject.SetActive(false);
-        gamePanel.gameObject.SetActive(true);
-        state = GameState.Normal;
     }
 
     public void DisplayDamage(DamageInfo info)

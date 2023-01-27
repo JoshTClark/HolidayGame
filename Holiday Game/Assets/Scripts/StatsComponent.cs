@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 using static ResourceManager;
 
 public abstract class StatsComponent : MonoBehaviour
@@ -12,10 +13,6 @@ public abstract class StatsComponent : MonoBehaviour
     [SerializeField]
     private float baseMaxHP, baseSpeed, baseDamage, baseAttackSpeed, baseArmor, baseRegen, baseRegenInterval, baseCritChance, baseCritDamage, knockbackMult;
 
-    // Level up stuff
-    [SerializeField]
-    private float levelScaling, hpLevelUp, damageLevelUp, speedLevelUp;
-
     // CurrentHP is here and is handled by this script
     public float currentHP;
 
@@ -24,6 +21,7 @@ public abstract class StatsComponent : MonoBehaviour
     private float xpAmount;
     private int level;
 
+    [HideInInspector]
     [SerializeField]
     // Flat additions to stats
     public float hpAdd, speedAdd, damageAdd, attackSpeedAdd, armorAdd, regenAdd, critChanceAdd, critDamageAdd;
@@ -31,12 +29,22 @@ public abstract class StatsComponent : MonoBehaviour
     [SerializeField]
     private AnimationCurve expCurve;
 
+    [HideInInspector]
     // Multipliers to stats
     public float hpMult, speedMult, damageMult, attackSpeedMult, armorMult, regenMult, regenIntervalMult, critChanceMult, critDamageMult, coolDownMult;
 
+    // Multipliers for enemies
+    [HideInInspector]
+    public float hpMultConst = 1.0f;
+    [HideInInspector]
+    public float damageMultConst = 1.0f;
+    [HideInInspector]
+    public float speedMultConst = 1.0f;
+
+
     // Flags
     [SerializeField]
-    private bool isDead = false;
+    protected bool isDead = false;
 
     // Weapon List
     public List<Weapon> weapons = new List<Weapon>();
@@ -677,9 +685,6 @@ public abstract class StatsComponent : MonoBehaviour
 
         // LEVELS
         CalculateLevel();
-        hpAdd += ((level - 1) * levelScaling) * hpLevelUp;
-        damageAdd += ((level - 1) * levelScaling) * damageLevelUp;
-        speedAdd += ((level - 1) * levelScaling) * speedLevelUp;
 
         // UPGRADES
 

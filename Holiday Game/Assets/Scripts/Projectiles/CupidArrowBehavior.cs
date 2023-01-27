@@ -57,7 +57,7 @@ public class CupidArrowBehavior : ProjectileBase
     }
     protected Enemy GetClosestEnemyForArrow()
     {
-        List<Enemy> enemies = EnemyManager.instance.CurrentEnemies;
+        List<Enemy> enemies = EnemyManager.instance.AllEnemies;
         if (enemies.Count > 0)
         {
             Enemy closest = null;

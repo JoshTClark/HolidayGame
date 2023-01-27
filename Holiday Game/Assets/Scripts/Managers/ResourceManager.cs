@@ -36,7 +36,7 @@ public class ResourceManager
         XP1,
         XP2,
         HealthDrop1,
-        BossDrop, 
+        BossDrop,
         Coin
     }
     public enum WeaponIndex
@@ -152,6 +152,7 @@ public class ResourceManager
     public static List<OrbitalParent> orbitals = new List<OrbitalParent>();
     public static Player playerPrefab;
     public static DashParticle playerDashEffect;
+    public static List<LevelData> levelDatas = new List<LevelData>();
 
     public static bool isLoaded = false;
 
@@ -172,6 +173,7 @@ public class ResourceManager
         LoadEffects();
         LoadPlayableCharacters();
         LoadOrbitals();
+        LoadLevels();
         isLoaded = true;
     }
 
@@ -250,7 +252,7 @@ public class ResourceManager
     public static void LoadPickups()
     {
         DropBase[] arr = Resources.LoadAll<DropBase>("");
-        
+
         foreach (DropBase i in arr)
         {
             pickupPrefabs.Add(i);
@@ -263,6 +265,15 @@ public class ResourceManager
         foreach (UpgradePool i in arr)
         {
             upgradePools.Add(i);
+        }
+    }
+
+    public static void LoadLevels()
+    {
+        LevelData[] arr = Resources.LoadAll<LevelData>("");
+        foreach (LevelData i in arr)
+        {
+            levelDatas.Add(i);
         }
     }
 
@@ -443,6 +454,18 @@ public class ResourceManager
             if (i.index == index)
             {
                 return i;
+            }
+        }
+        return null;
+    }
+
+    public static LevelData GetLevelFromSceneName(string scene)
+    {
+        foreach (LevelData data in levelDatas)
+        {
+            if (data.sceneName == scene) 
+            {
+                return data;
             }
         }
         return null;

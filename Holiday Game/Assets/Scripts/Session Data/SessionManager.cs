@@ -9,7 +9,9 @@ public class SessionManager
     private PlayerData playerData = new PlayerData();
 
     public void SavePlayerData(Player player)
-    { }
+    {
+        playerData.inventory = player.inventory;
+    }
 
     public void SetChosenCharacter(PlayableCharacterData chosenCharacter)
     {
@@ -23,6 +25,13 @@ public class SessionManager
     public void GenerateMap(int length, int maxBranches, float nodeDifference, int iterations)
     {
         map = new SessionMap(length, maxBranches, nodeDifference, iterations);
+    }
+
+    public Player GetPlayerInstance()
+    {
+        Player player = GameObject.Instantiate<Player>(playerData.chosenCharacter.prefab);
+        player.inventory = playerData.inventory;
+        return player;
     }
 
     private struct PlayerData

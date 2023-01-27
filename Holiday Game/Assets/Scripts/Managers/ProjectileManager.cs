@@ -27,6 +27,7 @@ public class ProjectileManager : MonoBehaviour
         ObjectPool<ProjectileBase> pool;
         if (pools.TryGetValue(index, out pool))
         {
+            //Debug.Log(pool.CountActive);
             ProjectileBase p = pool.Get();
             if (!allProjectiles.Contains(p))
             {

@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class MapPoint: MonoBehaviour
 {
-    public string scene;
+    public LevelData level;
 }

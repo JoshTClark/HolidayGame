@@ -86,19 +86,28 @@ public class GameManager : MonoBehaviour
     }
 
     // Only a single gamemanager should ever exist so we can always get it here
+    [HideInInspector]
     public static GameManager instance;
 
     // The save game data to use
+    [HideInInspector]
     public static GameData data;
+
+    [HideInInspector]
+    public static SessionManager session;
 
     void Start()
     {
         instance = this;
 
-        if (!player)
+        if (session == null)
         {
             ResourceManager.Init();
             player = GameObject.Instantiate<Player>(ResourceManager.playerPrefab);
+        }
+        else
+        {
+            player = session.GetPlayerInstance();
         }
 
         Cursor.visible = false;

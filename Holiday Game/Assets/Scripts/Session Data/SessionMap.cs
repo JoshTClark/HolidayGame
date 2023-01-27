@@ -64,6 +64,17 @@ public class SessionMap
             }
             prevNode.connections.Add(endingNode);
         }
+
+        foreach (MapNode[] m1 in nodeArr)
+        {
+            foreach (MapNode node in m1)
+            {
+                if (!node.isEmpty)
+                {
+                    node.levelData = ResourceManager.levelDatas[0];
+                }
+            }
+        }
     }
 
     public class MapNode
@@ -72,6 +83,6 @@ public class SessionMap
         public int branch;
         public bool isEmpty = true;
         public List<MapNode> connections = new List<MapNode>();
-        public string scene = "GenericMap";
+        public LevelData levelData;
     }
 }

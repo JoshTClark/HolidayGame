@@ -6,18 +6,8 @@ using UnityEngine;
 public class PlayableCharacterData : ScriptableObject
 {
     [SerializeField]
-    public Sprite sprite;
+    public Player prefab;
 
     [SerializeField]
     public List<Upgrade> inventory = new List<Upgrade>();
-
-    [SerializeField]
-    public StatsData stats = new StatsData();
-}
-
-[System.Serializable]
-public struct StatsData
-{
-    [SerializeField]
-    private float baseMaxHP, baseSpeed, baseDamage, baseAttackSpeed, baseArmor, baseRegen, baseRegenInterval, baseCritChance, baseCritDamage;
 }

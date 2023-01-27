@@ -6,6 +6,7 @@ using UnityEditor;
 [CreateAssetMenu(fileName = "Level Data", menuName = Constants.ASSET_MENU_PATH + "Level Data")]
 public class LevelData : ScriptableObject
 {
+    public string sceneName = "TestScene";
     public List<Wave> waves = new List<Wave>();
 
     public Wave GetWaveByTime(float time)

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c59e07d74277824bb5047733b29c0bc, type: 3}
   m_Name: TestLevel
   m_EditorClassIdentifier: 
+  sceneName: TestScene
   waves:
   - waveLength: 60
     enemies:

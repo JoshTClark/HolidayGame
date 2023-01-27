@@ -40,6 +40,7 @@ public class SaveSceneManager : MonoBehaviour
 
     private void Start()
     {
+        ResourceManager.Init();
         instance = this;
 
         FileInfo[] info = SaveManager.LoadAllSaves();

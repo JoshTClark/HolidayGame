@@ -21,7 +21,7 @@ public abstract class Weapon : MonoBehaviour
     public bool canFire = false;
 
     [SerializeField]
-    private float baseDamageMultiplier = 1, baseSizeMultiplier = 1, attackSpeedMultiplier = 1, pierce = 1;
+    private float baseDamageMultiplier = 1, baseSizeMultiplier = 1, attackSpeedMultiplier = 1, pierce = 0;
 
     [SerializeField]
     private List<WeaponStat> extraStats = new List<WeaponStat>();

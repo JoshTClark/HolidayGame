@@ -185,6 +185,7 @@ MonoBehaviour:
   player: {fileID: 0}
   index: 2
   isBoss: 0
+  deathEffect: {fileID: 7639369088873833346, guid: 7a4028f9e61aa2e4e95ee4624a72463e, type: 3}
   drops:
   - index: 1
     chance: 1

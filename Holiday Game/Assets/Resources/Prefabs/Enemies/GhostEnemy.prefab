@@ -159,10 +159,6 @@ MonoBehaviour:
   baseCritChance: 0
   baseCritDamage: 0
   knockbackMult: 0
-  levelScaling: 1
-  hpLevelUp: 3
-  damageLevelUp: 1
-  speedLevelUp: 0.3
   currentHP: 0
   xpAmount: 0
   hpAdd: 0
@@ -189,6 +185,9 @@ MonoBehaviour:
   critChanceMult: 0
   critDamageMult: 0
   coolDownMult: 0
+  hpMultConst: 1
+  damageMultConst: 1
+  speedMultConst: 1
   isDead: 0
   weapons: []
   inventory: []
@@ -196,6 +195,7 @@ MonoBehaviour:
   player: {fileID: 0}
   index: 5
   isBoss: 0
+  deathEffect: {fileID: 7639369088873833346, guid: 7a4028f9e61aa2e4e95ee4624a72463e, type: 3}
   drops:
   - index: 0
     chance: 1

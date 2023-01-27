@@ -14,104 +14,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: TestScene
   waves:
-  - waveLength: 5
+  - waveLength: 20
     enemies:
     - enemyIndex: 1
-      amountToSpawn: 10
+      amountToSpawn: 15
+      respawn: 1
+      healthMultiplier: 1
+      damageMultiplier: 1
+      speedMultiplier: 1
+  - waveLength: 20
+    enemies:
+    - enemyIndex: 1
+      amountToSpawn: 25
+      respawn: 1
+      healthMultiplier: 1
+      damageMultiplier: 1
+      speedMultiplier: 1
+  - waveLength: 60
+    enemies:
+    - enemyIndex: 1
+      amountToSpawn: 15
       respawn: 1
       healthMultiplier: 1
       damageMultiplier: 1
       speedMultiplier: 1
     - enemyIndex: 3
-      amountToSpawn: 3
-      respawn: 0
-      healthMultiplier: 1
-      damageMultiplier: 1
-      speedMultiplier: 1
-  - waveLength: 3
-    enemies:
-    - enemyIndex: 1
-      amountToSpawn: 25
-      respawn: 1
-      healthMultiplier: 1
-      damageMultiplier: 1
-      speedMultiplier: 1
-  - waveLength: 3
-    enemies:
-    - enemyIndex: 1
-      amountToSpawn: 25
-      respawn: 1
-      healthMultiplier: 1
-      damageMultiplier: 1
-      speedMultiplier: 1
-  - waveLength: 3
-    enemies:
-    - enemyIndex: 1
-      amountToSpawn: 25
-      respawn: 1
-      healthMultiplier: 1
-      damageMultiplier: 1
-      speedMultiplier: 1
-  - waveLength: 3
-    enemies:
-    - enemyIndex: 1
-      amountToSpawn: 25
-      respawn: 1
-      healthMultiplier: 1
-      damageMultiplier: 1
-      speedMultiplier: 1
-  - waveLength: 3
-    enemies:
-    - enemyIndex: 1
-      amountToSpawn: 25
-      respawn: 1
-      healthMultiplier: 1
-      damageMultiplier: 1
-      speedMultiplier: 1
-  - waveLength: 3
-    enemies:
-    - enemyIndex: 1
-      amountToSpawn: 25
-      respawn: 1
-      healthMultiplier: 1
-      damageMultiplier: 1
-      speedMultiplier: 1
-  - waveLength: 3
-    enemies:
-    - enemyIndex: 1
-      amountToSpawn: 25
-      respawn: 1
-      healthMultiplier: 1
-      damageMultiplier: 1
-      speedMultiplier: 1
-  - waveLength: 3
-    enemies:
-    - enemyIndex: 1
-      amountToSpawn: 25
-      respawn: 1
-      healthMultiplier: 1
-      damageMultiplier: 1
-      speedMultiplier: 1
-  - waveLength: 3
-    enemies:
-    - enemyIndex: 1
-      amountToSpawn: 25
-      respawn: 1
-      healthMultiplier: 1
-      damageMultiplier: 1
-      speedMultiplier: 1
-  - waveLength: 3
-    enemies:
-    - enemyIndex: 1
-      amountToSpawn: 25
-      respawn: 1
-      healthMultiplier: 1
-      damageMultiplier: 1
-      speedMultiplier: 1
-  - waveLength: 3
-    enemies:
-    - enemyIndex: 1
-      amountToSpawn: 25
+      amountToSpawn: 5
       respawn: 1
       healthMultiplier: 1
       damageMultiplier: 1

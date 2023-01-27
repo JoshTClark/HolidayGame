@@ -40,6 +40,7 @@ public class Player : StatsComponent
     private float particleTimer = 0.0f;
     private float particleDelay = 0.02f;
     public int maxWeapons = 4;
+    public int waitingForLevels = 0;
 
     public bool godMode = false;
 

@@ -279,6 +279,10 @@ public class UpgradeOption : MonoBehaviour
         if (u.weaponStatChanges.Count > 0)
         {
             Weapon w = player.GetWeapon(u.weaponStatIndex);
+            if (w == null)
+            {
+                w = ResourceManager.GetWeapon(u.weaponStatIndex);
+            }
             if (weaponStatsLabel)
             {
                 weaponStatsLabel.text = ResourceManager.GetUpgrade(w.upgradeIndex).upgradeName;

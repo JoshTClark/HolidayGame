@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     private Canvas ui;
 
     [SerializeField]
-    private TMP_Text timerDisplay, playerStats, playerLevel, hpText, numberEffect, dashText;
+    private TMP_Text timerDisplay, playerStats, playerLevel, hpText, numberEffect, dashText, levelUpText;
 
     [SerializeField]
     private Image xpBar, hpBar, dashTimer, dayBar1, dayBar2, dayBar3, cursor;
@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     private CanvasRenderer playerStatsPanel, pausedPanel, gamePanel, upgradePanel, gameOverPanel, effectsPanel, debugPanel;
 
     [SerializeField]
-    private InputActionReference displayStats, pauseGame, giveXP, playerDash, godMode;
+    private InputActionReference displayStats, pauseGame, giveXP, playerDash, godMode, levelUpButton;
 
     [SerializeField]
     private UnityEngine.Rendering.Universal.Light2D globalLight;
@@ -124,6 +124,11 @@ public class GameManager : MonoBehaviour
             paused = !paused;
         };
 
+        levelUpButton.action.performed += (InputAction.CallbackContext callback) =>
+        {
+            DoPlayerLevelUp();
+        };
+
         displayStats.action.performed += (InputAction.CallbackContext callback) =>
         {
             debugPanel.gameObject.SetActive(!debugPanel.gameObject.activeSelf);
@@ -155,8 +160,8 @@ public class GameManager : MonoBehaviour
             GameObject icon = Instantiate<GameObject>(weaponIconPrefab, gamePanel.transform);
             float space = 0.08f * player.maxWeapons;
 
-            icon.GetComponent<RectTransform>().anchorMin = new Vector2((0.5f - (0.08f * player.maxWeapons) / 2) + (0.08f * i) + 0.04f, 0.05f);
-            icon.GetComponent<RectTransform>().anchorMax = new Vector2((0.5f - (0.08f * player.maxWeapons) / 2) + (0.08f * i) + 0.04f, 0.05f);
+            icon.GetComponent<RectTransform>().anchorMin = new Vector2((1f - (0.08f * player.maxWeapons)) + (0.08f * i) + 0.04f, 0.05f);
+            icon.GetComponent<RectTransform>().anchorMax = new Vector2((1f - (0.08f * player.maxWeapons)) + (0.08f * i) + 0.04f, 0.05f);
             weaponIcons.Add(icon.GetComponentInChildren<WeaponIcon>());
         }
 
@@ -232,6 +237,12 @@ public class GameManager : MonoBehaviour
                     }
                 }
 
+                if (player.waitingForLevels > 0)
+                {
+                    levelUpText.gameObject.SetActive(true);
+                }
+                else { levelUpText.gameObject.SetActive(false); }
+
                 // Pause screen
                 if (paused)
                 {
@@ -277,6 +288,7 @@ public class GameManager : MonoBehaviour
                     if (upgradesToGive <= 0)
                     {
                         state = GameState.Normal;
+                        upgradeManager.tempWeapons = 0;
                         upgradePanel.gameObject.SetActive(false);
                         gamePanel.gameObject.SetActive(true);
                         doSpecialUpgrade = false;
@@ -338,10 +350,14 @@ public class GameManager : MonoBehaviour
         state = GameState.UpgradeMenu;
     }
 
-    public void DoPlayerLevelUp(int levels)
+    public void DoPlayerLevelUp()
     {
-        this.state = GameState.UpgradeMenu;
-        upgradesToGive = levels;
+        if (player.waitingForLevels > 0)
+        {
+            this.state = GameState.UpgradeMenu;
+            upgradesToGive = player.waitingForLevels;
+            player.waitingForLevels = 0;
+        }
     }
 
     public List<UpgradePool> GetPossiblePools(bool ignoreWeapons)

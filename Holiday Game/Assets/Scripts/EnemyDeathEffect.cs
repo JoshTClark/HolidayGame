@@ -8,7 +8,7 @@ public class EnemyDeathEffect : MonoBehaviour
 
     void Update()
     {
-        amount -= Time.deltaTime;
+        amount -= Time.deltaTime * 1.5f;
         gameObject.GetComponent<SpriteRenderer>().material.SetFloat("_Amount", amount);
         if (amount < 0) 
         {

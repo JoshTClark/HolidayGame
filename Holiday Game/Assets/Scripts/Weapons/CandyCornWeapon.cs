@@ -59,6 +59,7 @@ public class CandyCornWeapon : Weapon
                     p.transform.position = this.transform.position;
                     p.transform.rotation = transform.rotation;
                     p.Direction = transform.right;
+                    p.Pierce = GetStat("Pierce");
                     p.RotateDirection(accuracyOff);
                     DamageInfo info = new DamageInfo();
                     info.damage = owner.Damage * GetStat("Damage");

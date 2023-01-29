@@ -11,16 +11,20 @@ public class LevelData : ScriptableObject
 
     public Wave GetWaveByTime(float time)
     {
-        float timesPast = 0.0f;
-        for (int i = 0; i < waves.Count; i++)
+        if (waves.Count > 0)
         {
-            timesPast += waves[i].waveLength;
-            if (timesPast > time)
+            float timesPast = 0.0f;
+            for (int i = 0; i < waves.Count; i++)
             {
-                return waves[i];
+                timesPast += waves[i].waveLength;
+                if (timesPast > time)
+                {
+                    return waves[i];
+                }
             }
+            return waves[waves.Count - 1];
         }
-        return waves[waves.Count - 1];
+        return null;
     }
 
     [System.Serializable]

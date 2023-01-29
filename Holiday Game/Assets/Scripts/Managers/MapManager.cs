@@ -39,6 +39,7 @@ public class MapManager : MonoBehaviour
     {
         if (session == null)
         {
+            Debug.Log("No session found");
             ResourceManager.Init();
             session = new SessionManager();
             session.GenerateMap(10, 9, 10, 4);
@@ -141,8 +142,8 @@ public class MapManager : MonoBehaviour
 
     public void StartLevel() 
     {
-        SceneManager.LoadScene(selectedNode.GetComponent<MapPoint>().level.sceneName);
         GameManager.session = session;
+        SceneManager.LoadScene(selectedNode.GetComponent<MapPoint>().level.sceneName);
     }
 
     private void OnDrawGizmos()

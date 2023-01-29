@@ -44,39 +44,41 @@ public class EnemyManager : MonoBehaviour
             RemoveDeadEnemies();
 
             LevelData.Wave wave = GameManager.instance.levelData.GetWaveByTime(GameManager.instance.GameTime);
-
-            if (previousWave == null || wave != previousWave)
+            if (wave != null)
             {
-                currentWaveEnemies.Clear();
+                if (previousWave == null || wave != previousWave)
+                {
+                    currentWaveEnemies.Clear();
+                    foreach (LevelData.SpawnInfo info in wave.enemies)
+                    {
+                        if (!info.respawn)
+                        {
+                            for (int i = 0; i < info.amountToSpawn; i++)
+                            {
+                                SpawnEnemy(info);
+                            }
+                        }
+                    }
+                    previousWave = wave;
+                }
+
                 foreach (LevelData.SpawnInfo info in wave.enemies)
                 {
-                    if (!info.respawn)
+                    if (info.respawn)
                     {
-                        for (int i = 0; i < info.amountToSpawn; i++)
+                        int amount = 0;
+                        foreach (Enemy e in currentWaveEnemies)
+                        {
+                            if (e.index == info.enemyIndex)
+                            {
+                                amount++;
+                            }
+                        }
+
+                        for (int i = amount; i < info.amountToSpawn; i++)
                         {
                             SpawnEnemy(info);
                         }
-                    }
-                }
-                previousWave = wave;
-            }
-
-            foreach (LevelData.SpawnInfo info in wave.enemies)
-            {
-                if (info.respawn)
-                {
-                    int amount = 0;
-                    foreach (Enemy e in currentWaveEnemies)
-                    {
-                        if (e.index == info.enemyIndex)
-                        {
-                            amount++;
-                        }
-                    }
-
-                    for (int i = amount; i < info.amountToSpawn; i++)
-                    {
-                        SpawnEnemy(info);
                     }
                 }
             }

@@ -103,6 +103,7 @@ public class GameManager : MonoBehaviour
         if (session == null)
         {
             ResourceManager.Init();
+            Debug.Log("No session found");
             player = GameObject.Instantiate<Player>(ResourceManager.playerPrefab);
         }
         else

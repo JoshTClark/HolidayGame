@@ -23,7 +23,8 @@ public class ResourceManager
         Explosion,
         CupidArrow,
         CandyCorn,
-        IceShard
+        IceShard,
+        SwordSlash
     }
     public enum FollowingEffectIndex
     {
@@ -49,7 +50,8 @@ public class ResourceManager
         CupidArrow,
         BossAttack,
         BossAttack2,
-        CandyCornRifle
+        CandyCornRifle,
+        SwordSlash
     }
     public enum UpgradeIndex
     {
@@ -113,7 +115,8 @@ public class ResourceManager
         LowHPDamage,
         CupidArrowHealth,
         SharpShadow,
-        ExtraDash
+        ExtraDash,
+        SwordSlashWeaponUpgrade
     }
 
     public enum UpgradePoolIndex

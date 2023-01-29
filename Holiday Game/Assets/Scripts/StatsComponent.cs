@@ -363,6 +363,34 @@ public abstract class StatsComponent : MonoBehaviour
                 }
             }
         }
+        // Sword Slash
+        if (HasUpgrade(ResourceManager.UpgradeIndex.SwordSlashWeaponUpgrade))
+        {
+            bool giveSlash = true;
+            foreach (Weapon w in weapons)
+            {
+                if (w.GetType() == typeof(SwordSlashWeapon))
+                {
+                    giveSlash = false;
+                }
+            }
+            if (giveSlash)
+            {
+                AddAttack(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.SwordSlash));
+            }
+        }
+        else
+        {
+            for (int i = weapons.Count - 1; i >= 0; i--)
+            {
+                if (weapons[i].index == WeaponIndex.SwordSlash)
+                {
+                    Weapon w = weapons[i];
+                    weapons.RemoveAt(i);
+                    Destroy(w.gameObject);
+                }
+            }
+        }
     }
 
     //Checks to see if leveled up since last tick

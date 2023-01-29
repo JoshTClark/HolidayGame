@@ -18,6 +18,7 @@ public class SessionManager
 
     public void SetChosenCharacter(PlayableCharacterData chosenCharacter)
     {
+        Debug.Log("Setting Character: " + chosenCharacter.prefab.name);
         if (!playerData.chosenCharacter)
         {
             playerData.chosenCharacter = chosenCharacter;

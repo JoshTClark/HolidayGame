@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DashParticle : MonoBehaviour
+public class TrailParticle : MonoBehaviour
 {
     public SpriteRenderer sr;
     public bool finished = false;
-    private float lifetime = 0.5f;
-    private float timer = 0.35f;
+    public float lifetime = 0.5f;
+    public float timer = 0.35f;
 
     private void Start()
     {

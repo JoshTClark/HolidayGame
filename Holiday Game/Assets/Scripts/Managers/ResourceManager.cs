@@ -154,7 +154,7 @@ public class ResourceManager
     public static List<FollowingEffect> effects = new List<FollowingEffect>();
     public static List<OrbitalParent> orbitals = new List<OrbitalParent>();
     public static Player playerPrefab;
-    public static DashParticle playerDashEffect;
+    public static TrailParticle playerDashEffect;
     public static List<LevelData> levelDatas = new List<LevelData>();
 
     public static bool isLoaded = false;
@@ -294,7 +294,7 @@ public class ResourceManager
         Player[] arr1 = Resources.LoadAll<Player>("");
         playerPrefab = arr1[0];
 
-        DashParticle[] arr2 = Resources.LoadAll<DashParticle>("");
+        TrailParticle[] arr2 = Resources.LoadAll<TrailParticle>("");
         playerDashEffect = arr2[0];
     }
 

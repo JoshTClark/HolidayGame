@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2499742534556204745}
   - component: {fileID: 4572045033489371254}
   m_Layer: 0
-  m_Name: DashParticleEffect
+  m_Name: FadeParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

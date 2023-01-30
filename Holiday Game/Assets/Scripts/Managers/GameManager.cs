@@ -109,6 +109,7 @@ public class GameManager : MonoBehaviour
         else
         {
             player = session.GetPlayerInstance();
+            levelData = session.currentLevel;
         }
 
         Cursor.visible = false;

@@ -7,6 +7,7 @@ public class SessionManager
 {
     public SessionMap map;
     private PlayerData playerData = new PlayerData();
+    public LevelData currentLevel;
 
     public void SavePlayerData(Player player)
     {

@@ -142,6 +142,7 @@ public class MapManager : MonoBehaviour
 
     public void StartLevel() 
     {
+        session.currentLevel = selectedNode.GetComponent<MapPoint>().level;
         GameManager.session = session;
         SceneManager.LoadScene(selectedNode.GetComponent<MapPoint>().level.sceneName);
     }

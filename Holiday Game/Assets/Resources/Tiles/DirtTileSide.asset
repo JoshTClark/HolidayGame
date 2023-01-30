@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: FallTreeStandalone
+  m_Name: DirtTileSide
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: b4fa8b0883a89c446858414ec2869677, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f22b0a553c5c2c54fbab4c488e89b241, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

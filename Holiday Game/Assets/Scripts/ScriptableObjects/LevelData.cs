@@ -7,6 +7,7 @@ using UnityEditor;
 public class LevelData : ScriptableObject
 {
     public string sceneName = "TestScene";
+    public int startHour = 12;
     public List<Wave> waves = new List<Wave>();
 
     public Wave GetWaveByTime(float time)

@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     private Canvas ui;
 
     [SerializeField]
-    private TMP_Text timerDisplay, playerStats, playerLevel, hpText, numberEffect, dashText, levelUpText;
+    private TMP_Text objectiveDisplay, playerStats, playerLevel, hpText, numberEffect, dashText, levelUpText;
 
     [SerializeField]
     private Image xpBar, hpBar, dashTimer, dayBar1, dayBar2, dayBar3, cursor;
@@ -59,10 +59,10 @@ public class GameManager : MonoBehaviour
     private int upgradesToGive = 0;
     private float dayLength = 120f;
     public int currentDay = 1;
-    public int currentSeason = 0;
     public int currentHour = 12;
     private List<string> seasonsOrdered = new List<string>();
     public List<WeaponIcon> weaponIcons = new List<WeaponIcon>();
+    public int enemiesDefeated = 0;
 
     //Saved data
     [SerializeField]
@@ -78,6 +78,11 @@ public class GameManager : MonoBehaviour
     public float GameTime
     {
         get { return time; }
+    }
+
+    public float OffsetTime
+    {
+        get { return time + (levelData.startHour * (dayLength/24)); }
     }
 
     public GameState State
@@ -192,7 +197,18 @@ public class GameManager : MonoBehaviour
                 UpdateDate();
 
                 // Updating displays
-                timerDisplay.text = seasonsOrdered[currentSeason] + ": Day " + currentDay;
+                if (levelData.daysToSurvive > 0 && levelData.enemiesToDefeat > currentDay)
+                {
+                    objectiveDisplay.text = "Day " + currentDay + "/" + levelData.daysToSurvive;
+                }
+                else if (levelData.enemiesToDefeat > 0 && levelData.enemiesToDefeat > enemiesDefeated)
+                {
+                    objectiveDisplay.text = enemiesDefeated + "/" + levelData.enemiesToDefeat + " Enemies Defeated";
+                }
+                else 
+                {
+                    objectiveDisplay.text = "Find the exit";
+                }
                 dashText.text = player.currentDashes.ToString();
                 xpBar.GetComponent<RectTransform>().anchorMax = new Vector2(player.GetPercentToNextLevel(), xpBar.GetComponent<RectTransform>().anchorMax.y);
                 dashTimer.GetComponent<RectTransform>().anchorMax = new Vector2(1 - (player.dashCooldownTimer / player.DashCooldown), dashTimer.GetComponent<RectTransform>().anchorMax.y);
@@ -460,9 +476,8 @@ public class GameManager : MonoBehaviour
     */
     public void UpdateDate()
     {
-        currentSeason = (int)Mathf.Floor(time / (dayLength * 5));
-        currentDay = (int)Mathf.Floor((time - ((currentSeason - 1) * 5)) / dayLength) + 1;
-        currentHour = (int)((time % dayLength) / (dayLength / 24));
+        currentDay = (int)Mathf.Floor(time / dayLength) + 1;
+        currentHour = (int)((OffsetTime % dayLength) / (dayLength / 24));
 
         float percentThroughDay = (time % dayLength) / dayLength;
 
@@ -473,14 +488,14 @@ public class GameManager : MonoBehaviour
         dayBar3.rectTransform.anchorMin = new Vector2(2f - percentThroughDay - 0.5f, dayBar3.rectTransform.anchorMin.y);
         dayBar3.rectTransform.anchorMax = new Vector2(3f - percentThroughDay - 0.5f, dayBar3.rectTransform.anchorMax.y);
 
-        float currentHourFloat = ((time % dayLength) / (dayLength / 24));
+        float currentHourFloat = ((OffsetTime % dayLength) / (dayLength / 24));
         //globalLight.intensity = 0.1f;
         globalLight.intensity = Mathf.Clamp(1f - Mathf.Pow(Mathf.Abs(currentHourFloat - 12) / 12f, 3f / 4f) + (0.2f * (0.9f - Mathf.Abs(currentHourFloat - 12) / 12f)), 0f, 1f);
     }
 
     public bool IsDayLight()
     {
-        if (Mathf.RoundToInt((time - (dayLength / 4)) / dayLength) % 2 == 0)
+        if (Mathf.RoundToInt((OffsetTime - (dayLength / 4)) / dayLength) % 2 == 0)
         {
             return true;
         }

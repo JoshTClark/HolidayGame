@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: TestLevel
   m_EditorClassIdentifier: 
   sceneName: TestScene
+  difficulty: 1
+  startHour: 12
+  enemiesToDefeat: 20
+  daysToSurvive: 0
   waves:
   - waveLength: 20
     enemies:

@@ -6,9 +6,12 @@ using UnityEditor;
 [CreateAssetMenu(fileName = "Level Data", menuName = Constants.ASSET_MENU_PATH + "Level Data")]
 public class LevelData : ScriptableObject
 {
+
     public string sceneName = "TestScene";
     public int difficulty = 1;
     public int startHour = 12;
+    public int enemiesToDefeat = 0;
+    public int daysToSurvive = 0;
     public List<Wave> waves = new List<Wave>();
 
     public Wave GetWaveByTime(float time)

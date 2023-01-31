@@ -131,6 +131,11 @@ public class ResourceManager
         SpecialUpgrades
     }
 
+    public enum LevelPoolIndex
+    {
+        Test
+    }
+
     public enum BuffIndex
     {
         Burning,
@@ -146,8 +151,6 @@ public class ResourceManager
     public static List<ProjectileBase> projectilePrefabs = new List<ProjectileBase>();
     public static List<Weapon> weaponPrefabs = new List<Weapon>();
     public static List<Upgrade> upgradeDefinitions = new List<Upgrade>();
-    public static List<SpawnPhase> phaseDefinitions = new List<SpawnPhase>();
-    public static List<BurstSpawn> spawnDefinitions = new List<BurstSpawn>();
     public static List<DropBase> pickupPrefabs = new List<DropBase>();
     public static List<UpgradePool> upgradePools = new List<UpgradePool>();
     public static List<BuffDef> buffs = new List<BuffDef>();
@@ -156,6 +159,7 @@ public class ResourceManager
     public static Player playerPrefab;
     public static TrailParticle playerDashEffect;
     public static List<LevelData> levelDatas = new List<LevelData>();
+    public static List<LevelPool> levelPools = new List<LevelPool>();
 
     public static bool isLoaded = false;
 
@@ -168,8 +172,6 @@ public class ResourceManager
         LoadEnemies();
         LoadWeapons();
         LoadUpgrades();
-        LoadPhases();
-        LoadSpawns();
         LoadPickups();
         LoadUpgradePools();
         LoadBuffs();
@@ -235,23 +237,6 @@ public class ResourceManager
         }
     }
 
-    public static void LoadPhases()
-    {
-        SpawnPhase[] arr = Resources.LoadAll<SpawnPhase>("");
-        foreach (SpawnPhase i in arr)
-        {
-            phaseDefinitions.Add(i);
-        }
-    }
-    public static void LoadSpawns()
-    {
-        BurstSpawn[] arr = Resources.LoadAll<BurstSpawn>("");
-        foreach (BurstSpawn i in arr)
-        {
-            spawnDefinitions.Add(i);
-        }
-    }
-
     public static void LoadPickups()
     {
         DropBase[] arr = Resources.LoadAll<DropBase>("");
@@ -277,6 +262,13 @@ public class ResourceManager
         foreach (LevelData i in arr)
         {
             levelDatas.Add(i);
+        }
+
+        LevelPool[] pools = Resources.LoadAll<LevelPool>("");
+
+        foreach (LevelPool i in pools)
+        {
+            levelPools.Add(i);
         }
     }
 

@@ -71,7 +71,9 @@ public class SessionMap
             {
                 if (!node.isEmpty)
                 {
-                    node.levelData = ResourceManager.levelDatas[0];
+                    LevelPool pool = ResourceManager.levelPools[0];
+                    int ranIndex = Random.Range(0, ResourceManager.levelPools.Count - 1);
+                    node.levelData = ResourceManager.levelPools[0].levels[ranIndex];
                 }
             }
         }

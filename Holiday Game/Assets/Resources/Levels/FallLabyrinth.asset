@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: TestScene
   difficulty: 1
-  startHour: 14
+  startHour: 12
+  enemiesToDefeat: 0
+  daysToSurvive: 0
   waves:
   - waveLength: 1000
     enemies:
@@ -26,7 +28,7 @@ MonoBehaviour:
       speedMultiplier: 1
     - enemyIndex: 3
       amountToSpawn: 2
-      respawn: 0
+      respawn: 1
       healthMultiplier: 1
       damageMultiplier: 1
       speedMultiplier: 1

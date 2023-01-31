@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     private Canvas ui;
 
     [SerializeField]
-    private TMP_Text timerDisplay, playerStats, playerLevel, hpText, numberEffect, dashText, levelUpText;
+    private TMP_Text objectiveDisplay, playerStats, playerLevel, hpText, numberEffect, dashText, levelUpText;
 
     [SerializeField]
     private Image xpBar, hpBar, dashTimer, dayBar1, dayBar2, dayBar3, cursor;
@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour
     public int currentHour = 12;
     private List<string> seasonsOrdered = new List<string>();
     public List<WeaponIcon> weaponIcons = new List<WeaponIcon>();
+    public int enemiesDefeated = 0;
 
     //Saved data
     [SerializeField]
@@ -196,7 +197,18 @@ public class GameManager : MonoBehaviour
                 UpdateDate();
 
                 // Updating displays
-                timerDisplay.text = "Day " + currentDay;
+                if (levelData.daysToSurvive > 0 && levelData.enemiesToDefeat > currentDay)
+                {
+                    objectiveDisplay.text = "Day " + currentDay + "/" + levelData.daysToSurvive;
+                }
+                else if (levelData.enemiesToDefeat > 0 && levelData.enemiesToDefeat > enemiesDefeated)
+                {
+                    objectiveDisplay.text = enemiesDefeated + "/" + levelData.enemiesToDefeat + " Enemies Defeated";
+                }
+                else 
+                {
+                    objectiveDisplay.text = "Find the exit";
+                }
                 dashText.text = player.currentDashes.ToString();
                 xpBar.GetComponent<RectTransform>().anchorMax = new Vector2(player.GetPercentToNextLevel(), xpBar.GetComponent<RectTransform>().anchorMax.y);
                 dashTimer.GetComponent<RectTransform>().anchorMax = new Vector2(1 - (player.dashCooldownTimer / player.DashCooldown), dashTimer.GetComponent<RectTransform>().anchorMax.y);

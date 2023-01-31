@@ -15,7 +15,8 @@ public class GameManager : MonoBehaviour
         Normal,
         Paused,
         UpgradeMenu,
-        GameOver
+        GameOver,
+        LevelComplete
     }
 
     [SerializeField]
@@ -34,7 +35,7 @@ public class GameManager : MonoBehaviour
     private Image xpBar, hpBar, dashTimer, dayBar1, dayBar2, dayBar3, cursor;
 
     [SerializeField]
-    private CanvasRenderer playerStatsPanel, pausedPanel, gamePanel, upgradePanel, gameOverPanel, effectsPanel, debugPanel;
+    private CanvasRenderer playerStatsPanel, pausedPanel, gamePanel, upgradePanel, gameOverPanel, effectsPanel, debugPanel, levelCompletedPanel;
 
     [SerializeField]
     private InputActionReference displayStats, pauseGame, giveXP, playerDash, godMode, levelUpButton;
@@ -63,6 +64,7 @@ public class GameManager : MonoBehaviour
     private List<string> seasonsOrdered = new List<string>();
     public List<WeaponIcon> weaponIcons = new List<WeaponIcon>();
     public int enemiesDefeated = 0;
+    private bool levelEnded = false;
 
     //Saved data
     [SerializeField]
@@ -82,7 +84,7 @@ public class GameManager : MonoBehaviour
 
     public float OffsetTime
     {
-        get { return time + (levelData.startHour * (dayLength/24)); }
+        get { return time + (levelData.startHour * (dayLength / 24)); }
     }
 
     public GameState State
@@ -177,6 +179,7 @@ public class GameManager : MonoBehaviour
         gamePanel.gameObject.SetActive(true);
         gameOverPanel.gameObject.SetActive(false);
         debugPanel.gameObject.SetActive(false);
+        levelCompletedPanel.gameObject.SetActive(false);
     }
 
     void Update()
@@ -197,7 +200,7 @@ public class GameManager : MonoBehaviour
                 UpdateDate();
 
                 // Updating displays
-                if (levelData.daysToSurvive > 0 && levelData.enemiesToDefeat > currentDay)
+                if (levelData.daysToSurvive > 0 && levelData.daysToSurvive > currentDay)
                 {
                     objectiveDisplay.text = "Day " + currentDay + "/" + levelData.daysToSurvive;
                 }
@@ -205,7 +208,7 @@ public class GameManager : MonoBehaviour
                 {
                     objectiveDisplay.text = enemiesDefeated + "/" + levelData.enemiesToDefeat + " Enemies Defeated";
                 }
-                else 
+                else
                 {
                     objectiveDisplay.text = "Find the exit";
                 }
@@ -323,6 +326,14 @@ public class GameManager : MonoBehaviour
                         upgradeManager.ShowOptions(upgradesToGive, check);
                     }
                 }
+                break;
+            case GameState.LevelComplete:
+                pausedPanel.gameObject.SetActive(false);
+                upgradePanel.gameObject.SetActive(false);
+                gamePanel.gameObject.SetActive(false);
+                gameOverPanel.gameObject.SetActive(false);
+                debugPanel.gameObject.SetActive(false);
+                levelCompletedPanel.gameObject.SetActive(true);
                 break;
         }
     }
@@ -507,5 +518,46 @@ public class GameManager : MonoBehaviour
     public void GainGold(int amount)
     {
         goldTotal += amount;
+    }
+
+    // Called to end the level
+    public void EndLevel()
+    {
+        if (!levelEnded)
+        {
+            if (levelData.daysToSurvive > 0 || levelData.enemiesToDefeat > 0)
+            {
+                if (levelData.enemiesToDefeat <= enemiesDefeated && levelData.enemiesToDefeat > 0)
+                {
+                    Debug.Log("End Level - Defeated Enemies");
+                    levelEnded = true;
+                    DoLevelEnd();
+                }
+
+                if (levelData.daysToSurvive <= currentDay && levelData.daysToSurvive > 0)
+                {
+                    Debug.Log("End Level - Survived");
+                    levelEnded = true;
+                    DoLevelEnd();
+                }
+            }
+            else
+            {
+                Debug.Log("End Level - Found Exit");
+                levelEnded = true;
+                DoLevelEnd();
+            }
+        }
+    }
+
+    private void DoLevelEnd()
+    {
+        state = GameState.LevelComplete;
+        //EnemyManager.instance.KillAllAndStopSpawns();
+    }
+
+    public void ToMap()
+    {
+        if (session != null) { }
     }
 }

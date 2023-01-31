@@ -243,4 +243,14 @@ public class EnemyManager : MonoBehaviour
             p.pool.Release(p);
         }
     }
+
+    public void KillAllAndStopSpawns()
+    {
+        foreach (Enemy e in allEnemies)
+        {
+            DamageInfo info = new DamageInfo();
+            info.damage = e.MaxHp * 10;
+            e.TakeDamage(info);
+        }
+    }
 }

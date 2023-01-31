@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd1a16d25fa8cd04b89ff49a26d1ae31, type: 3}
   m_Name: TestPool
   m_EditorClassIdentifier: 
-  levels: []
+  levels:
+  - {fileID: 11400000, guid: 2af624da29f143742a95ed0f3bcf1a7a, type: 2}

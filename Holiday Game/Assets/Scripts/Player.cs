@@ -23,6 +23,9 @@ public class Player : StatsComponent
     private AudioSource hitEffect;
     private List<StatsComponent> hitBy = new List<StatsComponent>();
     private List<float> invincibilityTimes = new List<float>();
+    private float globalInvicibilityTime = 0.1f;
+    private float globalInvicibilityTimer = 0f;
+    private bool hasGlobalInvicibility = false;
 
     public int rerolls = 3;
 
@@ -156,6 +159,15 @@ public class Player : StatsComponent
     void UpdateiFrames()
     {
         float delta = Time.deltaTime;
+        if (hasGlobalInvicibility)
+        {
+            globalInvicibilityTimer += delta;
+            if (globalInvicibilityTimer >= globalInvicibilityTime)
+            {
+                globalInvicibilityTimer = 0;
+                hasGlobalInvicibility = false;
+            }
+        }
         for (int i = hitBy.Count - 1; i >= 0; i--)
         {
 
@@ -174,9 +186,11 @@ public class Player : StatsComponent
     /// <param name="damage"></param>
     public override void TakeDamage(DamageInfo info)
     {
-        if (!hitBy.Contains(info.attacker) && !isInvincible && !godMode)
+        if (!hitBy.Contains(info.attacker) && !isInvincible && !godMode && !hasGlobalInvicibility)
         {
             // take damage & become invincible
+            hasGlobalInvicibility = true;
+            globalInvicibilityTimer = 0f;
             hitBy.Add(info.attacker);
             invincibilityTimes.Add(iFrames);
             //hitEffect.Play();

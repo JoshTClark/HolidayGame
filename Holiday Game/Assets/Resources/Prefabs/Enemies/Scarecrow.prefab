@@ -103,8 +103,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.33, y: 2}
+  m_Offset: {x: -0.1, y: -0.1}
+  m_Size: {x: 0.6, y: 1.4}
   m_Direction: 0
 --- !u!50 &2384408725413230654
 Rigidbody2D:
@@ -413,7 +413,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 4
+  m_PointLightOuterRadius: 0.75
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1

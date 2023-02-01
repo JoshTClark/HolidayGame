@@ -29,6 +29,7 @@ public abstract class Enemy : StatsComponent
     // SoundEffects
     [SerializeField]
     protected AudioSource onHitSound;
+    
 
     /// <summary>
     /// Moves the Enemy towards the player

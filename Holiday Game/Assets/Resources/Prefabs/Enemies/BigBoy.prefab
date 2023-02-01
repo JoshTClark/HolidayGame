@@ -141,7 +141,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8434561644210671787}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 36.84524, y: 22.36428, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -190,7 +190,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b7202f45af1d33941adf501c11475928, type: 3}
+  m_Sprite: {fileID: 2035375623, guid: 2a7844655e825e247ad430c35e3804ce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -223,10 +223,6 @@ MonoBehaviour:
   baseCritChance: 0
   baseCritDamage: 0
   knockbackMult: 0.5
-  levelScaling: 1
-  hpLevelUp: 10
-  damageLevelUp: 5
-  speedLevelUp: 0.05
   currentHP: 0
   xpAmount: 0
   hpAdd: 0
@@ -253,6 +249,9 @@ MonoBehaviour:
   critChanceMult: 0
   critDamageMult: 0
   coolDownMult: 0
+  hpMultConst: 1
+  damageMultConst: 1
+  speedMultConst: 1
   isDead: 0
   weapons: []
   inventory: []
@@ -260,6 +259,7 @@ MonoBehaviour:
   player: {fileID: 0}
   index: 3
   isBoss: 0
+  deathEffect: {fileID: 7639369088873833346, guid: 7a4028f9e61aa2e4e95ee4624a72463e, type: 3}
   drops:
   - index: 1
     chance: 1
@@ -291,7 +291,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.9333334, y: 2.9333334}
+    oldSize: {x: 3.52, y: 3.52}
     newSize: {x: 3.52, y: 3.52}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

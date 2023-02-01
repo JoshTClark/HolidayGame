@@ -20,7 +20,7 @@ public abstract class OrbitalBase : MonoBehaviour
 
     protected Enemy GetClosestEnemy()
     {
-        List<Enemy> enemies = EnemyManager.instance.CurrentEnemies;
+        List<Enemy> enemies = EnemyManager.instance.AllEnemies;
         if (enemies.Count > 0)
         {
             Enemy closest = null;

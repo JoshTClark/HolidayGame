@@ -21,7 +21,7 @@ public abstract class Weapon : MonoBehaviour
     public bool canFire = false;
 
     [SerializeField]
-    private float baseDamageMultiplier = 1, baseSizeMultiplier = 1, attackSpeedMultiplier = 1, pierce = 1;
+    private float baseDamageMultiplier = 1, baseSizeMultiplier = 1, attackSpeedMultiplier = 1, pierce = 0;
 
     [SerializeField]
     private List<WeaponStat> extraStats = new List<WeaponStat>();
@@ -83,7 +83,7 @@ public abstract class Weapon : MonoBehaviour
     /// <returns>The closest enemy to the player or null if none are within the player's range</returns>
     protected Enemy GetClosestEnemy()
     {
-        List<Enemy> enemies = EnemyManager.instance.CurrentEnemies;
+        List<Enemy> enemies = EnemyManager.instance.AllEnemies;
         if (enemies.Count > 0)
         {
             Enemy closest = null;
@@ -107,7 +107,7 @@ public abstract class Weapon : MonoBehaviour
 
     protected List<Enemy> GetClosestEnemies(int num)
     {
-        List<Enemy> enemies = EnemyManager.instance.CurrentEnemies;
+        List<Enemy> enemies = EnemyManager.instance.AllEnemies;
         List<Enemy> targetList = new List<Enemy>();
 
         float closestDist = enemies[0].PlayerDistance();
@@ -155,10 +155,10 @@ public abstract class Weapon : MonoBehaviour
 
     protected Enemy GetRandomEnemy()
     {
-        List<Enemy> enemies = EnemyManager.instance.CurrentEnemies;
+        List<Enemy> enemies = EnemyManager.instance.AllEnemies;
         if (enemies.Count > 0)
         {
-            int rngEnemy = Random.Range(0, EnemyManager.instance.CurrentEnemies.Count - 1);
+            int rngEnemy = Random.Range(0, EnemyManager.instance.AllEnemies.Count - 1);
             Enemy closest = enemies[rngEnemy];
             return closest;
         }
@@ -170,7 +170,7 @@ public abstract class Weapon : MonoBehaviour
 
     protected Enemy GetRandomEnemyInRange(float range)
     {
-        List<Enemy> enemies = EnemyManager.instance.CurrentEnemies;
+        List<Enemy> enemies = EnemyManager.instance.AllEnemies;
         List<Enemy> filtered = new List<Enemy>();
         if (enemies.Count > 0)
         {

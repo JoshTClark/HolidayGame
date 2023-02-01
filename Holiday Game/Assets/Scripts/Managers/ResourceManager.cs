@@ -23,7 +23,8 @@ public class ResourceManager
         Explosion,
         CupidArrow,
         CandyCorn,
-        IceShard
+        IceShard,
+        SwordSlash
     }
     public enum FollowingEffectIndex
     {
@@ -36,7 +37,7 @@ public class ResourceManager
         XP1,
         XP2,
         HealthDrop1,
-        BossDrop, 
+        BossDrop,
         Coin
     }
     public enum WeaponIndex
@@ -49,7 +50,8 @@ public class ResourceManager
         CupidArrow,
         BossAttack,
         BossAttack2,
-        CandyCornRifle
+        CandyCornRifle,
+        SwordSlash
     }
     public enum UpgradeIndex
     {
@@ -113,7 +115,8 @@ public class ResourceManager
         LowHPDamage,
         CupidArrowHealth,
         SharpShadow,
-        ExtraDash
+        ExtraDash,
+        SwordSlashWeaponUpgrade
     }
 
     public enum UpgradePoolIndex
@@ -126,6 +129,11 @@ public class ResourceManager
         CupidArrow,
         CandyCorn,
         SpecialUpgrades
+    }
+
+    public enum LevelPoolIndex
+    {
+        Test
     }
 
     public enum BuffIndex
@@ -143,15 +151,15 @@ public class ResourceManager
     public static List<ProjectileBase> projectilePrefabs = new List<ProjectileBase>();
     public static List<Weapon> weaponPrefabs = new List<Weapon>();
     public static List<Upgrade> upgradeDefinitions = new List<Upgrade>();
-    public static List<SpawnPhase> phaseDefinitions = new List<SpawnPhase>();
-    public static List<BurstSpawn> spawnDefinitions = new List<BurstSpawn>();
     public static List<DropBase> pickupPrefabs = new List<DropBase>();
     public static List<UpgradePool> upgradePools = new List<UpgradePool>();
     public static List<BuffDef> buffs = new List<BuffDef>();
     public static List<FollowingEffect> effects = new List<FollowingEffect>();
     public static List<OrbitalParent> orbitals = new List<OrbitalParent>();
     public static Player playerPrefab;
-    public static DashParticle playerDashEffect;
+    public static TrailParticle playerDashEffect;
+    public static List<LevelData> levelDatas = new List<LevelData>();
+    public static List<LevelPool> levelPools = new List<LevelPool>();
 
     public static bool isLoaded = false;
 
@@ -160,18 +168,17 @@ public class ResourceManager
     /// </summary>
     public static void Init()
     {
-        LoadEnemies();
         LoadProjectiles();
+        LoadEnemies();
         LoadWeapons();
         LoadUpgrades();
-        LoadPhases();
-        LoadSpawns();
         LoadPickups();
         LoadUpgradePools();
         LoadBuffs();
         LoadEffects();
         LoadPlayableCharacters();
         LoadOrbitals();
+        LoadLevels();
         isLoaded = true;
     }
 
@@ -230,27 +237,10 @@ public class ResourceManager
         }
     }
 
-    public static void LoadPhases()
-    {
-        SpawnPhase[] arr = Resources.LoadAll<SpawnPhase>("");
-        foreach (SpawnPhase i in arr)
-        {
-            phaseDefinitions.Add(i);
-        }
-    }
-    public static void LoadSpawns()
-    {
-        BurstSpawn[] arr = Resources.LoadAll<BurstSpawn>("");
-        foreach (BurstSpawn i in arr)
-        {
-            spawnDefinitions.Add(i);
-        }
-    }
-
     public static void LoadPickups()
     {
         DropBase[] arr = Resources.LoadAll<DropBase>("");
-        
+
         foreach (DropBase i in arr)
         {
             pickupPrefabs.Add(i);
@@ -263,6 +253,22 @@ public class ResourceManager
         foreach (UpgradePool i in arr)
         {
             upgradePools.Add(i);
+        }
+    }
+
+    public static void LoadLevels()
+    {
+        LevelData[] arr = Resources.LoadAll<LevelData>("");
+        foreach (LevelData i in arr)
+        {
+            levelDatas.Add(i);
+        }
+
+        LevelPool[] pools = Resources.LoadAll<LevelPool>("");
+
+        foreach (LevelPool i in pools)
+        {
+            levelPools.Add(i);
         }
     }
 
@@ -280,7 +286,7 @@ public class ResourceManager
         Player[] arr1 = Resources.LoadAll<Player>("");
         playerPrefab = arr1[0];
 
-        DashParticle[] arr2 = Resources.LoadAll<DashParticle>("");
+        TrailParticle[] arr2 = Resources.LoadAll<TrailParticle>("");
         playerDashEffect = arr2[0];
     }
 
@@ -434,5 +440,29 @@ public class ResourceManager
         }
 
         return drop;
+    }
+
+    public static Enemy GetEnemyFromIndex(EnemyIndex index)
+    {
+        foreach (Enemy i in enemyPrefabs)
+        {
+            if (i.index == index)
+            {
+                return i;
+            }
+        }
+        return null;
+    }
+
+    public static LevelData GetLevelFromSceneName(string scene)
+    {
+        foreach (LevelData data in levelDatas)
+        {
+            if (data.sceneName == scene) 
+            {
+                return data;
+            }
+        }
+        return null;
     }
 }

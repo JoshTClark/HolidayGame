@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public abstract class Enemy : StatsComponent
 {
     public Player player;
-
+    public ObjectPool<Enemy> pool;
     public ResourceManager.EnemyIndex index;
     public bool isBoss;
+    public EnemyDeathEffect deathEffect;
 
     protected List<Vector2> movements = new List<Vector2>();
     protected List<Vector2> knockback = new List<Vector2>();
@@ -142,6 +144,11 @@ public abstract class Enemy : StatsComponent
             onHitSound.Stop();
         }
 
+        if (dmgInfo.attacker && dmgInfo.attacker.GetType() == typeof(Player))
+        {
+            GameManager.instance.enemiesDefeated++;
+        }
+
         foreach (DropInfo info in drops)
         {
             Vector2 dropPosition = new Vector2(transform.position.x + Random.Range(-sr.sprite.rect.size.x / sr.sprite.pixelsPerUnit, sr.sprite.rect.size.x / sr.sprite.pixelsPerUnit) * transform.localScale.x * (2f / 3f), transform.position.y + Random.Range(-sr.sprite.rect.size.y / sr.sprite.pixelsPerUnit, sr.sprite.rect.size.y / sr.sprite.pixelsPerUnit) * transform.localScale.y * (2f / 3f));
@@ -160,7 +167,12 @@ public abstract class Enemy : StatsComponent
             }
         }
 
-        
+        if (deathEffect)
+        {
+            EnemyDeathEffect gameObject = GameObject.Instantiate<EnemyDeathEffect>(deathEffect);
+            gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y, 0f);
+            gameObject.GetComponent<SpriteRenderer>().sprite = this.gameObject.GetComponent<SpriteRenderer>().sprite;
+        }
     }
 
     virtual protected void OnTriggerStay2D(Collider2D collision)
@@ -210,7 +222,7 @@ public abstract class Enemy : StatsComponent
         Vector2 currentVelocity = Vector2.zero;
 
         // Loop through all enemies
-        foreach (Enemy e in EnemyManager.instance.CurrentEnemies)
+        foreach (Enemy e in EnemyManager.instance.AllEnemies)
         {
             currentVelocity = Vector2.zero;
             float sqrDistance = Vector2.SqrMagnitude(transform.position - e.transform.position);
@@ -239,6 +251,17 @@ public abstract class Enemy : StatsComponent
             // Play Audio
             onHitSound.Play();
         }
+    }
+    public virtual void Clean(ObjectPool<Enemy> pool)
+    {
+        movements.Clear();
+        knockback.Clear();
+        currentHP = MaxHp;
+        player = null;
+        inventory.Clear();
+        this.pool = pool;
+        this.gameObject.SetActive(true);
+        isDead = false;
     }
 
     [System.Serializable]

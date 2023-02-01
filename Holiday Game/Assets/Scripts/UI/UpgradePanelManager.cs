@@ -18,6 +18,8 @@ public class UpgradePanelManager : MonoBehaviour
     private int levels = 1;
     public CanvasRenderer infoPanel, statsPanel;
 
+    public int tempWeapons = 0;
+
     private void Start()
     {
         replaceWeaponButton.gameObject.SetActive(false);
@@ -32,7 +34,7 @@ public class UpgradePanelManager : MonoBehaviour
     /// <param name="upgrade"></param>
     public void Select(ResourceManager.UpgradeIndex upgrade)
     {
-        if (ResourceManager.GetUpgrade(upgrade).IsWeapon && player.weapons.Count >= GameManager.instance.weaponIcons.Count)
+        if (ResourceManager.GetUpgrade(upgrade).IsWeapon && player.weapons.Count + tempWeapons >= GameManager.instance.weaponIcons.Count)
         {
             replaceWeaponButton.gameObject.SetActive(false);
             rerollButton.gameObject.SetActive(false);
@@ -82,6 +84,10 @@ public class UpgradePanelManager : MonoBehaviour
         }
         else
         {
+            if (ResourceManager.GetUpgrade(upgrade).IsWeapon)
+            {
+                tempWeapons++;
+            }
             player.AddUpgrade(upgrade);
             selected = true;
         }

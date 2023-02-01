@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.TextCore.Text;
 using UnityEngine.UIElements;
 using static SessionMap;
@@ -38,9 +39,12 @@ public class MapManager : MonoBehaviour
     {
         if (session == null)
         {
+            Debug.Log("No session found");
+            ResourceManager.Init();
             session = new SessionManager();
             session.GenerateMap(10, 9, 10, 4);
         }
+
         SessionMap.MapNode[][] nodes = session.map.nodeArr;
         nodeArr = new GameObject[session.map.nodeArr.Length][];
         for (int y = 0; y < nodes.Length; y++)
@@ -56,15 +60,18 @@ public class MapManager : MonoBehaviour
         mouseClick.Enable();
         mouseClick.performed += (InputAction.CallbackContext callback) =>
         {
-            Ray ray = mainCam.ScreenPointToRay(Mouse.current.position.ReadValue());
-            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
-            if (hit)
+            if (mainCam)
             {
-                //Debug.Log("Mouse selection to new map point");
-                if (selectedNode != hit.collider.gameObject)
+                Ray ray = mainCam.ScreenPointToRay(Mouse.current.position.ReadValue());
+                RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+                if (hit)
                 {
-                    selectedNode = hit.collider.gameObject;
-                    distanceToTarget = Vector2.Distance(mainCam.transform.position, selectedNode.transform.position);
+                    //Debug.Log("Mouse selection to new map point");
+                    if (selectedNode != hit.collider.gameObject)
+                    {
+                        selectedNode = hit.collider.gameObject;
+                        distanceToTarget = Vector2.Distance(mainCam.transform.position, selectedNode.transform.position);
+                    }
                 }
             }
         };
@@ -113,6 +120,7 @@ public class MapManager : MonoBehaviour
         {
             Vector3 pos1 = NodeToCoords(node);
             GameObject point = Instantiate<GameObject>(mapPoint, pos1, Quaternion.identity);
+            point.GetComponent<MapPoint>().level = node.levelData;
             nodeArr[node.level][node.branch] = point;
             foreach (SessionMap.MapNode n in node.connections)
             {
@@ -130,6 +138,13 @@ public class MapManager : MonoBehaviour
         pos.y = node.level * 2;
         pos.z = 0;
         return pos;
+    }
+
+    public void StartLevel() 
+    {
+        session.currentLevel = selectedNode.GetComponent<MapPoint>().level;
+        GameManager.session = session;
+        SceneManager.LoadScene(selectedNode.GetComponent<MapPoint>().level.sceneName);
     }
 
     private void OnDrawGizmos()

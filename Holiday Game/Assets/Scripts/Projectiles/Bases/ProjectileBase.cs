@@ -15,7 +15,7 @@ public abstract class ProjectileBase : MonoBehaviour
     private float damageMultiplier = 1f;
     private float knockbackMultiplier = 1f;
     private float lifetimeMultiplier = 1f;
-    private float pierce = 1f;
+    private float pierce = 0f;
 
     [SerializeField]
     public Team projectileTeam;
@@ -40,6 +40,8 @@ public abstract class ProjectileBase : MonoBehaviour
 
     public ObjectPool<ProjectileBase> pool;
 
+    private bool destroy = false;
+
 
     // Decides what the projectile can damage
     public enum Team
@@ -61,7 +63,7 @@ public abstract class ProjectileBase : MonoBehaviour
             timeAlive += delta;
             if (timeAlive >= Lifetime)
             {
-                DestroyProjectile();
+                destroy = true;
             }
 
             // Update stuff
@@ -69,6 +71,11 @@ public abstract class ProjectileBase : MonoBehaviour
 
             // Moving the projectile
             Move();
+
+            if (destroy == true)
+            {
+                DestroyProjectile();
+            }
         }
     }
 
@@ -102,7 +109,7 @@ public abstract class ProjectileBase : MonoBehaviour
                     {
                         if (((BombProjectileBase)this).explodeOnContact)
                         {
-                            DestroyProjectile();
+                            destroy = true;
                         }
                     }
                     this.damageInfo.damagePos = this.gameObject.transform.position;
@@ -116,7 +123,7 @@ public abstract class ProjectileBase : MonoBehaviour
                     }
                     else
                     {
-                        DestroyProjectile();
+                        destroy = true;
                     }
                 }
             }
@@ -142,7 +149,7 @@ public abstract class ProjectileBase : MonoBehaviour
                 if (other.gameObject.GetComponent<IceShield>())
                 {
                     other.gameObject.GetComponent<IceShield>().Shoot(damageInfo);
-                    DestroyProjectile();
+                    destroy = true;
                 }
             }
         }
@@ -150,7 +157,7 @@ public abstract class ProjectileBase : MonoBehaviour
         // Destroys the projectile if it hits a wall
         if (other.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
-            DestroyProjectile();
+            destroy = true;
             OnCollision(other);
         }
     }
@@ -190,6 +197,7 @@ public abstract class ProjectileBase : MonoBehaviour
         damageMultiplier = 1f;
         knockbackMultiplier = 1f;
         lifetimeMultiplier = 1f;
+        destroy = false;
         this.pool = pool;
         OnClean();
     }
@@ -200,7 +208,7 @@ public abstract class ProjectileBase : MonoBehaviour
     /// <returns>The closest enemy to the player or null if none are within the player's range</returns>
     protected Enemy GetClosestEnemy()
     {
-        List<Enemy> enemies = EnemyManager.instance.CurrentEnemies;
+        List<Enemy> enemies = EnemyManager.instance.AllEnemies;
         if (enemies.Count > 0)
         {
             Enemy closest = null;

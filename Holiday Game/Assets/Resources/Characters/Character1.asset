@@ -12,16 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee4d102efd0d48543a3cb4e1d2e7df3d, type: 3}
   m_Name: Character1
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: cbc12454666d1e14497014fc57b6372d, type: 3}
+  prefab: {fileID: 1069143796030833455, guid: a487fa23d2b6b8f429579c3891e1c79b, type: 3}
   inventory:
   - {fileID: 11400000, guid: 8a10a9c70a553bc42b69bb2b4e339431, type: 2}
-  stats:
-    baseMaxHP: 50
-    baseSpeed: 5
-    baseDamage: 5
-    baseAttackSpeed: 1
-    baseArmor: 0
-    baseRegen: 0
-    baseRegenInterval: 5
-    baseCritChance: 0.01
-    baseCritDamage: 2

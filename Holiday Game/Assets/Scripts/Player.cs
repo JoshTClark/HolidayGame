@@ -23,6 +23,9 @@ public class Player : StatsComponent
     private AudioSource hitEffect;
     private List<StatsComponent> hitBy = new List<StatsComponent>();
     private List<float> invincibilityTimes = new List<float>();
+    private float globalInvicibilityTime = 0.1f;
+    private float globalInvicibilityTimer = 0f;
+    private bool hasGlobalInvicibility = false;
 
     public int rerolls = 3;
 
@@ -37,8 +40,8 @@ public class Player : StatsComponent
     private Vector2 dashDirection;
     private int extraDashes = 0;
     private float dashCooldownMultiplier = 1f;
-    private float particleTimer = 0.0f;
-    private float particleDelay = 0.02f;
+    public int maxWeapons = 4;
+    public int waitingForLevels = 0;
 
     public bool godMode = false;
 
@@ -47,9 +50,6 @@ public class Player : StatsComponent
 
     public bool IsInvincible { get { return isInvincible; } }
     public float PickupRange { get { return pickupRange * pickupRangeIncrease; } }
-
-    private List<DashParticle> dashParticles = new List<DashParticle>();
-    private ObjectPool<DashParticle> dashParticlePool = new ObjectPool<DashParticle>(createFunc: () => Instantiate<DashParticle>(ResourceManager.playerDashEffect), actionOnGet: (obj) => obj.gameObject.SetActive(true), actionOnRelease: (obj) => obj.gameObject.SetActive(false), actionOnDestroy: (obj) => Destroy(obj.gameObject), collectionCheck: false, defaultCapacity: 10);
 
     public override void OnStart()
     {
@@ -93,29 +93,19 @@ public class Player : StatsComponent
             isMoving = true;
             isInvincible = true;
             dashTimer += delta;
-            particleTimer += delta;
             GetComponent<Rigidbody2D>().velocity = dashDirection * dashSpeed;
-
-            if (particleTimer >= particleDelay)
-            {
-                particleTimer = 0.0f;
-                DashParticle p = dashParticlePool.Get();
-                p.SetSprite(GetComponent<SpriteRenderer>().sprite, GetComponent<SpriteRenderer>().flipX);
-                p.transform.position = transform.position;
-                dashParticles.Add(p);
-            }
-
+            GetComponent<TrailEffect>().particleDelay = 0.01f;
             if (dashTimer >= dashLength)
             {
                 isDash = false;
                 dashTimer = 0.0f;
-                particleTimer = 0.0f;
                 isInvincible = false;
             }
         }
         else
         {
             // Basic movement
+            GetComponent<TrailEffect>().particleDelay = 0.15f;
             Vector2 movementInput = movement.action.ReadValue<Vector2>();
             movementInput = movementInput * Speed;
             if (movementInput.x == 0 && movementInput.y == 0)
@@ -161,16 +151,6 @@ public class Player : StatsComponent
         {
             pickupRangeIncrease += 0.15f * GetUpgrade(ResourceManager.UpgradeIndex.XP3).CurrentLevel;
         }
-
-        for (int i = dashParticles.Count - 1; i >= 0; i--)
-        {
-            DashParticle p = dashParticles[i];
-            if (p.finished)
-            {
-                dashParticlePool.Release(p);
-                dashParticles.RemoveAt(i);
-            }
-        }
     }
 
     /// <summary>
@@ -179,6 +159,15 @@ public class Player : StatsComponent
     void UpdateiFrames()
     {
         float delta = Time.deltaTime;
+        if (hasGlobalInvicibility)
+        {
+            globalInvicibilityTimer += delta;
+            if (globalInvicibilityTimer >= globalInvicibilityTime)
+            {
+                globalInvicibilityTimer = 0;
+                hasGlobalInvicibility = false;
+            }
+        }
         for (int i = hitBy.Count - 1; i >= 0; i--)
         {
 
@@ -197,9 +186,11 @@ public class Player : StatsComponent
     /// <param name="damage"></param>
     public override void TakeDamage(DamageInfo info)
     {
-        if (!hitBy.Contains(info.attacker) && !isInvincible && !godMode)
+        if (!hitBy.Contains(info.attacker) && !isInvincible && !godMode && !hasGlobalInvicibility)
         {
             // take damage & become invincible
+            hasGlobalInvicibility = true;
+            globalInvicibilityTimer = 0f;
             hitBy.Add(info.attacker);
             invincibilityTimes.Add(iFrames);
             //hitEffect.Play();

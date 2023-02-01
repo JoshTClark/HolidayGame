@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1069143796030833449}
   - component: {fileID: 9029963937983417022}
   - component: {fileID: 9036659781984168250}
+  - component: {fileID: 5793926723103721079}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -85,15 +86,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: cbc12454666d1e14497014fc57b6372d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.56, y: 2.4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
 --- !u!114 &1069143796030833448
@@ -148,10 +149,6 @@ MonoBehaviour:
   baseCritChance: 0.01
   baseCritDamage: 2
   knockbackMult: 0
-  levelScaling: 0
-  hpLevelUp: 0
-  damageLevelUp: 0
-  speedLevelUp: 0
   currentHP: 0
   xpAmount: 1
   hpAdd: 0
@@ -168,38 +165,20 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 1.4583758
-      outSlope: 1.4583758
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.0030155694
-    - serializedVersion: 3
-      time: 10
-      value: 42.992554
-      inSlope: 12.0863
-      outSlope: 12.0863
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 25
-      value: 341.0927
-      inSlope: 16.730629
-      outSlope: 16.730629
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.07476644
+      outWeight: 0
     - serializedVersion: 3
       time: 100
-      value: 5000
-      inSlope: 108.727585
-      outSlope: 108.727585
+      value: 10000
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.24986157
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -214,6 +193,9 @@ MonoBehaviour:
   critChanceMult: 0
   critDamageMult: 0
   coolDownMult: 0
+  hpMultConst: 1
+  damageMultConst: 1
+  speedMultConst: 1
   isDead: 0
   weapons: []
   inventory: []
@@ -226,6 +208,9 @@ MonoBehaviour:
   rerolls: 3
   dashCooldownTimer: 0
   currentDashes: 1
+  maxWeapons: 4
+  waitingForLevels: 0
+  godMode: 0
 --- !u!61 &1069143796030833450
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -244,7 +229,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.3}
     oldSize: {x: 2.56, y: 2.4}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 2.56, y: 2.4}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -304,6 +289,20 @@ SortingGroup:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &5793926723103721079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1069143796030833452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57634d22ee6af8d4db9a71e504699a99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleDelay: 0.15
+  createParticles: 1
 --- !u!1 &6916581085816787048
 GameObject:
   m_ObjectHideFlags: 0

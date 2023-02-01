@@ -32,6 +32,7 @@ public abstract class Enemy : StatsComponent
     [SerializeField]
     protected AudioSource onHitSound;
     
+    protected Vector2 Velocity { get { return GetComponent<Rigidbody2D>().velocity; } set { GetComponent<Rigidbody2D>().velocity = value; } }
 
     /// <summary>
     /// Moves the Enemy towards the player

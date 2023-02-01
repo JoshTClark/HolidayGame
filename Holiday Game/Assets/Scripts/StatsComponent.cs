@@ -865,4 +865,15 @@ public abstract class StatsComponent : MonoBehaviour
             p.owner = this;
         }
     }
+
+
+    /// <summary>
+    /// Used for Predictive behavior, tells where the object should be in the future using current velocity
+    /// </summary>
+    /// <param name="seconds"> How many seconds into the future your looking</param>
+    /// <returns>The objects future position</returns>
+    public Vector2 CalcFuturePosition(float seconds)
+    {
+        return (Vector2)transform.position + (GetComponent<Rigidbody2D>().velocity * seconds);
+    }
 }

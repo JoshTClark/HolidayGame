@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BatFly
+  m_Name: ZombieWalkAnim
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,14 +20,14 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: -1684193958, guid: 880acf92e19439348a60b3ba88861c1c, type: 3}
-    - time: 0.125
-      value: {fileID: 570986574, guid: 880acf92e19439348a60b3ba88861c1c, type: 3}
+      value: {fileID: 2035375623, guid: 2a7844655e825e247ad430c35e3804ce, type: 3}
+    - time: 0.33333334
+      value: {fileID: -1706589936, guid: 2a7844655e825e247ad430c35e3804ce, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
-  m_SampleRate: 8
+  m_SampleRate: 3
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -42,14 +42,14 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: -1684193958, guid: 880acf92e19439348a60b3ba88861c1c, type: 3}
-    - {fileID: 570986574, guid: 880acf92e19439348a60b3ba88861c1c, type: 3}
+    - {fileID: 2035375623, guid: 2a7844655e825e247ad430c35e3804ce, type: 3}
+    - {fileID: -1706589936, guid: 2a7844655e825e247ad430c35e3804ce, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.25
+    m_StopTime: 0.6666667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

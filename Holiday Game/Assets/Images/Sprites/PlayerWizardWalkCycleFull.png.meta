@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9b042fb3d2b0a864c9231ca64bd1d1c7
+guid: 31ea4bd5a566ba241ae7052532e10d6a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -70,7 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -105,43 +105,43 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PlayerTreaterWalkCycleFull_0
+      name: PlayerWizardWalkCycleFull_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 352
-        height: 330
+        width: 160
+        height: 150
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b046e4f08201121459e7e177bc40bcd4
-      internalID: -905843491
+      spriteID: 4368ea0968d57a74cae979c72e824a61
+      internalID: 476859388
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerTreaterWalkCycleFull_1
+      name: PlayerWizardWalkCycleFull_1
       rect:
         serializedVersion: 2
-        x: 352
+        x: 160
         y: 0
-        width: 352
-        height: 330
+        width: 160
+        height: 150
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5db6838c543460742938ebe62b77a11a
-      internalID: -1452743380
+      spriteID: 96364cd37ad600340b290bf94782257d
+      internalID: 834196294
       vertices: []
       indices: 
       edges: []
@@ -157,8 +157,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      PlayerTreaterWalkCycleFull_1: -1452743380
-      PlayerTreaterWalkCycleFull_0: -905843491
+      PlayerWizardWalkCycleFull_1: 834196294
+      PlayerWizardWalkCycleFull_0: 476859388
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

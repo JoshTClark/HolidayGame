@@ -12,22 +12,24 @@ public class SaveSceneManager : MonoBehaviour
     {
         SelectSave,
         Title,
-        CharacterSelect
+        CharacterSelect,
+        UpgradeMenu
     }
 
     [SerializeField]
     private Camera mainCam;
 
     [SerializeField]
-    private CanvasRenderer titleScreenPanel, saveScreenPanel, charSelectPanel;
+    private CanvasRenderer titleScreenPanel, saveScreenPanel, charSelectPanel, upgradePanel;
 
     public SceneState state = SceneState.SelectSave;
 
+    public List<MetaUpgrade> upgrades = new List<MetaUpgrade>();
     private List<PlayableCharacterData> characters = new List<PlayableCharacterData>();
     private int currentSelectedCharacter = 0;
 
     [SerializeField]
-    private TMP_Text charName, charInfo;
+    private TMP_Text charName, charInfo, costLabel, upgradeDesc;
 
     [SerializeField]
     private Image charImage;
@@ -55,19 +57,42 @@ public class SaveSceneManager : MonoBehaviour
                 titleScreenPanel.gameObject.SetActive(false);
                 saveScreenPanel.gameObject.SetActive(true);
                 charSelectPanel.gameObject.SetActive(false);
+                upgradePanel.gameObject.SetActive(false);
                 break;
             case SceneState.Title:
                 titleScreenPanel.gameObject.SetActive(true);
                 saveScreenPanel.gameObject.SetActive(false);
                 charSelectPanel.gameObject.SetActive(false);
+                upgradePanel.gameObject.SetActive(false);
                 break;
             case SceneState.CharacterSelect:
                 titleScreenPanel.gameObject.SetActive(false);
                 saveScreenPanel.gameObject.SetActive(false);
                 charSelectPanel.gameObject.SetActive(true);
+                upgradePanel.gameObject.SetActive(false);
                 charName.text = characters[currentSelectedCharacter].characterName;
                 charInfo.text = characters[currentSelectedCharacter].desc;
                 charImage.sprite = characters[currentSelectedCharacter].characterImage;
+                break;
+            case SceneState.UpgradeMenu:
+                titleScreenPanel.gameObject.SetActive(false);
+                saveScreenPanel.gameObject.SetActive(false);
+                charSelectPanel.gameObject.SetActive(false);
+                upgradePanel.gameObject.SetActive(true);
+                foreach (MetaUpgrade i in upgrades)
+                {
+                    if (i.gameObject.GetComponent<HoverButton>().isHover)
+                    {
+                        upgradeDesc.text = i.upgradeDesc;
+                        costLabel.text = "$" + i.GetCost();
+                        break;
+                    }
+                    if (i.selected)
+                    {
+                        upgradeDesc.text = i.upgradeDesc;
+                        costLabel.text = "$" + i.GetCost();
+                    }
+                }
                 break;
         }
 
@@ -91,6 +116,11 @@ public class SaveSceneManager : MonoBehaviour
     public void ToTitleScreen()
     {
         state = SceneState.Title;
+    }
+
+    public void ToUpgradeScreen()
+    {
+        state = SceneState.UpgradeMenu;
     }
 
     public void DeleteButtonClick(int slot)

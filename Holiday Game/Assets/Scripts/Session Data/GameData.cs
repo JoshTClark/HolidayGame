@@ -6,4 +6,10 @@ using UnityEngine;
 public class GameData
 {
     public float gamePlayTime = 0.0f;
+    public int currency = 0;
+    public int damageLevel = 0;
+    public int speedLevel = 0;
+    public int attackSpeedLevel = 0;
+    public int armorLevel = 0;
+    public int regenLevel = 0;
 }

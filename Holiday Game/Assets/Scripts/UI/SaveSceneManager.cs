@@ -11,7 +11,6 @@ public class SaveSceneManager : MonoBehaviour
     public enum SceneState
     {
         SelectSave,
-        NewSave,
         Title,
         CharacterSelect
     }
@@ -20,19 +19,7 @@ public class SaveSceneManager : MonoBehaviour
     private Camera mainCam;
 
     [SerializeField]
-    private CanvasRenderer saveSelectPanel, newSavePanel, selectSlotPanel, titleScreenPanel, saveScreenPanel, titleScreenSubPanel, charSelectPanel;
-
-    [SerializeField]
-    private Button createSaveButton;
-
-    [SerializeField]
-    private TMP_Text errorText;
-
-    [SerializeField]
-    private TMP_InputField nameField;
-
-    [SerializeField]
-    private SaveSelector selector;
+    private CanvasRenderer titleScreenPanel, saveScreenPanel, charSelectPanel;
 
     public SceneState state = SceneState.SelectSave;
 
@@ -44,23 +31,6 @@ public class SaveSceneManager : MonoBehaviour
         instance = this;
 
         FileInfo[] info = SaveManager.LoadAllSaves();
-        foreach (FileInfo i in info)
-        {
-            selector.AddSlot(SaveManager.LoadFile(i.Name.Replace(i.Extension, "")));
-        }
-
-
-        createSaveButton.onClick.AddListener(() =>
-        {
-            if (nameField.text != "")
-            {
-                FinalizeSave(nameField.text);
-            }
-            else
-            {
-                errorText.gameObject.SetActive(true);
-            }
-        });
     }
 
     private void Update()
@@ -68,32 +38,18 @@ public class SaveSceneManager : MonoBehaviour
         switch (state)
         {
             case SceneState.SelectSave:
-                saveSelectPanel.gameObject.SetActive(true);
-                newSavePanel.gameObject.SetActive(false);
-                errorText.gameObject.SetActive(false);
                 titleScreenPanel.gameObject.SetActive(false);
                 saveScreenPanel.gameObject.SetActive(true);
-                break;
-            case SceneState.NewSave:
-                saveSelectPanel.gameObject.SetActive(false);
-                newSavePanel.gameObject.SetActive(true);
-                titleScreenPanel.gameObject.SetActive(false);
-                saveScreenPanel.gameObject.SetActive(true);
+                charSelectPanel.gameObject.SetActive(false);
                 break;
             case SceneState.Title:
-                saveSelectPanel.gameObject.SetActive(false);
-                newSavePanel.gameObject.SetActive(false);
                 titleScreenPanel.gameObject.SetActive(true);
                 saveScreenPanel.gameObject.SetActive(false);
-                titleScreenSubPanel.gameObject.SetActive(true);
                 charSelectPanel.gameObject.SetActive(false);
                 break;
             case SceneState.CharacterSelect:
-                saveSelectPanel.gameObject.SetActive(false);
-                newSavePanel.gameObject.SetActive(false);
-                titleScreenPanel.gameObject.SetActive(true);
+                titleScreenPanel.gameObject.SetActive(false);
                 saveScreenPanel.gameObject.SetActive(false);
-                titleScreenSubPanel.gameObject.SetActive(false);
                 charSelectPanel.gameObject.SetActive(true);
                 break;
         }
@@ -106,35 +62,22 @@ public class SaveSceneManager : MonoBehaviour
 
     }
 
-    public void CreateNewSave()
+    public void ToTitleScreen(int slot)
     {
-        state = SceneState.NewSave;
-    }
-
-    private void FinalizeSave(string name)
-    {
-        GameData data = new GameData();
-        data.saveName = name;
-        SaveManager.SaveFile(name, data);
-        selector.AddSlot(data);
-        state = SceneState.SelectSave;
-    }
-
-    public void ToTitleScreen()
-    {
-        GameData data = selector.GetSelected();
+        GameData data = SaveManager.LoadFile(slot);
         if (data != null)
         {
             state = SceneState.Title;
         }
     }
 
-    public void DeleteButtonClick()
+    public void DeleteButtonClick(int slot)
     {
-        GameData data = selector.GetSelected();
+        GameData data = SaveManager.LoadFile(slot);
         if (data != null)
         {
-            selector.DeleteSlot();
+            SaveManager.Delete(slot);
+            SaveManager.SaveFile(slot, new GameData());
         }
     }
 

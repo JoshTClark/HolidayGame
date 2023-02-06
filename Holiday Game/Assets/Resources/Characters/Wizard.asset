@@ -10,8 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee4d102efd0d48543a3cb4e1d2e7df3d, type: 3}
-  m_Name: Character1
+  m_Name: Wizard
   m_EditorClassIdentifier: 
   prefab: {fileID: 1069143796030833455, guid: a487fa23d2b6b8f429579c3891e1c79b, type: 3}
+  characterName: <#F4831B>Wizard
+  desc: '* Starts with the <color=#F4831B><size=+8>Candy Corn Rifle</size></color>
+
+    *
+    Starts in <color=#902EBB><size=+8>Fall</size></color>
+
+    * Average damage
+
+    *
+    Average attack speed
+
+    * Average HP'
+  characterImage: {fileID: 476859388, guid: 31ea4bd5a566ba241ae7052532e10d6a, type: 3}
   inventory:
   - {fileID: 11400000, guid: 8a10a9c70a553bc42b69bb2b4e339431, type: 2}

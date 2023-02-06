@@ -5,7 +5,5 @@ using UnityEngine;
 [System.Serializable]
 public class GameData
 {
-    public string saveName;
-    public float longestTimeAlive = 0.0f;
-
+    public float gamePlayTime = 0.0f;
 }

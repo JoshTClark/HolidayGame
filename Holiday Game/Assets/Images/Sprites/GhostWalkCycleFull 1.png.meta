@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: db0a4b2d6e892eb429c15a3a39dd0755
+guid: a17206733a4b12846870f3eb2791ffc2
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -70,7 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -105,13 +105,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: GhostWalkCycleFull_0
+      name: GhostWalkCycleFull 1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 352
-        height: 352
+        width: 160
+        height: 160
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,20 +119,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4ffba65156c1d61458eb28690646ebf5
-      internalID: -901928952
+      spriteID: 1c46909a736852d459f1965dceb45053
+      internalID: 877482007
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GhostWalkCycleFull_1
+      name: GhostWalkCycleFull 1_1
       rect:
         serializedVersion: 2
-        x: 352
+        x: 160
         y: 0
-        width: 352
-        height: 352
+        width: 160
+        height: 160
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,20 +140,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4edbc2e00fd3e5243803e6a39a4d0378
-      internalID: -1327207294
+      spriteID: 3a3949cc65873bd488114e7a66e78983
+      internalID: 1814206391
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GhostWalkCycleFull_2
+      name: GhostWalkCycleFull 1_2
       rect:
         serializedVersion: 2
-        x: 704
+        x: 320
         y: 0
-        width: 352
-        height: 352
+        width: 160
+        height: 160
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,20 +161,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 38c604cac08e2e04d8c2633c87a6ba5e
-      internalID: -966474814
+      spriteID: 75681c27f0709234286e29da33be79db
+      internalID: -969284819
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GhostWalkCycleFull_3
+      name: GhostWalkCycleFull 1_3
       rect:
         serializedVersion: 2
-        x: 1056
+        x: 480
         y: 0
-        width: 352
-        height: 352
+        width: 160
+        height: 160
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,20 +182,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e6075bb4680e1c240b5ad6eb369c8d7b
-      internalID: 1430306435
+      spriteID: fe1590ef62b64b6408f2fb64f509427f
+      internalID: -604535790
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GhostWalkCycleFull_4
+      name: GhostWalkCycleFull 1_4
       rect:
         serializedVersion: 2
-        x: 1408
+        x: 640
         y: 0
-        width: 352
-        height: 352
+        width: 160
+        height: 160
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,20 +203,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d285e079b83dc934aad3b60e1f0dd597
-      internalID: -1229844031
+      spriteID: 3cc09126f0243434f830d81daf3a83da
+      internalID: -1825401503
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GhostWalkCycleFull_5
+      name: GhostWalkCycleFull 1_5
       rect:
         serializedVersion: 2
-        x: 1760
+        x: 800
         y: 0
-        width: 352
-        height: 352
+        width: 160
+        height: 160
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -224,20 +224,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 25f7f8305c3fffd4996a02954ae5451c
-      internalID: -866090922
+      spriteID: 70643ebbcc0a64c438f176139704456a
+      internalID: 1385534065
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GhostWalkCycleFull_6
+      name: GhostWalkCycleFull 1_6
       rect:
         serializedVersion: 2
-        x: 2112
+        x: 960
         y: 0
-        width: 352
-        height: 352
+        width: 160
+        height: 160
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -245,20 +245,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ca5db5d69e847ae4bbf0dcff6f6b368f
-      internalID: -1339546732
+      spriteID: 508816d76bed78241a68475233bc73b8
+      internalID: 1474859793
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GhostWalkCycleFull_7
+      name: GhostWalkCycleFull 1_7
       rect:
         serializedVersion: 2
-        x: 2464
+        x: 1120
         y: 0
-        width: 352
-        height: 352
+        width: 160
+        height: 160
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -266,8 +266,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ec846d9c3d1e7d541970da0eabdc80e8
-      internalID: -437935606
+      spriteID: 14a6fdb5a33d12b4c8bc9d11f84c839a
+      internalID: -1201556268
       vertices: []
       indices: 
       edges: []
@@ -283,14 +283,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      GhostWalkCycleFull_5: -866090922
-      GhostWalkCycleFull_3: 1430306435
-      GhostWalkCycleFull_2: -966474814
-      GhostWalkCycleFull_4: -1229844031
-      GhostWalkCycleFull_0: -901928952
-      GhostWalkCycleFull_6: -1339546732
-      GhostWalkCycleFull_7: -437935606
-      GhostWalkCycleFull_1: -1327207294
+      GhostWalkCycleFull 1_4: -1825401503
+      GhostWalkCycleFull 1_0: 877482007
+      GhostWalkCycleFull 1_6: 1474859793
+      GhostWalkCycleFull 1_1: 1814206391
+      GhostWalkCycleFull 1_2: -969284819
+      GhostWalkCycleFull 1_7: -1201556268
+      GhostWalkCycleFull 1_5: 1385534065
+      GhostWalkCycleFull 1_3: -604535790
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -111,7 +111,12 @@ public class GameManager : MonoBehaviour
         {
             ResourceManager.Init();
             Debug.Log("No session found");
-            player = GameObject.Instantiate<Player>(ResourceManager.playerPrefab);
+            player = GameObject.Instantiate<Player>(ResourceManager.characters[0].prefab);
+            player.inventory = new List<Upgrade>();
+            foreach (Upgrade i in ResourceManager.characters[0].inventory)
+            {
+                player.inventory.Add(i);
+            }
         }
         else
         {

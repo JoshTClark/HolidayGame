@@ -156,10 +156,9 @@ public class ResourceManager
     public static List<BuffDef> buffs = new List<BuffDef>();
     public static List<FollowingEffect> effects = new List<FollowingEffect>();
     public static List<OrbitalParent> orbitals = new List<OrbitalParent>();
-    public static Player playerPrefab;
-    public static TrailParticle playerDashEffect;
     public static List<LevelData> levelDatas = new List<LevelData>();
     public static List<LevelPool> levelPools = new List<LevelPool>();
+    public static List<PlayableCharacterData> characters = new List<PlayableCharacterData>();
 
     public static bool isLoaded = false;
 
@@ -283,11 +282,11 @@ public class ResourceManager
 
     public static void LoadPlayableCharacters()
     {
-        Player[] arr1 = Resources.LoadAll<Player>("");
-        playerPrefab = arr1[0];
-
-        TrailParticle[] arr2 = Resources.LoadAll<TrailParticle>("");
-        playerDashEffect = arr2[0];
+        PlayableCharacterData[] arr = Resources.LoadAll<PlayableCharacterData>("");
+        foreach (PlayableCharacterData i in arr)
+        {
+            characters.Add(i);
+        }
     }
 
     public static Upgrade GetUpgrade(ResourceManager.UpgradeIndex index)

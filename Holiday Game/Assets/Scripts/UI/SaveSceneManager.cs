@@ -23,12 +23,26 @@ public class SaveSceneManager : MonoBehaviour
 
     public SceneState state = SceneState.SelectSave;
 
+    private List<PlayableCharacterData> characters = new List<PlayableCharacterData>();
+    private int currentSelectedCharacter = 0;
+
+    [SerializeField]
+    private TMP_Text charName, charInfo;
+
+    [SerializeField]
+    private Image charImage;
+
     public static SaveSceneManager instance;
 
     private void Start()
     {
         ResourceManager.Init();
         instance = this;
+
+        foreach (PlayableCharacterData i in ResourceManager.characters)
+        {
+            characters.Add(i);
+        }
 
         FileInfo[] info = SaveManager.LoadAllSaves();
     }
@@ -51,6 +65,9 @@ public class SaveSceneManager : MonoBehaviour
                 titleScreenPanel.gameObject.SetActive(false);
                 saveScreenPanel.gameObject.SetActive(false);
                 charSelectPanel.gameObject.SetActive(true);
+                charName.text = characters[currentSelectedCharacter].characterName;
+                charInfo.text = characters[currentSelectedCharacter].desc;
+                charImage.sprite = characters[currentSelectedCharacter].characterImage;
                 break;
         }
 
@@ -71,6 +88,11 @@ public class SaveSceneManager : MonoBehaviour
         }
     }
 
+    public void ToTitleScreen()
+    {
+        state = SceneState.Title;
+    }
+
     public void DeleteButtonClick(int slot)
     {
         GameData data = SaveManager.LoadFile(slot);
@@ -86,12 +108,32 @@ public class SaveSceneManager : MonoBehaviour
         state = SceneState.CharacterSelect;
     }
 
-    public void StartGame(PlayableCharacterData character)
+    public void StartGame()
     {
         SessionManager session = new SessionManager();
-        session.SetChosenCharacter(character);
+        session.SetChosenCharacter(characters[currentSelectedCharacter]);
         session.GenerateMap(10, 9, 10, 4);
         MapManager.session = session;
         SceneManager.LoadSceneAsync("MapScene");
+    }
+
+    public void CharButtonRight()
+    {
+        currentSelectedCharacter++;
+
+        if (currentSelectedCharacter >= characters.Count)
+        {
+            currentSelectedCharacter = 0;
+        }
+    }
+
+    public void CharButtonLeft()
+    {
+        currentSelectedCharacter--;
+
+        if (currentSelectedCharacter < 0)
+        {
+            currentSelectedCharacter = characters.Count - 1;
+        }
     }
 }

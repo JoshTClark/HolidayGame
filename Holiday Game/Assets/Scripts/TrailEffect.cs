@@ -6,7 +6,7 @@ using UnityEngine.Pool;
 public class TrailEffect : MonoBehaviour
 {
     private List<TrailParticle> dashParticles = new List<TrailParticle>();
-    private ObjectPool<TrailParticle> dashParticlePool = new ObjectPool<TrailParticle>(createFunc: () => Instantiate<TrailParticle>(ResourceManager.playerDashEffect), actionOnGet: (obj) => obj.gameObject.SetActive(true), actionOnRelease: (obj) => obj.gameObject.SetActive(false), actionOnDestroy: (obj) => Destroy(obj.gameObject), collectionCheck: false, defaultCapacity: 10);
+    private ObjectPool<TrailParticle> dashParticlePool = new ObjectPool<TrailParticle>(createFunc: () => Instantiate<TrailParticle>(Resources.LoadAll<TrailParticle>("")[0]), actionOnGet: (obj) => obj.gameObject.SetActive(true), actionOnRelease: (obj) => obj.gameObject.SetActive(false), actionOnDestroy: (obj) => Destroy(obj.gameObject), collectionCheck: false, defaultCapacity: 10);
     private float particleTimer = 0.0f;
     public float particleDelay = 0.02f;
     public bool createParticles = true;

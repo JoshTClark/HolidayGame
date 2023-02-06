@@ -13,5 +13,18 @@ MonoBehaviour:
   m_Name: Knight
   m_EditorClassIdentifier: 
   prefab: {fileID: 1069143796030833455, guid: b2bef236b516c45418cd8d28400ad79d, type: 3}
+  characterName: Knight
+  desc: '* Starts with <color=#AAAAAA><size=+8>???</size></color>
+
+    * Starts in
+    <color=#AAAAAA><size=+8>???</size></color>
+
+    * <color=#AAAAAA><size=+8>???</size></color>
+
+    *
+    <color=#AAAAAA><size=+8>???</size></color>
+
+    * <color=#AAAAAA><size=+8>???</size></color>'
+  characterImage: {fileID: 1500714575, guid: c33ab33ef8c756640954b7567896f904, type: 3}
   inventory:
   - {fileID: 11400000, guid: f8daa8e190cc65b488e4e8d7f6ca94be, type: 2}

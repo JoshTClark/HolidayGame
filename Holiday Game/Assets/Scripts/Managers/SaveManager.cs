@@ -7,11 +7,11 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class SaveManager
 {
-    private static string path = Application.persistentDataPath + "/" + "saves" + "/";
+    private static string path = Application.persistentDataPath + "/" + "saves" + "/slot";
 
-    public static void SaveFile(string saveName, GameData data)
+    public static void SaveFile(int slot, GameData data)
     {
-        string destination = path + saveName + ".dat";
+        string destination = path + slot + ".dat";
         FileStream file;
 
         if (File.Exists(destination)) file = File.OpenWrite(destination);
@@ -22,9 +22,9 @@ public static class SaveManager
         file.Close();
     }
 
-    public static GameData LoadFile(string saveName)
+    public static GameData LoadFile(int slot)
     {
-        string destination = path + saveName + ".dat";
+        string destination = path + slot + ".dat";
         FileStream file;
 
         if (File.Exists(destination)) file = File.OpenRead(destination);
@@ -41,9 +41,9 @@ public static class SaveManager
         return data;
     }
 
-    public static bool DoesFileExist(string saveName)
+    public static bool DoesFileExist(int slot)
     {
-        string destination = Application.persistentDataPath + "/" + saveName + ".dat";
+        string destination = path + slot + ".dat";
 
         if (File.Exists(destination))
         {
@@ -66,9 +66,9 @@ public static class SaveManager
         return info;
     }
 
-    public static void Delete(string saveName)
+    public static void Delete(int slot)
     {
-        string destination = path + saveName + ".dat";
+        string destination = path + slot + ".dat";
         FileStream file;
 
         if (File.Exists(destination)) file = File.OpenRead(destination);

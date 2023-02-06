@@ -9,5 +9,14 @@ public class PlayableCharacterData : ScriptableObject
     public Player prefab;
 
     [SerializeField]
+    public string characterName;
+
+    [SerializeField, TextArea(15, 20)]
+    public string desc;
+
+    [SerializeField]
+    public Sprite characterImage;
+
+    [SerializeField]
     public List<Upgrade> inventory = new List<Upgrade>();
 }

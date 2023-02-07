@@ -13,13 +13,13 @@ public class EnemyManager : MonoBehaviour
 
     private static List<Enemy> allEnemies = new List<Enemy>();
 
+    private static List<Enemy> currentWaveEnemies = new List<Enemy>();
+
     public static Dictionary<EnemyIndex, ObjectPool<Enemy>> pools = new Dictionary<EnemyIndex, ObjectPool<Enemy>>();
 
     public static EnemyManager instance;
 
     private LevelData.Wave previousWave;
-
-    private List<Enemy> currentWaveEnemies = new List<Enemy>();
 
     public GameObject deathEffect;
 
@@ -197,15 +197,6 @@ public class EnemyManager : MonoBehaviour
         return null;
     }
 
-    /// <summary>
-    /// Removes all enemies
-    /// </summary>
-    public void Reset()
-    {
-        allEnemies.Clear();
-        currentWaveEnemies.Clear();
-    }
-
     private static void CreateNewPool(EnemyIndex index)
     {
         ObjectPool<Enemy> pool = new ObjectPool<Enemy>(createFunc: () => GameObject.Instantiate<Enemy>(ResourceManager.GetEnemyFromIndex(index)), actionOnGet: (obj) => obj.Clean(GetPool(index)), actionOnRelease: (obj) => obj.gameObject.SetActive(false), actionOnDestroy: (obj) => Destroy(obj.gameObject), collectionCheck: false, defaultCapacity: 50);
@@ -242,6 +233,8 @@ public class EnemyManager : MonoBehaviour
         {
             p.pool.Release(p);
         }
+        allEnemies.Clear();
+        pools.Clear();
     }
 
     public void KillAllAndStopSpawns()

@@ -222,7 +222,9 @@ public abstract class Enemy : StatsComponent
         Vector2 desiredVelocity = Vector2.zero;
         Vector2 currentVelocity = Vector2.zero;
 
+        // Commenting this out for right now as looping through every single enemy is very costly
         // Loop through all enemies
+        /*
         foreach (Enemy e in EnemyManager.instance.AllEnemies)
         {
             currentVelocity = Vector2.zero;
@@ -237,6 +239,7 @@ public abstract class Enemy : StatsComponent
             // Scale it by how close it is & apply it to the desired velocity
             desiredVelocity = currentVelocity * (1f / sqrDistance);
         }
+        */
         return desiredVelocity.normalized;
     }
 

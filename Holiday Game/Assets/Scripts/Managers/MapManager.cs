@@ -4,11 +4,14 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.TextCore.Text;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 using static SessionMap;
 
 public class MapManager : MonoBehaviour
 {
+    [SerializeField]
+    private Image cursor;
+
     [SerializeField]
     private Camera mainCam;
 
@@ -22,17 +25,16 @@ public class MapManager : MonoBehaviour
     private InputActionReference movement;
 
     [SerializeField]
-    private InputAction mouseClick;
+    private InputAction mouseClick, pressSpace;
 
     public static SessionManager session;
 
     private GameObject selectedNode;
 
-    private Vector2 previousInput;
-
     private GameObject[][] nodeArr;
 
-    private float camSpeed = 10.0f;
+    private float camSpeed = 20.0f;
+    private float freeSpeed = 10.0f;
     private float distanceToTarget = 0f;
 
     private void Start()
@@ -67,7 +69,7 @@ public class MapManager : MonoBehaviour
                 if (hit)
                 {
                     //Debug.Log("Mouse selection to new map point");
-                    if (selectedNode != hit.collider.gameObject)
+                    if (selectedNode != hit.collider.gameObject && !hit.collider.gameObject.GetComponent<MapPoint>().isLocked && !hit.collider.gameObject.GetComponent<MapPoint>().isComplete)
                     {
                         selectedNode = hit.collider.gameObject;
                         distanceToTarget = Vector2.Distance(mainCam.transform.position, selectedNode.transform.position);
@@ -75,42 +77,61 @@ public class MapManager : MonoBehaviour
                 }
             }
         };
+
+        pressSpace.Enable();
+        pressSpace.performed += (InputAction.CallbackContext callback) =>
+        {
+            distanceToTarget = Vector2.Distance(mainCam.transform.position, selectedNode.transform.position);
+        };
+    }
+
+    private void OnDisable()
+    {
+        pressSpace.Disable();
+        mouseClick.Disable();
     }
 
     void Update()
     {
-        Vector2 vecControls = movement.action.ReadValue<Vector2>();
+        cursor.rectTransform.position = new Vector3(Mouse.current.position.ReadValue().x, Mouse.current.position.ReadValue().y, 0);
+        cursor.transform.SetAsLastSibling();
 
-        if (vecControls.x < 0 && previousInput.x >= 0)
+        if (distanceToTarget != 0)
         {
-
-        }
-        if (vecControls.x > 0 && previousInput.x <= 0)
-        {
-
-        }
-        if (vecControls.y < 0 && previousInput.y >= 0)
-        {
-
-        }
-        if (vecControls.y > 0 && previousInput.y <= 0)
-        {
-
-        }
-
-        previousInput = vecControls;
-
-        Vector2 camMovement = new Vector2();
-        camMovement.x = selectedNode.transform.position.x - mainCam.transform.position.x;
-        camMovement.y = selectedNode.transform.position.y - mainCam.transform.position.y;
-        if (distanceToTarget != 0 && Vector2.Distance(mainCam.transform.position, selectedNode.transform.position) > 0.005f)
-        {
-            camMovement = camMovement.normalized * camSpeed * Time.deltaTime * ((Vector2.Distance(mainCam.transform.position, selectedNode.transform.position) +0.5f) / distanceToTarget);
+            Vector2 camMovement = new Vector2();
+            camMovement.x = selectedNode.transform.position.x - mainCam.transform.position.x;
+            camMovement.y = selectedNode.transform.position.y - mainCam.transform.position.y;
+            camMovement = camMovement.normalized * camSpeed * Time.deltaTime * ((Vector2.Distance(mainCam.transform.position, selectedNode.transform.position) + (distanceToTarget / 3.0f)) / distanceToTarget);
             mainCam.transform.position = mainCam.transform.position + new Vector3(camMovement.x, camMovement.y, 0);
+
+            if (Vector2.Distance(mainCam.transform.position, selectedNode.transform.position) < 0.01f)
+            {
+                mainCam.transform.position = new Vector3(selectedNode.transform.position.x, selectedNode.transform.position.y, -10);
+                distanceToTarget = 0;
+            }
         }
-        else 
+        else
         {
-            mainCam.transform.position = new Vector3(selectedNode.transform.position.x, selectedNode.transform.position.y, -10);
+            Vector2 vecControls = movement.action.ReadValue<Vector2>();
+            Vector2 camMovement = new Vector2();
+            if (vecControls.x < 0)
+            {
+                camMovement.x = -1 * freeSpeed * Time.deltaTime;
+            }
+            if (vecControls.x > 0)
+            {
+                camMovement.x = 1 * freeSpeed * Time.deltaTime;
+            }
+            if (vecControls.y < 0)
+            {
+                camMovement.y = -1 * freeSpeed * Time.deltaTime;
+            }
+            if (vecControls.y > 0)
+            {
+                camMovement.y = 1 * freeSpeed * Time.deltaTime;
+            }
+
+            mainCam.transform.position = mainCam.transform.position + new Vector3(camMovement.x, camMovement.y, 0);
         }
     }
 
@@ -121,6 +142,9 @@ public class MapManager : MonoBehaviour
             Vector3 pos1 = NodeToCoords(node);
             GameObject point = Instantiate<GameObject>(mapPoint, pos1, Quaternion.identity);
             point.GetComponent<MapPoint>().level = node.levelData;
+            point.GetComponent<MapPoint>().isLocked = node.isLocked;
+            point.GetComponent<MapPoint>().isComplete = node.isComplete;
+            point.GetComponent<MapPoint>().node = node;
             nodeArr[node.level][node.branch] = point;
             foreach (SessionMap.MapNode n in node.connections)
             {
@@ -140,11 +164,15 @@ public class MapManager : MonoBehaviour
         return pos;
     }
 
-    public void StartLevel() 
+    public void StartLevel()
     {
-        session.currentLevel = selectedNode.GetComponent<MapPoint>().level;
-        GameManager.session = session;
-        SceneManager.LoadScene(selectedNode.GetComponent<MapPoint>().level.sceneName);
+        if (!selectedNode.GetComponent<MapPoint>().isComplete && !selectedNode.GetComponent<MapPoint>().isLocked)
+        {
+            session.currentLevel = selectedNode.GetComponent<MapPoint>().level;
+            session.currentNode = selectedNode.GetComponent<MapPoint>().node;
+            GameManager.session = session;
+            SceneManager.LoadScene(selectedNode.GetComponent<MapPoint>().level.sceneName);
+        }
     }
 
     private void OnDrawGizmos()

@@ -187,6 +187,21 @@ public class GameManager : MonoBehaviour
         levelCompletedPanel.gameObject.SetActive(false);
     }
 
+    public void OnEnable()
+    {
+
+    }
+
+    public void OnDisable()
+    {
+        displayStats.action.Disable();
+        pauseGame.action.Disable(); 
+        giveXP.action.Disable(); 
+        playerDash.action.Disable(); 
+        godMode.action.Disable(); 
+        levelUpButton.action.Disable();
+    }
+
     void Update()
     {
         cursor.rectTransform.position = new Vector3(Mouse.current.position.ReadValue().x, Mouse.current.position.ReadValue().y, 0);
@@ -433,17 +448,6 @@ public class GameManager : MonoBehaviour
         return pools;
     }
 
-    public void Retry()
-    {
-        ProjectileManager.Clean();
-        DropManager.Clean();
-        gameOverPanel.gameObject.SetActive(false);
-        EnemyManager.instance.Reset();
-        Destroy(player.gameObject);
-        time = 0.0f;
-        upgradesToGive = 0;
-    }
-
     public void DisplayDamage(DamageInfo info)
     {
         if (info.receiver && showDamageNumbers)
@@ -558,11 +562,22 @@ public class GameManager : MonoBehaviour
     private void DoLevelEnd()
     {
         state = GameState.LevelComplete;
+        player.gameObject.SetActive(false);
         //EnemyManager.instance.KillAllAndStopSpawns();
     }
 
     public void ToMap()
     {
-        if (session != null) { }
+        if (session != null)
+        {
+            ProjectileManager.Clean();
+            EnemyManager.Clean();
+            DropManager.Clean();
+            session.LevelComplete();
+        }
+        else
+        {
+            Debug.Log("No current session cannot go to map");
+        }
     }
 }

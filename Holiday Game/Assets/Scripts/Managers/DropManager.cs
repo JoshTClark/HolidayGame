@@ -53,5 +53,7 @@ public class DropManager : MonoBehaviour
         {
             p.pool.Release(p);
         }
+        pools.Clear();
+        allDrops.Clear();
     }
 }

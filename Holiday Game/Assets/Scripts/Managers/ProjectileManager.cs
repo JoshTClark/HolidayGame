@@ -54,5 +54,6 @@ public class ProjectileManager : MonoBehaviour
         {
             p.pool.Release(p);
         }
+        pools.Clear();
     }
 }

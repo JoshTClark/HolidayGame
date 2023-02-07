@@ -29,6 +29,7 @@ public class SessionMap
         nodeArr[0][(maxBranches - 1) / 2] = startingNode;
         startingNode.level = 0;
         startingNode.branch = (maxBranches - 1) / 2;
+        startingNode.isLocked = false;
         nodeArr[length - 1][(maxBranches - 1) / 2] = endingNode;
         endingNode.level = length - 1;
         endingNode.branch = (maxBranches - 1) / 2;
@@ -44,7 +45,7 @@ public class SessionMap
                 float perlin = Mathf.PerlinNoise(perlinX, perlinY);
                 int branch = 0;
 
-                while (perlin >= divider * branch)
+                while (perlin > divider * branch)
                 {
                     branch++;
                 }
@@ -86,5 +87,7 @@ public class SessionMap
         public bool isEmpty = true;
         public List<MapNode> connections = new List<MapNode>();
         public LevelData levelData;
+        public bool isComplete = false;
+        public bool isLocked = true;
     }
 }

@@ -66,10 +66,6 @@ public class GameManager : MonoBehaviour
     public int enemiesDefeated = 0;
     private bool levelEnded = false;
 
-    //Saved data
-    [SerializeField]
-    public int goldTotal;
-
     public Player Player
     {
         get { return player; }
@@ -95,10 +91,6 @@ public class GameManager : MonoBehaviour
     // Only a single gamemanager should ever exist so we can always get it here
     [HideInInspector]
     public static GameManager instance;
-
-    // The save game data to use
-    [HideInInspector]
-    public static GameData data;
 
     [HideInInspector]
     public static SessionManager session;
@@ -526,7 +518,7 @@ public class GameManager : MonoBehaviour
     //Currency Management
     public void GainGold(int amount)
     {
-        goldTotal += amount;
+        SessionManager.data.currency += amount;
     }
 
     // Called to end the level

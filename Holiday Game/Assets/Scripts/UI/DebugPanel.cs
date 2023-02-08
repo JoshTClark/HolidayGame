@@ -60,9 +60,8 @@ public class DebugPanel : MonoBehaviour
 
     public void SpawnDrop()
     {
-        DropBase d = ResourceManager.DropFromName(dropSelector.options[dropSelector.value].text);
-        Debug.Log("Spawning " + d.name);
-        DropBase drop = DropManager.GetPickup(d.index);
+        Debug.Log("Spawning " + ResourceManager.DropFromName(dropSelector.options[dropSelector.value].text).name);
+        DropBase drop = DropManager.GetPickup(ResourceManager.DropFromName(dropSelector.options[dropSelector.value].text).index);
         drop.gameObject.transform.position = new Vector2(GameManager.instance.Player.transform.position.x, GameManager.instance.Player.transform.position.y + 10);
     }
 }

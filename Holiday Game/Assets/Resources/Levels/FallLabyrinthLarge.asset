@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c59e07d74277824bb5047733b29c0bc, type: 3}
+  m_Name: FallLabyrinthLarge
+  m_EditorClassIdentifier: 
+  scene: {fileID: 102900000, guid: 7e7621d1b49e0654baef32d85a7a2a71, type: 3}
+  difficulty: 1
+  startHour: 12
+  enemiesToDefeat: 0
+  daysToSurvive: 0
+  waves:
+  - waveLength: 1000
+    enemies:
+    - enemyIndex: 1
+      amountToSpawn: 10
+      respawn: 1
+      healthMultiplier: 1
+      damageMultiplier: 1
+      speedMultiplier: 1
+    - enemyIndex: 3
+      amountToSpawn: 2
+      respawn: 1
+      healthMultiplier: 1
+      damageMultiplier: 1
+      speedMultiplier: 1

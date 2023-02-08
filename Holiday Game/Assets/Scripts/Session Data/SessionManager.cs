@@ -10,6 +10,7 @@ public class SessionManager
     private PlayerData playerData = new PlayerData();
     public LevelData currentLevel;
     public SessionMap.MapNode currentNode;
+    public static GameData data;
 
     public void SavePlayerData(Player player)
     {
@@ -72,6 +73,7 @@ public class SessionManager
             n.isLocked = false;
         }
         MapManager.session = this;
+        SaveManager.SaveFile(data.id, data);
         SceneManager.LoadSceneAsync("MapScene");
     }
 

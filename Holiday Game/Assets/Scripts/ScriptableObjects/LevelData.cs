@@ -6,8 +6,7 @@ using UnityEditor;
 [CreateAssetMenu(fileName = "Level Data", menuName = Constants.ASSET_MENU_PATH + "Level Data")]
 public class LevelData : ScriptableObject
 {
-
-    public string sceneName = "TestScene";
+    public SceneAsset scene;
     public int difficulty = 1;
     public int startHour = 12;
     public int enemiesToDefeat = 0;

@@ -29,12 +29,16 @@ public class SaveSceneManager : MonoBehaviour
     private int currentSelectedCharacter = 0;
 
     [SerializeField]
-    private TMP_Text charName, charInfo, costLabel, upgradeDesc;
+    private TMP_Text charName, charInfo, costLabel, upgradeDesc, slot1Info, slot2Info, slot3Info, money;
 
     [SerializeField]
     private Image charImage;
 
+    private GameData data;
+
     public static SaveSceneManager instance;
+
+    private GameData[] saves = new GameData[3];
 
     private void Start()
     {
@@ -46,7 +50,11 @@ public class SaveSceneManager : MonoBehaviour
             characters.Add(i);
         }
 
-        FileInfo[] info = SaveManager.LoadAllSaves();
+        saves[0] = SaveManager.LoadFile(0);
+        saves[1] = SaveManager.LoadFile(1);
+        saves[2] = SaveManager.LoadFile(2);
+
+        slot1Info.text = "$" + saves[0].currency;
     }
 
     private void Update()
@@ -93,6 +101,7 @@ public class SaveSceneManager : MonoBehaviour
                         costLabel.text = "$" + i.GetCost();
                     }
                 }
+                money.text = "$" + data.currency;
                 break;
         }
 
@@ -106,9 +115,10 @@ public class SaveSceneManager : MonoBehaviour
 
     public void ToTitleScreen(int slot)
     {
-        GameData data = SaveManager.LoadFile(slot);
-        if (data != null)
+        GameData d = SaveManager.LoadFile(slot);
+        if (d != null)
         {
+            data = d;
             state = SceneState.Title;
         }
     }
@@ -141,6 +151,7 @@ public class SaveSceneManager : MonoBehaviour
     public void StartGame()
     {
         SessionManager session = new SessionManager();
+        SessionManager.data = data;
         session.SetChosenCharacter(characters[currentSelectedCharacter]);
         session.GenerateMap(10, 9, 10, 4);
         MapManager.session = session;

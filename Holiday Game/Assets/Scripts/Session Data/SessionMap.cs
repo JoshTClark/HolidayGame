@@ -78,6 +78,7 @@ public class SessionMap
                 }
             }
         }
+        startingNode.levelData = ResourceManager.GetLevelFromSceneName("Tutorial");
     }
 
     public class MapNode

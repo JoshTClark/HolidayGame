@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c59e07d74277824bb5047733b29c0bc, type: 3}
   m_Name: FallSurvival
   m_EditorClassIdentifier: 
-  sceneName: TestScene
+  scene: {fileID: 102900000, guid: baef28081c3544945b6db516adddcf26, type: 3}
   difficulty: 1
   startHour: 12
   enemiesToDefeat: 0

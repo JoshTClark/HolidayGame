@@ -29,7 +29,7 @@ public class SaveSceneManager : MonoBehaviour
     private int currentSelectedCharacter = 0;
 
     [SerializeField]
-    private TMP_Text charName, charInfo, costLabel, upgradeDesc, slot1Info, slot2Info, slot3Info;
+    private TMP_Text charName, charInfo, costLabel, upgradeDesc, slot1Info, slot2Info, slot3Info, money;
 
     [SerializeField]
     private Image charImage;

@@ -4206,7 +4206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2d381fb484aad441b67c5c97bb7412e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotNum: 2
+  slotNum: 1
   selectSave: {fileID: 780683524}
   deleteSave: {fileID: 1533989348}
   infoLabel: {fileID: 585676878}
@@ -9687,7 +9687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2d381fb484aad441b67c5c97bb7412e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotNum: 3
+  slotNum: 2
   selectSave: {fileID: 1571567140}
   deleteSave: {fileID: 151136327}
   infoLabel: {fileID: 1029011618}
@@ -10124,7 +10124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2d381fb484aad441b67c5c97bb7412e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotNum: 1
+  slotNum: 0
   selectSave: {fileID: 628955761}
   deleteSave: {fileID: 2073668621}
   infoLabel: {fileID: 982564302}

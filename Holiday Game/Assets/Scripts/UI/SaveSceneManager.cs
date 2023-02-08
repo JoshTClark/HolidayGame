@@ -50,11 +50,35 @@ public class SaveSceneManager : MonoBehaviour
             characters.Add(i);
         }
 
+        if (!SaveManager.DoesFileExist(0))
+        {
+            Debug.Log("Save file 0 does not exist creating new file");
+            GameData d = new GameData();
+            d.id = 0;
+            SaveManager.SaveFile(0, d);
+        }
+        if (!SaveManager.DoesFileExist(1))
+        {
+            Debug.Log("Save file 1 does not exist creating new file");
+            GameData d = new GameData();
+            d.id = 1;
+            SaveManager.SaveFile(1, d);
+        }
+        if (!SaveManager.DoesFileExist(2))
+        {
+            Debug.Log("Save file 2 does not exist creating new file");
+            GameData d = new GameData();
+            d.id = 2;
+            SaveManager.SaveFile(2, d);
+        }
+
         saves[0] = SaveManager.LoadFile(0);
         saves[1] = SaveManager.LoadFile(1);
         saves[2] = SaveManager.LoadFile(2);
 
         slot1Info.text = "$" + saves[0].currency;
+        slot2Info.text = "$" + saves[1].currency;
+        slot3Info.text = "$" + saves[2].currency;
     }
 
     private void Update()

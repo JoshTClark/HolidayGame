@@ -246,4 +246,18 @@ public class EnemyManager : MonoBehaviour
             e.TakeDamage(info);
         }
     }
+
+    /// <summary>
+    /// Draws spawn distances from player in yellow (min) and red (max) wire cubes
+    /// </summary>
+    void OnDrawGizmos()
+    {
+        if (GameManager.instance && GameManager.instance.player)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireCube(GameManager.instance.Player.transform.position, new Vector3(minSpawnDistance.x, minSpawnDistance.y, 1));
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireCube(GameManager.instance.Player.transform.position, new Vector3(maxSpawnDistance.x, maxSpawnDistance.y, 1));
+        }
+    }
 }

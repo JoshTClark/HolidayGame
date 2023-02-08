@@ -5,7 +5,7 @@ using UnityEngine.Pool;
 
 public class PumpkinBomb : Weapon
 {
-    public override void CalcStats()
+    public override void CalcStats() 
     {
         float damage = GetBaseStat("Damage");
         float size = GetBaseStat("Explosion Size");

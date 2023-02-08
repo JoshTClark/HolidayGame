@@ -5,7 +5,8 @@ using UnityEngine;
 public class Exploder : Enemy
 {
     private bool inRange = false;
-    private float range = 2f; // Test later
+    [SerializeField]
+    private float range = 1f; // Test later
     private float deathTimer = 2.5f;
     private float timer = 0.0f;
 
@@ -15,7 +16,7 @@ public class Exploder : Enemy
     }
     public override void OnUpdate()
     {
-        if(PlayerDistance() <= range)
+        if(PlayerDistance() >= range)
         {
             inRange= true;
         }
@@ -56,14 +57,18 @@ public class Exploder : Enemy
 
     public override void OnDeath(DamageInfo dmgInfo)
     {
-        base.OnDeath(dmgInfo);
+        
 
         // Create an empty explosion
         // Creates an explosion, Check PumpkinBomb.CS for example in Update()
-        ProjectileManager.GetProjectile(ResourceManager.ProjectileIndex.Explosion);
-        //EmptyProjectile explosion = new EmptyProjectile();
-        //explosion.index = ResourceManager.ProjectileIndex.Explosion;
-        //explosion.projectileTeam = ProjectileBase.Team.Enemy;
+        BombProjectileBase p = (BombProjectileBase)ProjectileManager.GetProjectile(ResourceManager.ProjectileIndex.PumpkinBomb);
+        p.transform.position = this.transform.position;
+        p.Direction = Vector2.zero;
+        DamageInfo info = new DamageInfo();
+        info.damage = Damage;
+        info.attacker = this;
+        p.SetDamageInfo(info);
 
+        base.OnDeath(dmgInfo);
     }
 }

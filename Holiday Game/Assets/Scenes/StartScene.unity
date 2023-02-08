@@ -840,6 +840,9 @@ MonoBehaviour:
   charInfo: {fileID: 1328533266}
   costLabel: {fileID: 1907926176}
   upgradeDesc: {fileID: 1159428814}
+  slot1Info: {fileID: 982564302}
+  slot2Info: {fileID: 585676878}
+  slot3Info: {fileID: 1029011618}
   money: {fileID: 1050633463}
   charImage: {fileID: 1376699976}
 --- !u!4 &296636939
@@ -1470,7 +1473,7 @@ GameObject:
   - component: {fileID: 585676879}
   - component: {fileID: 585676878}
   m_Layer: 5
-  m_Name: Info
+  m_Name: Info2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4684,7 +4687,7 @@ GameObject:
   - component: {fileID: 982564303}
   - component: {fileID: 982564302}
   m_Layer: 5
-  m_Name: Info
+  m_Name: Info1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5099,7 +5102,7 @@ GameObject:
   - component: {fileID: 1029011619}
   - component: {fileID: 1029011618}
   m_Layer: 5
-  m_Name: Info
+  m_Name: Info3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

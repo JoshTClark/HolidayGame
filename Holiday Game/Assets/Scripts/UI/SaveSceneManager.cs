@@ -29,7 +29,7 @@ public class SaveSceneManager : MonoBehaviour
     private int currentSelectedCharacter = 0;
 
     [SerializeField]
-    private TMP_Text charName, charInfo, costLabel, upgradeDesc, money;
+    private TMP_Text charName, charInfo, costLabel, upgradeDesc, slot1Info, slot2Info, slot3Info;
 
     [SerializeField]
     private Image charImage;
@@ -37,6 +37,8 @@ public class SaveSceneManager : MonoBehaviour
     private GameData data;
 
     public static SaveSceneManager instance;
+
+    private GameData[] saves = new GameData[3];
 
     private void Start()
     {
@@ -48,7 +50,11 @@ public class SaveSceneManager : MonoBehaviour
             characters.Add(i);
         }
 
-        FileInfo[] info = SaveManager.LoadAllSaves();
+        saves[0] = SaveManager.LoadFile(0);
+        saves[1] = SaveManager.LoadFile(1);
+        saves[2] = SaveManager.LoadFile(2);
+
+        slot1Info.text = "$" + saves[0].currency;
     }
 
     private void Update()

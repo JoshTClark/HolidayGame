@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: TestPool
   m_EditorClassIdentifier: 
   levels:
-  - {fileID: 11400000, guid: 326ce92e83a72bc458314e157f699778, type: 2}
   - {fileID: 11400000, guid: da4c72310f3167d47b6daf7e8d0613ba, type: 2}
-  - {fileID: 11400000, guid: 2af624da29f143742a95ed0f3bcf1a7a, type: 2}
-  - {fileID: 11400000, guid: 2af624da29f143742a95ed0f3bcf1a7a, type: 2}
-  - {fileID: 11400000, guid: 2af624da29f143742a95ed0f3bcf1a7a, type: 2}
+  - {fileID: 11400000, guid: 6b97d0d79ed01854daa17547b8e0d5f4, type: 2}
+  - {fileID: 11400000, guid: 0fd818b90f1ae0241b352b2009f9805d, type: 2}

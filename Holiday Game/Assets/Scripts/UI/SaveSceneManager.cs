@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -13,14 +14,15 @@ public class SaveSceneManager : MonoBehaviour
         SelectSave,
         Title,
         CharacterSelect,
-        UpgradeMenu
+        UpgradeMenu,
+        SaveEditor
     }
 
     [SerializeField]
     private Camera mainCam;
 
     [SerializeField]
-    private CanvasRenderer titleScreenPanel, saveScreenPanel, charSelectPanel, upgradePanel;
+    private CanvasRenderer titleScreenPanel, saveScreenPanel, charSelectPanel, upgradePanel, saveEditPanel;
 
     public SceneState state = SceneState.SelectSave;
 
@@ -34,11 +36,20 @@ public class SaveSceneManager : MonoBehaviour
     [SerializeField]
     private Image charImage;
 
+    [SerializeField]
+    private Button saveEditorButton;
+
+    [SerializeField]
+    private Input currencyInput;
+
     private GameData data;
 
     public static SaveSceneManager instance;
 
     private GameData[] saves = new GameData[3];
+
+    [SerializeField]
+    private InputAction debugToggle;
 
     private void Start()
     {
@@ -50,11 +61,44 @@ public class SaveSceneManager : MonoBehaviour
             characters.Add(i);
         }
 
+        if (!SaveManager.DoesFileExist(0))
+        {
+            Debug.Log("Save file 0 does not exist creating new file");
+            GameData d = new GameData();
+            d.id = 0;
+            SaveManager.SaveFile(0, d);
+        }
+        if (!SaveManager.DoesFileExist(1))
+        {
+            Debug.Log("Save file 1 does not exist creating new file");
+            GameData d = new GameData();
+            d.id = 1;
+            SaveManager.SaveFile(1, d);
+        }
+        if (!SaveManager.DoesFileExist(2))
+        {
+            Debug.Log("Save file 2 does not exist creating new file");
+            GameData d = new GameData();
+            d.id = 2;
+            SaveManager.SaveFile(2, d);
+        }
+
+        if (Constants.DEBUG)
+        {
+            debugToggle.Enable();
+        }
+        debugToggle.performed += (InputAction.CallbackContext callback) =>
+        {
+            state = SceneState.SaveEditor;
+        };
+
         saves[0] = SaveManager.LoadFile(0);
         saves[1] = SaveManager.LoadFile(1);
         saves[2] = SaveManager.LoadFile(2);
 
-        slot1Info.text = "$" + saves[0].currency;
+        slot1Info.text = "<color=#FF8B00>$" + saves[0].currency;
+        slot2Info.text = "<color=#FF8B00>$" + saves[1].currency;
+        slot3Info.text = "<color=#FF8B00>$" + saves[2].currency;
     }
 
     private void Update()
@@ -66,18 +110,21 @@ public class SaveSceneManager : MonoBehaviour
                 saveScreenPanel.gameObject.SetActive(true);
                 charSelectPanel.gameObject.SetActive(false);
                 upgradePanel.gameObject.SetActive(false);
+                saveEditPanel.gameObject.SetActive(false);
                 break;
             case SceneState.Title:
                 titleScreenPanel.gameObject.SetActive(true);
                 saveScreenPanel.gameObject.SetActive(false);
                 charSelectPanel.gameObject.SetActive(false);
                 upgradePanel.gameObject.SetActive(false);
+                saveEditPanel.gameObject.SetActive(false);
                 break;
             case SceneState.CharacterSelect:
                 titleScreenPanel.gameObject.SetActive(false);
                 saveScreenPanel.gameObject.SetActive(false);
                 charSelectPanel.gameObject.SetActive(true);
                 upgradePanel.gameObject.SetActive(false);
+                saveEditPanel.gameObject.SetActive(false);
                 charName.text = characters[currentSelectedCharacter].characterName;
                 charInfo.text = characters[currentSelectedCharacter].desc;
                 charImage.sprite = characters[currentSelectedCharacter].characterImage;
@@ -87,6 +134,7 @@ public class SaveSceneManager : MonoBehaviour
                 saveScreenPanel.gameObject.SetActive(false);
                 charSelectPanel.gameObject.SetActive(false);
                 upgradePanel.gameObject.SetActive(true);
+                saveEditPanel.gameObject.SetActive(false);
                 foreach (MetaUpgrade i in upgrades)
                 {
                     if (i.gameObject.GetComponent<HoverButton>().isHover)
@@ -102,6 +150,13 @@ public class SaveSceneManager : MonoBehaviour
                     }
                 }
                 money.text = "$" + data.currency;
+                break;
+            case SceneState.SaveEditor:
+                titleScreenPanel.gameObject.SetActive(false);
+                saveScreenPanel.gameObject.SetActive(false);
+                charSelectPanel.gameObject.SetActive(false);
+                upgradePanel.gameObject.SetActive(false);
+                saveEditPanel.gameObject.SetActive(true);
                 break;
         }
 

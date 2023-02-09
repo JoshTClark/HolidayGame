@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     private Canvas ui;
 
     [SerializeField]
-    private TMP_Text objectiveDisplay, playerStats, playerLevel, hpText, numberEffect, dashText, levelUpText;
+    private TMP_Text objectiveDisplay, playerStats, playerLevel, hpText, numberEffect, dashText, levelUpText, gemsText;
 
     [SerializeField]
     private Image xpBar, hpBar, dashTimer, dayBar1, dayBar2, dayBar3, cursor;
@@ -518,7 +518,7 @@ public class GameManager : MonoBehaviour
     //Currency Management
     public void GainGold(int amount)
     {
-        SessionManager.data.currency += amount;
+        SessionManager.money += amount;
     }
 
     // Called to end the level
@@ -553,6 +553,10 @@ public class GameManager : MonoBehaviour
 
     private void DoLevelEnd()
     {
+        if (session != null)
+        {
+            gemsText.text = "You gained " + session.difficulty * 5 + " Gems";
+        }
         state = GameState.LevelComplete;
         player.gameObject.SetActive(false);
         //EnemyManager.instance.KillAllAndStopSpawns();
@@ -565,7 +569,7 @@ public class GameManager : MonoBehaviour
             ProjectileManager.Clean();
             EnemyManager.Clean();
             DropManager.Clean();
-            session.LevelComplete();
+            session.LevelComplete(session.difficulty * 5);
         }
         else
         {

@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
     private TMP_Text objectiveDisplay, playerStats, playerLevel, hpText, numberEffect, dashText, levelUpText, gemsText;
 
     [SerializeField]
-    private Image xpBar, hpBar, dashTimer, dayBar1, dayBar2, dayBar3, cursor;
+    private Image xpBar, hpBar, dashTimer, cursor;
 
     [SerializeField]
     private CanvasRenderer playerStatsPanel, pausedPanel, gamePanel, upgradePanel, gameOverPanel, effectsPanel, debugPanel, levelCompletedPanel;
@@ -493,12 +493,14 @@ public class GameManager : MonoBehaviour
 
         float percentThroughDay = (time % dayLength) / dayLength;
 
+        /*
         dayBar1.rectTransform.anchorMin = new Vector2(0f - percentThroughDay - 0.5f, dayBar1.rectTransform.anchorMin.y);
         dayBar1.rectTransform.anchorMax = new Vector2(1f - percentThroughDay - 0.5f, dayBar1.rectTransform.anchorMax.y);
         dayBar2.rectTransform.anchorMin = new Vector2(1f - percentThroughDay - 0.5f, dayBar2.rectTransform.anchorMin.y);
         dayBar2.rectTransform.anchorMax = new Vector2(2f - percentThroughDay - 0.5f, dayBar2.rectTransform.anchorMax.y);
         dayBar3.rectTransform.anchorMin = new Vector2(2f - percentThroughDay - 0.5f, dayBar3.rectTransform.anchorMin.y);
         dayBar3.rectTransform.anchorMax = new Vector2(3f - percentThroughDay - 0.5f, dayBar3.rectTransform.anchorMax.y);
+        */
 
         float currentHourFloat = ((OffsetTime % dayLength) / (dayLength / 24));
         //globalLight.intensity = 0.1f;

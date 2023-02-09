@@ -8349,6 +8349,23 @@ MonoBehaviour:
   currentHour: 12
   weaponIcons: []
   enemiesDefeated: 0
+  slowToggle:
+    m_Name: Slow Toggle
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 34a7cb89-e89c-40e8-a4a7-efbea0741278
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 678a0b69-d283-45ba-bdcc-4490c36ec2c6
+      m_Path: <Keyboard>/f2
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Slow Toggle
+      m_Flags: 0
+    m_Flags: 0
   player: {fileID: 0}
 --- !u!114 &8704142796787333608
 MonoBehaviour:

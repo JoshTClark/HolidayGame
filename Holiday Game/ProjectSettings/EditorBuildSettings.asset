@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FallSurvival.unity
     guid: baef28081c3544945b6db516adddcf26
+  - enabled: 1
+    path: Assets/Scenes/FallBoss.unity
+    guid: c1ebee640cdb3c34a8007326713480b6
   m_configObjects: {}

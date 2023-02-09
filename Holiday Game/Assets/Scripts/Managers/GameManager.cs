@@ -51,6 +51,10 @@ public class GameManager : MonoBehaviour
 
     public GameObject weaponIconPrefab;
 
+    private float baseTimeScale = 1f;
+    private bool slowTime = false;
+    public float slowTimeScale = 0.5f;
+
     public bool showDamageNumbers = true;
     private float time = 0f;
     private GameState state = GameState.Normal;
@@ -65,6 +69,9 @@ public class GameManager : MonoBehaviour
     public List<WeaponIcon> weaponIcons = new List<WeaponIcon>();
     public int enemiesDefeated = 0;
     private bool levelEnded = false;
+
+    [SerializeField]
+    private InputAction slowToggle;
 
     public Player Player
     {
@@ -171,6 +178,15 @@ public class GameManager : MonoBehaviour
             weaponIcons.Add(icon.GetComponentInChildren<WeaponIcon>());
         }
 
+        if (Constants.DEBUG)
+        {
+            slowToggle.Enable();
+        }
+        slowToggle.performed += (InputAction.CallbackContext callback) =>
+        {
+            slowTime = !slowTime;
+        };
+
         pausedPanel.gameObject.SetActive(false);
         upgradePanel.gameObject.SetActive(false);
         gamePanel.gameObject.SetActive(true);
@@ -187,10 +203,10 @@ public class GameManager : MonoBehaviour
     public void OnDisable()
     {
         displayStats.action.Disable();
-        pauseGame.action.Disable(); 
-        giveXP.action.Disable(); 
-        playerDash.action.Disable(); 
-        godMode.action.Disable(); 
+        pauseGame.action.Disable();
+        giveXP.action.Disable();
+        playerDash.action.Disable();
+        godMode.action.Disable();
         levelUpButton.action.Disable();
     }
 
@@ -206,13 +222,24 @@ public class GameManager : MonoBehaviour
                 gameOverPanel.gameObject.SetActive(true);
                 break;
             case GameState.Normal:
-                Time.timeScale = 1f;
+                if (!slowTime)
+                {
+                    Time.timeScale = baseTimeScale;
+                }
+                else
+                {
+                    Time.timeScale = slowTimeScale;
+                }
                 // Updating the timer and difficulty
                 time += Time.deltaTime;
                 UpdateDate();
 
                 // Updating displays
-                if (levelData.daysToSurvive > 0 && levelData.daysToSurvive > currentDay)
+                if (levelData.isBoss)
+                {
+                    objectiveDisplay.text = "Defeat the boss";
+                }
+                else if (levelData.daysToSurvive > 0 && levelData.daysToSurvive > currentDay)
                 {
                     objectiveDisplay.text = "Day " + currentDay + "/" + levelData.daysToSurvive;
                 }

@@ -23,6 +23,8 @@ public class EnemyManager : MonoBehaviour
 
     public GameObject deathEffect;
 
+    public Enemy boss;
+
     public List<Enemy> AllEnemies
     {
         get { return allEnemies; }

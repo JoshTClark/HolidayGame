@@ -11,7 +11,7 @@ public class LevelData : ScriptableObject
     public int startHour = 12;
     public int enemiesToDefeat = 0;
     public int daysToSurvive = 0;
-    public bool isBoss = false;
+    public bool isBossLevel = false;
     public List<Wave> waves = new List<Wave>();
 
     public Wave GetWaveByTime(float time)
@@ -42,6 +42,7 @@ public class LevelData : ScriptableObject
     [System.Serializable]
     public class SpawnInfo
     {
+        public bool isBoss = false;
         public ResourceManager.EnemyIndex enemyIndex;
         public int amountToSpawn;
         public bool respawn;

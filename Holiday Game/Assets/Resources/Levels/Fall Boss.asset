@@ -17,5 +17,9 @@ MonoBehaviour:
   startHour: 12
   enemiesToDefeat: 0
   daysToSurvive: 0
-  isBoss: 1
-  waves: []
+  isBossLevel: 1
+  waves:
+  - waveLength: 5
+    enemies: []
+  - waveLength: 5
+    enemies: []

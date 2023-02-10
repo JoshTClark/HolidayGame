@@ -16,11 +16,13 @@ MonoBehaviour:
   difficulty: 1
   startHour: 12
   enemiesToDefeat: 0
-  daysToSurvive: 2
+  daysToSurvive: 3
+  isBossLevel: 0
   waves:
   - waveLength: 60
     enemies:
-    - enemyIndex: 1
+    - isBoss: 0
+      enemyIndex: 1
       amountToSpawn: 10
       respawn: 1
       healthMultiplier: 1
@@ -28,13 +30,15 @@ MonoBehaviour:
       speedMultiplier: 1
   - waveLength: 60
     enemies:
-    - enemyIndex: 1
+    - isBoss: 0
+      enemyIndex: 1
       amountToSpawn: 10
       respawn: 1
       healthMultiplier: 1
       damageMultiplier: 1
       speedMultiplier: 1
-    - enemyIndex: 5
+    - isBoss: 0
+      enemyIndex: 5
       amountToSpawn: 1
       respawn: 0
       healthMultiplier: 1
@@ -42,25 +46,29 @@ MonoBehaviour:
       speedMultiplier: 1
   - waveLength: 300
     enemies:
-    - enemyIndex: 1
+    - isBoss: 0
+      enemyIndex: 1
       amountToSpawn: 10
       respawn: 1
       healthMultiplier: 1
       damageMultiplier: 1
       speedMultiplier: 1
-    - enemyIndex: 2
+    - isBoss: 0
+      enemyIndex: 2
       amountToSpawn: 1
       respawn: 1
       healthMultiplier: 1
       damageMultiplier: 1
       speedMultiplier: 1
-    - enemyIndex: 3
+    - isBoss: 0
+      enemyIndex: 3
       amountToSpawn: 1
       respawn: 1
       healthMultiplier: 1
       damageMultiplier: 1
       speedMultiplier: 1
-    - enemyIndex: 5
+    - isBoss: 0
+      enemyIndex: 5
       amountToSpawn: 1
       respawn: 1
       healthMultiplier: 1

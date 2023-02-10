@@ -10,7 +10,7 @@ public class LevelExit : MonoBehaviour
 
     private void Start()
     {
-        
+        if(ExitLocations.Count > 1)
         RandomizeExit();
        
     }

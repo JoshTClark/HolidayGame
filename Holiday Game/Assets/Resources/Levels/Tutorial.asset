@@ -15,12 +15,14 @@ MonoBehaviour:
   scene: {fileID: 102900000, guid: 19d4cd4881419d64daee494ea90b741d, type: 3}
   difficulty: 1
   startHour: 12
-  enemiesToDefeat: 0
+  enemiesToDefeat: 5
   daysToSurvive: 0
+  isBossLevel: 0
   waves:
   - waveLength: 5
     enemies:
-    - enemyIndex: 1
+    - isBoss: 0
+      enemyIndex: 1
       amountToSpawn: 5
       respawn: 1
       healthMultiplier: 1
@@ -28,8 +30,9 @@ MonoBehaviour:
       speedMultiplier: 1
   - waveLength: 30
     enemies:
-    - enemyIndex: 1
-      amountToSpawn: 25
+    - isBoss: 0
+      enemyIndex: 1
+      amountToSpawn: 10
       respawn: 1
       healthMultiplier: 1
       damageMultiplier: 1

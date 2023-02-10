@@ -841,6 +841,19 @@ public abstract class StatsComponent : MonoBehaviour
         {
             attackSpeedMult *= Mathf.Clamp(1 + (4 * (patienceTimer / (30f * CooldownMultiplier))), 1f, 4f);
         }
+
+        if (this.GetComponent<Player>())
+        {
+            if (SessionManager.data != null)
+            {
+                damageMult += SessionManager.data.GetUpgradeLevel(MetaUpgrade.MetaUpgradeID.Damage) * 0.05f;
+                attackSpeedMult += SessionManager.data.GetUpgradeLevel(MetaUpgrade.MetaUpgradeID.AttackSpeed) * 0.05f;
+                speedMult += SessionManager.data.GetUpgradeLevel(MetaUpgrade.MetaUpgradeID.Speed) * 0.05f;
+                armorAdd += SessionManager.data.GetUpgradeLevel(MetaUpgrade.MetaUpgradeID.Armor) * 1f;
+                regenAdd += SessionManager.data.GetUpgradeLevel(MetaUpgrade.MetaUpgradeID.Regen) * 0.1f;
+                hpAdd += SessionManager.data.GetUpgradeLevel(MetaUpgrade.MetaUpgradeID.Health) * 5f;
+            }
+        }
     }
 
     public void OnGainUpgrade(Upgrade upgrade)

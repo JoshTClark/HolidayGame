@@ -29,10 +29,10 @@ public class GameManager : MonoBehaviour
     private Canvas ui;
 
     [SerializeField]
-    private TMP_Text objectiveDisplay, playerStats, playerLevel, hpText, numberEffect, dashText, levelUpText;
+    private TMP_Text objectiveDisplay, playerStats, playerLevel, hpText, numberEffect, dashText, levelUpText, gemsText;
 
     [SerializeField]
-    private Image xpBar, hpBar, dashTimer, dayBar1, dayBar2, dayBar3, cursor;
+    private Image xpBar, hpBar, dashTimer, cursor;
 
     [SerializeField]
     private CanvasRenderer playerStatsPanel, pausedPanel, gamePanel, upgradePanel, gameOverPanel, effectsPanel, debugPanel, levelCompletedPanel;
@@ -49,7 +49,11 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     public float cornKills, snowballKills, arrowKills, pumpkinKills, fireworkKills;
 
-    public GameObject weaponIconPrefab;
+    public GameObject weaponIconPrefab, bossHealth, bossHealthMask;
+
+    private float baseTimeScale = 1f;
+    private bool slowTime = false;
+    public float slowTimeScale = 0.5f;
 
     public bool showDamageNumbers = true;
     private float time = 0f;
@@ -65,6 +69,9 @@ public class GameManager : MonoBehaviour
     public List<WeaponIcon> weaponIcons = new List<WeaponIcon>();
     public int enemiesDefeated = 0;
     private bool levelEnded = false;
+
+    [SerializeField]
+    private InputAction slowToggle;
 
     public Player Player
     {
@@ -171,6 +178,15 @@ public class GameManager : MonoBehaviour
             weaponIcons.Add(icon.GetComponentInChildren<WeaponIcon>());
         }
 
+        if (Constants.DEBUG)
+        {
+            slowToggle.Enable();
+        }
+        slowToggle.performed += (InputAction.CallbackContext callback) =>
+        {
+            slowTime = !slowTime;
+        };
+
         pausedPanel.gameObject.SetActive(false);
         upgradePanel.gameObject.SetActive(false);
         gamePanel.gameObject.SetActive(true);
@@ -187,10 +203,10 @@ public class GameManager : MonoBehaviour
     public void OnDisable()
     {
         displayStats.action.Disable();
-        pauseGame.action.Disable(); 
-        giveXP.action.Disable(); 
-        playerDash.action.Disable(); 
-        godMode.action.Disable(); 
+        pauseGame.action.Disable();
+        giveXP.action.Disable();
+        playerDash.action.Disable();
+        godMode.action.Disable();
         levelUpButton.action.Disable();
     }
 
@@ -206,13 +222,31 @@ public class GameManager : MonoBehaviour
                 gameOverPanel.gameObject.SetActive(true);
                 break;
             case GameState.Normal:
-                Time.timeScale = 1f;
+                if (!slowTime)
+                {
+                    Time.timeScale = baseTimeScale;
+                }
+                else
+                {
+                    Time.timeScale = slowTimeScale;
+                }
                 // Updating the timer and difficulty
                 time += Time.deltaTime;
                 UpdateDate();
 
                 // Updating displays
-                if (levelData.daysToSurvive > 0 && levelData.daysToSurvive > currentDay)
+                objectiveDisplay.rectTransform.anchorMin = new Vector2(objectiveDisplay.rectTransform.anchorMin.x, 0.94f);
+                objectiveDisplay.rectTransform.anchorMax = new Vector2(objectiveDisplay.rectTransform.anchorMax.x, 1f);
+                bossHealth.SetActive(false);
+                if (levelData.isBossLevel && EnemyManager.instance.boss)
+                {
+                    objectiveDisplay.text = "Defeat the boss";
+                    bossHealth.SetActive(true);
+                    bossHealthMask.GetComponent<RectTransform>().anchorMax = new Vector2(EnemyManager.instance.boss.CurrentHP / EnemyManager.instance.boss.MaxHp, bossHealthMask.GetComponent<RectTransform>().anchorMax.y);
+                    objectiveDisplay.rectTransform.anchorMin = new Vector2(objectiveDisplay.rectTransform.anchorMin.x, 0.89f);
+                    objectiveDisplay.rectTransform.anchorMax = new Vector2(objectiveDisplay.rectTransform.anchorMax.x, 0.95f);
+                }
+                else if (levelData.daysToSurvive > 0 && levelData.daysToSurvive > currentDay)
                 {
                     objectiveDisplay.text = "Day " + currentDay + "/" + levelData.daysToSurvive;
                 }
@@ -493,12 +527,14 @@ public class GameManager : MonoBehaviour
 
         float percentThroughDay = (time % dayLength) / dayLength;
 
+        /*
         dayBar1.rectTransform.anchorMin = new Vector2(0f - percentThroughDay - 0.5f, dayBar1.rectTransform.anchorMin.y);
         dayBar1.rectTransform.anchorMax = new Vector2(1f - percentThroughDay - 0.5f, dayBar1.rectTransform.anchorMax.y);
         dayBar2.rectTransform.anchorMin = new Vector2(1f - percentThroughDay - 0.5f, dayBar2.rectTransform.anchorMin.y);
         dayBar2.rectTransform.anchorMax = new Vector2(2f - percentThroughDay - 0.5f, dayBar2.rectTransform.anchorMax.y);
         dayBar3.rectTransform.anchorMin = new Vector2(2f - percentThroughDay - 0.5f, dayBar3.rectTransform.anchorMin.y);
         dayBar3.rectTransform.anchorMax = new Vector2(3f - percentThroughDay - 0.5f, dayBar3.rectTransform.anchorMax.y);
+        */
 
         float currentHourFloat = ((OffsetTime % dayLength) / (dayLength / 24));
         //globalLight.intensity = 0.1f;
@@ -518,7 +554,7 @@ public class GameManager : MonoBehaviour
     //Currency Management
     public void GainGold(int amount)
     {
-        SessionManager.data.currency += amount;
+        SessionManager.money += amount;
     }
 
     // Called to end the level
@@ -553,6 +589,10 @@ public class GameManager : MonoBehaviour
 
     private void DoLevelEnd()
     {
+        if (session != null)
+        {
+            gemsText.text = "You gained " + session.difficulty * 5 + " Gems";
+        }
         state = GameState.LevelComplete;
         player.gameObject.SetActive(false);
         //EnemyManager.instance.KillAllAndStopSpawns();
@@ -565,7 +605,7 @@ public class GameManager : MonoBehaviour
             ProjectileManager.Clean();
             EnemyManager.Clean();
             DropManager.Clean();
-            session.LevelComplete();
+            session.LevelComplete(session.difficulty * 5);
         }
         else
         {

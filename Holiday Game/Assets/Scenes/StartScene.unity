@@ -1022,7 +1022,9 @@ MonoBehaviour:
   slot3Info: {fileID: 1029011618}
   money: {fileID: 1050633463}
   charImage: {fileID: 1376699976}
-  saveEditorButton: {fileID: 0}
+  saveEditorButton: {fileID: 370961146}
+  buyButton: {fileID: 996036941}
+  currencyInput: {fileID: 261902458}
   debugToggle:
     m_Name: Debug Toggle
     m_Type: 1
@@ -1334,7 +1336,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 370961147}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 296636938}
+        m_TargetAssemblyTypeName: SaveSceneManager, Assembly-CSharp
+        m_MethodName: SaveEditorButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &370961147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1839,7 +1853,7 @@ MonoBehaviour:
   m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b2add8b36b8829546b7061d806bad46d, type: 2}
-  m_sharedMaterial: {fileID: 5637714439376686687, guid: b2add8b36b8829546b7061d806bad46d, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: ae68b4fad69f6bd4ca3c4cd78caa953e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2741,7 +2755,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9752c390a27d3bd48b7aa77b987bfd7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 20
+  id: 1
+  baseCost: 20
   selected: 0
   level: 0
   upgradeName: Atk Spd
@@ -2776,6 +2791,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 296636938}
+          m_TargetAssemblyTypeName: SaveSceneManager, Assembly-CSharp
+          m_MethodName: SetHovered
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 708507064}
+            m_ObjectArgumentAssemblyTypeName: MetaUpgrade, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 1
     callback:
       m_PersistentCalls:
@@ -2783,6 +2810,18 @@ MonoBehaviour:
         - m_Target: {fileID: 708507066}
           m_TargetAssemblyTypeName: HoverButton, Assembly-CSharp
           m_MethodName: OnHoverStop
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 296636938}
+          m_TargetAssemblyTypeName: SaveSceneManager, Assembly-CSharp
+          m_MethodName: NotHovered
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -2851,6 +2890,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 296636938}
+        m_TargetAssemblyTypeName: SaveSceneManager, Assembly-CSharp
+        m_MethodName: MetaUpgradeClick
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 708507064}
+          m_ObjectArgumentAssemblyTypeName: MetaUpgrade, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 708507064}
         m_TargetAssemblyTypeName: MetaUpgrade, Assembly-CSharp
         m_MethodName: Select
@@ -2957,7 +3008,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9752c390a27d3bd48b7aa77b987bfd7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 20
+  id: 2
+  baseCost: 20
   selected: 0
   level: 0
   upgradeName: Speed
@@ -2992,6 +3044,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 296636938}
+          m_TargetAssemblyTypeName: SaveSceneManager, Assembly-CSharp
+          m_MethodName: SetHovered
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 709675760}
+            m_ObjectArgumentAssemblyTypeName: MetaUpgrade, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 1
     callback:
       m_PersistentCalls:
@@ -2999,6 +3063,18 @@ MonoBehaviour:
         - m_Target: {fileID: 709675762}
           m_TargetAssemblyTypeName: HoverButton, Assembly-CSharp
           m_MethodName: OnHoverStop
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 296636938}
+          m_TargetAssemblyTypeName: SaveSceneManager, Assembly-CSharp
+          m_MethodName: NotHovered
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -3074,6 +3150,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 296636938}
+        m_TargetAssemblyTypeName: SaveSceneManager, Assembly-CSharp
+        m_MethodName: MetaUpgradeClick
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 709675760}
+          m_ObjectArgumentAssemblyTypeName: MetaUpgrade, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3956,7 +4044,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9752c390a27d3bd48b7aa77b987bfd7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 20
+  id: 3
+  baseCost: 20
   selected: 0
   level: 0
   upgradeName: Armor
@@ -3991,6 +4080,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 296636938}
+          m_TargetAssemblyTypeName: SaveSceneManager, Assembly-CSharp
+          m_MethodName: SetHovered
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 784862278}
+            m_ObjectArgumentAssemblyTypeName: MetaUpgrade, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 1
     callback:
       m_PersistentCalls:
@@ -3998,6 +4099,18 @@ MonoBehaviour:
         - m_Target: {fileID: 784862280}
           m_TargetAssemblyTypeName: HoverButton, Assembly-CSharp
           m_MethodName: OnHoverStop
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 296636938}
+          m_TargetAssemblyTypeName: SaveSceneManager, Assembly-CSharp
+          m_MethodName: NotHovered
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -4073,6 +4186,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 296636938}
+        m_TargetAssemblyTypeName: SaveSceneManager, Assembly-CSharp
+        m_MethodName: MetaUpgradeClick
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 784862278}
+          m_ObjectArgumentAssemblyTypeName: MetaUpgrade, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -4172,7 +4297,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9752c390a27d3bd48b7aa77b987bfd7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 20
+  id: 5
+  baseCost: 20
   selected: 0
   level: 0
   upgradeName: Max HP
@@ -4207,6 +4333,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 296636938}
+          m_TargetAssemblyTypeName: SaveSceneManager, Assembly-CSharp
+          m_MethodName: SetHovered
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 797751939}
+            m_ObjectArgumentAssemblyTypeName: MetaUpgrade, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 1
     callback:
       m_PersistentCalls:
@@ -4214,6 +4352,18 @@ MonoBehaviour:
         - m_Target: {fileID: 797751941}
           m_TargetAssemblyTypeName: HoverButton, Assembly-CSharp
           m_MethodName: OnHoverStop
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 296636938}
+          m_TargetAssemblyTypeName: SaveSceneManager, Assembly-CSharp
+          m_MethodName: NotHovered
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -4289,6 +4439,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 296636938}
+        m_TargetAssemblyTypeName: SaveSceneManager, Assembly-CSharp
+        m_MethodName: MetaUpgradeClick
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 797751939}
+          m_ObjectArgumentAssemblyTypeName: MetaUpgrade, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -4532,7 +4694,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 123.3
+  m_fontSize: 123.25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4944,6 +5106,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 296636938}
+          m_TargetAssemblyTypeName: SaveSceneManager, Assembly-CSharp
+          m_MethodName: SetHovered
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 930566939}
+            m_ObjectArgumentAssemblyTypeName: MetaUpgrade, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 1
     callback:
       m_PersistentCalls:
@@ -4951,6 +5125,18 @@ MonoBehaviour:
         - m_Target: {fileID: 930566935}
           m_TargetAssemblyTypeName: HoverButton, Assembly-CSharp
           m_MethodName: OnHoverStop
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 296636938}
+          m_TargetAssemblyTypeName: SaveSceneManager, Assembly-CSharp
+          m_MethodName: NotHovered
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -5019,6 +5205,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 296636938}
+        m_TargetAssemblyTypeName: SaveSceneManager, Assembly-CSharp
+        m_MethodName: MetaUpgradeClick
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 930566939}
+          m_ObjectArgumentAssemblyTypeName: MetaUpgrade, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 930566939}
         m_TargetAssemblyTypeName: MetaUpgrade, Assembly-CSharp
         m_MethodName: Select
@@ -5081,7 +5279,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9752c390a27d3bd48b7aa77b987bfd7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 20
+  id: 0
+  baseCost: 20
   selected: 0
   level: 0
   upgradeName: Damage
@@ -5344,7 +5543,7 @@ MonoBehaviour:
   m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b2add8b36b8829546b7061d806bad46d, type: 2}
-  m_sharedMaterial: {fileID: 5637714439376686687, guid: b2add8b36b8829546b7061d806bad46d, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: ae68b4fad69f6bd4ca3c4cd78caa953e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5566,7 +5765,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 296636938}
         m_TargetAssemblyTypeName: SaveSceneManager, Assembly-CSharp
-        m_MethodName: ToTitleScreen
+        m_MethodName: BuyButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5589,7 +5788,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.31764704, g: 0.99607843, b: 0.558217, a: 1}
+  m_Color: {r: 0.3, g: 1, b: 0.5, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5759,7 +5958,7 @@ MonoBehaviour:
   m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b2add8b36b8829546b7061d806bad46d, type: 2}
-  m_sharedMaterial: {fileID: 5637714439376686687, guid: b2add8b36b8829546b7061d806bad46d, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: ae68b4fad69f6bd4ca3c4cd78caa953e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5901,7 +6100,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278225919
-  m_fontColor: {r: 1, g: 0.54365426, b: 0, a: 1}
+  m_fontColor: {r: 0, g: 1, b: 0.5, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -6100,7 +6299,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9752c390a27d3bd48b7aa77b987bfd7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 20
+  id: 4
+  baseCost: 20
   selected: 0
   level: 0
   upgradeName: Regen
@@ -6135,6 +6335,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 296636938}
+          m_TargetAssemblyTypeName: SaveSceneManager, Assembly-CSharp
+          m_MethodName: SetHovered
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1103520374}
+            m_ObjectArgumentAssemblyTypeName: MetaUpgrade, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 1
     callback:
       m_PersistentCalls:
@@ -6142,6 +6354,18 @@ MonoBehaviour:
         - m_Target: {fileID: 1103520376}
           m_TargetAssemblyTypeName: HoverButton, Assembly-CSharp
           m_MethodName: OnHoverStop
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 296636938}
+          m_TargetAssemblyTypeName: SaveSceneManager, Assembly-CSharp
+          m_MethodName: NotHovered
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -6217,6 +6441,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 296636938}
+        m_TargetAssemblyTypeName: SaveSceneManager, Assembly-CSharp
+        m_MethodName: MetaUpgradeClick
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1103520374}
+          m_ObjectArgumentAssemblyTypeName: MetaUpgrade, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -6345,7 +6581,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 41.75
+  m_fontSize: 41.7
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -10351,7 +10587,7 @@ RectTransform:
   m_Father: {fileID: 705282984}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.45, y: 0.02}
+  m_AnchorMin: {x: 0.4, y: 0.02}
   m_AnchorMax: {x: 0.62, y: 0.12}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
@@ -10386,7 +10622,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278225919
-  m_fontColor: {r: 1, g: 0.54365426, b: 0, a: 1}
+  m_fontColor: {r: 0, g: 1, b: 0.5, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

@@ -11,6 +11,8 @@ public class SessionManager
     public LevelData currentLevel;
     public SessionMap.MapNode currentNode;
     public static GameData data;
+    public static int money;
+    public int difficulty = 0;
 
     public void SavePlayerData(Player player)
     {
@@ -54,8 +56,9 @@ public class SessionManager
         return player;
     }
 
-    public void LevelComplete()
+    public void LevelComplete(int gems)
     {
+        data.currency += gems;
         currentLevel = null;
         currentNode.isComplete = true;
         for (int i = 0; i < map.nodeArr.Length; i++)

@@ -6,8 +6,21 @@ using UnityEngine.UI;
 
 public class MetaUpgrade : MonoBehaviour
 {
+    public enum MetaUpgradeID
+    {
+        Damage,
+        AttackSpeed,
+        Speed,
+        Armor,
+        Regen,
+        Health
+    }
+
     [SerializeField]
-    private int cost;
+    public MetaUpgradeID id;
+
+    [SerializeField]
+    private int baseCost;
 
     public bool selected;
     public int level;
@@ -42,6 +55,6 @@ public class MetaUpgrade : MonoBehaviour
 
     public int GetCost()
     {
-        return cost;
+        return baseCost * (level + 1);
     }
 }

@@ -45,7 +45,7 @@ public class SessionMap
                 float perlin = Mathf.PerlinNoise(perlinX, perlinY);
                 int branch = 0;
 
-                while (perlin > divider * branch)
+                while (perlin >= divider * branch)
                 {
                     branch++;
                 }
@@ -73,7 +73,7 @@ public class SessionMap
                 if (!node.isEmpty)
                 {
                     LevelPool pool = ResourceManager.levelPools[0];
-                    int ranIndex = Random.Range(0, ResourceManager.levelPools.Count - 1);
+                    int ranIndex = Random.Range(0, pool.levels.Count);
                     node.levelData = ResourceManager.levelPools[0].levels[ranIndex];
                 }
             }

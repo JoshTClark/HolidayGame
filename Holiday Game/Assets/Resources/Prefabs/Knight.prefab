@@ -150,7 +150,7 @@ MonoBehaviour:
   baseCritDamage: 2
   knockbackMult: 0
   currentHP: 0
-  xpAmount: 1
+  xpAmount: 0
   hpAdd: 0
   speedAdd: 0
   damageAdd: 0

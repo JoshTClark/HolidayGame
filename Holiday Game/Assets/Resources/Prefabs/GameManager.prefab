@@ -4269,7 +4269,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8704142796787333609}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ExitGame
+        m_MethodName: ToTitle
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6997,7 +6997,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Try again?
+  m_text: Title Screen
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b2add8b36b8829546b7061d806bad46d, type: 2}
   m_sharedMaterial: {fileID: 5637714439376686687, guid: b2add8b36b8829546b7061d806bad46d, type: 2}
@@ -8499,6 +8499,7 @@ MonoBehaviour:
   minSpawnDistance: {x: 20, y: 12}
   maxSpawnDistance: {x: 22, y: 14}
   deathEffect: {fileID: 0}
+  boss: {fileID: 0}
 --- !u!114 &8704142796787333607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9023,7 +9024,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8704142796787333609}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: Retry
+        m_MethodName: ToTitle
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

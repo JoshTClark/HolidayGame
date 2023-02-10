@@ -244,7 +244,7 @@ public class GameManager : MonoBehaviour
                     bossHealth.SetActive(true);
                     bossHealthMask.GetComponent<RectTransform>().anchorMax = new Vector2(EnemyManager.instance.boss.CurrentHP / EnemyManager.instance.boss.MaxHp, bossHealthMask.GetComponent<RectTransform>().anchorMax.y);
                     objectiveDisplay.rectTransform.anchorMin = new Vector2(objectiveDisplay.rectTransform.anchorMin.x, 0.89f);
-                    objectiveDisplay.rectTransform.anchorMax = new Vector2(objectiveDisplay.rectTransform.anchorMax.x, 0.95f);
+                    objectiveDisplay.rectTransform.anchorMax = new Vector2(EnemyManager.instance.boss.CurrentHP / EnemyManager.instance.boss.MaxHp, 0.95f);
                 }
                 else if (levelData.daysToSurvive > 0 && levelData.daysToSurvive > currentDay)
                 {
@@ -262,6 +262,11 @@ public class GameManager : MonoBehaviour
                 xpBar.GetComponent<RectTransform>().anchorMax = new Vector2(player.GetPercentToNextLevel(), xpBar.GetComponent<RectTransform>().anchorMax.y);
                 dashTimer.GetComponent<RectTransform>().anchorMax = new Vector2(1 - (player.dashCooldownTimer / player.DashCooldown), dashTimer.GetComponent<RectTransform>().anchorMax.y);
                 playerLevel.text = "Level: " + player.Level;
+                Debug.Log(player.CurrentHP + " current hp");
+                Debug.Log(player.MaxHp + " max hp");
+                Debug.Log(player.GetPercentHealth() + "% player health");
+                Debug.Log(hpBar.rectTransform.anchorMin + " anchor min");
+                Debug.Log(hpBar.rectTransform.anchorMax + " anchor max");
                 hpBar.rectTransform.anchorMax = new Vector2(player.GetPercentHealth(), hpBar.rectTransform.anchorMax.y);
                 hpText.text = player.CurrentHP.ToString("0") + "/" + player.MaxHp.ToString("0");
 
@@ -605,11 +610,19 @@ public class GameManager : MonoBehaviour
             ProjectileManager.Clean();
             EnemyManager.Clean();
             DropManager.Clean();
-            session.LevelComplete(session.difficulty * 5);
+            session.LevelComplete(session.difficulty * 5, player);
         }
         else
         {
             Debug.Log("No current session cannot go to map");
         }
+    }
+
+    public void ToTitle()
+    {
+        ProjectileManager.Clean();
+        EnemyManager.Clean();
+        DropManager.Clean();
+        session.ToTitle();
     }
 }

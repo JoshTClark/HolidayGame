@@ -53,11 +53,18 @@ public class SessionManager
         {
             player.inventory.Add(i);
         }
+        player.SetXPWithoutLevelUp(playerData.experience);
         return player;
     }
 
-    public void LevelComplete(int gems)
+    public void LevelComplete(int gems, Player player)
     {
+        playerData.inventory.Clear();
+        foreach (Upgrade u in player.inventory)
+        {
+            playerData.inventory.Add(u);
+        }
+        playerData.experience = player.XP;
         data.currency += gems;
         currentLevel = null;
         currentNode.isComplete = true;
@@ -80,9 +87,16 @@ public class SessionManager
         SceneManager.LoadSceneAsync("MapScene");
     }
 
+    public void ToTitle()
+    {
+        SaveManager.SaveFile(data.id, data);
+        SceneManager.LoadSceneAsync("StartScene");
+    }
+
     private struct PlayerData
     {
         public PlayableCharacterData chosenCharacter;
         public List<Upgrade> inventory;
+        public float experience;
     }
 }

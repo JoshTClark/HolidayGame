@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -13,14 +14,15 @@ public class SaveSceneManager : MonoBehaviour
         SelectSave,
         Title,
         CharacterSelect,
-        UpgradeMenu
+        UpgradeMenu,
+        SaveEditor
     }
 
     [SerializeField]
     private Camera mainCam;
 
     [SerializeField]
-    private CanvasRenderer titleScreenPanel, saveScreenPanel, charSelectPanel, upgradePanel;
+    private CanvasRenderer titleScreenPanel, saveScreenPanel, charSelectPanel, upgradePanel, saveEditPanel;
 
     public SceneState state = SceneState.SelectSave;
 
@@ -34,11 +36,22 @@ public class SaveSceneManager : MonoBehaviour
     [SerializeField]
     private Image charImage;
 
+    [SerializeField]
+    private Button saveEditorButton, buyButton;
+
+    [SerializeField]
+    private TMP_InputField currencyInput;
+
     private GameData data;
 
     public static SaveSceneManager instance;
 
     private GameData[] saves = new GameData[3];
+
+    [SerializeField]
+    private InputAction debugToggle;
+
+    private MetaUpgrade selected, hovered;
 
     private void Start()
     {
@@ -50,12 +63,51 @@ public class SaveSceneManager : MonoBehaviour
             characters.Add(i);
         }
 
+        if (!SaveManager.DoesFileExist(0))
+        {
+            Debug.Log("Save file 0 does not exist creating new file");
+            GameData d = new GameData();
+            d.id = 0;
+            SaveManager.SaveFile(0, d);
+        }
+        if (!SaveManager.DoesFileExist(1))
+        {
+            Debug.Log("Save file 1 does not exist creating new file");
+            GameData d = new GameData();
+            d.id = 1;
+            SaveManager.SaveFile(1, d);
+        }
+        if (!SaveManager.DoesFileExist(2))
+        {
+            Debug.Log("Save file 2 does not exist creating new file");
+            GameData d = new GameData();
+            d.id = 2;
+            SaveManager.SaveFile(2, d);
+        }
+
+        if (Constants.DEBUG)
+        {
+            debugToggle.Enable();
+        }
+        debugToggle.performed += (InputAction.CallbackContext callback) =>
+        {
+            if (state != SceneState.SaveEditor && state != SceneState.SelectSave)
+            {
+                state = SceneState.SaveEditor;
+                currencyInput.text = "" + data.currency;
+            }
+        };
+
         saves[0] = SaveManager.LoadFile(0);
         saves[1] = SaveManager.LoadFile(1);
         saves[2] = SaveManager.LoadFile(2);
 
-        slot1Info.text = "$" + saves[0].currency;
+        slot1Info.text = "<color=#00FF8B>" + saves[0].currency + " Gems";
+        slot2Info.text = "<color=#00FF8B>" + saves[1].currency + " Gems";
+        slot3Info.text = "<color=#00FF8B>" + saves[2].currency + " Gems";
     }
+
+
 
     private void Update()
     {
@@ -66,18 +118,21 @@ public class SaveSceneManager : MonoBehaviour
                 saveScreenPanel.gameObject.SetActive(true);
                 charSelectPanel.gameObject.SetActive(false);
                 upgradePanel.gameObject.SetActive(false);
+                saveEditPanel.gameObject.SetActive(false);
                 break;
             case SceneState.Title:
                 titleScreenPanel.gameObject.SetActive(true);
                 saveScreenPanel.gameObject.SetActive(false);
                 charSelectPanel.gameObject.SetActive(false);
                 upgradePanel.gameObject.SetActive(false);
+                saveEditPanel.gameObject.SetActive(false);
                 break;
             case SceneState.CharacterSelect:
                 titleScreenPanel.gameObject.SetActive(false);
                 saveScreenPanel.gameObject.SetActive(false);
                 charSelectPanel.gameObject.SetActive(true);
                 upgradePanel.gameObject.SetActive(false);
+                saveEditPanel.gameObject.SetActive(false);
                 charName.text = characters[currentSelectedCharacter].characterName;
                 charInfo.text = characters[currentSelectedCharacter].desc;
                 charImage.sprite = characters[currentSelectedCharacter].characterImage;
@@ -87,21 +142,45 @@ public class SaveSceneManager : MonoBehaviour
                 saveScreenPanel.gameObject.SetActive(false);
                 charSelectPanel.gameObject.SetActive(false);
                 upgradePanel.gameObject.SetActive(true);
-                foreach (MetaUpgrade i in upgrades)
+                saveEditPanel.gameObject.SetActive(false);
+                if (selected)
                 {
-                    if (i.gameObject.GetComponent<HoverButton>().isHover)
+                    upgradeDesc.text = selected.upgradeDesc;
+                    costLabel.text = selected.GetCost() + "";
+                    if (data.currency >= selected.GetCost())
                     {
-                        upgradeDesc.text = i.upgradeDesc;
-                        costLabel.text = "$" + i.GetCost();
-                        break;
+                        buyButton.gameObject.GetComponent<Image>().color = new Color(0.3f, 1f, 0.5f);
+                        buyButton.enabled = true;
                     }
-                    if (i.selected)
+                    else
                     {
-                        upgradeDesc.text = i.upgradeDesc;
-                        costLabel.text = "$" + i.GetCost();
+                        buyButton.gameObject.GetComponent<Image>().color = new Color(0.3f, 0.5f, 0.3f);
+                        buyButton.enabled = false;
                     }
                 }
-                money.text = "$" + data.currency;
+                if (hovered)
+                {
+                    upgradeDesc.text = hovered.upgradeDesc;
+                    costLabel.text = hovered.GetCost() + "";
+                    if (data.currency >= hovered.GetCost())
+                    {
+                        buyButton.gameObject.GetComponent<Image>().color = new Color(0.3f, 1f, 0.5f);
+                        buyButton.enabled = true;
+                    }
+                    else
+                    {
+                        buyButton.gameObject.GetComponent<Image>().color = new Color(0.3f, 0.5f, 0.3f);
+                        buyButton.enabled = false;
+                    }
+                }
+                money.text = data.currency + " Gems";
+                break;
+            case SceneState.SaveEditor:
+                titleScreenPanel.gameObject.SetActive(false);
+                saveScreenPanel.gameObject.SetActive(false);
+                charSelectPanel.gameObject.SetActive(false);
+                upgradePanel.gameObject.SetActive(false);
+                saveEditPanel.gameObject.SetActive(true);
                 break;
         }
 
@@ -119,6 +198,7 @@ public class SaveSceneManager : MonoBehaviour
         if (d != null)
         {
             data = d;
+            data.init();
             state = SceneState.Title;
         }
     }
@@ -131,6 +211,10 @@ public class SaveSceneManager : MonoBehaviour
     public void ToUpgradeScreen()
     {
         state = SceneState.UpgradeMenu;
+        foreach (MetaUpgrade u in upgrades)
+        {
+            u.level = data.GetUpgradeLevel(u.id);
+        }
     }
 
     public void DeleteButtonClick(int slot)
@@ -176,5 +260,41 @@ public class SaveSceneManager : MonoBehaviour
         {
             currentSelectedCharacter = characters.Count - 1;
         }
+    }
+
+    public void SaveEditorButton()
+    {
+        data.currency = int.Parse(currencyInput.text);
+        SaveManager.SaveFile(data.id, data);
+        ToTitleScreen();
+    }
+
+    public void BuyButtonClick()
+    {
+        if (selected)
+        {
+            if (data.currency >= selected.GetCost())
+            {
+                data.currency -= selected.GetCost();
+                selected.level++;
+                data.SetUpgrades(upgrades);
+                SaveManager.SaveFile(data.id, data);
+            }
+        }
+    }
+
+    public void MetaUpgradeClick(MetaUpgrade upgrade)
+    {
+        selected = upgrade;
+    }
+
+    public void SetHovered(MetaUpgrade upgrade)
+    {
+        hovered = upgrade;
+    }
+
+    public void NotHovered()
+    {
+        hovered = null;
     }
 }

@@ -52,4 +52,10 @@ public class HoverButton : MonoBehaviour
     {
         isHover = false;
     }
+
+    public void OnDisable()
+    {
+        scale = 1f;
+        isHover = false;
+    }
 }

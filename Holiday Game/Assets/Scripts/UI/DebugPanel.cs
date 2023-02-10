@@ -44,6 +44,16 @@ public class DebugPanel : MonoBehaviour
         }
     }
 
+    public void OnEnable()
+    {
+        Cursor.visible = true;
+    }
+
+    public void OnDisable()
+    {
+        Cursor.visible = false;
+    }
+
     public void GiveUpgrade()
     {
         UpgradeIndex index = ResourceManager.UpgradeIndexFromName(upgradeSelector.options[upgradeSelector.value].text);

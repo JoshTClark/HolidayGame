@@ -5232,6 +5232,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1230d1dbb7b1824428d67cd105b2dfc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ExitLocations:
+  - {x: 27, y: 23}
 --- !u!50 &483491557
 Rigidbody2D:
   serializedVersion: 4

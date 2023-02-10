@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c59e07d74277824bb5047733b29c0bc, type: 3}
   m_Name: Empty
   m_EditorClassIdentifier: 
-  scene: {fileID: 102900000, guid: 19d4cd4881419d64daee494ea90b741d, type: 3}
+  scene: {fileID: 0}
   difficulty: 1
   startHour: 12
   enemiesToDefeat: 0
   daysToSurvive: 0
+  isBossLevel: 0
   waves: []

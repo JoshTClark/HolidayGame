@@ -19,7 +19,7 @@ MonoBehaviour:
   daysToSurvive: 0
   isBossLevel: 0
   waves:
-  - waveLength: 500
+  - waveLength: 1000
     enemies:
     - isBoss: 0
       enemyIndex: 1

@@ -262,11 +262,13 @@ public class GameManager : MonoBehaviour
                 xpBar.GetComponent<RectTransform>().anchorMax = new Vector2(player.GetPercentToNextLevel(), xpBar.GetComponent<RectTransform>().anchorMax.y);
                 dashTimer.GetComponent<RectTransform>().anchorMax = new Vector2(1 - (player.dashCooldownTimer / player.DashCooldown), dashTimer.GetComponent<RectTransform>().anchorMax.y);
                 playerLevel.text = "Level: " + player.Level;
+                /*
                 Debug.Log(player.CurrentHP + " current hp");
                 Debug.Log(player.MaxHp + " max hp");
                 Debug.Log(player.GetPercentHealth() + "% player health");
                 Debug.Log(hpBar.rectTransform.anchorMin + " anchor min");
                 Debug.Log(hpBar.rectTransform.anchorMax + " anchor max");
+                */
                 hpBar.rectTransform.anchorMax = new Vector2(player.GetPercentHealth(), hpBar.rectTransform.anchorMax.y);
                 hpText.text = player.CurrentHP.ToString("0") + "/" + player.MaxHp.ToString("0");
 

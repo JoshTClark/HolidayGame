@@ -59,6 +59,7 @@ public class SessionManager
 
     public void LevelComplete(int gems, Player player)
     {
+        difficulty++;
         playerData.inventory.Clear();
         foreach (Upgrade u in player.inventory)
         {

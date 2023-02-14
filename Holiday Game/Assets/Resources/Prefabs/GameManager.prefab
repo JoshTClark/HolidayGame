@@ -922,7 +922,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 49.1
+  m_fontSize: 49.05
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2554,7 +2554,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 49.1
+  m_fontSize: 49.05
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7024,7 +7024,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 46.6
+  m_fontSize: 46.55
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -8481,6 +8481,23 @@ MonoBehaviour:
       m_Processors: 
       m_Groups: 
       m_Action: Slow Toggle
+      m_Flags: 0
+    m_Flags: 0
+  completeLevel:
+    m_Name: Complete Level
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 51e6fcec-0d3d-44aa-b0a1-1b26199e148e
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 35c29009-27ba-4f2e-b12e-885f8732aaa5
+      m_Path: <Keyboard>/f3
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Complete Level
       m_Flags: 0
     m_Flags: 0
   player: {fileID: 0}

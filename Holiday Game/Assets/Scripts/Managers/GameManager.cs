@@ -73,6 +73,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private InputAction slowToggle;
 
+    [SerializeField]
+    private InputAction completeLevel;
+
     public Player Player
     {
         get { return player; }
@@ -181,10 +184,15 @@ public class GameManager : MonoBehaviour
         if (Constants.DEBUG)
         {
             slowToggle.Enable();
+            completeLevel.Enable();
         }
         slowToggle.performed += (InputAction.CallbackContext callback) =>
         {
             slowTime = !slowTime;
+        };
+        completeLevel.performed += (InputAction.CallbackContext callback) =>
+        {
+            DoLevelEnd();
         };
 
         pausedPanel.gameObject.SetActive(false);
@@ -208,6 +216,9 @@ public class GameManager : MonoBehaviour
         playerDash.action.Disable();
         godMode.action.Disable();
         levelUpButton.action.Disable();
+        slowToggle.Disable();
+        completeLevel.Disable();
+
     }
 
     void Update()

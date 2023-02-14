@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,21 +21,44 @@ public class UpgradePanelManager : MonoBehaviour
     private void Start()
     {
         rerollButton.gameObject.SetActive(false);
-        backButton.gameObject.SetActive(false);
     }
     /// <summary>
     /// Sets upgrades for the player to choose
     /// </summary>
     public void SetUpgrades(int numOptions)
     {
+        List<ItemDef.LevelDescription> availableDescs = new List<ItemDef.LevelDescription>();
         List<Item> available = new List<Item>();
+        List<ItemDef.UpgradePath> paths = new List<ItemDef.UpgradePath>();
 
         // Checks which item upgrades are available to the player
         foreach (Item i in player.inventory)
         {
             if (i.Level < i.itemDef.maxLevel)
             {
-                available.Add(i);
+                if (i.Level < i.currentPath.levelRange.y)
+                {
+                    foreach (ItemDef.LevelDescription d in i.currentPath.levelDescriptions) {
+                        if (d.level == i.Level + 1)
+                        {
+                            availableDescs.Add(d);
+                        }
+                    }
+                    available.Add(i);
+                    paths.Add(i.currentPath);
+                }
+                else
+                {
+                    foreach (ItemDef.UpgradePath u in i.itemDef.paths)
+                    {
+                        if (u.levelRange.x == i.Level + 1)
+                        {
+                            availableDescs.Add(u.levelDescriptions[0]);
+                            available.Add(i);
+                            paths.Add(u);
+                        }
+                    }
+                }
             }
         }
 
@@ -44,8 +68,12 @@ public class UpgradePanelManager : MonoBehaviour
         {
             int random = Random.Range(0, available.Count);
             Item item = available[random];
+            ItemDef.LevelDescription lvlDesc = availableDescs[random];
+            ItemDef.UpgradePath path = paths[random];
+            availableDescs.RemoveAt(random);
             available.RemoveAt(random);
-            AddItem(item);
+            paths.RemoveAt(random);
+            AddItem(item, lvlDesc, path);
         }
     }
 
@@ -53,10 +81,11 @@ public class UpgradePanelManager : MonoBehaviour
     /// Adds an item to the set of chooseable item upgrades
     /// </summary>
     /// <param name="upgrade"></param>
-    public void AddItem(Item item)
+    public void AddItem(Item item, ItemDef.LevelDescription levelDescription, ItemDef.UpgradePath path)
     {
         UpgradeOption option = Instantiate<UpgradeOption>(prefab, new Vector3(), new Quaternion(), infoPanel.gameObject.transform);
         option.item = item;
+        option.levelDescription = levelDescription;
         option.tier = tier;
         option.textName = textName;
         option.desc = desc;
@@ -67,14 +96,15 @@ public class UpgradePanelManager : MonoBehaviour
         upgradeRect.localScale = new Vector3(2, 2, 1);
         option.gameObject.GetComponent<Button>().onClick.AddListener(() =>
         {
-            Select(item);
+            Select(item, path);
         });
         options.Add(option);
     }
 
-    public void Select(Item item)
+    public void Select(Item item, ItemDef.UpgradePath path)
     {
         item.Level += 1;
+        item.currentPath = path;
         selected = true;
     }
 

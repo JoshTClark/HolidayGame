@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class UpgradeOption : MonoBehaviour
 {
     public Item item;
+    public ItemDef.LevelDescription levelDescription;
     public TMP_Text textName, tier, desc, baseStatsTxt, weaponStatsTxt, weaponStatsLabel;
     public Image iconHolder;
     public bool isHover = false;
@@ -70,18 +71,15 @@ public class UpgradeOption : MonoBehaviour
         rectTransform.localScale = new Vector3(scale, scale, 1);
     }
 
+    /// <summary>
+    /// Called when player hovers over the button
+    /// Sets the stat change descriptions
+    /// </summary>
     public void OnHoverStart()
     {
         isHover = true;
         textName.text = item.itemDef.itemName + " LVL: " + (item.Level+1);
-        foreach (ItemDef.LevelDescription d in item.itemDef.levelDescriptions)
-        {
-            if (d.level == item.Level + 1) 
-            {
-                desc.text = d.desc;
-                break;
-            }
-        }
+        desc.text = levelDescription.desc;
         tier.enableVertexGradient = false;
         textName.enableVertexGradient = false;
         if (item.itemDef.tier == ItemDef.Tier.Common)
@@ -136,8 +134,7 @@ public class UpgradeOption : MonoBehaviour
 
         Player player = GameManager.instance.Player;
 
-        /*
-        float newHPf = (player.BaseMaxHp + u.statChange.hpAdd + player.hpAdd) * player.hpMult * u.statChange.hpMult;
+        float newHPf = (player.BaseMaxHp + levelDescription.statChanges.hpAdd + player.hpAdd) * player.hpMult * levelDescription.statChanges.hpMult;
         string newHP;
         if (newHPf > player.MaxHp)
         {
@@ -152,7 +149,7 @@ public class UpgradeOption : MonoBehaviour
             newHP = newHPf.ToString();
         }
 
-        float newSpeedf = (player.BaseSpeed + u.statChange.speedAdd + player.speedAdd) * player.speedMult * u.statChange.speedMult;
+        float newSpeedf = (player.BaseSpeed + levelDescription.statChanges.speedAdd + player.speedAdd) * player.speedMult * levelDescription.statChanges.speedMult;
         string newSpeed;
         if (newSpeedf > player.Speed)
         {
@@ -167,7 +164,7 @@ public class UpgradeOption : MonoBehaviour
             newSpeed = newSpeedf.ToString();
         }
 
-        float newDamagef = (player.BaseDamage + u.statChange.damageAdd + player.damageAdd) * player.damageMult * u.statChange.damageMult;
+        float newDamagef = (player.BaseDamage + levelDescription.statChanges.damageAdd + player.damageAdd) * player.damageMult * levelDescription.statChanges.damageMult;
         string newDamage;
         if (newDamagef > player.Damage)
         {
@@ -182,7 +179,7 @@ public class UpgradeOption : MonoBehaviour
             newDamage = newDamagef.ToString();
         }
 
-        float newAtckSpdf = (player.BaseAttackSpeed + u.statChange.attackSpeedAdd + player.attackSpeedAdd) * player.attackSpeedMult * u.statChange.attackSpeedMult;
+        float newAtckSpdf = (player.BaseAttackSpeed + levelDescription.statChanges.attackSpeedAdd + player.attackSpeedAdd) * player.attackSpeedMult * levelDescription.statChanges.attackSpeedMult;
         string newAtckSpd;
         if (newAtckSpdf > player.AttackSpeed)
         {
@@ -197,7 +194,7 @@ public class UpgradeOption : MonoBehaviour
             newAtckSpd = newAtckSpdf * 100 + "%";
         }
 
-        float newArmorf = (player.BaseArmor + u.statChange.armorAdd + player.armorAdd) * player.armorMult * u.statChange.armorMult;
+        float newArmorf = (player.BaseArmor + levelDescription.statChanges.armorAdd + player.armorAdd) * player.armorMult * levelDescription.statChanges.armorMult;
         string newArmor;
         if (newArmorf > player.Armor)
         {
@@ -212,7 +209,7 @@ public class UpgradeOption : MonoBehaviour
             newArmor = newArmorf.ToString();
         }
 
-        float newRegenf = (player.BaseRegen + u.statChange.regenAdd + player.regenAdd) * player.regenMult * u.statChange.regenMult;
+        float newRegenf = (player.BaseRegen + levelDescription.statChanges.regenAdd + player.regenAdd) * player.regenMult * levelDescription.statChanges.regenMult;
         string newRegen;
         if (newRegenf > player.Regen)
         {
@@ -227,7 +224,7 @@ public class UpgradeOption : MonoBehaviour
             newRegen = newRegenf.ToString();
         }
 
-        float newCritChancef = (player.BaseCritChance + u.statChange.critChanceAdd + player.critChanceAdd) * player.critChanceMult * u.statChange.critChanceMult;
+        float newCritChancef = (player.BaseCritChance + levelDescription.statChanges.critChanceAdd + player.critChanceAdd) * player.critChanceMult * levelDescription.statChanges.critChanceMult;
         string newCritChance;
         if (newCritChancef > player.CritChance)
         {
@@ -242,7 +239,7 @@ public class UpgradeOption : MonoBehaviour
             newCritChance = newCritChancef * 100 + "%";
         }
 
-        float newCritDmgf = (player.BaseCritDamage + u.statChange.critDamageAdd + player.critDamageAdd) * player.critDamageMult * u.statChange.critDamageMult;
+        float newCritDmgf = (player.BaseCritDamage + levelDescription.statChanges.critDamageAdd + player.critDamageAdd) * player.critDamageMult * levelDescription.statChanges.critDamageMult;
         string newCritDmg;
         if (newCritDmgf > player.CritDamage)
         {
@@ -267,7 +264,8 @@ public class UpgradeOption : MonoBehaviour
             "\nCrit Chance: " + (player.CritChance * 100) + "%" + " -> " + newCritChance +
             "\nCrit Damage: " + player.CritDamage * 100 + "%" + " -> " + newCritDmg;
 
-        if (u.weaponStatChanges.Count > 0)
+        /*
+        if (u.weaponstatChangess.Count > 0)
         {
             Weapon w = player.GetWeapon(u.weaponStatIndex);
             if (w == null)
@@ -281,11 +279,11 @@ public class UpgradeOption : MonoBehaviour
             string text = "";
             foreach (string key in w.GetAllStats())
             {
-                Upgrade.WeaponStatChange weaponStatChange = u.GetWeaponStatChange(key);
+                Upgrade.WeaponstatChanges weaponstatChanges = u.GetWeaponstatChanges(key);
 
-                float newStat = (w.GetStat(key) + weaponStatChange.add) * weaponStatChange.mult;
+                float newStat = (w.GetStat(key) + weaponstatChanges.add) * weaponstatChanges.mult;
                 string newStatTxt;
-                if (weaponStatChange.isPercent)
+                if (weaponstatChanges.isPercent)
                 {
                     if (newStat > w.GetStat(key))
                     {

@@ -60,7 +60,9 @@ public class ResourceManager
         Damage = 1,
         MoveSpeed = 2,
         SwordWeapon = 3,
-        CritChance = 4
+        CritChance = 4,
+        CandyCorn = 5
+
     }
 
     public enum UpgradeIndex

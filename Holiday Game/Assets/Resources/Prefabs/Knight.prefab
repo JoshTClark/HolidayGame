@@ -139,12 +139,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2d9c162f7ceb014a8112139a6fcc618, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMaxHP: 50
-  baseSpeed: 5
+  baseMaxHP: 100
+  baseSpeed: 4
   baseDamage: 5
-  baseAttackSpeed: 1
-  baseArmor: 0
-  baseRegen: 0
+  baseAttackSpeed: 0.8
+  baseArmor: 1
+  baseRegen: 1
   baseRegenInterval: 5
   baseCritChance: 0.1
   baseCritDamage: 2

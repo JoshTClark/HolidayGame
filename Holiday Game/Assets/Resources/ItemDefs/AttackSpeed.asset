@@ -22,7 +22,7 @@ MonoBehaviour:
     previousPath: 
     numLevels: 3
     levelDescriptions:
-    - desc: Increases attack speed by 25%
+    - desc: Increases attack speed by 15%
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -35,13 +35,13 @@ MonoBehaviour:
         hpMult: 1
         speedMult: 1
         damageMult: 1
-        attackSpeedMult: 1.25
+        attackSpeedMult: 1.15
         armorMult: 1
         regenMult: 1
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - desc: Increases attack speed by a further 25%
+    - desc: Increases attack speed by a further 15%
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -54,13 +54,13 @@ MonoBehaviour:
         hpMult: 1
         speedMult: 1
         damageMult: 1
-        attackSpeedMult: 1.25
+        attackSpeedMult: 1.15
         armorMult: 1
         regenMult: 1
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - desc: Increases attack speed by a further 25%
+    - desc: Increases attack speed by a further 15%
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -73,35 +73,16 @@ MonoBehaviour:
         hpMult: 1
         speedMult: 1
         damageMult: 1
-        attackSpeedMult: 1.25
+        attackSpeedMult: 1.15
         armorMult: 1
         regenMult: 1
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-  - pathName: Path1
+  - pathName: Pure Attack Speed
     previousPath: Start
     numLevels: 3
     levelDescriptions:
-    - desc: Increases attack speed by 25%
-      statChanges:
-        hpAdd: 0
-        speedAdd: 0
-        damageAdd: 0
-        attackSpeedAdd: 0
-        armorAdd: 0
-        regenAdd: 0
-        critChanceAdd: 0
-        critDamageAdd: 0
-        hpMult: 1
-        speedMult: 1
-        damageMult: 1
-        attackSpeedMult: 1.25
-        armorMult: 1
-        regenMult: 1
-        critChanceMult: 1
-        critDamageMult: 1
-        XPMult: 1
     - desc: Increases attack speed by a further 25%
       statChanges:
         hpAdd: 0
@@ -140,11 +121,30 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-  - pathName: Path2
+    - desc: Increases attack speed by a further 50%
+      statChanges:
+        hpAdd: 0
+        speedAdd: 0
+        damageAdd: 0
+        attackSpeedAdd: 0
+        armorAdd: 0
+        regenAdd: 0
+        critChanceAdd: 0
+        critDamageAdd: 0
+        hpMult: 1
+        speedMult: 1
+        damageMult: 1
+        attackSpeedMult: 1.5
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1
+  - pathName: Situational
     previousPath: Start
     numLevels: 3
     levelDescriptions:
-    - desc: Does something else
+    - desc: Should do something else
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -163,7 +163,7 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - desc: Does something else
+    - desc: Should do something else
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -182,7 +182,7 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - desc: does something else
+    - desc: Should do something else
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -195,7 +195,7 @@ MonoBehaviour:
         hpMult: 1
         speedMult: 1
         damageMult: 1
-        attackSpeedMult: 1.25
+        attackSpeedMult: 1.5
         armorMult: 1
         regenMult: 1
         critChanceMult: 1

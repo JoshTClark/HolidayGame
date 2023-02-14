@@ -41,9 +41,9 @@ public class UpgradePanelManager : MonoBehaviour
             }
             if (i.Level < i.itemDef.maxLevel)
             {
-                if (i.Level < i.currentPath.numLevels)
+                if (i.Level - offset < i.currentPath.numLevels)
                 {
-                    availableDescs.Add(i.currentPath.levelDescriptions[i.Level - 0]);
+                    availableDescs.Add(i.currentPath.levelDescriptions[i.Level - offset]);
                     available.Add(i);
                     paths.Add(i.currentPath);
                 }

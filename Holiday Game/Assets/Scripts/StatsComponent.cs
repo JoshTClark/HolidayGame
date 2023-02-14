@@ -582,7 +582,7 @@ public abstract class StatsComponent : MonoBehaviour
         if (currentHP != 0 && MaxHp != 0)
         {
             return CurrentHP / MaxHp;
-        } 
+        }
         return 0;
     }
 
@@ -711,6 +711,65 @@ public abstract class StatsComponent : MonoBehaviour
 
         // LEVELS
         CalculateLevel();
+
+        // Attack speed item for testing --- If you write a new item base how you program stat changes off of this
+        if (HasItem(ItemIndex.AttackSpeed))
+        {
+            Item i = GetItem(ItemIndex.AttackSpeed);
+            // Level 1
+            if (i.Level >= 1)
+            {
+                attackSpeedAdd += 0.15f;
+            }
+            // Level 2
+            if (i.Level >= 2)
+            {
+                attackSpeedAdd += 0.15f;
+            }
+            // Level 3
+            if (i.Level >= 3)
+            {
+                attackSpeedAdd += 0.15f;
+            }
+            // Path 1
+            if (i.HasTakenPath("Pure Attack Speed"))
+            {
+                // Level 4
+                if (i.Level >= 4)
+                {
+                    attackSpeedAdd += 0.25f;
+                }
+                // Level 5
+                if (i.Level >= 5)
+                {
+                    attackSpeedAdd += 0.25f;
+                }
+                // Level 6
+                if (i.Level >= 6)
+                {
+                    attackSpeedAdd += 0.50f;
+                }
+            }
+            // Path 2
+            if (i.HasTakenPath("Situational"))
+            {
+                // Level 4
+                if (i.Level >= 4)
+                {
+                    attackSpeedAdd += 0.25f;
+                }
+                // Level 5
+                if (i.Level >= 5)
+                {
+                    attackSpeedAdd += 0.25f;
+                }
+                // Level 6
+                if (i.Level >= 6)
+                {
+                    attackSpeedAdd += 0.50f;
+                }
+            }
+        }
 
         /*
         // UPGRADES

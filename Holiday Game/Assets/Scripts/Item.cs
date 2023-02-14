@@ -15,4 +15,20 @@ public class Item
         get { return level; }
         set { level = value; }
     }
+
+    public bool HasTakenPath(string pathName)
+    {
+        if (currentPath.pathName == pathName)
+        {
+            return true;
+        }
+        foreach (UpgradePath p in takenPaths)
+        {
+            if (p.pathName == pathName)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }

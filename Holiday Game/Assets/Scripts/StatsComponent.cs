@@ -771,6 +771,76 @@ public abstract class StatsComponent : MonoBehaviour
             }
         }
 
+        //Crit Upgrade Tree
+        if (HasItem(ItemIndex.CritChance))
+        {
+            Item i = GetItem(ItemIndex.CritChance);
+            // Level 1
+            if (i.Level >= 1)
+            {
+                critChanceAdd += 0.05f;
+                critDamageAdd += 0.25f;
+            }
+            // Level 2
+            if (i.Level >= 2)
+            {
+                critChanceAdd += 0.15f;
+            }
+            // Level 3
+            if (i.Level >= 3)
+            {
+                critDamageAdd += 0.5f;
+            }
+            // Path 1
+            if (i.HasTakenPath("Weak Spots"))
+            {
+                // Level 4
+                if (i.Level >= 4)
+                {
+                    critChanceAdd += 0.15f;
+                }
+                // Level 5
+                if (i.Level >= 5)
+                {
+                    critChanceAdd += 0.15f;
+                }
+
+            }
+            //path 1 capstone
+            if(i.HasTakenPath("Armor Piercer"))
+            {
+                // Level 6
+                if (i.Level >= 6)
+                {
+                    critChanceAdd += 0.15f;
+                }
+            }
+            // Path 2
+            if (i.HasTakenPath("Big Red Numbers"))
+            {
+                // Level 4
+                if (i.Level >= 4)
+                {
+                    critDamageAdd += 0.5f;
+                }
+                // Level 5
+                if (i.Level >= 5)
+                {
+                    critDamageAdd += 0.5f;
+                }
+
+            }
+            //path 2 capstone
+            if(i.HasTakenPath("Vicious Wounds"))
+            {
+                // Level 6
+                if (i.Level >= 6)
+                {
+                    critDamageAdd += 0.5f;
+                }
+            }
+        }
+
         /*
         // UPGRADES
 

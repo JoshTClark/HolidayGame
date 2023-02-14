@@ -59,7 +59,8 @@ public class ResourceManager
         AttackSpeed = 0,
         Damage = 1,
         MoveSpeed = 2,
-        SwordWeapon = 3
+        SwordWeapon = 3,
+        CritChance = 4
     }
 
     public enum UpgradeIndex

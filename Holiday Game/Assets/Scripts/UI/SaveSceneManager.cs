@@ -57,6 +57,7 @@ public class SaveSceneManager : MonoBehaviour
     {
         ResourceManager.Init();
         instance = this;
+        Cursor.visible = true;
 
         foreach (PlayableCharacterData i in ResourceManager.characters)
         {

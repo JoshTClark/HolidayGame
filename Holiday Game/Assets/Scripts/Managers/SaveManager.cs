@@ -15,7 +15,17 @@ public static class SaveManager
         FileStream file;
 
         if (File.Exists(destination)) file = File.OpenWrite(destination);
-        else file = File.Create(destination);
+        else 
+        {
+            //check if directory doesn't exit
+            if (!Directory.Exists(Application.persistentDataPath + "/" + "saves"))
+            {
+                //if it doesn't, create it
+                Directory.CreateDirectory(Application.persistentDataPath + "/" + "saves");
+
+            }
+            file = File.Create(destination);
+        }
 
         BinaryFormatter bf = new BinaryFormatter();
         bf.Serialize(file, data);

@@ -457,7 +457,7 @@ public class ResourceManager
     {
         foreach (LevelData data in levelDatas)
         {
-            if (data.scene && data.scene.name == scene) 
+            if (data.scene == scene) 
             {
                 return data;
             }

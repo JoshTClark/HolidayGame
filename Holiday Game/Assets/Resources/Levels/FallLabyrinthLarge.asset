@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c59e07d74277824bb5047733b29c0bc, type: 3}
   m_Name: FallLabyrinthLarge
   m_EditorClassIdentifier: 
-  scene: {fileID: 102900000, guid: 7e7621d1b49e0654baef32d85a7a2a71, type: 3}
+  scene: FallLabyrinthLarge
   difficulty: 1
   startHour: 12
   enemiesToDefeat: 0

@@ -6,7 +6,7 @@ public class Exploder : Enemy
 {
     private bool inRange = false;
     [SerializeField]
-    private float range = 1f; // Test later
+    private float range = 0.1f; // Test later
     private float deathTimer = 2.5f;
     private float timer = 0.0f;
 
@@ -16,7 +16,8 @@ public class Exploder : Enemy
     }
     public override void OnUpdate()
     {
-        if(PlayerDistance() >= range)
+        Move();
+        if(PlayerDistance() <= range)
         {
             inRange= true;
         }

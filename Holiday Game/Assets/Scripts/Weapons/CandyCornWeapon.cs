@@ -11,9 +11,10 @@ public class CandyCornWeapon : Weapon
 
     public override void CalcStats()
     {
+        /*
         if (owner.HasUpgrade(ResourceManager.UpgradeIndex.CandyCornSpray))
         {
-            trueStats["Attack Speed"] = 1.5f + 0.5f * (owner.GetUpgrade(ResourceManager.UpgradeIndex.CandyCornSpray).CurrentLevel - 1);
+            trueStats["Attack Speed"] = 1.5f + 0.5f * (owner.GetItem(ResourceManager.UpgradeIndex.CandyCornSpray).CurrentLevel - 1);
         }
 
         float count = GetBaseStat("Projectiles");
@@ -21,10 +22,11 @@ public class CandyCornWeapon : Weapon
         // More fireworks upgrade
         if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.MoreCorn))
         {
-            count += 1f * (GameManager.instance.Player.GetUpgrade(ResourceManager.UpgradeIndex.MoreCorn).CurrentLevel);
+            count += 1f * (GameManager.instance.Player.GetItem(ResourceManager.UpgradeIndex.MoreCorn).CurrentLevel);
         }
 
         trueStats["Projectiles"] = count;
+        */
     }
 
     public override void OnUpdate()
@@ -51,10 +53,12 @@ public class CandyCornWeapon : Weapon
                 if (volleyTimer >= (((shotDelay / GetStat("Projectiles")) / owner.AttackSpeed) / GetStat("Attack Speed")))
                 {
                     float accuracyOff = 0;
+                    /*
                     if (owner.HasUpgrade(ResourceManager.UpgradeIndex.CandyCornSpray))
                     {
-                        accuracyOff = Random.Range(-10 * (owner.GetUpgrade(ResourceManager.UpgradeIndex.CandyCornSpray).CurrentLevel), 10 * (owner.GetUpgrade(ResourceManager.UpgradeIndex.CandyCornSpray).CurrentLevel));
+                        accuracyOff = Random.Range(-10 * (owner.GetItem(ResourceManager.UpgradeIndex.CandyCornSpray).CurrentLevel), 10 * (owner.GetItem(ResourceManager.UpgradeIndex.CandyCornSpray).CurrentLevel));
                     }
+                    */
                     ProjectileBase p = ProjectileManager.GetProjectile(ResourceManager.ProjectileIndex.CandyCorn);
                     p.transform.position = this.transform.position;
                     p.transform.rotation = transform.rotation;

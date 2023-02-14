@@ -23,8 +23,6 @@ public class Upgrade : ScriptableObject
     public bool CanTakeMultiple;
     public bool IsWeapon;
     public Sprite icon;
-    public List<UpgradeIndex> prereqs = new List<UpgradeIndex>();
-    public List<UpgradeIndex> exclusions = new List<UpgradeIndex>();
 
     public StatChange statChange;
     public WeaponIndex weaponStatIndex;

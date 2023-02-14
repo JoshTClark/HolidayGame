@@ -38,9 +38,9 @@ public class DebugPanel : MonoBehaviour
     private void Update()
     {
         inventoryDisplay.text = "";
-        foreach (Upgrade i in GameManager.instance.Player.inventory)
+        foreach (Item i in GameManager.instance.Player.inventory)
         {
-            inventoryDisplay.text += i.upgradeName + ": LVL " + i.CurrentLevel + "\n";
+            inventoryDisplay.text += i.itemDef.itemName + ": LVL " + i.Level + "\n";
         }
     }
 
@@ -58,7 +58,9 @@ public class DebugPanel : MonoBehaviour
     {
         UpgradeIndex index = ResourceManager.UpgradeIndexFromName(upgradeSelector.options[upgradeSelector.value].text);
         Debug.Log("Giving player " + ResourceManager.GetUpgrade(index).upgradeName);
+        /*
         GameManager.instance.Player.AddUpgrade(index);
+        */
     }
 
     public void SpawnEnemy()

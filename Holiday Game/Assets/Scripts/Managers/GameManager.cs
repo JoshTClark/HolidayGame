@@ -114,10 +114,14 @@ public class GameManager : MonoBehaviour
             ResourceManager.Init();
             Debug.Log("No session found");
             player = GameObject.Instantiate<Player>(ResourceManager.characters[0].prefab);
-            player.inventory = new List<Upgrade>();
-            foreach (Upgrade i in ResourceManager.characters[0].inventory)
+            player.inventory = new List<Item>();
+            foreach (ItemDef i in ResourceManager.characters[0].inventory)
             {
-                player.inventory.Add(i);
+                player.inventory.Add(i.GetItem());
+                if (i.GetType() == typeof(WeaponDef))
+                {
+                    player.AddWeapon(((WeaponDef)i).weaponPrefab);
+                }
             }
         }
         else
@@ -358,13 +362,8 @@ public class GameManager : MonoBehaviour
                 if (!upgradeManager.displaying)
                 {
                     upgradeManager.player = player;
-                    upgradeManager.SetUpgradesByPools(GetPossiblePools(false), 4);
-                    bool check = false;
-                    if ((player.Level - (upgradesToGive - 1)) % garunteedWeaponLevel == 0)
-                    {
-                        check = true;
-                    }
-                    upgradeManager.ShowOptions(upgradesToGive, check);
+                    upgradeManager.SetUpgrades(4);
+                    upgradeManager.ShowOptions(upgradesToGive);
                 }
                 if (upgradeManager.selected)
                 {
@@ -373,21 +372,14 @@ public class GameManager : MonoBehaviour
                     if (upgradesToGive <= 0)
                     {
                         state = GameState.Normal;
-                        upgradeManager.tempWeapons = 0;
                         upgradePanel.gameObject.SetActive(false);
                         gamePanel.gameObject.SetActive(true);
-                        doSpecialUpgrade = false;
                     }
                     else
                     {
                         upgradeManager.player = player;
-                        upgradeManager.SetUpgradesByPools(GetPossiblePools(false), 4);
-                        bool check = false;
-                        if ((player.Level - (upgradesToGive - 1)) % garunteedWeaponLevel == 0)
-                        {
-                            check = true;
-                        }
-                        upgradeManager.ShowOptions(upgradesToGive, check);
+                        upgradeManager.SetUpgrades(4);
+                        upgradeManager.ShowOptions(upgradesToGive);
                     }
                 }
                 break;
@@ -406,7 +398,7 @@ public class GameManager : MonoBehaviour
     public void GivePlayerWeapon(ResourceManager.WeaponIndex index)
     {
         Weapon weapon = ResourceManager.GetWeapon(index);
-        Player.AddAttack(weapon);
+        Player.AddWeapon(weapon);
     }
 
     // Random check
@@ -468,6 +460,7 @@ public class GameManager : MonoBehaviour
         {
             pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Basic));
             pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Weapons));
+            /*
             if (player.HasUpgrade(ResourceManager.UpgradeIndex.SnowballWeaponUpgrade))
             {
                 pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Snowball));
@@ -488,6 +481,7 @@ public class GameManager : MonoBehaviour
             {
                 pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.CandyCorn));
             }
+            */
         }
         return pools;
     }

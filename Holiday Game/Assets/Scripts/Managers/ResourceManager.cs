@@ -53,6 +53,15 @@ public class ResourceManager
         CandyCornRifle,
         SwordSlash
     }
+
+    public enum ItemIndex
+    {
+        AttackSpeed = 0,
+        Damage = 1,
+        MoveSpeed = 2,
+        SwordWeapon = 3
+    }
+
     public enum UpgradeIndex
     {
         Health1,
@@ -159,6 +168,9 @@ public class ResourceManager
     public static List<LevelData> levelDatas = new List<LevelData>();
     public static List<LevelPool> levelPools = new List<LevelPool>();
     public static List<PlayableCharacterData> characters = new List<PlayableCharacterData>();
+
+    public static List<WeaponDef> weaponDefs = new List<WeaponDef>();
+    public static List<ItemDef> itemDefs = new List<ItemDef>();
 
     public static bool isLoaded = false;
 

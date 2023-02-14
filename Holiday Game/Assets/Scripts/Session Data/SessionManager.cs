@@ -16,7 +16,7 @@ public class SessionManager
 
     public void SavePlayerData(Player player)
     {
-        foreach (Upgrade i in player.inventory)
+        foreach (Item i in player.inventory)
         {
             playerData.inventory.Add(i);
         }
@@ -28,10 +28,10 @@ public class SessionManager
         if (!playerData.chosenCharacter)
         {
             playerData.chosenCharacter = chosenCharacter;
-            playerData.inventory = new List<Upgrade>();
-            foreach (Upgrade i in chosenCharacter.inventory)
+            playerData.inventory = new List<Item>();
+            foreach (ItemDef i in chosenCharacter.inventory)
             {
-                playerData.inventory.Add(i);
+                playerData.inventory.Add(i.GetItem());
             }
         }
     }
@@ -49,9 +49,12 @@ public class SessionManager
             SetChosenCharacter(ResourceManager.characters[0]);
         }
         player = GameObject.Instantiate<Player>(playerData.chosenCharacter.prefab);
-        foreach (Upgrade i in playerData.inventory)
+        foreach (Item i in playerData.inventory)
         {
             player.inventory.Add(i);
+            if (i.itemDef.GetType() == typeof(WeaponDef)) {
+                player.AddWeapon(((WeaponDef)i.itemDef).weaponPrefab);
+            }
         }
         player.SetXPWithoutLevelUp(playerData.experience);
         return player;
@@ -61,9 +64,9 @@ public class SessionManager
     {
         difficulty++;
         playerData.inventory.Clear();
-        foreach (Upgrade u in player.inventory)
+        foreach (Item i in player.inventory)
         {
-            playerData.inventory.Add(u);
+            playerData.inventory.Add(i);
         }
         playerData.experience = player.XP;
         data.currency += gems;
@@ -97,7 +100,7 @@ public class SessionManager
     private struct PlayerData
     {
         public PlayableCharacterData chosenCharacter;
-        public List<Upgrade> inventory;
+        public List<Item> inventory;
         public float experience;
     }
 }

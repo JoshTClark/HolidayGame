@@ -156,10 +156,11 @@ public abstract class Enemy : StatsComponent
             float ran = Random.value;
             if (info.index == ResourceManager.PickupIndex.HealthDrop1)
             {
+                /*
                 if (player.HasUpgrade(ResourceManager.UpgradeIndex.CupidArrowHealth) && dmgInfo.weapon == ResourceManager.WeaponIndex.CupidArrow)
                 {
-                    ran -= (float)(0.05 * GameManager.instance.Player.GetUpgrade(ResourceManager.UpgradeIndex.CupidArrowHealth).CurrentLevel);
-                }
+                    ran -= (float)(0.05 * GameManager.instance.Player.GetItem(ResourceManager.UpgradeIndex.CupidArrowHealth).CurrentLevel);
+                */
             }
             if (ran <= info.chance)
             {

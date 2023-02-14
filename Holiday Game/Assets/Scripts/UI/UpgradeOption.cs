@@ -6,41 +6,38 @@ using UnityEngine.UI;
 
 public class UpgradeOption : MonoBehaviour
 {
-    public ResourceManager.UpgradeIndex upgrade;
+    public Item item;
     public TMP_Text textName, tier, desc, baseStatsTxt, weaponStatsTxt, weaponStatsLabel;
     public Image iconHolder;
     public bool isHover = false;
-    public bool isWeaponReplacement = false;
     private float scale = 2;
 
     private void Start()
     {
-        Upgrade upgradeObject = ResourceManager.GetUpgrade(upgrade);
-
         // Setting the icon
-        if (ResourceManager.GetUpgrade(upgrade).icon)
+        if (item.itemDef.icon)
         {
-            iconHolder.sprite = ResourceManager.GetUpgrade(upgrade).icon;
+            iconHolder.sprite = item.itemDef.icon;
         }
 
         // Setting the color
-        if (upgradeObject.tier == Upgrade.Tier.Common)
+        if (item.itemDef.tier == ItemDef.Tier.Common)
         {
             this.gameObject.GetComponent<Image>().color = new Color(0f, 1f, 0f, 1f);
         }
-        else if (upgradeObject.tier == Upgrade.Tier.Uncommon)
+        else if (item.itemDef.tier == ItemDef.Tier.Uncommon)
         {
             this.gameObject.GetComponent<Image>().color = new Color(0f, 0f, 1f, 1f);
         }
-        else if (upgradeObject.tier == Upgrade.Tier.Rare)
+        else if (item.itemDef.tier == ItemDef.Tier.Rare)
         {
             this.gameObject.GetComponent<Image>().color = new Color(1f, 0f, 1f, 1f);
         }
-        else if (upgradeObject.tier == Upgrade.Tier.Epic)
+        else if (item.itemDef.tier == ItemDef.Tier.Epic)
         {
             this.gameObject.GetComponent<Image>().color = new Color(1f, 0.5f, 0f, 1f);
         }
-        else if (upgradeObject.tier == Upgrade.Tier.Legendary)
+        else if (item.itemDef.tier == ItemDef.Tier.Legendary)
         {
             this.gameObject.GetComponent<Image>().color = new Color(0.8f, 0f, 0f, 1f);
         }
@@ -76,76 +73,70 @@ public class UpgradeOption : MonoBehaviour
     public void OnHoverStart()
     {
         isHover = true;
-        Upgrade upgradeObject = ResourceManager.GetUpgrade(upgrade);
-        if (isWeaponReplacement)
+        textName.text = item.itemDef.itemName + " LVL: " + (item.Level+1);
+        foreach (ItemDef.LevelDescription d in item.itemDef.levelDescriptions)
         {
-            textName.text = upgradeObject.upgradeName;
-            desc.text = "Replace this weapon?";
+            if (d.level == item.Level + 1) 
+            {
+                desc.text = d.desc;
+                break;
+            }
         }
-        else
+        tier.enableVertexGradient = false;
+        textName.enableVertexGradient = false;
+        if (item.itemDef.tier == ItemDef.Tier.Common)
         {
-            textName.text = upgradeObject.upgradeName;
-            desc.text = upgradeObject.upgradeDescription;
-            tier.enableVertexGradient = false;
-            textName.enableVertexGradient = false;
-            if (upgradeObject.tier == Upgrade.Tier.Common)
-            {
-                tier.text = "Common";
-                tier.color = new Color(0f, 1f, 0f, 1f);
-                textName.color = new Color(0f, 1f, 0f, 1f);
-            }
-            else if (upgradeObject.tier == Upgrade.Tier.Uncommon)
-            {
-                tier.text = "Uncommon";
-                tier.color = new Color(0f, 0f, 1f, 1f);
-                textName.color = new Color(0f, 0f, 1f, 1f);
-            }
-            else if (upgradeObject.tier == Upgrade.Tier.Rare)
-            {
-                tier.text = "Rare";
-                tier.color = new Color(1f, 0f, 1f, 1f);
-                textName.color = new Color(1f, 0f, 1f, 1f);
-            }
-            else if (upgradeObject.tier == Upgrade.Tier.Epic)
-            {
-                VertexGradient grad = new VertexGradient();
-                grad.topLeft = new Color(1f, 0.5f, 0f, 1f);
-                grad.bottomLeft = new Color(0.75f, 0.35f, 0f, 1f);
-                grad.topRight = new Color(0.75f, 0.35f, 0f, 1f);
-                grad.bottomRight = new Color(0.5f, 0.25f, 0f, 1f);
-                tier.enableVertexGradient = true;
-                textName.enableVertexGradient = true;
-                tier.color = new Color(1f, 1f, 1f, 1f);
-                textName.color = new Color(1f, 1f, 1f, 1f);
-                tier.text = "Epic";
-                tier.colorGradient = grad;
-                textName.colorGradient = grad;
-            }
-            else if (upgradeObject.tier == Upgrade.Tier.Legendary)
-            {
-                VertexGradient grad = new VertexGradient();
-                grad.topLeft = new Color(1f, 0f, 0f, 1f);
-                grad.bottomLeft = new Color(0.75f, 0f, 0f, 1f);
-                grad.topRight = new Color(0.75f, 0f, 0f, 1f);
-                grad.bottomRight = new Color(0.5f, 0f, 0f, 1f);
-                tier.enableVertexGradient = true;
-                textName.enableVertexGradient = true;
-                tier.text = "Legendary";
-                tier.color = new Color(1f, 1f, 1f, 1f);
-                textName.color = new Color(1f, 1f, 1f, 1f);
-                tier.colorGradient = grad;
-                textName.colorGradient = grad;
-            }
+            tier.text = "Common";
+            tier.color = new Color(0f, 1f, 0f, 1f);
+            textName.color = new Color(0f, 1f, 0f, 1f);
+        }
+        else if (item.itemDef.tier == ItemDef.Tier.Uncommon)
+        {
+            tier.text = "Uncommon";
+            tier.color = new Color(0f, 0f, 1f, 1f);
+            textName.color = new Color(0f, 0f, 1f, 1f);
+        }
+        else if (item.itemDef.tier == ItemDef.Tier.Rare)
+        {
+            tier.text = "Rare";
+            tier.color = new Color(1f, 0f, 1f, 1f);
+            textName.color = new Color(1f, 0f, 1f, 1f);
+        }
+        else if (item.itemDef.tier == ItemDef.Tier.Epic)
+        {
+            VertexGradient grad = new VertexGradient();
+            grad.topLeft = new Color(1f, 0.5f, 0f, 1f);
+            grad.bottomLeft = new Color(0.75f, 0.35f, 0f, 1f);
+            grad.topRight = new Color(0.75f, 0.35f, 0f, 1f);
+            grad.bottomRight = new Color(0.5f, 0.25f, 0f, 1f);
+            tier.enableVertexGradient = true;
+            textName.enableVertexGradient = true;
+            tier.color = new Color(1f, 1f, 1f, 1f);
+            textName.color = new Color(1f, 1f, 1f, 1f);
+            tier.text = "Epic";
+            tier.colorGradient = grad;
+            textName.colorGradient = grad;
+        }
+        else if (item.itemDef.tier == ItemDef.Tier.Legendary)
+        {
+            VertexGradient grad = new VertexGradient();
+            grad.topLeft = new Color(1f, 0f, 0f, 1f);
+            grad.bottomLeft = new Color(0.75f, 0f, 0f, 1f);
+            grad.topRight = new Color(0.75f, 0f, 0f, 1f);
+            grad.bottomRight = new Color(0.5f, 0f, 0f, 1f);
+            tier.enableVertexGradient = true;
+            textName.enableVertexGradient = true;
+            tier.text = "Legendary";
+            tier.color = new Color(1f, 1f, 1f, 1f);
+            textName.color = new Color(1f, 1f, 1f, 1f);
+            tier.colorGradient = grad;
+            textName.colorGradient = grad;
+        }
 
-            if (upgradeObject.IsWeapon)
-            {
-                tier.text = "New Weapon";
-            }
-        }
 
         Player player = GameManager.instance.Player;
-        Upgrade u = ResourceManager.GetUpgrade(upgrade);
 
+        /*
         float newHPf = (player.BaseMaxHp + u.statChange.hpAdd + player.hpAdd) * player.hpMult * u.statChange.hpMult;
         string newHP;
         if (newHPf > player.MaxHp)
@@ -310,7 +301,7 @@ public class UpgradeOption : MonoBehaviour
                     }
                     text += key + ": " + w.GetStat(key) * 100 + "%" + " -> " + newStatTxt + "\n";
                 }
-                else 
+                else
                 {
                     if (newStat > w.GetStat(key))
                     {
@@ -337,6 +328,7 @@ public class UpgradeOption : MonoBehaviour
                 weaponStatsLabel.text = "";
             }
         }
+        */
     }
 
     public void OnHoverStop()

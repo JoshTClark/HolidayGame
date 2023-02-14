@@ -68,11 +68,12 @@ public class Player : StatsComponent
         extraDashes = 0;
         dashCooldownMultiplier = 1f;
 
+        /*
         if (HasUpgrade(ResourceManager.UpgradeIndex.ExtraDash))
         {
-            extraDashes = GetUpgrade(ResourceManager.UpgradeIndex.ExtraDash).CurrentLevel;
+            extraDashes = GetItem(ResourceManager.UpgradeIndex.ExtraDash).CurrentLevel;
         }
-
+        */
         if (currentDashes < Dashes)
         {
             dashCooldownTimer += delta;
@@ -139,18 +140,20 @@ public class Player : StatsComponent
         UpdateiFrames();
 
         pickupRangeIncrease = 1f;
+        /*
         if (HasUpgrade(ResourceManager.UpgradeIndex.XP1))
         {
-            pickupRangeIncrease += 0.05f * GetUpgrade(ResourceManager.UpgradeIndex.XP1).CurrentLevel;
+            pickupRangeIncrease += 0.05f * GetItem(ResourceManager.UpgradeIndex.XP1).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.XP2))
         {
-            pickupRangeIncrease += 0.1f * GetUpgrade(ResourceManager.UpgradeIndex.XP2).CurrentLevel;
+            pickupRangeIncrease += 0.1f * GetItem(ResourceManager.UpgradeIndex.XP2).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.XP3))
         {
-            pickupRangeIncrease += 0.15f * GetUpgrade(ResourceManager.UpgradeIndex.XP3).CurrentLevel;
+            pickupRangeIncrease += 0.15f * GetItem(ResourceManager.UpgradeIndex.XP3).CurrentLevel;
         }
+        */
     }
 
     /// <summary>
@@ -222,6 +225,7 @@ public class Player : StatsComponent
     {
         // if the player has SharpShadow Upgrade, and they dash through an enemy
         // Enemy takes [DAMAGE] (should it be scalable? should it be constant? is it just the player's damage stat?)
+        /*
         if (isDash && HasUpgrade(ResourceManager.UpgradeIndex.SharpShadow))
         {
             // deal the damage
@@ -235,5 +239,6 @@ public class Player : StatsComponent
                 e.TakeDamage(info);
             }
         }
+        */
     }
 }

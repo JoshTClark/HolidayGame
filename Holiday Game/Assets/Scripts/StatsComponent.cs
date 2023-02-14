@@ -49,8 +49,8 @@ public abstract class StatsComponent : MonoBehaviour
     // Weapon List
     public List<Weapon> weapons = new List<Weapon>();
 
-    // Inventory for upgrades
-    public List<Upgrade> inventory = new List<Upgrade>();
+    // Inventory for Items
+    public List<Item> inventory = new List<Item>();
 
     // Debuffs and Buffs
     public List<BuffInfo> buffs = new List<BuffInfo>();
@@ -145,6 +145,7 @@ public abstract class StatsComponent : MonoBehaviour
             float delta = Time.deltaTime;
 
             // Patience
+            /*
             if (HasUpgrade(ResourceManager.UpgradeIndex.Patience) && !isMoving)
             {
                 patienceTimer += delta;
@@ -153,6 +154,7 @@ public abstract class StatsComponent : MonoBehaviour
             {
                 patienceTimer = 0;
             }
+            */
 
             CalculateStats();
             CheckWeapons();
@@ -219,6 +221,7 @@ public abstract class StatsComponent : MonoBehaviour
     /// </summary>
     private void CheckWeapons()
     {
+        /*
         // Snowball
         if (HasUpgrade(ResourceManager.UpgradeIndex.SnowballWeaponUpgrade))
         {
@@ -232,7 +235,7 @@ public abstract class StatsComponent : MonoBehaviour
             }
             if (giveSnowball)
             {
-                AddAttack(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.Snowball));
+                AddWeapon(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.Snowball));
             }
         }
         else
@@ -261,7 +264,7 @@ public abstract class StatsComponent : MonoBehaviour
             }
             if (giveArrow)
             {
-                AddAttack(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.CupidArrow));
+                AddWeapon(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.CupidArrow));
             }
         }
         else
@@ -290,7 +293,7 @@ public abstract class StatsComponent : MonoBehaviour
             }
             if (givePumkin)
             {
-                AddAttack(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.PumpkinBomb));
+                AddWeapon(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.PumpkinBomb));
             }
         }
         else
@@ -319,7 +322,7 @@ public abstract class StatsComponent : MonoBehaviour
             }
             if (giveFirework)
             {
-                AddAttack(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.Fireworks));
+                AddWeapon(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.Fireworks));
             }
         }
         else
@@ -347,7 +350,7 @@ public abstract class StatsComponent : MonoBehaviour
             }
             if (giveCorn)
             {
-                AddAttack(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.CandyCornRifle));
+                AddWeapon(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.CandyCornRifle));
             }
         }
         else
@@ -375,7 +378,7 @@ public abstract class StatsComponent : MonoBehaviour
             }
             if (giveSlash)
             {
-                AddAttack(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.SwordSlash));
+                AddWeapon(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.SwordSlash));
             }
         }
         else
@@ -390,6 +393,7 @@ public abstract class StatsComponent : MonoBehaviour
                 }
             }
         }
+        */
     }
 
     //Checks to see if leveled up since last tick
@@ -525,7 +529,7 @@ public abstract class StatsComponent : MonoBehaviour
     }
 
     // Adds an attack
-    public void AddAttack(Weapon attack)
+    public void AddWeapon(Weapon attack)
     {
         attack.owner = this;
         weapons.Add(Instantiate(attack, transform));
@@ -535,18 +539,20 @@ public abstract class StatsComponent : MonoBehaviour
     public void AddXP(float amount)
     {
         float increase = 1f;
+        /*
         if (HasUpgrade(ResourceManager.UpgradeIndex.XP1))
         {
-            increase += 0.05f * GetUpgrade(ResourceManager.UpgradeIndex.XP1).CurrentLevel;
+            increase += 0.05f * GetItem(ResourceManager.UpgradeIndex.XP1).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.XP2))
         {
-            increase += 0.1f * GetUpgrade(ResourceManager.UpgradeIndex.XP2).CurrentLevel;
+            increase += 0.1f * GetItem(ResourceManager.UpgradeIndex.XP2).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.XP3))
         {
-            increase += 0.15f * GetUpgrade(ResourceManager.UpgradeIndex.XP3).CurrentLevel;
+            increase += 0.15f * GetItem(ResourceManager.UpgradeIndex.XP3).CurrentLevel;
         }
+        */
         amount *= increase;
 
         xpAmount += amount;
@@ -581,32 +587,22 @@ public abstract class StatsComponent : MonoBehaviour
     }
 
     /// <summary>
-    /// Adds the upgrade to the players inventory
+    /// Adds the item to the players inventory
     /// </summary>
-    public void AddUpgrade(ResourceManager.UpgradeIndex index)
+    public void AddItem(ResourceManager.ItemIndex index)
     {
-        if (HasUpgrade(index))
-        {
-            GetUpgrade(index).CurrentLevel++;
-        }
-        else
-        {
-            inventory.Add(ResourceManager.GetUpgrade(index));
-        }
-        CalculateStats();
-        OnGainUpgrade(ResourceManager.GetUpgrade(index));
     }
 
     /// <summary>
-    /// Returns true if the upgrade is in the inventory
+    /// Returns true if the item is in the inventory
     /// </summary>
     /// <param name="index"></param>
     /// <returns></returns>
-    public bool HasUpgrade(ResourceManager.UpgradeIndex index)
+    public bool HasItem(ResourceManager.ItemIndex index)
     {
-        foreach (Upgrade i in inventory)
+        foreach (Item i in inventory)
         {
-            if (i.index == index)
+            if (i.itemDef.index == index)
             {
                 return true;
             }
@@ -614,11 +610,11 @@ public abstract class StatsComponent : MonoBehaviour
         return false;
     }
 
-    public Upgrade GetUpgrade(ResourceManager.UpgradeIndex index)
+    public Item GetItem(ResourceManager.ItemIndex index)
     {
-        foreach (Upgrade i in inventory)
+        foreach (Item i in inventory)
         {
-            if (i.index == index)
+            if (i.itemDef.index == index)
             {
                 return i;
             }
@@ -670,11 +666,11 @@ public abstract class StatsComponent : MonoBehaviour
         return null;
     }
 
-    public void RemoveUpgrade(ResourceManager.UpgradeIndex index)
+    public void RemoveItem(ResourceManager.ItemIndex index)
     {
         for (int i = inventory.Count - 1; i >= 0; i--)
         {
-            if (inventory[i].index == index)
+            if (inventory[i].itemDef.index == index)
             {
                 inventory.RemoveAt(i);
                 break;
@@ -716,69 +712,70 @@ public abstract class StatsComponent : MonoBehaviour
         // LEVELS
         CalculateLevel();
 
+        /*
         // UPGRADES
 
         // HP1 - HP3
         if (HasUpgrade(ResourceManager.UpgradeIndex.Health1))
         {
-            hpAdd += 15 * GetUpgrade(ResourceManager.UpgradeIndex.Health1).CurrentLevel;
+            hpAdd += 15 * GetItem(ResourceManager.UpgradeIndex.Health1).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.Health2))
         {
-            hpAdd += 30 * GetUpgrade(ResourceManager.UpgradeIndex.Health2).CurrentLevel;
+            hpAdd += 30 * GetItem(ResourceManager.UpgradeIndex.Health2).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.Health3))
         {
-            hpAdd += 45 * GetUpgrade(ResourceManager.UpgradeIndex.Health3).CurrentLevel;
+            hpAdd += 45 * GetItem(ResourceManager.UpgradeIndex.Health3).CurrentLevel;
         }
 
         // Damage1 - Damage3
         if (HasUpgrade(ResourceManager.UpgradeIndex.Damage1))
         {
-            damageAdd += (0.5f) * GetUpgrade(ResourceManager.UpgradeIndex.Damage1).CurrentLevel;
+            damageAdd += (0.5f) * GetItem(ResourceManager.UpgradeIndex.Damage1).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.Damage2))
         {
-            damageAdd += (1f) * GetUpgrade(ResourceManager.UpgradeIndex.Damage2).CurrentLevel;
+            damageAdd += (1f) * GetItem(ResourceManager.UpgradeIndex.Damage2).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.Damage3))
         {
-            damageAdd += (2f) * GetUpgrade(ResourceManager.UpgradeIndex.Damage3).CurrentLevel;
+            damageAdd += (2f) * GetItem(ResourceManager.UpgradeIndex.Damage3).CurrentLevel;
         }
 
         // Speed1 - Speed3
         if (HasUpgrade(ResourceManager.UpgradeIndex.Speed1))
         {
-            speedMult += 0.05f * GetUpgrade(ResourceManager.UpgradeIndex.Speed1).CurrentLevel;
+            speedMult += 0.05f * GetItem(ResourceManager.UpgradeIndex.Speed1).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.Speed2))
         {
-            speedMult += 0.1f * GetUpgrade(ResourceManager.UpgradeIndex.Speed2).CurrentLevel;
+            speedMult += 0.1f * GetItem(ResourceManager.UpgradeIndex.Speed2).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.Speed3))
         {
-            speedMult += 0.2f * GetUpgrade(ResourceManager.UpgradeIndex.Speed3).CurrentLevel;
+            speedMult += 0.2f * GetItem(ResourceManager.UpgradeIndex.Speed3).CurrentLevel;
         }
 
         // AttackSpeed1 - AttackSpeed3
         if (HasUpgrade(ResourceManager.UpgradeIndex.AttackSpeed1))
         {
-            attackSpeedAdd += 0.1f * GetUpgrade(ResourceManager.UpgradeIndex.AttackSpeed1).CurrentLevel;
+            attackSpeedAdd += 0.1f * GetItem(ResourceManager.UpgradeIndex.AttackSpeed1).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.AttackSpeed2))
         {
-            attackSpeedAdd += 0.20f * GetUpgrade(ResourceManager.UpgradeIndex.AttackSpeed2).CurrentLevel;
+            attackSpeedAdd += 0.20f * GetItem(ResourceManager.UpgradeIndex.AttackSpeed2).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.AttackSpeed3))
         {
-            attackSpeedAdd += 0.30f * GetUpgrade(ResourceManager.UpgradeIndex.AttackSpeed3).CurrentLevel;
+            attackSpeedAdd += 0.30f * GetItem(ResourceManager.UpgradeIndex.AttackSpeed3).CurrentLevel;
         }
 
         // Glass Cannon
         if (HasUpgrade(ResourceManager.UpgradeIndex.GlassCannon1))
         {
-            attackSpeedMult *= 2f * GetUpgrade(ResourceManager.UpgradeIndex.GlassCannon1).CurrentLevel;
-            hpMult *= MathF.Pow(0.5f, GetUpgrade(ResourceManager.UpgradeIndex.GlassCannon1).CurrentLevel);
+            attackSpeedMult *= 2f * GetItem(ResourceManager.UpgradeIndex.GlassCannon1).CurrentLevel;
+            hpMult *= MathF.Pow(0.5f, GetItem(ResourceManager.UpgradeIndex.GlassCannon1).CurrentLevel);
         }
 
         // Making sure hp is <= maxHP
@@ -790,41 +787,41 @@ public abstract class StatsComponent : MonoBehaviour
         // Crit Chance
         if (HasUpgrade(ResourceManager.UpgradeIndex.CritChance1))
         {
-            critChanceAdd += 0.025f * GetUpgrade(ResourceManager.UpgradeIndex.CritChance1).CurrentLevel;
+            critChanceAdd += 0.025f * GetItem(ResourceManager.UpgradeIndex.CritChance1).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.CritChance2))
         {
-            critChanceAdd += 0.05f * GetUpgrade(ResourceManager.UpgradeIndex.CritChance2).CurrentLevel;
+            critChanceAdd += 0.05f * GetItem(ResourceManager.UpgradeIndex.CritChance2).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.CritChance3))
         {
-            critChanceAdd += 0.075f * GetUpgrade(ResourceManager.UpgradeIndex.CritChance3).CurrentLevel;
+            critChanceAdd += 0.075f * GetItem(ResourceManager.UpgradeIndex.CritChance3).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.CritChance4))
         {
-            critChanceAdd += 0.1f * GetUpgrade(ResourceManager.UpgradeIndex.CritChance4).CurrentLevel;
+            critChanceAdd += 0.1f * GetItem(ResourceManager.UpgradeIndex.CritChance4).CurrentLevel;
         }
 
         // Crit Damage
         if (HasUpgrade(ResourceManager.UpgradeIndex.CritDamage1))
         {
-            critDamageAdd += 0.05f * GetUpgrade(ResourceManager.UpgradeIndex.CritDamage1).CurrentLevel;
+            critDamageAdd += 0.05f * GetItem(ResourceManager.UpgradeIndex.CritDamage1).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.CritDamage2))
         {
-            critDamageAdd += 0.1f * GetUpgrade(ResourceManager.UpgradeIndex.CritDamage2).CurrentLevel;
+            critDamageAdd += 0.1f * GetItem(ResourceManager.UpgradeIndex.CritDamage2).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.CritDamage3))
         {
-            critDamageAdd += 0.2f * GetUpgrade(ResourceManager.UpgradeIndex.CritDamage3).CurrentLevel;
+            critDamageAdd += 0.2f * GetItem(ResourceManager.UpgradeIndex.CritDamage3).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.CritDamage4))
         {
-            critDamageAdd += 0.3f * GetUpgrade(ResourceManager.UpgradeIndex.CritDamage4).CurrentLevel;
+            critDamageAdd += 0.3f * GetItem(ResourceManager.UpgradeIndex.CritDamage4).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.CritDamage5))
         {
-            critDamageAdd += 0.5f * GetUpgrade(ResourceManager.UpgradeIndex.CritDamage5).CurrentLevel;
+            critDamageAdd += 0.5f * GetItem(ResourceManager.UpgradeIndex.CritDamage5).CurrentLevel;
         }
 
         // Low HP Damage
@@ -855,12 +852,13 @@ public abstract class StatsComponent : MonoBehaviour
                 regenAdd += SessionManager.data.GetUpgradeLevel(MetaUpgrade.MetaUpgradeID.Regen) * 0.1f;
                 hpAdd += SessionManager.data.GetUpgradeLevel(MetaUpgrade.MetaUpgradeID.Health) * 5f;
             }
-        }
+        */
     }
 
-    public void OnGainUpgrade(Upgrade upgrade)
+    public void OnGainUpgrade(Item item)
     {
         // Heal when taking these upgrades
+        /*
         if (upgrade.index == ResourceManager.UpgradeIndex.Health1)
         {
             Heal(20);
@@ -879,6 +877,7 @@ public abstract class StatsComponent : MonoBehaviour
             OrbitalParent p = Instantiate<OrbitalParent>(GetOrbital(OrbitalIndex.IceShield), transform);
             p.owner = this;
         }
+        */
     }
 
 

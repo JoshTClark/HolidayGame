@@ -120,8 +120,7 @@ public abstract class StatsComponent : MonoBehaviour
         damaged = false;
 
         currentHP = MaxHp;
-        xpAmount = 0;
-        if (this.gameObject.GetComponent<Player>())
+        if (this.gameObject.GetComponent<Player>() && xpAmount == 0)
         {
             level = 1;
             xpAmount = expCurve.Evaluate(1);
@@ -574,8 +573,11 @@ public abstract class StatsComponent : MonoBehaviour
 
     public float GetPercentHealth()
     {
-        // Testing for right now until we get an actual level curve
-        return CurrentHP / MaxHp;
+        if (currentHP != 0 && MaxHp != 0)
+        {
+            return CurrentHP / MaxHp;
+        } 
+        return 0;
     }
 
     /// <summary>
@@ -888,5 +890,24 @@ public abstract class StatsComponent : MonoBehaviour
     public Vector2 CalcFuturePosition(float seconds)
     {
         return (Vector2)transform.position + (GetComponent<Rigidbody2D>().velocity * seconds);
+    }
+
+    public void SetXPWithoutLevelUp(float xp)
+    {
+        xpAmount = xp;
+        if (!this.gameObject.GetComponent<Enemy>())
+        {
+            int tempLevel = level;
+            float xpToLevelUp = expCurve.Evaluate(tempLevel + 1);
+            while (XP > xpToLevelUp)
+            {
+                tempLevel++;
+                xpToLevelUp = expCurve.Evaluate(tempLevel + 1);
+            }
+            if (tempLevel > level)
+            {
+                level = tempLevel;
+            }
+        }
     }
 }

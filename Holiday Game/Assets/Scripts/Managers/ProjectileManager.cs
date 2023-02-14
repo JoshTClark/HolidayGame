@@ -52,7 +52,10 @@ public class ProjectileManager : MonoBehaviour
     {
         foreach (ProjectileBase p in allProjectiles)
         {
-            p.pool.Release(p);
+            if (p)
+            {
+                p.pool.Release(p);
+            }
         }
         pools.Clear();
     }

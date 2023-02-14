@@ -57,6 +57,7 @@ public class SaveSceneManager : MonoBehaviour
     {
         ResourceManager.Init();
         instance = this;
+        Cursor.visible = true;
 
         foreach (PlayableCharacterData i in ResourceManager.characters)
         {
@@ -237,7 +238,7 @@ public class SaveSceneManager : MonoBehaviour
         SessionManager session = new SessionManager();
         SessionManager.data = data;
         session.SetChosenCharacter(characters[currentSelectedCharacter]);
-        session.GenerateMap(10, 9, 10, 4);
+        session.GenerateMap(6, 5, 20, 3);
         MapManager.session = session;
         SceneManager.LoadSceneAsync("MapScene");
     }

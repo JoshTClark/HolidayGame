@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c59e07d74277824bb5047733b29c0bc, type: 3}
   m_Name: FallLabyrinthLarge
   m_EditorClassIdentifier: 
-  scene: {fileID: 102900000, guid: 7e7621d1b49e0654baef32d85a7a2a71, type: 3}
+  scene: FallLabyrinthLarge
   difficulty: 1
   startHour: 12
   enemiesToDefeat: 0
   daysToSurvive: 0
   isBossLevel: 0
   waves:
-  - waveLength: 500
+  - waveLength: 60
     enemies:
     - isBoss: 0
       enemyIndex: 1
@@ -32,6 +32,119 @@ MonoBehaviour:
       enemyIndex: 3
       amountToSpawn: 2
       respawn: 1
+      healthMultiplier: 1
+      damageMultiplier: 1
+      speedMultiplier: 1
+  - waveLength: 60
+    enemies:
+    - isBoss: 0
+      enemyIndex: 1
+      amountToSpawn: 10
+      respawn: 1
+      healthMultiplier: 1
+      damageMultiplier: 1
+      speedMultiplier: 1
+    - isBoss: 0
+      enemyIndex: 3
+      amountToSpawn: 2
+      respawn: 1
+      healthMultiplier: 1
+      damageMultiplier: 1
+      speedMultiplier: 1
+    - isBoss: 0
+      enemyIndex: 5
+      amountToSpawn: 2
+      respawn: 0
+      healthMultiplier: 1
+      damageMultiplier: 1
+      speedMultiplier: 1
+  - waveLength: 60
+    enemies:
+    - isBoss: 0
+      enemyIndex: 1
+      amountToSpawn: 10
+      respawn: 1
+      healthMultiplier: 1
+      damageMultiplier: 1
+      speedMultiplier: 1
+    - isBoss: 0
+      enemyIndex: 3
+      amountToSpawn: 2
+      respawn: 1
+      healthMultiplier: 1
+      damageMultiplier: 1
+      speedMultiplier: 1
+    - isBoss: 0
+      enemyIndex: 5
+      amountToSpawn: 2
+      respawn: 0
+      healthMultiplier: 1
+      damageMultiplier: 1
+      speedMultiplier: 1
+    - isBoss: 0
+      enemyIndex: 2
+      amountToSpawn: 1
+      respawn: 0
+      healthMultiplier: 1
+      damageMultiplier: 1
+      speedMultiplier: 1
+  - waveLength: 60
+    enemies:
+    - isBoss: 0
+      enemyIndex: 1
+      amountToSpawn: 10
+      respawn: 1
+      healthMultiplier: 1
+      damageMultiplier: 1
+      speedMultiplier: 1
+    - isBoss: 0
+      enemyIndex: 3
+      amountToSpawn: 2
+      respawn: 1
+      healthMultiplier: 1
+      damageMultiplier: 1
+      speedMultiplier: 1
+    - isBoss: 0
+      enemyIndex: 5
+      amountToSpawn: 2
+      respawn: 0
+      healthMultiplier: 1
+      damageMultiplier: 1
+      speedMultiplier: 1
+    - isBoss: 0
+      enemyIndex: 2
+      amountToSpawn: 1
+      respawn: 0
+      healthMultiplier: 1
+      damageMultiplier: 1
+      speedMultiplier: 1
+  - waveLength: 1000
+    enemies:
+    - isBoss: 0
+      enemyIndex: 1
+      amountToSpawn: 10
+      respawn: 1
+      healthMultiplier: 1
+      damageMultiplier: 1
+      speedMultiplier: 1
+    - isBoss: 0
+      enemyIndex: 3
+      amountToSpawn: 2
+      respawn: 1
+      healthMultiplier: 1
+      damageMultiplier: 1
+      speedMultiplier: 1
+    - isBoss: 0
+      enemyIndex: 5
+      amountToSpawn: 2
+      respawn: 0
+      healthMultiplier: 1
+      damageMultiplier: 1
+      speedMultiplier: 1
+    - isBoss: 0
+      enemyIndex: 2
+      amountToSpawn: 1
+      respawn: 0
       healthMultiplier: 1
       damageMultiplier: 1
       speedMultiplier: 1

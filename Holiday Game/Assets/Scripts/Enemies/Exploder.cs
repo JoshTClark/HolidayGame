@@ -7,7 +7,7 @@ public class Exploder : Enemy
     private bool inRange = false;
     [SerializeField]
     private float range = 0.1f; // Test later
-    private float deathTimer = 2.5f;
+    private float deathTimer = 0.5f;
     private float timer = 0.0f;
 
     public override void OnStart()
@@ -69,6 +69,8 @@ public class Exploder : Enemy
         info.damage = Damage;
         info.attacker = this;
         p.SetDamageInfo(info);
+
+        inRange = false;
 
         base.OnDeath(dmgInfo);
     }

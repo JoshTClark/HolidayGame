@@ -44,7 +44,7 @@ public class ItemDef : ScriptableObject
     [System.Serializable]
     public class LevelDescription
     {
-        public int level;
+        private string name = "hehe";
         [TextArea(15, 20)]
         public string desc;
         public StatChange statChanges;
@@ -60,7 +60,9 @@ public class ItemDef : ScriptableObject
     [System.Serializable]
     public class UpgradePath
     {
-        public Vector2 levelRange = new Vector2();
+        public string pathName;
+        public string previousPath;
+        public int numLevels;
         public List<LevelDescription> levelDescriptions = new List<LevelDescription>();
     }
 }

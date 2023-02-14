@@ -18,10 +18,11 @@ MonoBehaviour:
   maxLevel: 6
   tier: 0
   paths:
-  - levelRange: {x: 1, y: 3}
+  - pathName: Start
+    previousPath: 
+    numLevels: 3
     levelDescriptions:
-    - level: 1
-      desc: Increases attack speed by 25%
+    - desc: Increases attack speed by 25%
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -40,8 +41,7 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - level: 2
-      desc: Increases attack speed by a further 25%
+    - desc: Increases attack speed by a further 25%
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -60,8 +60,7 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - level: 3
-      desc: Increases attack speed by a further 25%
+    - desc: Increases attack speed by a further 25%
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -80,10 +79,11 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-  - levelRange: {x: 4, y: 6}
+  - pathName: Path1
+    previousPath: Start
+    numLevels: 3
     levelDescriptions:
-    - level: 4
-      desc: Increases attack speed by 25%
+    - desc: Increases attack speed by 25%
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -102,8 +102,7 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - level: 5
-      desc: Increases attack speed by a further 25%
+    - desc: Increases attack speed by a further 25%
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -122,8 +121,7 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - level: 6
-      desc: Increases attack speed by a further 25%
+    - desc: Increases attack speed by a further 25%
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -142,10 +140,11 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-  - levelRange: {x: 4, y: 6}
+  - pathName: Path2
+    previousPath: Start
+    numLevels: 3
     levelDescriptions:
-    - level: 4
-      desc: Does something else
+    - desc: Does something else
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -164,8 +163,7 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - level: 5
-      desc: Does something else
+    - desc: Does something else
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -184,8 +182,7 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - level: 6
-      desc: does something else
+    - desc: does something else
       statChanges:
         hpAdd: 0
         speedAdd: 0

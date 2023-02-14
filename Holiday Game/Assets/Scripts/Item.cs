@@ -8,6 +8,7 @@ public class Item
     public ItemDef itemDef;
     private int level = 0;
     public UpgradePath currentPath;
+    public List<UpgradePath> takenPaths = new List<UpgradePath>();
 
     public int Level
     {

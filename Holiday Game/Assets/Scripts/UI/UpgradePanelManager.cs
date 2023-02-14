@@ -34,16 +34,16 @@ public class UpgradePanelManager : MonoBehaviour
         // Checks which item upgrades are available to the player
         foreach (Item i in player.inventory)
         {
+            int offset = 0;
+            foreach (ItemDef.UpgradePath u in i.takenPaths)
+            {
+                offset += u.numLevels;
+            }
             if (i.Level < i.itemDef.maxLevel)
             {
-                if (i.Level < i.currentPath.levelRange.y)
+                if (i.Level < i.currentPath.numLevels)
                 {
-                    foreach (ItemDef.LevelDescription d in i.currentPath.levelDescriptions) {
-                        if (d.level == i.Level + 1)
-                        {
-                            availableDescs.Add(d);
-                        }
-                    }
+                    availableDescs.Add(i.currentPath.levelDescriptions[i.Level - 0]);
                     available.Add(i);
                     paths.Add(i.currentPath);
                 }
@@ -51,7 +51,7 @@ public class UpgradePanelManager : MonoBehaviour
                 {
                     foreach (ItemDef.UpgradePath u in i.itemDef.paths)
                     {
-                        if (u.levelRange.x == i.Level + 1)
+                        if (u.previousPath == i.currentPath.pathName)
                         {
                             availableDescs.Add(u.levelDescriptions[0]);
                             available.Add(i);
@@ -104,7 +104,11 @@ public class UpgradePanelManager : MonoBehaviour
     public void Select(Item item, ItemDef.UpgradePath path)
     {
         item.Level += 1;
-        item.currentPath = path;
+        if (path != item.currentPath)
+        {
+            item.takenPaths.Add(item.currentPath);
+            item.currentPath = path;
+        }
         selected = true;
     }
 

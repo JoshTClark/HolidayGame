@@ -152,7 +152,8 @@ public class ResourceManager
     public enum BuffIndex
     {
         Burning,
-        Stunned
+        Stunned,
+        Bleeding
     }
 
     public enum OrbitalIndex
@@ -171,9 +172,8 @@ public class ResourceManager
     public static List<OrbitalParent> orbitals = new List<OrbitalParent>();
     public static List<LevelData> levelDatas = new List<LevelData>();
     public static List<LevelPool> levelPools = new List<LevelPool>();
-    public static List<PlayableCharacterData> characters = new List<PlayableCharacterData>();
-
-    public static List<WeaponDef> weaponDefs = new List<WeaponDef>();
+    public static List<PlayableCharacterData> characters = new List<PlayableCharacterData>();
+    
     public static List<ItemDef> itemDefs = new List<ItemDef>();
 
     public static bool isLoaded = false;
@@ -194,7 +194,17 @@ public class ResourceManager
         LoadPlayableCharacters();
         LoadOrbitals();
         LoadLevels();
+
+        LoadItems();
         isLoaded = true;
+    }
+    public static void LoadItems()
+    {
+        ItemDef[] arr = Resources.LoadAll<ItemDef>("");
+        foreach (ItemDef i in arr)
+        {
+            itemDefs.Add(i);
+        }
     }
 
     public static void LoadEnemies()

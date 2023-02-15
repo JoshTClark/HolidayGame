@@ -159,7 +159,6 @@ public abstract class StatsComponent : MonoBehaviour
             */
 
             CalculateStats();
-            CheckWeapons();
 
             OnUpdate();
 
@@ -218,186 +217,6 @@ public abstract class StatsComponent : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Checks what weapons the player should have
-    /// </summary>
-    private void CheckWeapons()
-    {
-        /*
-        // Snowball
-        if (HasUpgrade(ResourceManager.UpgradeIndex.SnowballWeaponUpgrade))
-        {
-            bool giveSnowball = true;
-            foreach (Weapon w in weapons)
-            {
-                if (w.GetType() == typeof(SnowballWeapon))
-                {
-                    giveSnowball = false;
-                }
-            }
-            if (giveSnowball)
-            {
-                AddWeapon(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.Snowball));
-            }
-        }
-        else
-        {
-            for (int i = weapons.Count - 1; i >= 0; i--)
-            {
-                if (weapons[i].index == WeaponIndex.Snowball)
-                {
-                    Weapon w = weapons[i];
-                    weapons.RemoveAt(i);
-                    Destroy(w.gameObject);
-                }
-            }
-        }
-
-        // Cupid Arrow
-        if (HasUpgrade(ResourceManager.UpgradeIndex.CupidArrowWeaponUpgrade))
-        {
-            bool giveArrow = true;
-            foreach (Weapon w in weapons)
-            {
-                if (w.GetType() == typeof(CupidArrow))
-                {
-                    giveArrow = false;
-                }
-            }
-            if (giveArrow)
-            {
-                AddWeapon(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.CupidArrow));
-            }
-        }
-        else
-        {
-            for (int i = weapons.Count - 1; i >= 0; i--)
-            {
-                if (weapons[i].index == WeaponIndex.CupidArrow)
-                {
-                    Weapon w = weapons[i];
-                    weapons.RemoveAt(i);
-                    Destroy(w.gameObject);
-                }
-            }
-        }
-
-        // Pumpkin Bomb
-        if (HasUpgrade(ResourceManager.UpgradeIndex.PumpkinBombWeaponUpgrade))
-        {
-            bool givePumkin = true;
-            foreach (Weapon w in weapons)
-            {
-                if (w.GetType() == typeof(PumpkinBomb))
-                {
-                    givePumkin = false;
-                }
-            }
-            if (givePumkin)
-            {
-                AddWeapon(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.PumpkinBomb));
-            }
-        }
-        else
-        {
-            for (int i = weapons.Count - 1; i >= 0; i--)
-            {
-                if (weapons[i].index == WeaponIndex.PumpkinBomb)
-                {
-                    Weapon w = weapons[i];
-                    weapons.RemoveAt(i);
-                    Destroy(w.gameObject);
-                }
-            }
-        }
-
-        // Fireworks
-        if (HasUpgrade(ResourceManager.UpgradeIndex.FireworkWeaponUpgrade))
-        {
-            bool giveFirework = true;
-            foreach (Weapon w in weapons)
-            {
-                if (w.GetType() == typeof(FireworkWeapon))
-                {
-                    giveFirework = false;
-                }
-            }
-            if (giveFirework)
-            {
-                AddWeapon(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.Fireworks));
-            }
-        }
-        else
-        {
-            for (int i = weapons.Count - 1; i >= 0; i--)
-            {
-                if (weapons[i].index == WeaponIndex.Fireworks)
-                {
-                    Weapon w = weapons[i];
-                    weapons.RemoveAt(i);
-                    Destroy(w.gameObject);
-                }
-            }
-        }
-        // Candy Corn Rifle
-        if (HasUpgrade(ResourceManager.UpgradeIndex.CandyCornWeaponUpgrade))
-        {
-            bool giveCorn = true;
-            foreach (Weapon w in weapons)
-            {
-                if (w.GetType() == typeof(CandyCornWeapon))
-                {
-                    giveCorn = false;
-                }
-            }
-            if (giveCorn)
-            {
-                AddWeapon(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.CandyCornRifle));
-            }
-        }
-        else
-        {
-            for (int i = weapons.Count - 1; i >= 0; i--)
-            {
-                if (weapons[i].index == WeaponIndex.CandyCornRifle)
-                {
-                    Weapon w = weapons[i];
-                    weapons.RemoveAt(i);
-                    Destroy(w.gameObject);
-                }
-            }
-        }
-        // Sword Slash
-        if (HasUpgrade(ResourceManager.UpgradeIndex.SwordSlashWeaponUpgrade))
-        {
-            bool giveSlash = true;
-            foreach (Weapon w in weapons)
-            {
-                if (w.GetType() == typeof(SwordSlashWeapon))
-                {
-                    giveSlash = false;
-                }
-            }
-            if (giveSlash)
-            {
-                AddWeapon(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.SwordSlash));
-            }
-        }
-        else
-        {
-            for (int i = weapons.Count - 1; i >= 0; i--)
-            {
-                if (weapons[i].index == WeaponIndex.SwordSlash)
-                {
-                    Weapon w = weapons[i];
-                    weapons.RemoveAt(i);
-                    Destroy(w.gameObject);
-                }
-            }
-        }
-        */
-    }
-
     //Checks to see if leveled up since last tick
     public void CalculateLevel()
     {
@@ -433,12 +252,32 @@ public abstract class StatsComponent : MonoBehaviour
     {
         info.receiver = this;
         info.CalculateAll();
+        
         if (Armor > 0)
         {
-            float damageReduction = (-1f / ((0.1f * Mathf.Sqrt(Armor)) + 1f)) + 1f;
-            info.damage *= damageReduction;
+            if (info.attacker.HasItem(ItemIndex.CritChance)) // If receiver has armor, check if attacker has armor piercer
+            {
+                Item i = info.attacker.GetItem(ItemIndex.CritChance);
+                
+                if(info.isCrit && i.HasTakenPath("Armor Piercer"))
+                {
+                        //do nothing ie. No damage Reduction. Stuff should be calced here if we want armor piercer to only percentage ignore armor instead of complete
+                }
+                else // attacker has crit item, but doesnt have upgrade or didnt crit
+                {
+                    float damageReduction = (-1f / ((0.1f * Mathf.Sqrt(Armor)) + 1f)) + 1f;
+                    info.damage *= damageReduction;
+                }
+                
+            }
+            else // dont have item, do normal calc
+            {
+                float damageReduction = (-1f / ((0.1f * Mathf.Sqrt(Armor)) + 1f)) + 1f;
+                info.damage *= damageReduction;
+            }
         }
 
+        // Armor Item Capstones
         if (this.HasItem(ItemIndex.Armor))
         {
             Item i = GetItem(ItemIndex.Armor);
@@ -455,6 +294,8 @@ public abstract class StatsComponent : MonoBehaviour
                 info.damage *= 0.75f;
             }
         }
+
+        
         
 
         if (this.gameObject.GetComponent<Enemy>())
@@ -470,6 +311,16 @@ public abstract class StatsComponent : MonoBehaviour
             }
         }
 
+        if (info.attacker.HasItem(ItemIndex.CritChance))
+        {
+            Item i = info.attacker.GetItem(ItemIndex.CritChance);
+            if(info.isCrit && i.HasTakenPath("Vicious Wounds"))
+            {
+                Debug.Log("Bleed should be applied");
+                info.debuffs.Add(BuffIndex.Bleeding);
+            }
+        }
+
         foreach (ResourceManager.BuffIndex i in info.debuffs)
         {
             BuffDef def = ResourceManager.GetBuffDef(i);
@@ -479,12 +330,16 @@ public abstract class StatsComponent : MonoBehaviour
             buffInfo.attacker = info.attacker;
             buffInfo.receiver = info.receiver;
             buff.infoTemplate = buffInfo;
+            buff.infoTemplate.mask.Add(i);
             buff.afflicting = this;
             if (i == ResourceManager.BuffIndex.Burning)
             {
                 buff.totalDamage = info.attacker.Damage;
             }
-            buffs.Add(buff);
+            if (!info.mask.Contains(i)) 
+            {
+                buffs.Add(buff);
+            }
         }
 
         // Damage Tracking

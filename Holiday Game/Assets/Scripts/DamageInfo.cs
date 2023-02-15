@@ -21,6 +21,7 @@ public class DamageInfo
     public bool isCrit;
     public List<ResourceManager.BuffIndex> debuffs = new List<ResourceManager.BuffIndex>();
     public ResourceManager.WeaponIndex weapon;
+    public List<ResourceManager.BuffIndex> mask = new List<ResourceManager.BuffIndex>();
 
     public void CalculateAll()
     {

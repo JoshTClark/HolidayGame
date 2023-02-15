@@ -92,7 +92,7 @@ MonoBehaviour:
         armorAdd: 0
         regenAdd: 0
         critChanceAdd: 0.15
-        critDamageAdd: 1
+        critDamageAdd: 0
         hpMult: 1
         speedMult: 1
         damageMult: 1

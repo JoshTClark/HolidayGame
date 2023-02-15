@@ -263,6 +263,7 @@ public abstract class Enemy : StatsComponent
     {
         movements.Clear();
         knockback.Clear();
+        buffs.Clear();
         currentHP = MaxHp;
         player = null;
         inventory.Clear();

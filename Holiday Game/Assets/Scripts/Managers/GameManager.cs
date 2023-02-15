@@ -61,6 +61,8 @@ public class GameManager : MonoBehaviour
     private bool paused = false;
     private int garunteedWeaponLevel = 5;
     private bool doSpecialUpgrade = false;
+    private bool itemOnlyUpgrade = false;
+    private bool weaponOnlyUpgrade = false;
     private int upgradesToGive = 0;
     private float dayLength = 120f;
     public int currentDay = 1;
@@ -249,6 +251,10 @@ public class GameManager : MonoBehaviour
                 time += Time.deltaTime;
                 UpdateDate();
 
+                doSpecialUpgrade = false;
+                itemOnlyUpgrade = false;
+                weaponOnlyUpgrade = false;
+
                 // Updating displays
                 objectiveDisplay.rectTransform.anchorMin = new Vector2(objectiveDisplay.rectTransform.anchorMin.x, 0.94f);
                 objectiveDisplay.rectTransform.anchorMax = new Vector2(objectiveDisplay.rectTransform.anchorMax.x, 1f);
@@ -362,7 +368,7 @@ public class GameManager : MonoBehaviour
                 if (!upgradeManager.displaying)
                 {
                     upgradeManager.player = player;
-                    upgradeManager.SetUpgrades(4);
+                    upgradeManager.SetUpgrades(4, doSpecialUpgrade, itemOnlyUpgrade, weaponOnlyUpgrade);
                     upgradeManager.ShowOptions(upgradesToGive);
                 }
                 if (upgradeManager.selected)
@@ -631,5 +637,15 @@ public class GameManager : MonoBehaviour
         EnemyManager.Clean();
         DropManager.Clean();
         session.ToTitle();
+    }
+
+    public void ChestPickup(Chest c)
+    {
+        Debug.Log("Found chest");
+        state = GameState.UpgradeMenu;
+        upgradesToGive = 1;
+        doSpecialUpgrade = true;
+        itemOnlyUpgrade = c.onlyItems;
+        weaponOnlyUpgrade = c.onlyWeapon;
     }
 }

@@ -25,37 +25,59 @@ public class UpgradePanelManager : MonoBehaviour
     /// <summary>
     /// Sets upgrades for the player to choose
     /// </summary>
-    public void SetUpgrades(int numOptions)
+    public void SetUpgrades(int numOptions, bool specialUpgrade, bool itemsOnly, bool weaponsOnly)
     {
         List<ItemDef.LevelDescription> availableDescs = new List<ItemDef.LevelDescription>();
         List<Item> available = new List<Item>();
         List<ItemDef.UpgradePath> paths = new List<ItemDef.UpgradePath>();
 
-        // Checks which item upgrades are available to the player
-        foreach (Item i in player.inventory)
+        if (specialUpgrade)
         {
-            int offset = 0;
-            foreach (ItemDef.UpgradePath u in i.takenPaths)
+            List<ItemDef> itemDefs = ResourceManager.itemDefs;
+            foreach (ItemDef i in itemDefs)
             {
-                offset += u.numLevels;
-            }
-            if (i.Level < i.itemDef.maxLevel)
-            {
-                if (i.Level - offset < i.currentPath.numLevels)
+                if (!player.HasItem(i.index))
                 {
-                    availableDescs.Add(i.currentPath.levelDescriptions[i.Level - offset]);
-                    available.Add(i);
-                    paths.Add(i.currentPath);
-                }
-                else
-                {
-                    foreach (ItemDef.UpgradePath u in i.itemDef.paths)
+                    Item item = i.GetItem();
+                    if (i.paths.Count > 0)
                     {
-                        if (u.previousPath == i.currentPath.pathName)
+                        item.currentPath = i.paths[0];
+                        item.Level = 0;
+                        availableDescs.Add(item.currentPath.levelDescriptions[0]);
+                        available.Add(item);
+                        paths.Add(item.currentPath);
+                    }
+                }
+            }
+        }
+        else
+        {
+            // Checks which item upgrades are available to the player
+            foreach (Item i in player.inventory)
+            {
+                int offset = 0;
+                foreach (ItemDef.UpgradePath u in i.takenPaths)
+                {
+                    offset += u.numLevels;
+                }
+                if (i.Level < i.itemDef.maxLevel)
+                {
+                    if (i.Level - offset < i.currentPath.numLevels)
+                    {
+                        availableDescs.Add(i.currentPath.levelDescriptions[i.Level - offset]);
+                        available.Add(i);
+                        paths.Add(i.currentPath);
+                    }
+                    else
+                    {
+                        foreach (ItemDef.UpgradePath u in i.itemDef.paths)
                         {
-                            availableDescs.Add(u.levelDescriptions[0]);
-                            available.Add(i);
-                            paths.Add(u);
+                            if (u.previousPath == i.currentPath.pathName)
+                            {
+                                availableDescs.Add(u.levelDescriptions[0]);
+                                available.Add(i);
+                                paths.Add(u);
+                            }
                         }
                     }
                 }
@@ -75,6 +97,11 @@ public class UpgradePanelManager : MonoBehaviour
             paths.RemoveAt(random);
             AddItem(item, lvlDesc, path);
         }
+    }
+
+    public void SetUpgrades(int numOptions)
+    {
+        SetUpgrades(numOptions, false, false, false);
     }
 
     /// <summary>
@@ -104,6 +131,10 @@ public class UpgradePanelManager : MonoBehaviour
     public void Select(Item item, ItemDef.UpgradePath path)
     {
         item.Level += 1;
+        if (item.Level == 1)
+        {
+            player.inventory.Add(item);
+        }
         if (path != item.currentPath)
         {
             item.takenPaths.Add(item.currentPath);

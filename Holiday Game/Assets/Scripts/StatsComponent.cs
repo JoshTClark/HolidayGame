@@ -102,6 +102,8 @@ public abstract class StatsComponent : MonoBehaviour
     // Flags
     public bool IsDead { get { return isDead; } }
 
+
+
     protected void Start()
     {
 
@@ -436,6 +438,24 @@ public abstract class StatsComponent : MonoBehaviour
             float damageReduction = (-1f / ((0.1f * Mathf.Sqrt(Armor)) + 1f)) + 1f;
             info.damage *= damageReduction;
         }
+
+        if (this.HasItem(ItemIndex.Armor))
+        {
+            Item i = GetItem(ItemIndex.Armor);
+            if (i.HasTakenPath("Spiked Armor"))
+            {
+                DamageInfo reflectInfo = new DamageInfo();
+                reflectInfo.attacker = info.receiver;
+                reflectInfo.receiver = info.attacker;
+                reflectInfo.damage = (this.Armor / 2);
+                info.attacker.TakeDamage(reflectInfo);
+            }
+            if (i.HasTakenPath("Mythril Armor"))
+            {
+                info.damage *= 0.75f;
+            }
+        }
+        
 
         if (this.gameObject.GetComponent<Enemy>())
         {
@@ -840,6 +860,87 @@ public abstract class StatsComponent : MonoBehaviour
                 }
             }
         }
+
+        //Plate Armor Item
+        if (HasItem(ItemIndex.Armor))
+        {
+            Item i = GetItem(ItemIndex.Armor);
+            // Level 1
+            if (i.Level >= 1)
+            {
+                armorAdd += 1f;
+                hpAdd += 10f;
+            }
+            // Level 2
+            if (i.Level >= 2)
+            {
+                armorAdd += 1f;
+                hpAdd += 10f;
+            }
+            // Level 3
+            if (i.Level >= 3)
+            {
+                armorAdd += 1f;
+                hpAdd += 10f;
+            }
+            // Path 1
+            if (i.HasTakenPath("Heavy Plating"))
+            {
+                // Level 4
+                if (i.Level >= 4)
+                {
+                    armorAdd += 2f;
+                }
+                // Level 5
+                if (i.Level >= 5)
+                {
+                    armorAdd += 2f;
+                }
+
+            }
+            //path 1 capstone
+            if (i.HasTakenPath("Spiked Armor"))
+            {
+                // Level 6
+                if (i.Level >= 6)
+                {
+                    armorAdd += 2f;
+             
+                }
+            }
+            // Path 2
+            if (i.HasTakenPath("Better Blacksmithing"))
+            {
+                // Level 4
+                if (i.Level >= 4)
+                {
+                    armorAdd += 1f;
+                    hpAdd += 10f;
+                    speedAdd += 0.5f;
+                }
+                // Level 5
+                if (i.Level >= 5)
+                {
+                    armorAdd += 1f;
+                    hpAdd += 10f;
+                    speedAdd += 0.5f;
+                }
+
+            }
+            //path 2 capstone
+            if (i.HasTakenPath("Mythril Coating"))
+            {
+                // Level 6
+                if (i.Level >= 6)
+                {
+                    armorAdd += 1f;
+                    hpAdd += 10f;
+                    speedAdd += 0.5f;
+                }
+            }
+
+        }
+     
 
         /*
         // UPGRADES

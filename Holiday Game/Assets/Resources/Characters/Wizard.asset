@@ -27,4 +27,5 @@ MonoBehaviour:
     * Average HP'
   characterImage: {fileID: 476859388, guid: 31ea4bd5a566ba241ae7052532e10d6a, type: 3}
   inventory:
-  - {fileID: 11400000, guid: 8a10a9c70a553bc42b69bb2b4e339431, type: 2}
+  - {fileID: 11400000, guid: 1bc11125d1e7e3f45b5352e2db4bf476, type: 2}
+  - {fileID: 11400000, guid: bcd6ce1c0e89b354887669cac4a07fff, type: 2}

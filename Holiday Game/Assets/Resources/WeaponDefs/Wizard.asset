@@ -18,4 +18,4 @@ MonoBehaviour:
   maxLevel: 0
   tier: 0
   paths: []
-  weaponPrefab: {fileID: 0}
+  weaponPrefab: {fileID: 130564432471187322, guid: 05dcd730e4f2b3442bf0d379416bf5b1, type: 3}

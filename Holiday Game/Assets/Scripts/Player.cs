@@ -45,6 +45,7 @@ public class Player : StatsComponent
 
     public bool godMode = false;
 
+
     public float DashCooldown { get { return baseDashCooldown * dashCooldownMultiplier; } }
     public float Dashes { get { return baseDashes + extraDashes; } }
 

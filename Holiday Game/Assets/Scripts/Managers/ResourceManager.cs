@@ -61,7 +61,8 @@ public class ResourceManager
         MoveSpeed = 2,
         SwordWeapon = 3,
         CritChance = 4,
-        CandyCorn = 5
+        CandyCorn = 5,
+        Armor = 6
 
     }
 

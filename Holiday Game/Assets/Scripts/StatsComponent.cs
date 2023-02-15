@@ -433,12 +433,32 @@ public abstract class StatsComponent : MonoBehaviour
     {
         info.receiver = this;
         info.CalculateAll();
+        
         if (Armor > 0)
         {
-            float damageReduction = (-1f / ((0.1f * Mathf.Sqrt(Armor)) + 1f)) + 1f;
-            info.damage *= damageReduction;
+            if (info.attacker.HasItem(ItemIndex.CritChance)) // If receiver has armor, check if attacker has armor piercer
+            {
+                Item i = info.attacker.GetItem(ItemIndex.CritChance);
+                
+                if(info.isCrit && i.HasTakenPath("Armor Piercer"))
+                {
+                        //do nothing ie. No damage Reduction. Stuff should be calced here if we want armor piercer to only percentage ignore armor instead of complete
+                }
+                else // attacker has crit item, but doesnt have upgrade or didnt crit
+                {
+                    float damageReduction = (-1f / ((0.1f * Mathf.Sqrt(Armor)) + 1f)) + 1f;
+                    info.damage *= damageReduction;
+                }
+                
+            }
+            else // dont have item, do normal calc
+            {
+                float damageReduction = (-1f / ((0.1f * Mathf.Sqrt(Armor)) + 1f)) + 1f;
+                info.damage *= damageReduction;
+            }
         }
 
+        // Armor Item Capstones
         if (this.HasItem(ItemIndex.Armor))
         {
             Item i = GetItem(ItemIndex.Armor);
@@ -455,6 +475,8 @@ public abstract class StatsComponent : MonoBehaviour
                 info.damage *= 0.75f;
             }
         }
+
+        
         
 
         if (this.gameObject.GetComponent<Enemy>())
@@ -470,6 +492,16 @@ public abstract class StatsComponent : MonoBehaviour
             }
         }
 
+        if (info.attacker.HasItem(ItemIndex.CritChance))
+        {
+            Item i = info.attacker.GetItem(ItemIndex.CritChance);
+            if(info.isCrit && i.HasTakenPath("Vicious Wounds"))
+            {
+                Debug.Log("Bleed should be applied");
+                info.debuffs.Add(BuffIndex.Bleeding);
+            }
+        }
+
         foreach (ResourceManager.BuffIndex i in info.debuffs)
         {
             BuffDef def = ResourceManager.GetBuffDef(i);
@@ -479,12 +511,16 @@ public abstract class StatsComponent : MonoBehaviour
             buffInfo.attacker = info.attacker;
             buffInfo.receiver = info.receiver;
             buff.infoTemplate = buffInfo;
+            buff.infoTemplate.mask.Add(i);
             buff.afflicting = this;
             if (i == ResourceManager.BuffIndex.Burning)
             {
                 buff.totalDamage = info.attacker.Damage;
             }
-            buffs.Add(buff);
+            if (!info.mask.Contains(i)) 
+            {
+                buffs.Add(buff);
+            }
         }
 
         // Damage Tracking

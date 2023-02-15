@@ -85,26 +85,13 @@ public class EnemyManager : MonoBehaviour
                 }
             }
 
+            Vector2 playerPos = GameManager.instance.player.transform.position;
             foreach (Enemy e in allEnemies)
             {
-                if (Vector2.Distance(e.gameObject.transform.position, GameManager.instance.player.gameObject.transform.position) >= maxSpawnDistance.magnitude)
+                Vector2 enemyPos = e.gameObject.transform.position;
+                if (enemyPos.x > playerPos.x + maxSpawnDistance.x || enemyPos.x < playerPos.x - maxSpawnDistance.x || enemyPos.y > playerPos.y + maxSpawnDistance.y || enemyPos.y < playerPos.y - maxSpawnDistance.y)
                 {
-                    Vector2 spawnPos = new Vector2();
-                    float pX = Random.Range(minSpawnDistance.x, maxSpawnDistance.x);
-                    float pY = Random.Range(minSpawnDistance.y, maxSpawnDistance.y);
-                    Vector2 playerPos = GameManager.instance.Player.transform.position;
-                    if (GameManager.RollCheck(0.5f))
-                    {
-                        pX *= -1;
-                    }
-                    if (GameManager.RollCheck(0.5f))
-                    {
-                        pY *= -1;
-                    }
-
-                    spawnPos.x = playerPos.x + pX;
-                    spawnPos.y = playerPos.y + pY;
-
+                    Vector2 spawnPos = GetRandomPosition();
                     e.transform.position = spawnPos;
                 }
             }
@@ -141,21 +128,7 @@ public class EnemyManager : MonoBehaviour
     public void SpawnEnemy(ResourceManager.EnemyIndex index)
     {
         Enemy enemy = GetEnemy(index);
-        Vector2 spawnPos = new Vector2();
-        float pX = Random.Range(minSpawnDistance.x, maxSpawnDistance.x);
-        float pY = Random.Range(minSpawnDistance.y, maxSpawnDistance.y);
-        Vector2 playerPos = GameManager.instance.Player.transform.position;
-        if (GameManager.RollCheck(0.5f))
-        {
-            pX *= -1;
-        }
-        if (GameManager.RollCheck(0.5f))
-        {
-            pY *= -1;
-        }
-
-        spawnPos.x = playerPos.x + pX;
-        spawnPos.y = playerPos.y + pY;
+        Vector2 spawnPos = GetRandomPosition();
         enemy.gameObject.transform.position = spawnPos;
         enemy.damageMultConst = 1f;
         enemy.hpMultConst = 1f;

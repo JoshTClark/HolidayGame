@@ -27,4 +27,6 @@ MonoBehaviour:
     * <color=#AAAAAA><size=+8>???</size></color>'
   characterImage: {fileID: 1500714575, guid: c33ab33ef8c756640954b7567896f904, type: 3}
   inventory:
-  - {fileID: 11400000, guid: f8daa8e190cc65b488e4e8d7f6ca94be, type: 2}
+  - {fileID: 11400000, guid: a91aef9daf87f6c4db422bf454b6327d, type: 2}
+  - {fileID: 11400000, guid: f7eba188c934a104da54ec5823b012ac, type: 2}
+  - {fileID: 11400000, guid: 26c21fd8aefbbdb4fbd69af5a82f8669, type: 2}

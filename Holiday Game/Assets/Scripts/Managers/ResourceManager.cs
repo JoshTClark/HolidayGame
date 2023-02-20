@@ -52,7 +52,20 @@ public class ResourceManager
         BossAttack2,
         CandyCornRifle,
         SwordSlash
+    }
+
+    public enum ItemIndex
+    {
+        AttackSpeed = 0,
+        Damage = 1,
+        MoveSpeed = 2,
+        SwordWeapon = 3,
+        CritChance = 4,
+        Fireball = 5,
+        Armor = 6
+
     }
+
     public enum UpgradeIndex
     {
         Health1,
@@ -139,7 +152,8 @@ public class ResourceManager
     public enum BuffIndex
     {
         Burning,
-        Stunned
+        Stunned,
+        Bleeding
     }
 
     public enum OrbitalIndex
@@ -155,10 +169,12 @@ public class ResourceManager
     public static List<UpgradePool> upgradePools = new List<UpgradePool>();
     public static List<BuffDef> buffs = new List<BuffDef>();
     public static List<FollowingEffect> effects = new List<FollowingEffect>();
-    public static List<OrbitalParent> orbitals = new List<OrbitalParent>();
-    public static List<LevelData> levelDatas = new List<LevelData>();
-    public static List<LevelPool> levelPools = new List<LevelPool>();
+    public static List<OrbitalParent> orbitals = new List<OrbitalParent>();
+    public static List<LevelData> levelDatas = new List<LevelData>();
+    public static List<LevelPool> levelPools = new List<LevelPool>();
     public static List<PlayableCharacterData> characters = new List<PlayableCharacterData>();
+    
+    public static List<ItemDef> itemDefs = new List<ItemDef>();
 
     public static bool isLoaded = false;
 
@@ -178,7 +194,17 @@ public class ResourceManager
         LoadPlayableCharacters();
         LoadOrbitals();
         LoadLevels();
+
+        LoadItems();
         isLoaded = true;
+    }
+    public static void LoadItems()
+    {
+        ItemDef[] arr = Resources.LoadAll<ItemDef>("");
+        foreach (ItemDef i in arr)
+        {
+            itemDefs.Add(i);
+        }
     }
 
     public static void LoadEnemies()

@@ -11,17 +11,18 @@ public class FireworkWeapon : Weapon
         float count = GetBaseStat("Projectiles");
         float chance = GetBaseStat("Stun Chance");
 
+        /*
         // More fireworks upgrade
         if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.FireworkCount))
         {
-            count += 1f * (GameManager.instance.Player.GetUpgrade(ResourceManager.UpgradeIndex.FireworkCount).CurrentLevel);
+            count += 1f * (GameManager.instance.Player.GetItem(ResourceManager.UpgradeIndex.FireworkCount).CurrentLevel);
         }
 
         if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.StunningFireworks))
         {
-            chance += GameManager.instance.Player.GetUpgrade(ResourceManager.UpgradeIndex.StunningFireworks).CurrentLevel * 0.05f;
+            chance += GameManager.instance.Player.GetItem(ResourceManager.UpgradeIndex.StunningFireworks).CurrentLevel * 0.05f;
         }
-
+        */
         trueStats["Projectiles"] = count;
         trueStats["Stun Chance"] = chance;
     }
@@ -38,6 +39,7 @@ public class FireworkWeapon : Weapon
                 p.transform.position = this.transform.position;
                 p.target = e;
                 DamageInfo info = new DamageInfo();
+                /*
                 if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.StunningFireworks))
                 {
                     if (GameManager.RollCheck(GetStat("Stun Chance")))
@@ -45,6 +47,7 @@ public class FireworkWeapon : Weapon
                         info.debuffs.Add(ResourceManager.BuffIndex.Stunned);
                     }
                 }
+                */
                 info.damage = GetStat("Damage") * owner.Damage;
                 info.attacker = owner;
                 info.debuffs.Add(ResourceManager.BuffIndex.Burning);

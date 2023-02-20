@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,27 +8,212 @@ using static ResourceManager;
 public class UpgradePanelManager : MonoBehaviour
 {
     private List<UpgradeOption> options = new List<UpgradeOption>();
-    private List<UpgradeOption> replaceWeapons = new List<UpgradeOption>();
     public UpgradeOption prefab;
     public Player player;
     public bool selected = false;
     public bool displaying = false;
     public float commonOdds, uncommonOdds, rareOdds, epicOdds, legendaryOdds;
     public TMP_Text textName, tier, desc, titleText, baseStatsTxt, weaponStatsTxt, weaponStatsLabel;
-    public Button replaceWeaponButton, rerollButton, backButton;
+    public Button rerollButton, backButton;
     private int levels = 1;
     public CanvasRenderer infoPanel, statsPanel;
 
-    public int tempWeapons = 0;
-
     private void Start()
     {
-        replaceWeaponButton.gameObject.SetActive(false);
         rerollButton.gameObject.SetActive(false);
-        backButton.gameObject.SetActive(false);
-        ResetOdds();
+    }
+    /// <summary>
+    /// Sets upgrades for the player to choose
+    /// </summary>
+    public void SetUpgrades(int numOptions, bool specialUpgrade, bool itemsOnly, bool weaponsOnly)
+    {
+        List<ItemDef.LevelDescription> availableDescs = new List<ItemDef.LevelDescription>();
+        List<Item> available = new List<Item>();
+        List<ItemDef.UpgradePath> paths = new List<ItemDef.UpgradePath>();
+
+        if (specialUpgrade)
+        {
+            List<ItemDef> itemDefs = ResourceManager.itemDefs;
+            foreach (ItemDef i in itemDefs)
+            {
+                if (!player.HasItem(i.index))
+                {
+                    Item item = i.GetItem();
+                    if (i.paths.Count > 0)
+                    {
+                        item.currentPath = i.paths[0];
+                        item.Level = 0;
+                        availableDescs.Add(item.currentPath.levelDescriptions[0]);
+                        available.Add(item);
+                        paths.Add(item.currentPath);
+                    }
+                }
+            }
+        }
+        else
+        {
+            // Checks which item upgrades are available to the player
+            foreach (Item i in player.inventory)
+            {
+                int offset = 0;
+                foreach (ItemDef.UpgradePath u in i.takenPaths)
+                {
+                    offset += u.numLevels;
+                }
+                if (i.Level < i.itemDef.maxLevel)
+                {
+                    if (i.Level - offset < i.currentPath.numLevels)
+                    {
+                        availableDescs.Add(i.currentPath.levelDescriptions[i.Level - offset]);
+                        available.Add(i);
+                        paths.Add(i.currentPath);
+                    }
+                    else
+                    {
+                        foreach (ItemDef.UpgradePath u in i.itemDef.paths)
+                        {
+                            if (u.previousPath == i.currentPath.pathName)
+                            {
+                                availableDescs.Add(u.levelDescriptions[0]);
+                                available.Add(i);
+                                paths.Add(u);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Randomly adds upgrades to the current choices
+        int val = Mathf.Min(numOptions, available.Count);
+        for (int i = 0; i < val; i++)
+        {
+            int random = Random.Range(0, available.Count);
+            Item item = available[random];
+            ItemDef.LevelDescription lvlDesc = availableDescs[random];
+            ItemDef.UpgradePath path = paths[random];
+            availableDescs.RemoveAt(random);
+            available.RemoveAt(random);
+            paths.RemoveAt(random);
+            AddItem(item, lvlDesc, path);
+        }
     }
 
+    public void SetUpgrades(int numOptions)
+    {
+        SetUpgrades(numOptions, false, false, false);
+    }
+
+    /// <summary>
+    /// Adds an item to the set of chooseable item upgrades
+    /// </summary>
+    /// <param name="upgrade"></param>
+    public void AddItem(Item item, ItemDef.LevelDescription levelDescription, ItemDef.UpgradePath path)
+    {
+        UpgradeOption option = Instantiate<UpgradeOption>(prefab, new Vector3(), new Quaternion(), infoPanel.gameObject.transform);
+        option.item = item;
+        option.levelDescription = levelDescription;
+        option.tier = tier;
+        option.textName = textName;
+        option.desc = desc;
+        option.baseStatsTxt = baseStatsTxt;
+        option.weaponStatsTxt = weaponStatsTxt;
+        option.weaponStatsLabel = weaponStatsLabel;
+        RectTransform upgradeRect = option.GetComponent<RectTransform>();
+        upgradeRect.localScale = new Vector3(2, 2, 1);
+        option.gameObject.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            Select(item, path);
+        });
+        options.Add(option);
+    }
+
+    public void Select(Item item, ItemDef.UpgradePath path)
+    {
+        item.Level += 1;
+        if (item.Level == 1)
+        {
+            player.inventory.Add(item);
+        }
+        if (path != item.currentPath)
+        {
+            item.takenPaths.Add(item.currentPath);
+            item.currentPath = path;
+        }
+        selected = true;
+    }
+
+    /// <summary>
+    /// Resets the panels options
+    /// </summary>
+    public void Clear()
+    {
+        for (int i = options.Count - 1; i >= 0; i--)
+        {
+            Destroy(options[i].gameObject);
+        }
+        titleText.text = "Select an Upgrade";
+        options.Clear();
+        selected = false;
+        displaying = false;
+        baseStatsTxt.text = "";
+        weaponStatsLabel.text = "";
+        weaponStatsTxt.text = "";
+    }
+
+    public void Reroll()
+    {
+        player.rerolls--;
+        Clear();
+        SetUpgrades(4);
+    }
+
+    public void Skip()
+    {
+        selected = true;
+    }
+
+    /// <summary>
+    /// Sets up the panel with the given options
+    /// </summary>
+    public void ShowOptions(int levels)
+    {
+        this.levels = levels;
+        if (player.rerolls > 0)
+        {
+            rerollButton.gameObject.SetActive(true);
+            rerollButton.GetComponentInChildren<TMP_Text>().text = "Reroll Upgrades\n" + player.rerolls + " rerolls left";
+        }
+        else
+        {
+            rerollButton.gameObject.SetActive(false);
+        }
+        if (levels == 1)
+        {
+            titleText.text = "Select <b><color=#00D4FF>" + levels + "</color></b> Upgrade";
+        }
+        else
+        {
+            titleText.text = "Select <b><color=#00D4FF>" + levels + "</color></b> Upgrades";
+        }
+
+        textName.text = "";
+        tier.text = "";
+        desc.text = "";
+        for (int i = 0; i < options.Count; i++)
+        {
+            UpgradeOption option = options[i];
+
+            RectTransform upgradeRect = option.GetComponent<RectTransform>();
+
+            upgradeRect.localPosition = new Vector3(0, 0);
+            upgradeRect.anchorMax = new Vector2(0.125f + (i * 0.25f), 0.3f);
+            upgradeRect.anchorMin = new Vector2(0.125f + (i * 0.25f), 0.3f);
+        }
+        displaying = true;
+    }
+
+    /*
     /// <summary>
     /// Called when the player hits the accept upgrade button
     /// </summary>
@@ -66,7 +252,7 @@ public class UpgradePanelManager : MonoBehaviour
                 option.weaponStatsLabel = weaponStatsLabel;
                 option.gameObject.GetComponent<Button>().onClick.AddListener(() =>
                 {
-                    SelectWeapon(upgrade, replacement);
+                    //SelectWeapon(upgrade, replacement);
                 });
                 replaceWeapons.Add(option);
             }
@@ -88,16 +274,9 @@ public class UpgradePanelManager : MonoBehaviour
             {
                 tempWeapons++;
             }
-            player.AddUpgrade(upgrade);
+            //player.AddUpgrade(upgrade);
             selected = true;
         }
-    }
-
-    public void SelectWeapon(ResourceManager.UpgradeIndex add, ResourceManager.UpgradeIndex remove)
-    {
-        player.RemoveUpgrade(remove);
-        player.AddUpgrade(add);
-        selected = true;
     }
 
     /// <summary>
@@ -183,6 +362,7 @@ public class UpgradePanelManager : MonoBehaviour
         List<ResourceManager.UpgradeIndex> all = new List<ResourceManager.UpgradeIndex>();
         foreach (ResourceManager.UpgradeIndex u in pool.upgrades)
         {
+            /*
             if (!(player.HasUpgrade(u) && !ResourceManager.GetUpgrade(u).CanTakeMultiple))
             {
                 Upgrade upgrade = ResourceManager.GetUpgrade(u);
@@ -277,6 +457,7 @@ public class UpgradePanelManager : MonoBehaviour
         {
             foreach (ResourceManager.UpgradeIndex u in pool.upgrades)
             {
+                /*
                 if (!(player.HasUpgrade(u) && !ResourceManager.GetUpgrade(u).CanTakeMultiple))
                 {
                     Upgrade upgrade = ResourceManager.GetUpgrade(u);
@@ -437,4 +618,5 @@ public class UpgradePanelManager : MonoBehaviour
             titleText.text = "Select <b><color=#00D4FF>" + levels + "</color></b> Upgrades";
         }
     }
+    */
 }

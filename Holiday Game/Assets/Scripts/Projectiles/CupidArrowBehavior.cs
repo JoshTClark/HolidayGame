@@ -35,6 +35,7 @@ public class CupidArrowBehavior : ProjectileBase
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
             Direction = transform.right;
 
+            /*
             if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.CupidArrowSwiftFlight))
             {
                 SpeedMultiplier += .5f;
@@ -43,6 +44,7 @@ public class CupidArrowBehavior : ProjectileBase
             {
                 DamageMultiplier += .2f;
             }
+            */
         }
     }
 

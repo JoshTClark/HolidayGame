@@ -61,6 +61,8 @@ public class GameManager : MonoBehaviour
     private bool paused = false;
     private int garunteedWeaponLevel = 5;
     private bool doSpecialUpgrade = false;
+    private bool itemOnlyUpgrade = false;
+    private bool weaponOnlyUpgrade = false;
     private int upgradesToGive = 0;
     private float dayLength = 120f;
     public int currentDay = 1;
@@ -72,6 +74,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private InputAction slowToggle;
+
+    [SerializeField]
+    private InputAction completeLevel;
 
     public Player Player
     {
@@ -111,10 +116,14 @@ public class GameManager : MonoBehaviour
             ResourceManager.Init();
             Debug.Log("No session found");
             player = GameObject.Instantiate<Player>(ResourceManager.characters[0].prefab);
-            player.inventory = new List<Upgrade>();
-            foreach (Upgrade i in ResourceManager.characters[0].inventory)
+            player.inventory = new List<Item>();
+            foreach (ItemDef i in ResourceManager.characters[0].inventory)
             {
-                player.inventory.Add(i);
+                player.inventory.Add(i.GetItem());
+                if (i.GetType() == typeof(WeaponDef))
+                {
+                    player.AddWeapon(((WeaponDef)i).weaponPrefab);
+                }
             }
         }
         else
@@ -181,10 +190,15 @@ public class GameManager : MonoBehaviour
         if (Constants.DEBUG)
         {
             slowToggle.Enable();
+            completeLevel.Enable();
         }
         slowToggle.performed += (InputAction.CallbackContext callback) =>
         {
             slowTime = !slowTime;
+        };
+        completeLevel.performed += (InputAction.CallbackContext callback) =>
+        {
+            DoLevelEnd();
         };
 
         pausedPanel.gameObject.SetActive(false);
@@ -208,6 +222,9 @@ public class GameManager : MonoBehaviour
         playerDash.action.Disable();
         godMode.action.Disable();
         levelUpButton.action.Disable();
+        slowToggle.Disable();
+        completeLevel.Disable();
+
     }
 
     void Update()
@@ -233,6 +250,10 @@ public class GameManager : MonoBehaviour
                 // Updating the timer and difficulty
                 time += Time.deltaTime;
                 UpdateDate();
+
+                doSpecialUpgrade = false;
+                itemOnlyUpgrade = false;
+                weaponOnlyUpgrade = false;
 
                 // Updating displays
                 objectiveDisplay.rectTransform.anchorMin = new Vector2(objectiveDisplay.rectTransform.anchorMin.x, 0.94f);
@@ -347,13 +368,8 @@ public class GameManager : MonoBehaviour
                 if (!upgradeManager.displaying)
                 {
                     upgradeManager.player = player;
-                    upgradeManager.SetUpgradesByPools(GetPossiblePools(false), 4);
-                    bool check = false;
-                    if ((player.Level - (upgradesToGive - 1)) % garunteedWeaponLevel == 0)
-                    {
-                        check = true;
-                    }
-                    upgradeManager.ShowOptions(upgradesToGive, check);
+                    upgradeManager.SetUpgrades(4, doSpecialUpgrade, itemOnlyUpgrade, weaponOnlyUpgrade);
+                    upgradeManager.ShowOptions(upgradesToGive);
                 }
                 if (upgradeManager.selected)
                 {
@@ -362,21 +378,14 @@ public class GameManager : MonoBehaviour
                     if (upgradesToGive <= 0)
                     {
                         state = GameState.Normal;
-                        upgradeManager.tempWeapons = 0;
                         upgradePanel.gameObject.SetActive(false);
                         gamePanel.gameObject.SetActive(true);
-                        doSpecialUpgrade = false;
                     }
                     else
                     {
                         upgradeManager.player = player;
-                        upgradeManager.SetUpgradesByPools(GetPossiblePools(false), 4);
-                        bool check = false;
-                        if ((player.Level - (upgradesToGive - 1)) % garunteedWeaponLevel == 0)
-                        {
-                            check = true;
-                        }
-                        upgradeManager.ShowOptions(upgradesToGive, check);
+                        upgradeManager.SetUpgrades(4);
+                        upgradeManager.ShowOptions(upgradesToGive);
                     }
                 }
                 break;
@@ -395,7 +404,7 @@ public class GameManager : MonoBehaviour
     public void GivePlayerWeapon(ResourceManager.WeaponIndex index)
     {
         Weapon weapon = ResourceManager.GetWeapon(index);
-        Player.AddAttack(weapon);
+        Player.AddWeapon(weapon);
     }
 
     // Random check
@@ -457,6 +466,7 @@ public class GameManager : MonoBehaviour
         {
             pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Basic));
             pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Weapons));
+            /*
             if (player.HasUpgrade(ResourceManager.UpgradeIndex.SnowballWeaponUpgrade))
             {
                 pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Snowball));
@@ -477,6 +487,7 @@ public class GameManager : MonoBehaviour
             {
                 pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.CandyCorn));
             }
+            */
         }
         return pools;
     }
@@ -626,5 +637,15 @@ public class GameManager : MonoBehaviour
         EnemyManager.Clean();
         DropManager.Clean();
         session.ToTitle();
+    }
+
+    public void ChestPickup(Chest c)
+    {
+        Debug.Log("Found chest");
+        state = GameState.UpgradeMenu;
+        upgradesToGive = 1;
+        doSpecialUpgrade = true;
+        itemOnlyUpgrade = c.onlyItems;
+        weaponOnlyUpgrade = c.onlyWeapon;
     }
 }

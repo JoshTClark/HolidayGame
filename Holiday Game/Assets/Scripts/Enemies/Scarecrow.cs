@@ -31,6 +31,6 @@ public class Scarecrow : Enemy
         minPlayerDist = 6f;
         maxPlayerDist = 8f;
 
-        AddAttack(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.Crows));
+        AddWeapon(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.Crows));
     }
 }

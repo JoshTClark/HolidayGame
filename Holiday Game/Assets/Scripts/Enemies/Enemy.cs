@@ -156,10 +156,11 @@ public abstract class Enemy : StatsComponent
             float ran = Random.value;
             if (info.index == ResourceManager.PickupIndex.HealthDrop1)
             {
+                /*
                 if (player.HasUpgrade(ResourceManager.UpgradeIndex.CupidArrowHealth) && dmgInfo.weapon == ResourceManager.WeaponIndex.CupidArrow)
                 {
-                    ran -= (float)(0.05 * GameManager.instance.Player.GetUpgrade(ResourceManager.UpgradeIndex.CupidArrowHealth).CurrentLevel);
-                }
+                    ran -= (float)(0.05 * GameManager.instance.Player.GetItem(ResourceManager.UpgradeIndex.CupidArrowHealth).CurrentLevel);
+                */
             }
             if (ran <= info.chance)
             {
@@ -250,16 +251,19 @@ public abstract class Enemy : StatsComponent
     public override void TakeDamage(DamageInfo info)
     {
         base.TakeDamage(info);
+        /*
         if (!onHitSound.isPlaying)
         {
             // Play Audio
             onHitSound.Play();
         }
+        */
     }
     public virtual void Clean(ObjectPool<Enemy> pool)
     {
         movements.Clear();
         knockback.Clear();
+        buffs.Clear();
         currentHP = MaxHp;
         player = null;
         inventory.Clear();

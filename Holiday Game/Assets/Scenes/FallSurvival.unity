@@ -253,6 +253,14 @@ PrefabInstance:
       propertyPath: levelData
       value: 
       objectReference: {fileID: 11400000, guid: da4c72310f3167d47b6daf7e8d0613ba, type: 2}
+    - target: {fileID: 8704142796787333609, guid: 63e4eaf74c005b145a2bb0c416415e86, type: 3}
+      propertyPath: completeLevel.m_Id
+      value: aa7d72b1-0297-41cd-871c-0b6128dfea70
+      objectReference: {fileID: 0}
+    - target: {fileID: 8704142796787333609, guid: 63e4eaf74c005b145a2bb0c416415e86, type: 3}
+      propertyPath: completeLevel.m_Name
+      value: Complete Level
+      objectReference: {fileID: 0}
     - target: {fileID: 8704142796787333614, guid: 63e4eaf74c005b145a2bb0c416415e86, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -533,7 +541,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 3c3a537e6fb5fd2468da12b76981b112, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

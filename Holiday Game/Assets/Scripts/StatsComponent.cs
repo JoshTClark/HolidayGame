@@ -49,8 +49,8 @@ public abstract class StatsComponent : MonoBehaviour
     // Weapon List
     public List<Weapon> weapons = new List<Weapon>();
 
-    // Inventory for upgrades
-    public List<Upgrade> inventory = new List<Upgrade>();
+    // Inventory for Items
+    public List<Item> inventory = new List<Item>();
 
     // Debuffs and Buffs
     public List<BuffInfo> buffs = new List<BuffInfo>();
@@ -102,6 +102,8 @@ public abstract class StatsComponent : MonoBehaviour
     // Flags
     public bool IsDead { get { return isDead; } }
 
+
+
     protected void Start()
     {
 
@@ -145,6 +147,7 @@ public abstract class StatsComponent : MonoBehaviour
             float delta = Time.deltaTime;
 
             // Patience
+            /*
             if (HasUpgrade(ResourceManager.UpgradeIndex.Patience) && !isMoving)
             {
                 patienceTimer += delta;
@@ -153,9 +156,9 @@ public abstract class StatsComponent : MonoBehaviour
             {
                 patienceTimer = 0;
             }
+            */
 
             CalculateStats();
-            CheckWeapons();
 
             OnUpdate();
 
@@ -214,184 +217,6 @@ public abstract class StatsComponent : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Checks what weapons the player should have
-    /// </summary>
-    private void CheckWeapons()
-    {
-        // Snowball
-        if (HasUpgrade(ResourceManager.UpgradeIndex.SnowballWeaponUpgrade))
-        {
-            bool giveSnowball = true;
-            foreach (Weapon w in weapons)
-            {
-                if (w.GetType() == typeof(SnowballWeapon))
-                {
-                    giveSnowball = false;
-                }
-            }
-            if (giveSnowball)
-            {
-                AddAttack(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.Snowball));
-            }
-        }
-        else
-        {
-            for (int i = weapons.Count - 1; i >= 0; i--)
-            {
-                if (weapons[i].index == WeaponIndex.Snowball)
-                {
-                    Weapon w = weapons[i];
-                    weapons.RemoveAt(i);
-                    Destroy(w.gameObject);
-                }
-            }
-        }
-
-        // Cupid Arrow
-        if (HasUpgrade(ResourceManager.UpgradeIndex.CupidArrowWeaponUpgrade))
-        {
-            bool giveArrow = true;
-            foreach (Weapon w in weapons)
-            {
-                if (w.GetType() == typeof(CupidArrow))
-                {
-                    giveArrow = false;
-                }
-            }
-            if (giveArrow)
-            {
-                AddAttack(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.CupidArrow));
-            }
-        }
-        else
-        {
-            for (int i = weapons.Count - 1; i >= 0; i--)
-            {
-                if (weapons[i].index == WeaponIndex.CupidArrow)
-                {
-                    Weapon w = weapons[i];
-                    weapons.RemoveAt(i);
-                    Destroy(w.gameObject);
-                }
-            }
-        }
-
-        // Pumpkin Bomb
-        if (HasUpgrade(ResourceManager.UpgradeIndex.PumpkinBombWeaponUpgrade))
-        {
-            bool givePumkin = true;
-            foreach (Weapon w in weapons)
-            {
-                if (w.GetType() == typeof(PumpkinBomb))
-                {
-                    givePumkin = false;
-                }
-            }
-            if (givePumkin)
-            {
-                AddAttack(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.PumpkinBomb));
-            }
-        }
-        else
-        {
-            for (int i = weapons.Count - 1; i >= 0; i--)
-            {
-                if (weapons[i].index == WeaponIndex.PumpkinBomb)
-                {
-                    Weapon w = weapons[i];
-                    weapons.RemoveAt(i);
-                    Destroy(w.gameObject);
-                }
-            }
-        }
-
-        // Fireworks
-        if (HasUpgrade(ResourceManager.UpgradeIndex.FireworkWeaponUpgrade))
-        {
-            bool giveFirework = true;
-            foreach (Weapon w in weapons)
-            {
-                if (w.GetType() == typeof(FireworkWeapon))
-                {
-                    giveFirework = false;
-                }
-            }
-            if (giveFirework)
-            {
-                AddAttack(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.Fireworks));
-            }
-        }
-        else
-        {
-            for (int i = weapons.Count - 1; i >= 0; i--)
-            {
-                if (weapons[i].index == WeaponIndex.Fireworks)
-                {
-                    Weapon w = weapons[i];
-                    weapons.RemoveAt(i);
-                    Destroy(w.gameObject);
-                }
-            }
-        }
-        // Candy Corn Rifle
-        if (HasUpgrade(ResourceManager.UpgradeIndex.CandyCornWeaponUpgrade))
-        {
-            bool giveCorn = true;
-            foreach (Weapon w in weapons)
-            {
-                if (w.GetType() == typeof(CandyCornWeapon))
-                {
-                    giveCorn = false;
-                }
-            }
-            if (giveCorn)
-            {
-                AddAttack(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.CandyCornRifle));
-            }
-        }
-        else
-        {
-            for (int i = weapons.Count - 1; i >= 0; i--)
-            {
-                if (weapons[i].index == WeaponIndex.CandyCornRifle)
-                {
-                    Weapon w = weapons[i];
-                    weapons.RemoveAt(i);
-                    Destroy(w.gameObject);
-                }
-            }
-        }
-        // Sword Slash
-        if (HasUpgrade(ResourceManager.UpgradeIndex.SwordSlashWeaponUpgrade))
-        {
-            bool giveSlash = true;
-            foreach (Weapon w in weapons)
-            {
-                if (w.GetType() == typeof(SwordSlashWeapon))
-                {
-                    giveSlash = false;
-                }
-            }
-            if (giveSlash)
-            {
-                AddAttack(ResourceManager.GetWeapon(ResourceManager.WeaponIndex.SwordSlash));
-            }
-        }
-        else
-        {
-            for (int i = weapons.Count - 1; i >= 0; i--)
-            {
-                if (weapons[i].index == WeaponIndex.SwordSlash)
-                {
-                    Weapon w = weapons[i];
-                    weapons.RemoveAt(i);
-                    Destroy(w.gameObject);
-                }
-            }
-        }
-    }
-
     //Checks to see if leveled up since last tick
     public void CalculateLevel()
     {
@@ -427,11 +252,51 @@ public abstract class StatsComponent : MonoBehaviour
     {
         info.receiver = this;
         info.CalculateAll();
+        
         if (Armor > 0)
         {
-            float damageReduction = (-1f / ((0.1f * Mathf.Sqrt(Armor)) + 1f)) + 1f;
-            info.damage *= damageReduction;
+            if (info.attacker.HasItem(ItemIndex.CritChance)) // If receiver has armor, check if attacker has armor piercer
+            {
+                Item i = info.attacker.GetItem(ItemIndex.CritChance);
+                
+                if(info.isCrit && i.HasTakenPath("Armor Piercer"))
+                {
+                        //do nothing ie. No damage Reduction. Stuff should be calced here if we want armor piercer to only percentage ignore armor instead of complete
+                }
+                else // attacker has crit item, but doesnt have upgrade or didnt crit
+                {
+                    float damageReduction = (-1f / ((0.1f * Mathf.Sqrt(Armor)) + 1f)) + 1f;
+                    info.damage *= damageReduction;
+                }
+                
+            }
+            else // dont have item, do normal calc
+            {
+                float damageReduction = (-1f / ((0.1f * Mathf.Sqrt(Armor)) + 1f)) + 1f;
+                info.damage *= damageReduction;
+            }
         }
+
+        // Armor Item Capstones
+        if (this.HasItem(ItemIndex.Armor))
+        {
+            Item i = GetItem(ItemIndex.Armor);
+            if (i.HasTakenPath("Spiked Armor"))
+            {
+                DamageInfo reflectInfo = new DamageInfo();
+                reflectInfo.attacker = info.receiver;
+                reflectInfo.receiver = info.attacker;
+                reflectInfo.damage = (this.Armor / 2);
+                info.attacker.TakeDamage(reflectInfo);
+            }
+            if (i.HasTakenPath("Mythril Armor"))
+            {
+                info.damage *= 0.75f;
+            }
+        }
+
+        
+        
 
         if (this.gameObject.GetComponent<Enemy>())
         {
@@ -446,6 +311,16 @@ public abstract class StatsComponent : MonoBehaviour
             }
         }
 
+        if (info.attacker.HasItem(ItemIndex.CritChance))
+        {
+            Item i = info.attacker.GetItem(ItemIndex.CritChance);
+            if(info.isCrit && i.HasTakenPath("Vicious Wounds"))
+            {
+                Debug.Log("Bleed should be applied");
+                info.debuffs.Add(BuffIndex.Bleeding);
+            }
+        }
+
         foreach (ResourceManager.BuffIndex i in info.debuffs)
         {
             BuffDef def = ResourceManager.GetBuffDef(i);
@@ -455,12 +330,16 @@ public abstract class StatsComponent : MonoBehaviour
             buffInfo.attacker = info.attacker;
             buffInfo.receiver = info.receiver;
             buff.infoTemplate = buffInfo;
+            buff.infoTemplate.mask.Add(i);
             buff.afflicting = this;
             if (i == ResourceManager.BuffIndex.Burning)
             {
                 buff.totalDamage = info.attacker.Damage;
             }
-            buffs.Add(buff);
+            if (!info.mask.Contains(i)) 
+            {
+                buffs.Add(buff);
+            }
         }
 
         // Damage Tracking
@@ -525,7 +404,7 @@ public abstract class StatsComponent : MonoBehaviour
     }
 
     // Adds an attack
-    public void AddAttack(Weapon attack)
+    public void AddWeapon(Weapon attack)
     {
         attack.owner = this;
         weapons.Add(Instantiate(attack, transform));
@@ -535,18 +414,20 @@ public abstract class StatsComponent : MonoBehaviour
     public void AddXP(float amount)
     {
         float increase = 1f;
+        /*
         if (HasUpgrade(ResourceManager.UpgradeIndex.XP1))
         {
-            increase += 0.05f * GetUpgrade(ResourceManager.UpgradeIndex.XP1).CurrentLevel;
+            increase += 0.05f * GetItem(ResourceManager.UpgradeIndex.XP1).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.XP2))
         {
-            increase += 0.1f * GetUpgrade(ResourceManager.UpgradeIndex.XP2).CurrentLevel;
+            increase += 0.1f * GetItem(ResourceManager.UpgradeIndex.XP2).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.XP3))
         {
-            increase += 0.15f * GetUpgrade(ResourceManager.UpgradeIndex.XP3).CurrentLevel;
+            increase += 0.15f * GetItem(ResourceManager.UpgradeIndex.XP3).CurrentLevel;
         }
+        */
         amount *= increase;
 
         xpAmount += amount;
@@ -576,37 +457,27 @@ public abstract class StatsComponent : MonoBehaviour
         if (currentHP != 0 && MaxHp != 0)
         {
             return CurrentHP / MaxHp;
-        } 
+        }
         return 0;
     }
 
     /// <summary>
-    /// Adds the upgrade to the players inventory
+    /// Adds the item to the players inventory
     /// </summary>
-    public void AddUpgrade(ResourceManager.UpgradeIndex index)
+    public void AddItem(ResourceManager.ItemIndex index)
     {
-        if (HasUpgrade(index))
-        {
-            GetUpgrade(index).CurrentLevel++;
-        }
-        else
-        {
-            inventory.Add(ResourceManager.GetUpgrade(index));
-        }
-        CalculateStats();
-        OnGainUpgrade(ResourceManager.GetUpgrade(index));
     }
 
     /// <summary>
-    /// Returns true if the upgrade is in the inventory
+    /// Returns true if the item is in the inventory
     /// </summary>
     /// <param name="index"></param>
     /// <returns></returns>
-    public bool HasUpgrade(ResourceManager.UpgradeIndex index)
+    public bool HasItem(ResourceManager.ItemIndex index)
     {
-        foreach (Upgrade i in inventory)
+        foreach (Item i in inventory)
         {
-            if (i.index == index)
+            if (i.itemDef.index == index)
             {
                 return true;
             }
@@ -614,11 +485,11 @@ public abstract class StatsComponent : MonoBehaviour
         return false;
     }
 
-    public Upgrade GetUpgrade(ResourceManager.UpgradeIndex index)
+    public Item GetItem(ResourceManager.ItemIndex index)
     {
-        foreach (Upgrade i in inventory)
+        foreach (Item i in inventory)
         {
-            if (i.index == index)
+            if (i.itemDef.index == index)
             {
                 return i;
             }
@@ -670,11 +541,11 @@ public abstract class StatsComponent : MonoBehaviour
         return null;
     }
 
-    public void RemoveUpgrade(ResourceManager.UpgradeIndex index)
+    public void RemoveItem(ResourceManager.ItemIndex index)
     {
         for (int i = inventory.Count - 1; i >= 0; i--)
         {
-            if (inventory[i].index == index)
+            if (inventory[i].itemDef.index == index)
             {
                 inventory.RemoveAt(i);
                 break;
@@ -716,69 +587,280 @@ public abstract class StatsComponent : MonoBehaviour
         // LEVELS
         CalculateLevel();
 
+        // Attack speed item for testing --- If you write a new item base how you program stat changes off of this
+        if (HasItem(ItemIndex.AttackSpeed))
+        {
+            Item i = GetItem(ItemIndex.AttackSpeed);
+            // Level 1
+            if (i.Level >= 1)
+            {
+                attackSpeedAdd += 0.15f;
+            }
+            // Level 2
+            if (i.Level >= 2)
+            {
+                attackSpeedAdd += 0.15f;
+            }
+            // Level 3
+            if (i.Level >= 3)
+            {
+                attackSpeedAdd += 0.15f;
+            }
+            // Path 1
+            if (i.HasTakenPath("Pure Attack Speed"))
+            {
+                // Level 4
+                if (i.Level >= 4)
+                {
+                    attackSpeedAdd += 0.25f;
+                }
+                // Level 5
+                if (i.Level >= 5)
+                {
+                    attackSpeedAdd += 0.25f;
+                }
+                // Level 6
+                if (i.Level >= 6)
+                {
+                    attackSpeedAdd += 0.50f;
+                }
+            }
+            // Path 2
+            if (i.HasTakenPath("Situational"))
+            {
+                // Level 4
+                if (i.Level >= 4)
+                {
+                    attackSpeedAdd += 0.25f;
+                }
+                // Level 5
+                if (i.Level >= 5)
+                {
+                    attackSpeedAdd += 0.25f;
+                }
+                // Level 6
+                if (i.Level >= 6)
+                {
+                    attackSpeedAdd += 0.50f;
+                }
+            }
+        }
+
+        //Crit Upgrade Tree
+        if (HasItem(ItemIndex.CritChance))
+        {
+            Item i = GetItem(ItemIndex.CritChance);
+            // Level 1
+            if (i.Level >= 1)
+            {
+                critChanceAdd += 0.05f;
+                critDamageAdd += 0.25f;
+            }
+            // Level 2
+            if (i.Level >= 2)
+            {
+                critChanceAdd += 0.15f;
+            }
+            // Level 3
+            if (i.Level >= 3)
+            {
+                critDamageAdd += 0.5f;
+            }
+            // Path 1
+            if (i.HasTakenPath("Weak Spots"))
+            {
+                // Level 4
+                if (i.Level >= 4)
+                {
+                    critChanceAdd += 0.15f;
+                }
+                // Level 5
+                if (i.Level >= 5)
+                {
+                    critChanceAdd += 0.15f;
+                }
+
+            }
+            //path 1 capstone
+            if(i.HasTakenPath("Armor Piercer"))
+            {
+                // Level 6
+                if (i.Level >= 6)
+                {
+                    critChanceAdd += 0.15f;
+                }
+            }
+            // Path 2
+            if (i.HasTakenPath("Big Red Numbers"))
+            {
+                // Level 4
+                if (i.Level >= 4)
+                {
+                    critDamageAdd += 0.5f;
+                }
+                // Level 5
+                if (i.Level >= 5)
+                {
+                    critDamageAdd += 0.5f;
+                }
+
+            }
+            //path 2 capstone
+            if(i.HasTakenPath("Vicious Wounds"))
+            {
+                // Level 6
+                if (i.Level >= 6)
+                {
+                    critDamageAdd += 0.5f;
+                }
+            }
+        }
+
+        //Plate Armor Item
+        if (HasItem(ItemIndex.Armor))
+        {
+            Item i = GetItem(ItemIndex.Armor);
+            // Level 1
+            if (i.Level >= 1)
+            {
+                armorAdd += 1f;
+                hpAdd += 10f;
+            }
+            // Level 2
+            if (i.Level >= 2)
+            {
+                armorAdd += 1f;
+                hpAdd += 10f;
+            }
+            // Level 3
+            if (i.Level >= 3)
+            {
+                armorAdd += 1f;
+                hpAdd += 10f;
+            }
+            // Path 1
+            if (i.HasTakenPath("Heavy Plating"))
+            {
+                // Level 4
+                if (i.Level >= 4)
+                {
+                    armorAdd += 2f;
+                }
+                // Level 5
+                if (i.Level >= 5)
+                {
+                    armorAdd += 2f;
+                }
+
+            }
+            //path 1 capstone
+            if (i.HasTakenPath("Spiked Armor"))
+            {
+                // Level 6
+                if (i.Level >= 6)
+                {
+                    armorAdd += 2f;
+             
+                }
+            }
+            // Path 2
+            if (i.HasTakenPath("Better Blacksmithing"))
+            {
+                // Level 4
+                if (i.Level >= 4)
+                {
+                    armorAdd += 1f;
+                    hpAdd += 10f;
+                    speedAdd += 0.5f;
+                }
+                // Level 5
+                if (i.Level >= 5)
+                {
+                    armorAdd += 1f;
+                    hpAdd += 10f;
+                    speedAdd += 0.5f;
+                }
+
+            }
+            //path 2 capstone
+            if (i.HasTakenPath("Mythril Coating"))
+            {
+                // Level 6
+                if (i.Level >= 6)
+                {
+                    armorAdd += 1f;
+                    hpAdd += 10f;
+                    speedAdd += 0.5f;
+                }
+            }
+
+        }
+     
+
+        /*
         // UPGRADES
 
         // HP1 - HP3
         if (HasUpgrade(ResourceManager.UpgradeIndex.Health1))
         {
-            hpAdd += 15 * GetUpgrade(ResourceManager.UpgradeIndex.Health1).CurrentLevel;
+            hpAdd += 15 * GetItem(ResourceManager.UpgradeIndex.Health1).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.Health2))
         {
-            hpAdd += 30 * GetUpgrade(ResourceManager.UpgradeIndex.Health2).CurrentLevel;
+            hpAdd += 30 * GetItem(ResourceManager.UpgradeIndex.Health2).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.Health3))
         {
-            hpAdd += 45 * GetUpgrade(ResourceManager.UpgradeIndex.Health3).CurrentLevel;
+            hpAdd += 45 * GetItem(ResourceManager.UpgradeIndex.Health3).CurrentLevel;
         }
 
         // Damage1 - Damage3
         if (HasUpgrade(ResourceManager.UpgradeIndex.Damage1))
         {
-            damageAdd += (0.5f) * GetUpgrade(ResourceManager.UpgradeIndex.Damage1).CurrentLevel;
+            damageAdd += (0.5f) * GetItem(ResourceManager.UpgradeIndex.Damage1).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.Damage2))
         {
-            damageAdd += (1f) * GetUpgrade(ResourceManager.UpgradeIndex.Damage2).CurrentLevel;
+            damageAdd += (1f) * GetItem(ResourceManager.UpgradeIndex.Damage2).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.Damage3))
         {
-            damageAdd += (2f) * GetUpgrade(ResourceManager.UpgradeIndex.Damage3).CurrentLevel;
+            damageAdd += (2f) * GetItem(ResourceManager.UpgradeIndex.Damage3).CurrentLevel;
         }
 
         // Speed1 - Speed3
         if (HasUpgrade(ResourceManager.UpgradeIndex.Speed1))
         {
-            speedMult += 0.05f * GetUpgrade(ResourceManager.UpgradeIndex.Speed1).CurrentLevel;
+            speedMult += 0.05f * GetItem(ResourceManager.UpgradeIndex.Speed1).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.Speed2))
         {
-            speedMult += 0.1f * GetUpgrade(ResourceManager.UpgradeIndex.Speed2).CurrentLevel;
+            speedMult += 0.1f * GetItem(ResourceManager.UpgradeIndex.Speed2).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.Speed3))
         {
-            speedMult += 0.2f * GetUpgrade(ResourceManager.UpgradeIndex.Speed3).CurrentLevel;
+            speedMult += 0.2f * GetItem(ResourceManager.UpgradeIndex.Speed3).CurrentLevel;
         }
 
         // AttackSpeed1 - AttackSpeed3
         if (HasUpgrade(ResourceManager.UpgradeIndex.AttackSpeed1))
         {
-            attackSpeedAdd += 0.1f * GetUpgrade(ResourceManager.UpgradeIndex.AttackSpeed1).CurrentLevel;
+            attackSpeedAdd += 0.1f * GetItem(ResourceManager.UpgradeIndex.AttackSpeed1).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.AttackSpeed2))
         {
-            attackSpeedAdd += 0.20f * GetUpgrade(ResourceManager.UpgradeIndex.AttackSpeed2).CurrentLevel;
+            attackSpeedAdd += 0.20f * GetItem(ResourceManager.UpgradeIndex.AttackSpeed2).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.AttackSpeed3))
         {
-            attackSpeedAdd += 0.30f * GetUpgrade(ResourceManager.UpgradeIndex.AttackSpeed3).CurrentLevel;
+            attackSpeedAdd += 0.30f * GetItem(ResourceManager.UpgradeIndex.AttackSpeed3).CurrentLevel;
         }
 
         // Glass Cannon
         if (HasUpgrade(ResourceManager.UpgradeIndex.GlassCannon1))
         {
-            attackSpeedMult *= 2f * GetUpgrade(ResourceManager.UpgradeIndex.GlassCannon1).CurrentLevel;
-            hpMult *= MathF.Pow(0.5f, GetUpgrade(ResourceManager.UpgradeIndex.GlassCannon1).CurrentLevel);
+            attackSpeedMult *= 2f * GetItem(ResourceManager.UpgradeIndex.GlassCannon1).CurrentLevel;
+            hpMult *= MathF.Pow(0.5f, GetItem(ResourceManager.UpgradeIndex.GlassCannon1).CurrentLevel);
         }
 
         // Making sure hp is <= maxHP
@@ -790,41 +872,41 @@ public abstract class StatsComponent : MonoBehaviour
         // Crit Chance
         if (HasUpgrade(ResourceManager.UpgradeIndex.CritChance1))
         {
-            critChanceAdd += 0.025f * GetUpgrade(ResourceManager.UpgradeIndex.CritChance1).CurrentLevel;
+            critChanceAdd += 0.025f * GetItem(ResourceManager.UpgradeIndex.CritChance1).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.CritChance2))
         {
-            critChanceAdd += 0.05f * GetUpgrade(ResourceManager.UpgradeIndex.CritChance2).CurrentLevel;
+            critChanceAdd += 0.05f * GetItem(ResourceManager.UpgradeIndex.CritChance2).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.CritChance3))
         {
-            critChanceAdd += 0.075f * GetUpgrade(ResourceManager.UpgradeIndex.CritChance3).CurrentLevel;
+            critChanceAdd += 0.075f * GetItem(ResourceManager.UpgradeIndex.CritChance3).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.CritChance4))
         {
-            critChanceAdd += 0.1f * GetUpgrade(ResourceManager.UpgradeIndex.CritChance4).CurrentLevel;
+            critChanceAdd += 0.1f * GetItem(ResourceManager.UpgradeIndex.CritChance4).CurrentLevel;
         }
 
         // Crit Damage
         if (HasUpgrade(ResourceManager.UpgradeIndex.CritDamage1))
         {
-            critDamageAdd += 0.05f * GetUpgrade(ResourceManager.UpgradeIndex.CritDamage1).CurrentLevel;
+            critDamageAdd += 0.05f * GetItem(ResourceManager.UpgradeIndex.CritDamage1).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.CritDamage2))
         {
-            critDamageAdd += 0.1f * GetUpgrade(ResourceManager.UpgradeIndex.CritDamage2).CurrentLevel;
+            critDamageAdd += 0.1f * GetItem(ResourceManager.UpgradeIndex.CritDamage2).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.CritDamage3))
         {
-            critDamageAdd += 0.2f * GetUpgrade(ResourceManager.UpgradeIndex.CritDamage3).CurrentLevel;
+            critDamageAdd += 0.2f * GetItem(ResourceManager.UpgradeIndex.CritDamage3).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.CritDamage4))
         {
-            critDamageAdd += 0.3f * GetUpgrade(ResourceManager.UpgradeIndex.CritDamage4).CurrentLevel;
+            critDamageAdd += 0.3f * GetItem(ResourceManager.UpgradeIndex.CritDamage4).CurrentLevel;
         }
         if (HasUpgrade(ResourceManager.UpgradeIndex.CritDamage5))
         {
-            critDamageAdd += 0.5f * GetUpgrade(ResourceManager.UpgradeIndex.CritDamage5).CurrentLevel;
+            critDamageAdd += 0.5f * GetItem(ResourceManager.UpgradeIndex.CritDamage5).CurrentLevel;
         }
 
         // Low HP Damage
@@ -855,12 +937,13 @@ public abstract class StatsComponent : MonoBehaviour
                 regenAdd += SessionManager.data.GetUpgradeLevel(MetaUpgrade.MetaUpgradeID.Regen) * 0.1f;
                 hpAdd += SessionManager.data.GetUpgradeLevel(MetaUpgrade.MetaUpgradeID.Health) * 5f;
             }
-        }
+        */
     }
 
-    public void OnGainUpgrade(Upgrade upgrade)
+    public void OnGainUpgrade(Item item)
     {
         // Heal when taking these upgrades
+        /*
         if (upgrade.index == ResourceManager.UpgradeIndex.Health1)
         {
             Heal(20);
@@ -879,6 +962,7 @@ public abstract class StatsComponent : MonoBehaviour
             OrbitalParent p = Instantiate<OrbitalParent>(GetOrbital(OrbitalIndex.IceShield), transform);
             p.owner = this;
         }
+        */
     }
 
 

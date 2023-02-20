@@ -7,15 +7,16 @@ public class CupidArrow : Weapon
     public override void CalcStats()
     {
         float pierce = GetBaseStat("Pierce");
+        /*
         if (owner.HasUpgrade(ResourceManager.UpgradeIndex.ArrowPierce1))
         {
-            pierce += 1 * owner.GetUpgrade(ResourceManager.UpgradeIndex.ArrowPierce1).CurrentLevel;
+            pierce += 1 * owner.GetItem(ResourceManager.UpgradeIndex.ArrowPierce1).CurrentLevel;
         }
         if (owner.HasUpgrade(ResourceManager.UpgradeIndex.ArrowPierce2))
         {
-            pierce += 2 * owner.GetUpgrade(ResourceManager.UpgradeIndex.ArrowPierce2).CurrentLevel;
+            pierce += 2 * owner.GetItem(ResourceManager.UpgradeIndex.ArrowPierce2).CurrentLevel;
         }
-
+        */
         trueStats["Pierce"] = pierce;
     }
 

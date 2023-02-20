@@ -141,12 +141,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseMaxHP: 50
   baseSpeed: 5
-  baseDamage: 5
+  baseDamage: 7
   baseAttackSpeed: 1
   baseArmor: 0
   baseRegen: 0
   baseRegenInterval: 5
-  baseCritChance: 0.01
+  baseCritChance: 0.1
   baseCritDamage: 2
   knockbackMult: 0
   currentHP: 0
@@ -198,7 +198,6 @@ MonoBehaviour:
   speedMultConst: 1
   isDead: 0
   weapons: []
-  inventory: []
   fadeTotalTime: 0
   movement: {fileID: -8801911651582695651, guid: 46c5d35181ff19744bbe64637b663d10, type: 3}
   pickupRange: 5

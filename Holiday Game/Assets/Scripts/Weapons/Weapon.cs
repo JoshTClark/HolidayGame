@@ -9,6 +9,8 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField]
     private float delay;
 
+    public WeaponDef weaponDef;
+    public int level;
     public ResourceManager.WeaponIndex index;
     public ResourceManager.UpgradeIndex upgradeIndex;
 

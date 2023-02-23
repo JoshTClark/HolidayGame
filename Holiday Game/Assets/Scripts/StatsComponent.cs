@@ -588,6 +588,7 @@ public abstract class StatsComponent : MonoBehaviour
         CalculateLevel();
 
         // Attack speed item for testing --- If you write a new item base how you program stat changes off of this
+        /* Item has been replaced for now
         if (HasItem(ItemIndex.AttackSpeed))
         {
             Item i = GetItem(ItemIndex.AttackSpeed);
@@ -645,7 +646,84 @@ public abstract class StatsComponent : MonoBehaviour
                 }
             }
         }
+        */
 
+        //Agility Boots Item
+        if (HasItem(ItemIndex.AgilityBoots))
+        {
+            Item i = GetItem(ItemIndex.AgilityBoots);
+            // Level 1
+            if (i.Level >= 1)
+            {
+                speedAdd += 1f;
+                attackSpeedMult *= 1.15f;
+            }
+            // Level 2
+            if (i.Level >= 2)
+            {
+                speedAdd += 1f;
+                attackSpeedMult *= 1.15f;
+            }
+            // Level 3
+            if (i.Level >= 3)
+            {
+                speedAdd += 1f;
+                attackSpeedMult *= 1.15f;
+            }
+            // Path 1
+            if (i.HasTakenPath("Swift Strider"))
+            {
+                // Level 4
+                if (i.Level >= 4)
+                {
+                    speedAdd += 2f;
+                    attackSpeedMult *= 1.15f;
+                }
+                // Level 5
+                if (i.Level >= 5)
+                {
+                    speedAdd += 2f;
+                    attackSpeedMult *= 1.15f;
+                }
+
+            }
+            //path 1 capstone
+            if (i.HasTakenPath("Dastardly Dasher"))
+            {
+                // Level 6
+                if (i.Level >= 6)
+                {
+                    speedAdd += 3f;
+                    
+                }
+            }
+            // Path 2
+            if (i.HasTakenPath("Berzerker's Boots(LoL)"))
+            {
+                // Level 4
+                if (i.Level >= 4)
+                {
+                    speedAdd += 0.5f;
+                    attackSpeedMult *= 1.25f;
+                }
+                // Level 5
+                if (i.Level >= 5)
+                {
+                    speedAdd += 0.5f;
+                    attackSpeedMult *= 1.25f;
+                }
+
+            }
+            //path 2 capstone
+            if (i.HasTakenPath("?????"))
+            {
+                // Level 6
+                if (i.Level >= 6)
+                {
+                    attackSpeedMult *= 1.5f;
+                }
+            }
+        }
         //Crit Upgrade Tree
         if (HasItem(ItemIndex.CritChance))
         {
@@ -795,7 +873,84 @@ public abstract class StatsComponent : MonoBehaviour
             }
 
         }
-     
+
+        //Lifting Belt Item
+        if (HasItem(ItemIndex.LiftingBelt))
+        {
+            Item i = GetItem(ItemIndex.LiftingBelt);
+            // Level 1
+            if (i.Level >= 1)
+            {
+                hpAdd += 20f;
+                damageAdd += 2f;
+            }
+            // Level 2
+            if (i.Level >= 2)
+            {
+                hpAdd += 20f;
+                damageAdd += 2f;
+            }
+            // Level 3
+            if (i.Level >= 3)
+            {
+                hpAdd += 20f;
+                damageAdd += 2f;
+            }
+            // Path 1
+            if (i.HasTakenPath("Beefcake"))
+            {
+                // Level 4
+                if (i.Level >= 4)
+                {
+                    hpAdd += 50f;
+                }
+                // Level 5
+                if (i.Level >= 5)
+                {
+                    hpAdd += 50f;
+                }
+
+            }
+            //path 1 capstone
+            if (i.HasTakenPath("Absolute Unit"))
+            {
+                // Level 6
+                if (i.Level >= 6)
+                {
+                    hpAdd += 100f;
+                    hpMult *= 1.25f;
+                }
+            }
+            // Path 2
+            if (i.HasTakenPath("Boxing Lessons"))
+            {
+                // Level 4
+                if (i.Level >= 4)
+                {
+                    hpAdd += 20f;
+                    damageAdd += 3f;
+                }
+                // Level 5
+                if (i.Level >= 5)
+                {
+                    hpAdd += 20f;
+                    damageAdd += 3f;
+                }
+
+            }
+            //path 2 capstone
+            if (i.HasTakenPath("Haymaker"))
+            {
+                // Level 6
+                if (i.Level >= 6)
+                {
+                    hpAdd += 20f;
+                    damageAdd += (MaxHp * 0.05f);
+                }
+            }
+        }
+
+
 
         /*
         // UPGRADES

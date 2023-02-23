@@ -75,6 +75,14 @@ public class Player : StatsComponent
             extraDashes = GetItem(ResourceManager.UpgradeIndex.ExtraDash).CurrentLevel;
         }
         */
+        if (HasItem(ResourceManager.ItemIndex.AgilityBoots))
+        {
+            Item i = GetItem(ResourceManager.ItemIndex.AgilityBoots);
+            if(i.HasTakenPath("Dastardly Dashing"))
+            {
+                extraDashes += 1;
+            }
+        }
         if (currentDashes < Dashes)
         {
             dashCooldownTimer += delta;

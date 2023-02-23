@@ -1,0 +1,211 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2be3bbcefa23824c9d10c29f7d30d38, type: 3}
+  m_Name: LiftingBelt
+  m_EditorClassIdentifier: 
+  itemName: PowerLifting Belt
+  index: 8
+  icon: {fileID: 0}
+  maxLevel: 6
+  tier: 1
+  paths:
+  - pathName: Weight Training
+    previousPath: 
+    numLevels: 3
+    levelDescriptions:
+    - desc: Increases Max HP and Base Damage
+      statChanges:
+        hpAdd: 20
+        speedAdd: 0
+        damageAdd: 2
+        attackSpeedAdd: 0
+        armorAdd: 0
+        regenAdd: 0
+        critChanceAdd: 0
+        critDamageAdd: 0
+        hpMult: 1
+        speedMult: 1
+        damageMult: 1
+        attackSpeedMult: 1
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1
+    - desc: Increases Max HP and Base Damage
+      statChanges:
+        hpAdd: 20
+        speedAdd: 0
+        damageAdd: 2
+        attackSpeedAdd: 0
+        armorAdd: 0
+        regenAdd: 0
+        critChanceAdd: 0
+        critDamageAdd: 0
+        hpMult: 1
+        speedMult: 1
+        damageMult: 1
+        attackSpeedMult: 1
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1
+    - desc: Increases Max HP and Base Damage
+      statChanges:
+        hpAdd: 20
+        speedAdd: 0
+        damageAdd: 2
+        attackSpeedAdd: 0
+        armorAdd: 0
+        regenAdd: 0
+        critChanceAdd: 0
+        critDamageAdd: 0
+        hpMult: 1
+        speedMult: 1
+        damageMult: 1
+        attackSpeedMult: 1
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1
+  - pathName: Beefcake
+    previousPath: Weight Training
+    numLevels: 2
+    levelDescriptions:
+    - desc: Greatly Increase Max HP
+      statChanges:
+        hpAdd: 50
+        speedAdd: 0
+        damageAdd: 0
+        attackSpeedAdd: 0
+        armorAdd: 0
+        regenAdd: 0
+        critChanceAdd: 0
+        critDamageAdd: 0
+        hpMult: 1
+        speedMult: 1
+        damageMult: 1
+        attackSpeedMult: 1
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1
+    - desc: Greatly Increase Max HP
+      statChanges:
+        hpAdd: 50
+        speedAdd: 0
+        damageAdd: 0
+        attackSpeedAdd: 0
+        armorAdd: 0
+        regenAdd: 0
+        critChanceAdd: 0
+        critDamageAdd: 0
+        hpMult: 1
+        speedMult: 1
+        damageMult: 1
+        attackSpeedMult: 1
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1
+  - pathName: Absolute Unit
+    previousPath: Beefcake
+    numLevels: 1
+    levelDescriptions:
+    - desc: Massively Increases Max HP, and amplifies Max HP bonuses from all sources
+      statChanges:
+        hpAdd: 100
+        speedAdd: 0
+        damageAdd: 0
+        attackSpeedAdd: 0
+        armorAdd: 0
+        regenAdd: 0
+        critChanceAdd: 0
+        critDamageAdd: 0
+        hpMult: 1.25
+        speedMult: 1
+        damageMult: 1
+        attackSpeedMult: 1
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1
+  - pathName: Boxing Lessons
+    previousPath: Weight Training
+    numLevels: 2
+    levelDescriptions:
+    - desc: Greatly increase Base Damage, and increaes Max HP
+      statChanges:
+        hpAdd: 20
+        speedAdd: 0
+        damageAdd: 3
+        attackSpeedAdd: 0
+        armorAdd: 0
+        regenAdd: 0
+        critChanceAdd: 0
+        critDamageAdd: 0
+        hpMult: 1
+        speedMult: 1
+        damageMult: 1
+        attackSpeedMult: 1
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1
+    - desc: Greatly increase Base Damage, and increaes Max HP
+      statChanges:
+        hpAdd: 20
+        speedAdd: 0
+        damageAdd: 3
+        attackSpeedAdd: 0
+        armorAdd: 0
+        regenAdd: 0
+        critChanceAdd: 0
+        critDamageAdd: 0
+        hpMult: 1
+        speedMult: 1
+        damageMult: 1
+        attackSpeedMult: 1
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1
+  - pathName: Haymaker
+    previousPath: Boxing Lessons
+    numLevels: 1
+    levelDescriptions:
+    - desc: Attacks deal bonus damage based on % of Max HP
+      statChanges:
+        hpAdd: 20
+        speedAdd: 0
+        damageAdd: 0
+        attackSpeedAdd: 0
+        armorAdd: 0
+        regenAdd: 0
+        critChanceAdd: 0
+        critDamageAdd: 0
+        hpMult: 0
+        speedMult: 0
+        damageMult: 0
+        attackSpeedMult: 0
+        armorMult: 0
+        regenMult: 0
+        critChanceMult: 0
+        critDamageMult: 0
+        XPMult: 0

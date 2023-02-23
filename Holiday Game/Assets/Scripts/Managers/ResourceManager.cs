@@ -62,7 +62,9 @@ public class ResourceManager
         SwordWeapon = 3,
         CritChance = 4,
         Fireball = 5,
-        Armor = 6
+        Armor = 6,
+        AgilityBoots = 7,
+        LiftingBelt = 8
 
     }
 

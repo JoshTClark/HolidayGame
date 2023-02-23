@@ -56,11 +56,6 @@ public class DebugPanel : MonoBehaviour
 
     public void GiveUpgrade()
     {
-        UpgradeIndex index = ResourceManager.UpgradeIndexFromName(upgradeSelector.options[upgradeSelector.value].text);
-        Debug.Log("Giving player " + ResourceManager.GetUpgrade(index).upgradeName);
-        /*
-        GameManager.instance.Player.AddUpgrade(index);
-        */
     }
 
     public void SpawnEnemy()

@@ -16,15 +16,15 @@ public class ResourceManager
     }
     public enum ProjectileIndex
     {
-        Snowball,
-        PumpkinBomb,
-        Firework,
-        EnemyProjectile,
-        Explosion,
-        CupidArrow,
-        CandyCorn,
-        IceShard,
-        SwordSlash
+        Snowball = 0,
+        PumpkinBomb = 1,
+        Firework = 2,
+        EnemyProjectile = 3,
+        Explosion = 4,
+        CupidArrow = 5,
+        MagicMissile = 6,
+        IceShard = 7,
+        SwordSlash = 8
     }
     public enum FollowingEffectIndex
     {
@@ -42,16 +42,16 @@ public class ResourceManager
     }
     public enum WeaponIndex
     {
-        Snowball,
-        PumpkinBomb,
-        Crows,
-        Fireworks,
-        Null,
-        CupidArrow,
-        BossAttack,
-        BossAttack2,
-        CandyCornRifle,
-        SwordSlash
+        Snowball = 0,
+        PumpkinBomb = 1,
+        Crows = 2,
+        Fireworks = 3,
+        Null = 4,
+        CupidArrow = 5,
+        BossAttack = 6,
+        BossAttack2 = 7,
+        CandyCornRifle = 8,
+        SwordSlash = 9
     }
 
     public enum ItemIndex
@@ -70,6 +70,7 @@ public class ResourceManager
 
     }
 
+    /*
     public enum UpgradeIndex
     {
         Health1,
@@ -135,7 +136,9 @@ public class ResourceManager
         ExtraDash,
         SwordSlashWeaponUpgrade
     }
+    */
 
+    /*
     public enum UpgradePoolIndex
     {
         Basic,
@@ -147,6 +150,7 @@ public class ResourceManager
         CandyCorn,
         SpecialUpgrades
     }
+    */
 
     public enum LevelPoolIndex
     {
@@ -177,7 +181,7 @@ public class ResourceManager
     public static List<LevelData> levelDatas = new List<LevelData>();
     public static List<LevelPool> levelPools = new List<LevelPool>();
     public static List<PlayableCharacterData> characters = new List<PlayableCharacterData>();
-    
+
     public static List<ItemDef> itemDefs = new List<ItemDef>();
 
     public static bool isLoaded = false;
@@ -319,6 +323,7 @@ public class ResourceManager
         }
     }
 
+    /*
     public static Upgrade GetUpgrade(ResourceManager.UpgradeIndex index)
     {
         foreach (Upgrade i in upgradeDefinitions)
@@ -344,6 +349,8 @@ public class ResourceManager
         }
         return null;
     }
+    */
+
     public static Weapon GetWeapon(ResourceManager.WeaponIndex index)
     {
         foreach (Weapon i in weaponPrefabs)
@@ -420,6 +427,7 @@ public class ResourceManager
         return null;
     }
 
+    /*
     public static UpgradeIndex GetUpgradeFromWeapon(WeaponIndex index)
     {
         return GetWeapon(index).upgradeIndex;
@@ -440,7 +448,7 @@ public class ResourceManager
 
         return index;
     }
-
+    */
     public static Enemy EnemyFromName(string name)
     {
         Enemy e = null;
@@ -487,7 +495,7 @@ public class ResourceManager
     {
         foreach (LevelData data in levelDatas)
         {
-            if (data.scene == scene) 
+            if (data.scene == scene)
             {
                 return data;
             }

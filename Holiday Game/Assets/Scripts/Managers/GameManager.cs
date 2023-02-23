@@ -451,47 +451,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public List<UpgradePool> GetPossiblePools(bool ignoreWeapons)
-    {
-        List<UpgradePool> pools = new List<UpgradePool>();
-        if (doSpecialUpgrade)
-        {
-            pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.SpecialUpgrades));
-        }
-        else if ((player.Level - (upgradesToGive - 1)) % garunteedWeaponLevel == 0 && !ignoreWeapons)
-        {
-            pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Weapons));
-        }
-        else
-        {
-            pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Basic));
-            pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Weapons));
-            /*
-            if (player.HasUpgrade(ResourceManager.UpgradeIndex.SnowballWeaponUpgrade))
-            {
-                pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Snowball));
-            }
-            if (player.HasUpgrade(ResourceManager.UpgradeIndex.PumpkinBombWeaponUpgrade))
-            {
-                pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Pumkin));
-            }
-            if (player.HasUpgrade(ResourceManager.UpgradeIndex.FireworkWeaponUpgrade))
-            {
-                pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.Fireworks));
-            }
-            if (player.HasUpgrade(ResourceManager.UpgradeIndex.CupidArrowWeaponUpgrade))
-            {
-                pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.CupidArrow));
-            }
-            if (player.HasUpgrade(ResourceManager.UpgradeIndex.CandyCornWeaponUpgrade))
-            {
-                pools.Add(ResourceManager.GetUpgradePool(ResourceManager.UpgradePoolIndex.CandyCorn));
-            }
-            */
-        }
-        return pools;
-    }
-
     public void DisplayDamage(DamageInfo info)
     {
         if (info.receiver && showDamageNumbers)

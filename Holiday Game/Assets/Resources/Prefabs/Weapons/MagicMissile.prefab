@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5310597426760342082}
   - component: {fileID: 130564432471187322}
   m_Layer: 0
-  m_Name: CandyCornWeapon
+  m_Name: MagicMissile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

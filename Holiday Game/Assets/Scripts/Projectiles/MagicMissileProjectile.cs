@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CandyCornProjectile : ProjectileBase
+public class MagicMissileProjectile : ProjectileBase
 {
     public override void Move()
     {

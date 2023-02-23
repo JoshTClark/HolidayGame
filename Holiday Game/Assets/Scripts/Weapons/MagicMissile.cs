@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CandyCornWeapon : Weapon
+public class MagicMissile : Weapon
 {
     private bool doVolley = false;
     private float volleyTimer = 0.2f;
@@ -59,7 +59,7 @@ public class CandyCornWeapon : Weapon
                         accuracyOff = Random.Range(-10 * (owner.GetItem(ResourceManager.UpgradeIndex.CandyCornSpray).CurrentLevel), 10 * (owner.GetItem(ResourceManager.UpgradeIndex.CandyCornSpray).CurrentLevel));
                     }
                     */
-                    ProjectileBase p = ProjectileManager.GetProjectile(ResourceManager.ProjectileIndex.CandyCorn);
+                    ProjectileBase p = ProjectileManager.GetProjectile(ResourceManager.ProjectileIndex.MagicMissile);
                     p.transform.position = this.transform.position;
                     p.transform.rotation = transform.rotation;
                     p.Direction = transform.right;

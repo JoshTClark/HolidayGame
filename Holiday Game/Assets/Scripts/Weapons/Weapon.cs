@@ -12,7 +12,6 @@ public abstract class Weapon : MonoBehaviour
     public WeaponDef weaponDef;
     public int level;
     public ResourceManager.WeaponIndex index;
-    public ResourceManager.UpgradeIndex upgradeIndex;
 
     public Sprite icon;
 

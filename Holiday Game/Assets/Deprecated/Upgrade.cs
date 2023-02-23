@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static ResourceManager;
 
-[CreateAssetMenu(fileName = "Upgrade Config", menuName = Constants.ASSET_MENU_PATH + "Upgrade Config")]
+//[CreateAssetMenu(fileName = "Upgrade Config", menuName = Constants.ASSET_MENU_PATH + "Upgrade Config")]
 public class Upgrade : ScriptableObject
 {
     public enum Tier
@@ -18,7 +18,6 @@ public class Upgrade : ScriptableObject
     public string upgradeName;
     [TextArea(15, 20)]
     public string upgradeDescription;
-    public ResourceManager.UpgradeIndex index;
     public Tier tier;
     public bool CanTakeMultiple;
     public bool IsWeapon;

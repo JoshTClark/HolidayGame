@@ -950,6 +950,162 @@ public abstract class StatsComponent : MonoBehaviour
             }
         }
 
+        // Meat Item
+        if (HasItem(ItemIndex.Meat))
+        {
+            Item i = GetItem(ItemIndex.Meat);
+            // Level 1
+            if (i.Level >= 1)
+            {
+                hpAdd += 20f;
+                regenAdd += 0.5f;
+            }
+            // Level 2
+            if (i.Level >= 2)
+            {
+                hpAdd += 20f;
+                regenAdd += 0.5f;
+            }
+            // Level 3
+            if (i.Level >= 3)
+            {
+                hpAdd += 20f;
+                regenAdd += 0.5f;
+            }
+            // Path 1
+            if (i.HasTakenPath("Selective Breeding"))
+            {
+                // Level 4
+                if (i.Level >= 4)
+                {
+                    hpAdd += 20f;
+                    regenAdd += 1f;
+                }
+                // Level 5
+                if (i.Level >= 5)
+                {
+                    hpAdd += 20f;
+                    regenAdd += 1f;
+                }
+
+            }
+            //path 1 capstone
+            if (i.HasTakenPath("Steroid Infusions"))
+            {
+                // Level 6
+                if (i.Level >= 6)
+                {
+                    regenAdd += 2f;
+                }
+            }
+            // Path 2
+            if (i.HasTakenPath("Heaping Helpings"))
+            {
+                // Level 4
+                if (i.Level >= 4)
+                {
+                    hpAdd += 35f;
+                    regenAdd += 0.5f;
+                }
+                // Level 5
+                if (i.Level >= 5)
+                {
+                    hpAdd += 35f;
+                    regenAdd += 0.5f;
+                }
+
+            }
+            //path 2 capstone
+            if (i.HasTakenPath("Insatiable Appetite"))
+            {
+                // Level 6
+                if (i.Level >= 6)
+                {
+                    hpAdd += 50f;
+                }
+            }
+        }
+
+        // Golden Duck Item
+        if (HasItem(ItemIndex.Duck))
+        {
+            Item i = GetItem(ItemIndex.Duck);
+            // Level 1
+            if (i.Level >= 1)
+            {
+                hpAdd += 20f;
+                speedAdd += 2f;
+                damageAdd += 4f;
+                attackSpeedAdd += 0.5f;
+                armorAdd += 2f;
+                regenAdd += 2f;
+                critChanceAdd += 0.1f;
+                critDamageAdd += 0.5f;
+            }
+            // Level 2
+            if (i.Level >= 2)
+            {
+                hpAdd += 20f;
+                speedAdd += 2f;
+                damageAdd += 4f;
+                attackSpeedAdd += 0.5f;
+                armorAdd += 2f;
+                regenAdd += 2f;
+                critChanceAdd += 0.1f;
+                critDamageAdd += 0.5f;
+            }
+            // Level 3
+            if (i.Level >= 3)
+            {
+                hpAdd += 20f;
+                speedAdd += 2f;
+                damageAdd += 4f;
+                attackSpeedAdd += 0.5f;
+                armorAdd += 2f;
+                regenAdd += 2f;
+                critChanceAdd += 0.1f;
+                critDamageAdd += 0.5f;
+            }
+            // Level 4
+            if (i.Level >= 4)
+            {
+                hpAdd += 20f;
+                speedAdd += 2f;
+                damageAdd += 4f;
+                attackSpeedAdd += 0.5f;
+                armorAdd += 2f;
+                regenAdd += 2f;
+                critChanceAdd += 0.1f;
+                critDamageAdd += 0.5f;
+            }
+            // Level 5
+            if (i.Level >= 5)
+            {
+                hpAdd += 20f;
+                speedAdd += 2f;
+                damageAdd += 4f;
+                attackSpeedAdd += 0.5f;
+                armorAdd += 2f;
+                regenAdd += 2f;
+                critChanceAdd += 0.1f;
+                critDamageAdd += 0.5f;
+            }
+            // Level 6
+            if (i.Level >= 6)
+            {
+                hpAdd += 20f;
+                speedAdd += 2f;
+                damageAdd += 4f;
+                attackSpeedAdd += 0.5f;
+                armorAdd += 2f;
+                regenAdd += 2f;
+                critChanceAdd += 0.1f;
+                critDamageAdd += 0.5f;
+            }
+
+        }
+
+
 
 
         /*

@@ -11,7 +11,19 @@ public class HealthDrop : DropBase
         {
             //access player and add hp to it
             StatsComponent receiver = other.gameObject.GetComponent<StatsComponent>();
-            receiver.Heal(receiver.MaxHp / 4);
+            
+            
+            if (receiver.HasItem(ResourceManager.ItemIndex.Meat))
+            {
+                Item i = receiver.GetItem(ResourceManager.ItemIndex.Meat);
+                if(i.HasTakenPath("Insatiable Appetite"))
+                {
+                    receiver.Heal(receiver.MaxHp / 3);
+                }
+                else receiver.Heal(receiver.MaxHp / 4);
+                
+            }
+            else receiver.Heal(receiver.MaxHp / 4);
             //remove the health drop
             pool.Release(this);
         }

@@ -64,7 +64,9 @@ public class ResourceManager
         Fireball = 5,
         Armor = 6,
         AgilityBoots = 7,
-        LiftingBelt = 8
+        LiftingBelt = 8,
+        Meat = 9,
+        Duck = 10
 
     }
 

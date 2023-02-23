@@ -6,6 +6,29 @@ public class SwordSlashWeapon : Weapon
 {
     public override void CalcStats()
     {
+        if (owner.HasItem(ResourceManager.ItemIndex.SwordWeapon))
+        {
+            float damageMult = GetBaseStat("Damage");
+            
+            float pierceAdd = GetBaseStat("Pierce");
+      
+
+            Item i = owner.GetItem(ResourceManager.ItemIndex.SwordWeapon);
+            if (i.Level >= 1)
+            {
+                damageMult *= 1.2f;
+            }
+            // Level 2
+            if (i.Level >= 2)
+            {
+                damageMult *= 1.2f;
+            }
+            // Level 3
+            if (i.Level >= 3)
+            {
+                damageMult *= 1.2f;
+            }
+        }
     }
 
     public override void OnUpdate()

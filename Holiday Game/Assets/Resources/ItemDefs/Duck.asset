@@ -1,0 +1,138 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2be3bbcefa23824c9d10c29f7d30d38, type: 3}
+  m_Name: Duck
+  m_EditorClassIdentifier: 
+  itemName: Golden Duck
+  index: 10
+  icon: {fileID: 0}
+  maxLevel: 6
+  tier: 4
+  paths:
+  - pathName: Day of the Duck
+    previousPath: 
+    numLevels: 6
+    levelDescriptions:
+    - desc: Greatly Increases All Stats
+      statChanges:
+        hpAdd: 50
+        speedAdd: 2
+        damageAdd: 4
+        attackSpeedAdd: 0.5
+        armorAdd: 2
+        regenAdd: 2
+        critChanceAdd: 0.1
+        critDamageAdd: 0.5
+        hpMult: 1
+        speedMult: 1
+        damageMult: 1
+        attackSpeedMult: 1
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1
+    - desc: Greatly Increases All Stats
+      statChanges:
+        hpAdd: 50
+        speedAdd: 2
+        damageAdd: 4
+        attackSpeedAdd: 0.5
+        armorAdd: 2
+        regenAdd: 2
+        critChanceAdd: 0.1
+        critDamageAdd: 0.5
+        hpMult: 1
+        speedMult: 1
+        damageMult: 1
+        attackSpeedMult: 1
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1
+    - desc: Greatly Increases All Stats
+      statChanges:
+        hpAdd: 50
+        speedAdd: 2
+        damageAdd: 4
+        attackSpeedAdd: 0.5
+        armorAdd: 2
+        regenAdd: 2
+        critChanceAdd: 0.1
+        critDamageAdd: 0.5
+        hpMult: 1
+        speedMult: 1
+        damageMult: 1
+        attackSpeedMult: 1
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1
+    - desc: Greatly Increases All Stats
+      statChanges:
+        hpAdd: 50
+        speedAdd: 2
+        damageAdd: 4
+        attackSpeedAdd: 0.5
+        armorAdd: 2
+        regenAdd: 2
+        critChanceAdd: 0.1
+        critDamageAdd: 0.5
+        hpMult: 1
+        speedMult: 1
+        damageMult: 1
+        attackSpeedMult: 1
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1
+    - desc: Greatly Increases All Stats
+      statChanges:
+        hpAdd: 50
+        speedAdd: 2
+        damageAdd: 4
+        attackSpeedAdd: 0.5
+        armorAdd: 2
+        regenAdd: 2
+        critChanceAdd: 0.1
+        critDamageAdd: 0.5
+        hpMult: 1
+        speedMult: 1
+        damageMult: 1
+        attackSpeedMult: 1
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1
+    - desc: Greatly Increases All Stats
+      statChanges:
+        hpAdd: 50
+        speedAdd: 2
+        damageAdd: 4
+        attackSpeedAdd: 0.5
+        armorAdd: 2
+        regenAdd: 2
+        critChanceAdd: 0.1
+        critDamageAdd: 0.5
+        hpMult: 1
+        speedMult: 1
+        damageMult: 1
+        attackSpeedMult: 1
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1

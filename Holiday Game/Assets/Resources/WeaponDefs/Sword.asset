@@ -17,5 +17,28 @@ MonoBehaviour:
   icon: {fileID: 0}
   maxLevel: 0
   tier: 0
-  levelDescriptions: []
+  paths:
+  - pathName: Slashing Savant
+    previousPath: 
+    numLevels: 3
+    levelDescriptions:
+    - desc: Sword Slashes deal increased damage
+      statChanges:
+        hpAdd: 0
+        speedAdd: 0
+        damageAdd: 0
+        attackSpeedAdd: 0
+        armorAdd: 0
+        regenAdd: 0
+        critChanceAdd: 0
+        critDamageAdd: 0
+        hpMult: 0
+        speedMult: 0
+        damageMult: 0
+        attackSpeedMult: 0
+        armorMult: 0
+        regenMult: 0
+        critChanceMult: 0
+        critDamageMult: 0
+        XPMult: 0
   weaponPrefab: {fileID: -6073485330287907389, guid: 75a60ea68aa9ce24f8d26bf15c21f4da, type: 3}

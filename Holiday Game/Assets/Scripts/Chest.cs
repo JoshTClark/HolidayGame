@@ -11,10 +11,9 @@ public class Chest : MonoBehaviour
     private void Start()
     {
         int spawn = Random.Range(0, 100);
-        Debug.Log(spawn + ", " + spawnChance);
+  
         if(spawn > spawnChance)
         {
-            Debug.Log("Shouldnt Spawn");
             this.gameObject.SetActive(false); 
         }
     }

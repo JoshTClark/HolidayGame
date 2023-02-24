@@ -25,7 +25,7 @@ MonoBehaviour:
     - desc: Increases attack speed and move speed
       statChanges:
         hpAdd: 0
-        speedAdd: 1
+        speedAdd: 0.5
         damageAdd: 0
         attackSpeedAdd: 0
         armorAdd: 0
@@ -35,7 +35,7 @@ MonoBehaviour:
         hpMult: 1
         speedMult: 1
         damageMult: 1
-        attackSpeedMult: 1.15
+        attackSpeedMult: 1.1
         armorMult: 1
         regenMult: 1
         critChanceMult: 1
@@ -44,7 +44,7 @@ MonoBehaviour:
     - desc: Increases attack speed and move speed
       statChanges:
         hpAdd: 0
-        speedAdd: 1
+        speedAdd: 0.5
         damageAdd: 0
         attackSpeedAdd: 0
         armorAdd: 0
@@ -54,7 +54,7 @@ MonoBehaviour:
         hpMult: 1
         speedMult: 1
         damageMult: 1
-        attackSpeedMult: 1.15
+        attackSpeedMult: 1.1
         armorMult: 1
         regenMult: 1
         critChanceMult: 1
@@ -63,7 +63,7 @@ MonoBehaviour:
     - desc: Increases attack speed and move speed
       statChanges:
         hpAdd: 0
-        speedAdd: 1
+        speedAdd: 0.5
         damageAdd: 0
         attackSpeedAdd: 0
         armorAdd: 0
@@ -73,7 +73,7 @@ MonoBehaviour:
         hpMult: 1
         speedMult: 1
         damageMult: 1
-        attackSpeedMult: 1.15
+        attackSpeedMult: 1.1
         armorMult: 1
         regenMult: 1
         critChanceMult: 1
@@ -86,7 +86,7 @@ MonoBehaviour:
     - desc: Greatly Increases Movement Speed, and increaes atk speed
       statChanges:
         hpAdd: 0
-        speedAdd: 2
+        speedAdd: 1
         damageAdd: 0
         attackSpeedAdd: 0
         armorAdd: 0
@@ -96,7 +96,7 @@ MonoBehaviour:
         hpMult: 1
         speedMult: 1
         damageMult: 1
-        attackSpeedMult: 1.15
+        attackSpeedMult: 1.1
         armorMult: 1
         regenMult: 1
         critChanceMult: 1
@@ -105,7 +105,7 @@ MonoBehaviour:
     - desc: Greatly Increases Movement Speed, and increaes atk speed
       statChanges:
         hpAdd: 0
-        speedAdd: 2
+        speedAdd: 1
         damageAdd: 0
         attackSpeedAdd: 0
         armorAdd: 0
@@ -115,7 +115,7 @@ MonoBehaviour:
         hpMult: 1
         speedMult: 1
         damageMult: 1
-        attackSpeedMult: 1.15
+        attackSpeedMult: 1.1
         armorMult: 1
         regenMult: 1
         critChanceMult: 1
@@ -128,7 +128,7 @@ MonoBehaviour:
     - desc: Massively Increases Movement Speed, and gives an extra charge of Dash
       statChanges:
         hpAdd: 0
-        speedAdd: 3
+        speedAdd: 2
         damageAdd: 0
         attackSpeedAdd: 0
         armorAdd: 0
@@ -151,7 +151,7 @@ MonoBehaviour:
     - desc: Greatly increases Atk speed, and slightly increases movement speed
       statChanges:
         hpAdd: 0
-        speedAdd: 0.5
+        speedAdd: 0.25
         damageAdd: 0
         attackSpeedAdd: 0
         armorAdd: 0
@@ -170,7 +170,7 @@ MonoBehaviour:
     - desc: Greatly increases Atk speed, and slightly increases movement speed
       statChanges:
         hpAdd: 0
-        speedAdd: 0.5
+        speedAdd: 0.25
         damageAdd: 0
         attackSpeedAdd: 0
         armorAdd: 0

@@ -15,7 +15,7 @@ MonoBehaviour:
   itemName: Iron Blade
   index: 3
   icon: {fileID: 0}
-  maxLevel: 4
+  maxLevel: 8
   tier: 0
   paths:
   - pathName: Start
@@ -86,6 +86,177 @@ MonoBehaviour:
     - lvlName: Duelist Proficiency
       desc: Enemies hit with the tip of the Iron Blade always take critical damage.
         Damage at the tip of the Iron Blade is increased by 50%.
+      statChanges:
+        hpAdd: 0
+        speedAdd: 0
+        damageAdd: 0
+        attackSpeedAdd: 0
+        armorAdd: 0
+        regenAdd: 0
+        critChanceAdd: 0
+        critDamageAdd: 0
+        hpMult: 1
+        speedMult: 1
+        damageMult: 1
+        attackSpeedMult: 1
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1
+  - pathName: Wave Beam
+    previousPath: Start
+    numLevels: 4
+    levelDescriptions:
+    - lvlName: Wave Beam
+      desc: Iron Blade shoots a wave that deals  75% damage.
+      statChanges:
+        hpAdd: 0
+        speedAdd: 0
+        damageAdd: 0
+        attackSpeedAdd: 0
+        armorAdd: 0
+        regenAdd: 0
+        critChanceAdd: 0
+        critDamageAdd: 0
+        hpMult: 1
+        speedMult: 1
+        damageMult: 1
+        attackSpeedMult: 1
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1
+    - lvlName: Tidal Force
+      desc: Iron Blade waves do greater knockback and travel faster.
+      statChanges:
+        hpAdd: 0
+        speedAdd: 0
+        damageAdd: 0
+        attackSpeedAdd: 0
+        armorAdd: 0
+        regenAdd: 0
+        critChanceAdd: 0
+        critDamageAdd: 0
+        hpMult: 1
+        speedMult: 1
+        damageMult: 1
+        attackSpeedMult: 1
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1
+    - lvlName: Expanding Force
+      desc: Iron Blade waves are 30% larger.
+      statChanges:
+        hpAdd: 0
+        speedAdd: 0
+        damageAdd: 0
+        attackSpeedAdd: 0
+        armorAdd: 0
+        regenAdd: 0
+        critChanceAdd: 0
+        critDamageAdd: 0
+        hpMult: 1
+        speedMult: 1
+        damageMult: 1
+        attackSpeedMult: 1
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1
+    - lvlName: Shockwave
+      desc: Enemies hit by the Iron Blade are breifly stunned.
+      statChanges:
+        hpAdd: 0
+        speedAdd: 0
+        damageAdd: 0
+        attackSpeedAdd: 0
+        armorAdd: 0
+        regenAdd: 0
+        critChanceAdd: 0
+        critDamageAdd: 0
+        hpMult: 1
+        speedMult: 1
+        damageMult: 1
+        attackSpeedMult: 1
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1
+  - pathName: Multi Strike
+    previousPath: Start
+    numLevels: 4
+    levelDescriptions:
+    - lvlName: Extra Swing
+      desc: The Iron Blade attacks twice. Attack speed for Iron Blade is increased
+        by 10%.
+      statChanges:
+        hpAdd: 0
+        speedAdd: 0
+        damageAdd: 0
+        attackSpeedAdd: 0
+        armorAdd: 0
+        regenAdd: 0
+        critChanceAdd: 0
+        critDamageAdd: 0
+        hpMult: 1
+        speedMult: 1
+        damageMult: 1
+        attackSpeedMult: 1
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1
+    - lvlName: Combo Strike
+      desc: Add a thrust that deals 100% damage to the Iron Blades attacks.
+      statChanges:
+        hpAdd: 0
+        speedAdd: 0
+        damageAdd: 0
+        attackSpeedAdd: 0
+        armorAdd: 0
+        regenAdd: 0
+        critChanceAdd: 0
+        critDamageAdd: 0
+        hpMult: 1
+        speedMult: 1
+        damageMult: 1
+        attackSpeedMult: 1
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1
+    - lvlName: Flurry
+      desc: Iron Blade attack speed increased by 45% and Iron Blade damage decreased
+        by 25%.
+      statChanges:
+        hpAdd: 0
+        speedAdd: 0
+        damageAdd: 0
+        attackSpeedAdd: 0
+        armorAdd: 0
+        regenAdd: 0
+        critChanceAdd: 0
+        critDamageAdd: 0
+        hpMult: 1
+        speedMult: 1
+        damageMult: 1
+        attackSpeedMult: 1
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1
+    - lvlName: Blade Master
+      desc: Iron Blade attack speed increased by 50%. Unleash a large amount of strikes
+        towards enemies.
       statChanges:
         hpAdd: 0
         speedAdd: 0

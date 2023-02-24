@@ -89,7 +89,7 @@ MonoBehaviour:
         speedAdd: 0
         damageAdd: 0
         attackSpeedAdd: 0
-        armorAdd: 2
+        armorAdd: 1.5
         regenAdd: 0
         critChanceAdd: 0
         critDamageAdd: 0
@@ -108,7 +108,7 @@ MonoBehaviour:
         speedAdd: 0
         damageAdd: 0
         attackSpeedAdd: 0
-        armorAdd: 2
+        armorAdd: 1.5
         regenAdd: 0
         critChanceAdd: 0
         critDamageAdd: 0
@@ -131,7 +131,7 @@ MonoBehaviour:
         speedAdd: 0
         damageAdd: 0
         attackSpeedAdd: 0
-        armorAdd: 2
+        armorAdd: 1.5
         regenAdd: 0
         critChanceAdd: 0
         critDamageAdd: 0
@@ -151,10 +151,10 @@ MonoBehaviour:
     - desc: Gain armor, hp and move speed
       statChanges:
         hpAdd: 10
-        speedAdd: 0.5
+        speedAdd: 0.25
         damageAdd: 0
         attackSpeedAdd: 0
-        armorAdd: 1
+        armorAdd: 0.5
         regenAdd: 0
         critChanceAdd: 0
         critDamageAdd: 0
@@ -170,10 +170,10 @@ MonoBehaviour:
     - desc: Gain armor, hp and move speed
       statChanges:
         hpAdd: 10
-        speedAdd: 0.5
+        speedAdd: 0.25
         damageAdd: 0
         attackSpeedAdd: 0
-        armorAdd: 1
+        armorAdd: 0.5
         regenAdd: 0
         critChanceAdd: 0
         critDamageAdd: 0

@@ -286,7 +286,7 @@ public abstract class StatsComponent : MonoBehaviour
                 DamageInfo reflectInfo = new DamageInfo();
                 reflectInfo.attacker = info.receiver;
                 reflectInfo.receiver = info.attacker;
-                reflectInfo.damage = (this.Armor / 2);
+                reflectInfo.damage = (this.Armor / 4);
                 info.attacker.TakeDamage(reflectInfo);
             }
             if (i.HasTakenPath("Mythril Armor"))
@@ -737,12 +737,12 @@ public abstract class StatsComponent : MonoBehaviour
             // Level 2
             if (i.Level >= 2)
             {
-                critChanceAdd += 0.15f;
+                critChanceAdd += 0.1f;
             }
             // Level 3
             if (i.Level >= 3)
             {
-                critDamageAdd += 0.5f;
+                critDamageAdd += 0.4f;
             }
             // Path 1
             if (i.HasTakenPath("Weak Spots"))
@@ -750,12 +750,12 @@ public abstract class StatsComponent : MonoBehaviour
                 // Level 4
                 if (i.Level >= 4)
                 {
-                    critChanceAdd += 0.15f;
+                    critChanceAdd += 0.1f;
                 }
                 // Level 5
                 if (i.Level >= 5)
                 {
-                    critChanceAdd += 0.15f;
+                    critChanceAdd += 0.1f;
                 }
 
             }
@@ -765,7 +765,7 @@ public abstract class StatsComponent : MonoBehaviour
                 // Level 6
                 if (i.Level >= 6)
                 {
-                    critChanceAdd += 0.15f;
+                    critChanceAdd += 0.1f;
                 }
             }
             // Path 2
@@ -822,12 +822,12 @@ public abstract class StatsComponent : MonoBehaviour
                 // Level 4
                 if (i.Level >= 4)
                 {
-                    armorAdd += 2f;
+                    armorAdd += 1.5f;
                 }
                 // Level 5
                 if (i.Level >= 5)
                 {
-                    armorAdd += 2f;
+                    armorAdd += 1.5f;
                 }
 
             }
@@ -837,7 +837,7 @@ public abstract class StatsComponent : MonoBehaviour
                 // Level 6
                 if (i.Level >= 6)
                 {
-                    armorAdd += 2f;
+                    armorAdd += 1.5f;
              
                 }
             }
@@ -847,16 +847,16 @@ public abstract class StatsComponent : MonoBehaviour
                 // Level 4
                 if (i.Level >= 4)
                 {
-                    armorAdd += 1f;
+                    armorAdd += 0.5f;
                     hpAdd += 10f;
-                    speedAdd += 0.5f;
+                    speedAdd += 0.25f;
                 }
                 // Level 5
                 if (i.Level >= 5)
                 {
-                    armorAdd += 1f;
+                    armorAdd += 0.5f;
                     hpAdd += 10f;
-                    speedAdd += 0.5f;
+                    speedAdd += 0.25f;
                 }
 
             }
@@ -881,20 +881,20 @@ public abstract class StatsComponent : MonoBehaviour
             // Level 1
             if (i.Level >= 1)
             {
-                hpAdd += 20f;
-                damageAdd += 2f;
+                hpAdd += 10f;
+                damageAdd += 1f;
             }
             // Level 2
             if (i.Level >= 2)
             {
-                hpAdd += 20f;
-                damageAdd += 2f;
+                hpAdd += 10f;
+                damageAdd += 1f;
             }
             // Level 3
             if (i.Level >= 3)
             {
-                hpAdd += 20f;
-                damageAdd += 2f;
+                hpAdd += 10f;
+                damageAdd += 1f;
             }
             // Path 1
             if (i.HasTakenPath("Beefcake"))
@@ -902,12 +902,12 @@ public abstract class StatsComponent : MonoBehaviour
                 // Level 4
                 if (i.Level >= 4)
                 {
-                    hpAdd += 50f;
+                    hpAdd += 35f;
                 }
                 // Level 5
                 if (i.Level >= 5)
                 {
-                    hpAdd += 50f;
+                    hpAdd += 35f;
                 }
 
             }
@@ -917,7 +917,7 @@ public abstract class StatsComponent : MonoBehaviour
                 // Level 6
                 if (i.Level >= 6)
                 {
-                    hpAdd += 100f;
+                    hpAdd += 50f;
                     hpMult *= 1.25f;
                 }
             }
@@ -927,14 +927,14 @@ public abstract class StatsComponent : MonoBehaviour
                 // Level 4
                 if (i.Level >= 4)
                 {
-                    hpAdd += 20f;
-                    damageAdd += 3f;
+                    hpAdd += 10f;
+                    damageAdd += 2f;
                 }
                 // Level 5
                 if (i.Level >= 5)
                 {
-                    hpAdd += 20f;
-                    damageAdd += 3f;
+                    hpAdd += 10f;
+                    damageAdd += 2f;
                 }
 
             }
@@ -944,8 +944,8 @@ public abstract class StatsComponent : MonoBehaviour
                 // Level 6
                 if (i.Level >= 6)
                 {
-                    hpAdd += 20f;
-                    damageAdd += (MaxHp * 0.05f);
+                    hpAdd += 10f;
+                    damageAdd += (MaxHp * 0.02f);
                 }
             }
         }
@@ -957,19 +957,19 @@ public abstract class StatsComponent : MonoBehaviour
             // Level 1
             if (i.Level >= 1)
             {
-                hpAdd += 20f;
+                hpAdd += 10f;
                 regenAdd += 0.5f;
             }
             // Level 2
             if (i.Level >= 2)
             {
-                hpAdd += 20f;
+                hpAdd += 10f;
                 regenAdd += 0.5f;
             }
             // Level 3
             if (i.Level >= 3)
             {
-                hpAdd += 20f;
+                hpAdd += 10f;
                 regenAdd += 0.5f;
             }
             // Path 1
@@ -978,13 +978,13 @@ public abstract class StatsComponent : MonoBehaviour
                 // Level 4
                 if (i.Level >= 4)
                 {
-                    hpAdd += 20f;
+                    hpAdd += 10f;
                     regenAdd += 1f;
                 }
                 // Level 5
                 if (i.Level >= 5)
                 {
-                    hpAdd += 20f;
+                    hpAdd += 10f;
                     regenAdd += 1f;
                 }
 
@@ -1004,14 +1004,14 @@ public abstract class StatsComponent : MonoBehaviour
                 // Level 4
                 if (i.Level >= 4)
                 {
-                    hpAdd += 35f;
-                    regenAdd += 0.5f;
+                    hpAdd += 25f;
+                    regenAdd += 0.25f;
                 }
                 // Level 5
                 if (i.Level >= 5)
                 {
-                    hpAdd += 35f;
-                    regenAdd += 0.5f;
+                    hpAdd += 25f;
+                    regenAdd += 0.25f;
                 }
 
             }
@@ -1021,7 +1021,7 @@ public abstract class StatsComponent : MonoBehaviour
                 // Level 6
                 if (i.Level >= 6)
                 {
-                    hpAdd += 50f;
+                    hpAdd += 40f;
                 }
             }
         }
@@ -1034,73 +1034,73 @@ public abstract class StatsComponent : MonoBehaviour
             if (i.Level >= 1)
             {
                 hpAdd += 20f;
-                speedAdd += 2f;
-                damageAdd += 4f;
-                attackSpeedAdd += 0.5f;
-                armorAdd += 2f;
-                regenAdd += 2f;
-                critChanceAdd += 0.1f;
-                critDamageAdd += 0.5f;
+                speedAdd += 0.5f;
+                damageAdd += 1f;
+                attackSpeedAdd += 0.2f;
+                armorAdd += 1f;
+                regenAdd += 1f;
+                critChanceAdd += 0.05f;
+                critDamageAdd += 0.25f;
             }
             // Level 2
             if (i.Level >= 2)
             {
                 hpAdd += 20f;
-                speedAdd += 2f;
-                damageAdd += 4f;
-                attackSpeedAdd += 0.5f;
-                armorAdd += 2f;
-                regenAdd += 2f;
-                critChanceAdd += 0.1f;
-                critDamageAdd += 0.5f;
+                speedAdd += 0.5f;
+                damageAdd += 1f;
+                attackSpeedAdd += 0.2f;
+                armorAdd += 1f;
+                regenAdd += 1f;
+                critChanceAdd += 0.05f;
+                critDamageAdd += 0.25f;
             }
             // Level 3
             if (i.Level >= 3)
             {
                 hpAdd += 20f;
-                speedAdd += 2f;
-                damageAdd += 4f;
-                attackSpeedAdd += 0.5f;
-                armorAdd += 2f;
-                regenAdd += 2f;
-                critChanceAdd += 0.1f;
-                critDamageAdd += 0.5f;
+                speedAdd += 0.5f;
+                damageAdd += 1f;
+                attackSpeedAdd += 0.2f;
+                armorAdd += 1f;
+                regenAdd += 1f;
+                critChanceAdd += 0.05f;
+                critDamageAdd += 0.25f;
             }
             // Level 4
             if (i.Level >= 4)
             {
                 hpAdd += 20f;
-                speedAdd += 2f;
-                damageAdd += 4f;
-                attackSpeedAdd += 0.5f;
-                armorAdd += 2f;
-                regenAdd += 2f;
-                critChanceAdd += 0.1f;
-                critDamageAdd += 0.5f;
+                speedAdd += 0.5f;
+                damageAdd += 1f;
+                attackSpeedAdd += 0.2f;
+                armorAdd += 1f;
+                regenAdd += 1f;
+                critChanceAdd += 0.05f;
+                critDamageAdd += 0.25f;
             }
             // Level 5
             if (i.Level >= 5)
             {
                 hpAdd += 20f;
-                speedAdd += 2f;
-                damageAdd += 4f;
-                attackSpeedAdd += 0.5f;
-                armorAdd += 2f;
-                regenAdd += 2f;
-                critChanceAdd += 0.1f;
-                critDamageAdd += 0.5f;
+                speedAdd += 0.5f;
+                damageAdd += 1f;
+                attackSpeedAdd += 0.2f;
+                armorAdd += 1f;
+                regenAdd += 1f;
+                critChanceAdd += 0.05f;
+                critDamageAdd += 0.25f;
             }
             // Level 6
             if (i.Level >= 6)
             {
                 hpAdd += 20f;
-                speedAdd += 2f;
-                damageAdd += 4f;
-                attackSpeedAdd += 0.5f;
-                armorAdd += 2f;
-                regenAdd += 2f;
-                critChanceAdd += 0.1f;
-                critDamageAdd += 0.5f;
+                speedAdd += 0.5f;
+                damageAdd += 1f;
+                attackSpeedAdd += 0.2f;
+                armorAdd += 1f;
+                regenAdd += 1f;
+                critChanceAdd += 0.05f;
+                critDamageAdd += 0.25f;
             }
 
         }

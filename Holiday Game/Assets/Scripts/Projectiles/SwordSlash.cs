@@ -8,6 +8,11 @@ public class SwordSlash : ProjectileBase
     public GameObject tip;
     private float degrees = 180f;
     private float moved = 0f;
+    public bool multiStrike5 = false;
+    public bool multiStrike6 = false;
+    public bool multiStrike8 = false;
+    private int swingCounter = 0;
+    private int numSwings = 1;
 
     public override void Move()
     {
@@ -16,6 +21,7 @@ public class SwordSlash : ProjectileBase
             float rotate = degrees / (Lifetime / 3) * Time.deltaTime;
             this.transform.Rotate(new Vector3(0, 0, rotate));
             moved += rotate;
+            swingCounter++;
         }
     }
 
@@ -23,6 +29,11 @@ public class SwordSlash : ProjectileBase
     {
         this.gameObject.SetActive(true);
         moved = 0;
+        multiStrike5 = false;
+        multiStrike6 = false;
+        multiStrike8 = false;
+        swingCounter = 0;
+        numSwings = 1;
     }
 
     public override void OnCollision(Collider2D other)
@@ -38,7 +49,7 @@ public class SwordSlash : ProjectileBase
         Vector2 closest = info.otherCollider.ClosestPoint(this.gameObject.transform.position);
         Debug.Log(Vector2.Distance(closest, this.gameObject.transform.position));
         Item i = info.attacker.GetItem(ResourceManager.ItemIndex.SwordWeapon);
-        if (i.Level >= 4 && Vector2.Distance(closest, this.gameObject.transform.position) >= (2.5f * SizeMultiplier)) 
+        if (i.Level >= 4 && Vector2.Distance(closest, this.gameObject.transform.position) >= (2.5f * SizeMultiplier))
         {
             info.critOveride = true;
             info.damage *= 1.5f;

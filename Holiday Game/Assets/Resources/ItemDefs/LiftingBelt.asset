@@ -24,9 +24,9 @@ MonoBehaviour:
     levelDescriptions:
     - desc: Increases Max HP and Base Damage
       statChanges:
-        hpAdd: 20
+        hpAdd: 10
         speedAdd: 0
-        damageAdd: 2
+        damageAdd: 1
         attackSpeedAdd: 0
         armorAdd: 0
         regenAdd: 0
@@ -43,9 +43,9 @@ MonoBehaviour:
         XPMult: 1
     - desc: Increases Max HP and Base Damage
       statChanges:
-        hpAdd: 20
+        hpAdd: 10
         speedAdd: 0
-        damageAdd: 2
+        damageAdd: 1
         attackSpeedAdd: 0
         armorAdd: 0
         regenAdd: 0
@@ -62,9 +62,9 @@ MonoBehaviour:
         XPMult: 1
     - desc: Increases Max HP and Base Damage
       statChanges:
-        hpAdd: 20
+        hpAdd: 10
         speedAdd: 0
-        damageAdd: 2
+        damageAdd: 1
         attackSpeedAdd: 0
         armorAdd: 0
         regenAdd: 0
@@ -85,7 +85,7 @@ MonoBehaviour:
     levelDescriptions:
     - desc: Greatly Increase Max HP
       statChanges:
-        hpAdd: 50
+        hpAdd: 35
         speedAdd: 0
         damageAdd: 0
         attackSpeedAdd: 0
@@ -104,7 +104,7 @@ MonoBehaviour:
         XPMult: 1
     - desc: Greatly Increase Max HP
       statChanges:
-        hpAdd: 50
+        hpAdd: 35
         speedAdd: 0
         damageAdd: 0
         attackSpeedAdd: 0
@@ -127,7 +127,7 @@ MonoBehaviour:
     levelDescriptions:
     - desc: Massively Increases Max HP, and amplifies Max HP bonuses from all sources
       statChanges:
-        hpAdd: 100
+        hpAdd: 50
         speedAdd: 0
         damageAdd: 0
         attackSpeedAdd: 0
@@ -150,9 +150,9 @@ MonoBehaviour:
     levelDescriptions:
     - desc: Greatly increase Base Damage, and increaes Max HP
       statChanges:
-        hpAdd: 20
+        hpAdd: 10
         speedAdd: 0
-        damageAdd: 3
+        damageAdd: 2
         attackSpeedAdd: 0
         armorAdd: 0
         regenAdd: 0
@@ -169,9 +169,9 @@ MonoBehaviour:
         XPMult: 1
     - desc: Greatly increase Base Damage, and increaes Max HP
       statChanges:
-        hpAdd: 20
+        hpAdd: 10
         speedAdd: 0
-        damageAdd: 3
+        damageAdd: 2
         attackSpeedAdd: 0
         armorAdd: 0
         regenAdd: 0
@@ -192,7 +192,7 @@ MonoBehaviour:
     levelDescriptions:
     - desc: Attacks deal bonus damage based on % of Max HP
       statChanges:
-        hpAdd: 20
+        hpAdd: 10
         speedAdd: 0
         damageAdd: 0
         attackSpeedAdd: 0

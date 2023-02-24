@@ -78,25 +78,26 @@ public class UpgradeOption : MonoBehaviour
     public void OnHoverStart()
     {
         isHover = true;
-        textName.text = item.itemDef.itemName + " LVL: " + (item.Level+1);
+        textName.text = levelDescription.lvlName;
         desc.text = levelDescription.desc;
+        tier.text = item.itemDef.itemName + " LVL: " + (item.Level + 1);
         tier.enableVertexGradient = false;
         textName.enableVertexGradient = false;
         if (item.itemDef.tier == ItemDef.Tier.Common)
         {
-            tier.text = "Common";
+            //tier.text = "Common";
             tier.color = new Color(0f, 1f, 0f, 1f);
             textName.color = new Color(0f, 1f, 0f, 1f);
         }
         else if (item.itemDef.tier == ItemDef.Tier.Uncommon)
         {
-            tier.text = "Uncommon";
+            //tier.text = "Uncommon";
             tier.color = new Color(0f, 0f, 1f, 1f);
             textName.color = new Color(0f, 0f, 1f, 1f);
         }
         else if (item.itemDef.tier == ItemDef.Tier.Rare)
         {
-            tier.text = "Rare";
+            //tier.text = "Rare";
             tier.color = new Color(1f, 0f, 1f, 1f);
             textName.color = new Color(1f, 0f, 1f, 1f);
         }
@@ -111,7 +112,7 @@ public class UpgradeOption : MonoBehaviour
             textName.enableVertexGradient = true;
             tier.color = new Color(1f, 1f, 1f, 1f);
             textName.color = new Color(1f, 1f, 1f, 1f);
-            tier.text = "Epic";
+            //tier.text = "Epic";
             tier.colorGradient = grad;
             textName.colorGradient = grad;
         }
@@ -124,7 +125,7 @@ public class UpgradeOption : MonoBehaviour
             grad.bottomRight = new Color(0.5f, 0f, 0f, 1f);
             tier.enableVertexGradient = true;
             textName.enableVertexGradient = true;
-            tier.text = "Legendary";
+            //tier.text = "Legendary";
             tier.color = new Color(1f, 1f, 1f, 1f);
             textName.color = new Color(1f, 1f, 1f, 1f);
             tier.colorGradient = grad;

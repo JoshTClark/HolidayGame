@@ -44,7 +44,7 @@ public class ItemDef : ScriptableObject
     [System.Serializable]
     public class LevelDescription
     {
-        public string name;
+        public string lvlName;
         [TextArea(10, 20)]
         public string desc;
         public StatChange statChanges;

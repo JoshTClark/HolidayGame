@@ -22,7 +22,7 @@ MonoBehaviour:
     previousPath: 
     numLevels: 4
     levelDescriptions:
-    - name: Iron Blade
+    - lvlName: Iron Blade
       desc: New weapon. Every <color=blue>1 second</color> swing a blade towards
         the cursor for <b>100%</b> damage.
       statChanges:
@@ -43,7 +43,7 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - name: Sharpening Stone
+    - lvlName: Sharp Blade
       desc: Iron Blade deals 25% more damage.
       statChanges:
         hpAdd: 0
@@ -63,7 +63,7 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - name: Heavy Swings
+    - lvlName: Heavy Blade
       desc: Iron Blade is 15% larger and can pierce 2 more enemies.
       statChanges:
         hpAdd: 0
@@ -83,7 +83,7 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - name: Duelist
+    - lvlName: Duelist Proficiency
       desc: Enemies hit with the tip of the Iron Blade always take critical damage.
         Damage at the tip of the Iron Blade is increased by 50%.
       statChanges:

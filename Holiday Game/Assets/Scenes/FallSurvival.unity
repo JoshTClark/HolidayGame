@@ -557,7 +557,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 520582315, guid: 9d969f72a70fb0a438be10e67e3b0fe6, type: 3}
       propertyPath: spawnChance
-      value: 25
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 520582315, guid: 9d969f72a70fb0a438be10e67e3b0fe6, type: 3}
       propertyPath: contents.Array.size
@@ -10997,7 +10997,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 520582315, guid: 9d969f72a70fb0a438be10e67e3b0fe6, type: 3}
       propertyPath: spawnChance
-      value: 25
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 520582315, guid: 9d969f72a70fb0a438be10e67e3b0fe6, type: 3}
       propertyPath: contents.Array.size
@@ -149370,7 +149370,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 520582315, guid: 9d969f72a70fb0a438be10e67e3b0fe6, type: 3}
       propertyPath: spawnChance
-      value: 25
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 520582315, guid: 9d969f72a70fb0a438be10e67e3b0fe6, type: 3}
       propertyPath: contents.Array.size
@@ -149435,7 +149435,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 520582315, guid: 9d969f72a70fb0a438be10e67e3b0fe6, type: 3}
       propertyPath: spawnChance
-      value: 25
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 520582315, guid: 9d969f72a70fb0a438be10e67e3b0fe6, type: 3}
       propertyPath: contents.Array.size

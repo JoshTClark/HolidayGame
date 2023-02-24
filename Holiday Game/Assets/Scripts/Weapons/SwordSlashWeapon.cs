@@ -11,6 +11,7 @@ public class SwordSlashWeapon : Weapon
             float damageMult = GetBaseStat("Damage");
             float pierceAdd = GetBaseStat("Pierce");
             float sizeMult = GetBaseStat("Size");
+            float atckSpdMult = GetBaseStat("Attack Speed");
 
             Item i = owner.GetItem(ResourceManager.ItemIndex.SwordWeapon);
             // Level 2
@@ -25,9 +26,36 @@ public class SwordSlashWeapon : Weapon
                 sizeMult += 0.15f;
             }
 
+            // Sword Beam Path
+            if (i.Level > 4 && i.HasTakenPath("Multi Strike"))
+            {
+            }
+
+            // Multi Strike Path
+            if (i.Level > 4 && i.HasTakenPath("Multi Strike")) 
+            {
+                // Level 5
+                if (i.Level >= 5)
+                {
+                    atckSpdMult += 0.1f;
+                }
+                // Level 5
+                if (i.Level >= 7)
+                {
+                    atckSpdMult += 0.45f;
+                    damageMult -= 0.25f;
+                }
+                // Level 5
+                if (i.Level >= 8)
+                {
+                    atckSpdMult += 0.5f;
+                }
+            }
+
             trueStats["Damage"] = damageMult;
             trueStats["Pierce"] = pierceAdd;
             trueStats["Size"] = sizeMult;
+            trueStats["Attack Speed"] = atckSpdMult;
         }
     }
 

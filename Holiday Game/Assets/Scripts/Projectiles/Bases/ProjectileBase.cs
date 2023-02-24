@@ -113,6 +113,7 @@ public abstract class ProjectileBase : MonoBehaviour
                         }
                     }
                     this.damageInfo.damagePos = this.gameObject.transform.position;
+                    this.damageInfo.otherCollider = other;
                     this.damageInfo.receiver = receiver;
                     this.damageInfo.knockback *= knockbackMultiplier;
                     hitTargets.Add(receiver);
@@ -165,8 +166,8 @@ public abstract class ProjectileBase : MonoBehaviour
     // Called when the projectile hits something
     protected void Hit(StatsComponent receiver)
     {
-        OnHit(receiver);
         DamageInfo passedInfo = damageInfo.CreateCopy();
+        OnHit(receiver, passedInfo);
         passedInfo.damage *= damageMultiplier;
         receiver.TakeDamage(passedInfo);
     }
@@ -248,7 +249,7 @@ public abstract class ProjectileBase : MonoBehaviour
     /// <summary>
     /// Any special behavior for when the projectile hits something with health goes here
     /// </summary>
-    public abstract void OnHit(StatsComponent receiver);
+    public abstract void OnHit(StatsComponent receiver, DamageInfo info);
 
     /// <summary>
     /// Any special behavior for when the projectile collides with something goes here

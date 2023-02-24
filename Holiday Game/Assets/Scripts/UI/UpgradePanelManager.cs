@@ -293,6 +293,7 @@ public class UpgradePanelManager : MonoBehaviour
     public void Skip()
     {
         selected = true;
+        chest = null;
     }
 
     /// <summary>

@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class SwordSlash : ProjectileBase
 {
+    public bool hasTipper = false;
+    public GameObject tip;
     private float degrees = 180f;
     private float moved = 0f;
+
     public override void Move()
     {
         if (degrees > moved)
@@ -30,8 +33,16 @@ public class SwordSlash : ProjectileBase
     {
     }
 
-    public override void OnHit(StatsComponent receiver)
+    public override void OnHit(StatsComponent receiver, DamageInfo info)
     {
+        Vector2 closest = info.otherCollider.ClosestPoint(this.gameObject.transform.position);
+        Debug.Log(Vector2.Distance(closest, this.gameObject.transform.position));
+        Item i = info.attacker.GetItem(ResourceManager.ItemIndex.SwordWeapon);
+        if (i.Level >= 4 && Vector2.Distance(closest, this.gameObject.transform.position) >= (2.5f * SizeMultiplier)) 
+        {
+            info.critOveride = true;
+            info.damage *= 1.5f;
+        }
     }
 
     public override void OnUpdate()
@@ -40,5 +51,11 @@ public class SwordSlash : ProjectileBase
         speedMult = 50 * ((Lifetime - (TimeAlive*2)) / Lifetime);
         speedMult = Mathf.Clamp(speedMult, 0, 100);
         */
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = new Color(1f, 0, 0, 0.25f);
+        Gizmos.DrawSphere(this.gameObject.transform.position, (2.5f * SizeMultiplier));
     }
 }

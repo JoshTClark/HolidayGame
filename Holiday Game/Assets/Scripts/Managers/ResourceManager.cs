@@ -61,7 +61,7 @@ public class ResourceManager
         MoveSpeed = 2,
         SwordWeapon = 3,
         CritChance = 4,
-        Fireball = 5,
+        MagicMissile = 5,
         Armor = 6,
         AgilityBoots = 7,
         LiftingBelt = 8,

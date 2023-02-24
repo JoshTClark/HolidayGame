@@ -21,7 +21,7 @@ public class IceShard : ProjectileBase
     {
     }
 
-    public override void OnHit(StatsComponent receiver)
+    public override void OnHit(StatsComponent receiver, DamageInfo info)
     {
     }
 

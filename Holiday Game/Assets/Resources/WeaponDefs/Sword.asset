@@ -15,7 +15,7 @@ MonoBehaviour:
   itemName: Iron Blade
   index: 3
   icon: {fileID: 0}
-  maxLevel: 0
+  maxLevel: 4
   tier: 0
   paths:
   - pathName: Start
@@ -34,17 +34,17 @@ MonoBehaviour:
         regenAdd: 0
         critChanceAdd: 0
         critDamageAdd: 0
-        hpMult: 0
-        speedMult: 0
-        damageMult: 0
-        attackSpeedMult: 0
-        armorMult: 0
-        regenMult: 0
-        critChanceMult: 0
-        critDamageMult: 0
-        XPMult: 0
-    - name: 
-      desc: Sword Slashes deal increased damage
+        hpMult: 1
+        speedMult: 1
+        damageMult: 1
+        attackSpeedMult: 1
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1
+    - name: Sharpening Stone
+      desc: Iron Blade deals 25% more damage.
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -54,17 +54,17 @@ MonoBehaviour:
         regenAdd: 0
         critChanceAdd: 0
         critDamageAdd: 0
-        hpMult: 0
-        speedMult: 0
-        damageMult: 0
-        attackSpeedMult: 0
-        armorMult: 0
-        regenMult: 0
-        critChanceMult: 0
-        critDamageMult: 0
-        XPMult: 0
-    - name: 
-      desc: Sword Slashes deal increased damage
+        hpMult: 1
+        speedMult: 1
+        damageMult: 1
+        attackSpeedMult: 1
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1
+    - name: Heavy Swings
+      desc: Iron Blade is 15% larger and can pierce 2 more enemies.
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -74,17 +74,18 @@ MonoBehaviour:
         regenAdd: 0
         critChanceAdd: 0
         critDamageAdd: 0
-        hpMult: 0
-        speedMult: 0
-        damageMult: 0
-        attackSpeedMult: 0
-        armorMult: 0
-        regenMult: 0
-        critChanceMult: 0
-        critDamageMult: 0
-        XPMult: 0
-    - name: 
-      desc: Sword Slashes deal increased damage
+        hpMult: 1
+        speedMult: 1
+        damageMult: 1
+        attackSpeedMult: 1
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1
+    - name: Duelist
+      desc: Enemies hit with the tip of the Iron Blade always take critical damage.
+        Damage at the tip of the Iron Blade is increased by 50%.
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -94,13 +95,13 @@ MonoBehaviour:
         regenAdd: 0
         critChanceAdd: 0
         critDamageAdd: 0
-        hpMult: 0
-        speedMult: 0
-        damageMult: 0
-        attackSpeedMult: 0
-        armorMult: 0
-        regenMult: 0
-        critChanceMult: 0
-        critDamageMult: 0
-        XPMult: 0
+        hpMult: 1
+        speedMult: 1
+        damageMult: 1
+        attackSpeedMult: 1
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1
   weaponPrefab: {fileID: -6073485330287907389, guid: 75a60ea68aa9ce24f8d26bf15c21f4da, type: 3}

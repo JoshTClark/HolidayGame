@@ -59,7 +59,7 @@ public class PumpkinBombBehavior : BombProjectileBase
         base.OnDeath();
     }
 
-    public override void OnHit(StatsComponent receiver)
+    public override void OnHit(StatsComponent receiver, DamageInfo info)
     {
         // Nothing special
     }

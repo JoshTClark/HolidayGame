@@ -29,7 +29,7 @@ public class SnowballBehavior : ProjectileBase
         // Nothing special
     }
 
-    public override void OnHit(StatsComponent receiver)
+    public override void OnHit(StatsComponent receiver, DamageInfo info)
     {
         // Nothing special
     }

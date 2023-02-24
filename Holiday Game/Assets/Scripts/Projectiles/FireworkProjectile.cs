@@ -27,7 +27,7 @@ public class FireworkProjectile : BombProjectileBase
     {
     }
 
-    public override void OnHit(StatsComponent receiver)
+    public override void OnHit(StatsComponent receiver, DamageInfo info)
     {
     }
 

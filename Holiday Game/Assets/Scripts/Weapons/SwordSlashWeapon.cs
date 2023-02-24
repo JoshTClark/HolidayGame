@@ -9,25 +9,25 @@ public class SwordSlashWeapon : Weapon
         if (owner.HasItem(ResourceManager.ItemIndex.SwordWeapon))
         {
             float damageMult = GetBaseStat("Damage");
-            
             float pierceAdd = GetBaseStat("Pierce");
-      
+            float sizeMult = GetBaseStat("Size");
 
             Item i = owner.GetItem(ResourceManager.ItemIndex.SwordWeapon);
-            if (i.Level >= 1)
-            {
-                damageMult *= 1.2f;
-            }
             // Level 2
             if (i.Level >= 2)
             {
-                damageMult *= 1.2f;
+                damageMult += 0.25f;
             }
             // Level 3
             if (i.Level >= 3)
             {
-                damageMult *= 1.2f;
+                pierceAdd += 2;
+                sizeMult += 0.15f;
             }
+
+            trueStats["Damage"] = damageMult;
+            trueStats["Pierce"] = pierceAdd;
+            trueStats["Size"] = sizeMult;
         }
     }
 
@@ -45,6 +45,7 @@ public class SwordSlashWeapon : Weapon
             p.transform.rotation = transform.rotation;
             //p.Direction = transform.right;
             p.Pierce = GetStat("Pierce");
+            p.SizeMultiplier = GetStat("Size");
             DamageInfo info = new DamageInfo();
             info.damage = owner.Damage * GetStat("Damage");
             info.attacker = owner;

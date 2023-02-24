@@ -24,7 +24,7 @@ public class CupidArrowBehavior : ProjectileBase
         // Nothing special
     }
 
-    public override void OnHit(StatsComponent receiver)
+    public override void OnHit(StatsComponent receiver, DamageInfo info)
     {
         e = GetClosestEnemyForArrow();
 

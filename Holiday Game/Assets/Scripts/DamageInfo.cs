@@ -15,10 +15,12 @@ public class DamageInfo
     public float knockback = 1f;
     public Vector2 knockbackDirection = new Vector2(0, 0);
     public Vector2 damagePos;
+    public Collider2D otherCollider;
     public DamageColor damageColor = DamageColor.Basic;
     public StatsComponent receiver;
     public StatsComponent attacker;
     public bool isCrit;
+    public bool critOveride = false;
     public List<ResourceManager.BuffIndex> debuffs = new List<ResourceManager.BuffIndex>();
     public ResourceManager.WeaponIndex weapon;
     public List<ResourceManager.BuffIndex> mask = new List<ResourceManager.BuffIndex>();
@@ -28,6 +30,10 @@ public class DamageInfo
         if (attacker)
         {
             isCrit = GameManager.RollCheck(attacker.CritChance);
+            if (critOveride)
+            {
+                isCrit = true;
+            }
             if (isCrit)
             {
                 damage *= attacker.CritDamage;
@@ -48,6 +54,8 @@ public class DamageInfo
         info.knockbackDirection = this.knockbackDirection;
         info.radialKnockback = this.radialKnockback;
         info.weapon = this.weapon;
+        info.critOveride = this.critOveride;
+        info.otherCollider = this.otherCollider;
         return info;
     }
 

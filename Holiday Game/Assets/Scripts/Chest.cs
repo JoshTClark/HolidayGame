@@ -4,19 +4,27 @@ using UnityEngine;
 
 public class Chest : MonoBehaviour
 {
-    public bool onlyWeapon = false;
-    public bool onlyItems = false;
     public int spawnChance;
+    public List<ChestContent> contents = new List<ChestContent>();
 
+
+    /// <summary>
+    /// Checks if the chest should randomly spawn
+    /// </summary>
     private void Start()
     {
         int spawn = Random.Range(0, 100);
-  
-        if(spawn > spawnChance)
+
+        if (spawn > spawnChance)
         {
-            this.gameObject.SetActive(false); 
+            this.gameObject.SetActive(false);
         }
     }
+
+    /// <summary>
+    /// Does the logic for the player colliding with and opening a chest
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.GetComponent<Player>())
@@ -24,5 +32,20 @@ public class Chest : MonoBehaviour
             GameManager.instance.ChestPickup(this);
             this.gameObject.SetActive(false);
         }
+    }
+
+    [System.Serializable]
+    public class ChestContent
+    {
+        public enum ChestContentType
+        {
+            RandomAll = 0,
+            RandomItem = 1,
+            RandomWeapon = 2,
+            Preset = 3
+        }
+
+        public ChestContentType contentType = ChestContentType.RandomAll;
+        public ItemDef presetItem;
     }
 }

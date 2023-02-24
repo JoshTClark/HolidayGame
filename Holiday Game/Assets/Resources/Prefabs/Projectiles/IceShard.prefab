@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8241160680520428360}
   - component: {fileID: 2765787977676421781}
   - component: {fileID: 6446653776942121697}
+  - component: {fileID: -6832824285379710760}
   m_Layer: 8
   m_Name: IceShard
   m_TagString: Untagged
@@ -123,7 +124,6 @@ MonoBehaviour:
   index: 7
   baseSpeed: 10
   baseLifetime: 2
-  basePierce: 2
   baseSize: 1
   projectileTeam: 0
 --- !u!70 &6446653776942121697
@@ -142,3 +142,14 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.8, y: 0.4}
   m_Direction: 1
+--- !u!210 &-6832824285379710760
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6747723150464202164}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0

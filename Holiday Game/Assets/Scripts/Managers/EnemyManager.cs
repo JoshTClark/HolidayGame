@@ -45,41 +45,44 @@ public class EnemyManager : MonoBehaviour
 
             RemoveDeadEnemies();
 
-            LevelData.Wave wave = GameManager.instance.levelData.GetWaveByTime(GameManager.instance.GameTime);
-            if (wave != null)
+            if (GameManager.instance.doSpawns)
             {
-                if (previousWave == null || wave != previousWave)
+                LevelData.Wave wave = GameManager.instance.levelData.GetWaveByTime(GameManager.instance.GameTime);
+                if (wave != null)
                 {
-                    currentWaveEnemies.Clear();
+                    if (previousWave == null || wave != previousWave)
+                    {
+                        currentWaveEnemies.Clear();
+                        foreach (LevelData.SpawnInfo info in wave.enemies)
+                        {
+                            if (!info.respawn)
+                            {
+                                for (int i = 0; i < info.amountToSpawn; i++)
+                                {
+                                    SpawnEnemy(info);
+                                }
+                            }
+                        }
+                        previousWave = wave;
+                    }
+
                     foreach (LevelData.SpawnInfo info in wave.enemies)
                     {
-                        if (!info.respawn)
+                        if (info.respawn)
                         {
-                            for (int i = 0; i < info.amountToSpawn; i++)
+                            int amount = 0;
+                            foreach (Enemy e in currentWaveEnemies)
+                            {
+                                if (e.index == info.enemyIndex)
+                                {
+                                    amount++;
+                                }
+                            }
+
+                            for (int i = amount; i < info.amountToSpawn; i++)
                             {
                                 SpawnEnemy(info);
                             }
-                        }
-                    }
-                    previousWave = wave;
-                }
-
-                foreach (LevelData.SpawnInfo info in wave.enemies)
-                {
-                    if (info.respawn)
-                    {
-                        int amount = 0;
-                        foreach (Enemy e in currentWaveEnemies)
-                        {
-                            if (e.index == info.enemyIndex)
-                            {
-                                amount++;
-                            }
-                        }
-
-                        for (int i = amount; i < info.amountToSpawn; i++)
-                        {
-                            SpawnEnemy(info);
                         }
                     }
                 }
@@ -160,6 +163,14 @@ public class EnemyManager : MonoBehaviour
 
         allEnemies.Add(enemy);
         currentWaveEnemies.Add(enemy);
+    }
+
+    public void SpawnEnemy(EnemyIndex index, int count)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            SpawnEnemy(index);
+        }
     }
 
     private Vector2 GetRandomPosition()
@@ -254,7 +265,7 @@ public class EnemyManager : MonoBehaviour
         if (GameManager.instance && GameManager.instance.player)
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireCube(GameManager.instance.Player.transform.position, new Vector3(minSpawnDistance.x*2, minSpawnDistance.y * 2, 1));
+            Gizmos.DrawWireCube(GameManager.instance.Player.transform.position, new Vector3(minSpawnDistance.x * 2, minSpawnDistance.y * 2, 1));
             Gizmos.color = Color.red;
             Gizmos.DrawWireCube(GameManager.instance.Player.transform.position, new Vector3(maxSpawnDistance.x * 2, maxSpawnDistance.y * 2, 1));
         }

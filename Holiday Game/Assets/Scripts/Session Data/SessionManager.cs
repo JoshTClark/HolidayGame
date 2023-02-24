@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class SessionManager
 {
     public SessionMap map;
-    private PlayerData playerData = new PlayerData();
+    public PlayerData playerData = new PlayerData();
     public LevelData currentLevel;
     public SessionMap.MapNode currentNode;
     public static GameData data;
@@ -31,7 +31,9 @@ public class SessionManager
             playerData.inventory = new List<Item>();
             foreach (ItemDef i in chosenCharacter.inventory)
             {
-                playerData.inventory.Add(i.GetItem());
+                Item item = i.GetItem();
+                item.Level = 1;
+                playerData.inventory.Add(item);
             }
         }
     }
@@ -97,7 +99,7 @@ public class SessionManager
         SceneManager.LoadSceneAsync("StartScene");
     }
 
-    private struct PlayerData
+    public struct PlayerData
     {
         public PlayableCharacterData chosenCharacter;
         public List<Item> inventory;

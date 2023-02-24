@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7228458649901201419}
   - component: {fileID: 7587284864811035457}
   - component: {fileID: 7584129709982100208}
+  - component: {fileID: -5070095468510710547}
   m_Layer: 8
   m_Name: Explosion
   m_TagString: Untagged
@@ -139,6 +140,16 @@ MonoBehaviour:
   index: 4
   baseSpeed: 0
   baseLifetime: 0
-  basePierce: 0
   baseSize: 0
   projectileTeam: 0
+--- !u!210 &-5070095468510710547
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1706315131308921988}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0

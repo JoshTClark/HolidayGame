@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2163538340299386}
   - component: {fileID: 105689963958363916}
   - component: {fileID: -2961629869756525691}
+  - component: {fileID: 6078329684497650796}
   m_Layer: 8
   m_Name: CupidArrowProj
   m_TagString: Untagged
@@ -125,7 +126,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.2, y: 0.375}
+    oldSize: {x: 0.96, y: 0.3}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -149,6 +150,16 @@ MonoBehaviour:
   index: 5
   baseSpeed: 20
   baseLifetime: 10
-  basePierce: 4
   baseSize: 1
   projectileTeam: 0
+--- !u!210 &6078329684497650796
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3103317673598625866}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0

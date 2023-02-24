@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8063736733929000519}
   - component: {fileID: 8063736733929000518}
   - component: {fileID: 8063736733929000517}
+  - component: {fileID: -2715337200061992264}
   m_Layer: 8
   m_Name: CandyCorn
   m_TagString: Untagged
@@ -141,3 +142,14 @@ MonoBehaviour:
   baseLifetime: 2
   baseSize: 1
   projectileTeam: 0
+--- !u!210 &-2715337200061992264
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8063736733929000516}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0

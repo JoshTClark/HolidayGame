@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 7047887557445649234}
   - component: {fileID: 6243427137443032006}
   - component: {fileID: -6673121354519276325}
+  - component: {fileID: 7855055868811803186}
   m_Layer: 8
   m_Name: PumpkinBomb
   m_TagString: Untagged
@@ -252,7 +253,6 @@ MonoBehaviour:
   index: 1
   baseSpeed: 0
   baseLifetime: 2.5
-  basePierce: 999
   baseSize: 1
   projectileTeam: 2
   explodeOnContact: 0
@@ -359,3 +359,14 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!210 &7855055868811803186
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8200694377467840568}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0

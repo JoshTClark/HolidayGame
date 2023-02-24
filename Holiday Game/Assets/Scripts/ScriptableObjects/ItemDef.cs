@@ -33,7 +33,7 @@ public class ItemDef : ScriptableObject
     {
         Item i = new Item();
         i.itemDef = this;
-        i.Level = 1;
+        i.Level = 0;
         if (paths.Count > 0)
         {
             i.currentPath = paths[0];
@@ -44,8 +44,8 @@ public class ItemDef : ScriptableObject
     [System.Serializable]
     public class LevelDescription
     {
-        private string name = "hehe";
-        [TextArea(15, 20)]
+        public string name;
+        [TextArea(10, 20)]
         public string desc;
         public StatChange statChanges;
 

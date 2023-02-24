@@ -59,10 +59,6 @@ public class GameManager : MonoBehaviour
     private float time = 0f;
     private GameState state = GameState.Normal;
     private bool paused = false;
-    private int garunteedWeaponLevel = 5;
-    private bool doSpecialUpgrade = false;
-    private bool itemOnlyUpgrade = false;
-    private bool weaponOnlyUpgrade = false;
     private int upgradesToGive = 0;
     private float dayLength = 120f;
     public int currentDay = 1;
@@ -71,6 +67,7 @@ public class GameManager : MonoBehaviour
     public List<WeaponIcon> weaponIcons = new List<WeaponIcon>();
     public int enemiesDefeated = 0;
     private bool levelEnded = false;
+    public bool doSpawns = true;
 
     [SerializeField]
     private InputAction slowToggle;
@@ -119,7 +116,19 @@ public class GameManager : MonoBehaviour
             player.inventory = new List<Item>();
             foreach (ItemDef i in ResourceManager.characters[0].inventory)
             {
-                player.inventory.Add(i.GetItem());
+                Item item = i.GetItem();
+                item.Level = 1;
+                player.inventory.Add(item);
+                if (i.GetType() == typeof(WeaponDef))
+                {
+                    player.AddWeapon(((WeaponDef)i).weaponPrefab);
+                }
+            }
+            foreach (ItemDef i in ResourceManager.characters[0].tutorialChestItems)
+            {
+                Item item = i.GetItem();
+                item.Level = 1;
+                player.inventory.Add(item);
                 if (i.GetType() == typeof(WeaponDef))
                 {
                     player.AddWeapon(((WeaponDef)i).weaponPrefab);
@@ -248,12 +257,11 @@ public class GameManager : MonoBehaviour
                     Time.timeScale = slowTimeScale;
                 }
                 // Updating the timer and difficulty
-                time += Time.deltaTime;
+                if (doSpawns)
+                {
+                    time += Time.deltaTime;
+                }
                 UpdateDate();
-
-                doSpecialUpgrade = false;
-                itemOnlyUpgrade = false;
-                weaponOnlyUpgrade = false;
 
                 // Updating displays
                 objectiveDisplay.rectTransform.anchorMin = new Vector2(objectiveDisplay.rectTransform.anchorMin.x, 0.94f);
@@ -368,7 +376,7 @@ public class GameManager : MonoBehaviour
                 if (!upgradeManager.displaying)
                 {
                     upgradeManager.player = player;
-                    upgradeManager.SetUpgrades(4, doSpecialUpgrade, itemOnlyUpgrade, weaponOnlyUpgrade);
+                    upgradeManager.SetUpgrades(4);
                     upgradeManager.ShowOptions(upgradesToGive);
                 }
                 if (upgradeManager.selected)
@@ -437,7 +445,6 @@ public class GameManager : MonoBehaviour
     public void PlayerPickupBossDrop(int upgrades)
     {
         upgradesToGive = upgrades;
-        doSpecialUpgrade = true;
         state = GameState.UpgradeMenu;
     }
 
@@ -603,8 +610,6 @@ public class GameManager : MonoBehaviour
         Debug.Log("Found chest");
         state = GameState.UpgradeMenu;
         upgradesToGive = 1;
-        doSpecialUpgrade = true;
-        itemOnlyUpgrade = c.onlyItems;
-        weaponOnlyUpgrade = c.onlyWeapon;
+        upgradePanel.GetComponent<UpgradePanelManager>().chest = c;
     }
 }

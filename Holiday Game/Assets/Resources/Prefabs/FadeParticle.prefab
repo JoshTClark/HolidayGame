@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5023223344212170397}
   - component: {fileID: 2499742534556204745}
   - component: {fileID: 4572045033489371254}
+  - component: {fileID: 305949795650881397}
   m_Layer: 0
   m_Name: FadeParticle
   m_TagString: Untagged
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -84,7 +85,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!114 &4572045033489371254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,3 +100,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sr: {fileID: 2499742534556204745}
   finished: 0
+  lifetime: 0.5
+  timer: 0.35
+--- !u!210 &305949795650881397
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5247591576159708300}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: -1

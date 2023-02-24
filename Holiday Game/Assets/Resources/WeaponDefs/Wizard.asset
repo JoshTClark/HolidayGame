@@ -17,5 +17,29 @@ MonoBehaviour:
   icon: {fileID: 0}
   maxLevel: 0
   tier: 0
-  paths: []
+  paths:
+  - pathName: 
+    previousPath: 
+    numLevels: 0
+    levelDescriptions:
+    - name: 
+      desc: 
+      statChanges:
+        hpAdd: 0
+        speedAdd: 0
+        damageAdd: 0
+        attackSpeedAdd: 0
+        armorAdd: 0
+        regenAdd: 0
+        critChanceAdd: 0
+        critDamageAdd: 0
+        hpMult: 0
+        speedMult: 0
+        damageMult: 0
+        attackSpeedMult: 0
+        armorMult: 0
+        regenMult: 0
+        critChanceMult: 0
+        critDamageMult: 0
+        XPMult: 0
   weaponPrefab: {fileID: 130564432471187322, guid: 05dcd730e4f2b3442bf0d379416bf5b1, type: 3}

@@ -26,6 +26,7 @@ MonoBehaviour:
 
     * <color=#AAAAAA><size=+8>???</size></color>'
   characterImage: {fileID: 1500714575, guid: c33ab33ef8c756640954b7567896f904, type: 3}
-  inventory:
+  tutorialChestItems:
   - {fileID: 11400000, guid: f7eba188c934a104da54ec5823b012ac, type: 2}
+  inventory:
   - {fileID: 11400000, guid: 4c1d2b0074040d3498c64541c4a76685, type: 2}

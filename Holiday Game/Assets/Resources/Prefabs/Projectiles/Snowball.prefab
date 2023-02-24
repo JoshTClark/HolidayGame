@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7666470324831021171}
   - component: {fileID: 7666470324831021170}
   - component: {fileID: 2198510103596972710}
+  - component: {fileID: -4838373538695018196}
   m_Layer: 8
   m_Name: Snowball
   m_TagString: Untagged
@@ -139,7 +140,17 @@ MonoBehaviour:
   index: 0
   baseSpeed: 8
   baseLifetime: 5
-  basePierce: 0
   baseSize: 1
   projectileTeam: 0
   effects: {fileID: 6125135307708369886, guid: 74cffb353dcc8cf4398ce4e54d8ca1a2, type: 3}
+--- !u!210 &-4838373538695018196
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7666470324831021173}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0

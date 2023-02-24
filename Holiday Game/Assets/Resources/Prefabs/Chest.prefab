@@ -87,7 +87,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!210 &6973114615440797026
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -160,3 +160,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onlyWeapon: 0
   onlyItems: 0
+  spawnChance: 0

@@ -18,5 +18,8 @@ public class PlayableCharacterData : ScriptableObject
     public Sprite characterImage;
 
     [SerializeField]
+    public List<ItemDef> tutorialChestItems = new List<ItemDef>();
+
+    [SerializeField]
     public List<ItemDef> inventory = new List<ItemDef>();
 }

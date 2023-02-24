@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 5491713004324386631}
   - component: {fileID: 5491713004324386632}
   - component: {fileID: 5491713004324386633}
+  - component: {fileID: -7080908795885610182}
   m_Layer: 8
   m_Name: Firework
   m_TagString: Untagged
@@ -261,7 +262,6 @@ MonoBehaviour:
   index: 2
   baseSpeed: 5
   baseLifetime: 12
-  basePierce: 0
   baseSize: 1
   projectileTeam: 0
   explodeOnContact: 1
@@ -273,3 +273,14 @@ MonoBehaviour:
   explosionPrefab: {fileID: 0}
   target: {fileID: 0}
   rotationSpeed: 400
+--- !u!210 &-7080908795885610182
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5491713004324386634}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0

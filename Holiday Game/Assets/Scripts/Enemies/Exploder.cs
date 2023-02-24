@@ -17,7 +17,7 @@ public class Exploder : Enemy
     }
     public override void OnUpdate()
     {
-        Move();
+        Move(); 
         if(PlayerDistance() <= range)
         {
             inRange= true;
@@ -61,7 +61,7 @@ public class Exploder : Enemy
 
     public override void OnDeath(DamageInfo dmgInfo)
     {
-        if(explode)
+        if(explode && dmgInfo.attacker == this)
         {
             // Create an empty explosion
             // Creates an explosion, Check PumpkinBomb.CS for example in Update()

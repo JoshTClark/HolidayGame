@@ -5,23 +5,30 @@ using UnityEngine;
 public class SwordSlash : ProjectileBase
 {
     public bool hasTipper = false;
-    public GameObject tip;
     private float degrees = 180f;
     private float moved = 0f;
-    public bool multiStrike5 = false;
-    public bool multiStrike6 = false;
-    public bool multiStrike8 = false;
-    private int swingCounter = 0;
-    private int numSwings = 1;
+    private bool inverse = false;
+    public SpriteRenderer sprite;
 
     public override void Move()
     {
-        if (degrees > moved)
+        if (inverse)
         {
-            float rotate = degrees / (Lifetime / 3) * Time.deltaTime;
-            this.transform.Rotate(new Vector3(0, 0, rotate));
-            moved += rotate;
-            swingCounter++;
+            if (degrees > moved)
+            {
+                float rotate = degrees / (Lifetime / 3) * Time.deltaTime;
+                this.transform.Rotate(new Vector3(0, 0, -rotate));
+                moved += rotate;
+            }
+        }
+        else
+        {
+            if (degrees > moved)
+            {
+                float rotate = degrees / (Lifetime / 3) * Time.deltaTime;
+                this.transform.Rotate(new Vector3(0, 0, rotate));
+                moved += rotate;
+            }
         }
     }
 
@@ -29,11 +36,8 @@ public class SwordSlash : ProjectileBase
     {
         this.gameObject.SetActive(true);
         moved = 0;
-        multiStrike5 = false;
-        multiStrike6 = false;
-        multiStrike8 = false;
-        swingCounter = 0;
-        numSwings = 1;
+        inverse = false;
+        sprite.flipX = false;
     }
 
     public override void OnCollision(Collider2D other)
@@ -47,7 +51,7 @@ public class SwordSlash : ProjectileBase
     public override void OnHit(StatsComponent receiver, DamageInfo info)
     {
         Vector2 closest = info.otherCollider.ClosestPoint(this.gameObject.transform.position);
-        Debug.Log(Vector2.Distance(closest, this.gameObject.transform.position));
+        //Debug.Log(Vector2.Distance(closest, this.gameObject.transform.position));
         Item i = info.attacker.GetItem(ResourceManager.ItemIndex.SwordWeapon);
         if (i.Level >= 4 && Vector2.Distance(closest, this.gameObject.transform.position) >= (2.5f * SizeMultiplier))
         {
@@ -58,15 +62,18 @@ public class SwordSlash : ProjectileBase
 
     public override void OnUpdate()
     {
-        /*
-        speedMult = 50 * ((Lifetime - (TimeAlive*2)) / Lifetime);
-        speedMult = Mathf.Clamp(speedMult, 0, 100);
-        */
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = new Color(1f, 0, 0, 0.25f);
         Gizmos.DrawSphere(this.gameObject.transform.position, (2.5f * SizeMultiplier));
+    }
+
+    public void InvertSwing()
+    {
+        inverse = true;
+        this.transform.Rotate(new Vector3(0, 0, degrees));
+        sprite.flipX = true;
     }
 }

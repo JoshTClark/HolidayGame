@@ -87,9 +87,9 @@ public abstract class StatsComponent : MonoBehaviour
     public float Level { get { return level; } }
 
     // Used to get the "true" values of stats after calculating any additions from upgrades etc
-    public float MaxHp { get { return (baseMaxHP + hpAdd) * hpMult; } }
-    public float Speed { get { return (baseSpeed + speedAdd) * speedMult; } }
-    public float Damage { get { return (baseDamage + damageAdd) * damageMult; } }
+    public float MaxHp { get { return (baseMaxHP + hpAdd) * hpMult * hpMultConst; } }
+    public float Speed { get { return (baseSpeed + speedAdd) * speedMult * speedMultConst; } }
+    public float Damage { get { return (baseDamage + damageAdd) * damageMult * damageMultConst; } }
     public float AttackSpeed { get { return (baseAttackSpeed + attackSpeedAdd) * attackSpeedMult; } }
     public float Armor { get { return (baseArmor + armorAdd) * armorMult; } }
     public float Regen { get { return (baseRegen + regenAdd) * regenMult; } }

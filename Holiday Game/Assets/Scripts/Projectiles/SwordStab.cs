@@ -2,17 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwordStab : MonoBehaviour
+public class SwordStab : ProjectileBase
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void Move()
     {
-        
+        throw new System.NotImplementedException();
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void OnClean()
     {
-        
+        throw new System.NotImplementedException();
+    }
+
+    public override void OnCollision(Collider2D other)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void OnDeath()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void OnHit(StatsComponent receiver, DamageInfo info)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void OnUpdate()
+    {
+        throw new System.NotImplementedException();
     }
 }

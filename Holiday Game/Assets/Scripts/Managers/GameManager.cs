@@ -267,13 +267,13 @@ public class GameManager : MonoBehaviour
                 objectiveDisplay.rectTransform.anchorMin = new Vector2(objectiveDisplay.rectTransform.anchorMin.x, 0.94f);
                 objectiveDisplay.rectTransform.anchorMax = new Vector2(objectiveDisplay.rectTransform.anchorMax.x, 1f);
                 bossHealth.SetActive(false);
-                if (levelData.isBossLevel && EnemyManager.instance.boss)
+                if (levelData.isBossLevel && EnemyManager.instance.boss && EnemyManager.instance.boss.MaxHp != 0)
                 {
                     objectiveDisplay.text = "Defeat the boss";
                     bossHealth.SetActive(true);
                     bossHealthMask.GetComponent<RectTransform>().anchorMax = new Vector2(EnemyManager.instance.boss.CurrentHP / EnemyManager.instance.boss.MaxHp, bossHealthMask.GetComponent<RectTransform>().anchorMax.y);
                     objectiveDisplay.rectTransform.anchorMin = new Vector2(objectiveDisplay.rectTransform.anchorMin.x, 0.89f);
-                    objectiveDisplay.rectTransform.anchorMax = new Vector2(EnemyManager.instance.boss.CurrentHP / EnemyManager.instance.boss.MaxHp, 0.95f);
+                    objectiveDisplay.rectTransform.anchorMax = new Vector2(objectiveDisplay.rectTransform.anchorMax.x, 0.95f);
                 }
                 else if (levelData.daysToSurvive > 0 && levelData.daysToSurvive > currentDay)
                 {

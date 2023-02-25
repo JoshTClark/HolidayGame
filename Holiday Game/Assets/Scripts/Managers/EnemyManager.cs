@@ -109,6 +109,10 @@ public class EnemyManager : MonoBehaviour
             Enemy e = allEnemies[i];
             if (e.IsDead)
             {
+                if (boss == e)
+                {
+                    boss = null;
+                }
                 allEnemies.RemoveAt(i);
                 if (e.pool != null)
                 {
@@ -160,6 +164,11 @@ public class EnemyManager : MonoBehaviour
         enemy.damageMultConst = info.damageMultiplier;
         enemy.hpMultConst = info.healthMultiplier;
         enemy.speedMultConst = info.speedMultiplier;
+        enemy.isBoss = info.isBoss;
+        if (enemy.isBoss)
+        {
+            this.boss = enemy;
+        }
 
         allEnemies.Add(enemy);
         currentWaveEnemies.Add(enemy);

@@ -8,15 +8,25 @@ public class SwordSlash : ProjectileBase
     private float degrees = 180f;
     private float moved = 0f;
     private bool inverse = false;
+    public bool spin = false;
     public SpriteRenderer sprite;
 
     public override void Move()
     {
-        if (inverse)
+        if (spin)
+        {
+            if (degrees * 2 > moved)
+            {
+                float rotate = (degrees * 2) / (Lifetime / 2) * Time.deltaTime;
+                this.transform.Rotate(new Vector3(0, 0, rotate));
+                moved += rotate;
+            }
+        }
+        else if (inverse)
         {
             if (degrees > moved)
             {
-                float rotate = degrees / (Lifetime / 3) * Time.deltaTime;
+                float rotate = degrees / (Lifetime / 2) * Time.deltaTime;
                 this.transform.Rotate(new Vector3(0, 0, -rotate));
                 moved += rotate;
             }
@@ -25,7 +35,7 @@ public class SwordSlash : ProjectileBase
         {
             if (degrees > moved)
             {
-                float rotate = degrees / (Lifetime / 3) * Time.deltaTime;
+                float rotate = degrees / (Lifetime / 2) * Time.deltaTime;
                 this.transform.Rotate(new Vector3(0, 0, rotate));
                 moved += rotate;
             }
@@ -38,6 +48,7 @@ public class SwordSlash : ProjectileBase
         moved = 0;
         inverse = false;
         sprite.flipX = false;
+        spin = false;
     }
 
     public override void OnCollision(Collider2D other)

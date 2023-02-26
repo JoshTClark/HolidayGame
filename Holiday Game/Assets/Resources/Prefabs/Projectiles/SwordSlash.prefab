@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleDelay: 0.01
+  lifetime: 0.15
   createParticles: 1
 --- !u!1 &8063736733929000516
 GameObject:
@@ -270,11 +271,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 8
-  baseSpeed: 35
-  baseLifetime: 0.3
+  baseSpeed: 15
+  baseLifetime: 0.45
   baseSize: 1.5
   projectileTeam: 0
   hasTipper: 0
+  spin: 0
   sprite: {fileID: 8927079939891396353}
 --- !u!210 &6444072750991370466
 SortingGroup:

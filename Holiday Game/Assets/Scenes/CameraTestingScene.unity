@@ -468,7 +468,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 519420031, guid: 63e4eaf74c005b145a2bb0c416415e86, type: 3}
       propertyPath: orthographic size
-      value: 2.8125
+      value: 4.875
       objectReference: {fileID: 0}
     - target: {fileID: 8704142796787333609, guid: 63e4eaf74c005b145a2bb0c416415e86, type: 3}
       propertyPath: CAMERA_TEST

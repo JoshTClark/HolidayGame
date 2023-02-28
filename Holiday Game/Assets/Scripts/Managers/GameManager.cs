@@ -104,6 +104,8 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public static SessionManager session;
 
+    public bool CAMERA_TEST = false;
+
     void Start()
     {
         instance = this;
@@ -112,26 +114,34 @@ public class GameManager : MonoBehaviour
         {
             ResourceManager.Init();
             Debug.Log("No session found");
-            player = GameObject.Instantiate<Player>(ResourceManager.characters[0].prefab);
-            player.inventory = new List<Item>();
-            foreach (ItemDef i in ResourceManager.characters[0].inventory)
+            if (CAMERA_TEST) 
             {
-                Item item = i.GetItem();
-                item.Level = 1;
-                player.inventory.Add(item);
-                if (i.GetType() == typeof(WeaponDef))
-                {
-                    player.AddWeapon(((WeaponDef)i).weaponPrefab);
-                }
+                doSpawns = false;
+                player = GameObject.Instantiate<Player>(Resources.Load<Player>("Prefabs/KnightTest32x32"));
             }
-            foreach (ItemDef i in ResourceManager.characters[0].tutorialChestItems)
+            else
             {
-                Item item = i.GetItem();
-                item.Level = 1;
-                player.inventory.Add(item);
-                if (i.GetType() == typeof(WeaponDef))
+                player = GameObject.Instantiate<Player>(ResourceManager.characters[0].prefab);
+                player.inventory = new List<Item>();
+                foreach (ItemDef i in ResourceManager.characters[0].inventory)
                 {
-                    player.AddWeapon(((WeaponDef)i).weaponPrefab);
+                    Item item = i.GetItem();
+                    item.Level = 1;
+                    player.inventory.Add(item);
+                    if (i.GetType() == typeof(WeaponDef))
+                    {
+                        player.AddWeapon(((WeaponDef)i).weaponPrefab);
+                    }
+                }
+                foreach (ItemDef i in ResourceManager.characters[0].tutorialChestItems)
+                {
+                    Item item = i.GetItem();
+                    item.Level = 1;
+                    player.inventory.Add(item);
+                    if (i.GetType() == typeof(WeaponDef))
+                    {
+                        player.AddWeapon(((WeaponDef)i).weaponPrefab);
+                    }
                 }
             }
         }

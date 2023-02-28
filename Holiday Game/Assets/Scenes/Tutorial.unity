@@ -100582,24 +100582,8 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1807913482048079254, guid: a2aa67931f173f04a9927498f0381df4, type: 3}
-      propertyPath: ExitLocations.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1807913482048079254, guid: a2aa67931f173f04a9927498f0381df4, type: 3}
-      propertyPath: ExitLocations.Array.data[0].y
-      value: -40
-      objectReference: {fileID: 0}
     - target: {fileID: 1807913482048079256, guid: a2aa67931f173f04a9927498f0381df4, type: 3}
       propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1807913482048079256, guid: a2aa67931f173f04a9927498f0381df4, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1807913482048079256, guid: a2aa67931f173f04a9927498f0381df4, type: 3}
-      propertyPath: m_LocalScale.y
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1807913482048079256, guid: a2aa67931f173f04a9927498f0381df4, type: 3}
@@ -100641,30 +100625,6 @@ PrefabInstance:
     - target: {fileID: 1807913482048079256, guid: a2aa67931f173f04a9927498f0381df4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1807913482048079257, guid: a2aa67931f173f04a9927498f0381df4, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: d8b17fa32d1edfb44a1a86cc32f5abc7, type: 3}
-    - target: {fileID: 1807913482048079257, guid: a2aa67931f173f04a9927498f0381df4, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1807913482048079257, guid: a2aa67931f173f04a9927498f0381df4, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1807913482048079257, guid: a2aa67931f173f04a9927498f0381df4, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1807913482048079258, guid: a2aa67931f173f04a9927498f0381df4, type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1807913482048079258, guid: a2aa67931f173f04a9927498f0381df4, type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1807913482048079260, guid: a2aa67931f173f04a9927498f0381df4, type: 3}
       propertyPath: m_Name

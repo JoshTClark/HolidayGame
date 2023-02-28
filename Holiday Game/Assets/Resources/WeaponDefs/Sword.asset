@@ -214,7 +214,7 @@ MonoBehaviour:
         critDamageMult: 1
         XPMult: 1
     - lvlName: Combo Strike
-      desc: Add a thrust that deals 100% damage to the Iron Blades attacks.
+      desc: Stab inbetween the swings of Iron Blade for 75% damage each.
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -235,7 +235,7 @@ MonoBehaviour:
         XPMult: 1
     - lvlName: Flurry
       desc: Iron Blade attack speed increased by 45% and Iron Blade damage decreased
-        by 15%.
+        by 25%.
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -255,7 +255,7 @@ MonoBehaviour:
         critDamageMult: 1
         XPMult: 1
     - lvlName: Blade Master
-      desc: Iron Blade attack speed increased by 30%. Unleash a large amount of strikes
+      desc: Iron Blade attack speed increased by 50%. Unleash a large amount of strikes
         towards enemies.
       statChanges:
         hpAdd: 0

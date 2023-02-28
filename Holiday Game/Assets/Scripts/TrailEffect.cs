@@ -9,7 +9,9 @@ public class TrailEffect : MonoBehaviour
     private ObjectPool<TrailParticle> dashParticlePool = new ObjectPool<TrailParticle>(createFunc: () => Instantiate<TrailParticle>(Resources.LoadAll<TrailParticle>("")[0]), actionOnGet: (obj) => obj.gameObject.SetActive(true), actionOnRelease: (obj) => obj.gameObject.SetActive(false), actionOnDestroy: (obj) => Destroy(obj.gameObject), collectionCheck: false, defaultCapacity: 10);
     private float particleTimer = 0.0f;
     public float particleDelay = 0.02f;
+    public float lifetime = 0.5f;
     public bool createParticles = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +28,7 @@ public class TrailEffect : MonoBehaviour
             {
                 particleTimer = 0.0f;
                 TrailParticle p = dashParticlePool.Get();
+                p.lifetime = lifetime;
                 p.SetSprite(this.gameObject.GetComponent<SpriteRenderer>().sprite, GetComponent<SpriteRenderer>().flipX);
                 p.transform.position = transform.position;
                 p.transform.rotation = transform.rotation;

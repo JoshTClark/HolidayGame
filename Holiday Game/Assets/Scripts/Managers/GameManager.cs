@@ -144,6 +144,16 @@ public class GameManager : MonoBehaviour
                         player.AddWeapon(((WeaponDef)i).weaponPrefab);
                     }
                 }
+                foreach (ItemDef i in ResourceManager.characters[0].tutorialChestItems)
+                {
+                    Item item = i.GetItem();
+                    item.Level = 1;
+                    player.inventory.Add(item);
+                    if (i.GetType() == typeof(WeaponDef))
+                    {
+                        player.AddWeapon(((WeaponDef)i).weaponPrefab);
+                    }
+                }
             }
         }
         else

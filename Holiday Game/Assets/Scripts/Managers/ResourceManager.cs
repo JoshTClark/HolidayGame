@@ -25,7 +25,8 @@ public class ResourceManager
         MagicMissile = 6,
         IceShard = 7,
         SwordSlash = 8,
-        SwordStab = 9
+        SwordStab = 9,
+        EnemyBomb = 10
     }
     public enum FollowingEffectIndex
     {
@@ -53,8 +54,10 @@ public class ResourceManager
         BossAttack2 = 7,
         CandyCornRifle = 8,
         SwordSlash = 9
-    }
-
+    }
+
+
+
     public enum ItemIndex
     {
         AttackSpeed = 0,
@@ -179,9 +182,12 @@ public class ResourceManager
     public static List<UpgradePool> upgradePools = new List<UpgradePool>();
     public static List<BuffDef> buffs = new List<BuffDef>();
     public static List<FollowingEffect> effects = new List<FollowingEffect>();
-    public static List<OrbitalParent> orbitals = new List<OrbitalParent>();
-    public static List<LevelData> levelDatas = new List<LevelData>();
-    public static List<LevelPool> levelPools = new List<LevelPool>();
+    public static List<OrbitalParent> orbitals = new List<OrbitalParent>();
+
+    public static List<LevelData> levelDatas = new List<LevelData>();
+
+    public static List<LevelPool> levelPools = new List<LevelPool>();
+
     public static List<PlayableCharacterData> characters = new List<PlayableCharacterData>();
 
     public static List<ItemDef> itemDefs = new List<ItemDef>();

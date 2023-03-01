@@ -65,7 +65,7 @@ public class Exploder : Enemy
         {
             // Create an empty explosion
             // Creates an explosion, Check PumpkinBomb.CS for example in Update()
-            BombProjectileBase p = (BombProjectileBase)ProjectileManager.GetProjectile(ResourceManager.ProjectileIndex.PumpkinBomb);
+            BombProjectileBase p = (BombProjectileBase)ProjectileManager.GetProjectile(ResourceManager.ProjectileIndex.EnemyBomb);
             p.transform.position = this.transform.position;
             p.Direction = Vector2.zero;
             DamageInfo info = new DamageInfo();

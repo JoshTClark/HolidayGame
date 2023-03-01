@@ -62,7 +62,7 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - lvlName: Weight Training
+    - lvlName: Weight Training II
       desc: Increases Max HP and Base Damage
       statChanges:
         hpAdd: 10
@@ -84,10 +84,12 @@ MonoBehaviour:
         XPMult: 1
   - pathName: Beefcake
     previousPath: Weight Training
-    numLevels: 2
+    numLevels: 3
     levelDescriptions:
     - lvlName: Beefcake
-      desc: Greatly Increase Max HP
+      desc: 'Increases HP Gained from all sources by 10%
+
+        HP+'
       statChanges:
         hpAdd: 35
         speedAdd: 0
@@ -106,8 +108,10 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - lvlName: Beefcake
-      desc: Greatly Increase Max HP
+    - lvlName: Large Lad
+      desc: 'HP Bonus increased to 40%
+
+        HP+'
       statChanges:
         hpAdd: 35
         speedAdd: 0
@@ -126,14 +130,12 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-  - pathName: Absolute Unit
-    previousPath: Beefcake
-    numLevels: 1
-    levelDescriptions:
     - lvlName: Absolute Unit
-      desc: Massively Increases Max HP, and amplifies Max HP bonuses from all sources
+      desc: 'HP Bonus increased to 40%
+
+        HP+'
       statChanges:
-        hpAdd: 50
+        hpAdd: 35
         speedAdd: 0
         damageAdd: 0
         attackSpeedAdd: 0
@@ -141,7 +143,7 @@ MonoBehaviour:
         regenAdd: 0
         critChanceAdd: 0
         critDamageAdd: 0
-        hpMult: 1.25
+        hpMult: 1
         speedMult: 1
         damageMult: 1
         attackSpeedMult: 1
@@ -152,10 +154,12 @@ MonoBehaviour:
         XPMult: 1
   - pathName: Boxing Lessons
     previousPath: Weight Training
-    numLevels: 2
+    numLevels: 3
     levelDescriptions:
     - lvlName: Boxing Lessons
-      desc: Greatly increase Base Damage, and increaes Max HP
+      desc: 'Converts 2% of Current HP into Bonus Damage
+
+        HP+; Damage+'
       statChanges:
         hpAdd: 10
         speedAdd: 0
@@ -174,8 +178,10 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - lvlName: Boxing Lessons
-      desc: Greatly increase Base Damage, and increaes Max HP
+    - lvlName: Boxing Lessons II
+      desc: 'Bonus Damage increased to 4%Current HP
+
+        HP+; Damage+'
       statChanges:
         hpAdd: 10
         speedAdd: 0
@@ -194,27 +200,28 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-  - pathName: Haymaker
-    previousPath: Boxing Lessons
-    numLevels: 1
-    levelDescriptions:
-    - lvlName: Haymaker
-      desc: Attacks deal bonus damage based on % of Max HP
+    - lvlName: Boxing Lessons III
+      desc: 'Bonus Damage increased to 5% Current HP
+
+        Also Grants 1% MAX
+        HP as Bonus Damage
+
+        HP+; Damage+'
       statChanges:
         hpAdd: 10
         speedAdd: 0
-        damageAdd: 0
+        damageAdd: 2
         attackSpeedAdd: 0
         armorAdd: 0
         regenAdd: 0
         critChanceAdd: 0
         critDamageAdd: 0
-        hpMult: 0
-        speedMult: 0
-        damageMult: 0
-        attackSpeedMult: 0
-        armorMult: 0
-        regenMult: 0
-        critChanceMult: 0
-        critDamageMult: 0
-        XPMult: 0
+        hpMult: 1
+        speedMult: 1
+        damageMult: 1
+        attackSpeedMult: 1
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1

@@ -68,6 +68,7 @@ public class Player : StatsComponent
         float delta = Time.deltaTime;
         extraDashes = 0;
         dashCooldownMultiplier = 1f;
+        
 
         /*
         if (HasUpgrade(ResourceManager.UpgradeIndex.ExtraDash))
@@ -75,14 +76,37 @@ public class Player : StatsComponent
             extraDashes = GetItem(ResourceManager.UpgradeIndex.ExtraDash).CurrentLevel;
         }
         */
-        if (HasItem(ResourceManager.ItemIndex.AgilityBoots))
+
+        //Upgrade Effects
+
+        //Extra Dash Upgrade
+        if (HasItem(ResourceManager.ItemIndex.AgilityBoots)) 
         {
             Item i = GetItem(ResourceManager.ItemIndex.AgilityBoots);
-            if(i.HasTakenPath("Dastardly Dashing"))
+            if(i.HasTakenPath("Swift Strider"))
             {
-                extraDashes += 1;
+                if (i.Level == 4)
+                {
+                    dashCooldownMultiplier *= 0.85f;
+                }
+                else if (i.Level == 5)
+                {
+                    dashCooldownMultiplier *= 0.7f;
+                }
+                else if (i.Level == 6)
+                {
+                    extraDashes += 1;
+                    dashCooldownMultiplier *= 0.6f;
+                }
+
             }
+            
+            
         }
+        
+
+
+
         if (currentDashes < Dashes)
         {
             dashCooldownTimer += delta;

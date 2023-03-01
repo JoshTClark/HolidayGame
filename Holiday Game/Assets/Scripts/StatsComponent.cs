@@ -259,12 +259,22 @@ public abstract class StatsComponent : MonoBehaviour
             {
                 Item i = info.attacker.GetItem(ItemIndex.CritChance);
                 
-                if(info.isCrit && i.HasTakenPath("Armor Piercer"))
+                if(info.isCrit && i.HasTakenPath("Weak Spots"))
                 {
-                        //do nothing ie. No damage Reduction. Stuff should be calced here if we want armor piercer to only percentage ignore armor instead of complete
-                }
-                else // attacker has crit item, but doesnt have upgrade or didnt crit
-                {
+                    //Calculate new armor value if attacker had armor pen
+                    if(i.Level == 4)
+                    {
+                        armorMult *= 0.8f;
+                    }
+                    else if (i.Level == 5)
+                    {
+                        armorMult *= 0.6f;
+                    }
+                    else if (i.Level == 6)
+                    {
+                        armorMult *= 0.25f;
+                    }
+
                     float damageReduction = (-1f / ((0.1f * Mathf.Sqrt(Armor)) + 1f)) + 1f;
 
                     info.damage *= 1f - damageReduction;
@@ -297,7 +307,28 @@ public abstract class StatsComponent : MonoBehaviour
             }
         }
 
-        
+        // Boxing Gloves Upgrades
+        if (info.attacker.HasItem(ItemIndex.LiftingBelt))
+        {
+            Item i = info.attacker.GetItem(ItemIndex.LiftingBelt);
+
+            if(i.HasTakenPath("Boxing Lessons"))
+            {
+                if(i.Level == 4)
+                {
+                    info.damage += info.attacker.CurrentHP * 0.02f;
+                }
+                if (i.Level == 5)
+                {
+                    info.damage += info.attacker.CurrentHP * 0.05f;
+                }
+                if (i.Level == 6)
+                {
+                    info.damage += info.attacker.CurrentHP * 0.05f;
+                    info.damage += info.attacker.MaxHp * 0.01f;
+                }
+            }
+        }
         
 
         if (this.gameObject.GetComponent<Enemy>())
@@ -316,10 +347,10 @@ public abstract class StatsComponent : MonoBehaviour
         if (info.attacker.HasItem(ItemIndex.CritChance))
         {
             Item i = info.attacker.GetItem(ItemIndex.CritChance);
-            if(info.isCrit && i.HasTakenPath("Vicious Wounds"))
+            if(info.isCrit && i.HasTakenPath("Vicious Wounds") && i.Level >= 4)
             {
                 Debug.Log("Bleed should be applied");
-                info.debuffs.Add(BuffIndex.Bleeding);
+                //info.debuffs.Add(BuffIndex.Bleeding); Not working commenting out for now
             }
         }
 
@@ -687,18 +718,16 @@ public abstract class StatsComponent : MonoBehaviour
                     speedAdd += 2f;
                     attackSpeedMult *= 1.15f;
                 }
+                // Level 6
+                if (i.Level >= 6) 
+                {
+                    speedAdd += 1f;
+                    attackSpeedMult *= 1.15f;
+                }
+          
 
             }
-            //path 1 capstone
-            if (i.HasTakenPath("Dastardly Dasher"))
-            {
-                // Level 6
-                if (i.Level >= 6)
-                {
-                    speedAdd += 3f;
-                    
-                }
-            }
+
             // Path 2
             if (i.HasTakenPath("Berzerker's Boots(LoL)"))
             {
@@ -714,17 +743,13 @@ public abstract class StatsComponent : MonoBehaviour
                     speedAdd += 0.5f;
                     attackSpeedMult *= 1.25f;
                 }
-
-            }
-            //path 2 capstone
-            if (i.HasTakenPath("?????"))
-            {
-                // Level 6
-                if (i.Level >= 6)
+                if(i.Level >= 6)
                 {
                     attackSpeedMult *= 1.5f;
                 }
+
             }
+
         }
         //Crit Upgrade Tree
         if (HasItem(ItemIndex.CritChance))
@@ -902,27 +927,27 @@ public abstract class StatsComponent : MonoBehaviour
             if (i.HasTakenPath("Beefcake"))
             {
                 // Level 4
-                if (i.Level >= 4)
+                if (i.Level == 4)
                 {
-                    hpAdd += 35f;
+                    hpAdd += 30f;
+                    hpMult *= 1.1f;
+                    
                 }
                 // Level 5
                 if (i.Level >= 5)
                 {
-                    hpAdd += 35f;
+                    hpAdd += 30f;
+                    hpMult *= 1.2f;
                 }
-
-            }
-            //path 1 capstone
-            if (i.HasTakenPath("Absolute Unit"))
-            {
                 // Level 6
                 if (i.Level >= 6)
                 {
-                    hpAdd += 50f;
-                    hpMult *= 1.25f;
+                    hpAdd += 100f;
+                    hpMult *= 1.4f;
                 }
+
             }
+
             // Path 2
             if (i.HasTakenPath("Boxing Lessons"))
             {
@@ -938,18 +963,14 @@ public abstract class StatsComponent : MonoBehaviour
                     hpAdd += 10f;
                     damageAdd += 2f;
                 }
-
-            }
-            //path 2 capstone
-            if (i.HasTakenPath("Haymaker"))
-            {
-                // Level 6
                 if (i.Level >= 6)
                 {
                     hpAdd += 10f;
-                    damageAdd += (MaxHp * 0.02f);
+                    damageAdd += 2f;
                 }
+
             }
+
         }
 
         // Meat Item

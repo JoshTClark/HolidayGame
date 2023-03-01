@@ -62,7 +62,7 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - lvlName: Radical Criticals
+    - lvlName: Big Red Numbers
       desc: Greatly Increases Critical Strike Damage
       statChanges:
         hpAdd: 0
@@ -84,10 +84,12 @@ MonoBehaviour:
         XPMult: 1
   - pathName: Weak Spots
     previousPath: Radical Critical
-    numLevels: 2
+    numLevels: 3
     levelDescriptions:
-    - lvlName: Weak Spots
-      desc: Greatly Increases Critical Strike Chance
+    - lvlName: Weak Spots I
+      desc: 'Critical Strikes Gain 20% Armor Penetration
+
+        CritChance+'
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -106,8 +108,10 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - lvlName: Weak Spots
-      desc: Greatly Increases Critical Strike Chance
+    - lvlName: Weak Spots II
+      desc: 'Armor Penetration On Crits Increased to 40%
+
+        CritChance+'
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -126,12 +130,10 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-  - pathName: Armor Piercer
-    previousPath: Weak Spots
-    numLevels: 1
-    levelDescriptions:
-    - lvlName: Armor Piercer
-      desc: '*Critical Strikes Ignore Enemy Armor'
+    - lvlName: Weak Spots III
+      desc: 'Armor Penetration on Crits Increased to 75%
+
+'
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -141,50 +143,6 @@ MonoBehaviour:
         regenAdd: 0
         critChanceAdd: 0.1
         critDamageAdd: 0
-        hpMult: 1
-        speedMult: 1
-        damageMult: 1
-        attackSpeedMult: 1
-        armorMult: 1
-        regenMult: 1
-        critChanceMult: 1
-        critDamageMult: 1
-        XPMult: 1
-  - pathName: Big Red Numbers
-    previousPath: Radical Critical
-    numLevels: 2
-    levelDescriptions:
-    - lvlName: Big Red Numbers
-      desc: Greatly Increased Critical Strike Damage
-      statChanges:
-        hpAdd: 0
-        speedAdd: 0
-        damageAdd: 0
-        attackSpeedAdd: 0
-        armorAdd: 0
-        regenAdd: 0
-        critChanceAdd: 0
-        critDamageAdd: 0.5
-        hpMult: 1
-        speedMult: 1
-        damageMult: 1
-        attackSpeedMult: 1
-        armorMult: 1
-        regenMult: 1
-        critChanceMult: 1
-        critDamageMult: 1
-        XPMult: 1
-    - lvlName: Big Red Numbers
-      desc: Greatly Increased Criitcal Strike Damage
-      statChanges:
-        hpAdd: 0
-        speedAdd: 0
-        damageAdd: 0
-        attackSpeedAdd: 0
-        armorAdd: 0
-        regenAdd: 0
-        critChanceAdd: 0
-        critDamageAdd: 0.5
         hpMult: 1
         speedMult: 1
         damageMult: 1
@@ -195,11 +153,57 @@ MonoBehaviour:
         critDamageMult: 1
         XPMult: 1
   - pathName: Vicious Wounds
-    previousPath: Big Red Numbers
-    numLevels: 1
+    previousPath: Radical Critical
+    numLevels: 3
     levelDescriptions:
     - lvlName: Vicious Wounds
-      desc: '*Critical Strikes Cause the target to bleed'
+      desc: 'Critical Strikes Apply a bleed
+
+        CritDamage+'
+      statChanges:
+        hpAdd: 0
+        speedAdd: 0
+        damageAdd: 0
+        attackSpeedAdd: 0
+        armorAdd: 0
+        regenAdd: 0
+        critChanceAdd: 0
+        critDamageAdd: 0.5
+        hpMult: 1
+        speedMult: 1
+        damageMult: 1
+        attackSpeedMult: 1
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1
+    - lvlName: Vicious Wounds II
+      desc: 'Critical Strikes Apply a bleed
+
+        CritDamage+'
+      statChanges:
+        hpAdd: 0
+        speedAdd: 0
+        damageAdd: 0
+        attackSpeedAdd: 0
+        armorAdd: 0
+        regenAdd: 0
+        critChanceAdd: 0
+        critDamageAdd: 0.5
+        hpMult: 1
+        speedMult: 1
+        damageMult: 1
+        attackSpeedMult: 1
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1
+    - lvlName: Vicious Wounds III
+      desc: 'Critical Strikes Apply a bleed
+
+        CritDamage+'
       statChanges:
         hpAdd: 0
         speedAdd: 0

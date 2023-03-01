@@ -16,7 +16,8 @@ public class GameManager : MonoBehaviour
         Paused,
         UpgradeMenu,
         GameOver,
-        LevelComplete
+        LevelComplete,
+        OptionsMenu
     }
 
     [SerializeField]
@@ -35,7 +36,7 @@ public class GameManager : MonoBehaviour
     private Image xpBar, hpBar, dashTimer, cursor;
 
     [SerializeField]
-    private CanvasRenderer playerStatsPanel, pausedPanel, gamePanel, upgradePanel, gameOverPanel, effectsPanel, debugPanel, levelCompletedPanel;
+    private CanvasRenderer playerStatsPanel, pausedPanel, gamePanel, upgradePanel, gameOverPanel, effectsPanel, debugPanel, levelCompletedPanel, optionsMenu;
 
     [SerializeField]
     private InputActionReference displayStats, pauseGame, giveXP, playerDash, godMode, levelUpButton;
@@ -114,7 +115,7 @@ public class GameManager : MonoBehaviour
         {
             ResourceManager.Init();
             Debug.Log("No session found");
-            if (CAMERA_TEST) 
+            if (CAMERA_TEST)
             {
                 doSpawns = false;
                 player = GameObject.Instantiate<Player>(Resources.Load<Player>("Prefabs/KnightTest32x32"));
@@ -162,7 +163,7 @@ public class GameManager : MonoBehaviour
 
         pauseGame.action.performed += (InputAction.CallbackContext callback) =>
         {
-            paused = !paused;
+            paused = true;
         };
 
         levelUpButton.action.performed += (InputAction.CallbackContext callback) =>
@@ -226,6 +227,7 @@ public class GameManager : MonoBehaviour
         gameOverPanel.gameObject.SetActive(false);
         debugPanel.gameObject.SetActive(false);
         levelCompletedPanel.gameObject.SetActive(false);
+        optionsMenu.gameObject.SetActive(false);
     }
 
     public void OnEnable()
@@ -285,7 +287,7 @@ public class GameManager : MonoBehaviour
                     objectiveDisplay.rectTransform.anchorMin = new Vector2(objectiveDisplay.rectTransform.anchorMin.x, 0.89f);
                     objectiveDisplay.rectTransform.anchorMax = new Vector2(objectiveDisplay.rectTransform.anchorMax.x, 0.95f);
                 }
-                else if (levelData.daysToSurvive > 0 && levelData.daysToSurvive > currentDay)
+                else if (levelData.daysToSurvive > 0 && levelData.daysToSurvive >= currentDay)
                 {
                     objectiveDisplay.text = "Day " + currentDay + "/" + levelData.daysToSurvive;
                 }
@@ -372,6 +374,8 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.Paused:
                 Time.timeScale = 0f;
+                pausedPanel.gameObject.SetActive(true);
+                optionsMenu.gameObject.SetActive(false);
                 if (!paused)
                 {
                     state = GameState.Normal;
@@ -414,6 +418,15 @@ public class GameManager : MonoBehaviour
                 gameOverPanel.gameObject.SetActive(false);
                 debugPanel.gameObject.SetActive(false);
                 levelCompletedPanel.gameObject.SetActive(true);
+                break;
+            case GameState.OptionsMenu:
+                pausedPanel.gameObject.SetActive(false);
+                upgradePanel.gameObject.SetActive(false);
+                gamePanel.gameObject.SetActive(false);
+                gameOverPanel.gameObject.SetActive(false);
+                debugPanel.gameObject.SetActive(false);
+                levelCompletedPanel.gameObject.SetActive(false);
+                optionsMenu.gameObject.SetActive(true);
                 break;
         }
     }
@@ -621,5 +634,29 @@ public class GameManager : MonoBehaviour
         state = GameState.UpgradeMenu;
         upgradesToGive = 1;
         upgradePanel.GetComponent<UpgradePanelManager>().chest = c;
+    }
+
+    /// <summary>
+    /// Called when the continue button is clicked in the paused menu
+    /// </summary>
+    public void ContinueButton()
+    {
+        paused = false;
+    }
+
+    /// <summary>
+    /// Called when the return button is clicked in the options menu
+    /// </summary>
+    public void OptionsBackButton()
+    {
+        state = GameState.Paused;
+    }
+
+    /// <summary>
+    /// Called when the options button is clicked in the paused menu
+    /// </summary>
+    public void OptionsButton()
+    {
+        state = GameState.OptionsMenu;
     }
 }

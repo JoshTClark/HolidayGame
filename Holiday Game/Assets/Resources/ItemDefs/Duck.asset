@@ -22,7 +22,8 @@ MonoBehaviour:
     previousPath: 
     numLevels: 6
     levelDescriptions:
-    - desc: Increases All Stats
+    - lvlName: Day of the Duck
+      desc: Increases All Stats
       statChanges:
         hpAdd: 20
         speedAdd: 0.5
@@ -41,7 +42,8 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - desc: Increases All Stats
+    - lvlName: Day of the Duck
+      desc: Increases All Stats
       statChanges:
         hpAdd: 25
         speedAdd: 0.5
@@ -60,7 +62,8 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - desc: Increases All Stats
+    - lvlName: Day of the Duck
+      desc: Increases All Stats
       statChanges:
         hpAdd: 25
         speedAdd: 0.5
@@ -79,7 +82,8 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - desc: Increases All Stats
+    - lvlName: Day of the Duck
+      desc: Increases All Stats
       statChanges:
         hpAdd: 25
         speedAdd: 0.5
@@ -98,7 +102,8 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - desc: Increases All Stats
+    - lvlName: Day of the Duck
+      desc: Increases All Stats
       statChanges:
         hpAdd: 25
         speedAdd: 0.5
@@ -117,7 +122,8 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - desc: Increases All Stats
+    - lvlName: Day of the Duck
+      desc: Increases All Stats
       statChanges:
         hpAdd: 25
         speedAdd: 0.5

@@ -67,7 +67,8 @@ public class ResourceManager
         AgilityBoots = 7,
         LiftingBelt = 8,
         Meat = 9,
-        Duck = 10
+        Duck = 10,
+        Snowball = 11
 
     }
 
@@ -295,6 +296,7 @@ public class ResourceManager
         LevelData[] arr = Resources.LoadAll<LevelData>("");
         foreach (LevelData i in arr)
         {
+            i.Init();
             levelDatas.Add(i);
         }
 

@@ -266,14 +266,16 @@ public abstract class StatsComponent : MonoBehaviour
                 else // attacker has crit item, but doesnt have upgrade or didnt crit
                 {
                     float damageReduction = (-1f / ((0.1f * Mathf.Sqrt(Armor)) + 1f)) + 1f;
-                    info.damage *= damageReduction;
+
+                    info.damage *= 1f - damageReduction;
                 }
                 
             }
             else // dont have item, do normal calc
             {
                 float damageReduction = (-1f / ((0.1f * Mathf.Sqrt(Armor)) + 1f)) + 1f;
-                info.damage *= damageReduction;
+                
+                info.damage *= 1f - damageReduction;
             }
         }
 

@@ -22,7 +22,8 @@ MonoBehaviour:
     previousPath: 
     numLevels: 3
     levelDescriptions:
-    - desc: Gain Armor and a small amount of health
+    - lvlName: Plate Armor
+      desc: Gain Armor and a small amount of health
       statChanges:
         hpAdd: 10
         speedAdd: 0
@@ -41,7 +42,8 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - desc: Gain Armor and a small amount of health
+    - lvlName: Plate Armor
+      desc: Gain Armor and a small amount of health
       statChanges:
         hpAdd: 10
         speedAdd: 0
@@ -60,7 +62,8 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - desc: Gain Armor and a small amount of health
+    - lvlName: Plate Armor
+      desc: Gain Armor and a small amount of health
       statChanges:
         hpAdd: 10
         speedAdd: 0
@@ -83,7 +86,8 @@ MonoBehaviour:
     previousPath: Plate Armor
     numLevels: 2
     levelDescriptions:
-    - desc: Gain Armor
+    - lvlName: 
+      desc: Gain Armor
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -102,7 +106,8 @@ MonoBehaviour:
         critChanceMult: 0
         critDamageMult: 0
         XPMult: 0
-    - desc: Gain Armor
+    - lvlName: 
+      desc: Gain Armor
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -125,7 +130,8 @@ MonoBehaviour:
     previousPath: Heavy Plating
     numLevels: 1
     levelDescriptions:
-    - desc: Gain Armor and reflects damage based on armor.
+    - lvlName: 
+      desc: Gain Armor and reflects damage based on armor.
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -148,7 +154,8 @@ MonoBehaviour:
     previousPath: Plate Armor
     numLevels: 2
     levelDescriptions:
-    - desc: Gain armor, hp and move speed
+    - lvlName: 
+      desc: Gain armor, hp and move speed
       statChanges:
         hpAdd: 10
         speedAdd: 0.25
@@ -167,7 +174,8 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - desc: Gain armor, hp and move speed
+    - lvlName: 
+      desc: Gain armor, hp and move speed
       statChanges:
         hpAdd: 10
         speedAdd: 0.25
@@ -190,7 +198,8 @@ MonoBehaviour:
     previousPath: Better Blacksmithing
     numLevels: 1
     levelDescriptions:
-    - desc: Gain Armor, HP and take 25% reduced damage from non-boss enemies
+    - lvlName: 
+      desc: Gain Armor, HP and take 25% reduced damage from non-boss enemies
       statChanges:
         hpAdd: 10
         speedAdd: 0.5

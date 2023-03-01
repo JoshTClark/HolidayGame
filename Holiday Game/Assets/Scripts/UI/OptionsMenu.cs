@@ -33,7 +33,7 @@ public class OptionsMenu : MonoBehaviour
             c.gameObject.SetActive(false);
         }
         tabs[index].gameObject.GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
-        tabs[index].GetComponentInChildren<TMP_Text>().color = new Color(0f, 0f, 0f, 1f);
+        tabs[index].GetComponentInChildren<TMP_Text>().color = new Color(0.8f, 0.8f, 0.8f, 1f);
         menus[index].gameObject.SetActive(true);
     }
 }

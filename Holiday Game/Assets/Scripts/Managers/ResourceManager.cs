@@ -302,6 +302,7 @@ public class ResourceManager
         LevelData[] arr = Resources.LoadAll<LevelData>("");
         foreach (LevelData i in arr)
         {
+            i.Init();
             levelDatas.Add(i);
         }
 

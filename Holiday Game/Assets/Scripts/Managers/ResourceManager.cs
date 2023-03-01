@@ -24,7 +24,8 @@ public class ResourceManager
         CupidArrow = 5,
         MagicMissile = 6,
         IceShard = 7,
-        SwordSlash = 8
+        SwordSlash = 8,
+        SwordStab = 9
     }
     public enum FollowingEffectIndex
     {
@@ -66,7 +67,8 @@ public class ResourceManager
         AgilityBoots = 7,
         LiftingBelt = 8,
         Meat = 9,
-        Duck = 10
+        Duck = 10,
+        Snowball = 11
 
     }
 

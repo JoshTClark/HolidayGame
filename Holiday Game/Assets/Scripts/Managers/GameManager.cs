@@ -104,6 +104,8 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public static SessionManager session;
 
+    public bool CAMERA_TEST = false;
+
     void Start()
     {
         instance = this;
@@ -112,26 +114,34 @@ public class GameManager : MonoBehaviour
         {
             ResourceManager.Init();
             Debug.Log("No session found");
-            player = GameObject.Instantiate<Player>(ResourceManager.characters[0].prefab);
-            player.inventory = new List<Item>();
-            foreach (ItemDef i in ResourceManager.characters[0].inventory)
+            if (CAMERA_TEST) 
             {
-                Item item = i.GetItem();
-                item.Level = 1;
-                player.inventory.Add(item);
-                if (i.GetType() == typeof(WeaponDef))
-                {
-                    player.AddWeapon(((WeaponDef)i).weaponPrefab);
-                }
+                doSpawns = false;
+                player = GameObject.Instantiate<Player>(Resources.Load<Player>("Prefabs/KnightTest32x32"));
             }
-            foreach (ItemDef i in ResourceManager.characters[0].tutorialChestItems)
+            else
             {
-                Item item = i.GetItem();
-                item.Level = 1;
-                player.inventory.Add(item);
-                if (i.GetType() == typeof(WeaponDef))
+                player = GameObject.Instantiate<Player>(ResourceManager.characters[0].prefab);
+                player.inventory = new List<Item>();
+                foreach (ItemDef i in ResourceManager.characters[0].inventory)
                 {
-                    player.AddWeapon(((WeaponDef)i).weaponPrefab);
+                    Item item = i.GetItem();
+                    item.Level = 1;
+                    player.inventory.Add(item);
+                    if (i.GetType() == typeof(WeaponDef))
+                    {
+                        player.AddWeapon(((WeaponDef)i).weaponPrefab);
+                    }
+                }
+                foreach (ItemDef i in ResourceManager.characters[0].tutorialChestItems)
+                {
+                    Item item = i.GetItem();
+                    item.Level = 1;
+                    player.inventory.Add(item);
+                    if (i.GetType() == typeof(WeaponDef))
+                    {
+                        player.AddWeapon(((WeaponDef)i).weaponPrefab);
+                    }
                 }
             }
         }
@@ -267,15 +277,15 @@ public class GameManager : MonoBehaviour
                 objectiveDisplay.rectTransform.anchorMin = new Vector2(objectiveDisplay.rectTransform.anchorMin.x, 0.94f);
                 objectiveDisplay.rectTransform.anchorMax = new Vector2(objectiveDisplay.rectTransform.anchorMax.x, 1f);
                 bossHealth.SetActive(false);
-                if (levelData.isBossLevel && EnemyManager.instance.boss)
+                if (levelData.isBossLevel && EnemyManager.instance.boss && EnemyManager.instance.boss.MaxHp != 0)
                 {
                     objectiveDisplay.text = "Defeat the boss";
                     bossHealth.SetActive(true);
                     bossHealthMask.GetComponent<RectTransform>().anchorMax = new Vector2(EnemyManager.instance.boss.CurrentHP / EnemyManager.instance.boss.MaxHp, bossHealthMask.GetComponent<RectTransform>().anchorMax.y);
                     objectiveDisplay.rectTransform.anchorMin = new Vector2(objectiveDisplay.rectTransform.anchorMin.x, 0.89f);
-                    objectiveDisplay.rectTransform.anchorMax = new Vector2(EnemyManager.instance.boss.CurrentHP / EnemyManager.instance.boss.MaxHp, 0.95f);
+                    objectiveDisplay.rectTransform.anchorMax = new Vector2(objectiveDisplay.rectTransform.anchorMax.x, 0.95f);
                 }
-                else if (levelData.daysToSurvive > 0 && levelData.daysToSurvive > currentDay)
+                else if (levelData.daysToSurvive > 0 && levelData.daysToSurvive >= currentDay)
                 {
                     objectiveDisplay.text = "Day " + currentDay + "/" + levelData.daysToSurvive;
                 }

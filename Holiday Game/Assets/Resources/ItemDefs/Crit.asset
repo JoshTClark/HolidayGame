@@ -22,7 +22,8 @@ MonoBehaviour:
     previousPath: 
     numLevels: 3
     levelDescriptions:
-    - desc: Increases Critical Strike Chance and Damage
+    - lvlName: Assassains Gloves
+      desc: Increases Critical Strike Chance and Damage
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -41,7 +42,8 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - desc: Greatly Increases Critical Strike Chance
+    - lvlName: More Crits
+      desc: Greatly Increases Critical Strike Chance
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -49,7 +51,7 @@ MonoBehaviour:
         attackSpeedAdd: 0
         armorAdd: 0
         regenAdd: 0
-        critChanceAdd: 0.15
+        critChanceAdd: 0.1
         critDamageAdd: 1
         hpMult: 1
         speedMult: 1
@@ -60,7 +62,8 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - desc: Greatly Increases Critical Strike Damage
+    - lvlName: Radical Criticals
+      desc: Greatly Increases Critical Strike Damage
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -69,7 +72,7 @@ MonoBehaviour:
         armorAdd: 0
         regenAdd: 0
         critChanceAdd: 0
-        critDamageAdd: 0.5
+        critDamageAdd: 0.4
         hpMult: 1
         speedMult: 1
         damageMult: 1
@@ -83,7 +86,8 @@ MonoBehaviour:
     previousPath: Radical Critical
     numLevels: 2
     levelDescriptions:
-    - desc: Greatly Increases Critical Strike Chance
+    - lvlName: Weak Spots
+      desc: Greatly Increases Critical Strike Chance
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -91,7 +95,7 @@ MonoBehaviour:
         attackSpeedAdd: 0
         armorAdd: 0
         regenAdd: 0
-        critChanceAdd: 0.15
+        critChanceAdd: 0.1
         critDamageAdd: 0
         hpMult: 1
         speedMult: 1
@@ -102,7 +106,8 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - desc: Greatly Increases Critical Strike Chance
+    - lvlName: Weak Spots
+      desc: Greatly Increases Critical Strike Chance
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -110,7 +115,7 @@ MonoBehaviour:
         attackSpeedAdd: 0
         armorAdd: 0
         regenAdd: 0
-        critChanceAdd: 0.15
+        critChanceAdd: 0.1
         critDamageAdd: 0
         hpMult: 1
         speedMult: 1
@@ -125,7 +130,8 @@ MonoBehaviour:
     previousPath: Weak Spots
     numLevels: 1
     levelDescriptions:
-    - desc: '*Critical Strikes Ignore Enemy Armor'
+    - lvlName: Armor Piercer
+      desc: '*Critical Strikes Ignore Enemy Armor'
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -133,7 +139,7 @@ MonoBehaviour:
         attackSpeedAdd: 0
         armorAdd: 0
         regenAdd: 0
-        critChanceAdd: 0.15
+        critChanceAdd: 0.1
         critDamageAdd: 0
         hpMult: 1
         speedMult: 1
@@ -148,7 +154,8 @@ MonoBehaviour:
     previousPath: Radical Critical
     numLevels: 2
     levelDescriptions:
-    - desc: Greatly Increased Critical Strike Damage
+    - lvlName: Big Red Numbers
+      desc: Greatly Increased Critical Strike Damage
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -167,7 +174,8 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - desc: Greatly Increased Criitcal Strike Damage
+    - lvlName: Big Red Numbers
+      desc: Greatly Increased Criitcal Strike Damage
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -190,7 +198,8 @@ MonoBehaviour:
     previousPath: Big Red Numbers
     numLevels: 1
     levelDescriptions:
-    - desc: '*Critical Strikes Cause the target to bleed'
+    - lvlName: Vicious Wounds
+      desc: '*Critical Strikes Cause the target to bleed'
       statChanges:
         hpAdd: 0
         speedAdd: 0

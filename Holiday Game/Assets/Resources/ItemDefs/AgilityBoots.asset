@@ -22,10 +22,11 @@ MonoBehaviour:
     previousPath: 
     numLevels: 3
     levelDescriptions:
-    - desc: Increases attack speed and move speed
+    - lvlName: Agility Boots
+      desc: Increases attack speed and move speed
       statChanges:
         hpAdd: 0
-        speedAdd: 1
+        speedAdd: 0.5
         damageAdd: 0
         attackSpeedAdd: 0
         armorAdd: 0
@@ -35,16 +36,17 @@ MonoBehaviour:
         hpMult: 1
         speedMult: 1
         damageMult: 1
-        attackSpeedMult: 1.15
+        attackSpeedMult: 1.1
         armorMult: 1
         regenMult: 1
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - desc: Increases attack speed and move speed
+    - lvlName: Better Fitting Footwear
+      desc: Increases attack speed and move speed
       statChanges:
         hpAdd: 0
-        speedAdd: 1
+        speedAdd: 0.5
         damageAdd: 0
         attackSpeedAdd: 0
         armorAdd: 0
@@ -54,16 +56,17 @@ MonoBehaviour:
         hpMult: 1
         speedMult: 1
         damageMult: 1
-        attackSpeedMult: 1.15
+        attackSpeedMult: 1.1
         armorMult: 1
         regenMult: 1
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - desc: Increases attack speed and move speed
+    - lvlName: Better Fitting Footwear
+      desc: Increases attack speed and move speed
       statChanges:
         hpAdd: 0
-        speedAdd: 1
+        speedAdd: 0.5
         damageAdd: 0
         attackSpeedAdd: 0
         armorAdd: 0
@@ -73,7 +76,7 @@ MonoBehaviour:
         hpMult: 1
         speedMult: 1
         damageMult: 1
-        attackSpeedMult: 1.15
+        attackSpeedMult: 1.1
         armorMult: 1
         regenMult: 1
         critChanceMult: 1
@@ -83,10 +86,11 @@ MonoBehaviour:
     previousPath: Better Fitting Footwear
     numLevels: 2
     levelDescriptions:
-    - desc: Greatly Increases Movement Speed, and increaes atk speed
+    - lvlName: Swift Strider
+      desc: Greatly Increases Movement Speed, and increaes atk speed
       statChanges:
         hpAdd: 0
-        speedAdd: 2
+        speedAdd: 1
         damageAdd: 0
         attackSpeedAdd: 0
         armorAdd: 0
@@ -96,16 +100,17 @@ MonoBehaviour:
         hpMult: 1
         speedMult: 1
         damageMult: 1
-        attackSpeedMult: 1.15
+        attackSpeedMult: 1.1
         armorMult: 1
         regenMult: 1
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - desc: Greatly Increases Movement Speed, and increaes atk speed
+    - lvlName: Swift Strider
+      desc: Greatly Increases Movement Speed, and increaes atk speed
       statChanges:
         hpAdd: 0
-        speedAdd: 2
+        speedAdd: 1
         damageAdd: 0
         attackSpeedAdd: 0
         armorAdd: 0
@@ -115,7 +120,7 @@ MonoBehaviour:
         hpMult: 1
         speedMult: 1
         damageMult: 1
-        attackSpeedMult: 1.15
+        attackSpeedMult: 1.1
         armorMult: 1
         regenMult: 1
         critChanceMult: 1
@@ -125,10 +130,11 @@ MonoBehaviour:
     previousPath: Swift Strider
     numLevels: 1
     levelDescriptions:
-    - desc: Massively Increases Movement Speed, and gives an extra charge of Dash
+    - lvlName: Dastardly Dashing
+      desc: Massively Increases Movement Speed, and gives an extra charge of Dash
       statChanges:
         hpAdd: 0
-        speedAdd: 3
+        speedAdd: 2
         damageAdd: 0
         attackSpeedAdd: 0
         armorAdd: 0
@@ -144,14 +150,15 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-  - pathName: Berzerker's Boots(LoL)
+  - pathName: Berzerker's Boots
     previousPath: Better Fitting Footwear
     numLevels: 2
     levelDescriptions:
-    - desc: Greatly increases Atk speed, and slightly increases movement speed
+    - lvlName: Berzerker's Boots
+      desc: Greatly increases Atk speed, and slightly increases movement speed
       statChanges:
         hpAdd: 0
-        speedAdd: 0.5
+        speedAdd: 0.25
         damageAdd: 0
         attackSpeedAdd: 0
         armorAdd: 0
@@ -167,10 +174,11 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - desc: Greatly increases Atk speed, and slightly increases movement speed
+    - lvlName: Berzerker's Boots
+      desc: Greatly increases Atk speed, and slightly increases movement speed
       statChanges:
         hpAdd: 0
-        speedAdd: 0.5
+        speedAdd: 0.25
         damageAdd: 0
         attackSpeedAdd: 0
         armorAdd: 0
@@ -190,7 +198,8 @@ MonoBehaviour:
     previousPath: Berzerker's Boots(LoL)
     numLevels: 1
     levelDescriptions:
-    - desc: Cool Capstone effect here
+    - lvlName: ????
+      desc: Cool Capstone effect here
       statChanges:
         hpAdd: 0
         speedAdd: 0

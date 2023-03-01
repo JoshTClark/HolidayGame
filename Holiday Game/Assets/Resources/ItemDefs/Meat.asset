@@ -24,7 +24,7 @@ MonoBehaviour:
     levelDescriptions:
     - desc: Increases Max HP and HP Regen
       statChanges:
-        hpAdd: 20
+        hpAdd: 10
         speedAdd: 0
         damageAdd: 0
         attackSpeedAdd: 0
@@ -85,7 +85,7 @@ MonoBehaviour:
     levelDescriptions:
     - desc: Increases Max HP and greatly Increases HP Regen
       statChanges:
-        hpAdd: 20
+        hpAdd: 10
         speedAdd: 0
         damageAdd: 0
         attackSpeedAdd: 0
@@ -104,7 +104,7 @@ MonoBehaviour:
         XPMult: 1
     - desc: Increases Max HP and greatly Increases HP Regen
       statChanges:
-        hpAdd: 20
+        hpAdd: 10
         speedAdd: 0
         damageAdd: 0
         attackSpeedAdd: 0
@@ -151,12 +151,12 @@ MonoBehaviour:
     levelDescriptions:
     - desc: Increases HP and slightly increases HP Regen
       statChanges:
-        hpAdd: 35
+        hpAdd: 15
         speedAdd: 0
         damageAdd: 0
         attackSpeedAdd: 0
         armorAdd: 0
-        regenAdd: 0.5
+        regenAdd: 0.25
         critChanceAdd: 0
         critDamageAdd: 0
         hpMult: 1
@@ -170,12 +170,12 @@ MonoBehaviour:
         XPMult: 1
     - desc: Increases HP and slightly increases HP Regen
       statChanges:
-        hpAdd: 35
+        hpAdd: 25
         speedAdd: 0
         damageAdd: 0
         attackSpeedAdd: 0
         armorAdd: 0
-        regenAdd: 0.5
+        regenAdd: 0.25
         critChanceAdd: 0
         critDamageAdd: 0
         hpMult: 1
@@ -193,7 +193,7 @@ MonoBehaviour:
     levelDescriptions:
     - desc: Greatly Increases Max Hp and increases healing from health drops
       statChanges:
-        hpAdd: 50
+        hpAdd: 40
         speedAdd: 0
         damageAdd: 0
         attackSpeedAdd: 0

@@ -22,16 +22,17 @@ MonoBehaviour:
     previousPath: 
     numLevels: 6
     levelDescriptions:
-    - desc: Greatly Increases All Stats
+    - lvlName: Day of the Duck
+      desc: Increases All Stats
       statChanges:
-        hpAdd: 50
-        speedAdd: 2
-        damageAdd: 4
-        attackSpeedAdd: 0.5
-        armorAdd: 2
-        regenAdd: 2
-        critChanceAdd: 0.1
-        critDamageAdd: 0.5
+        hpAdd: 20
+        speedAdd: 0.5
+        damageAdd: 1
+        attackSpeedAdd: 0.2
+        armorAdd: 1
+        regenAdd: 1
+        critChanceAdd: 0.05
+        critDamageAdd: 0.25
         hpMult: 1
         speedMult: 1
         damageMult: 1
@@ -41,16 +42,17 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - desc: Greatly Increases All Stats
+    - lvlName: Day of the Duck
+      desc: Increases All Stats
       statChanges:
-        hpAdd: 50
-        speedAdd: 2
-        damageAdd: 4
-        attackSpeedAdd: 0.5
-        armorAdd: 2
-        regenAdd: 2
-        critChanceAdd: 0.1
-        critDamageAdd: 0.5
+        hpAdd: 25
+        speedAdd: 0.5
+        damageAdd: 1
+        attackSpeedAdd: 0.2
+        armorAdd: 1
+        regenAdd: 1
+        critChanceAdd: 0.05
+        critDamageAdd: 0.25
         hpMult: 1
         speedMult: 1
         damageMult: 1
@@ -60,16 +62,17 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - desc: Greatly Increases All Stats
+    - lvlName: Day of the Duck
+      desc: Increases All Stats
       statChanges:
-        hpAdd: 50
-        speedAdd: 2
-        damageAdd: 4
-        attackSpeedAdd: 0.5
-        armorAdd: 2
-        regenAdd: 2
-        critChanceAdd: 0.1
-        critDamageAdd: 0.5
+        hpAdd: 25
+        speedAdd: 0.5
+        damageAdd: 1
+        attackSpeedAdd: 0.2
+        armorAdd: 1
+        regenAdd: 1
+        critChanceAdd: 0.05
+        critDamageAdd: 0.25
         hpMult: 1
         speedMult: 1
         damageMult: 1
@@ -79,16 +82,17 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - desc: Greatly Increases All Stats
+    - lvlName: Day of the Duck
+      desc: Increases All Stats
       statChanges:
-        hpAdd: 50
-        speedAdd: 2
-        damageAdd: 4
-        attackSpeedAdd: 0.5
-        armorAdd: 2
-        regenAdd: 2
-        critChanceAdd: 0.1
-        critDamageAdd: 0.5
+        hpAdd: 25
+        speedAdd: 0.5
+        damageAdd: 1
+        attackSpeedAdd: 0.2
+        armorAdd: 1
+        regenAdd: 1
+        critChanceAdd: 0.05
+        critDamageAdd: 0.25
         hpMult: 1
         speedMult: 1
         damageMult: 1
@@ -98,16 +102,17 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - desc: Greatly Increases All Stats
+    - lvlName: Day of the Duck
+      desc: Increases All Stats
       statChanges:
-        hpAdd: 50
-        speedAdd: 2
-        damageAdd: 4
-        attackSpeedAdd: 0.5
-        armorAdd: 2
-        regenAdd: 2
-        critChanceAdd: 0.1
-        critDamageAdd: 0.5
+        hpAdd: 25
+        speedAdd: 0.5
+        damageAdd: 1
+        attackSpeedAdd: 0.2
+        armorAdd: 1
+        regenAdd: 1
+        critChanceAdd: 0.05
+        critDamageAdd: 0.25
         hpMult: 1
         speedMult: 1
         damageMult: 1
@@ -117,16 +122,17 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - desc: Greatly Increases All Stats
+    - lvlName: Day of the Duck
+      desc: Increases All Stats
       statChanges:
-        hpAdd: 50
-        speedAdd: 2
-        damageAdd: 4
-        attackSpeedAdd: 0.5
-        armorAdd: 2
-        regenAdd: 2
-        critChanceAdd: 0.1
-        critDamageAdd: 0.5
+        hpAdd: 25
+        speedAdd: 0.5
+        damageAdd: 1
+        attackSpeedAdd: 0.2
+        armorAdd: 1
+        regenAdd: 1
+        critChanceAdd: 0.05
+        critDamageAdd: 0.25
         hpMult: 1
         speedMult: 1
         damageMult: 1

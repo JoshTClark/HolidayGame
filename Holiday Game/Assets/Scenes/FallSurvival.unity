@@ -481,21 +481,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1807913482048079254, guid: a2aa67931f173f04a9927498f0381df4, type: 3}
-      propertyPath: ExitLocations.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1807913482048079256, guid: a2aa67931f173f04a9927498f0381df4, type: 3}
       propertyPath: m_RootOrder
       value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1807913482048079256, guid: a2aa67931f173f04a9927498f0381df4, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1807913482048079256, guid: a2aa67931f173f04a9927498f0381df4, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1807913482048079256, guid: a2aa67931f173f04a9927498f0381df4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -557,7 +545,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 520582315, guid: 9d969f72a70fb0a438be10e67e3b0fe6, type: 3}
       propertyPath: spawnChance
-      value: 25
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 520582315, guid: 9d969f72a70fb0a438be10e67e3b0fe6, type: 3}
       propertyPath: contents.Array.size
@@ -10997,7 +10985,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 520582315, guid: 9d969f72a70fb0a438be10e67e3b0fe6, type: 3}
       propertyPath: spawnChance
-      value: 25
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 520582315, guid: 9d969f72a70fb0a438be10e67e3b0fe6, type: 3}
       propertyPath: contents.Array.size
@@ -149370,7 +149358,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 520582315, guid: 9d969f72a70fb0a438be10e67e3b0fe6, type: 3}
       propertyPath: spawnChance
-      value: 25
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 520582315, guid: 9d969f72a70fb0a438be10e67e3b0fe6, type: 3}
       propertyPath: contents.Array.size
@@ -149435,7 +149423,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 520582315, guid: 9d969f72a70fb0a438be10e67e3b0fe6, type: 3}
       propertyPath: spawnChance
-      value: 25
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 520582315, guid: 9d969f72a70fb0a438be10e67e3b0fe6, type: 3}
       propertyPath: contents.Array.size

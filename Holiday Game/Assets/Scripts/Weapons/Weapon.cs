@@ -33,7 +33,7 @@ public abstract class Weapon : MonoBehaviour
 
     public float Delay
     {
-        get { return (delay * (1 / owner.AttackSpeed)) / attackSpeedMultiplier; }
+        get { return (delay * (1 / owner.AttackSpeed)) / GetStat("Attack Speed"); }
     }
 
     private void Start()

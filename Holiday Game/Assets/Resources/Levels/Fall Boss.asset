@@ -22,4 +22,11 @@ MonoBehaviour:
   - waveLength: 5
     enemies: []
   - waveLength: 5
-    enemies: []
+    enemies:
+    - isBoss: 1
+      enemyIndex: 1
+      amountToSpawn: 1
+      respawn: 0
+      healthMultiplier: 10
+      damageMultiplier: 1
+      speedMultiplier: 1

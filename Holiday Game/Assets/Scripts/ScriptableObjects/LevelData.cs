@@ -11,11 +11,16 @@ public class LevelData : ScriptableObject
     public int startHour = 12;
     public int enemiesToDefeat = 0;
     public int daysToSurvive = 0;
+    public float levelHealthMultiplier = 1;
+    public float levelDamageMultiplier = 1;
+    public float levelSpeedMultiplier = 1;
     public bool isBossLevel = false;
     public List<Wave> waves = new List<Wave>();
 
+
     public Wave GetWaveByTime(float time)
     {
+
         if (waves.Count > 0)
         {
             float timesPast = 0.0f;
@@ -30,6 +35,19 @@ public class LevelData : ScriptableObject
             return waves[waves.Count - 1];
         }
         return null;
+    }
+
+    public void Init()
+    {
+        foreach (Wave w in waves)
+        {
+            foreach (SpawnInfo i in w.enemies) 
+            {
+                i.levelDamageMultiplier = levelDamageMultiplier;
+                i.levelSpeedMultiplier = levelSpeedMultiplier;
+                i.levelHealthMultiplier = levelHealthMultiplier;
+            }
+        }
     }
 
     [System.Serializable]
@@ -49,6 +67,9 @@ public class LevelData : ScriptableObject
         public float healthMultiplier;
         public float damageMultiplier;
         public float speedMultiplier;
+
+        [HideInInspector]
+        public float levelHealthMultiplier, levelDamageMultiplier, levelSpeedMultiplier;
     }
 }
 

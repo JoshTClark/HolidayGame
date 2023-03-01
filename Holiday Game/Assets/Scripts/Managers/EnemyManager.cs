@@ -161,9 +161,9 @@ public class EnemyManager : MonoBehaviour
         Enemy enemy = GetEnemy(info.enemyIndex);
         enemy.gameObject.transform.position = GetRandomPosition();
         enemy.player = GameManager.instance.Player;
-        enemy.damageMultConst = info.damageMultiplier;
-        enemy.hpMultConst = info.healthMultiplier;
-        enemy.speedMultConst = info.speedMultiplier;
+        enemy.damageMultConst = info.damageMultiplier * info.levelDamageMultiplier;
+        enemy.hpMultConst = info.healthMultiplier * info.levelHealthMultiplier;
+        enemy.speedMultConst = info.speedMultiplier * info.levelSpeedMultiplier;
         enemy.isBoss = info.isBoss;
         if (enemy.isBoss)
         {

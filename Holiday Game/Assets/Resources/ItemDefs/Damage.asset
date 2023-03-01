@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Damage
   m_EditorClassIdentifier: 
   itemName: 
-  itemDescription: 
   index: 0
   icon: {fileID: 0}
-  levelDescriptions: []
+  maxLevel: 1
+  tier: 0
+  paths: []

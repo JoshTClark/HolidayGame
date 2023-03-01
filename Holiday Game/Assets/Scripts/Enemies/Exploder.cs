@@ -17,7 +17,7 @@ public class Exploder : Enemy
     }
     public override void OnUpdate()
     {
-        Move();
+        Move(); 
         if(PlayerDistance() <= range)
         {
             inRange= true;
@@ -61,11 +61,11 @@ public class Exploder : Enemy
 
     public override void OnDeath(DamageInfo dmgInfo)
     {
-        if(explode)
+        if(explode && dmgInfo.attacker == this)
         {
             // Create an empty explosion
             // Creates an explosion, Check PumpkinBomb.CS for example in Update()
-            BombProjectileBase p = (BombProjectileBase)ProjectileManager.GetProjectile(ResourceManager.ProjectileIndex.PumpkinBomb);
+            BombProjectileBase p = (BombProjectileBase)ProjectileManager.GetProjectile(ResourceManager.ProjectileIndex.EnemyBomb);
             p.transform.position = this.transform.position;
             p.Direction = Vector2.zero;
             DamageInfo info = new DamageInfo();

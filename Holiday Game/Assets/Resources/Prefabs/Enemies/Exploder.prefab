@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -867669218492193622}
   - component: {fileID: -7479789438020961626}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Exploder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -167,7 +167,6 @@ MonoBehaviour:
   speedMultConst: 1
   isDead: 0
   weapons: []
-  inventory: []
   fadeTotalTime: 0
   player: {fileID: 0}
   index: 0

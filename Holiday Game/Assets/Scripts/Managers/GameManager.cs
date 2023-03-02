@@ -17,7 +17,8 @@ public class GameManager : MonoBehaviour
         UpgradeMenu,
         GameOver,
         LevelComplete,
-        OptionsMenu
+        OptionsMenu,
+        Cutscene
     }
 
     [SerializeField]
@@ -70,6 +71,7 @@ public class GameManager : MonoBehaviour
     public int enemiesDefeated = 0;
     private bool levelEnded = false;
     public bool doSpawns = true;
+    private CutsceneManager cutscene;
 
     [SerializeField]
     private InputAction slowToggle;
@@ -126,16 +128,6 @@ public class GameManager : MonoBehaviour
                 player = GameObject.Instantiate<Player>(ResourceManager.characters[0].prefab);
                 player.inventory = new List<Item>();
                 foreach (ItemDef i in ResourceManager.characters[0].inventory)
-                {
-                    Item item = i.GetItem();
-                    item.Level = 1;
-                    player.inventory.Add(item);
-                    if (i.GetType() == typeof(WeaponDef))
-                    {
-                        player.AddWeapon(((WeaponDef)i).weaponPrefab);
-                    }
-                }
-                foreach (ItemDef i in ResourceManager.characters[0].tutorialChestItems)
                 {
                     Item item = i.GetItem();
                     item.Level = 1;
@@ -271,6 +263,7 @@ public class GameManager : MonoBehaviour
                 gameOverPanel.gameObject.SetActive(true);
                 break;
             case GameState.Normal:
+                player.canMove = true;
                 if (!slowTime)
                 {
                     Time.timeScale = baseTimeScale;
@@ -438,6 +431,17 @@ public class GameManager : MonoBehaviour
                 debugPanel.gameObject.SetActive(false);
                 levelCompletedPanel.gameObject.SetActive(false);
                 optionsMenu.gameObject.SetActive(true);
+                break;
+            case GameState.Cutscene:
+                pausedPanel.gameObject.SetActive(false);
+                upgradePanel.gameObject.SetActive(false);
+                gamePanel.gameObject.SetActive(false);
+                gameOverPanel.gameObject.SetActive(false);
+                debugPanel.gameObject.SetActive(false);
+                levelCompletedPanel.gameObject.SetActive(false);
+                optionsMenu.gameObject.SetActive(false);
+                player.canMove = false;
+                cutscene.Update();
                 break;
         }
     }
@@ -674,5 +678,18 @@ public class GameManager : MonoBehaviour
     public void OptionsButton()
     {
         state = GameState.OptionsMenu;
+    }
+
+    public void CollectBossGem(BossGem gem) 
+    {
+        if (state != GameState.Cutscene)
+        {
+            Debug.Log("Starting Cutscene");
+            state = GameState.Cutscene;
+            //EnemyManager.instance.KillAllAndStopSpawns();
+            ProjectileManager.Clean();
+            cutscene = new CutsceneManager();
+            cutscene.DoCutscene(CutsceneManager.Cutscene.BossGemScene, player.gameObject, gem.gameObject, cam.gameObject);
+        }
     }
 }

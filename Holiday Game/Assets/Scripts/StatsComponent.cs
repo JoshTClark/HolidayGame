@@ -142,79 +142,72 @@ public abstract class StatsComponent : MonoBehaviour
 
     protected void Update()
     {
-        if (GameManager.instance.State == GameManager.GameState.Normal)
+        float delta = Time.deltaTime;
+
+        // Patience
+        /*
+        if (HasUpgrade(ResourceManager.UpgradeIndex.Patience) && !isMoving)
         {
-            float delta = Time.deltaTime;
-
-            // Patience
-            /*
-            if (HasUpgrade(ResourceManager.UpgradeIndex.Patience) && !isMoving)
-            {
-                patienceTimer += delta;
-            }
-            else if (isMoving)
-            {
-                patienceTimer = 0;
-            }
-            */
-
-            CalculateStats();
-
-            OnUpdate();
-
-            if (damaged)
-            {
-                fadeTimer += delta;
-                sr.color = Color.Lerp(Color.red, ogColor, fadeTimer / fadeTotalTime);
-                if (fadeTimer > fadeTotalTime)
-                {
-                    damaged = false;
-                }
-            }
-
-            // Doing regen
-            regenTimer += delta;
-            if (regenTimer >= RegenInterval)
-            {
-                regenTimer = 0;
-                if (Regen != 0)
-                {
-                    Heal(Regen);
-                }
-            }
-
-            // Checks if should be dead
-            //if (currentHP <= 0)
-            //{
-            //    isDead = true;
-            //}
-
-            // Adding things for burning effects
-            if (HasBuff(ResourceManager.BuffIndex.Burning))
-            {
-                // Nothing
-            }
-
-            // Buff updating
-            for (int i = buffs.Count - 1; i >= 0; i--)
-            {
-                buffs[i].DoTick();
-                if (!buffs[i].active)
-                {
-                    buffs.RemoveAt(i);
-                }
-            }
-
-            // Checking if dead
-            //if (IsDead)
-            //{
-            //    OnDeath(DamageInfo info);
-            //}
+            patienceTimer += delta;
         }
-        else
+        else if (isMoving)
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2();
+            patienceTimer = 0;
         }
+        */
+
+        CalculateStats();
+
+        OnUpdate();
+
+        if (damaged)
+        {
+            fadeTimer += delta;
+            sr.color = Color.Lerp(Color.red, ogColor, fadeTimer / fadeTotalTime);
+            if (fadeTimer > fadeTotalTime)
+            {
+                damaged = false;
+            }
+        }
+
+        // Doing regen
+        regenTimer += delta;
+        if (regenTimer >= RegenInterval)
+        {
+            regenTimer = 0;
+            if (Regen != 0)
+            {
+                Heal(Regen);
+            }
+        }
+
+        // Checks if should be dead
+        //if (currentHP <= 0)
+        //{
+        //    isDead = true;
+        //}
+
+        // Adding things for burning effects
+        if (HasBuff(ResourceManager.BuffIndex.Burning))
+        {
+            // Nothing
+        }
+
+        // Buff updating
+        for (int i = buffs.Count - 1; i >= 0; i--)
+        {
+            buffs[i].DoTick();
+            if (!buffs[i].active)
+            {
+                buffs.RemoveAt(i);
+            }
+        }
+
+        // Checking if dead
+        //if (IsDead)
+        //{
+        //    OnDeath(DamageInfo info);
+        //}
     }
 
     //Checks to see if leveled up since last tick
@@ -252,17 +245,17 @@ public abstract class StatsComponent : MonoBehaviour
     {
         info.receiver = this;
         info.CalculateAll();
-        
+
         if (Armor > 0)
         {
             if (info.attacker.HasItem(ItemIndex.CritChance)) // If receiver has armor, check if attacker has armor piercer
             {
                 Item i = info.attacker.GetItem(ItemIndex.CritChance);
-                
-                if(info.isCrit && i.HasTakenPath("Weak Spots"))
+
+                if (info.isCrit && i.HasTakenPath("Weak Spots"))
                 {
                     //Calculate new armor value if attacker had armor pen
-                    if(i.Level == 4)
+                    if (i.Level == 4)
                     {
                         armorMult *= 0.8f;
                     }
@@ -279,12 +272,12 @@ public abstract class StatsComponent : MonoBehaviour
 
                     info.damage *= 1f - damageReduction;
                 }
-                
+
             }
             else // dont have item, do normal calc
             {
                 float damageReduction = (-1f / ((0.1f * Mathf.Sqrt(Armor)) + 1f)) + 1f;
-                
+
                 info.damage *= 1f - damageReduction;
             }
         }
@@ -312,9 +305,9 @@ public abstract class StatsComponent : MonoBehaviour
         {
             Item i = info.attacker.GetItem(ItemIndex.LiftingBelt);
 
-            if(i.HasTakenPath("Boxing Lessons"))
+            if (i.HasTakenPath("Boxing Lessons"))
             {
-                if(i.Level == 4)
+                if (i.Level == 4)
                 {
                     info.damage += info.attacker.CurrentHP * 0.02f;
                 }
@@ -329,7 +322,7 @@ public abstract class StatsComponent : MonoBehaviour
                 }
             }
         }
-        
+
 
         if (this.gameObject.GetComponent<Enemy>())
         {
@@ -347,7 +340,7 @@ public abstract class StatsComponent : MonoBehaviour
         if (info.attacker.HasItem(ItemIndex.CritChance))
         {
             Item i = info.attacker.GetItem(ItemIndex.CritChance);
-            if(info.isCrit && i.HasTakenPath("Vicious Wounds") && i.Level >= 4)
+            if (info.isCrit && i.HasTakenPath("Vicious Wounds") && i.Level >= 4)
             {
                 Debug.Log("Bleed should be applied");
                 //info.debuffs.Add(BuffIndex.Bleeding); Not working commenting out for now
@@ -369,7 +362,7 @@ public abstract class StatsComponent : MonoBehaviour
             {
                 buff.totalDamage = info.attacker.Damage;
             }
-            if (!info.mask.Contains(i)) 
+            if (!info.mask.Contains(i))
             {
                 buffs.Add(buff);
             }
@@ -719,12 +712,12 @@ public abstract class StatsComponent : MonoBehaviour
                     attackSpeedMult *= 1.15f;
                 }
                 // Level 6
-                if (i.Level >= 6) 
+                if (i.Level >= 6)
                 {
                     speedAdd += 1f;
                     attackSpeedMult *= 1.15f;
                 }
-          
+
 
             }
 
@@ -743,7 +736,7 @@ public abstract class StatsComponent : MonoBehaviour
                     speedAdd += 0.5f;
                     attackSpeedMult *= 1.25f;
                 }
-                if(i.Level >= 6)
+                if (i.Level >= 6)
                 {
                     attackSpeedMult *= 1.5f;
                 }
@@ -787,7 +780,7 @@ public abstract class StatsComponent : MonoBehaviour
 
             }
             //path 1 capstone
-            if(i.HasTakenPath("Armor Piercer"))
+            if (i.HasTakenPath("Armor Piercer"))
             {
                 // Level 6
                 if (i.Level >= 6)
@@ -811,7 +804,7 @@ public abstract class StatsComponent : MonoBehaviour
 
             }
             //path 2 capstone
-            if(i.HasTakenPath("Vicious Wounds"))
+            if (i.HasTakenPath("Vicious Wounds"))
             {
                 // Level 6
                 if (i.Level >= 6)
@@ -865,7 +858,7 @@ public abstract class StatsComponent : MonoBehaviour
                 if (i.Level >= 6)
                 {
                     armorAdd += 1.5f;
-             
+
                 }
             }
             // Path 2
@@ -931,7 +924,7 @@ public abstract class StatsComponent : MonoBehaviour
                 {
                     hpAdd += 30f;
                     hpMult *= 1.1f;
-                    
+
                 }
                 // Level 5
                 if (i.Level >= 5)

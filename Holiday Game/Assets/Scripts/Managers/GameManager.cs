@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
     public float slowTimeScale = 0.5f;
 
     public bool showDamageNumbers = true;
+    public bool showWeaponIcons = true;
     private float time = 0f;
     private GameState state = GameState.Normal;
     private bool paused = false;
@@ -526,9 +527,14 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
-    public void ShowDamageNumbers(bool show)
+    public void ShowDamageNumbers(Toggle toggle)
     {
-        showDamageNumbers = show;
+        showDamageNumbers = toggle.isOn;
+    }
+
+    public void ShowWeaponIcons(Toggle toggle)
+    {
+        showWeaponIcons = toggle.isOn;
     }
 
     /* 

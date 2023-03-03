@@ -31,6 +31,12 @@ public abstract class Weapon : MonoBehaviour
 
     protected Dictionary<string, float> trueStats = new Dictionary<string, float>();
 
+
+    // Audio
+    [SerializeField] protected List<AudioClip> audioClips;
+    [SerializeField] protected AudioSource source;
+    
+
     public float Delay
     {
         get { return (delay * (1 / owner.AttackSpeed)) / GetStat("Attack Speed"); }

@@ -247,6 +247,7 @@ public abstract class Weapon : MonoBehaviour
     public abstract void OnUpdate();
 
     public abstract void CalcStats();
+    protected abstract void WeaponSound();
 
     [System.Serializable]
     private class WeaponStat

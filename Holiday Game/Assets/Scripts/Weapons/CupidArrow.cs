@@ -50,4 +50,8 @@ public class CupidArrow : Weapon
             ResetTimer();
         }
     }
+    protected override void WeaponSound()
+    {
+        return;
+    }
 }

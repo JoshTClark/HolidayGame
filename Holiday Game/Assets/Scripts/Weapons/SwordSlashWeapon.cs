@@ -277,4 +277,8 @@ public class SwordSlashWeapon : Weapon
             p.SizeMultiplier = GetStat("Size") * 1.25f;
         }
     }
+    protected override void WeaponSound()
+    {
+        return;
+    }
 }

@@ -18,11 +18,12 @@ MonoBehaviour:
   maxLevel: 6
   tier: 0
   paths:
-  - pathName: More Meat
+  - pathName: Meat
     previousPath: 
     numLevels: 3
     levelDescriptions:
-    - desc: Increases Max HP and HP Regen
+    - lvlName: Meat!
+      desc: Increases Max HP and HP Regen
       statChanges:
         hpAdd: 10
         speedAdd: 0
@@ -41,7 +42,8 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - desc: Increases Max HP and HP Regen
+    - lvlName: Bigger Portions I
+      desc: Increases Max HP and HP Regen
       statChanges:
         hpAdd: 20
         speedAdd: 0
@@ -60,7 +62,8 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - desc: Increases Max HP and HP Regen
+    - lvlName: Bigger Portions II
+      desc: Increases Max HP and HP Regen
       statChanges:
         hpAdd: 20
         speedAdd: 0
@@ -79,11 +82,15 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-  - pathName: Selective Breeding
-    previousPath: More Meat
-    numLevels: 2
+  - pathName: Mutated Cows
+    previousPath: Meat
+    numLevels: 3
     levelDescriptions:
-    - desc: Increases Max HP and greatly Increases HP Regen
+    - lvlName: Mutated Cows I
+      desc: 'Increases Health Regen after not taking damage for 5s
+
+        MaxHP+;
+        HPRegen+'
       statChanges:
         hpAdd: 10
         speedAdd: 0
@@ -102,7 +109,11 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - desc: Increases Max HP and greatly Increases HP Regen
+    - lvlName: Mutated Cows II
+      desc: 'Increases Health Regen after not taking damage for 4s
+
+        MaxHP+;
+        HPRegen+'
       statChanges:
         hpAdd: 10
         speedAdd: 0
@@ -121,19 +132,18 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-  - pathName: Steroid Infusions
-    previousPath: Selective Breeding
-    numLevels: 1
-    levelDescriptions:
-    - desc: Massively Increases HP Regen, and doubles Regen after not taking damage
-        for awhile
+    - lvlName: Mutated Cows III
+      desc: 'Increases Health Regen after not taking damage for 3s
+
+        MaxHP+;
+        HPRegen+'
       statChanges:
-        hpAdd: 0
+        hpAdd: 10
         speedAdd: 0
         damageAdd: 0
         attackSpeedAdd: 0
         armorAdd: 0
-        regenAdd: 2
+        regenAdd: 1
         critChanceAdd: 0
         critDamageAdd: 0
         hpMult: 1
@@ -145,13 +155,16 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-  - pathName: Heaping Helpings
-    previousPath: More Meat
-    numLevels: 2
+  - pathName: Bigger Stomach
+    previousPath: Meat
+    numLevels: 3
     levelDescriptions:
-    - desc: Increases HP and slightly increases HP Regen
+    - lvlName: Bigger Stomach I
+      desc: 'Increases Health gained from HP drops by 5
+
+        MaxHP+, HPRegen+'
       statChanges:
-        hpAdd: 15
+        hpAdd: 20
         speedAdd: 0
         damageAdd: 0
         attackSpeedAdd: 0
@@ -168,7 +181,34 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - desc: Increases HP and slightly increases HP Regen
+    - lvlName: Bigger Stomach II
+      desc: 'Increases Health gained from HP drops by an additional 5
+
+        MaxHP+,
+        HPRegen+'
+      statChanges:
+        hpAdd: 20
+        speedAdd: 0
+        damageAdd: 0
+        attackSpeedAdd: 0
+        armorAdd: 0
+        regenAdd: 0.25
+        critChanceAdd: 0
+        critDamageAdd: 0
+        hpMult: 1
+        speedMult: 1
+        damageMult: 1
+        attackSpeedMult: 1
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1
+    - lvlName: Insatiable Appetite
+      desc: 'Increases Health gained from HP drops by an additional 20%
+
+        MaxHP+,
+        HPRegen+'
       statChanges:
         hpAdd: 25
         speedAdd: 0
@@ -176,29 +216,6 @@ MonoBehaviour:
         attackSpeedAdd: 0
         armorAdd: 0
         regenAdd: 0.25
-        critChanceAdd: 0
-        critDamageAdd: 0
-        hpMult: 1
-        speedMult: 1
-        damageMult: 1
-        attackSpeedMult: 1
-        armorMult: 1
-        regenMult: 1
-        critChanceMult: 1
-        critDamageMult: 1
-        XPMult: 1
-  - pathName: Insatiable Appetite
-    previousPath: Heaping Helpings
-    numLevels: 1
-    levelDescriptions:
-    - desc: Greatly Increases Max Hp and increases healing from health drops
-      statChanges:
-        hpAdd: 40
-        speedAdd: 0
-        damageAdd: 0
-        attackSpeedAdd: 0
-        armorAdd: 0
-        regenAdd: 0
         critChanceAdd: 0
         critDamageAdd: 0
         hpMult: 1

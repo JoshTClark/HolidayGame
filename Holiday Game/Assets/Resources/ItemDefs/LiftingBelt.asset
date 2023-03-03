@@ -91,7 +91,7 @@ MonoBehaviour:
 
         HP+'
       statChanges:
-        hpAdd: 35
+        hpAdd: 30
         speedAdd: 0
         damageAdd: 0
         attackSpeedAdd: 0
@@ -99,7 +99,7 @@ MonoBehaviour:
         regenAdd: 0
         critChanceAdd: 0
         critDamageAdd: 0
-        hpMult: 1
+        hpMult: 1.1
         speedMult: 1
         damageMult: 1
         attackSpeedMult: 1
@@ -113,7 +113,7 @@ MonoBehaviour:
 
         HP+'
       statChanges:
-        hpAdd: 35
+        hpAdd: 30
         speedAdd: 0
         damageAdd: 0
         attackSpeedAdd: 0
@@ -121,7 +121,7 @@ MonoBehaviour:
         regenAdd: 0
         critChanceAdd: 0
         critDamageAdd: 0
-        hpMult: 1
+        hpMult: 1.2
         speedMult: 1
         damageMult: 1
         attackSpeedMult: 1
@@ -135,7 +135,7 @@ MonoBehaviour:
 
         HP+'
       statChanges:
-        hpAdd: 35
+        hpAdd: 40
         speedAdd: 0
         damageAdd: 0
         attackSpeedAdd: 0
@@ -143,7 +143,7 @@ MonoBehaviour:
         regenAdd: 0
         critChanceAdd: 0
         critDamageAdd: 0
-        hpMult: 1
+        hpMult: 1.4
         speedMult: 1
         damageMult: 1
         attackSpeedMult: 1
@@ -159,11 +159,11 @@ MonoBehaviour:
     - lvlName: Boxing Lessons
       desc: 'Converts 2% of Current HP into Bonus Damage
 
-        HP+; Damage+'
+        HP+'
       statChanges:
-        hpAdd: 10
+        hpAdd: 15
         speedAdd: 0
-        damageAdd: 2
+        damageAdd: 0
         attackSpeedAdd: 0
         armorAdd: 0
         regenAdd: 0
@@ -183,9 +183,9 @@ MonoBehaviour:
 
         HP+; Damage+'
       statChanges:
-        hpAdd: 10
+        hpAdd: 15
         speedAdd: 0
-        damageAdd: 2
+        damageAdd: 0
         attackSpeedAdd: 0
         armorAdd: 0
         regenAdd: 0
@@ -208,9 +208,9 @@ MonoBehaviour:
 
         HP+; Damage+'
       statChanges:
-        hpAdd: 10
+        hpAdd: 20
         speedAdd: 0
-        damageAdd: 2
+        damageAdd: 0
         attackSpeedAdd: 0
         armorAdd: 0
         regenAdd: 0

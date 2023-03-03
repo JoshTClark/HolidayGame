@@ -16,9 +16,20 @@ public class HealthDrop : DropBase
             if (receiver.HasItem(ResourceManager.ItemIndex.Meat))
             {
                 Item i = receiver.GetItem(ResourceManager.ItemIndex.Meat);
-                if(i.HasTakenPath("Insatiable Appetite"))
+                if(i.HasTakenPath("Bigger Stomach"))
                 {
-                    receiver.Heal(receiver.MaxHp / 3);
+                    if(i.Level == 4)
+                    {
+                        receiver.Heal((receiver.MaxHp / 4) + 5);
+                    }
+                    else if(i.Level == 5)
+                    {
+                        receiver.Heal((receiver.MaxHp / 4) + 10);
+                    }
+                    else if (i.Level == 10)
+                    {
+                        receiver.Heal(((receiver.MaxHp / 4) + 10) * 1.2f);
+                    }
                 }
                 else receiver.Heal(receiver.MaxHp / 4);
                 

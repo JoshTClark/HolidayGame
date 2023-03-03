@@ -286,17 +286,42 @@ public abstract class StatsComponent : MonoBehaviour
         if (this.HasItem(ItemIndex.Armor))
         {
             Item i = GetItem(ItemIndex.Armor);
-            if (i.HasTakenPath("Spiked Armor"))
+
+            if (i.HasTakenPath("Spiked Armor")) //Damage reflection path
             {
                 DamageInfo reflectInfo = new DamageInfo();
                 reflectInfo.attacker = info.receiver;
                 reflectInfo.receiver = info.attacker;
-                reflectInfo.damage = (this.Armor / 4);
+                if(i.Level == 4)
+                {
+                    reflectInfo.damage = (this.Armor / 6);
+                }
+                else if (i.Level == 5)
+                {
+                    reflectInfo.damage = (this.Armor / 5);
+                }
+                else if (i.Level == 6)
+                {
+                    reflectInfo.damage = (this.Armor / 4);
+                }
+
                 info.attacker.TakeDamage(reflectInfo);
             }
-            if (i.HasTakenPath("Mythril Armor"))
+
+            if (i.HasTakenPath("Mythril Coating")) // Damage reduction path
             {
-                info.damage *= 0.75f;
+                if(i.Level == 4)
+                {
+                    info.damage *= 0.9f;
+                }
+                else if (i.Level == 5)
+                {
+                    info.damage *= 0.8f;
+                }
+                else if (i.Level == 6)
+                {
+                    info.damage *= 0.7f;
+                }
             }
         }
 
@@ -681,20 +706,20 @@ public abstract class StatsComponent : MonoBehaviour
             // Level 1
             if (i.Level >= 1)
             {
-                speedAdd += 1f;
-                attackSpeedMult *= 1.15f;
+                speedAdd += 0.25f;
+                attackSpeedMult *= 1.1f;
             }
             // Level 2
             if (i.Level >= 2)
             {
-                speedAdd += 1f;
-                attackSpeedMult *= 1.15f;
+                speedAdd += 0.25f;
+                attackSpeedMult *= 1.1f;
             }
             // Level 3
             if (i.Level >= 3)
             {
-                speedAdd += 1f;
-                attackSpeedMult *= 1.15f;
+                speedAdd += 0.25f;
+                attackSpeedMult *= 1.1f;
             }
             // Path 1
             if (i.HasTakenPath("Swift Strider"))
@@ -702,39 +727,39 @@ public abstract class StatsComponent : MonoBehaviour
                 // Level 4
                 if (i.Level >= 4)
                 {
-                    speedAdd += 2f;
-                    attackSpeedMult *= 1.15f;
+                    speedAdd += 0.25f;
+                    attackSpeedMult *= 1.1f;
                 }
                 // Level 5
                 if (i.Level >= 5)
                 {
-                    speedAdd += 2f;
-                    attackSpeedMult *= 1.15f;
+                    speedAdd += 0.25f;
+                    attackSpeedMult *= 1.1f;
                 }
                 // Level 6
                 if (i.Level >= 6)
                 {
-                    speedAdd += 1f;
-                    attackSpeedMult *= 1.15f;
+                    speedAdd += 0.25f;
+                    attackSpeedMult *= 1.1f;
                 }
 
 
             }
 
             // Path 2
-            if (i.HasTakenPath("Berzerker's Boots(LoL)"))
+            if (i.HasTakenPath("Berzerker's Boots"))
             {
                 // Level 4
                 if (i.Level >= 4)
                 {
-                    speedAdd += 0.5f;
-                    attackSpeedMult *= 1.25f;
+                    speedAdd += 0.1f;
+                    attackSpeedMult *= 1.2f;
                 }
                 // Level 5
                 if (i.Level >= 5)
                 {
-                    speedAdd += 0.5f;
-                    attackSpeedMult *= 1.25f;
+                    speedAdd += 0.1f;
+                    attackSpeedMult *= 1.2f;
                 }
                 if (i.Level >= 6)
                 {
@@ -744,6 +769,7 @@ public abstract class StatsComponent : MonoBehaviour
             }
 
         }
+        
         //Crit Upgrade Tree
         if (HasItem(ItemIndex.CritChance))
         {
@@ -777,17 +803,12 @@ public abstract class StatsComponent : MonoBehaviour
                 {
                     critChanceAdd += 0.1f;
                 }
-
-            }
-            //path 1 capstone
-            if (i.HasTakenPath("Armor Piercer"))
-            {
-                // Level 6
-                if (i.Level >= 6)
+                if(i.Level >= 6)
                 {
                     critChanceAdd += 0.1f;
                 }
             }
+
             // Path 2
             if (i.HasTakenPath("Big Red Numbers"))
             {
@@ -801,17 +822,14 @@ public abstract class StatsComponent : MonoBehaviour
                 {
                     critDamageAdd += 0.5f;
                 }
-
-            }
-            //path 2 capstone
-            if (i.HasTakenPath("Vicious Wounds"))
-            {
-                // Level 6
+                // Level 5
                 if (i.Level >= 6)
                 {
                     critDamageAdd += 0.5f;
                 }
+
             }
+
         }
 
         //Plate Armor Item
@@ -837,7 +855,7 @@ public abstract class StatsComponent : MonoBehaviour
                 hpAdd += 10f;
             }
             // Path 1
-            if (i.HasTakenPath("Heavy Plating"))
+            if (i.HasTakenPath("Spiked Armor"))
             {
                 // Level 4
                 if (i.Level >= 4)
@@ -846,23 +864,19 @@ public abstract class StatsComponent : MonoBehaviour
                 }
                 // Level 5
                 if (i.Level >= 5)
+                {
+                    armorAdd += 1.5f;
+                }
+                if (i.Level >= 6)
                 {
                     armorAdd += 1.5f;
                 }
 
             }
             //path 1 capstone
-            if (i.HasTakenPath("Spiked Armor"))
-            {
-                // Level 6
-                if (i.Level >= 6)
-                {
-                    armorAdd += 1.5f;
 
-                }
-            }
             // Path 2
-            if (i.HasTakenPath("Better Blacksmithing"))
+            if (i.HasTakenPath("Mythril Coating"))
             {
                 // Level 4
                 if (i.Level >= 4)
@@ -878,19 +892,15 @@ public abstract class StatsComponent : MonoBehaviour
                     hpAdd += 10f;
                     speedAdd += 0.25f;
                 }
-
-            }
-            //path 2 capstone
-            if (i.HasTakenPath("Mythril Coating"))
-            {
-                // Level 6
                 if (i.Level >= 6)
                 {
-                    armorAdd += 1f;
+                    armorAdd += 0.5f;
                     hpAdd += 10f;
-                    speedAdd += 0.5f;
+                    speedAdd += 0.25f;
                 }
+
             }
+
 
         }
 
@@ -927,7 +937,7 @@ public abstract class StatsComponent : MonoBehaviour
 
                 }
                 // Level 5
-                if (i.Level >= 5)
+                if (i.Level == 5)
                 {
                     hpAdd += 30f;
                     hpMult *= 1.2f;
@@ -935,7 +945,7 @@ public abstract class StatsComponent : MonoBehaviour
                 // Level 6
                 if (i.Level >= 6)
                 {
-                    hpAdd += 100f;
+                    hpAdd += 40f;
                     hpMult *= 1.4f;
                 }
 
@@ -947,19 +957,19 @@ public abstract class StatsComponent : MonoBehaviour
                 // Level 4
                 if (i.Level >= 4)
                 {
-                    hpAdd += 10f;
-                    damageAdd += 2f;
+                    hpAdd += 15f;
+
                 }
                 // Level 5
                 if (i.Level >= 5)
                 {
-                    hpAdd += 10f;
-                    damageAdd += 2f;
+                    hpAdd += 15f;
+
                 }
                 if (i.Level >= 6)
                 {
-                    hpAdd += 10f;
-                    damageAdd += 2f;
+                    hpAdd += 20f;
+     
                 }
 
             }
@@ -989,7 +999,7 @@ public abstract class StatsComponent : MonoBehaviour
                 regenAdd += 0.5f;
             }
             // Path 1
-            if (i.HasTakenPath("Selective Breeding"))
+            if (i.HasTakenPath("Mutated Cows"))
             {
                 // Level 4
                 if (i.Level >= 4)
@@ -1003,27 +1013,30 @@ public abstract class StatsComponent : MonoBehaviour
                     hpAdd += 10f;
                     regenAdd += 1f;
                 }
-
-            }
-            //path 1 capstone
-            if (i.HasTakenPath("Steroid Infusions"))
-            {
                 // Level 6
                 if (i.Level >= 6)
                 {
-                    regenAdd += 2f;
+                    hpAdd += 10f;
+                    regenAdd += 1f;
                 }
             }
+
             // Path 2
-            if (i.HasTakenPath("Heaping Helpings"))
+            if (i.HasTakenPath("Bigger Stomach"))
             {
                 // Level 4
                 if (i.Level >= 4)
                 {
-                    hpAdd += 25f;
+                    hpAdd += 20f;
                     regenAdd += 0.25f;
                 }
                 // Level 5
+                if (i.Level >= 5)
+                {
+                    hpAdd += 20f;
+                    regenAdd += 0.25f;
+                }
+                // Level 6
                 if (i.Level >= 5)
                 {
                     hpAdd += 25f;
@@ -1031,15 +1044,7 @@ public abstract class StatsComponent : MonoBehaviour
                 }
 
             }
-            //path 2 capstone
-            if (i.HasTakenPath("Insatiable Appetite"))
-            {
-                // Level 6
-                if (i.Level >= 6)
-                {
-                    hpAdd += 40f;
-                }
-            }
+
         }
 
         // Golden Duck Item
@@ -1049,74 +1054,74 @@ public abstract class StatsComponent : MonoBehaviour
             // Level 1
             if (i.Level >= 1)
             {
-                hpAdd += 20f;
-                speedAdd += 0.5f;
-                damageAdd += 1f;
-                attackSpeedAdd += 0.2f;
-                armorAdd += 1f;
+                hpAdd += 10f;
+                speedAdd += 0.2f;
+                damageAdd += 0.5f;
+                attackSpeedAdd += 0.1f;
+                armorAdd += 0.5f;
                 regenAdd += 1f;
                 critChanceAdd += 0.05f;
-                critDamageAdd += 0.25f;
+                critDamageAdd += 0.2f;
             }
             // Level 2
             if (i.Level >= 2)
             {
-                hpAdd += 20f;
-                speedAdd += 0.5f;
-                damageAdd += 1f;
-                attackSpeedAdd += 0.2f;
-                armorAdd += 1f;
+                hpAdd += 10f;
+                speedAdd += 0.2f;
+                damageAdd += 0.5f;
+                attackSpeedAdd += 0.1f;
+                armorAdd += 0.5f;
                 regenAdd += 1f;
                 critChanceAdd += 0.05f;
-                critDamageAdd += 0.25f;
+                critDamageAdd += 0.2f;
             }
             // Level 3
             if (i.Level >= 3)
             {
-                hpAdd += 20f;
-                speedAdd += 0.5f;
-                damageAdd += 1f;
-                attackSpeedAdd += 0.2f;
-                armorAdd += 1f;
+                hpAdd += 10f;
+                speedAdd += 0.2f;
+                damageAdd += 0.5f;
+                attackSpeedAdd += 0.1f;
+                armorAdd += 0.5f;
                 regenAdd += 1f;
                 critChanceAdd += 0.05f;
-                critDamageAdd += 0.25f;
+                critDamageAdd += 0.2f;
             }
             // Level 4
             if (i.Level >= 4)
             {
-                hpAdd += 20f;
-                speedAdd += 0.5f;
-                damageAdd += 1f;
-                attackSpeedAdd += 0.2f;
-                armorAdd += 1f;
+                hpAdd += 10f;
+                speedAdd += 0.2f;
+                damageAdd += 0.5f;
+                attackSpeedAdd += 0.1f;
+                armorAdd += 0.5f;
                 regenAdd += 1f;
                 critChanceAdd += 0.05f;
-                critDamageAdd += 0.25f;
+                critDamageAdd += 0.2f;
             }
             // Level 5
             if (i.Level >= 5)
             {
-                hpAdd += 20f;
-                speedAdd += 0.5f;
-                damageAdd += 1f;
-                attackSpeedAdd += 0.2f;
-                armorAdd += 1f;
+                hpAdd += 10f;
+                speedAdd += 0.2f;
+                damageAdd += 0.5f;
+                attackSpeedAdd += 0.1f;
+                armorAdd += 0.5f;
                 regenAdd += 1f;
                 critChanceAdd += 0.05f;
-                critDamageAdd += 0.25f;
+                critDamageAdd += 0.2f;
             }
             // Level 6
             if (i.Level >= 6)
             {
-                hpAdd += 20f;
-                speedAdd += 0.5f;
-                damageAdd += 1f;
-                attackSpeedAdd += 0.2f;
-                armorAdd += 1f;
+                hpAdd += 10f;
+                speedAdd += 0.2f;
+                damageAdd += 0.5f;
+                attackSpeedAdd += 0.1f;
+                armorAdd += 0.5f;
                 regenAdd += 1f;
                 critChanceAdd += 0.05f;
-                critDamageAdd += 0.25f;
+                critDamageAdd += 0.2f;
             }
 
         }

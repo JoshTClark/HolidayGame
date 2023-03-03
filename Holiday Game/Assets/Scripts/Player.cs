@@ -44,6 +44,7 @@ public class Player : StatsComponent
     public int waitingForLevels = 0;
 
     public bool godMode = false;
+    public bool canMove = true;
 
 
     public float DashCooldown { get { return baseDashCooldown * dashCooldownMultiplier; } }
@@ -68,7 +69,7 @@ public class Player : StatsComponent
         float delta = Time.deltaTime;
         extraDashes = 0;
         dashCooldownMultiplier = 1f;
-        
+
 
         /*
         if (HasUpgrade(ResourceManager.UpgradeIndex.ExtraDash))
@@ -80,10 +81,10 @@ public class Player : StatsComponent
         //Upgrade Effects
 
         //Extra Dash Upgrade
-        if (HasItem(ResourceManager.ItemIndex.AgilityBoots)) 
+        if (HasItem(ResourceManager.ItemIndex.AgilityBoots))
         {
             Item i = GetItem(ResourceManager.ItemIndex.AgilityBoots);
-            if(i.HasTakenPath("Swift Strider"))
+            if (i.HasTakenPath("Swift Strider"))
             {
                 if (i.Level == 4)
                 {
@@ -100,12 +101,9 @@ public class Player : StatsComponent
                 }
 
             }
-            
-            
+
+
         }
-        
-
-
 
         if (currentDashes < Dashes)
         {
@@ -139,34 +137,43 @@ public class Player : StatsComponent
         else
         {
             // Basic movement
-            GetComponent<TrailEffect>().particleDelay = 0.15f;
-            Vector2 movementInput = movement.action.ReadValue<Vector2>();
-            movementInput = movementInput * Speed;
-            if (movementInput.x == 0 && movementInput.y == 0)
+            if (canMove)
             {
-                isMoving = false;
-            }
-            else
-            {
-                isMoving = true;
-            }
-
-            GetComponent<Rigidbody2D>().velocity = movementInput;
-            if (movementInput != Vector2.zero)
-            {
-                an.speed = 1;
-                if (movementInput.x > 0)
+                GetComponent<TrailEffect>().particleDelay = 0.15f;
+                Vector2 movementInput = movement.action.ReadValue<Vector2>();
+                movementInput = movementInput * Speed;
+                if (movementInput.x == 0 && movementInput.y == 0)
                 {
-                    sr.flipX = true;
+                    isMoving = false;
                 }
-                if (movementInput.x < 0)
+                else
                 {
-                    sr.flipX = false;
+                    isMoving = true;
+                }
+
+                GetComponent<Rigidbody2D>().velocity = movementInput;
+                if (movementInput != Vector2.zero)
+                {
+                    an.speed = 1;
+                    if (movementInput.x > 0)
+                    {
+                        sr.flipX = true;
+                    }
+                    if (movementInput.x < 0)
+                    {
+                        sr.flipX = false;
+                    }
+                }
+                else
+                {
+                    an.speed = 0;
                 }
             }
             else
             {
                 an.speed = 0;
+                isMoving = false;
+                GetComponent<Rigidbody2D>().velocity = new Vector2();
             }
         }
 

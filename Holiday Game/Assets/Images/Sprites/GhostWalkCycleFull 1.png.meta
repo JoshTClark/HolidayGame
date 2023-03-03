@@ -122,8 +122,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 64
-        height: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,10 +141,10 @@ TextureImporter:
       name: GhostWalkCycleFull 1_1
       rect:
         serializedVersion: 2
-        x: 64
+        x: 32
         y: 0
-        width: 64
-        height: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -162,10 +162,10 @@ TextureImporter:
       name: GhostWalkCycleFull 1_2
       rect:
         serializedVersion: 2
-        x: 128
+        x: 64
         y: 0
-        width: 64
-        height: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -183,10 +183,10 @@ TextureImporter:
       name: GhostWalkCycleFull 1_3
       rect:
         serializedVersion: 2
-        x: 192
+        x: 96
         y: 0
-        width: 64
-        height: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -204,10 +204,10 @@ TextureImporter:
       name: GhostWalkCycleFull 1_4
       rect:
         serializedVersion: 2
-        x: 256
+        x: 128
         y: 0
-        width: 64
-        height: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -225,10 +225,10 @@ TextureImporter:
       name: GhostWalkCycleFull 1_5
       rect:
         serializedVersion: 2
-        x: 320
+        x: 160
         y: 0
-        width: 64
-        height: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -246,10 +246,10 @@ TextureImporter:
       name: GhostWalkCycleFull 1_6
       rect:
         serializedVersion: 2
-        x: 384
+        x: 192
         y: 0
-        width: 64
-        height: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -267,10 +267,10 @@ TextureImporter:
       name: GhostWalkCycleFull 1_7
       rect:
         serializedVersion: 2
-        x: 448
+        x: 224
         y: 0
-        width: 64
-        height: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -278,8 +278,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 14a6fdb5a33d12b4c8bc9d11f84c839a
-      internalID: -1201556268
+      spriteID: 1c55e9a07f4c2834797aa2bbaa45ecc0
+      internalID: -93592949
       vertices: []
       indices: 
       edges: []
@@ -300,7 +300,7 @@ TextureImporter:
       GhostWalkCycleFull 1_6: 1474859793
       GhostWalkCycleFull 1_1: 1814206391
       GhostWalkCycleFull 1_2: -969284819
-      GhostWalkCycleFull 1_7: -1201556268
+      GhostWalkCycleFull 1_7: -93592949
       GhostWalkCycleFull 1_5: 1385534065
       GhostWalkCycleFull 1_3: -604535790
   spritePackingTag: 

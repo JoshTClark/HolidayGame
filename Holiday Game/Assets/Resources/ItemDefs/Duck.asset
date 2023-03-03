@@ -25,14 +25,14 @@ MonoBehaviour:
     - lvlName: Day of the Duck
       desc: Increases All Stats
       statChanges:
-        hpAdd: 20
-        speedAdd: 0.5
-        damageAdd: 1
-        attackSpeedAdd: 0.2
-        armorAdd: 1
+        hpAdd: 10
+        speedAdd: 0.2
+        damageAdd: 0.5
+        attackSpeedAdd: 0.1
+        armorAdd: 0.5
         regenAdd: 1
         critChanceAdd: 0.05
-        critDamageAdd: 0.25
+        critDamageAdd: 0.2
         hpMult: 1
         speedMult: 1
         damageMult: 1
@@ -45,14 +45,14 @@ MonoBehaviour:
     - lvlName: Day of the Duck
       desc: Increases All Stats
       statChanges:
-        hpAdd: 25
-        speedAdd: 0.5
-        damageAdd: 1
-        attackSpeedAdd: 0.2
-        armorAdd: 1
+        hpAdd: 10
+        speedAdd: 0.2
+        damageAdd: 0.5
+        attackSpeedAdd: 0.1
+        armorAdd: 0.5
         regenAdd: 1
         critChanceAdd: 0.05
-        critDamageAdd: 0.25
+        critDamageAdd: 0.2
         hpMult: 1
         speedMult: 1
         damageMult: 1
@@ -65,14 +65,14 @@ MonoBehaviour:
     - lvlName: Day of the Duck
       desc: Increases All Stats
       statChanges:
-        hpAdd: 25
-        speedAdd: 0.5
-        damageAdd: 1
-        attackSpeedAdd: 0.2
-        armorAdd: 1
+        hpAdd: 10
+        speedAdd: 0.2
+        damageAdd: 0.5
+        attackSpeedAdd: 0.1
+        armorAdd: 0.5
         regenAdd: 1
         critChanceAdd: 0.05
-        critDamageAdd: 0.25
+        critDamageAdd: 0.2
         hpMult: 1
         speedMult: 1
         damageMult: 1
@@ -85,14 +85,14 @@ MonoBehaviour:
     - lvlName: Day of the Duck
       desc: Increases All Stats
       statChanges:
-        hpAdd: 25
-        speedAdd: 0.5
-        damageAdd: 1
-        attackSpeedAdd: 0.2
-        armorAdd: 1
+        hpAdd: 10
+        speedAdd: 0.2
+        damageAdd: 0.5
+        attackSpeedAdd: 0.1
+        armorAdd: 0.5
         regenAdd: 1
         critChanceAdd: 0.05
-        critDamageAdd: 0.25
+        critDamageAdd: 0.2
         hpMult: 1
         speedMult: 1
         damageMult: 1
@@ -105,14 +105,14 @@ MonoBehaviour:
     - lvlName: Day of the Duck
       desc: Increases All Stats
       statChanges:
-        hpAdd: 25
-        speedAdd: 0.5
-        damageAdd: 1
-        attackSpeedAdd: 0.2
-        armorAdd: 1
+        hpAdd: 10
+        speedAdd: 0.2
+        damageAdd: 0.5
+        attackSpeedAdd: 0.1
+        armorAdd: 0.5
         regenAdd: 1
         critChanceAdd: 0.05
-        critDamageAdd: 0.25
+        critDamageAdd: 0.2
         hpMult: 1
         speedMult: 1
         damageMult: 1
@@ -125,14 +125,14 @@ MonoBehaviour:
     - lvlName: Day of the Duck
       desc: Increases All Stats
       statChanges:
-        hpAdd: 25
-        speedAdd: 0.5
-        damageAdd: 1
-        attackSpeedAdd: 0.2
-        armorAdd: 1
+        hpAdd: 10
+        speedAdd: 0.2
+        damageAdd: 0.5
+        attackSpeedAdd: 0.1
+        armorAdd: 0.5
         regenAdd: 1
         critChanceAdd: 0.05
-        critDamageAdd: 0.25
+        critDamageAdd: 0.2
         hpMult: 1
         speedMult: 1
         damageMult: 1

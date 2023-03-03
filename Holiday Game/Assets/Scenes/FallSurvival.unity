@@ -132,7 +132,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 520582315, guid: 9d969f72a70fb0a438be10e67e3b0fe6, type: 3}
       propertyPath: spawnChance
-      value: 25
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 520582315, guid: 9d969f72a70fb0a438be10e67e3b0fe6, type: 3}
       propertyPath: contents.Array.size
@@ -314,6 +314,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3841309205968721747, guid: 63e4eaf74c005b145a2bb0c416415e86, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8704142796787333609, guid: 63e4eaf74c005b145a2bb0c416415e86, type: 3}
       propertyPath: levelData
       value: 
@@ -373,6 +377,10 @@ PrefabInstance:
     - target: {fileID: 8704142796787333615, guid: 63e4eaf74c005b145a2bb0c416415e86, type: 3}
       propertyPath: m_Name
       value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 9010720163605277837, guid: 63e4eaf74c005b145a2bb0c416415e86, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63e4eaf74c005b145a2bb0c416415e86, type: 3}
@@ -545,12 +553,24 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 520582315, guid: 9d969f72a70fb0a438be10e67e3b0fe6, type: 3}
       propertyPath: spawnChance
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 520582315, guid: 9d969f72a70fb0a438be10e67e3b0fe6, type: 3}
       propertyPath: contents.Array.size
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 520582315, guid: 9d969f72a70fb0a438be10e67e3b0fe6, type: 3}
+      propertyPath: contents.Array.data[0].presetItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 1bc11125d1e7e3f45b5352e2db4bf476, type: 2}
+    - target: {fileID: 520582315, guid: 9d969f72a70fb0a438be10e67e3b0fe6, type: 3}
+      propertyPath: contents.Array.data[1].presetItem
+      value: 
+      objectReference: {fileID: 11400000, guid: a91aef9daf87f6c4db422bf454b6327d, type: 2}
+    - target: {fileID: 520582315, guid: 9d969f72a70fb0a438be10e67e3b0fe6, type: 3}
+      propertyPath: contents.Array.data[2].presetItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c1d2b0074040d3498c64541c4a76685, type: 2}
     - target: {fileID: 217916885906758609, guid: 9d969f72a70fb0a438be10e67e3b0fe6, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -10985,7 +11005,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 520582315, guid: 9d969f72a70fb0a438be10e67e3b0fe6, type: 3}
       propertyPath: spawnChance
-      value: 50
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 520582315, guid: 9d969f72a70fb0a438be10e67e3b0fe6, type: 3}
       propertyPath: contents.Array.size
@@ -149358,7 +149378,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 520582315, guid: 9d969f72a70fb0a438be10e67e3b0fe6, type: 3}
       propertyPath: spawnChance
-      value: 50
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 520582315, guid: 9d969f72a70fb0a438be10e67e3b0fe6, type: 3}
       propertyPath: contents.Array.size
@@ -149423,7 +149443,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 520582315, guid: 9d969f72a70fb0a438be10e67e3b0fe6, type: 3}
       propertyPath: spawnChance
-      value: 50
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 520582315, guid: 9d969f72a70fb0a438be10e67e3b0fe6, type: 3}
       propertyPath: contents.Array.size

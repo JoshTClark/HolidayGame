@@ -173,7 +173,7 @@ MonoBehaviour:
       outWeight: 0
     - serializedVersion: 3
       time: 100
-      value: 10000
+      value: 15000
       inSlope: 2
       outSlope: 2
       tangentMode: 0
@@ -210,6 +210,7 @@ MonoBehaviour:
   maxWeapons: 4
   waitingForLevels: 0
   godMode: 0
+  canMove: 1
 --- !u!61 &1069143796030833450
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -301,6 +302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleDelay: 0.15
+  lifetime: 0.5
   createParticles: 1
 --- !u!1 &6916581085816787048
 GameObject:

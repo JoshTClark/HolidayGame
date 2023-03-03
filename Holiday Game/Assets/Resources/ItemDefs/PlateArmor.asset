@@ -42,7 +42,7 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - lvlName: Plate Armor
+    - lvlName: Heavy Plating
       desc: Gain Armor and a small amount of health
       statChanges:
         hpAdd: 10
@@ -62,7 +62,7 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - lvlName: Plate Armor
+    - lvlName: Heavy Plating
       desc: Gain Armor and a small amount of health
       statChanges:
         hpAdd: 10
@@ -82,86 +82,20 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-  - pathName: Heavy Plating
-    previousPath: Plate Armor
-    numLevels: 2
-    levelDescriptions:
-    - lvlName: 
-      desc: Gain Armor
-      statChanges:
-        hpAdd: 0
-        speedAdd: 0
-        damageAdd: 0
-        attackSpeedAdd: 0
-        armorAdd: 1.5
-        regenAdd: 0
-        critChanceAdd: 0
-        critDamageAdd: 0
-        hpMult: 0
-        speedMult: 0
-        damageMult: 0
-        attackSpeedMult: 0
-        armorMult: 0
-        regenMult: 0
-        critChanceMult: 0
-        critDamageMult: 0
-        XPMult: 0
-    - lvlName: 
-      desc: Gain Armor
-      statChanges:
-        hpAdd: 0
-        speedAdd: 0
-        damageAdd: 0
-        attackSpeedAdd: 0
-        armorAdd: 1.5
-        regenAdd: 0
-        critChanceAdd: 0
-        critDamageAdd: 0
-        hpMult: 0
-        speedMult: 0
-        damageMult: 0
-        attackSpeedMult: 0
-        armorMult: 0
-        regenMult: 0
-        critChanceMult: 0
-        critDamageMult: 0
-        XPMult: 0
   - pathName: Spiked Armor
-    previousPath: Heavy Plating
-    numLevels: 1
+    previousPath: Plate Armor
+    numLevels: 3
     levelDescriptions:
-    - lvlName: 
-      desc: Gain Armor and reflects damage based on armor.
+    - lvlName: Spiked Armor I
+      desc: 'Deals damage back to enemies upon taking damage
+
+        MaxHP+, Armor+'
       statChanges:
         hpAdd: 0
         speedAdd: 0
         damageAdd: 0
         attackSpeedAdd: 0
         armorAdd: 1.5
-        regenAdd: 0
-        critChanceAdd: 0
-        critDamageAdd: 0
-        hpMult: 0
-        speedMult: 0
-        damageMult: 0
-        attackSpeedMult: 0
-        armorMult: 0
-        regenMult: 0
-        critChanceMult: 0
-        critDamageMult: 0
-        XPMult: 0
-  - pathName: Better Blacksmithing
-    previousPath: Plate Armor
-    numLevels: 2
-    levelDescriptions:
-    - lvlName: 
-      desc: Gain armor, hp and move speed
-      statChanges:
-        hpAdd: 10
-        speedAdd: 0.25
-        damageAdd: 0
-        attackSpeedAdd: 0
-        armorAdd: 0.5
         regenAdd: 0
         critChanceAdd: 0
         critDamageAdd: 0
@@ -174,14 +108,38 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - lvlName: 
-      desc: Gain armor, hp and move speed
+    - lvlName: Spiked Armor II
+      desc: 'Damage Reflected is increased
+
+        MaxHP+, Armor+'
       statChanges:
-        hpAdd: 10
-        speedAdd: 0.25
+        hpAdd: 0
+        speedAdd: 0
         damageAdd: 0
         attackSpeedAdd: 0
-        armorAdd: 0.5
+        armorAdd: 1.5
+        regenAdd: 0
+        critChanceAdd: 0
+        critDamageAdd: 0
+        hpMult: 1
+        speedMult: 1
+        damageMult: 1
+        attackSpeedMult: 1
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1
+    - lvlName: Spiked Armor III
+      desc: 'Damage reflected is further increased
+
+        MaxHP+, Armor+'
+      statChanges:
+        hpAdd: 0
+        speedAdd: 0
+        damageAdd: 0
+        attackSpeedAdd: 0
+        armorAdd: 1.5
         regenAdd: 0
         critChanceAdd: 0
         critDamageAdd: 0
@@ -195,17 +153,63 @@ MonoBehaviour:
         critDamageMult: 1
         XPMult: 1
   - pathName: Mythril Coating
-    previousPath: Better Blacksmithing
-    numLevels: 1
+    previousPath: Plate Armor
+    numLevels: 3
     levelDescriptions:
-    - lvlName: 
-      desc: Gain Armor, HP and take 25% reduced damage from non-boss enemies
+    - lvlName: 'Silver Coating '
+      desc: 'Gain 10% Damage Reduction
+
+        HP+; Armor+; Speed+'
       statChanges:
         hpAdd: 10
-        speedAdd: 0.5
+        speedAdd: 0.25
         damageAdd: 0
         attackSpeedAdd: 0
-        armorAdd: 1
+        armorAdd: 0.5
+        regenAdd: 0
+        critChanceAdd: 0
+        critDamageAdd: 0
+        hpMult: 1
+        speedMult: 1
+        damageMult: 1
+        attackSpeedMult: 1
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1
+    - lvlName: Gold Coating
+      desc: 'Damage Reduction increased to 20%
+
+        HP+; Armor+; Speed+'
+      statChanges:
+        hpAdd: 10
+        speedAdd: 0.25
+        damageAdd: 0
+        attackSpeedAdd: 0
+        armorAdd: 0.5
+        regenAdd: 0
+        critChanceAdd: 0
+        critDamageAdd: 0
+        hpMult: 1
+        speedMult: 1
+        damageMult: 1
+        attackSpeedMult: 1
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1
+    - lvlName: 'Mythril Coating '
+      desc: 'Damage Reduction increased to 20%
+
+        HP+; Armor+; Speed+'
+      statChanges:
+        hpAdd: 10
+        speedAdd: 0.25
+        damageAdd: 0
+        attackSpeedAdd: 0
+        armorAdd: 0.5
         regenAdd: 0
         critChanceAdd: 0
         critDamageAdd: 0

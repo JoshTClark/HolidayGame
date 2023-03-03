@@ -317,4 +317,9 @@ public class SaveSceneManager : MonoBehaviour
     {
         state = SceneState.Options;
     }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }

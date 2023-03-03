@@ -122,8 +122,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 10
-        height: 10
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,10 +141,10 @@ TextureImporter:
       name: CoinAnimFullCycle_1
       rect:
         serializedVersion: 2
-        x: 10
+        x: 20
         y: 0
-        width: 10
-        height: 10
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -162,10 +162,10 @@ TextureImporter:
       name: CoinAnimFullCycle_2
       rect:
         serializedVersion: 2
-        x: 20
+        x: 40
         y: 0
-        width: 10
-        height: 10
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -183,10 +183,10 @@ TextureImporter:
       name: CoinAnimFullCycle_3
       rect:
         serializedVersion: 2
-        x: 30
+        x: 60
         y: 0
-        width: 10
-        height: 10
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -204,10 +204,10 @@ TextureImporter:
       name: CoinAnimFullCycle_4
       rect:
         serializedVersion: 2
-        x: 40
+        x: 80
         y: 0
-        width: 10
-        height: 10
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -225,10 +225,10 @@ TextureImporter:
       name: CoinAnimFullCycle_5
       rect:
         serializedVersion: 2
-        x: 50
+        x: 100
         y: 0
-        width: 10
-        height: 10
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

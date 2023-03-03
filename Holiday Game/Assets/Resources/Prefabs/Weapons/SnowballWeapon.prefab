@@ -45,9 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 2
+  weaponDef: {fileID: 0}
+  level: 0
   index: 0
-  upgradeIndex: 12
-  icon: {fileID: 21300000, guid: 3d458aca5a1ce524ea243b16f676bd34, type: 3}
+  icon: {fileID: 21300000, guid: 4d1df5a13ccc2264fae9da15e450960d, type: 3}
   timer: 0
   owner: {fileID: 0}
   canFire: 0

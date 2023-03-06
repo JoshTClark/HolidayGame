@@ -80,12 +80,14 @@ public class MagicMissile : Weapon
                     firedShots++;
                     volleyTimer = 0.0f;
 
+                    /*
                     if (!source.isPlaying || !hasFired)
                     {
                         hasFired= true;
                         source.Stop();
                         WeaponSound();
                     }
+                    */
                 }
             }
             else

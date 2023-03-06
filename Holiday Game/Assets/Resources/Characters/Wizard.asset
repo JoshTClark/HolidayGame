@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 1069143796030833455, guid: a487fa23d2b6b8f429579c3891e1c79b, type: 3}
   characterName: <#F4831B>Wizard
-  desc: '* Starts with the <color=#F4831B><size=+8>Candy Corn Rifle</size></color>
+  desc: '* Starts with the <color=#F4831B><size=+8>Magic Missile</size></color>
 
     *
     Starts in <color=#902EBB><size=+8>Fall</size></color>

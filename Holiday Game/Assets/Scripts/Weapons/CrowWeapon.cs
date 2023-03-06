@@ -30,8 +30,4 @@ public class CrowWeapon : Weapon
             ResetTimer();
         }
     }
-    protected override void WeaponSound()
-    {
-        return;
-    }
 }

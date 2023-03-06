@@ -55,7 +55,6 @@ public class PumpkinBombBehavior : BombProjectileBase
             }
         }
         */
-        SoundManager.instance.PumpkinExplosion();
         base.OnDeath();
     }
 

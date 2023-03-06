@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Pool;
 
 public abstract class Weapon : MonoBehaviour
 {
@@ -33,8 +31,8 @@ public abstract class Weapon : MonoBehaviour
 
 
     // Audio
-    [SerializeField] protected List<AudioClip> audioClips;
-    [SerializeField] protected AudioSource source;
+    [SerializeField] 
+    protected AudioClip soundEffect;
     
 
     public float Delay
@@ -247,7 +245,6 @@ public abstract class Weapon : MonoBehaviour
     public abstract void OnUpdate();
 
     public abstract void CalcStats();
-    protected abstract void WeaponSound();
 
     [System.Serializable]
     private class WeaponStat

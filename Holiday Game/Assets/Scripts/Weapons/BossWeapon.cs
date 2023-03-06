@@ -91,9 +91,4 @@ public class BossWeapon : Weapon
             }
         }
     }
-
-    protected override void WeaponSound()
-    {
-        return;
-    }
 }

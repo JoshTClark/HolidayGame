@@ -8,7 +8,6 @@ public class MagicMissile : Weapon
     private float volleyTimer = 0.2f;
     private float shotDelay = 0.6f;
     private int firedShots = 0;
-    private bool hasFired = false;
 
     public override void CalcStats()
     {
@@ -80,14 +79,7 @@ public class MagicMissile : Weapon
                     firedShots++;
                     volleyTimer = 0.0f;
 
-                    /*
-                    if (!source.isPlaying || !hasFired)
-                    {
-                        hasFired= true;
-                        source.Stop();
-                        WeaponSound();
-                    }
-                    */
+
                 }
             }
             else
@@ -96,17 +88,7 @@ public class MagicMissile : Weapon
                 doVolley = false;
                 volleyTimer = 0.2f;
                 firedShots = 0;
-                hasFired= false;    
             }
         }
-    }
-
-    /// <summary>
-    /// Randomly chooses a sound clip from the list and plays it once
-    /// </summary>
-    protected override void WeaponSound()
-    {
-        AudioClip clip = audioClips[Random.Range(0, audioClips.Count)];
-        source.PlayOneShot(clip);
     }
 }

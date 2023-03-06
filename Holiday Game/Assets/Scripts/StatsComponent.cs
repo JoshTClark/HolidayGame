@@ -236,7 +236,6 @@ public abstract class StatsComponent : MonoBehaviour
         if (this.gameObject.GetComponent<Player>())
         {
             ((Player)this).waitingForLevels++;
-            SoundManager.instance.LevelUp();
         }
     }
 

@@ -36,8 +36,4 @@ public class BossWeapon2 : Weapon
             ResetTimer();
         }
     }
-    protected override void WeaponSound()
-    {
-        return;
-    }
 }

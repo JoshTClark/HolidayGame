@@ -32,10 +32,6 @@ public class CupidArrow : Weapon
 
         if (canFire && e)
         {
-            // Play weapon sound
-            SoundManager.instance.ArrowHit();
-            
-
             ProjectileBase p = ProjectileManager.GetProjectile(ResourceManager.ProjectileIndex.CupidArrow);
             p.transform.position = this.transform.position;
             p.transform.rotation = transform.rotation;
@@ -49,9 +45,5 @@ public class CupidArrow : Weapon
             p.SetDamageInfo(info);
             ResetTimer();
         }
-    }
-    protected override void WeaponSound()
-    {
-        return;
     }
 }

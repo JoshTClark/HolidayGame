@@ -69,8 +69,4 @@ public class FireworkWeapon : Weapon
             ResetTimer();
         }
     }
-    protected override void WeaponSound()
-    {
-        return;
-    }
 }

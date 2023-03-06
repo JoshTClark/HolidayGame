@@ -45,8 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 1
+  weaponDef: {fileID: 0}
+  level: 0
   index: 9
-  upgradeIndex: 61
   icon: {fileID: 0}
   timer: 0
   owner: {fileID: 0}
@@ -56,3 +57,4 @@ MonoBehaviour:
   attackSpeedMultiplier: 1
   pierce: 1
   extraStats: []
+  soundEffect: {fileID: 8300000, guid: 4b9e3e7ac868a91448e46c87f461137e, type: 3}

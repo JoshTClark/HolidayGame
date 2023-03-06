@@ -52,8 +52,4 @@ public class FeralGroundHog : Weapon
             }
         }
     }
-    protected override void WeaponSound()
-    {
-        return;
-    }
 }

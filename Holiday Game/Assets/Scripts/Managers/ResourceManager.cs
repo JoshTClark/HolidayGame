@@ -61,7 +61,7 @@ public class ResourceManager
     public enum ItemIndex
     {
         AttackSpeed = 0,
-        Damage = 1,
+        Vampire = 1,
         MoveSpeed = 2,
         SwordWeapon = 3,
         CritChance = 4,

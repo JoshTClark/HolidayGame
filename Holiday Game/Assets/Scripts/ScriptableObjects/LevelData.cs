@@ -11,9 +11,9 @@ public class LevelData : ScriptableObject
     public int startHour = 12;
     public int enemiesToDefeat = 0;
     public int daysToSurvive = 0;
-    public float levelHealthMultiplier = 1;
-    public float levelDamageMultiplier = 1;
-    public float levelSpeedMultiplier = 1;
+    public float levelHealthMultiplier = 1f;
+    public float levelDamageMultiplier = 1f;
+    public float levelSpeedMultiplier = 1f;
     public bool isBossLevel = false;
     public List<Wave> waves = new List<Wave>();
 
@@ -64,12 +64,12 @@ public class LevelData : ScriptableObject
         public ResourceManager.EnemyIndex enemyIndex;
         public int amountToSpawn;
         public bool respawn;
-        public float healthMultiplier;
-        public float damageMultiplier;
-        public float speedMultiplier;
+        public float healthMultiplier = 1f;
+        public float damageMultiplier = 1f;
+        public float speedMultiplier = 1f;
 
         [HideInInspector]
-        public float levelHealthMultiplier, levelDamageMultiplier, levelSpeedMultiplier;
+        public float levelHealthMultiplier = 1f, levelDamageMultiplier = 1f, levelSpeedMultiplier = 1f;
     }
 }
 

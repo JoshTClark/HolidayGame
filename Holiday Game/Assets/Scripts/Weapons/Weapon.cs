@@ -67,7 +67,7 @@ public abstract class Weapon : MonoBehaviour
     void Update()
     {
         CalcStats();
-        if (GameManager.instance.State == GameManager.GameState.Normal)
+        if (GameManager.instance.State == GameManager.GameState.MainGame)
         {
             if (!owner.HasBuff(ResourceManager.BuffIndex.Stunned))
             {

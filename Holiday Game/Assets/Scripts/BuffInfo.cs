@@ -17,7 +17,7 @@ public class BuffInfo
     // Update is called once per frame
     public void DoTick()
     {
-        if (GameManager.instance.State == GameManager.GameState.Normal && active)
+        if (GameManager.instance.State == GameManager.GameState.MainGame && active)
         {
             durationTimer += Time.deltaTime;
 

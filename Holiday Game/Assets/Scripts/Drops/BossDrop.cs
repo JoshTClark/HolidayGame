@@ -9,8 +9,10 @@ public class BossDrop : DropBase
         //if colliding with player
         if (other.gameObject.GetComponent<Player>())
         {
+            /*
             GameManager.instance.PlayerPickupBossDrop(1);
             pool.Release(this);
+            */
         }
     }
 }

@@ -53,7 +53,7 @@ public abstract class ProjectileBase : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.instance.State == GameManager.GameState.Normal)
+        if (GameManager.instance.State == GameManager.GameState.MainGame)
         {
             float delta = Time.deltaTime;
 

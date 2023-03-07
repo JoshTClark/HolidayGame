@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 {
     public enum GameState
     {
-        Normal,
+        MainGame,
         Paused,
         UpgradeMenu,
         GameOver,
@@ -28,16 +28,7 @@ public class GameManager : MonoBehaviour
     public Camera cam;
 
     [SerializeField]
-    private Canvas ui;
-
-    [SerializeField]
-    private TMP_Text objectiveDisplay, playerStats, playerLevel, hpText, numberEffect, dashText, levelUpText, gemsText;
-
-    [SerializeField]
-    private Image xpBar, hpBar, dashTimer, cursor;
-
-    [SerializeField]
-    private CanvasRenderer playerStatsPanel, pausedPanel, gamePanel, upgradePanel, gameOverPanel, effectsPanel, debugPanel, levelCompletedPanel, optionsMenu;
+    private GameUIManager UIManager;
 
     [SerializeField]
     private InputActionReference displayStats, pauseGame, giveXP, playerDash, godMode, levelUpButton;
@@ -51,23 +42,17 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     public float cornKills, snowballKills, arrowKills, pumpkinKills, fireworkKills;
 
-    public GameObject weaponIconPrefab, bossHealth, bossHealthMask;
-
     private float baseTimeScale = 1f;
     private bool slowTime = false;
     public float slowTimeScale = 0.5f;
 
-    public bool showDamageNumbers = true;
-    public bool showWeaponIcons = true;
     private float time = 0f;
-    private GameState state = GameState.Normal;
+    private GameState state = GameState.MainGame;
     private bool paused = false;
-    private int upgradesToGive = 0;
     private float dayLength = 120f;
     public int currentDay = 1;
     public int currentHour = 12;
     private List<string> seasonsOrdered = new List<string>();
-    public List<WeaponIcon> weaponIcons = new List<WeaponIcon>();
     public int enemiesDefeated = 0;
     private bool levelEnded = false;
     public bool doSpawns = true;
@@ -99,6 +84,7 @@ public class GameManager : MonoBehaviour
     public GameState State
     {
         get { return state; }
+        set { state = value; }
     }
 
     // Only a single gamemanager should ever exist so we can always get it here
@@ -155,8 +141,6 @@ public class GameManager : MonoBehaviour
             levelData = session.currentLevel;
         }
 
-        Cursor.visible = false;
-        debugPanel.GetComponent<DebugPanel>().Init();
         ResourceManager.GetBuffDef(ResourceManager.BuffIndex.Burning);
 
         seasonsOrdered.Add("Fall");
@@ -176,7 +160,7 @@ public class GameManager : MonoBehaviour
 
         displayStats.action.performed += (InputAction.CallbackContext callback) =>
         {
-            debugPanel.gameObject.SetActive(!debugPanel.gameObject.activeSelf);
+            UIManager.ToggleDebug();
         };
 
         giveXP.action.performed += (InputAction.CallbackContext callback) =>
@@ -186,7 +170,7 @@ public class GameManager : MonoBehaviour
 
         playerDash.action.performed += (InputAction.CallbackContext callback) =>
         {
-            if (state == GameState.Normal)
+            if (state == GameState.MainGame)
             {
                 player.DoDash();
             }
@@ -194,21 +178,11 @@ public class GameManager : MonoBehaviour
 
         godMode.action.performed += (InputAction.CallbackContext callback) =>
         {
-            if (state == GameState.Normal)
+            if (state == GameState.MainGame)
             {
                 player.godMode = !player.godMode;
             }
         };
-
-        for (int i = 0; i < player.maxWeapons; i++)
-        {
-            GameObject icon = Instantiate<GameObject>(weaponIconPrefab, gamePanel.transform);
-            float space = 0.08f * player.maxWeapons;
-
-            icon.GetComponent<RectTransform>().anchorMin = new Vector2((1f - (0.08f * player.maxWeapons)) + (0.08f * i) + 0.04f, 0.05f);
-            icon.GetComponent<RectTransform>().anchorMax = new Vector2((1f - (0.08f * player.maxWeapons)) + (0.08f * i) + 0.04f, 0.05f);
-            weaponIcons.Add(icon.GetComponentInChildren<WeaponIcon>());
-        }
 
         if (Constants.DEBUG)
         {
@@ -224,18 +198,8 @@ public class GameManager : MonoBehaviour
             DoLevelEnd();
         };
 
-        pausedPanel.gameObject.SetActive(false);
-        upgradePanel.gameObject.SetActive(false);
-        gamePanel.gameObject.SetActive(true);
-        gameOverPanel.gameObject.SetActive(false);
-        debugPanel.gameObject.SetActive(false);
-        levelCompletedPanel.gameObject.SetActive(false);
-        optionsMenu.gameObject.SetActive(false);
-    }
-
-    public void OnEnable()
-    {
-
+        // Initialize the UI manager
+        UIManager.Init(player);
     }
 
     public void OnDisable()
@@ -248,21 +212,19 @@ public class GameManager : MonoBehaviour
         levelUpButton.action.Disable();
         slowToggle.Disable();
         completeLevel.Disable();
-
     }
 
     void Update()
     {
-        cursor.rectTransform.position = new Vector3(Mouse.current.position.ReadValue().x, Mouse.current.position.ReadValue().y, 0);
-        cursor.transform.SetAsLastSibling();
+        // Updating the UI
+        UIManager.UpdateUI(state, player, this);
 
+        // Game Logic
         switch (state)
         {
-            case GameState.GameOver:
-                gamePanel.gameObject.SetActive(false);
-                gameOverPanel.gameObject.SetActive(true);
+            case GameState.GameOver: // GAME OVER
                 break;
-            case GameState.Normal:
+            case GameState.MainGame:
                 player.canMove = true;
                 if (!slowTime)
                 {
@@ -279,95 +241,14 @@ public class GameManager : MonoBehaviour
                 }
                 UpdateDate();
 
-                // Updating displays
-                objectiveDisplay.rectTransform.anchorMin = new Vector2(objectiveDisplay.rectTransform.anchorMin.x, 0.94f);
-                objectiveDisplay.rectTransform.anchorMax = new Vector2(objectiveDisplay.rectTransform.anchorMax.x, 1f);
-                bossHealth.SetActive(false);
-                if (levelData.isBossLevel && EnemyManager.instance.boss && EnemyManager.instance.boss.MaxHp != 0)
-                {
-                    objectiveDisplay.text = "Defeat the boss";
-                    bossHealth.SetActive(true);
-                    bossHealthMask.GetComponent<RectTransform>().anchorMax = new Vector2(EnemyManager.instance.boss.CurrentHP / EnemyManager.instance.boss.MaxHp, bossHealthMask.GetComponent<RectTransform>().anchorMax.y);
-                    objectiveDisplay.rectTransform.anchorMin = new Vector2(objectiveDisplay.rectTransform.anchorMin.x, 0.89f);
-                    objectiveDisplay.rectTransform.anchorMax = new Vector2(objectiveDisplay.rectTransform.anchorMax.x, 0.95f);
-                }
-                else if (levelData.daysToSurvive > 0 && levelData.daysToSurvive >= currentDay)
-                {
-                    objectiveDisplay.text = "Day " + currentDay + "/" + levelData.daysToSurvive;
-                }
-                else if (levelData.enemiesToDefeat > 0 && levelData.enemiesToDefeat > enemiesDefeated)
-                {
-                    objectiveDisplay.text = enemiesDefeated + "/" + levelData.enemiesToDefeat + " Enemies Defeated";
-                }
-                else
-                {
-                    objectiveDisplay.text = "Find the exit";
-                }
-                dashText.text = player.currentDashes.ToString();
-                xpBar.GetComponent<RectTransform>().anchorMax = new Vector2(player.GetPercentToNextLevel(), xpBar.GetComponent<RectTransform>().anchorMax.y);
-                dashTimer.GetComponent<RectTransform>().anchorMax = new Vector2(1 - (player.dashCooldownTimer / player.DashCooldown), dashTimer.GetComponent<RectTransform>().anchorMax.y);
-                playerLevel.text = "Level: " + player.Level;
-                /*
-                Debug.Log(player.CurrentHP + " current hp");
-                Debug.Log(player.MaxHp + " max hp");
-                Debug.Log(player.GetPercentHealth() + "% player health");
-                Debug.Log(hpBar.rectTransform.anchorMin + " anchor min");
-                Debug.Log(hpBar.rectTransform.anchorMax + " anchor max");
-                */
-                hpBar.rectTransform.anchorMax = new Vector2(player.GetPercentHealth(), hpBar.rectTransform.anchorMax.y);
-                hpText.text = player.CurrentHP.ToString("0") + "/" + player.MaxHp.ToString("0");
-
                 // Moving the camera
                 Vector3 camPos = new Vector3(Player.transform.position.x, Player.transform.position.y, cam.transform.position.z);
                 cam.transform.position = camPos;
 
-                // Removing icons
-                foreach (WeaponIcon icon in weaponIcons)
-                {
-                    if (!player.HasWeapon(icon.weaponIndex))
-                    {
-                        icon.weaponIndex = ResourceManager.WeaponIndex.Null;
-                        //icon.gameObject.SetActive(false);
-                    }
-                }
-
-                // Adding new icons
-                foreach (Weapon weapon in player.weapons)
-                {
-                    bool hasIcon = false;
-                    foreach (WeaponIcon icon in weaponIcons)
-                    {
-                        if (weapon.index == icon.weaponIndex)
-                        {
-                            hasIcon = true;
-                        }
-                    }
-
-                    if (!hasIcon)
-                    {
-                        int i = 0;
-                        while (weaponIcons[i].weaponIndex != ResourceManager.WeaponIndex.Null)
-                        {
-                            i++;
-                        }
-                        weaponIcons[i].weaponIndex = weapon.index;
-                        weaponIcons[i].sprite = weapon.icon;
-                        weaponIcons[i].gameObject.SetActive(true);
-                    }
-                }
-
-                if (player.waitingForLevels > 0)
-                {
-                    levelUpText.gameObject.SetActive(true);
-                }
-                else { levelUpText.gameObject.SetActive(false); }
-
                 // Pause screen
                 if (paused)
                 {
-                    DisplayStats();
                     state = GameState.Paused;
-                    pausedPanel.gameObject.SetActive(true);
                 }
 
                 // GameOver
@@ -376,70 +257,21 @@ public class GameManager : MonoBehaviour
                     state = GameState.GameOver;
                 }
                 break;
-            case GameState.Paused:
+            case GameState.Paused: // PAUSE
                 Time.timeScale = 0f;
-                pausedPanel.gameObject.SetActive(true);
-                optionsMenu.gameObject.SetActive(false);
                 if (!paused)
                 {
-                    state = GameState.Normal;
-                    pausedPanel.gameObject.SetActive(false);
+                    state = GameState.MainGame;
                 }
                 break;
-            case GameState.UpgradeMenu:
+            case GameState.UpgradeMenu: // UPGRADE MENU
                 Time.timeScale = 0f;
-                upgradePanel.gameObject.SetActive(true);
-                gamePanel.gameObject.SetActive(false);
-                UpgradePanelManager upgradeManager = upgradePanel.GetComponent<UpgradePanelManager>();
-                if (!upgradeManager.displaying)
-                {
-                    upgradeManager.player = player;
-                    upgradeManager.SetUpgrades(4);
-                    upgradeManager.ShowOptions(upgradesToGive);
-                }
-                if (upgradeManager.selected)
-                {
-                    upgradesToGive--;
-                    upgradeManager.Clear();
-                    if (upgradesToGive <= 0)
-                    {
-                        state = GameState.Normal;
-                        upgradePanel.gameObject.SetActive(false);
-                        gamePanel.gameObject.SetActive(true);
-                    }
-                    else
-                    {
-                        upgradeManager.player = player;
-                        upgradeManager.SetUpgrades(4);
-                        upgradeManager.ShowOptions(upgradesToGive);
-                    }
-                }
                 break;
-            case GameState.LevelComplete:
-                pausedPanel.gameObject.SetActive(false);
-                upgradePanel.gameObject.SetActive(false);
-                gamePanel.gameObject.SetActive(false);
-                gameOverPanel.gameObject.SetActive(false);
-                debugPanel.gameObject.SetActive(false);
-                levelCompletedPanel.gameObject.SetActive(true);
+            case GameState.LevelComplete: // LEVEL COMPLETE
                 break;
-            case GameState.OptionsMenu:
-                pausedPanel.gameObject.SetActive(false);
-                upgradePanel.gameObject.SetActive(false);
-                gamePanel.gameObject.SetActive(false);
-                gameOverPanel.gameObject.SetActive(false);
-                debugPanel.gameObject.SetActive(false);
-                levelCompletedPanel.gameObject.SetActive(false);
-                optionsMenu.gameObject.SetActive(true);
+            case GameState.OptionsMenu: // OPTIONS MENU
                 break;
-            case GameState.Cutscene:
-                pausedPanel.gameObject.SetActive(false);
-                upgradePanel.gameObject.SetActive(false);
-                gamePanel.gameObject.SetActive(false);
-                gameOverPanel.gameObject.SetActive(false);
-                debugPanel.gameObject.SetActive(false);
-                levelCompletedPanel.gameObject.SetActive(false);
-                optionsMenu.gameObject.SetActive(false);
+            case GameState.Cutscene: // CUTSCENE
                 player.canMove = false;
                 cutscene.Update();
                 break;
@@ -468,7 +300,8 @@ public class GameManager : MonoBehaviour
     {
         string minutes = Mathf.Floor(time / 60f).ToString();
         string seconds = (time % 60f).ToString("00");
-        playerStats.text =
+        /*
+       playerStats.text =
             "Max HP: " + player.MaxHp +
             "\nSpeed: " + player.Speed +
             "\nDamage: " + player.Damage +
@@ -478,12 +311,7 @@ public class GameManager : MonoBehaviour
             "\nCrit Chance: " + (player.CritChance * 100) + "% " +
             "\nCrit Damage: " + player.CritDamage + "x" +
             "\nTime Alive " + minutes + ":" + seconds;
-    }
-
-    public void PlayerPickupBossDrop(int upgrades)
-    {
-        upgradesToGive = upgrades;
-        state = GameState.UpgradeMenu;
+        */
     }
 
     public void DoPlayerLevelUp()
@@ -491,39 +319,7 @@ public class GameManager : MonoBehaviour
         if (player.waitingForLevels > 0)
         {
             this.state = GameState.UpgradeMenu;
-            upgradesToGive = player.waitingForLevels;
-            player.waitingForLevels = 0;
         }
-    }
-
-    public void DisplayDamage(DamageInfo info)
-    {
-        if (info.receiver && showDamageNumbers)
-        {
-            if (info.receiver.GetType() != typeof(Player))
-            {
-                TMP_Text effect = Instantiate<TMP_Text>(numberEffect, effectsPanel.gameObject.transform);
-                effect.text = info.damage.ToString("0.0");
-                effect.color = info.GetColor();
-                if (info.damageColor == DamageInfo.DamageColor.Crit)
-                {
-                    effect.fontStyle = FontStyles.Bold;
-                }
-                effect.GetComponent<NumberEffect>().spawnPosition = info.receiver.gameObject.transform.position;
-                effect.GetComponent<NumberEffect>().canvas = ui;
-                effect.GetComponent<NumberEffect>().cam = cam;
-            }
-        }
-    }
-
-    public void DisplayHealing(float amount, StatsComponent receiver)
-    {
-        TMP_Text effect = Instantiate<TMP_Text>(numberEffect, effectsPanel.gameObject.transform);
-        effect.text = amount.ToString("0.0");
-        effect.color = new Color(0f, 1f, 0f, 1f);
-        effect.GetComponent<NumberEffect>().spawnPosition = receiver.gameObject.transform.position;
-        effect.GetComponent<NumberEffect>().canvas = ui;
-        effect.GetComponent<NumberEffect>().cam = cam;
     }
 
     public void ExitGame()
@@ -533,12 +329,12 @@ public class GameManager : MonoBehaviour
 
     public void ShowDamageNumbers(Toggle toggle)
     {
-        showDamageNumbers = toggle.isOn;
+        UIManager.showDamageNumbers = toggle.isOn;
     }
 
     public void ShowWeaponIcons(Toggle toggle)
     {
-        showWeaponIcons = toggle.isOn;
+        UIManager.showWeaponIcons = toggle.isOn;
     }
 
     /* 
@@ -616,10 +412,6 @@ public class GameManager : MonoBehaviour
 
     private void DoLevelEnd()
     {
-        if (session != null)
-        {
-            gemsText.text = "You gained " + session.difficulty * 5 + " Gems";
-        }
         state = GameState.LevelComplete;
         player.gameObject.SetActive(false);
         //EnemyManager.instance.KillAllAndStopSpawns();
@@ -648,12 +440,21 @@ public class GameManager : MonoBehaviour
         session.ToTitle();
     }
 
+    public void DisplayDamage(DamageInfo info) 
+    {
+        UIManager.DisplayDamage(info);
+    }
+
+    public void DisplayHealing(float amount, StatsComponent receiver)
+    {
+        UIManager.DisplayHealing(amount, receiver);
+    }
+
     public void ChestPickup(Chest c)
     {
         Debug.Log("Found chest");
         state = GameState.UpgradeMenu;
-        upgradesToGive = 1;
-        upgradePanel.GetComponent<UpgradePanelManager>().chest = c;
+        UIManager.DoChestPickupUpgrade(c);
     }
 
     /// <summary>
@@ -680,7 +481,7 @@ public class GameManager : MonoBehaviour
         state = GameState.OptionsMenu;
     }
 
-    public void CollectBossGem(BossGem gem) 
+    public void CollectBossGem(BossGem gem)
     {
         if (state != GameState.Cutscene)
         {

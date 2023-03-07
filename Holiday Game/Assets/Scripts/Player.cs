@@ -237,6 +237,24 @@ public class Player : StatsComponent
             hitBy.Add(info.attacker);
             invincibilityTimes.Add(iFrames);
             //hitEffect.Play();
+
+            if (this.HasItem(ResourceManager.ItemIndex.AgilityBoots))
+            {
+                Item i = this.GetItem(ResourceManager.ItemIndex.AgilityBoots);
+                if(i.HasTakenPath("Berzerker's Boots"))
+                {
+                    if (i.Level == 4)
+                    {
+                        info.damage *= 1.1f;
+                    }
+                    else if (i.Level >= 5)
+                    {
+                        info.damage *= 1.2f;
+                    }
+                    
+                }
+            }
+
             base.TakeDamage(info);
         }
     }

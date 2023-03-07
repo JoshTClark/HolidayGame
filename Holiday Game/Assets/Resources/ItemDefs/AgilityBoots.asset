@@ -16,7 +16,7 @@ MonoBehaviour:
   index: 7
   icon: {fileID: 0}
   maxLevel: 6
-  tier: 0
+  tier: 1
   paths:
   - pathName: Better Fitting Footwear
     previousPath: 
@@ -158,12 +158,12 @@ MonoBehaviour:
     numLevels: 3
     levelDescriptions:
     - lvlName: Berzerker's Boots I
-      desc: Greatly increases Atk speed, and slightly increases movement speed
+      desc: Greatly increases Atk speed, but also increases damage taken by 10%
       statChanges:
         hpAdd: 0
         speedAdd: 0.1
         damageAdd: 0
-        attackSpeedAdd: 0
+        attackSpeedAdd: 0.3
         armorAdd: 0
         regenAdd: 0
         critChanceAdd: 0
@@ -171,19 +171,20 @@ MonoBehaviour:
         hpMult: 1
         speedMult: 1
         damageMult: 1
-        attackSpeedMult: 1.2
+        attackSpeedMult: 1
         armorMult: 1
         regenMult: 1
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
     - lvlName: Berzerker's Boots II
-      desc: Greatly increases Atk speed, and slightly increases movement speed
+      desc: Greatly increases Atk speed, but also increases damage taken by another
+        10%
       statChanges:
         hpAdd: 0
         speedAdd: 0.1
         damageAdd: 0
-        attackSpeedAdd: 0
+        attackSpeedAdd: 0.3
         armorAdd: 0
         regenAdd: 0
         critChanceAdd: 0
@@ -191,16 +192,14 @@ MonoBehaviour:
         hpMult: 1
         speedMult: 1
         damageMult: 1
-        attackSpeedMult: 1.25
+        attackSpeedMult: 1
         armorMult: 1
         regenMult: 1
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - lvlName: ???
-      desc: 'Special Effect Coming Soon
-
-        Attack Speed+++'
+    - lvlName: Glass Cannon
+      desc: Doubles Attack Speed from all sources, but reduces max hp by 33%
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -210,10 +209,10 @@ MonoBehaviour:
         regenAdd: 0
         critChanceAdd: 0
         critDamageAdd: 0
-        hpMult: 1
+        hpMult: 0.6666
         speedMult: 1
         damageMult: 1
-        attackSpeedMult: 1.5
+        attackSpeedMult: 2
         armorMult: 1
         regenMult: 1
         critChanceMult: 1

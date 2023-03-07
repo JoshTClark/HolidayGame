@@ -200,7 +200,7 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - lvlName: Boxing Lessons III
+    - lvlName: Heavyweight Champ
       desc: 'Bonus Damage increased to 5% Current HP
 
         Also Grants 1% MAX

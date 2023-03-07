@@ -16,7 +16,7 @@ MonoBehaviour:
   index: 4
   icon: {fileID: 0}
   maxLevel: 6
-  tier: 2
+  tier: 1
   paths:
   - pathName: Radical Critical
     previousPath: 

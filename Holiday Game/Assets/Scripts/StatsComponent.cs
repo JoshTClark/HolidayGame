@@ -752,17 +752,18 @@ public abstract class StatsComponent : MonoBehaviour
                 if (i.Level >= 4)
                 {
                     speedAdd += 0.1f;
-                    attackSpeedMult *= 1.2f;
+                    attackSpeedAdd += 0.3f;
                 }
                 // Level 5
                 if (i.Level >= 5)
                 {
                     speedAdd += 0.1f;
-                    attackSpeedMult *= 1.2f;
+                    attackSpeedAdd += 0.3f;
                 }
                 if (i.Level >= 6)
                 {
-                    attackSpeedMult *= 1.5f;
+                    attackSpeedMult *= 2f;
+                    hpMult *= 0.666f;
                 }
 
             }

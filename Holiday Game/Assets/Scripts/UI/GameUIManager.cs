@@ -204,6 +204,7 @@ public class GameUIManager : MonoBehaviour
                     {
                         upgradeManager.Clear();
                         gameManager.State = GameState.MainGame;
+                        doChestUpgrade = false;
                         upgradePanel.gameObject.SetActive(false);
                         gamePanel.gameObject.SetActive(true);
                     }

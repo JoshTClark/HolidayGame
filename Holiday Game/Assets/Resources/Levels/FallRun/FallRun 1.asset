@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c59e07d74277824bb5047733b29c0bc, type: 3}
   m_Name: FallRun 1
   m_EditorClassIdentifier: 
-  scene: 
+  scene: FallRun
   difficulty: 1
   startHour: 12
   enemiesToDefeat: 0

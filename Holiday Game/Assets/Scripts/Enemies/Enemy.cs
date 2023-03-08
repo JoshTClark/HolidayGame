@@ -148,6 +148,31 @@ public abstract class Enemy : StatsComponent
         if (dmgInfo.attacker && dmgInfo.attacker.GetType() == typeof(Player))
         {
             GameManager.instance.enemiesDefeated++;
+
+            if (dmgInfo.attacker.HasItem(ResourceManager.ItemIndex.Vampire)) // Tracks kills after player hits path 2 vamp upgrade, and does random heal on kill 
+            {
+                Item i = dmgInfo.attacker.GetItem(ResourceManager.ItemIndex.Vampire);   
+
+                if(i.HasTakenPath("Blood Transfusions"))
+                {
+                    float r = Random.Range(0, 100);
+                    if(i.Level == 4 && r < 10)
+                    {
+                        dmgInfo.attacker.Heal(dmgInfo.attacker.MaxHp * 0.03f);
+                    }
+                    if (i.Level == 4 && r < 15)
+                    {
+                        dmgInfo.attacker.Heal(dmgInfo.attacker.MaxHp * 0.03f);
+                    }
+                    if (i.Level == 6 && r < 20)
+                    {
+                        dmgInfo.attacker.Heal(dmgInfo.attacker.MaxHp * 0.03f);
+                    }
+
+                    if (i.Level == 6) dmgInfo.attacker.vampKills++;
+                }
+            }
+            
         }
 
         foreach (DropInfo info in drops)

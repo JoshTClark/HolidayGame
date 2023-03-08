@@ -41,6 +41,8 @@ public abstract class StatsComponent : MonoBehaviour
     [HideInInspector]
     public float speedMultConst = 1.0f;
 
+    //Trackers
+    public int vampKills = 0;
 
     // Flags
     [SerializeField]
@@ -345,6 +347,50 @@ public abstract class StatsComponent : MonoBehaviour
                     info.damage += info.attacker.MaxHp * 0.01f;
                 }
             }
+        }
+
+        // Vampire Fang Upgrades
+        if (info.attacker.HasItem(ItemIndex.Vampire))
+        {
+            Item i = info.attacker.GetItem(ItemIndex.Vampire);
+            if(i.Level == 1)
+            {
+                if (info.receiver.currentHP > info.damage) info.attacker.Heal(info.damage * 0.005f);
+                else info.attacker.Heal(info.receiver.currentHP * 0.005f);
+            }
+            else if(i.Level == 2)
+            {
+                if (info.receiver.currentHP > info.damage) info.attacker.Heal(info.damage * 0.01f);
+                else info.attacker.Heal(info.receiver.currentHP * 0.01f);
+            }
+            else if(i.Level > -3)
+            {
+                if (info.receiver.currentHP > info.damage) info.attacker.Heal(info.damage * 0.02f);
+                else info.attacker.Heal(info.receiver.currentHP * 0.02f);
+            }
+
+            if(i.HasTakenPath("See Red")) // bonus damage and healing when low hp
+            {
+                if(i.Level == 4 && info.attacker.currentHP < (info.attacker.MaxHp / 4))
+                {
+                    info.damage *= 1.2f;
+                    if (info.receiver.currentHP > info.damage) info.attacker.Heal(info.damage * 0.02f);
+                    else info.attacker.Heal(info.receiver.currentHP * 0.02f);
+                }
+                else if (i.Level == 6 && info.attacker.currentHP < (info.attacker.MaxHp / 4))
+                {
+                    info.damage *= 1.3f;
+                    if (info.receiver.currentHP > info.damage) info.attacker.Heal(info.damage * 0.03f);
+                    else info.attacker.Heal(info.receiver.currentHP * 0.03f);
+                }
+                else if (i.Level == 6 && info.attacker.currentHP < (info.attacker.MaxHp / 4))
+                {
+                    info.damage *= 1.5f;
+                    if (info.receiver.currentHP > info.damage) info.attacker.Heal(info.damage * 0.05f);
+                    else info.attacker.Heal(info.receiver.currentHP * 0.05f);
+                }
+            }
+
         }
 
 
@@ -1122,6 +1168,60 @@ public abstract class StatsComponent : MonoBehaviour
                 regenAdd += 1f;
                 critChanceAdd += 0.05f;
                 critDamageAdd += 0.2f;
+            }
+
+        }
+
+        if (HasItem(ItemIndex.Vampire))
+        {
+            Item i = GetItem(ItemIndex.Vampire);
+
+            if(i.Level >= 1)
+            {
+                damageMult *= 1.2f;
+            }
+            if(i.Level >= 2){
+                damageMult *= 1.2f;
+            }
+            if (i.Level >= 3)
+            {
+                damageMult *= 1.2f;
+            }
+
+            if (i.HasTakenPath("See Red"))
+            {
+                if(i.Level >= 4)
+                {
+                    damageMult *= 1.2f;
+                }
+                if (i.Level >= 5)
+                {
+                    damageMult *= 1.2f;
+                }
+                if (i.Level >= 6)
+                {
+                    damageMult *= 1.2f;
+                }
+            }
+
+            if (i.HasTakenPath("Blood Transfusions"))
+            {
+                if (i.Level >= 4)
+                {
+                    damageMult *= 1.1f;
+                    hpAdd += 10f;
+                }
+                if (i.Level >= 5)
+                {
+                    damageMult *= 1.1f;
+                    hpAdd += 10f;
+                }
+                if (i.Level >= 6)
+                {
+                    damageMult *= 1.1f;
+                    hpAdd += 10f;
+                    hpAdd += vampKills / 20;
+                }
             }
 
         }

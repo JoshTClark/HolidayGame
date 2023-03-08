@@ -15,7 +15,7 @@ MonoBehaviour:
   itemName: Vampire's Fang
   index: 1
   icon: {fileID: 0}
-  maxLevel: 1
+  maxLevel: 6
   tier: 3
   paths:
   - pathName: Vampire's Fang
@@ -82,11 +82,146 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-  - pathName: Bloodlust
-    previousPath: 
-    numLevels: 0
-    levelDescriptions: []
-  - pathName: 
-    previousPath: 
-    numLevels: 0
-    levelDescriptions: []
+  - pathName: See Red
+    previousPath: Vampire's Fang
+    numLevels: 3
+    levelDescriptions:
+    - lvlName: See Red I
+      desc: 'Gain  20% damage and 2% lifesteal when below 25% HP
+
+        Damage+'
+      statChanges:
+        hpAdd: 0
+        speedAdd: 0
+        damageAdd: 0
+        attackSpeedAdd: 0
+        armorAdd: 0
+        regenAdd: 0
+        critChanceAdd: 0
+        critDamageAdd: 0
+        hpMult: 1
+        speedMult: 1
+        damageMult: 1.2
+        attackSpeedMult: 1
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1
+    - lvlName: See Red II
+      desc: 'Gain 30% damage and  3% lifesteal when below 25% HP
+
+        Damage+'
+      statChanges:
+        hpAdd: 0
+        speedAdd: 0
+        damageAdd: 0
+        attackSpeedAdd: 0
+        armorAdd: 0
+        regenAdd: 0
+        critChanceAdd: 0
+        critDamageAdd: 0
+        hpMult: 0
+        speedMult: 0
+        damageMult: 0
+        attackSpeedMult: 0
+        armorMult: 0
+        regenMult: 0
+        critChanceMult: 0
+        critDamageMult: 0
+        XPMult: 0
+    - lvlName: See Red III
+      desc: 'Gain 50% damage and 5% lifesteal when below 25% HP
+
+        Damage+'
+      statChanges:
+        hpAdd: 0
+        speedAdd: 0
+        damageAdd: 0
+        attackSpeedAdd: 0
+        armorAdd: 0
+        regenAdd: 0
+        critChanceAdd: 0
+        critDamageAdd: 0
+        hpMult: 1
+        speedMult: 1
+        damageMult: 1.2
+        attackSpeedMult: 1
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1
+  - pathName: Blood Transfusions
+    previousPath: Vampire's Fang
+    numLevels: 3
+    levelDescriptions:
+    - lvlName: Blood Transfusions I
+      desc: '10% chance to heal for 3% HP upon enemy kill
+
+        Damage+, HP+'
+      statChanges:
+        hpAdd: 10
+        speedAdd: 0
+        damageAdd: 0
+        attackSpeedAdd: 0
+        armorAdd: 0
+        regenAdd: 0
+        critChanceAdd: 0
+        critDamageAdd: 0
+        hpMult: 1
+        speedMult: 1
+        damageMult: 1.1
+        attackSpeedMult: 1
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1
+    - lvlName: Blood Transfusions II
+      desc: 'Chance to heal on kill increased to 15%
+
+        Dmg+, HP+'
+      statChanges:
+        hpAdd: 10
+        speedAdd: 0
+        damageAdd: 0
+        attackSpeedAdd: 0
+        armorAdd: 0
+        regenAdd: 0
+        critChanceAdd: 0
+        critDamageAdd: 0
+        hpMult: 1.1
+        speedMult: 1
+        damageMult: 1
+        attackSpeedMult: 1
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1
+    - lvlName: Demon Drain
+      desc: 'Chance to heal on kill increased to 20%
+
+        Gain 1 permanent Max
+        HP every 20 enemies slain
+
+        HP+, Dmg+'
+      statChanges:
+        hpAdd: 10
+        speedAdd: 0
+        damageAdd: 0
+        attackSpeedAdd: 0
+        armorAdd: 0
+        regenAdd: 0
+        critChanceAdd: 0
+        critDamageAdd: 0
+        hpMult: 1
+        speedMult: 1
+        damageMult: 1.1
+        attackSpeedMult: 1
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1

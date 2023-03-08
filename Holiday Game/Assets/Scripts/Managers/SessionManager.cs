@@ -59,6 +59,7 @@ public class SessionManager
             }
         }
         player.SetXPWithoutLevelUp(playerData.experience);
+        player.vampKills = playerData.VampKills;
         return player;
     }
 
@@ -71,6 +72,7 @@ public class SessionManager
             playerData.inventory.Add(i);
         }
         playerData.experience = player.XP;
+        playerData.VampKills = player.vampKills;
         data.currency += gems;
         currentLevel = null;
         currentNode.isComplete = true;
@@ -104,5 +106,6 @@ public class SessionManager
         public PlayableCharacterData chosenCharacter;
         public List<Item> inventory;
         public float experience;
+        public int VampKills;
     }
 }

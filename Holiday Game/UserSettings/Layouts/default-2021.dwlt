@@ -94,8 +94,8 @@ MonoBehaviour:
     y: 0
     width: 517
     height: 773
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -325,7 +325,7 @@ MonoBehaviour:
   m_LastFolders:
   - Assets/Resources/ItemDefs
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Users\djs6413\Documents\HolidayGame\Holiday Game
+  m_LastProjectPath: C:\Users\jtc2365\Desktop\HolidayGame\Holiday Game
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
@@ -754,7 +754,7 @@ MonoBehaviour:
   m_WindowGUID: cc27987af1a868c49b0894db9c0f5429
   m_Gizmos: 1
   m_OverrideSceneCullingMask: 6917529027641081856
-  m_SceneIsLit: 0
+  m_SceneIsLit: 1
   m_SceneLighting: 1
   m_2DMode: 1
   m_isRotationLocked: 0
@@ -780,7 +780,7 @@ MonoBehaviour:
     showImageEffects: 1
     showParticleSystems: 1
     showVisualEffectGraphs: 1
-    m_FxEnabled: 0
+    m_FxEnabled: 1
   m_Grid:
     xGrid:
       m_Fade:

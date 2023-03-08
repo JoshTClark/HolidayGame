@@ -71,8 +71,10 @@ public class ResourceManager
         LiftingBelt = 8,
         Meat = 9,
         Duck = 10,
-        Snowball = 11
-
+        Snowball = 11,
+        Fireworks = 12,
+        PumpkinBomb = 13,
+        Arrow = 14
     }
 
     /*

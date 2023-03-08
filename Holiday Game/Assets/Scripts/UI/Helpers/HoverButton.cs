@@ -9,13 +9,19 @@ public class HoverButton : MonoBehaviour
     public bool isHover = false;
     private float scale = 1;
     public float scaleMax = 1.25f;
+    private RectTransform rectTransform;
+
+    public void Start()
+    {
+        rectTransform = this.gameObject.GetComponent<RectTransform>();
+    }
 
     public void Update()
     {
         float delta = Time.unscaledDeltaTime;
 
         // Hover animation
-        RectTransform rectTransform = this.gameObject.GetComponent<RectTransform>();
+        
         if (isHover && scale < scaleMax)
         {
             scale += 5f * delta;
@@ -57,5 +63,6 @@ public class HoverButton : MonoBehaviour
     {
         scale = 1f;
         isHover = false;
+        rectTransform.localScale = new Vector3(scale, scale, 1);
     }
 }

@@ -15,7 +15,7 @@ MonoBehaviour:
   itemName: Iron Blade
   index: 14
   icon: {fileID: 0}
-  maxLevel: 8
+  maxLevel: 0
   tier: 0
   paths:
   - pathName: Start

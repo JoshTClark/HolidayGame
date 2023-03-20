@@ -105,7 +105,10 @@ public class GameUIManager : MonoBehaviour
     public void UpdateUI(GameManager.GameState state, Player player, GameManager gameManager)
     {
         // Setting the cursor position
-        cursor.rectTransform.position = new Vector3(Mouse.current.position.ReadValue().x, Mouse.current.position.ReadValue().y, 0);
+        Vector2 mousePos = Mouse.current.position.ReadValue();
+        Vector2 cursorPos;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(this.GetComponent<RectTransform>(), mousePos, cam, out cursorPos);
+        cursor.rectTransform.anchoredPosition = new Vector3(cursorPos.x, cursorPos.y, 0.0f);
         cursor.transform.SetAsLastSibling();
 
         // Swapping in game layout

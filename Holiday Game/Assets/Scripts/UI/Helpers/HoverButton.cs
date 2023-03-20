@@ -63,6 +63,6 @@ public class HoverButton : MonoBehaviour
     {
         scale = 1f;
         isHover = false;
-        rectTransform.localScale = new Vector3(scale, scale, 1);
+        //rectTransform.localScale = new Vector3(scale, scale, 1);
     }
 }

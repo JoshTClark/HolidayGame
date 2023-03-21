@@ -36,12 +36,6 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private UnityEngine.Rendering.Universal.Light2D globalLight;
 
-    [SerializeField]
-    public float cornDamageDone, snowballDamageDone, arrowDamageDone, pumpkinDamageDone, fireworkDamageDone;
-
-    [SerializeField]
-    public float cornKills, snowballKills, arrowKills, pumpkinKills, fireworkKills;
-
     private float baseTimeScale = 1f;
     private bool slowTime = false;
     public float slowTimeScale = 0.5f;
@@ -87,10 +81,11 @@ public class GameManager : MonoBehaviour
         set { state = value; }
     }
 
-    // Only a single gamemanager should ever exist so we can always get it here
+    // Only a single GameManager should ever exist so we can always get it here
     [HideInInspector]
     public static GameManager instance;
 
+    // The current session
     [HideInInspector]
     public static SessionManager session;
 
@@ -99,10 +94,21 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
 
+        // Checks if the session exists
+        // No session means something went very wrong or the game is being run in the editor
         if (session == null)
         {
+            if (DebugHelpers.DEBUG)
+            {
+                Debug.LogWarning("No session found - this does not cause any errors but you will not be able to exit the stage");
+            }
+            else
+            {
+                Debug.LogError("No session found");
+            }
+
+            // Initializes everything that would have been done at the start of the game and creates a player.
             ResourceManager.Init();
-            Debug.Log("No session found");
             player = GameObject.Instantiate<Player>(ResourceManager.characters[1].prefab);
             player.inventory = new List<Item>();
             foreach (ItemDef i in ResourceManager.characters[1].inventory)
@@ -128,16 +134,12 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            // Gets a player instance from the current session and grabs the current level
             player = session.GetPlayerInstance();
             levelData = session.currentLevel;
         }
 
         ResourceManager.GetBuffDef(ResourceManager.BuffIndex.Burning);
-
-        seasonsOrdered.Add("Fall");
-        seasonsOrdered.Add("Winter");
-        seasonsOrdered.Add("Spring");
-        seasonsOrdered.Add("Summer");
 
         pauseGame.action.performed += (InputAction.CallbackContext callback) =>
         {
@@ -175,7 +177,7 @@ public class GameManager : MonoBehaviour
             }
         };
 
-        if (Constants.DEBUG)
+        if (DebugHelpers.DEBUG)
         {
             slowToggle.Enable();
             completeLevel.Enable();
@@ -214,6 +216,7 @@ public class GameManager : MonoBehaviour
         switch (state)
         {
             case GameState.GameOver: // GAME OVER
+                player.canMove = false;
                 break;
             case GameState.MainGame:
                 player.canMove = true;
@@ -419,16 +422,23 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("No current session cannot go to map");
+            Debug.LogWarning("No current session cannot return to title");
         }
     }
 
     public void ToTitle()
     {
-        ProjectileManager.Clean();
-        EnemyManager.Clean();
-        DropManager.Clean();
-        session.ToTitle();
+        if (session != null)
+        {
+            ProjectileManager.Clean();
+            EnemyManager.Clean();
+            DropManager.Clean();
+            session.ToTitle();
+        }
+        else
+        {
+            Debug.LogWarning("No current session cannot return to title");
+        }
     }
 
     public void DisplayDamage(DamageInfo info)

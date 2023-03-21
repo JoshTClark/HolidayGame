@@ -87,7 +87,7 @@ public class SaveSceneManager : MonoBehaviour
             SaveManager.SaveFile(2, d);
         }
 
-        if (Constants.DEBUG)
+        if (DebugHelpers.DEBUG)
         {
             debugToggle.Enable();
         }

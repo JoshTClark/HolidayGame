@@ -22,25 +22,23 @@ public class NumberEffect : MonoBehaviour
         direction = new Vector2(Random.Range(-0.2f, 0.2f), 1).normalized;
 
         // Converting from world space to canvas/screen space
-        RectTransform rect = canvas.GetComponent<RectTransform>();
-        currentPosition = spawnPosition;
-        Vector2 viewPosition = cam.WorldToViewportPoint(spawnPosition);
-        Vector2 canvasPosition = new Vector2(((viewPosition.x * rect.sizeDelta.x) * canvas.scaleFactor), ((viewPosition.y * rect.sizeDelta.y) * canvas.scaleFactor));
-        this.gameObject.GetComponent<RectTransform>().position = canvasPosition;
+        RectTransform canvasRect = canvas.GetComponent<RectTransform>();
+        currentPosition += spawnPosition;
+        Vector2 viewPosition = cam.WorldToViewportPoint(currentPosition);
+        Vector2 canvasPosition = new Vector2(((viewPosition.x * canvasRect.sizeDelta.x) - (canvasRect.sizeDelta.x * 0.5f)), ((viewPosition.y * canvasRect.sizeDelta.y) - (canvasRect.sizeDelta.y * 0.5f)));
+        this.gameObject.GetComponent<RectTransform>().anchoredPosition = canvasPosition;
     }
 
     private void Update()
     {
         float delta = Time.deltaTime;
 
-        RectTransform objectRect = this.gameObject.GetComponent<RectTransform>();
+        // Moving the effect
         RectTransform canvasRect = canvas.GetComponent<RectTransform>();
-
-        // Moving the number
         currentPosition += speed * direction * delta;
         Vector2 viewPosition = cam.WorldToViewportPoint(currentPosition);
-        Vector2 canvasPosition = new Vector2(((viewPosition.x * canvasRect.sizeDelta.x) * canvas.scaleFactor), ((viewPosition.y * canvasRect.sizeDelta.y) * canvas.scaleFactor));
-        objectRect.position = canvasPosition;
+        Vector2 canvasPosition = new Vector2(((viewPosition.x * canvasRect.sizeDelta.x) - (canvasRect.sizeDelta.x * 0.5f)), ((viewPosition.y * canvasRect.sizeDelta.y) - (canvasRect.sizeDelta.y * 0.5f)));
+        this.gameObject.GetComponent<RectTransform>().anchoredPosition = canvasPosition;
 
         timer += delta;
         if (timer <= fadeTime)

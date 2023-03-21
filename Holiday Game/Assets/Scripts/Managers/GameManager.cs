@@ -103,9 +103,9 @@ public class GameManager : MonoBehaviour
         {
             ResourceManager.Init();
             Debug.Log("No session found");
-            player = GameObject.Instantiate<Player>(ResourceManager.characters[0].prefab);
+            player = GameObject.Instantiate<Player>(ResourceManager.characters[1].prefab);
             player.inventory = new List<Item>();
-            foreach (ItemDef i in ResourceManager.characters[0].inventory)
+            foreach (ItemDef i in ResourceManager.characters[1].inventory)
             {
                 Item item = i.GetItem();
                 item.Level = 1;
@@ -115,7 +115,7 @@ public class GameManager : MonoBehaviour
                     player.AddWeapon(((WeaponDef)i).weaponPrefab);
                 }
             }
-            foreach (ItemDef i in ResourceManager.characters[0].tutorialChestItems)
+            foreach (ItemDef i in ResourceManager.characters[1].tutorialChestItems)
             {
                 Item item = i.GetItem();
                 item.Level = 1;

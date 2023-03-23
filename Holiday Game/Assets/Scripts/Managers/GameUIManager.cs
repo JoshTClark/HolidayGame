@@ -98,6 +98,7 @@ public class GameUIManager : MonoBehaviour
     public void ToggleDebug()
     {
         debugPanel.gameObject.SetActive(!debugPanel.gameObject.activeSelf);
+        Cursor.visible = debugPanel.gameObject.activeSelf;
     }
 
     /// <summary>

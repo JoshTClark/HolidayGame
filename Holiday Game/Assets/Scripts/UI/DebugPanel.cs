@@ -9,6 +9,7 @@ public class DebugPanel : MonoBehaviour
     public TMP_Dropdown upgradeSelector;
     public TMP_Dropdown enemySelector;
     public TMP_Dropdown dropSelector;
+    public TMP_Dropdown characterSelector;
     public TMP_Text inventoryDisplay;
 
     public void Init()
@@ -33,6 +34,13 @@ public class DebugPanel : MonoBehaviour
             optionsDrops.Add(new TMP_Dropdown.OptionData(i.name));
         }
         dropSelector.AddOptions(optionsDrops);
+
+        List<TMP_Dropdown.OptionData> optionsCharacters = new List<TMP_Dropdown.OptionData>();
+        foreach (PlayableCharacterData i in ResourceManager.characters)
+        {
+            optionsDrops.Add(new TMP_Dropdown.OptionData(i.characterName));
+        }
+        characterSelector.AddOptions(optionsDrops);
     }
 
     private void Update()
@@ -70,5 +78,9 @@ public class DebugPanel : MonoBehaviour
         Debug.Log("Spawning " + ResourceManager.DropFromName(dropSelector.options[dropSelector.value].text).name);
         DropBase drop = DropManager.GetPickup(ResourceManager.DropFromName(dropSelector.options[dropSelector.value].text).index);
         drop.gameObject.transform.position = new Vector2(GameManager.instance.Player.transform.position.x, GameManager.instance.Player.transform.position.y + 10);
+    }
+
+    public void ChangeCharacter()
+    {
     }
 }

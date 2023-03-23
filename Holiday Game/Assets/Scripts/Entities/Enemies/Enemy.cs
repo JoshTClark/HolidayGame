@@ -31,7 +31,7 @@ public abstract class Enemy : StatsComponent
     // SoundEffects
     [SerializeField]
     protected AudioSource onHitSound;
-    
+
     protected Vector2 Velocity { get { return GetComponent<Rigidbody2D>().velocity; } set { GetComponent<Rigidbody2D>().velocity = value; } }
 
     /// <summary>
@@ -84,10 +84,7 @@ public abstract class Enemy : StatsComponent
 
     protected void Move()
     {
-        if (!HasBuff(ResourceManager.BuffIndex.Stunned))
-        {
-            CalcMoves();
-        }
+        CalcMoves();
         if (transform.position.x < player.transform.position.x)
         {
             sr.flipX = true;
@@ -151,12 +148,12 @@ public abstract class Enemy : StatsComponent
 
             if (dmgInfo.attacker.HasItem(ResourceManager.ItemIndex.Vampire)) // Tracks kills after player hits path 2 vamp upgrade, and does random heal on kill 
             {
-                Item i = dmgInfo.attacker.GetItem(ResourceManager.ItemIndex.Vampire);   
+                Item i = dmgInfo.attacker.GetItem(ResourceManager.ItemIndex.Vampire);
 
-                if(i.HasTakenPath("Blood Transfusions"))
+                if (i.HasTakenPath("Blood Transfusions"))
                 {
                     float r = Random.Range(0, 100);
-                    if(i.Level == 4 && r < 10)
+                    if (i.Level == 4 && r < 10)
                     {
                         dmgInfo.attacker.Heal(dmgInfo.attacker.MaxHp * 0.03f);
                     }
@@ -172,7 +169,7 @@ public abstract class Enemy : StatsComponent
                     if (i.Level == 6) dmgInfo.attacker.vampKills++;
                 }
             }
-            
+
         }
 
         foreach (DropInfo info in drops)

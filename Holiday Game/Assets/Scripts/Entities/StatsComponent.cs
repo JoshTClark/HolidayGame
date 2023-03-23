@@ -55,13 +55,12 @@ public abstract class StatsComponent : MonoBehaviour
     public List<Item> inventory = new List<Item>();
 
     // Debuffs and Buffs
-    public List<BuffInfo> buffs = new List<BuffInfo>();
+    public List<BuffIndex> buffs = new List<BuffIndex>();
 
     protected SpriteRenderer sr;
     Color ogColor;
     bool damaged;
     float fadeTimer;
-    float vFade;
     float regenTimer = 0f;
     private float patienceTimer = 0.0f;
     protected bool isMoving = true;
@@ -183,33 +182,10 @@ public abstract class StatsComponent : MonoBehaviour
             }
         }
 
-        // Checks if should be dead
-        //if (currentHP <= 0)
-        //{
-        //    isDead = true;
-        //}
-
-        // Adding things for burning effects
-        if (HasBuff(ResourceManager.BuffIndex.Burning))
-        {
-            // Nothing
-        }
-
         // Buff updating
         for (int i = buffs.Count - 1; i >= 0; i--)
         {
-            buffs[i].DoTick();
-            if (!buffs[i].active)
-            {
-                buffs.RemoveAt(i);
-            }
         }
-
-        // Checking if dead
-        //if (IsDead)
-        //{
-        //    OnDeath(DamageInfo info);
-        //}
     }
 
     //Checks to see if leveled up since last tick
@@ -417,27 +393,6 @@ public abstract class StatsComponent : MonoBehaviour
             }
         }
 
-        foreach (ResourceManager.BuffIndex i in info.debuffs)
-        {
-            BuffDef def = ResourceManager.GetBuffDef(i);
-            BuffInfo buff = new BuffInfo();
-            buff.def = def;
-            DamageInfo buffInfo = new DamageInfo();
-            buffInfo.attacker = info.attacker;
-            buffInfo.receiver = info.receiver;
-            buff.infoTemplate = buffInfo;
-            buff.infoTemplate.mask.Add(i);
-            buff.afflicting = this;
-            if (i == ResourceManager.BuffIndex.Burning)
-            {
-                buff.totalDamage = info.attacker.Damage;
-            }
-            if (!info.mask.Contains(i))
-            {
-                buffs.Add(buff);
-            }
-        }
-
         // reducing health
         currentHP -= info.damage;
         GameManager.instance.DisplayDamage(info);
@@ -449,8 +404,6 @@ public abstract class StatsComponent : MonoBehaviour
             isDead = true;
             OnDeath(info);
         }
-
-
     }
 
     // Adds an attack
@@ -557,9 +510,9 @@ public abstract class StatsComponent : MonoBehaviour
 
     public bool HasBuff(ResourceManager.BuffIndex index)
     {
-        foreach (BuffInfo b in buffs)
+        foreach (BuffIndex i in buffs)
         {
-            if (b.def.index == index)
+            if (i == index)
             {
                 return true;
             }

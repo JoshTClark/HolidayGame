@@ -10,10 +10,7 @@ public class Crow : Enemy
 
     public override void OnUpdate()
     {
-        if (!HasBuff(ResourceManager.BuffIndex.Stunned))
-        {
-            CalcMoves();
-        }
+        CalcMoves();
         // Then take Velocity normalize it so it's a heading vector
         // scale that by speed, then apply movement
         Vector2 velocity = Vector2.zero;

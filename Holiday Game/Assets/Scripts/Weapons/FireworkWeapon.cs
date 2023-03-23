@@ -50,7 +50,7 @@ public class FireworkWeapon : Weapon
                 */
                 info.damage = GetStat("Damage") * owner.Damage;
                 info.attacker = owner;
-                info.debuffs.Add(ResourceManager.BuffIndex.Burning);
+                //info.debuffs.Add(ResourceManager.BuffIndex.Burning);
                 info.weapon = ResourceManager.WeaponIndex.Fireworks;
                 p.SetDamageInfo(info);
                 p.SizeMultiplier = GetStat("Size");

@@ -139,8 +139,6 @@ public class GameManager : MonoBehaviour
             levelData = session.currentLevel;
         }
 
-        ResourceManager.GetBuffDef(ResourceManager.BuffIndex.Burning);
-
         pauseGame.action.performed += (InputAction.CallbackContext callback) =>
         {
             paused = true;

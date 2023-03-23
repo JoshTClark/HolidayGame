@@ -6,13 +6,13 @@ public class ResourceManager
 {
     public enum EnemyIndex
     {
-        None,
-        Bat,
-        Scarecrow,
-        BigBoy,
-        Boss,
-        Ghost,
-        Crow
+        None = 0,
+        Bat = 1,
+        Scarecrow = 2,
+        Zombie = 3,
+        BigPumpkin = 4,
+        Ghost = 5,
+        Crow = 6
     }
     public enum ProjectileIndex
     {
@@ -30,17 +30,16 @@ public class ResourceManager
     }
     public enum FollowingEffectIndex
     {
-        None,
-        Burning,
-        SnowballEffect
+        None = 0,
+        SnowballEffect = 1
     }
     public enum PickupIndex
     {
-        XP1,
-        XP2,
-        HealthDrop1,
-        BossDrop,
-        Coin
+        XP1 = 0,
+        XP2 = 1,
+        HealthDrop1 = 2,
+        BossDrop = 3,
+        Coin = 4
     }
     public enum WeaponIndex
     {
@@ -77,88 +76,6 @@ public class ResourceManager
         Arrow = 14
     }
 
-    /*
-    public enum UpgradeIndex
-    {
-        Health1,
-        Health2,
-        Health3,
-        Damage1,
-        Damage2,
-        Damage3,
-        Speed1,
-        Speed2,
-        Speed3,
-        AttackSpeed1,
-        AttackSpeed2,
-        AttackSpeed3,
-        SnowballWeaponUpgrade,
-        SnowballDamage1,
-        SnowballDamage2,
-        SnowballDamage3,
-        SnowballSize1,
-        SnowballSize2,
-        SnowballSize3,
-        SnowballSpeed1,
-        PumpkinBombWeaponUpgrade,
-        FireworkWeaponUpgrade,
-        PumkinRadius1,
-        PumkinRadius2,
-        PumkinRadius3,
-        FireworkCount,
-        GlassCannon1,
-        GlassCannon2,
-        CritDamage1,
-        CritDamage2,
-        CritDamage3,
-        CritDamage4,
-        CritDamage5,
-        CritChance1,
-        CritChance2,
-        CritChance3,
-        CritChance4,
-        PumpkinDamage1,
-        PumpkinDamage2,
-        PumpkinDamage3,
-        PumpkinLauncher,
-        ClusterPumkins,
-        XP1,
-        XP2,
-        XP3,
-        CupidArrowWeaponUpgrade,
-        CupidArrowSwiftFlight,
-        ArrowPierce1,
-        ArrowPierce2,
-        ArrowBounceDamage,
-        Snowballing,
-        StunningFireworks,
-        CandyCornWeaponUpgrade,
-        CandyCornSpray,
-        MoreCorn,
-        Reflector,
-        Patience,
-        LowHPDamage,
-        CupidArrowHealth,
-        SharpShadow,
-        ExtraDash,
-        SwordSlashWeaponUpgrade
-    }
-    */
-
-    /*
-    public enum UpgradePoolIndex
-    {
-        Basic,
-        Weapons,
-        Snowball,
-        Pumkin,
-        Fireworks,
-        CupidArrow,
-        CandyCorn,
-        SpecialUpgrades
-    }
-    */
-
     public enum LevelPoolIndex
     {
         Test
@@ -166,9 +83,6 @@ public class ResourceManager
 
     public enum BuffIndex
     {
-        Burning,
-        Stunned,
-        Bleeding
     }
 
     public enum OrbitalIndex
@@ -182,7 +96,7 @@ public class ResourceManager
     public static List<Upgrade> upgradeDefinitions = new List<Upgrade>();
     public static List<DropBase> pickupPrefabs = new List<DropBase>();
     public static List<UpgradePool> upgradePools = new List<UpgradePool>();
-    public static List<BuffDef> buffs = new List<BuffDef>();
+    //public static List<BuffDef> buffs = new List<BuffDef>();
     public static List<FollowingEffect> effects = new List<FollowingEffect>();
     public static List<OrbitalParent> orbitals = new List<OrbitalParent>();
 
@@ -207,7 +121,7 @@ public class ResourceManager
         LoadUpgrades();
         LoadPickups();
         LoadUpgradePools();
-        LoadBuffs();
+        //LoadBuffs();
         LoadEffects();
         LoadPlayableCharacters();
         LoadOrbitals();
@@ -316,15 +230,6 @@ public class ResourceManager
         }
     }
 
-    public static void LoadBuffs()
-    {
-        BuffDef[] arr = Resources.LoadAll<BuffDef>("");
-        foreach (BuffDef i in arr)
-        {
-            buffs.Add(i);
-        }
-    }
-
     public static void LoadPlayableCharacters()
     {
         PlayableCharacterData[] arr = Resources.LoadAll<PlayableCharacterData>("");
@@ -333,34 +238,6 @@ public class ResourceManager
             characters.Add(i);
         }
     }
-
-    /*
-    public static Upgrade GetUpgrade(ResourceManager.UpgradeIndex index)
-    {
-        foreach (Upgrade i in upgradeDefinitions)
-        {
-            if (i.index == index)
-            {
-                Upgrade b = GameObject.Instantiate<Upgrade>(i);
-                return b;
-            }
-        }
-        return null;
-    }
-
-    public static UpgradePool GetUpgradePool(ResourceManager.UpgradePoolIndex index)
-    {
-        foreach (UpgradePool i in upgradePools)
-        {
-            if (i.index == index)
-            {
-                UpgradePool b = GameObject.Instantiate<UpgradePool>(i);
-                return b;
-            }
-        }
-        return null;
-    }
-    */
 
     public static Weapon GetWeapon(ResourceManager.WeaponIndex index)
     {
@@ -372,6 +249,16 @@ public class ResourceManager
             }
         }
         return null;
+    }
+
+    /*
+    public static void LoadBuffs()
+    {
+        BuffDef[] arr = Resources.LoadAll<BuffDef>("");
+        foreach (BuffDef i in arr)
+        {
+            buffs.Add(i);
+        }
     }
 
     public static BuffDef GetBuffDef(ResourceManager.BuffIndex index)
@@ -386,7 +273,7 @@ public class ResourceManager
         }
         return null;
     }
-
+    */
     public static ProjectileBase GetProjectile(ResourceManager.ProjectileIndex index)
     {
         foreach (ProjectileBase i in projectilePrefabs)

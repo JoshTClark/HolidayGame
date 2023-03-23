@@ -23,8 +23,10 @@ public class DamageInfo
     public bool critOveride = false;
     public List<ResourceManager.BuffIndex> debuffs = new List<ResourceManager.BuffIndex>();
     public ResourceManager.WeaponIndex weapon;
-    public List<ResourceManager.BuffIndex> mask = new List<ResourceManager.BuffIndex>();
 
+    /// <summary>
+    /// Calculates the total damage after effects like critical strike
+    /// </summary>
     public void CalculateAll()
     {
         if (attacker)
@@ -42,6 +44,10 @@ public class DamageInfo
         }
     }
 
+    /// <summary>
+    /// Creates a copy of the damage info
+    /// </summary>
+    /// <returns></returns>
     public DamageInfo CreateCopy()
     {
         DamageInfo info = new DamageInfo();
@@ -59,6 +65,10 @@ public class DamageInfo
         return info;
     }
 
+    /// <summary>
+    /// Returns the color that the damage numbers should be
+    /// </summary>
+    /// <returns></returns>
     public Color GetColor()
     {
         if (damageColor == DamageColor.Crit)

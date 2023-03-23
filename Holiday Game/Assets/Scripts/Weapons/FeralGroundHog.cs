@@ -43,7 +43,7 @@ public class FeralGroundHog : Weapon
                 DamageInfo info = new DamageInfo();
                 info.damage = GetStat("Damage") * owner.Damage;
                 info.attacker = owner;
-                info.debuffs.Add(ResourceManager.BuffIndex.Stunned);
+                //info.debuffs.Add(ResourceManager.BuffIndex.Stunned);
                 p.SetDamageInfo(info);
                 //p.SizeMultiplier = sizeMult;
                 //p.SpeedMultiplier = speedMult;

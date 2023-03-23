@@ -31,9 +31,9 @@ public abstract class Weapon : MonoBehaviour
 
 
     // Audio
-    [SerializeField] 
+    [SerializeField]
     protected AudioClip soundEffect;
-    
+
 
     public float Delay
     {
@@ -69,16 +69,13 @@ public abstract class Weapon : MonoBehaviour
         CalcStats();
         if (GameManager.instance.State == GameManager.GameState.MainGame)
         {
-            if (!owner.HasBuff(ResourceManager.BuffIndex.Stunned))
+            float delta = Time.deltaTime;
+            timer += delta;
+            if (timer >= Delay)
             {
-                float delta = Time.deltaTime;
-                timer += delta;
-                if (timer >= Delay)
-                {
-                    canFire = true;
-                }
-                OnUpdate();
+                canFire = true;
             }
+            OnUpdate();
         }
     }
 

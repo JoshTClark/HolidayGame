@@ -32,7 +32,7 @@ public abstract class Weapon : MonoBehaviour
 
     // Audio
     [SerializeField]
-    protected AudioClip soundEffect;
+    protected List<AudioClip> soundEffects;
 
 
     public float Delay

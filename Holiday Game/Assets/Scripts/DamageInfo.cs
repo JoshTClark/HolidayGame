@@ -21,7 +21,7 @@ public class DamageInfo
     public StatsComponent attacker;
     public bool isCrit;
     public bool critOveride = false;
-    public List<ResourceManager.BuffIndex> debuffs = new List<ResourceManager.BuffIndex>();
+    public List<BuffInfo> buffs = new List<BuffInfo>();
     public ResourceManager.WeaponIndex weapon;
 
     /// <summary>
@@ -55,7 +55,7 @@ public class DamageInfo
         info.receiver = this.receiver;
         info.attacker = this.attacker;
         info.isCrit = this.isCrit;
-        info.debuffs = debuffs;
+        info.buffs = buffs;
         info.knockback = this.knockback;
         info.knockbackDirection = this.knockbackDirection;
         info.radialKnockback = this.radialKnockback;

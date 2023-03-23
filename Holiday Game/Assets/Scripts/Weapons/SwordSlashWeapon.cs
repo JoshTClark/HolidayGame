@@ -245,7 +245,14 @@ public class SwordSlashWeapon : Weapon
         info.damage = owner.Damage * GetStat("Damage");
         info.attacker = owner;
         info.knockbackDirection = p.Direction;
-        info.weapon = ResourceManager.WeaponIndex.CupidArrow;
+        info.weapon = ResourceManager.WeaponIndex.SwordSlash;
+        DotInfo buff = new DotInfo();
+        buff.duration = 2f;
+        buff.index = ResourceManager.BuffIndex.Burning;
+        buff.isDebuff = true;
+        buff.damagePerTick = owner.Damage / 10;
+        buff.tickRate = 0.5f;
+        info.buffs.Add(buff);
         p.SetDamageInfo(info);
         if (spin)
         {

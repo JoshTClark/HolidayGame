@@ -55,7 +55,7 @@ public abstract class StatsComponent : MonoBehaviour
     public List<Item> inventory = new List<Item>();
 
     // Debuffs and Buffs
-    public List<BuffIndex> buffs = new List<BuffIndex>();
+    protected List<BuffHolder> buffs = new List<BuffHolder>();
 
     protected SpriteRenderer sr;
     Color ogColor;
@@ -185,6 +185,16 @@ public abstract class StatsComponent : MonoBehaviour
         // Buff updating
         for (int i = buffs.Count - 1; i >= 0; i--)
         {
+            if (buffs[i].IsActive)
+            {
+                // Update the holder
+                buffs[i].Update(delta);
+            }
+            else
+            {
+                // Remove buff from list if it is no longer active
+                buffs.RemoveAt(i);
+            }
         }
     }
 
@@ -269,7 +279,7 @@ public abstract class StatsComponent : MonoBehaviour
                 DamageInfo reflectInfo = new DamageInfo();
                 reflectInfo.attacker = info.receiver;
                 reflectInfo.receiver = info.attacker;
-                if(i.Level == 4)
+                if (i.Level == 4)
                 {
                     reflectInfo.damage = (this.Armor / 6);
                 }
@@ -287,7 +297,7 @@ public abstract class StatsComponent : MonoBehaviour
 
             if (i.HasTakenPath("Mythril Coating")) // Damage reduction path
             {
-                if(i.Level == 4)
+                if (i.Level == 4)
                 {
                     info.damage *= 0.9f;
                 }
@@ -329,25 +339,25 @@ public abstract class StatsComponent : MonoBehaviour
         if (info.attacker.HasItem(ItemIndex.Vampire))
         {
             Item i = info.attacker.GetItem(ItemIndex.Vampire);
-            if(i.Level == 1)
+            if (i.Level == 1)
             {
                 if (info.receiver.currentHP > info.damage) info.attacker.Heal(info.damage * 0.005f);
                 else info.attacker.Heal(info.receiver.currentHP * 0.005f);
             }
-            else if(i.Level == 2)
+            else if (i.Level == 2)
             {
                 if (info.receiver.currentHP > info.damage) info.attacker.Heal(info.damage * 0.01f);
                 else info.attacker.Heal(info.receiver.currentHP * 0.01f);
             }
-            else if(i.Level > -3)
+            else if (i.Level > -3)
             {
                 if (info.receiver.currentHP > info.damage) info.attacker.Heal(info.damage * 0.02f);
                 else info.attacker.Heal(info.receiver.currentHP * 0.02f);
             }
 
-            if(i.HasTakenPath("See Red")) // bonus damage and healing when low hp
+            if (i.HasTakenPath("See Red")) // bonus damage and healing when low hp
             {
-                if(i.Level == 4 && info.attacker.currentHP < (info.attacker.MaxHp / 4))
+                if (i.Level == 4 && info.attacker.currentHP < (info.attacker.MaxHp / 4))
                 {
                     info.damage *= 1.2f;
                     if (info.receiver.currentHP > info.damage) info.attacker.Heal(info.damage * 0.02f);
@@ -390,6 +400,22 @@ public abstract class StatsComponent : MonoBehaviour
             {
                 Debug.Log("Bleed should be applied");
                 //info.debuffs.Add(BuffIndex.Bleeding); Not working commenting out for now
+            }
+        }
+
+        // Applying buffs/debuffs
+        foreach (BuffInfo i in info.buffs)
+        {
+            // DoT effects
+            if (i.GetType() == typeof(DotInfo))
+            {
+                DotInfo dot = (DotInfo)i;
+                DotHolder dotHolder = new DotHolder(dot.index, dot.duration, dot.tickRate, dot.damagePerTick, info.attacker, this);
+                buffs.Add(dotHolder);
+            }
+            else 
+            {
+                BuffHolder buff = new BuffHolder(i.index, i.duration, i.isDebuff, info.attacker);
             }
         }
 
@@ -510,9 +536,9 @@ public abstract class StatsComponent : MonoBehaviour
 
     public bool HasBuff(ResourceManager.BuffIndex index)
     {
-        foreach (BuffIndex i in buffs)
+        foreach (BuffHolder b in buffs)
         {
-            if (i == index)
+            if (b.index == index)
             {
                 return true;
             }
@@ -722,7 +748,7 @@ public abstract class StatsComponent : MonoBehaviour
             }
 
         }
-        
+
         //Crit Upgrade Tree
         if (HasItem(ItemIndex.CritChance))
         {
@@ -756,7 +782,7 @@ public abstract class StatsComponent : MonoBehaviour
                 {
                     critChanceAdd += 0.1f;
                 }
-                if(i.Level >= 6)
+                if (i.Level >= 6)
                 {
                     critChanceAdd += 0.1f;
                 }
@@ -922,7 +948,7 @@ public abstract class StatsComponent : MonoBehaviour
                 if (i.Level >= 6)
                 {
                     hpAdd += 20f;
-     
+
                 }
 
             }
@@ -1083,11 +1109,12 @@ public abstract class StatsComponent : MonoBehaviour
         {
             Item i = GetItem(ItemIndex.Vampire);
 
-            if(i.Level >= 1)
+            if (i.Level >= 1)
             {
                 damageMult *= 1.2f;
             }
-            if(i.Level >= 2){
+            if (i.Level >= 2)
+            {
                 damageMult *= 1.2f;
             }
             if (i.Level >= 3)
@@ -1097,7 +1124,7 @@ public abstract class StatsComponent : MonoBehaviour
 
             if (i.HasTakenPath("See Red"))
             {
-                if(i.Level >= 4)
+                if (i.Level >= 4)
                 {
                     damageMult *= 1.2f;
                 }
@@ -1330,6 +1357,102 @@ public abstract class StatsComponent : MonoBehaviour
             if (tempLevel > level)
             {
                 level = tempLevel;
+            }
+        }
+    }
+
+    protected class BuffHolder
+    {
+        public BuffIndex index;
+        public bool isDebuff;
+        public StatsComponent inflictor;
+        public float duration;
+
+        protected bool isActive;
+        protected float timer = 0f;
+
+        public bool IsActive
+        {
+            get { return isActive; }
+        }
+
+        public float TimeActive
+        {
+            get { return timer; }
+        }
+
+        public BuffHolder(BuffIndex index = 0, float duration = 1f, bool isDebuff = false, StatsComponent inflictor = null)
+        {
+            isActive = true;
+            this.index = index;
+            this.duration = duration;
+            this.isDebuff = isDebuff;
+            this.inflictor = inflictor;
+        }
+
+        /// <summary>
+        /// Updates the buffs timer and checks if it is still active
+        /// </summary>
+        /// <param name="delta"></param>
+        public virtual void Update(float delta)
+        {
+            if (isActive)
+            {
+                timer += delta;
+                if (timer >= duration)
+                {
+                    isActive = false;
+                    timer = duration;
+                }
+            }
+        }
+    }
+
+    protected class DotHolder : BuffHolder
+    {
+        public StatsComponent inflicted;
+
+        private float tickRate;
+        private float damagePerTick;
+        private float tickTimer = 0f;
+
+        public DotHolder(BuffIndex index = 0, float duration = 1f, float tickRate = 0.25f, float damagePerTick = 0f, StatsComponent inflictor = null, StatsComponent inflicted = null)
+        {
+            isActive = true;
+            this.index = index;
+            this.duration = duration;
+            isDebuff = true;
+            this.inflictor = inflictor;
+            this.inflicted = inflicted;
+            this.tickRate = tickRate;
+            this.damagePerTick = damagePerTick;
+        }
+
+        /// <summary>
+        /// Updates the buffs timer and checks if it is still active
+        /// </summary>
+        /// <param name="delta"></param>
+        public override void Update(float delta)
+        {
+            if (isActive)
+            {
+                timer += delta;
+                tickTimer += delta;
+                if (tickTimer >= tickRate)
+                {
+                    tickTimer = 0f;
+                    DamageInfo info = new DamageInfo();
+                    info.damage = damagePerTick;
+                    info.attacker = inflictor;
+                    info.critOveride = false;
+                    info.knockback = 0;
+                    inflicted.TakeDamage(info);
+                }
+                if (timer >= duration)
+                {
+                    isActive = false;
+                    timer = duration;
+                }
             }
         }
     }

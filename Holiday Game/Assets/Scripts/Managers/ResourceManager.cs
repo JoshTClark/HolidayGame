@@ -83,6 +83,8 @@ public class ResourceManager
 
     public enum BuffIndex
     {
+        Burning = 0,
+        Stunned = 1
     }
 
     public enum OrbitalIndex

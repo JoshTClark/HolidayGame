@@ -67,7 +67,7 @@ public abstract class Weapon : MonoBehaviour
     void Update()
     {
         CalcStats();
-        if (GameManager.instance.State == GameManager.GameState.MainGame)
+        if (GameManager.instance.State == GameManager.GameState.MainGame && !owner.isStunned)
         {
             float delta = Time.deltaTime;
             timer += delta;
@@ -239,6 +239,16 @@ public abstract class Weapon : MonoBehaviour
         return ar;
     }
 
+    /// <summary>
+    /// Decreases the time remaining for the weapon to fire again
+    /// </summary>
+    /// <param name="percent"></param>
+    public void ReduceCooldown(float percent)
+    {
+        float timeDecrease = percent * delay;
+        timer += timeDecrease;
+    }
+
     public abstract void OnUpdate();
 
     public abstract void CalcStats();
@@ -248,5 +258,11 @@ public abstract class Weapon : MonoBehaviour
     {
         public string statName;
         public float value;
+    }
+
+    public void OnDrawGizmos()
+    {
+        Gizmos.color = new Color(1f, 0f, 1f, 1f);
+        Gizmos.DrawLine(this.gameObject.transform.position, this.gameObject.transform.position + this.gameObject.transform.right);
     }
 }

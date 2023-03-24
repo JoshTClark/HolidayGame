@@ -14,12 +14,12 @@ public class DebugPanel : MonoBehaviour
 
     public void Init()
     {
-        List<TMP_Dropdown.OptionData> optionsUpgrades = new List<TMP_Dropdown.OptionData>();
-        foreach (Upgrade i in ResourceManager.upgradeDefinitions)
+        List<TMP_Dropdown.OptionData> optionsItems = new List<TMP_Dropdown.OptionData>();
+        foreach (ItemDef i in ResourceManager.itemDefs)
         {
-            optionsUpgrades.Add(new TMP_Dropdown.OptionData(i.upgradeName));
+            optionsItems.Add(new TMP_Dropdown.OptionData(i.itemName));
         }
-        upgradeSelector.AddOptions(optionsUpgrades);
+        upgradeSelector.AddOptions(optionsItems);
 
         List<TMP_Dropdown.OptionData> optionsEnemies = new List<TMP_Dropdown.OptionData>();
         foreach (Enemy i in ResourceManager.enemyPrefabs)
@@ -64,6 +64,7 @@ public class DebugPanel : MonoBehaviour
 
     public void GiveUpgrade()
     {
+        GameManager.instance.player.AddItem(ResourceManager.ItemDefFromName(upgradeSelector.options[upgradeSelector.value].text).GetItem());
     }
 
     public void SpawnEnemy()

@@ -37,9 +37,18 @@ public class SwordSlashWeapon : Weapon
                 sizeMult += 0.15f;
             }
 
-            // Sword Beam Path
-            if (i.Level > 4 && i.HasTakenPath("Multi Strike"))
+            // Stun Path
+            if (i.Level > 4 && i.HasTakenPath("Stun"))
             {
+                if (i.Level >= 7)
+                {
+                    pierceAdd += 4;
+                    sizeMult += 0.1f;
+                }
+                if (i.Level >= 8)
+                {
+                    pierceAdd += 4;
+                }
             }
 
             // Multi Strike Path
@@ -244,15 +253,23 @@ public class SwordSlashWeapon : Weapon
         DamageInfo info = new DamageInfo();
         info.damage = owner.Damage * GetStat("Damage");
         info.attacker = owner;
-        info.knockbackDirection = p.Direction;
+        info.knockbackDirection = this.gameObject.transform.right;
+        info.knockback = 1;
         info.weapon = ResourceManager.WeaponIndex.SwordSlash;
-        DotInfo buff = new DotInfo();
-        buff.duration = 2f;
-        buff.index = ResourceManager.BuffIndex.Burning;
-        buff.isDebuff = true;
-        buff.damagePerTick = owner.Damage / 10;
-        buff.tickRate = 0.5f;
-        info.buffs.Add(buff);
+        Item i = owner.GetItem(ResourceManager.ItemIndex.SwordWeapon);
+        if (i.HasTakenPath("Stun"))
+        {
+            BuffInfo stun = new BuffInfo();
+            stun.duration = 4f;
+            if (i.Level >= 7) 
+            {
+                stun.duration += 0.1f;
+                info.knockback *= 1.2f;
+            }
+            stun.index = ResourceManager.BuffIndex.Stunned;
+            stun.isDebuff = true;
+            info.buffs.Add(stun);
+        }
         p.SetDamageInfo(info);
         if (spin)
         {
@@ -260,7 +277,7 @@ public class SwordSlashWeapon : Weapon
             p.SizeMultiplier = GetStat("Size") * 1.5f;
             p.Pierce = GetStat("Pierce") + 99;
         }
-        AudioManager.instance.PlaySound(soundEffects[Random.Range(0,4)], 1f);
+        AudioManager.instance.PlaySound(soundEffects[Random.Range(0, 4)], 1f);
     }
 
     private void Stab(bool strong = false)

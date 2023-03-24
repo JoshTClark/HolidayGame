@@ -379,6 +379,21 @@ public class ResourceManager
         return drop;
     }
 
+    public static ItemDef ItemDefFromName(string name)
+    {
+        ItemDef def = null;
+
+        foreach (ItemDef i in itemDefs)
+        {
+            if (i.itemName == name)
+            {
+                def = i;
+            }
+        }
+
+        return def;
+    }
+
     public static Enemy GetEnemyFromIndex(EnemyIndex index)
     {
         foreach (Enemy i in enemyPrefabs)

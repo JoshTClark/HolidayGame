@@ -70,7 +70,6 @@ public class GameUIManager : MonoBehaviour
         currentLayout = layout1;
 
         // Setting up the weapon icons
-        /*
         for (int i = 0; i < player.maxWeapons; i++)
         {
             GameObject icon = Instantiate<GameObject>(weaponIconPrefab, gamePanel.transform);
@@ -80,7 +79,6 @@ public class GameUIManager : MonoBehaviour
             icon.GetComponent<RectTransform>().anchorMax = new Vector2((1f - (0.08f * player.maxWeapons)) + (0.08f * i) + 0.04f, 0.05f);
             weaponIcons.Add(icon.GetComponentInChildren<WeaponIcon>());
         }
-        */
 
         // Set all panels but gamePanel to not active
         gamePanel.gameObject.SetActive(true);
@@ -271,7 +269,6 @@ public class GameUIManager : MonoBehaviour
                 // Updating player stat display depending on the layout
                 currentLayout.UpdateUI(player);
 
-                /*
                 // Weapon Icon Stuff
                 // Removing icons
                 foreach (WeaponIcon icon in weaponIcons)
@@ -313,7 +310,6 @@ public class GameUIManager : MonoBehaviour
                         }
                     }
                 }
-                */
                 break;
         }
     }

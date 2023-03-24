@@ -84,25 +84,35 @@ public abstract class Enemy : StatsComponent
 
     protected void Move()
     {
-        CalcMoves();
-        if (transform.position.x < player.transform.position.x)
+        if (!isStunned)
         {
-            sr.flipX = true;
+            CalcMoves();
+            if (transform.position.x < player.transform.position.x)
+            {
+                sr.flipX = true;
+            }
+            else
+            {
+                sr.flipX = false;
+            }
+            // Then take Velocity normalize it so it's a heading vector
+            // scale that by speed, then apply movement
+            Vector2 velocity = Vector2.zero;
+            if (movements.Count > 0)
+            {
+                foreach (Vector2 v in movements)
+                {
+                    velocity += v;
+                }
+            }
+
+            GetComponent<Rigidbody2D>().velocity = (velocity.normalized * Speed);
         }
         else
         {
-            sr.flipX = false;
+            GetComponent<Rigidbody2D>().Sleep();
         }
-        // Then take Velocity normalize it so it's a heading vector
-        // scale that by speed, then apply movement
-        Vector2 velocity = Vector2.zero;
-        if (movements.Count > 0)
-        {
-            foreach (Vector2 v in movements)
-            {
-                velocity += v;
-            }
-        }
+
         Vector2 knockbackAmount = Vector2.zero;
         if (knockback.Count > 0)
         {
@@ -111,8 +121,6 @@ public abstract class Enemy : StatsComponent
                 knockbackAmount += v;
             }
         }
-
-        GetComponent<Rigidbody2D>().velocity = (velocity.normalized * Speed);
         GetComponent<Rigidbody2D>().position = GetComponent<Rigidbody2D>().position + (knockbackAmount);
         movements.Clear();
         knockback.Clear();
@@ -226,10 +234,13 @@ public abstract class Enemy : StatsComponent
         {
             //Debug.Log("Hurt");
             // We hit the player, so they take damage
-            DamageInfo info = new DamageInfo();
-            info.damage = Damage;
-            info.attacker = this;
-            GameManager.instance.Player.TakeDamage(info);
+            if (!isStunned)
+            {
+                DamageInfo info = new DamageInfo();
+                info.damage = Damage;
+                info.attacker = this;
+                GameManager.instance.Player.TakeDamage(info);
+            }
         }
         else if (collision.gameObject.GetComponent<Enemy>())
         {

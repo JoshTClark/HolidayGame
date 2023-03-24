@@ -109,9 +109,10 @@ public class GameManager : MonoBehaviour
 
             // Initializes everything that would have been done at the start of the game and creates a player.
             ResourceManager.Init();
-            player = GameObject.Instantiate<Player>(ResourceManager.characters[1].prefab);
+            PlayableCharacterData charData = ResourceManager.characters[0];
+            player = GameObject.Instantiate<Player>(charData.prefab);
             player.inventory = new List<Item>();
-            foreach (ItemDef i in ResourceManager.characters[1].inventory)
+            foreach (ItemDef i in charData.inventory)
             {
                 Item item = i.GetItem();
                 item.Level = 1;
@@ -121,7 +122,7 @@ public class GameManager : MonoBehaviour
                     player.AddWeapon(((WeaponDef)i).weaponPrefab);
                 }
             }
-            foreach (ItemDef i in ResourceManager.characters[1].tutorialChestItems)
+            foreach (ItemDef i in charData.tutorialChestItems)
             {
                 Item item = i.GetItem();
                 item.Level = 1;

@@ -252,8 +252,11 @@ MonoBehaviour:
   hpMultConst: 1
   damageMultConst: 1
   speedMultConst: 1
+  vampKills: 0
   isDead: 0
   weapons: []
+  canMove: 1
+  isStunned: 0
   fadeTotalTime: 0
   player: {fileID: 0}
   index: 3

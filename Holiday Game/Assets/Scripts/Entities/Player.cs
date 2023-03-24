@@ -44,7 +44,6 @@ public class Player : StatsComponent
     public int waitingForLevels = 0;
 
     public bool godMode = false;
-    public bool canMove = true;
 
 
     public float DashCooldown { get { return baseDashCooldown * dashCooldownMultiplier; } }

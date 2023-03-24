@@ -104,12 +104,12 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-  - pathName: Wave Beam
+  - pathName: Stun
     previousPath: Start
     numLevels: 4
     levelDescriptions:
-    - lvlName: Wave Beam
-      desc: Iron Blade shoots a wave that deals  75% damage.
+    - lvlName: Stunning Strike
+      desc: Iron Blade stuns enemies briefly on hit.
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -128,8 +128,8 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - lvlName: Tidal Force
-      desc: Iron Blade waves do greater knockback and travel faster.
+    - lvlName: Deep Wounds
+      desc: Stunned enemies take 15% more damage.
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -148,8 +148,9 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - lvlName: Expanding Force
-      desc: Iron Blade waves are 30% larger.
+    - lvlName: Big Sword
+      desc: Iron Blade becomes 10% larger and has 4 more pierce. Increases stun duration
+        and knockback.
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -168,8 +169,9 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - lvlName: Shockwave
-      desc: Enemies hit by the Iron Blade are breifly stunned.
+    - lvlName: Reverbating Strike
+      desc: Hitting a stunned enemy decreases all cooldowns by 1% except for Iron
+        Blade's cooldown. Increases pierce by 4.
       statChanges:
         hpAdd: 0
         speedAdd: 0

@@ -65,6 +65,9 @@ public abstract class StatsComponent : MonoBehaviour
     private float patienceTimer = 0.0f;
     protected bool isMoving = true;
 
+    public bool canMove = true;
+    public bool isStunned = false;
+
     [SerializeField]
     float fadeTotalTime;
 
@@ -157,6 +160,16 @@ public abstract class StatsComponent : MonoBehaviour
         }
         */
 
+        // Check if entity should be stunned
+        if (HasBuff(BuffIndex.Stunned))
+        {
+            isStunned = true;
+        }
+        else
+        {
+            isStunned = false;
+        }
+
         CalculateStats();
 
         OnUpdate();
@@ -232,6 +245,30 @@ public abstract class StatsComponent : MonoBehaviour
     {
         info.receiver = this;
         info.CalculateAll();
+
+        // Sword Upgrade - if stunned take more damage
+        if (info.attacker.HasItem(ResourceManager.ItemIndex.SwordWeapon)
+            && info.attacker.GetItem(ResourceManager.ItemIndex.SwordWeapon).HasTakenPath("Stun")
+            && info.attacker.GetItem(ResourceManager.ItemIndex.SwordWeapon).Level >= 6
+            && isStunned)
+        {
+            info.damage *= 1.15f;
+            if (info.attacker.GetItem(ResourceManager.ItemIndex.SwordWeapon).Level >= 8)
+            {
+                foreach (Weapon weapon in info.attacker.weapons)
+                {
+                    if (weapon.index != WeaponIndex.SwordSlash)
+                    {
+                        weapon.ReduceCooldown(0.01f);
+                    }
+                }
+                if (info.attacker.GetType() == typeof(Player))
+                {
+                    Player p = (Player)info.attacker;
+                    p.dashCooldownTimer += 0.01f * p.DashCooldown;
+                }
+            }
+        }
 
         if (Armor > 0)
         {
@@ -413,9 +450,10 @@ public abstract class StatsComponent : MonoBehaviour
                 DotHolder dotHolder = new DotHolder(dot.index, dot.duration, dot.tickRate, dot.damagePerTick, info.attacker, this);
                 buffs.Add(dotHolder);
             }
-            else 
+            else
             {
                 BuffHolder buff = new BuffHolder(i.index, i.duration, i.isDebuff, info.attacker);
+                buffs.Add(buff);
             }
         }
 
@@ -493,8 +531,14 @@ public abstract class StatsComponent : MonoBehaviour
     /// <summary>
     /// Adds the item to the players inventory
     /// </summary>
-    public void AddItem(ResourceManager.ItemIndex index)
+    public void AddItem(Item item)
     {
+        if (item.Level == 0) { item.Level++; }
+        inventory.Add(item);
+        if (item.itemDef.GetType() == typeof(WeaponDef))
+        {
+            AddWeapon(((WeaponDef)item.itemDef).weaponPrefab);
+        }
     }
 
     /// <summary>

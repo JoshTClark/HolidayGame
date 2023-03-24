@@ -1488,7 +1488,7 @@ public abstract class StatsComponent : MonoBehaviour
                     DamageInfo info = new DamageInfo();
                     info.damage = damagePerTick;
                     info.attacker = inflictor;
-                    info.critOveride = false;
+                    info.neverCrit = true;
                     info.knockback = 0;
                     inflicted.TakeDamage(info);
                 }

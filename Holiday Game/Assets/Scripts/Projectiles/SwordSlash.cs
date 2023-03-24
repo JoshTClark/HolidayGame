@@ -66,7 +66,7 @@ public class SwordSlash : ProjectileBase
         Item i = info.attacker.GetItem(ResourceManager.ItemIndex.SwordWeapon);
         if (i.Level >= 4 && Vector2.Distance(closest, this.gameObject.transform.position) >= (2.5f * SizeMultiplier))
         {
-            info.critOveride = true;
+            info.alwaysCrit = true;
             info.damage *= 1.5f;
         }
     }

@@ -46,7 +46,6 @@ public class GameManager : MonoBehaviour
     private float dayLength = 120f;
     public int currentDay = 1;
     public int currentHour = 12;
-    private List<string> seasonsOrdered = new List<string>();
     public int enemiesDefeated = 0;
     private bool levelEnded = false;
     public bool doSpawns = true;
@@ -109,7 +108,7 @@ public class GameManager : MonoBehaviour
 
             // Initializes everything that would have been done at the start of the game and creates a player.
             ResourceManager.Init();
-            PlayableCharacterData charData = ResourceManager.characters[0];
+            PlayableCharacterData charData = ResourceManager.characters[1];
             player = GameObject.Instantiate<Player>(charData.prefab);
             player.inventory = new List<Item>();
             foreach (ItemDef i in charData.inventory)

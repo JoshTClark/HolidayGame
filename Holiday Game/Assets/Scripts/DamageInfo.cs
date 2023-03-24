@@ -20,7 +20,8 @@ public class DamageInfo
     public StatsComponent receiver;
     public StatsComponent attacker;
     public bool isCrit;
-    public bool critOveride = false;
+    public bool alwaysCrit = false;
+    public bool neverCrit = false;
     public List<BuffInfo> buffs = new List<BuffInfo>();
     public ResourceManager.WeaponIndex weapon;
 
@@ -32,9 +33,13 @@ public class DamageInfo
         if (attacker)
         {
             isCrit = GameManager.RollCheck(attacker.CritChance);
-            if (critOveride)
+            if (alwaysCrit)
             {
                 isCrit = true;
+            }
+            if (neverCrit)
+            {
+                isCrit = false;
             }
             if (isCrit)
             {
@@ -60,7 +65,7 @@ public class DamageInfo
         info.knockbackDirection = this.knockbackDirection;
         info.radialKnockback = this.radialKnockback;
         info.weapon = this.weapon;
-        info.critOveride = this.critOveride;
+        info.alwaysCrit = this.alwaysCrit;
         info.otherCollider = this.otherCollider;
         return info;
     }

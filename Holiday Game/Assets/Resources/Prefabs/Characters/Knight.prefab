@@ -142,7 +142,7 @@ MonoBehaviour:
   baseMaxHP: 60
   baseSpeed: 4
   baseDamage: 5
-  baseAttackSpeed: 0.9
+  baseAttackSpeed: 1
   baseArmor: 1
   baseRegen: 1
   baseRegenInterval: 5
@@ -199,6 +199,8 @@ MonoBehaviour:
   vampKills: 0
   isDead: 0
   weapons: []
+  canMove: 1
+  isStunned: 1
   fadeTotalTime: 0
   movement: {fileID: -8801911651582695651, guid: 46c5d35181ff19744bbe64637b663d10, type: 3}
   pickupRange: 5
@@ -211,7 +213,6 @@ MonoBehaviour:
   maxWeapons: 4
   waitingForLevels: 0
   godMode: 0
-  canMove: 1
 --- !u!61 &1069143796030833450
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -228,7 +229,7 @@ BoxCollider2D:
   m_Offset: {x: 0.10077372, y: -0.19417405}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.625, y: 0.42857143}
     oldSize: {x: 1, y: 1.09375}
     newSize: {x: 1.0625, y: 1.15625}
     adaptiveTilingThreshold: 0.5

@@ -51,7 +51,7 @@ public class ResourceManager
         CupidArrow = 5,
         BossAttack = 6,
         BossAttack2 = 7,
-        CandyCornRifle = 8,
+        MagicMissile = 8,
         SwordSlash = 9
     }
 

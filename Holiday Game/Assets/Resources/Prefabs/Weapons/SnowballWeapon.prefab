@@ -52,10 +52,12 @@ MonoBehaviour:
   timer: 0
   owner: {fileID: 0}
   canFire: 0
+  hasStarted: 0
   baseDamageMultiplier: 1.2
   baseSizeMultiplier: 1
   attackSpeedMultiplier: 1
-  pierce: 0
+  pierce: 1
   extraStats:
   - statName: Speed
     value: 1
+  soundEffects: []

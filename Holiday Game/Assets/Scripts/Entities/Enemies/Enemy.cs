@@ -177,7 +177,66 @@ public abstract class Enemy : StatsComponent
                     if (i.Level == 6) dmgInfo.attacker.vampKills++;
                 }
             }
+        }
 
+        if (dmgInfo.attacker && dmgInfo.attacker.HasItem(ResourceManager.ItemIndex.MagicMissile))
+        {
+            Item i = dmgInfo.attacker.GetItem(ResourceManager.ItemIndex.MagicMissile);
+
+            if (i.HasTakenPath("Burning"))
+            {
+                if (i.Level >= 8)
+                {
+                    ProjectileBase projectile = ProjectileManager.GetProjectile(ResourceManager.ProjectileIndex.Explosion);
+                    projectile.gameObject.transform.position = this.gameObject.transform.position;
+                    DamageInfo info = new DamageInfo();
+                    info.radialKnockback = true;
+                    info.damagePos = this.transform.position;
+                    info.attacker = dmgInfo.attacker;
+                    info.damage = dmgInfo.attacker.Damage * 0.5f;
+                    info.knockback = 0.25f;
+                    // Burn Effect
+                    DotInfo burn = new DotInfo();
+                    burn.duration = 0.75f;
+                    burn.index = ResourceManager.BuffIndex.Burning;
+                    burn.damagePerTick = dmgInfo.attacker.Damage * 0.1f;
+                    burn.tickRate = 0.5f;
+                    // Level 2 burn
+                    if (i.Level >= 2)
+                    {
+                        burn.damagePerTick = dmgInfo.attacker.Damage * 0.15f;
+                    }
+
+                    if (i.HasTakenPath("Burning"))
+                    {
+                        // Level 5 duration multiplier
+                        if (i.Level >= 5)
+                        {
+                            burn.duration *= 2;
+                        }
+
+                        // Level 7 burn speed
+                        if (i.Level >= 5)
+                        {
+                            burn.tickRate /= 1.25f;
+                            burn.damagePerTick = dmgInfo.attacker.Damage * 0.4f;
+                        }
+                    }
+                    burn.chance = 0.25f;
+                    burn.isDebuff = true;
+                    info.buffs.Add(burn);
+                    projectile.SetDamageInfo(info);
+                    projectile.DamageMultiplier = 1f;
+                    projectile.Lifetime = 0.25f;
+                    projectile.Pierce = 999f;
+                    projectile.Size = 1.5f;
+                    projectile.SizeMultiplier = 1f;
+                    projectile.projectileTeam = ProjectileBase.Team.Player;
+                    GameObject explosion = Instantiate(Resources.Load<GameObject>("Prefabs/Effects/Explosion"), transform.position, Quaternion.identity);
+                    explosion.GetComponent<SpriteRenderer>().size = new Vector3(1.5f, 1.5f);
+                    explosion.gameObject.transform.localScale = new Vector3(projectile.Size, projectile.Size);
+                }
+            }
         }
 
         foreach (DropInfo info in drops)

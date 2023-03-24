@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70605d7495d740a44a869ce4212c2ba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 2.25
+  delay: 2.75
   weaponDef: {fileID: 0}
   level: 0
   index: 8
@@ -52,10 +52,11 @@ MonoBehaviour:
   timer: 0
   owner: {fileID: 0}
   canFire: 0
-  baseDamageMultiplier: 0.4
+  hasStarted: 0
+  baseDamageMultiplier: 0.3
   baseSizeMultiplier: 1
   attackSpeedMultiplier: 0
-  pierce: 0
+  pierce: 1
   extraStats:
   - statName: Projectiles
     value: 3

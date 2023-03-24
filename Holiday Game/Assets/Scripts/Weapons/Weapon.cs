@@ -19,6 +19,8 @@ public abstract class Weapon : MonoBehaviour
 
     public bool canFire = false;
 
+    public bool hasStarted = false;
+
     [SerializeField]
     private float baseDamageMultiplier = 1, baseSizeMultiplier = 1, attackSpeedMultiplier = 1, pierce = 0;
 
@@ -62,6 +64,8 @@ public abstract class Weapon : MonoBehaviour
             baseStats.TryGetValue(key, out val);
             trueStats.Add(key, val);
         }
+
+        hasStarted = true;
     }
 
     void Update()

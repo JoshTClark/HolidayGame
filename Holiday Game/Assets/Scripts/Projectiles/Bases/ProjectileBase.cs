@@ -102,29 +102,28 @@ public abstract class ProjectileBase : MonoBehaviour
             if (other.gameObject.GetComponent<Enemy>())
             {
                 StatsComponent receiver = other.gameObject.GetComponent<StatsComponent>();
-                OnCollision(other);
-                if (!hitTargets.Contains(receiver))
-                {
-                    if (this.GetType() == typeof(BombProjectileBase))
+                if (!receiver.IsDead && usedPierce < pierce) {
+                    OnCollision(other);
+                    if (!hitTargets.Contains(receiver))
                     {
-                        if (((BombProjectileBase)this).explodeOnContact)
+                        if (this.GetType() == typeof(BombProjectileBase))
+                        {
+                            if (((BombProjectileBase)this).explodeOnContact)
+                            {
+                                destroy = true;
+                            }
+                        }
+                        this.damageInfo.damagePos = this.gameObject.transform.position;
+                        this.damageInfo.otherCollider = other;
+                        this.damageInfo.receiver = receiver;
+                        this.damageInfo.knockback *= knockbackMultiplier;
+                        hitTargets.Add(receiver);
+                        Hit(receiver);
+                        usedPierce++;
+                        if(usedPierce >= pierce)
                         {
                             destroy = true;
                         }
-                    }
-                    this.damageInfo.damagePos = this.gameObject.transform.position;
-                    this.damageInfo.otherCollider = other;
-                    this.damageInfo.receiver = receiver;
-                    this.damageInfo.knockback *= knockbackMultiplier;
-                    hitTargets.Add(receiver);
-                    Hit(receiver);
-                    if (Pierce > 0 && usedPierce < Pierce)
-                    {
-                        usedPierce++;
-                    }
-                    else
-                    {
-                        destroy = true;
                     }
                 }
             }

@@ -22,7 +22,7 @@ public class WeaponIcon : MonoBehaviour
         float percentLeft = 1f;
         foreach (Weapon weapon in GameManager.instance.Player.weapons) 
         {
-            if (weapon.index == this.weaponIndex)
+            if (weapon.hasStarted && weapon.index == this.weaponIndex)
             {
                 percentLeft = weapon.PercentTimeLeft();
             }

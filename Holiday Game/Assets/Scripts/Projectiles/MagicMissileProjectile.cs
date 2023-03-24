@@ -1,12 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MagicMissileProjectile : ProjectileBase
 {
+    public bool seeking = false;
+
     public override void Move()
     {
-        GetComponent<Rigidbody2D>().velocity = Direction * Speed;
+        Rigidbody2D body = this.gameObject.GetComponent<Rigidbody2D>();
+        if (seeking)
+        {
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+            mousePosition.z = 0.0f;
+            Vector2 desiredDirection = (Vector2)mousePosition - (Vector2)this.gameObject.transform.position;
+            desiredDirection.Normalize();
+            float rotateAmount = Vector3.Cross(desiredDirection, transform.right).z;
+            body.angularVelocity = -rotateAmount * 400f;
+        }
+        body.velocity = transform.right * Speed;
     }
 
     public override void OnClean()
@@ -15,6 +28,7 @@ public class MagicMissileProjectile : ProjectileBase
         this.transform.rotation = Quaternion.identity;
         body.angularVelocity = 0;
         body.velocity = Vector2.zero;
+        seeking = false;
     }
 
     public override void OnCollision(Collider2D other)

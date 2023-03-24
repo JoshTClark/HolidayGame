@@ -8,7 +8,7 @@ public class MagicMissile : Weapon
     private float volleyTimer = 0.2f;
     private float shotDelay = 0.6f;
     private int firedShots = 0;
-    private int soundChoice = 0;//Random.Range(0, 3);
+    private int soundChoice = 0; //Random.Range(0, 3);
 
     public override void CalcStats()
     {

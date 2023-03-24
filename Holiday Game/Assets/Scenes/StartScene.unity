@@ -1216,6 +1216,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 856402527}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: ButtonPress
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &364217565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3574,6 +3586,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 856402527}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: ButtonPress
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &739476434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3775,6 +3799,18 @@ MonoBehaviour:
       - m_Target: {fileID: 296636938}
         m_TargetAssemblyTypeName: SaveSceneManager, Assembly-CSharp
         m_MethodName: CharButtonRight
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 856402527}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: ButtonPress
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4794,6 +4830,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f3a9ce08b81e8446a26fd4b2ce70508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menuSound: {fileID: 8300000, guid: 91f4da32ee67257469cbb75943f8023f, type: 3}
+  titleMusic: {fileID: 8300000, guid: 01a8306ab29f92b4dae1b58edb9c2009, type: 3}
+  mapMusic: {fileID: 8300000, guid: 01a8306ab29f92b4dae1b58edb9c2009, type: 3}
 --- !u!4 &856402528
 Transform:
   m_ObjectHideFlags: 0
@@ -7398,6 +7437,18 @@ MonoBehaviour:
       - m_Target: {fileID: 296636938}
         m_TargetAssemblyTypeName: SaveSceneManager, Assembly-CSharp
         m_MethodName: CharButtonLeft
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 856402527}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: ButtonPress
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

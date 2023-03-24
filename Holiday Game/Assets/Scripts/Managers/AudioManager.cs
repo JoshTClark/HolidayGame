@@ -13,6 +13,10 @@ public class AudioManager : MonoBehaviour
     private static ObjectPool<AudioSource> pool = new ObjectPool<AudioSource>(createFunc: () => CreateSource(), actionOnGet: (obj) => obj.gameObject.SetActive(true), actionOnRelease: (obj) => obj.gameObject.SetActive(false), actionOnDestroy: (obj) => Destroy(obj.gameObject), collectionCheck: true, defaultCapacity: 10);
     private static List<AudioSource> allSources = new List<AudioSource>();
 
+    [SerializeField] private AudioClip menuSound;
+    [SerializeField] private AudioClip titleMusic;
+    [SerializeField] private AudioClip mapMusic;
+
     /// <summary>
     /// Called when the scene starts
     /// </summary>
@@ -67,5 +71,10 @@ public class AudioManager : MonoBehaviour
         source.pitch = pitch;
         source.clip = audio;
         source.Play();
+    }
+
+    public void ButtonPress()
+    {
+        PlaySound(menuSound);
     }
 }

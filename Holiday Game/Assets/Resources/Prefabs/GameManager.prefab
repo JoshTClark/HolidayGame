@@ -188,10 +188,10 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
-    y: 0.18402778
-    width: 0.16523437
-    height: 0.16523437
+    x: 0.18242188
+    y: 0
+    width: 0.3715278
+    height: 0.3715278
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -1185,6 +1185,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f3a9ce08b81e8446a26fd4b2ce70508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menuSound: {fileID: 8300000, guid: 91f4da32ee67257469cbb75943f8023f, type: 3}
+  titleMusic: {fileID: 8300000, guid: 01a8306ab29f92b4dae1b58edb9c2009, type: 3}
+  mapMusic: {fileID: 8300000, guid: 01a8306ab29f92b4dae1b58edb9c2009, type: 3}
 --- !u!1 &1168054015722964801
 GameObject:
   m_ObjectHideFlags: 0

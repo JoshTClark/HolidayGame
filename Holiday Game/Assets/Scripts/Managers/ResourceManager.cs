@@ -26,7 +26,8 @@ public class ResourceManager
         IceShard = 7,
         SwordSlash = 8,
         SwordStab = 9,
-        EnemyBomb = 10
+        EnemyBomb = 10,
+        Shockwave = 11
     }
     public enum FollowingEffectIndex
     {

@@ -252,7 +252,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 1
   baseSpeed: 0
-  baseLifetime: 2.5
+  baseLifetime: 3
   baseSize: 1
   projectileTeam: 2
   explodeOnContact: 0
@@ -262,7 +262,11 @@ MonoBehaviour:
   explosionEffect: {fileID: -2186267711908558283, guid: 82eb3a088bb77db4d8e206b4642dc787, type: 3}
   explosionSizeMultiplier: 1
   explosionPrefab: {fileID: 7626580761896396394, guid: 7240eba55b787c042b905deb42848489, type: 3}
+  clusterNum: 4
+  isCluster: 0
+  isRecursive: 0
   selfPrefab: {fileID: 6243427137443032006}
+  clusterSpeed: 10
 --- !u!82 &-6673121354519276325
 AudioSource:
   m_ObjectHideFlags: 0

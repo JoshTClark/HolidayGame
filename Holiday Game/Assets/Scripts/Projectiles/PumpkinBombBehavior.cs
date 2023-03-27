@@ -6,13 +6,16 @@ using UnityEngine;
 public class PumpkinBombBehavior : BombProjectileBase
 {
     SpriteRenderer sr;
-    private bool isCluster = false;
+    public int clusterNum = 4;
+    public bool isCluster = false;
+    public bool isRecursive = false;
+    public bool shockWave = false;
     public PumpkinBombBehavior selfPrefab;
-    private float clusterSpeed = 10f;
+    public float clusterSpeed = 7.5f;
     private float slowdownSpeed = 1.25f;
-    private float clusterLifetime = 0.8f;
-    private float clusterDamage = 0.25f;
-    private float clusterSize = 0.8f;
+    private float clusterLifetime = 0.5f;
+    private float clusterDamage = 0.30f;
+    private float clusterSize = 0.75f;
 
     public void Start()
     {
@@ -31,10 +34,9 @@ public class PumpkinBombBehavior : BombProjectileBase
 
     public override void OnDeath()
     {
-        /*
-        if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.ClusterPumkins) && !isCluster)
+        if (isCluster || isRecursive)
         {
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < clusterNum; i++)
             {
                 PumpkinBombBehavior p = (PumpkinBombBehavior)pool.Get();
                 p.transform.position = this.transform.position;
@@ -42,19 +44,36 @@ public class PumpkinBombBehavior : BombProjectileBase
                 p.isCluster = true;
                 p.Speed = clusterSpeed;
                 p.Direction = p.transform.right;
-                p.RotateDirection(45f + (90f * i));
-                p.isCluster = true;
+                p.RotateDirection((360f/clusterNum/2f) + (360f / clusterNum * i));
+                p.isCluster = false;
+                if (isRecursive) 
+                {
+                    p.isCluster = true;
+                    p.isRecursive = false;
+                    p.clusterNum = 4;
+                }
                 p.damageInfo = damageInfo.CreateCopy();
                 p.DamageMultiplier = clusterDamage * DamageMultiplier;
-                p.LifetimeMultiplier = clusterLifetime;
+                p.LifetimeMultiplier = clusterLifetime * LifetimeMultiplier;
                 float torque = Random.Range(-500f, 500f);
                 p.gameObject.GetComponent<Rigidbody2D>().AddTorque(torque);
                 p.gameObject.GetComponent<Rigidbody2D>().angularDrag = 1.75f;
-                p.SizeMultiplier = clusterSize;
+                p.SizeMultiplier = clusterSize * SizeMultiplier;
                 p.explosionSizeMultiplier = clusterSize * explosionSizeMultiplier;
             }
         }
-        */
+
+        if (shockWave)
+        {
+            ProjectileBase p = ProjectileManager.GetProjectile(ResourceManager.ProjectileIndex.Shockwave);
+            p.transform.position = this.transform.position;
+            p.Speed = clusterSpeed;
+            p.Direction = p.transform.right;
+            DamageInfo info = this.damageInfo.CreateCopy();
+            p.SetDamageInfo(info);
+            p.DamageMultiplier = 0;
+            p.Pierce = 999;
+        }
         base.OnDeath();
     }
 
@@ -66,7 +85,7 @@ public class PumpkinBombBehavior : BombProjectileBase
     public override void OnUpdate()
     {
         float delta = Time.deltaTime;
-        sr.color = Color.Lerp(Color.white, Color.red, Mathf.PingPong(TimeAlive * TimeAlive * 1.5f, 1));
+        sr.color = Color.Lerp(Color.white, Color.red, Mathf.PingPong((TimeAlive/Lifetime) * (TimeAlive / Lifetime) * 10, 1));
 
         if (SpeedMultiplier > 0)
         {
@@ -92,6 +111,10 @@ public class PumpkinBombBehavior : BombProjectileBase
         body.angularVelocity = 0;
         body.velocity = Vector2.zero;
         this.isCluster = false;
+        this.isRecursive = false;
+        clusterSpeed = 7.5f;
+        clusterNum = 4;
+        shockWave = false;
         this.gameObject.SetActive(true);
     }
 }

@@ -45,12 +45,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 8
+  weaponDef: {fileID: 0}
+  level: 0
   index: 1
-  upgradeIndex: 20
   icon: {fileID: 21300000, guid: 64554ce95a34ac6489ac9898d9b9561c, type: 3}
   timer: 0
   owner: {fileID: 0}
   canFire: 0
+  hasStarted: 0
   baseDamageMultiplier: 5
   baseSizeMultiplier: 1
   attackSpeedMultiplier: 1
@@ -58,3 +60,6 @@ MonoBehaviour:
   extraStats:
   - statName: Explosion Size
     value: 1
+  - statName: Fuse
+    value: 1
+  soundEffects: []

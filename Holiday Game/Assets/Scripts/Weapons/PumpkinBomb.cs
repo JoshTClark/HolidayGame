@@ -1,46 +1,44 @@
- using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
 public class PumpkinBomb : Weapon
 {
-    public override void CalcStats() 
+    public override void CalcStats()
     {
-        float damage = GetBaseStat("Damage");
-        float size = GetBaseStat("Explosion Size");
+        if (owner.HasItem(ResourceManager.ItemIndex.PumpkinBomb))
+        {
+            float damage = GetBaseStat("Damage");
+            float attackSpeed = GetBaseStat("Attack Speed");
+            float size = GetBaseStat("Explosion Size");
+            float fuse = GetBaseStat("Fuse");
+            Item i = owner.GetItem(ResourceManager.ItemIndex.PumpkinBomb);
 
-        // Explosion size boost
-        /*
-        if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.PumkinRadius1))
-        {
-            size += 0.1f * (GameManager.instance.Player.GetItem(ResourceManager.UpgradeIndex.PumkinRadius1).CurrentLevel);
-        }
-        if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.PumkinRadius2))
-        {
-            size += 0.2f * (GameManager.instance.Player.GetItem(ResourceManager.UpgradeIndex.PumkinRadius2).CurrentLevel);
-        }
-        if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.PumkinRadius3))
-        {
-            size += 0.3f * (GameManager.instance.Player.GetItem(ResourceManager.UpgradeIndex.PumkinRadius3).CurrentLevel);
-        }
+            // Explosion size boost
+            if (i.Level >= 2)
+            {
+                size += 0.2f;
+            }
 
-        // Damage
-        if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.PumpkinDamage1))
-        {
-            damage += 0.3f * (GameManager.instance.Player.GetItem(ResourceManager.UpgradeIndex.PumpkinDamage1).CurrentLevel);
+            // Explosion size boost
+            if (i.Level >= 3)
+            {
+                damage += 0.2f;
+            }
+
+            // Explosion delay
+            if (i.Level >= 4)
+            {
+                fuse *= 0.8f;
+                attackSpeed += 0.1f;
+            }
+
+            trueStats["Damage"] = damage;
+            trueStats["Attack Speed"] = attackSpeed;
+            trueStats["Explosion Size"] = size;
+            trueStats["Fuse"] = fuse;
         }
-        if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.PumpkinDamage2))
-        {
-            damage += 0.6f * (GameManager.instance.Player.GetItem(ResourceManager.UpgradeIndex.PumpkinDamage2).CurrentLevel);
-        }
-        if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.PumpkinDamage3))
-        {
-            damage += 1f * (GameManager.instance.Player.GetItem(ResourceManager.UpgradeIndex.PumpkinDamage3).CurrentLevel);
-        }
-        */
-        trueStats["Damage"] = damage;
-        trueStats["Explosion Size"] = size;
     }
 
     public override void OnUpdate()
@@ -58,6 +56,38 @@ public class PumpkinBomb : Weapon
             info.weapon = ResourceManager.WeaponIndex.PumpkinBomb;
             p.SetDamageInfo(info);
             p.explosionSizeMultiplier = GetStat("Explosion Size");
+            p.LifetimeMultiplier = GetStat("Fuse");
+
+            if (owner.HasItem(ResourceManager.ItemIndex.PumpkinBomb))
+            {
+                Item i = owner.GetItem(ResourceManager.ItemIndex.PumpkinBomb);
+                if (i.HasTakenPath("Cluster Pumpkins"))
+                {
+                    if (i.Level >= 7)
+                    {
+                        ((PumpkinBombBehavior)p).isRecursive = true;
+                    }
+                    else if (i.Level >= 5)
+                    {
+                        ((PumpkinBombBehavior)p).isCluster = true;
+                    }
+
+                    if (i.Level >= 6)
+                    {
+                        ((PumpkinBombBehavior)p).clusterSpeed *= 1.3f;
+                    }
+
+                    if (i.Level >= 8)
+                    {
+                        ((PumpkinBombBehavior)p).clusterNum = 6;
+                    }
+                }
+
+                if (i.HasTakenPath("Shockwave"))
+                {
+                    ((PumpkinBombBehavior)p).shockWave = true;
+                }
+            }
 
             /*
             // Pumkin Launcher
@@ -77,7 +107,6 @@ public class PumpkinBomb : Weapon
                 //float torque = Random.Range(-500f, 500f);
                 //p.gameObject.GetComponent<Rigidbody2D>().AddTorque(torque);
                 //p.gameObject.GetComponent<Rigidbody2D>().angularDrag = 1.75f;
-                p.LifetimeMultiplier = 0.8f;
             }
             */
             ResetTimer();

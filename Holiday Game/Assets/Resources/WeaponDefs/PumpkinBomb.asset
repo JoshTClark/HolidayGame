@@ -12,19 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff55350f7a42e094f96c5b12c6778ef2, type: 3}
   m_Name: PumpkinBomb
   m_EditorClassIdentifier: 
-  itemName: Iron Blade
+  itemName: Pumpkin Bomb
   index: 13
   icon: {fileID: 0}
-  maxLevel: 0
+  maxLevel: 8
   tier: 0
   paths:
   - pathName: Start
     previousPath: 
     numLevels: 4
     levelDescriptions:
-    - lvlName: Iron Blade
-      desc: New weapon. Every <color=blue>1 second</color> swing a blade towards
-        the cursor for <b>100%</b> damage.
+    - lvlName: Pumpkin
+      desc: Occasionally drop a pumpkin behind you that explodes after some time.
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -43,8 +42,8 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - lvlName: Sharp Blade
-      desc: Iron Blade deals 25% more damage.
+    - lvlName: More Exposives
+      desc: Pumpkin Bombs explosion radius is increased by 20%.
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -63,8 +62,8 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - lvlName: Heavy Blade
-      desc: Iron Blade is 15% larger and can pierce 2 more enemies.
+    - lvlName: Angry Pumpkins
+      desc: Pumpkin Bomb does 20% more damage.
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -83,9 +82,9 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - lvlName: Duelist Proficiency
-      desc: Enemies hit with the tip of the Iron Blade always take critical damage.
-        Damage at the tip of the Iron Blade is increased by 50%.
+    - lvlName: Shorter Fuse
+      desc: Pumpkin Bombs explode 20% faster and the cooldown of Pumpkin Bomb is
+        decreased by 10%.
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -104,12 +103,12 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-  - pathName: Wave Beam
+  - pathName: Cluster Pumpkins
     previousPath: Start
     numLevels: 4
     levelDescriptions:
-    - lvlName: Wave Beam
-      desc: Iron Blade shoots a wave that deals  75% damage.
+    - lvlName: Cluster Pumpkins
+      desc: Pumpkin Bombs release 4 smaller pumpkins when they explode.
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -128,8 +127,8 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - lvlName: Tidal Force
-      desc: Iron Blade waves do greater knockback and travel faster.
+    - lvlName: Speedy Children
+      desc: Mini pumpkins are shot out 30% faster.
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -148,8 +147,8 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - lvlName: Expanding Force
-      desc: Iron Blade waves are 30% larger.
+    - lvlName: Recursive Pumpkins
+      desc: Mini pumpkins release 4 even smaller pumpkins when they explode.
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -168,33 +167,33 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
+    - lvlName: Full of Pumpkins
+      desc: Pumpkin Bombs release 6 mini pumpkins when they explode.
+      statChanges:
+        hpAdd: 0
+        speedAdd: 0
+        damageAdd: 0
+        attackSpeedAdd: 0
+        armorAdd: 0
+        regenAdd: 0
+        critChanceAdd: 0
+        critDamageAdd: 0
+        hpMult: 1
+        speedMult: 1
+        damageMult: 1
+        attackSpeedMult: 1
+        armorMult: 1
+        regenMult: 1
+        critChanceMult: 1
+        critDamageMult: 1
+        XPMult: 1
+  - pathName: Shock Wave
+    previousPath: Start
+    numLevels: 4
+    levelDescriptions:
     - lvlName: Shockwave
-      desc: Enemies hit by the Iron Blade are breifly stunned.
-      statChanges:
-        hpAdd: 0
-        speedAdd: 0
-        damageAdd: 0
-        attackSpeedAdd: 0
-        armorAdd: 0
-        regenAdd: 0
-        critChanceAdd: 0
-        critDamageAdd: 0
-        hpMult: 1
-        speedMult: 1
-        damageMult: 1
-        attackSpeedMult: 1
-        armorMult: 1
-        regenMult: 1
-        critChanceMult: 1
-        critDamageMult: 1
-        XPMult: 1
-  - pathName: Multi Strike
-    previousPath: Start
-    numLevels: 4
-    levelDescriptions:
-    - lvlName: Extra Swing
-      desc: The Iron Blade attacks twice. Attack speed for Iron Blade is increased
-        by 10%.
+      desc: Pumpkins release a wave when they explode that stuns enemies. It stuns
+        for longer near the center of the explosion.
       statChanges:
         hpAdd: 0
         speedAdd: 0

@@ -69,17 +69,6 @@ public class GameUIManager : MonoBehaviour
         // Current layout
         currentLayout = layout1;
 
-        // Setting up the weapon icons
-        for (int i = 0; i < player.maxWeapons; i++)
-        {
-            GameObject icon = Instantiate<GameObject>(weaponIconPrefab, gamePanel.transform);
-            float space = 0.08f * player.maxWeapons;
-
-            icon.GetComponent<RectTransform>().anchorMin = new Vector2((1f - (0.08f * player.maxWeapons)) + (0.08f * i) + 0.04f, 0.05f);
-            icon.GetComponent<RectTransform>().anchorMax = new Vector2((1f - (0.08f * player.maxWeapons)) + (0.08f * i) + 0.04f, 0.05f);
-            weaponIcons.Add(icon.GetComponentInChildren<WeaponIcon>());
-        }
-
         // Set all panels but gamePanel to not active
         gamePanel.gameObject.SetActive(true);
         pausedPanel.gameObject.SetActive(false);
@@ -297,17 +286,12 @@ public class GameUIManager : MonoBehaviour
 
                     if (!hasIcon)
                     {
-                        int i = 0;
-                        while (weaponIcons[i].weaponIndex != ResourceManager.WeaponIndex.Null)
-                        {
-                            i++;
-                        }
-                        weaponIcons[i].weaponIndex = weapon.index;
-                        weaponIcons[i].sprite = weapon.icon;
-                        if (showWeaponIcons)
-                        {
-                            weaponIcons[i].gameObject.SetActive(true);
-                        }
+                        GameObject icon = GameObject.Instantiate<GameObject>(weaponIconPrefab, gamePanel.transform);
+                        icon.GetComponentInChildren<WeaponIcon>().weaponIndex = weapon.index;
+                        icon.GetComponentInChildren<WeaponIcon>().sprite = weapon.icon;
+                        float x = 320 - (14 * (weaponIcons.Count + 1)) - (weaponIcons.Count * 14);
+                        icon.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, -160);
+                        weaponIcons.Add(icon.GetComponentInChildren<WeaponIcon>());
                     }
                 }
                 break;

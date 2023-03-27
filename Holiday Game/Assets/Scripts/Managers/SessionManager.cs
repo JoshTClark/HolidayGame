@@ -54,7 +54,8 @@ public class SessionManager
         foreach (Item i in playerData.inventory)
         {
             player.inventory.Add(i);
-            if (i.itemDef.GetType() == typeof(WeaponDef)) {
+            if (i.itemDef.GetType() == typeof(WeaponDef))
+            {
                 player.AddWeapon(((WeaponDef)i.itemDef).weaponPrefab);
             }
         }
@@ -73,17 +74,17 @@ public class SessionManager
         }
         playerData.experience = player.XP;
         playerData.VampKills = player.vampKills;
-        data.currency += gems;
+        if (data != null)
+        {
+            data.currency += gems;
+        }
         currentLevel = null;
         currentNode.isComplete = true;
-        for (int i = 0; i < map.nodeArr.Length; i++)
+        foreach (SessionMap.MapNode n in map.nodes)
         {
-            foreach (SessionMap.MapNode n in map.nodeArr[i])
+            if (!n.isComplete && !n.isLocked)
             {
-                if (!n.isComplete && !n.isLocked)
-                {
-                    n.isLocked = true;
-                }
+                n.isLocked = true;
             }
         }
         foreach (SessionMap.MapNode n in currentNode.connections)

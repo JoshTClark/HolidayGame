@@ -86,29 +86,24 @@ public class PumpkinBomb : Weapon
                 if (i.HasTakenPath("Shockwave"))
                 {
                     ((PumpkinBombBehavior)p).shockWave = true;
-                }
-            }
 
-            /*
-            // Pumkin Launcher
-            if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.PumpkinLauncher))
-            {
-                Enemy e = GetRandomEnemyInRange(10f);
-                if (e)
-                {
-                    p.Direction = (e.transform.position - transform.position).normalized;
+                    if (i.Level >= 6)
+                    {
+                        Vector3 target = MousePosition();
+                        Vector2 direction = target - transform.position;
+                        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                        ((PumpkinBombBehavior)p).targetPosition = new Vector2(target.x, target.y);
+
+                        p.Direction = (new Vector3(direction.x, direction.y) - transform.position).normalized;
+                        p.Speed = 10f;
+                        p.SpeedMultiplier = 1f;
+                        //float torque = Random.Range(-500f, 500f);
+                        //p.gameObject.GetComponent<Rigidbody2D>().AddTorque(torque);
+                        //p.gameObject.GetComponent<Rigidbody2D>().angularDrag = 1.75f;
+                    }
                 }
-                else
-                {
-                    p.RotateDirection(Random.Range(0, 360));
-                }
-                p.Speed = 10f;
-                p.SpeedMultiplier = 1f;
-                //float torque = Random.Range(-500f, 500f);
-                //p.gameObject.GetComponent<Rigidbody2D>().AddTorque(torque);
-                //p.gameObject.GetComponent<Rigidbody2D>().angularDrag = 1.75f;
             }
-            */
             ResetTimer();
         }
     }

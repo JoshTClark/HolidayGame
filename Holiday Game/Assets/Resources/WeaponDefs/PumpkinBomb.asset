@@ -187,7 +187,7 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-  - pathName: Shock Wave
+  - pathName: Shockwave
     previousPath: Start
     numLevels: 4
     levelDescriptions:
@@ -212,8 +212,8 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - lvlName: Combo Strike
-      desc: Stab inbetween the swings of Iron Blade for 75% damage each.
+    - lvlName: Pumpkin Launcher
+      desc: Pumpkin Bombs launch towards the cursor.
       statChanges:
         hpAdd: 0
         speedAdd: 0

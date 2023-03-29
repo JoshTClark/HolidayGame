@@ -150,6 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 11
   baseSpeed: 5
-  baseLifetime: 1.5
+  baseLifetime: 1
   baseSize: 1
   projectileTeam: 0
+  stunTime: 1

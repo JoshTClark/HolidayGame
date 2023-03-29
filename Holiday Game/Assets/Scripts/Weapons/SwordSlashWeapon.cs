@@ -260,7 +260,7 @@ public class SwordSlashWeapon : Weapon
         if (i.HasTakenPath("Stun"))
         {
             BuffInfo stun = new BuffInfo();
-            stun.duration = 4f;
+            stun.duration = 0.2f;
             if (i.Level >= 7) 
             {
                 stun.duration += 0.1f;

@@ -11,15 +11,25 @@ public class PumpkinBombBehavior : BombProjectileBase
     public bool isRecursive = false;
     public bool shockWave = false;
     public PumpkinBombBehavior selfPrefab;
+
     public float clusterSpeed = 7.5f;
     private float slowdownSpeed = 1.25f;
     private float clusterLifetime = 0.5f;
     private float clusterDamage = 0.30f;
     private float clusterSize = 0.75f;
 
+    public float shockWaveStunDuration = 0.4f;
+    [HideInInspector]
+    public float shockWaveSizeMult = 3f;
+
+    private Vector2 startPosition;
+    [HideInInspector]
+    public Vector2 targetPosition;
+
     public void Start()
     {
         sr = gameObject.GetComponent<SpriteRenderer>();
+        startPosition = transform.position;
     }
 
     public override void Move()
@@ -67,12 +77,13 @@ public class PumpkinBombBehavior : BombProjectileBase
         {
             ProjectileBase p = ProjectileManager.GetProjectile(ResourceManager.ProjectileIndex.Shockwave);
             p.transform.position = this.transform.position;
-            p.Speed = clusterSpeed;
             p.Direction = p.transform.right;
             DamageInfo info = this.damageInfo.CreateCopy();
             p.SetDamageInfo(info);
             p.DamageMultiplier = 0;
             p.Pierce = 999;
+            ((ShockwaveBehavior)p).stunTime = shockWaveStunDuration;
+            ((ShockwaveBehavior)p).maxSizeMult = shockWaveSizeMult;
         }
         base.OnDeath();
     }
@@ -89,8 +100,10 @@ public class PumpkinBombBehavior : BombProjectileBase
 
         if (SpeedMultiplier > 0)
         {
-            SpeedMultiplier -= delta * slowdownSpeed;
-            if (SpeedMultiplier <= 0)
+            float totalDist = Vector2.Distance(startPosition, targetPosition);
+            float currDist = Vector2.Distance(transform.position, targetPosition);
+            SpeedMultiplier = Mathf.SmoothStep(0, 1, currDist/totalDist);
+            if (SpeedMultiplier <= 0.01f)
             {
                 SpeedMultiplier = 0;
             }
@@ -115,6 +128,8 @@ public class PumpkinBombBehavior : BombProjectileBase
         clusterSpeed = 7.5f;
         clusterNum = 4;
         shockWave = false;
+        shockWaveSizeMult = 3f;
+        shockWaveStunDuration = 1.0f;
         this.gameObject.SetActive(true);
     }
 }

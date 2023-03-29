@@ -178,8 +178,11 @@ MonoBehaviour:
   hpMultConst: 1
   damageMultConst: 1
   speedMultConst: 1
+  vampKills: 0
   isDead: 0
   weapons: []
+  canMove: 1
+  isStunned: 0
   fadeTotalTime: 0
   player: {fileID: 0}
   index: 2
@@ -302,7 +305,7 @@ Animator:
   m_GameObject: {fileID: 3215207529135037127}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c700118f25bd72b429c4de9e4c759de9, type: 2}
+  m_Controller: {fileID: 9100000, guid: d6b360986d847a74fae6402e5fb5be24, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

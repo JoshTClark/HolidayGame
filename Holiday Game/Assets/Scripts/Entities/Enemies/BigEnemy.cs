@@ -18,7 +18,7 @@ public class BigEnemy : Enemy
     protected override void CalcMoves()
     {
         // Seek & Separate
-        movements.Add(SeekPlayer() * 3f);
+        movements.Add(Seek() * 3f);
         movements.Add(Separation() * .01f);
     }
 

@@ -9,11 +9,12 @@ public class PumpkinBombBehavior : BombProjectileBase
     public int clusterNum = 4;
     public bool isCluster = false;
     public bool isRecursive = false;
+    public bool attractEnemeis = false;
     public bool shockWave = false;
     public PumpkinBombBehavior selfPrefab;
 
     public float clusterSpeed = 7.5f;
-    private float slowdownSpeed = 1.25f;
+    public float slowdownSpeed = 1.25f;
     private float clusterLifetime = 0.5f;
     private float clusterDamage = 0.30f;
     private float clusterSize = 0.75f;
@@ -49,9 +50,9 @@ public class PumpkinBombBehavior : BombProjectileBase
                 p.isCluster = true;
                 p.Speed = clusterSpeed;
                 p.Direction = p.transform.right;
-                p.RotateDirection((360f/clusterNum/2f) + (360f / clusterNum * i));
+                p.RotateDirection((360f / clusterNum / 2f) + (360f / clusterNum * i));
                 p.isCluster = false;
-                if (isRecursive) 
+                if (isRecursive)
                 {
                     p.isCluster = true;
                     p.isRecursive = false;
@@ -80,6 +81,11 @@ public class PumpkinBombBehavior : BombProjectileBase
             ((ShockwaveBehavior)p).stunTime = shockWaveStunDuration;
             ((ShockwaveBehavior)p).maxSizeMult = shockWaveSizeMult;
         }
+
+        if (this.gameObject.GetComponentInChildren<EnemyAttractor>())
+        {
+            Destroy(this.gameObject.GetComponentInChildren<EnemyAttractor>().gameObject);
+        }
         base.OnDeath();
     }
 
@@ -91,7 +97,7 @@ public class PumpkinBombBehavior : BombProjectileBase
     public override void OnUpdate()
     {
         float delta = Time.deltaTime;
-        sr.color = Color.Lerp(Color.white, Color.red, Mathf.PingPong((TimeAlive/Lifetime) * (TimeAlive / Lifetime) * 10, 1));
+        sr.color = Color.Lerp(Color.white, Color.red, Mathf.PingPong((TimeAlive / Lifetime) * (TimeAlive / Lifetime) * 10, 1));
 
         if (SpeedMultiplier > 0)
         {
@@ -121,6 +127,7 @@ public class PumpkinBombBehavior : BombProjectileBase
         clusterSpeed = 7.5f;
         clusterNum = 4;
         shockWave = false;
+        attractEnemeis = false;
         shockWaveSizeMult = 3f;
         shockWaveStunDuration = 1.0f;
         this.gameObject.SetActive(true);

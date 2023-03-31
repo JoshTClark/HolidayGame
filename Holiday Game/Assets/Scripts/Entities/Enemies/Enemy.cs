@@ -6,6 +6,7 @@ using UnityEngine.Pool;
 public abstract class Enemy : StatsComponent
 {
     public Player player;
+    public GameObject attractor;
     public ObjectPool<Enemy> pool;
     public ResourceManager.EnemyIndex index;
     public bool isBoss;
@@ -37,19 +38,26 @@ public abstract class Enemy : StatsComponent
     /// <summary>
     /// Moves the Enemy towards the player
     /// </summary>
-    protected Vector2 SeekPlayer()
+    protected Vector2 Seek()
     {
-        // Get the players position
-        Vector2 desiredVelocity = (Vector2)player.transform.position - (Vector2)transform.position;
-
-        // Get the players position, seek that point, apply forces, and move
+        Vector2 desiredVelocity = new Vector2();
+        if (attractor) 
+        {
+            // If another object is attracting the enemy seek it
+            desiredVelocity = (Vector2)attractor.transform.position - (Vector2)transform.position;
+        }
+        else
+        {
+            // Seek the player if there is no object
+            desiredVelocity = (Vector2)player.transform.position - (Vector2)transform.position;
+        }
         return desiredVelocity;
     }
 
     /// <summary>
     /// Moves the Enemy away from the player
     /// </summary>
-    protected Vector2 FleePlayer()
+    protected Vector2 Flee()
     {
         // Get Player Position
         Vector2 desiredVelocity = (Vector2)transform.position - (Vector2)player.transform.position;
@@ -67,7 +75,7 @@ public abstract class Enemy : StatsComponent
         if (PlayerDistance() >= maxPlayerDist)
         {
             // Player is too far away, move closer
-            return SeekPlayer();
+            return Seek();
         }
         /*
         else if (PlayerDistance() <= minPlayerDist)
@@ -87,14 +95,6 @@ public abstract class Enemy : StatsComponent
         if (!isStunned)
         {
             CalcMoves();
-            if (transform.position.x < player.transform.position.x)
-            {
-                sr.flipX = true;
-            }
-            else
-            {
-                sr.flipX = false;
-            }
             // Then take Velocity normalize it so it's a heading vector
             // scale that by speed, then apply movement
             Vector2 velocity = Vector2.zero;
@@ -104,6 +104,15 @@ public abstract class Enemy : StatsComponent
                 {
                     velocity += v;
                 }
+            }
+
+            if (velocity.normalized.x >= 0)
+            {
+                sr.flipX = true;
+            }
+            else
+            {
+                sr.flipX = false;
             }
 
             GetComponent<Rigidbody2D>().velocity = (velocity.normalized * Speed);

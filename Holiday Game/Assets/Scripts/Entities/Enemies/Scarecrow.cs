@@ -21,7 +21,7 @@ public class Scarecrow : Enemy
     }
     protected override void CalcMoves()
     {
-        movements.Add(SeekPlayer() * 1.5f);
+        movements.Add(Seek() * 1.5f);
         movements.Add(Separation() * 2f);
     }
 

@@ -4971,7 +4971,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 1
-      m_TileSpriteIndex: 1
+      m_TileSpriteIndex: 2
       m_TileMatrixIndex: 3
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -5648,10 +5648,10 @@ Tilemap:
   m_TileSpriteArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: 174490092, guid: 46eaa6b0ff6f0f040b8489a7f8efe7b3, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 174490092, guid: 46eaa6b0ff6f0f040b8489a7f8efe7b3, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: 979517274, guid: 46eaa6b0ff6f0f040b8489a7f8efe7b3, type: 3}
   - m_RefCount: 60
@@ -99843,6 +99843,10 @@ PrefabInstance:
     - target: {fileID: 3841309205968721747, guid: 63e4eaf74c005b145a2bb0c416415e86, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8704142796190578988, guid: 63e4eaf74c005b145a2bb0c416415e86, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1.2200012
       objectReference: {fileID: 0}
     - target: {fileID: 8704142796787333609, guid: 63e4eaf74c005b145a2bb0c416415e86, type: 3}
       propertyPath: doSpawns

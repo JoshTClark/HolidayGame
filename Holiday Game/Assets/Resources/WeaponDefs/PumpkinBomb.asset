@@ -232,9 +232,8 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - lvlName: Flurry
-      desc: Iron Blade attack speed increased by 45% and Iron Blade damage decreased
-        by 25%.
+    - lvlName: Shell Shock
+      desc: Pumpkin Bomb explosion size and stun duration increased by 25%.
       statChanges:
         hpAdd: 0
         speedAdd: 0
@@ -253,9 +252,8 @@ MonoBehaviour:
         critChanceMult: 1
         critDamageMult: 1
         XPMult: 1
-    - lvlName: Blade Master
-      desc: Iron Blade attack speed increased by 50%. Unleash a large amount of strikes
-        towards enemies.
+    - lvlName: Pumpkin Lure
+      desc: Pumpkin Bombs lure enemies towards them before they detonate.
       statChanges:
         hpAdd: 0
         speedAdd: 0

@@ -22,14 +22,9 @@ public class PumpkinBombBehavior : BombProjectileBase
     [HideInInspector]
     public float shockWaveSizeMult = 3f;
 
-    private Vector2 startPosition;
-    [HideInInspector]
-    public Vector2 targetPosition;
-
     public void Start()
     {
         sr = gameObject.GetComponent<SpriteRenderer>();
-        startPosition = transform.position;
     }
 
     public override void Move()
@@ -100,9 +95,7 @@ public class PumpkinBombBehavior : BombProjectileBase
 
         if (SpeedMultiplier > 0)
         {
-            float totalDist = Vector2.Distance(startPosition, targetPosition);
-            float currDist = Vector2.Distance(transform.position, targetPosition);
-            SpeedMultiplier = Mathf.SmoothStep(0, 1, currDist/totalDist);
+            SpeedMultiplier -= delta * slowdownSpeed;
             if (SpeedMultiplier <= 0.01f)
             {
                 SpeedMultiplier = 0;

@@ -63,6 +63,7 @@ public class PumpkinBomb : Weapon
                 Item i = owner.GetItem(ResourceManager.ItemIndex.PumpkinBomb);
                 if (i.HasTakenPath("Cluster Pumpkins"))
                 {
+                    //Debug.Log("Cluster - " + i.Level);
                     if (i.Level >= 7)
                     {
                         ((PumpkinBombBehavior)p).isRecursive = true;
@@ -93,8 +94,6 @@ public class PumpkinBomb : Weapon
                         Vector2 direction = target - transform.position;
                         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
                         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-                        ((PumpkinBombBehavior)p).targetPosition = new Vector2(target.x, target.y);
-
                         p.Direction = (new Vector3(direction.x, direction.y) - transform.position).normalized;
                         p.Speed = 10f;
                         p.SpeedMultiplier = 1f;

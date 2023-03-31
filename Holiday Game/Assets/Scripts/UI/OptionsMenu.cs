@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System;
 
 public class OptionsMenu : MonoBehaviour
 {
@@ -35,5 +36,10 @@ public class OptionsMenu : MonoBehaviour
         tabs[index].gameObject.GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
         tabs[index].GetComponentInChildren<TMP_Text>().color = new Color(0.8f, 0.8f, 0.8f, 1f);
         menus[index].gameObject.SetActive(true);
+    }
+
+    public void UpdateAudioVolume(System.Single single) 
+    {
+        AudioManager.globalVolume = single;
     }
 }

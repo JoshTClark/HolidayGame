@@ -66,9 +66,10 @@ public class MapManager : MonoBehaviour
 
     private float camSpeed = 20.0f;
     private float freeSpeed = 10.0f;
-    private float distanceToTarget = 0f;
 
     private static Vector3 prevPlayerPos = new Vector3(0, -5, 0);
+
+    private CamMovement camMovement;
 
     private void Start()
     {
@@ -80,6 +81,9 @@ public class MapManager : MonoBehaviour
             session = new SessionManager();
             session.GenerateMap(5, 3, 10, 4);
         }
+
+        camMovement = new CamMovement();
+        camMovement.cam = mainCam;
 
         List<MapNode> nodes = session.map.nodes;
         nodeObjects = new List<GameObject>();
@@ -107,7 +111,7 @@ public class MapManager : MonoBehaviour
                         selectedNode = hit.collider.gameObject;
                         mapSelector.SetActive(true);
                         mapSelector.gameObject.transform.position = selectedNode.transform.position;
-                        distanceToTarget = Vector2.Distance(mainCam.transform.position, selectedNode.transform.position);
+                        camMovement.SetTarget(mainCam.transform.position, selectedNode.transform.position);
                         LevelData level = selectedNode.GetComponent<MapPoint>().level;
                         levelName.text = level.name;
                         if (level.isBossLevel)
@@ -138,7 +142,7 @@ public class MapManager : MonoBehaviour
         pressSpace.Enable();
         pressSpace.performed += (InputAction.CallbackContext callback) =>
         {
-            distanceToTarget = Vector2.Distance(mainCam.transform.position, selectedNode.transform.position);
+            camMovement.SetTarget(mainCam.transform.position, selectedNode.transform.position);
         };
 
         if (prevPlayerPos != null)
@@ -161,50 +165,34 @@ public class MapManager : MonoBehaviour
         Vector2 cursorPos;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.GetComponent<RectTransform>(), mousePos, mainCam, out cursorPos);
         cursor.rectTransform.anchoredPosition = new Vector3(cursorPos.x, cursorPos.y, 0.0f);
+        camMovement.Update();
 
         if (!followingPlayer)
         {
-            if (distanceToTarget != 0)
+            Vector2 vecControls = movement.action.ReadValue<Vector2>();
+            Vector2 camMovement = new Vector2();
+            if (vecControls.x < 0)
             {
-                Vector2 camMovement = new Vector2();
-                camMovement.x = selectedNode.transform.position.x - mainCam.transform.position.x;
-                camMovement.y = selectedNode.transform.position.y - mainCam.transform.position.y;
-                camMovement = camMovement.normalized * camSpeed * Time.deltaTime * ((Vector2.Distance(mainCam.transform.position, selectedNode.transform.position) + (distanceToTarget / 3.0f)) / distanceToTarget);
-                mainCam.transform.position = mainCam.transform.position + new Vector3(camMovement.x, camMovement.y, 0);
-
-                if (Vector2.Distance(mainCam.transform.position, selectedNode.transform.position) < 0.01f)
-                {
-                    mainCam.transform.position = new Vector3(selectedNode.transform.position.x, selectedNode.transform.position.y, -10);
-                    distanceToTarget = 0;
-                }
+                camMovement.x = -1 * freeSpeed * Time.deltaTime;
             }
-            else
+            if (vecControls.x > 0)
             {
-                Vector2 vecControls = movement.action.ReadValue<Vector2>();
-                Vector2 camMovement = new Vector2();
-                if (vecControls.x < 0)
-                {
-                    camMovement.x = -1 * freeSpeed * Time.deltaTime;
-                }
-                if (vecControls.x > 0)
-                {
-                    camMovement.x = 1 * freeSpeed * Time.deltaTime;
-                }
-                if (vecControls.y < 0)
-                {
-                    camMovement.y = -1 * freeSpeed * Time.deltaTime;
-                }
-                if (vecControls.y > 0)
-                {
-                    camMovement.y = 1 * freeSpeed * Time.deltaTime;
-                }
-
-                Vector3 newPos = new Vector3();
-                newPos.x = Mathf.Clamp((mainCam.transform.position + new Vector3(camMovement.x, camMovement.y, 0)).x, -20, 20);
-                newPos.y = Mathf.Clamp((mainCam.transform.position + new Vector3(camMovement.x, camMovement.y, 0)).y, -6, 25);
-                newPos.z = -10;
-                mainCam.transform.position = newPos;
+                camMovement.x = 1 * freeSpeed * Time.deltaTime;
             }
+            if (vecControls.y < 0)
+            {
+                camMovement.y = -1 * freeSpeed * Time.deltaTime;
+            }
+            if (vecControls.y > 0)
+            {
+                camMovement.y = 1 * freeSpeed * Time.deltaTime;
+            }
+
+            Vector3 newPos = new Vector3();
+            newPos.x = Mathf.Clamp((mainCam.transform.position + new Vector3(camMovement.x, camMovement.y, 0)).x, -20, 20);
+            newPos.y = Mathf.Clamp((mainCam.transform.position + new Vector3(camMovement.x, camMovement.y, 0)).y, -6, 25);
+            newPos.z = -10;
+            mainCam.transform.position = newPos;
         }
         else if (fading)
         {
@@ -388,5 +376,44 @@ public class MapManager : MonoBehaviour
             }
         }
         */
+    }
+
+    public class CamMovement
+    {
+        public float animTime = 0.75f;
+        public float time = 0f;
+        public Vector2 target;
+        public Vector2 start;
+        public bool isAnimating = false;
+        public Camera cam;
+
+        public void Update()
+        {
+            if (isAnimating)
+            {
+                time += Time.deltaTime;
+
+                if (time < animTime)
+                {
+                    Vector3 newPos = new Vector3(0, 0, cam.gameObject.transform.position.z);
+                    newPos.x = Mathf.SmoothStep(start.x, target.x, time / animTime);
+                    newPos.y = Mathf.SmoothStep(start.y, target.y, time / animTime);
+                    cam.gameObject.transform.position = newPos;
+                }
+                else
+                {
+                    cam.gameObject.transform.position = new Vector3(target.x, target.y, cam.gameObject.transform.position.z);
+                    isAnimating = false;
+                }
+            }
+        }
+
+        public void SetTarget(Vector2 start, Vector2 target)
+        {
+            this.target = target;
+            this.start = start;
+            time = 0;
+            isAnimating = true;
+        }
     }
 }

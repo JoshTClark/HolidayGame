@@ -31,27 +31,6 @@ public class SessionMap
         nodes.Add(startingNode);
         nodes.Add(endingNode);
 
-        /*
-        nodeArr = new MapNode[length][];
-        for (int y = 0; y < length; y++)
-        {
-            nodeArr[y] = new MapNode[width];
-            for (int x = 0; x < width; x++)
-            {
-                nodeArr[y][x] = new MapNode();
-                nodeArr[y][x].difficulty = y;
-                nodeArr[y][x].branch = x;
-            }
-        }
-        nodeArr[0][(width - 1) / 2] = startingNode;
-        startingNode.difficulty = 0;
-        startingNode.branch = (width - 1) / 2;
-        startingNode.isLocked = false;
-        nodeArr[length - 1][(width - 1) / 2] = endingNode;
-        endingNode.difficulty = length - 1;
-        endingNode.branch = (width - 1) / 2;
-        */
-
         for (int i = 0; i < iterations; i++)
         {
             MapNode prevNode = startingNode;
@@ -66,17 +45,7 @@ public class SessionMap
 
                 MapNode node = new MapNode();
                 node.pos = new Vector2(x, y);
-                /*
-                if (nodeArr[y][branch].isEmpty)
-                {
-                    nodeArr[y][branch].isEmpty = false;
-                }
-
-                if (!prevNode.connections.Contains(nodeArr[y][branch]))
-                {
-                    prevNode.connections.Add(nodeArr[y][branch]);
-                }
-                */
+                node.difficulty = y;
                 prevNode.connections.Add(node);
                 nodes.Add(node);
                 prevNode = node;
@@ -85,11 +54,31 @@ public class SessionMap
             prevNode.connections.Add(endingNode);
         }
 
+        // Assigning a level to each node
         foreach (MapNode node in nodes)
         {
+            if (node == startingNode || node == endingNode) { continue; }
             LevelPool pool = ResourceManager.levelPools[0];
-            int ranIndex = Random.Range(0, pool.levels.Count);
-            node.levelData = ResourceManager.levelPools[0].levels[ranIndex];
+            List<LevelData> correctDifficultyLevels = new List<LevelData>();
+            foreach (LevelData i in pool.levels)
+            {
+                if (i.difficulty == node.difficulty)
+                {
+                    correctDifficultyLevels.Add(i);
+                }
+            }
+            int ranIndex = 0;
+            if (correctDifficultyLevels.Count > 0)
+            {
+                ranIndex = Random.Range(0, correctDifficultyLevels.Count);
+                node.levelData = correctDifficultyLevels[ranIndex];
+            }
+            else
+            {
+                ranIndex = Random.Range(0, pool.levels.Count);
+                node.levelData = ResourceManager.levelPools[0].levels[ranIndex];
+                Debug.LogWarning("No level found for difficulty " + node.difficulty + " - assigning a random level - " + ResourceManager.levelPools[0].levels[ranIndex].name);
+            }
         }
 
         startingNode.levelData = ResourceManager.GetLevelFromSceneName("Tutorial");

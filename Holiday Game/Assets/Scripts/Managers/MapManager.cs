@@ -64,7 +64,6 @@ public class MapManager : MonoBehaviour
 
     Dictionary<int, List<int>> turnPoints = new Dictionary<int, List<int>>();
 
-    private float camSpeed = 20.0f;
     private float freeSpeed = 10.0f;
 
     private static Vector3 prevPlayerPos = new Vector3(0, -5, 0);

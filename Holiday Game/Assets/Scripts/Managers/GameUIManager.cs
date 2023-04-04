@@ -32,10 +32,6 @@ public class GameUIManager : MonoBehaviour
     [SerializeField]
     private CanvasRenderer pausedPanel, gamePanel, upgradePanel, gameOverPanel, effectsPanel, debugPanel, levelCompletedPanel, optionsMenu;
 
-    // All the different panels
-    [SerializeField]
-    private TMP_Dropdown layoutSelection;
-
     // Various othe gameobjects/prefabs
     [SerializeField]
     public GameObject weaponIconPrefab, bossHealth, bossHealthMask;
@@ -157,12 +153,12 @@ public class GameUIManager : MonoBehaviour
                     if (doChestUpgrade)
                     {
                         upgradeManager.SetUpgrades(chest);
-                        upgradeManager.ShowOptions(1);
+                        upgradeManager.ShowOptions();
                     }
                     else
                     {
                         upgradeManager.SetUpgrades(4);
-                        upgradeManager.ShowOptions(player.waitingForLevels);
+                        upgradeManager.ShowOptions();
                     }
                 }
                 if (upgradeManager.selected)
@@ -189,7 +185,7 @@ public class GameUIManager : MonoBehaviour
                         {
                             upgradeManager.player = player;
                             upgradeManager.SetUpgrades(4);
-                            upgradeManager.ShowOptions(player.waitingForLevels);
+                            upgradeManager.ShowOptions();
                         }
                     }
                 }

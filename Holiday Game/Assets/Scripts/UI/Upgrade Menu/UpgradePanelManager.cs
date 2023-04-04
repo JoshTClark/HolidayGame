@@ -5,16 +5,14 @@ using UnityEngine.UI;
 
 public class UpgradePanelManager : MonoBehaviour
 {
-    private List<UpgradeOption> options = new List<UpgradeOption>();
-    public UpgradeOption prefab;
+    public List<UpgradeOption> upgradeOptions = new List<UpgradeOption>();
     public Player player;
     public bool selected = false;
     public bool displaying = false;
     public float commonOdds, uncommonOdds, rareOdds, epicOdds, legendaryOdds;
-    public TMP_Text textName, tier, desc, titleText, baseStatsTxt, weaponStatsTxt, weaponStatsLabel;
-    public Button rerollButton, backButton;
-    private int levels = 1;
-    public CanvasRenderer infoPanel, statsPanel;
+    public TMP_Text baseStatsTxt;
+    public Button rerollButton;
+    public CanvasRenderer statsPanel;
     private Chest chest;
 
     private bool doNewItemsOnNormalLevelUp = true;
@@ -98,7 +96,7 @@ public class UpgradePanelManager : MonoBehaviour
                     availableItems.Remove(item);
                     pathsItems.Remove(path);
                 }
-                AddItem(item, lvlDesc, path);
+                AddItem(item, lvlDesc, path, upgradeOptions[i]);
             }
             else if (chest.contents[i].contentType == Chest.ChestContent.ChestContentType.RandomAll)
             {
@@ -121,7 +119,7 @@ public class UpgradePanelManager : MonoBehaviour
                     availableItems.Remove(item);
                     pathsItems.Remove(path);
                 }
-                AddItem(item, lvlDesc, path);
+                AddItem(item, lvlDesc, path, upgradeOptions[i]);
             }
             else if (chest.contents[i].contentType == Chest.ChestContent.ChestContentType.RandomWeapon)
             {
@@ -144,7 +142,7 @@ public class UpgradePanelManager : MonoBehaviour
                     availableItems.Remove(item);
                     pathsItems.Remove(path);
                 }
-                AddItem(item, lvlDesc, path);
+                AddItem(item, lvlDesc, path, upgradeOptions[i]);
             }
             else if (chest.contents[i].contentType == Chest.ChestContent.ChestContentType.RandomItem)
             {
@@ -167,7 +165,7 @@ public class UpgradePanelManager : MonoBehaviour
                     availableWeapons.Remove(item);
                     pathsWeapons.Remove(path);
                 }
-                AddItem(item, lvlDesc, path);
+                AddItem(item, lvlDesc, path, upgradeOptions[i]);
             }
         }
     }
@@ -244,7 +242,7 @@ public class UpgradePanelManager : MonoBehaviour
                 availableDescsAll.RemoveAt(random);
                 availableAll.RemoveAt(random);
                 pathsAll.RemoveAt(random);
-                AddItem(item, lvlDesc, path);
+                AddItem(item, lvlDesc, path, upgradeOptions[i]);
             }
         
     }
@@ -253,24 +251,15 @@ public class UpgradePanelManager : MonoBehaviour
     /// Adds an item to the set of chooseable item upgrades
     /// </summary>
     /// <param name="upgrade"></param>
-    public void AddItem(Item item, ItemDef.LevelDescription levelDescription, ItemDef.UpgradePath path)
+    public void AddItem(Item item, ItemDef.LevelDescription levelDescription, ItemDef.UpgradePath path, UpgradeOption upgradeOption)
     {
-        UpgradeOption option = Instantiate<UpgradeOption>(prefab, new Vector3(), new Quaternion(), infoPanel.gameObject.transform);
-        option.item = item;
-        option.levelDescription = levelDescription;
-        option.tier = tier;
-        option.textName = textName;
-        option.desc = desc;
-        option.baseStatsTxt = baseStatsTxt;
-        option.weaponStatsTxt = weaponStatsTxt;
-        option.weaponStatsLabel = weaponStatsLabel;
-        RectTransform upgradeRect = option.GetComponent<RectTransform>();
-        upgradeRect.localScale = new Vector3(2, 2, 1);
-        option.gameObject.GetComponent<Button>().onClick.AddListener(() =>
+        upgradeOption.gameObject.SetActive(true);
+        upgradeOption.SetItem(item.itemDef, item.Level, levelDescription);
+        upgradeOption.gameObject.GetComponent<Button>().onClick.RemoveAllListeners();
+        upgradeOption.gameObject.GetComponent<Button>().onClick.AddListener(() =>
         {
             Select(item, path);
         });
-        options.Add(option);
     }
 
     public void Select(Item item, ItemDef.UpgradePath path)
@@ -299,17 +288,13 @@ public class UpgradePanelManager : MonoBehaviour
     /// </summary>
     public void Clear()
     {
-        for (int i = options.Count - 1; i >= 0; i--)
+        foreach(UpgradeOption i in upgradeOptions)
         {
-            Destroy(options[i].gameObject);
+            i.gameObject.SetActive(false);
         }
-        titleText.text = "Select an Upgrade";
-        options.Clear();
         selected = false;
         displaying = false;
         baseStatsTxt.text = "";
-        weaponStatsLabel.text = "";
-        weaponStatsTxt.text = "";
     }
 
     public void Reroll()
@@ -328,9 +313,8 @@ public class UpgradePanelManager : MonoBehaviour
     /// <summary>
     /// Sets up the panel with the given options
     /// </summary>
-    public void ShowOptions(int levels)
+    public void ShowOptions()
     {
-        this.levels = levels;
         if (player.rerolls > 0)
         {
             rerollButton.gameObject.SetActive(true);
@@ -339,28 +323,6 @@ public class UpgradePanelManager : MonoBehaviour
         else
         {
             rerollButton.gameObject.SetActive(false);
-        }
-        if (levels == 1)
-        {
-            titleText.text = "Select <b><color=#00D4FF>" + levels + "</color></b> Upgrade";
-        }
-        else
-        {
-            titleText.text = "Select <b><color=#00D4FF>" + levels + "</color></b> Upgrades";
-        }
-
-        textName.text = "";
-        tier.text = "";
-        desc.text = "";
-        for (int i = 0; i < options.Count; i++)
-        {
-            UpgradeOption option = options[i];
-
-            RectTransform upgradeRect = option.GetComponent<RectTransform>();
-
-            upgradeRect.localPosition = new Vector3(0, 0);
-            upgradeRect.anchorMax = new Vector2(0.125f + (i * 0.25f), 0.3f);
-            upgradeRect.anchorMin = new Vector2(0.125f + (i * 0.25f), 0.3f);
         }
         displaying = true;
     }

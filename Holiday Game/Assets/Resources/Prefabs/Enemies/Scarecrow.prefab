@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5476646206053836482}
   - component: {fileID: 7082930282233220939}
   - component: {fileID: 6498875173864323963}
-  m_Layer: 12
+  m_Layer: 7
   m_Name: EnemyPlayerCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -223,7 +223,6 @@ MonoBehaviour:
   baseCritDamage: 0
   knockbackMult: 0.5
   currentHP: 0
-  xpAmount: 0
   hpAdd: 0
   speedAdd: 0
   damageAdd: 0
@@ -232,12 +231,6 @@ MonoBehaviour:
   regenAdd: 0
   critChanceAdd: 0
   critDamageAdd: 0
-  expCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   hpMult: 0
   speedMult: 0
   damageMult: 0
@@ -399,7 +392,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3739375256567699026}
   - component: {fileID: 6732873839557532573}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7431447368233517244}
   - component: {fileID: -5865313985130163075}
   - component: {fileID: 1758532831}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GhostEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -161,7 +161,6 @@ MonoBehaviour:
   baseCritDamage: 0
   knockbackMult: 0
   currentHP: 0
-  xpAmount: 0
   hpAdd: 0
   speedAdd: 0
   damageAdd: 0
@@ -170,12 +169,6 @@ MonoBehaviour:
   regenAdd: 0
   critChanceAdd: 0
   critDamageAdd: 0
-  expCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   hpMult: 0
   speedMult: 0
   damageMult: 0
@@ -338,7 +331,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3516217873915257158}
   - component: {fileID: 4967456823508681258}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}

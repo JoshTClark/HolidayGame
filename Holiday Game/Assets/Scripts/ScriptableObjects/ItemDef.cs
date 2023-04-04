@@ -47,14 +47,7 @@ public class ItemDef : ScriptableObject
         public string lvlName;
         [TextArea(10, 20)]
         public string desc;
-        public StatChange statChanges;
-
-        [System.Serializable]
-        public class StatChange
-        {
-            public float hpAdd, speedAdd, damageAdd, attackSpeedAdd, armorAdd, regenAdd, critChanceAdd, critDamageAdd;
-            public float hpMult = 1, speedMult = 1, damageMult = 1, attackSpeedMult = 1, armorMult = 1, regenMult = 1, critChanceMult = 1, critDamageMult = 1, XPMult = 1;
-        }
+        public List<string> statChanges = new List<string>();
     }
 
     [System.Serializable]

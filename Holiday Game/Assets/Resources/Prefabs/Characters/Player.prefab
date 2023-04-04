@@ -203,7 +203,7 @@ MonoBehaviour:
   isStunned: 1
   fadeTotalTime: 0
   movement: {fileID: -8801911651582695651, guid: 46c5d35181ff19744bbe64637b663d10, type: 3}
-  pickupRange: 5
+  pickupRange: 2.5
   attackActivationRange: 20
   iFrames: 0.4
   hitEffect: {fileID: 0}
@@ -303,8 +303,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57634d22ee6af8d4db9a71e504699a99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleDelay: 0.15
-  lifetime: 0.5
+  particleDelay: 0.02
+  lifetime: 0.1
   createParticles: 1
 --- !u!1 &6916581085816787048
 GameObject:

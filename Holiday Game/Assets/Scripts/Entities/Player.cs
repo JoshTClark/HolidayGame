@@ -179,20 +179,6 @@ public class Player : StatsComponent
         UpdateiFrames();
 
         pickupRangeIncrease = 1f;
-        /*
-        if (HasUpgrade(ResourceManager.UpgradeIndex.XP1))
-        {
-            pickupRangeIncrease += 0.05f * GetItem(ResourceManager.UpgradeIndex.XP1).CurrentLevel;
-        }
-        if (HasUpgrade(ResourceManager.UpgradeIndex.XP2))
-        {
-            pickupRangeIncrease += 0.1f * GetItem(ResourceManager.UpgradeIndex.XP2).CurrentLevel;
-        }
-        if (HasUpgrade(ResourceManager.UpgradeIndex.XP3))
-        {
-            pickupRangeIncrease += 0.15f * GetItem(ResourceManager.UpgradeIndex.XP3).CurrentLevel;
-        }
-        */
     }
 
     /// <summary>

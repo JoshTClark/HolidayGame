@@ -17,7 +17,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip titleMusic;
     [SerializeField] private AudioClip mapMusic;
 
-    public static float globalVolume = 1f;
+    public static float globalVolume = 0f;
 
     /// <summary>
     /// Called when the scene starts

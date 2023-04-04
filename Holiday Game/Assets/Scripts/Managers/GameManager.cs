@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
     private float time = 0f;
     private GameState state = GameState.MainGame;
     private bool paused = false;
-    private float dayLength = 120f;
+    private float dayLength = 180f;
     public int currentDay = 1;
     public int currentHour = 12;
     public int enemiesDefeated = 0;
@@ -340,19 +340,7 @@ public class GameManager : MonoBehaviour
         currentDay = (int)Mathf.Floor(time / dayLength) + 1;
         currentHour = (int)((OffsetTime % dayLength) / (dayLength / 24));
 
-        float percentThroughDay = (time % dayLength) / dayLength;
-
-        /*
-        dayBar1.rectTransform.anchorMin = new Vector2(0f - percentThroughDay - 0.5f, dayBar1.rectTransform.anchorMin.y);
-        dayBar1.rectTransform.anchorMax = new Vector2(1f - percentThroughDay - 0.5f, dayBar1.rectTransform.anchorMax.y);
-        dayBar2.rectTransform.anchorMin = new Vector2(1f - percentThroughDay - 0.5f, dayBar2.rectTransform.anchorMin.y);
-        dayBar2.rectTransform.anchorMax = new Vector2(2f - percentThroughDay - 0.5f, dayBar2.rectTransform.anchorMax.y);
-        dayBar3.rectTransform.anchorMin = new Vector2(2f - percentThroughDay - 0.5f, dayBar3.rectTransform.anchorMin.y);
-        dayBar3.rectTransform.anchorMax = new Vector2(3f - percentThroughDay - 0.5f, dayBar3.rectTransform.anchorMax.y);
-        */
-
         float currentHourFloat = ((OffsetTime % dayLength) / (dayLength / 24));
-        //globalLight.intensity = 0.1f;
         globalLight.intensity = Mathf.Clamp(1f - Mathf.Pow(Mathf.Abs(currentHourFloat - 12) / 12f, 3f / 4f) + (0.2f * (0.9f - Mathf.Abs(currentHourFloat - 12) / 12f)), 0f, 1f);
     }
 

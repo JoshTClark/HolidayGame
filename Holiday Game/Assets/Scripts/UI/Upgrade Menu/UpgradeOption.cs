@@ -80,7 +80,21 @@ public class UpgradeOption : MonoBehaviour
         isHover = true;
         textName.text = levelDescription.lvlName;
         desc.text = levelDescription.desc;
-        tier.text = item.itemDef.itemName + " LVL: " + (item.Level + 1);
+        if (item.Level == 0)
+        {
+            if (item.itemDef.GetType() == typeof(WeaponDef)) 
+            {
+                tier.text = "New weapon!";
+            }
+            else
+            {
+                tier.text = "New item!";
+            }
+        }
+        else
+        {
+            tier.text = item.itemDef.itemName + " LVL: " + (item.Level + 1);
+        }
         tier.enableVertexGradient = false;
         textName.enableVertexGradient = false;
         if (item.itemDef.tier == ItemDef.Tier.Common)

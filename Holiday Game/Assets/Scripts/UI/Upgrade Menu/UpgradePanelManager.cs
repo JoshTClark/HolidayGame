@@ -17,6 +17,8 @@ public class UpgradePanelManager : MonoBehaviour
     public CanvasRenderer infoPanel, statsPanel;
     private Chest chest;
 
+    private bool doNewItemsOnNormalLevelUp = true;
+
     private void Start()
     {
         chest = null;
@@ -179,8 +181,29 @@ public class UpgradePanelManager : MonoBehaviour
         List<Item> availableAll = new List<Item>();
         List<ItemDef.UpgradePath> pathsAll = new List<ItemDef.UpgradePath>();
 
-            // Checks which item upgrades are available to the player
-            foreach (Item i in player.inventory)
+        // Checks which item upgrades are available to the player
+        if (doNewItemsOnNormalLevelUp)
+        {
+            // Items the player doesn't have
+            List<ItemDef> itemDefs = ResourceManager.itemDefs;
+            foreach (ItemDef i in itemDefs)
+            {
+                if (!player.HasItem(i.index))
+                {
+                    Item item = i.GetItem();
+                    if (i.paths.Count > 0)
+                    {
+                        item.currentPath = i.paths[0];
+                        item.Level = 0;
+                        availableDescsAll.Add(item.currentPath.levelDescriptions[0]);
+                        availableAll.Add(item);
+                        pathsAll.Add(item.currentPath);
+                    }
+                }
+            }
+        }
+
+        foreach (Item i in player.inventory)
             {
                 int offset = 0;
                 foreach (ItemDef.UpgradePath u in i.takenPaths)

@@ -19,15 +19,5 @@ public class BigEnemy : Enemy
     {
         // Seek & Separate
         movements.Add(Seek() * 3f);
-        movements.Add(Separation() * .01f);
-    }
-
-    protected override void OnTriggerStay2D(Collider2D collision)
-    {
-        // For testing purposes
-        base.OnTriggerStay2D(collision);
-
-        //Debug.Break();
-
     }
 }

@@ -12,10 +12,10 @@ public class Bat : Enemy
     {
         Move();
     }
+
     protected override void CalcMoves()
     {
         // Basic enemy just wants to seek the player & to separate from other enemies
         movements.Add(Seek() * 2f);
-        movements.Add(Separation() * .1f);
     }
 }

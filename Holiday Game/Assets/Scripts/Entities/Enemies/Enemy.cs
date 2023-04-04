@@ -276,25 +276,12 @@ public abstract class Enemy : StatsComponent
         }
     }
 
-    virtual protected void OnTriggerStay2D(Collider2D collision)
-    {
-        HandleCollision(collision);
-    }
-
     /// <summary>
     /// Handles the logic for colliding with a player
     /// </summary>
     /// <param name="collision"></param>
-    private void HandleCollision(Collider2D collision)
+    public void HandleCollision(Collider2D collision)
     {
-        /*
-        Debug.Log("Here");
-        if (!GameManager.instance.Player.Invincible)
-        {
-            GameManager.instance.Player.DealDamage(Damage);
-        }
-        */
-
         // Getting Component from the collider doesn't work properly for some reason
         // The code inside of the if statements will never be called for some reason
 
@@ -310,40 +297,6 @@ public abstract class Enemy : StatsComponent
                 GameManager.instance.Player.TakeDamage(info);
             }
         }
-        else if (collision.gameObject.GetComponent<Enemy>())
-        {
-            //Debug.Log("Other Enemy");
-        }
-    }
-
-    /// <summary>
-    /// Has each enemy flee every other enemy scaled by it's distance from each other
-    /// </summary>
-    protected Vector2 Separation()
-    {
-        // Set an empty Desired Velocity
-        Vector2 desiredVelocity = Vector2.zero;
-        Vector2 currentVelocity = Vector2.zero;
-
-        // Commenting this out for right now as looping through every single enemy is very costly
-        // Loop through all enemies
-        /*
-        foreach (Enemy e in EnemyManager.instance.AllEnemies)
-        {
-            currentVelocity = Vector2.zero;
-            float sqrDistance = Vector2.SqrMagnitude(transform.position - e.transform.position);
-            if (sqrDistance <= Mathf.Epsilon)
-            {
-                continue;
-            }
-            // Flee the Enemy
-            currentVelocity = (Vector2)transform.position - (Vector2)e.transform.position;
-
-            // Scale it by how close it is & apply it to the desired velocity
-            desiredVelocity = currentVelocity * (1f / sqrDistance);
-        }
-        */
-        return desiredVelocity.normalized;
     }
 
     public void AddKnockback(Vector2 vec)

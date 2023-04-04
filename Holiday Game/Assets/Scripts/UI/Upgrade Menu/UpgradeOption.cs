@@ -258,16 +258,6 @@ public class UpgradeOption : MonoBehaviour
             newCritDmg = newCritDmgf * 100 + "%";
         }
 
-        baseStatsTxt.text =
-            "HP: " + player.MaxHp + " -> " + newHP +
-            "\nSpeed: " + player.Speed + " -> " + newSpeed +
-            "\nDamage: " + player.Damage + " -> " + newDamage +
-            "\nAttack Speed: " + player.AttackSpeed * 100 + "%" + " -> " + newAtckSpd +
-            "\nArmor: " + player.Armor + " -> " + newArmor +
-            "\nRegen: " + player.Regen + " -> " + newRegen +
-            "\nCrit Chance: " + (player.CritChance * 100) + "%" + " -> " + newCritChance +
-            "\nCrit Damage: " + player.CritDamage * 100 + "%" + " -> " + newCritDmg;
-
         /*
         if (u.weaponstatChangess.Count > 0)
         {

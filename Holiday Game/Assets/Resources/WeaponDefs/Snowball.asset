@@ -24,22 +24,5 @@ MonoBehaviour:
     levelDescriptions:
     - lvlName: Snowball Toss
       desc: Throws a snowball towards the cursor every <color=blue> 1 second </color>
-      statChanges:
-        hpAdd: 0
-        speedAdd: 0
-        damageAdd: 0
-        attackSpeedAdd: 0
-        armorAdd: 0
-        regenAdd: 0
-        critChanceAdd: 0
-        critDamageAdd: 0
-        hpMult: 0
-        speedMult: 0
-        damageMult: 0
-        attackSpeedMult: 0
-        armorMult: 0
-        regenMult: 0
-        critChanceMult: 0
-        critDamageMult: 0
-        XPMult: 0
+      statChanges: []
   weaponPrefab: {fileID: 2227321042379140027, guid: 004bf8ebdd84e4d40844a9da715c7154, type: 3}

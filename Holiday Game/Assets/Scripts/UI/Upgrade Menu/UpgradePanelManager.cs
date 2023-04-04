@@ -202,49 +202,49 @@ public class UpgradePanelManager : MonoBehaviour
         }
 
         foreach (Item i in player.inventory)
+        {
+            int offset = 0;
+            foreach (ItemDef.UpgradePath u in i.takenPaths)
             {
-                int offset = 0;
-                foreach (ItemDef.UpgradePath u in i.takenPaths)
+                offset += u.numLevels;
+            }
+            if (i.Level < i.itemDef.maxLevel)
+            {
+                if (i.Level - offset < i.currentPath.numLevels)
                 {
-                    offset += u.numLevels;
+                    availableDescsAll.Add(i.currentPath.levelDescriptions[i.Level - offset]);
+                    availableAll.Add(i);
+                    pathsAll.Add(i.currentPath);
                 }
-                if (i.Level < i.itemDef.maxLevel)
+                else
                 {
-                    if (i.Level - offset < i.currentPath.numLevels)
+                    foreach (ItemDef.UpgradePath u in i.itemDef.paths)
                     {
-                        availableDescsAll.Add(i.currentPath.levelDescriptions[i.Level - offset]);
-                        availableAll.Add(i);
-                        pathsAll.Add(i.currentPath);
-                    }
-                    else
-                    {
-                        foreach (ItemDef.UpgradePath u in i.itemDef.paths)
+                        if (u.previousPath == i.currentPath.pathName)
                         {
-                            if (u.previousPath == i.currentPath.pathName)
-                            {
-                                availableDescsAll.Add(u.levelDescriptions[0]);
-                                availableAll.Add(i);
-                                pathsAll.Add(u);
-                            }
+                            availableDescsAll.Add(u.levelDescriptions[0]);
+                            availableAll.Add(i);
+                            pathsAll.Add(u);
                         }
                     }
                 }
             }
+        }
 
-            // Randomly adds upgrades to the current choices
-            int val = Mathf.Min(numOptions, availableAll.Count);
-            for (int i = 0; i < val; i++)
-            {
-                int random = Random.Range(0, availableAll.Count);
-                Item item = availableAll[random];
-                ItemDef.LevelDescription lvlDesc = availableDescsAll[random];
-                ItemDef.UpgradePath path = pathsAll[random];
-                availableDescsAll.RemoveAt(random);
-                availableAll.RemoveAt(random);
-                pathsAll.RemoveAt(random);
-                AddItem(item, lvlDesc, path, upgradeOptions[i]);
-            }
-        
+        // Randomly adds upgrades to the current choices
+        int val = Mathf.Min(numOptions, availableAll.Count);
+        for (int i = 0; i < val; i++)
+        {
+            int random = Random.Range(0, availableAll.Count);
+            Item item = availableAll[random];
+            ItemDef.LevelDescription lvlDesc = availableDescsAll[random];
+            ItemDef.UpgradePath path = pathsAll[random];
+            availableDescsAll.RemoveAt(random);
+            availableAll.RemoveAt(random);
+            pathsAll.RemoveAt(random);
+            AddItem(item, lvlDesc, path, upgradeOptions[i]);
+        }
+
     }
 
     /// <summary>
@@ -288,7 +288,7 @@ public class UpgradePanelManager : MonoBehaviour
     /// </summary>
     public void Clear()
     {
-        foreach(UpgradeOption i in upgradeOptions)
+        foreach (UpgradeOption i in upgradeOptions)
         {
             i.gameObject.SetActive(false);
         }
@@ -324,6 +324,17 @@ public class UpgradePanelManager : MonoBehaviour
         {
             rerollButton.gameObject.SetActive(false);
         }
+
+        baseStatsTxt.text =
+    "HP: " + player.MaxHp +
+    "\nSpeed: " + player.Speed +
+    "\nDamage: " + player.Damage +
+    "\nAttack Speed: " + player.AttackSpeed * 100 + "%" +
+    "\nArmor: " + player.Armor +
+    "\nRegen: " + player.Regen +
+    "\nCrit Chance: " + (player.CritChance * 100) + "%" +
+    "\nCrit Damage: " + player.CritDamage * 100 + "%";
+
         displaying = true;
     }
 

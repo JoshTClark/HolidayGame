@@ -156,7 +156,7 @@ public class GameManager : MonoBehaviour
 
         giveXP.action.performed += (InputAction.CallbackContext callback) =>
         {
-            player.AddXP(player.GetXpToNextLevel() - player.XP + 1);
+            player.AddXP(player.GetXpToNextLevel());
         };
 
         playerDash.action.performed += (InputAction.CallbackContext callback) =>

@@ -59,7 +59,7 @@ public class SessionManager
                 player.AddWeapon(((WeaponDef)i.itemDef).weaponPrefab);
             }
         }
-        player.SetXPWithoutLevelUp(playerData.experience);
+        player.SetLevelAndXP(playerData.level, playerData.experience);
         player.vampKills = playerData.VampKills;
         return player;
     }
@@ -72,6 +72,7 @@ public class SessionManager
         {
             playerData.inventory.Add(i);
         }
+        playerData.level = player.Level;
         playerData.experience = player.XP;
         playerData.VampKills = player.vampKills;
         if (data != null)
@@ -92,7 +93,10 @@ public class SessionManager
             n.isLocked = false;
         }
         MapManager.session = this;
-        SaveManager.SaveFile(data.id, data);
+        if (data != null)
+        {
+            SaveManager.SaveFile(data.id, data);
+        }
         SceneManager.LoadSceneAsync("MapScene");
     }
 
@@ -102,11 +106,12 @@ public class SessionManager
         SceneManager.LoadSceneAsync("StartScene");
     }
 
-    public struct PlayerData
+    public class PlayerData
     {
         public PlayableCharacterData chosenCharacter;
         public List<Item> inventory;
-        public float experience;
+        public int level = 1;
+        public float experience = 0;
         public int VampKills;
     }
 }

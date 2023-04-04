@@ -18,7 +18,7 @@ public class GameUIManager : MonoBehaviour
 
     // The different layouts for the UI
     [SerializeField]
-    private UILayout layout1, layout2;
+    private UILayout layout;
 
     // All the text fields that need to be updated
     [SerializeField]
@@ -47,9 +47,6 @@ public class GameUIManager : MonoBehaviour
     // All the weapon icons
     public List<WeaponIcon> weaponIcons = new List<WeaponIcon>();
 
-    // The current layout in use
-    private UILayout currentLayout;
-
     // Stuff for doing a chest upgrade with the upgrade panel
     private bool doChestUpgrade = false;
     private Chest chest;
@@ -65,9 +62,6 @@ public class GameUIManager : MonoBehaviour
 
         // Set cursor to be not visible, custom cursor will take its place
         Cursor.visible = false;
-
-        // Current layout
-        currentLayout = layout1;
 
         // Set all panels but gamePanel to not active
         gamePanel.gameObject.SetActive(true);
@@ -100,21 +94,6 @@ public class GameUIManager : MonoBehaviour
         RectTransformUtility.ScreenPointToLocalPointInRectangle(this.GetComponent<RectTransform>(), mousePos, cam, out cursorPos);
         cursor.rectTransform.anchoredPosition = new Vector3(cursorPos.x, cursorPos.y, 0.0f);
         cursor.transform.SetAsLastSibling();
-
-        // Swapping in game layout
-        switch (layoutSelection.value)
-        {
-            case 0:
-                currentLayout = layout1;
-                layout1.holder.gameObject.SetActive(true);
-                layout2.holder.gameObject.SetActive(false);
-                break;
-            case 1:
-                currentLayout = layout2;
-                layout1.holder.gameObject.SetActive(false);
-                layout2.holder.gameObject.SetActive(true);
-                break;
-        }
 
         // Switch statement to check the state
         switch (state)
@@ -256,7 +235,7 @@ public class GameUIManager : MonoBehaviour
                 }
 
                 // Updating player stat display depending on the layout
-                currentLayout.UpdateUI(player);
+                layout.UpdateUI(player);
 
                 // Weapon Icon Stuff
                 // Removing icons

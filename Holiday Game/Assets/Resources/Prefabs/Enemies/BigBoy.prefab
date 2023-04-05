@@ -297,7 +297,6 @@ MonoBehaviour:
   baseCritDamage: 0
   knockbackMult: 0.5
   currentHP: 0
-  xpAmount: 0
   hpAdd: 0
   speedAdd: 0
   damageAdd: 0
@@ -306,12 +305,6 @@ MonoBehaviour:
   regenAdd: 0
   critChanceAdd: 0
   critDamageAdd: 0
-  expCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   hpMult: 0
   speedMult: 0
   damageMult: 0
@@ -337,18 +330,10 @@ MonoBehaviour:
   isBoss: 0
   deathEffect: {fileID: 7639369088873833346, guid: 7a4028f9e61aa2e4e95ee4624a72463e, type: 3}
   drops:
-  - index: 1
+  - index: 0
     chance: 1
   - index: 0
     chance: 0.25
-  - index: 0
-    chance: 0.25
-  - index: 2
-    chance: 0.1
-  - index: 4
-    chance: 0.1
-  - index: 4
-    chance: 0.1
   onHitSound: {fileID: -1947996119439005389}
 --- !u!61 &9056888587313460342
 BoxCollider2D:

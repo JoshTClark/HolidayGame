@@ -137,8 +137,9 @@ public class EnemyManager : MonoBehaviour
         Enemy enemy = GetEnemy(index);
         Vector2 spawnPos = GetRandomPosition();
         enemy.gameObject.transform.position = spawnPos;
-        enemy.damageMultConst = 1f;
-        enemy.hpMultConst = 1f;
+        float playerLevel = GameManager.instance.player.Level;
+        enemy.damageMultConst = (1 + (playerLevel - 1) * 0.02f);
+        enemy.hpMultConst = (1 + (playerLevel - 1) * 0.1f);
         enemy.speedMultConst = 1f;
         enemy.player = GameManager.instance.Player;
         allEnemies.Add(enemy);
@@ -149,8 +150,9 @@ public class EnemyManager : MonoBehaviour
         Enemy enemy = GetEnemy(index);
         enemy.gameObject.transform.position = pos;
         enemy.player = GameManager.instance.Player;
-        enemy.damageMultConst = 1f;
-        enemy.hpMultConst = 1f;
+        float playerLevel = GameManager.instance.player.Level;
+        enemy.damageMultConst = (1 + (playerLevel - 1) * 0.02f);
+        enemy.hpMultConst = (1 + (playerLevel - 1) * 0.1f);
         enemy.speedMultConst = 1f;
         allEnemies.Add(enemy);
         return enemy;
@@ -158,11 +160,13 @@ public class EnemyManager : MonoBehaviour
 
     public void SpawnEnemy(LevelData.SpawnInfo info)
     {
+        float playerLevel = GameManager.instance.player.Level;
+
         Enemy enemy = GetEnemy(info.enemyIndex);
         enemy.gameObject.transform.position = GetRandomPosition();
         enemy.player = GameManager.instance.Player;
-        enemy.damageMultConst = info.damageMultiplier * info.levelDamageMultiplier;
-        enemy.hpMultConst = info.healthMultiplier * info.levelHealthMultiplier;
+        enemy.damageMultConst = info.damageMultiplier * info.levelDamageMultiplier * (1 + (playerLevel - 1) * 0.02f);
+        enemy.hpMultConst = info.healthMultiplier * info.levelHealthMultiplier * (1 + (playerLevel - 1) * 0.1f); ;
         enemy.speedMultConst = info.speedMultiplier * info.levelSpeedMultiplier;
         enemy.isBoss = info.isBoss;
         if (enemy.isBoss)

@@ -258,12 +258,6 @@ MonoBehaviour:
   drops:
   - index: 1
     chance: 1
-  - index: 2
-    chance: 0.05
-  - index: 4
-    chance: 0.05
-  - index: 4
-    chance: 0.05
   onHitSound: {fileID: 5181472191143963359}
   lights: {fileID: 6732873839557532573}
 --- !u!82 &5181472191143963359

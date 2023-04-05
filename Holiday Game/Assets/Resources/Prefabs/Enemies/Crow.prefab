@@ -318,7 +318,6 @@ MonoBehaviour:
   baseCritDamage: 0
   knockbackMult: 0.5
   currentHP: 0
-  xpAmount: 0
   hpAdd: 0
   speedAdd: 0
   damageAdd: 2
@@ -327,12 +326,6 @@ MonoBehaviour:
   regenAdd: 0
   critChanceAdd: 0
   critDamageAdd: 0
-  expCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   hpMult: 0
   speedMult: 0
   damageMult: 0
@@ -485,7 +478,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.053167284, y: 0.006645903}

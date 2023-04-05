@@ -29,10 +29,6 @@ public abstract class Enemy : StatsComponent
     [SerializeField]
     private List<DropInfo> drops;
 
-    // SoundEffects
-    [SerializeField]
-    protected AudioSource onHitSound;
-
     protected Vector2 Velocity { get { return GetComponent<Rigidbody2D>().velocity; } set { GetComponent<Rigidbody2D>().velocity = value; } }
 
     /// <summary>
@@ -153,12 +149,6 @@ public abstract class Enemy : StatsComponent
 
     public override void OnDeath(DamageInfo dmgInfo)
     {
-        // Stop the hit sound
-        if (onHitSound.isPlaying)
-        {
-            onHitSound.Stop();
-        }
-
         if (dmgInfo.attacker && dmgInfo.attacker.GetType() == typeof(Player))
         {
             GameManager.instance.enemiesDefeated++;
@@ -257,6 +247,20 @@ public abstract class Enemy : StatsComponent
                 DropBase b = DropManager.GetPickup(info.index);
                 b.gameObject.transform.position = dropPosition;
             }
+        }
+
+        float ranHealth = Random.value;
+        if (ranHealth <= 0.005)
+        {
+            DropBase b = DropManager.GetPickup(ResourceManager.PickupIndex.HealthDrop1);
+            b.gameObject.transform.position = this.gameObject.transform.position;
+        }
+
+        float ranGem = Random.value;
+        if (ranGem <= 0.005)
+        {
+            DropBase b = DropManager.GetPickup(ResourceManager.PickupIndex.Coin);
+            b.gameObject.transform.position = this.gameObject.transform.position;
         }
 
         if (deathEffect)

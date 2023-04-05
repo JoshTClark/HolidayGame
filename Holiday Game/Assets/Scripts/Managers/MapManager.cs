@@ -148,6 +148,11 @@ public class MapManager : MonoBehaviour
         {
             player.transform.position = prevPlayerPos;
         }
+        if (session.difficulty == 0)
+        {
+            player.gameObject.transform.position = new Vector2(0, -5);
+            prevPlayerPos = new Vector2(0, -5);
+        }
 
         mainCam.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, -10);
     }

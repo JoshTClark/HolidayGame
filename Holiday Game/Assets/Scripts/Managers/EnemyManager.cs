@@ -139,7 +139,7 @@ public class EnemyManager : MonoBehaviour
         enemy.gameObject.transform.position = spawnPos;
         float playerLevel = GameManager.instance.player.Level;
         enemy.damageMultConst = (1 + (playerLevel - 1) * 0.02f);
-        enemy.hpMultConst = (1 + (playerLevel - 1) * 0.1f);
+        enemy.hpMultConst = (1 + (playerLevel - 1) * 0.075f);
         enemy.speedMultConst = 1f;
         enemy.player = GameManager.instance.Player;
         allEnemies.Add(enemy);
@@ -152,7 +152,7 @@ public class EnemyManager : MonoBehaviour
         enemy.player = GameManager.instance.Player;
         float playerLevel = GameManager.instance.player.Level;
         enemy.damageMultConst = (1 + (playerLevel - 1) * 0.02f);
-        enemy.hpMultConst = (1 + (playerLevel - 1) * 0.1f);
+        enemy.hpMultConst = (1 + (playerLevel - 1) * 0.075f);
         enemy.speedMultConst = 1f;
         allEnemies.Add(enemy);
         return enemy;
@@ -166,7 +166,7 @@ public class EnemyManager : MonoBehaviour
         enemy.gameObject.transform.position = GetRandomPosition();
         enemy.player = GameManager.instance.Player;
         enemy.damageMultConst = info.damageMultiplier * info.levelDamageMultiplier * (1 + (playerLevel - 1) * 0.02f);
-        enemy.hpMultConst = info.healthMultiplier * info.levelHealthMultiplier * (1 + (playerLevel - 1) * 0.1f); ;
+        enemy.hpMultConst = info.healthMultiplier * info.levelHealthMultiplier * (1 + (playerLevel - 1) * 0.075f); ;
         enemy.speedMultConst = info.speedMultiplier * info.levelSpeedMultiplier;
         enemy.isBoss = info.isBoss;
         if (enemy.isBoss)

@@ -24,64 +24,13 @@ MonoBehaviour:
     levelDescriptions:
     - lvlName: Lifting Belt
       desc: Increases Max HP and Base Damage
-      statChanges:
-        hpAdd: 10
-        speedAdd: 0
-        damageAdd: 1
-        attackSpeedAdd: 0
-        armorAdd: 0
-        regenAdd: 0
-        critChanceAdd: 0
-        critDamageAdd: 0
-        hpMult: 1
-        speedMult: 1
-        damageMult: 1
-        attackSpeedMult: 1
-        armorMult: 1
-        regenMult: 1
-        critChanceMult: 1
-        critDamageMult: 1
-        XPMult: 1
+      statChanges: []
     - lvlName: Weight Training
       desc: Increases Max HP and Base Damage
-      statChanges:
-        hpAdd: 10
-        speedAdd: 0
-        damageAdd: 1
-        attackSpeedAdd: 0
-        armorAdd: 0
-        regenAdd: 0
-        critChanceAdd: 0
-        critDamageAdd: 0
-        hpMult: 1
-        speedMult: 1
-        damageMult: 1
-        attackSpeedMult: 1
-        armorMult: 1
-        regenMult: 1
-        critChanceMult: 1
-        critDamageMult: 1
-        XPMult: 1
+      statChanges: []
     - lvlName: Weight Training II
       desc: Increases Max HP and Base Damage
-      statChanges:
-        hpAdd: 10
-        speedAdd: 0
-        damageAdd: 1
-        attackSpeedAdd: 0
-        armorAdd: 0
-        regenAdd: 0
-        critChanceAdd: 0
-        critDamageAdd: 0
-        hpMult: 1
-        speedMult: 1
-        damageMult: 1
-        attackSpeedMult: 1
-        armorMult: 1
-        regenMult: 1
-        critChanceMult: 1
-        critDamageMult: 1
-        XPMult: 1
+      statChanges: []
   - pathName: Beefcake
     previousPath: Weight Training
     numLevels: 3
@@ -90,68 +39,17 @@ MonoBehaviour:
       desc: 'Increases HP Gained from all sources by 10%
 
         HP+'
-      statChanges:
-        hpAdd: 30
-        speedAdd: 0
-        damageAdd: 0
-        attackSpeedAdd: 0
-        armorAdd: 0
-        regenAdd: 0
-        critChanceAdd: 0
-        critDamageAdd: 0
-        hpMult: 1.1
-        speedMult: 1
-        damageMult: 1
-        attackSpeedMult: 1
-        armorMult: 1
-        regenMult: 1
-        critChanceMult: 1
-        critDamageMult: 1
-        XPMult: 1
+      statChanges: []
     - lvlName: Large Lad
       desc: 'HP Bonus increased to 40%
 
         HP+'
-      statChanges:
-        hpAdd: 30
-        speedAdd: 0
-        damageAdd: 0
-        attackSpeedAdd: 0
-        armorAdd: 0
-        regenAdd: 0
-        critChanceAdd: 0
-        critDamageAdd: 0
-        hpMult: 1.2
-        speedMult: 1
-        damageMult: 1
-        attackSpeedMult: 1
-        armorMult: 1
-        regenMult: 1
-        critChanceMult: 1
-        critDamageMult: 1
-        XPMult: 1
+      statChanges: []
     - lvlName: Absolute Unit
       desc: 'HP Bonus increased to 40%
 
         HP+'
-      statChanges:
-        hpAdd: 40
-        speedAdd: 0
-        damageAdd: 0
-        attackSpeedAdd: 0
-        armorAdd: 0
-        regenAdd: 0
-        critChanceAdd: 0
-        critDamageAdd: 0
-        hpMult: 1.4
-        speedMult: 1
-        damageMult: 1
-        attackSpeedMult: 1
-        armorMult: 1
-        regenMult: 1
-        critChanceMult: 1
-        critDamageMult: 1
-        XPMult: 1
+      statChanges: []
   - pathName: Boxing Lessons
     previousPath: Weight Training
     numLevels: 3
@@ -160,46 +58,12 @@ MonoBehaviour:
       desc: 'Converts 2% of Current HP into Bonus Damage
 
         HP+'
-      statChanges:
-        hpAdd: 15
-        speedAdd: 0
-        damageAdd: 0
-        attackSpeedAdd: 0
-        armorAdd: 0
-        regenAdd: 0
-        critChanceAdd: 0
-        critDamageAdd: 0
-        hpMult: 1
-        speedMult: 1
-        damageMult: 1
-        attackSpeedMult: 1
-        armorMult: 1
-        regenMult: 1
-        critChanceMult: 1
-        critDamageMult: 1
-        XPMult: 1
+      statChanges: []
     - lvlName: Boxing Lessons II
       desc: 'Bonus Damage increased to 4%Current HP
 
         HP+; Damage+'
-      statChanges:
-        hpAdd: 15
-        speedAdd: 0
-        damageAdd: 0
-        attackSpeedAdd: 0
-        armorAdd: 0
-        regenAdd: 0
-        critChanceAdd: 0
-        critDamageAdd: 0
-        hpMult: 1
-        speedMult: 1
-        damageMult: 1
-        attackSpeedMult: 1
-        armorMult: 1
-        regenMult: 1
-        critChanceMult: 1
-        critDamageMult: 1
-        XPMult: 1
+      statChanges: []
     - lvlName: Heavyweight Champ
       desc: 'Bonus Damage increased to 5% Current HP
 
@@ -207,21 +71,4 @@ MonoBehaviour:
         HP as Bonus Damage
 
         HP+; Damage+'
-      statChanges:
-        hpAdd: 20
-        speedAdd: 0
-        damageAdd: 0
-        attackSpeedAdd: 0
-        armorAdd: 0
-        regenAdd: 0
-        critChanceAdd: 0
-        critDamageAdd: 0
-        hpMult: 1
-        speedMult: 1
-        damageMult: 1
-        attackSpeedMult: 1
-        armorMult: 1
-        regenMult: 1
-        critChanceMult: 1
-        critDamageMult: 1
-        XPMult: 1
+      statChanges: []

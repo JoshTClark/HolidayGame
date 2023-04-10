@@ -11,7 +11,6 @@ public class SessionManager
     public LevelData currentLevel;
     public SessionMap.MapNode currentNode;
     public static GameData data;
-    public static int money;
     public int difficulty = 0;
 
     public void SavePlayerData(Player player)

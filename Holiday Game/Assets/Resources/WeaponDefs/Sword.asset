@@ -23,7 +23,7 @@ MonoBehaviour:
     numLevels: 4
     levelDescriptions:
     - lvlName: Iron Blade
-      desc: New weapon. Every <color=blue>1 second</color> swing a blade towards
+      desc: New weapon. Every <color=blue>2.5 seconds</color> swing a blade towards
         the cursor for <b>100%</b> damage.
       statChanges: []
     - lvlName: Sharp Blade

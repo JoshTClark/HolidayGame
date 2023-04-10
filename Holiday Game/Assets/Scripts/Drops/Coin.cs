@@ -10,7 +10,7 @@ public class Coin : DropBase
         if (other.gameObject.GetComponent<Player>())
         {
             //add 5 gold to total
-            GameManager.instance.GainGold(1);
+            GameManager.instance.pickupGems(1);
             //remove the health drop
             pool.Release(this);
         }

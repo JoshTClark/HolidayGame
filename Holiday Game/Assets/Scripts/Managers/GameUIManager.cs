@@ -30,7 +30,7 @@ public class GameUIManager : MonoBehaviour
 
     // All the different panels
     [SerializeField]
-    private CanvasRenderer pausedPanel, gamePanel, upgradePanel, gameOverPanel, effectsPanel, debugPanel, levelCompletedPanel, optionsMenu;
+    private CanvasRenderer pausedPanel, gamePanel, upgradePanel, gameOverPanel, effectsPanel, debugPanel, levelCompletedPanel, optionsMenu, fadePanel;
 
     // Various othe gameobjects/prefabs
     [SerializeField]
@@ -46,6 +46,11 @@ public class GameUIManager : MonoBehaviour
     // Stuff for doing a chest upgrade with the upgrade panel
     private bool doChestUpgrade = false;
     private Chest chest;
+
+    // Fade
+    private float fadeTime = 0.75f;
+    private float fadeTimer = 0.0f;
+    private bool doFade = false;
 
     /// <summary>
     /// Initializes the UI
@@ -91,6 +96,16 @@ public class GameUIManager : MonoBehaviour
         cursor.rectTransform.anchoredPosition = new Vector3(cursorPos.x, cursorPos.y, 0.0f);
         cursor.transform.SetAsLastSibling();
 
+        if (doFade)
+        {
+            fadeTimer += Time.deltaTime;
+            fadePanel.gameObject.GetComponent<Image>().color = new Color(0, 0, 0, fadeTimer / fadeTime);
+            if (fadeTimer > fadeTime)
+            {
+                gameManager.ToMap();
+            }
+        }
+
         // Switch statement to check the state
         switch (state)
         {
@@ -133,7 +148,8 @@ public class GameUIManager : MonoBehaviour
                 // Gems text display
                 if (session != null)
                 {
-                    gemsText.text = "You gained " + session.difficulty * 5 + " Gems";
+                    int numGems = session.difficulty * 5 + gameManager.pickedUpGems;
+                    gemsText.text = "You gained " + numGems + " Gems";
                 }
                 break;
             case GameState.UpgradeMenu:
@@ -307,6 +323,11 @@ public class GameUIManager : MonoBehaviour
     {
         doChestUpgrade = true;
         chest = c;
+    }
+
+    public void EndLevel()
+    {
+        doFade = true;
     }
 
     /// <summary>

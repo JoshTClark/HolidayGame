@@ -43,12 +43,13 @@ public class GameManager : MonoBehaviour
     private float time = 0f;
     private GameState state = GameState.MainGame;
     private bool paused = false;
-    private float dayLength = 180f;
+    private float dayLength = 180f; // 2 1/2 minutes
     public int currentDay = 1;
     public int currentHour = 12;
     public int enemiesDefeated = 0;
     private bool levelEnded = false;
     public bool doSpawns = true;
+    public int pickedUpGems = 0;
     private CutsceneManager cutscene;
 
     [SerializeField]
@@ -354,10 +355,10 @@ public class GameManager : MonoBehaviour
         return false;
     }
 
-    //Currency Management
-    public void GainGold(int amount)
+    // Called when the player picks up a gem. At the end of the stage this is added to the total from the stage
+    public void pickupGems(int amount)
     {
-        SessionManager.money += amount;
+        pickedUpGems += amount;
     }
 
     // Called to end the level

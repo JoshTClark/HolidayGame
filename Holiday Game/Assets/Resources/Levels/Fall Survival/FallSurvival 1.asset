@@ -122,7 +122,7 @@ MonoBehaviour:
       levelSpeedMultiplier: 1
     - isBoss: 0
       enemyIndex: 5
-      amountToSpawn: 50
+      amountToSpawn: 5
       respawn: 1
       healthMultiplier: 1
       damageMultiplier: 1

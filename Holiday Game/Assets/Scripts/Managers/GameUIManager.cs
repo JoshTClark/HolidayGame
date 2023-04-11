@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -22,7 +23,7 @@ public class GameUIManager : MonoBehaviour
 
     // All the text fields that need to be updated
     [SerializeField]
-    private TMP_Text objectiveDisplay, numberEffect, gemsText;
+    private TMP_Text objectiveDisplay, numberEffect, gemsText, timeDisplay;
 
     // The cursor
     [SerializeField]
@@ -245,6 +246,12 @@ public class GameUIManager : MonoBehaviour
                     // All objective complete
                     objectiveDisplay.text = "Find the exit";
                 }
+
+                // Updating time display
+                TimeSpan t = TimeSpan.FromSeconds(gameManager.GameTime);
+                timeDisplay.text = string.Format("{0:D1}:{1:D2}",
+                t.Minutes,
+                t.Seconds);
 
                 // Updating player stat display depending on the layout
                 layout.UpdateUI(player);

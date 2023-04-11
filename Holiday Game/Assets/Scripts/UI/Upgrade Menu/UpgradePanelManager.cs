@@ -5,17 +5,17 @@ using UnityEngine.UI;
 
 public class UpgradePanelManager : MonoBehaviour
 {
-    private List<UpgradeOption> options = new List<UpgradeOption>();
-    public UpgradeOption prefab;
+    public List<UpgradeOption> upgradeOptions = new List<UpgradeOption>();
     public Player player;
     public bool selected = false;
     public bool displaying = false;
     public float commonOdds, uncommonOdds, rareOdds, epicOdds, legendaryOdds;
-    public TMP_Text textName, tier, desc, titleText, baseStatsTxt, weaponStatsTxt, weaponStatsLabel;
-    public Button rerollButton, backButton;
-    private int levels = 1;
-    public CanvasRenderer infoPanel, statsPanel;
+    public TMP_Text baseStatsTxt;
+    public Button rerollButton;
+    public CanvasRenderer statsPanel;
     private Chest chest;
+
+    private bool doNewItemsOnNormalLevelUp = true;
 
     private void Start()
     {
@@ -71,101 +71,104 @@ public class UpgradePanelManager : MonoBehaviour
         }
 
         // Randomly adds upgrades to the current choices based on the chests contents
-        for (int i = 0; i < chest.contents.Count; i++)
+        if (availableItems.Count > 0)
         {
-            if (chest.contents[i].contentType == Chest.ChestContent.ChestContentType.Preset)
+            for (int i = 0; i < chest.contents.Count; i++)
             {
-                Item item = chest.contents[i].presetItem.GetItem();
-                ItemDef.LevelDescription lvlDesc = item.currentPath.levelDescriptions[0];
-                ItemDef.UpgradePath path = item.currentPath;
-                if (availableAll.Contains(item))
+                if (chest.contents[i].contentType == Chest.ChestContent.ChestContentType.Preset)
                 {
-                    availableDescsAll.Remove(lvlDesc);
-                    availableAll.Remove(item);
-                    pathsAll.Remove(path);
+                    Item item = chest.contents[i].presetItem.GetItem();
+                    ItemDef.LevelDescription lvlDesc = item.currentPath.levelDescriptions[0];
+                    ItemDef.UpgradePath path = item.currentPath;
+                    if (availableAll.Contains(item))
+                    {
+                        availableDescsAll.Remove(lvlDesc);
+                        availableAll.Remove(item);
+                        pathsAll.Remove(path);
+                    }
+                    if (availableWeapons.Contains(item))
+                    {
+                        availableDescsWeapons.Remove(lvlDesc);
+                        availableWeapons.Remove(item);
+                        pathsWeapons.Remove(path);
+                    }
+                    if (availableItems.Contains(item))
+                    {
+                        availableDescsItems.Remove(lvlDesc);
+                        availableItems.Remove(item);
+                        pathsItems.Remove(path);
+                    }
+                    AddItem(item, lvlDesc, path, upgradeOptions[i]);
                 }
-                if (availableWeapons.Contains(item))
+                else if (chest.contents[i].contentType == Chest.ChestContent.ChestContentType.RandomAll)
                 {
-                    availableDescsWeapons.Remove(lvlDesc);
-                    availableWeapons.Remove(item);
-                    pathsWeapons.Remove(path);
+                    int random = Random.Range(0, availableAll.Count);
+                    Item item = availableAll[random];
+                    ItemDef.LevelDescription lvlDesc = availableDescsAll[random];
+                    ItemDef.UpgradePath path = pathsAll[random];
+                    availableDescsAll.RemoveAt(random);
+                    availableAll.RemoveAt(random);
+                    pathsAll.RemoveAt(random);
+                    if (availableWeapons.Contains(item))
+                    {
+                        availableDescsWeapons.Remove(lvlDesc);
+                        availableWeapons.Remove(item);
+                        pathsWeapons.Remove(path);
+                    }
+                    if (availableItems.Contains(item))
+                    {
+                        availableDescsItems.Remove(lvlDesc);
+                        availableItems.Remove(item);
+                        pathsItems.Remove(path);
+                    }
+                    AddItem(item, lvlDesc, path, upgradeOptions[i]);
                 }
-                if (availableItems.Contains(item))
+                else if (chest.contents[i].contentType == Chest.ChestContent.ChestContentType.RandomWeapon)
                 {
-                    availableDescsItems.Remove(lvlDesc);
-                    availableItems.Remove(item);
-                    pathsItems.Remove(path);
+                    int random = Random.Range(0, availableWeapons.Count);
+                    Item item = availableWeapons[random];
+                    ItemDef.LevelDescription lvlDesc = availableDescsWeapons[random];
+                    ItemDef.UpgradePath path = pathsWeapons[random];
+                    availableDescsWeapons.RemoveAt(random);
+                    availableWeapons.RemoveAt(random);
+                    pathsWeapons.RemoveAt(random);
+                    if (availableAll.Contains(item))
+                    {
+                        availableDescsAll.Remove(lvlDesc);
+                        availableAll.Remove(item);
+                        pathsAll.Remove(path);
+                    }
+                    if (availableItems.Contains(item))
+                    {
+                        availableDescsItems.Remove(lvlDesc);
+                        availableItems.Remove(item);
+                        pathsItems.Remove(path);
+                    }
+                    AddItem(item, lvlDesc, path, upgradeOptions[i]);
                 }
-                AddItem(item, lvlDesc, path);
-            }
-            else if (chest.contents[i].contentType == Chest.ChestContent.ChestContentType.RandomAll)
-            {
-                int random = Random.Range(0, availableAll.Count);
-                Item item = availableAll[random];
-                ItemDef.LevelDescription lvlDesc = availableDescsAll[random];
-                ItemDef.UpgradePath path = pathsAll[random];
-                availableDescsAll.RemoveAt(random);
-                availableAll.RemoveAt(random);
-                pathsAll.RemoveAt(random);
-                if (availableWeapons.Contains(item))
+                else if (chest.contents[i].contentType == Chest.ChestContent.ChestContentType.RandomItem)
                 {
-                    availableDescsWeapons.Remove(lvlDesc);
-                    availableWeapons.Remove(item);
-                    pathsWeapons.Remove(path);
+                    int random = Random.Range(0, availableItems.Count);
+                    Item item = availableItems[random];
+                    ItemDef.LevelDescription lvlDesc = availableDescsItems[random];
+                    ItemDef.UpgradePath path = pathsItems[random];
+                    availableDescsItems.RemoveAt(random);
+                    availableItems.RemoveAt(random);
+                    pathsItems.RemoveAt(random);
+                    if (availableAll.Contains(item))
+                    {
+                        availableDescsAll.Remove(lvlDesc);
+                        availableAll.Remove(item);
+                        pathsAll.Remove(path);
+                    }
+                    if (availableWeapons.Contains(item))
+                    {
+                        availableDescsWeapons.Remove(lvlDesc);
+                        availableWeapons.Remove(item);
+                        pathsWeapons.Remove(path);
+                    }
+                    AddItem(item, lvlDesc, path, upgradeOptions[i]);
                 }
-                if (availableItems.Contains(item))
-                {
-                    availableDescsItems.Remove(lvlDesc);
-                    availableItems.Remove(item);
-                    pathsItems.Remove(path);
-                }
-                AddItem(item, lvlDesc, path);
-            }
-            else if (chest.contents[i].contentType == Chest.ChestContent.ChestContentType.RandomWeapon)
-            {
-                int random = Random.Range(0, availableWeapons.Count);
-                Item item = availableWeapons[random];
-                ItemDef.LevelDescription lvlDesc = availableDescsWeapons[random];
-                ItemDef.UpgradePath path = pathsWeapons[random];
-                availableDescsWeapons.RemoveAt(random);
-                availableWeapons.RemoveAt(random);
-                pathsWeapons.RemoveAt(random);
-                if (availableAll.Contains(item))
-                {
-                    availableDescsAll.Remove(lvlDesc);
-                    availableAll.Remove(item);
-                    pathsAll.Remove(path);
-                }
-                if (availableItems.Contains(item))
-                {
-                    availableDescsItems.Remove(lvlDesc);
-                    availableItems.Remove(item);
-                    pathsItems.Remove(path);
-                }
-                AddItem(item, lvlDesc, path);
-            }
-            else if (chest.contents[i].contentType == Chest.ChestContent.ChestContentType.RandomItem)
-            {
-                int random = Random.Range(0, availableItems.Count);
-                Item item = availableItems[random];
-                ItemDef.LevelDescription lvlDesc = availableDescsItems[random];
-                ItemDef.UpgradePath path = pathsItems[random];
-                availableDescsItems.RemoveAt(random);
-                availableItems.RemoveAt(random);
-                pathsItems.RemoveAt(random);
-                if (availableAll.Contains(item))
-                {
-                    availableDescsAll.Remove(lvlDesc);
-                    availableAll.Remove(item);
-                    pathsAll.Remove(path);
-                }
-                if (availableWeapons.Contains(item))
-                {
-                    availableDescsWeapons.Remove(lvlDesc);
-                    availableWeapons.Remove(item);
-                    pathsWeapons.Remove(path);
-                }
-                AddItem(item, lvlDesc, path);
             }
         }
     }
@@ -179,75 +182,87 @@ public class UpgradePanelManager : MonoBehaviour
         List<Item> availableAll = new List<Item>();
         List<ItemDef.UpgradePath> pathsAll = new List<ItemDef.UpgradePath>();
 
-            // Checks which item upgrades are available to the player
-            foreach (Item i in player.inventory)
+        // Checks which item upgrades are available to the player
+        if (doNewItemsOnNormalLevelUp)
+        {
+            // Items the player doesn't have
+            List<ItemDef> itemDefs = ResourceManager.itemDefs;
+            foreach (ItemDef i in itemDefs)
             {
-                int offset = 0;
-                foreach (ItemDef.UpgradePath u in i.takenPaths)
+                if (!player.HasItem(i.index))
                 {
-                    offset += u.numLevels;
-                }
-                if (i.Level < i.itemDef.maxLevel)
-                {
-                    if (i.Level - offset < i.currentPath.numLevels)
+                    Item item = i.GetItem();
+                    if (i.paths.Count > 0)
                     {
-                        availableDescsAll.Add(i.currentPath.levelDescriptions[i.Level - offset]);
-                        availableAll.Add(i);
-                        pathsAll.Add(i.currentPath);
+                        item.currentPath = i.paths[0];
+                        item.Level = 0;
+                        availableDescsAll.Add(item.currentPath.levelDescriptions[0]);
+                        availableAll.Add(item);
+                        pathsAll.Add(item.currentPath);
                     }
-                    else
+                }
+            }
+        }
+
+        foreach (Item i in player.inventory)
+        {
+            int offset = 0;
+            foreach (ItemDef.UpgradePath u in i.takenPaths)
+            {
+                offset += u.numLevels;
+            }
+            if (i.Level < i.itemDef.maxLevel)
+            {
+                if (i.Level - offset < i.currentPath.numLevels)
+                {
+                    availableDescsAll.Add(i.currentPath.levelDescriptions[i.Level - offset]);
+                    availableAll.Add(i);
+                    pathsAll.Add(i.currentPath);
+                }
+                else
+                {
+                    foreach (ItemDef.UpgradePath u in i.itemDef.paths)
                     {
-                        foreach (ItemDef.UpgradePath u in i.itemDef.paths)
+                        if (u.previousPath == i.currentPath.pathName)
                         {
-                            if (u.previousPath == i.currentPath.pathName)
-                            {
-                                availableDescsAll.Add(u.levelDescriptions[0]);
-                                availableAll.Add(i);
-                                pathsAll.Add(u);
-                            }
+                            availableDescsAll.Add(u.levelDescriptions[0]);
+                            availableAll.Add(i);
+                            pathsAll.Add(u);
                         }
                     }
                 }
             }
+        }
 
-            // Randomly adds upgrades to the current choices
-            int val = Mathf.Min(numOptions, availableAll.Count);
-            for (int i = 0; i < val; i++)
-            {
-                int random = Random.Range(0, availableAll.Count);
-                Item item = availableAll[random];
-                ItemDef.LevelDescription lvlDesc = availableDescsAll[random];
-                ItemDef.UpgradePath path = pathsAll[random];
-                availableDescsAll.RemoveAt(random);
-                availableAll.RemoveAt(random);
-                pathsAll.RemoveAt(random);
-                AddItem(item, lvlDesc, path);
-            }
-        
+        // Randomly adds upgrades to the current choices
+        int val = Mathf.Min(numOptions, availableAll.Count);
+        for (int i = 0; i < val; i++)
+        {
+            int random = Random.Range(0, availableAll.Count);
+            Item item = availableAll[random];
+            ItemDef.LevelDescription lvlDesc = availableDescsAll[random];
+            ItemDef.UpgradePath path = pathsAll[random];
+            availableDescsAll.RemoveAt(random);
+            availableAll.RemoveAt(random);
+            pathsAll.RemoveAt(random);
+            AddItem(item, lvlDesc, path, upgradeOptions[i]);
+        }
+
     }
 
     /// <summary>
     /// Adds an item to the set of chooseable item upgrades
     /// </summary>
     /// <param name="upgrade"></param>
-    public void AddItem(Item item, ItemDef.LevelDescription levelDescription, ItemDef.UpgradePath path)
+    public void AddItem(Item item, ItemDef.LevelDescription levelDescription, ItemDef.UpgradePath path, UpgradeOption upgradeOption)
     {
-        UpgradeOption option = Instantiate<UpgradeOption>(prefab, new Vector3(), new Quaternion(), infoPanel.gameObject.transform);
-        option.item = item;
-        option.levelDescription = levelDescription;
-        option.tier = tier;
-        option.textName = textName;
-        option.desc = desc;
-        option.baseStatsTxt = baseStatsTxt;
-        option.weaponStatsTxt = weaponStatsTxt;
-        option.weaponStatsLabel = weaponStatsLabel;
-        RectTransform upgradeRect = option.GetComponent<RectTransform>();
-        upgradeRect.localScale = new Vector3(2, 2, 1);
-        option.gameObject.GetComponent<Button>().onClick.AddListener(() =>
+        upgradeOption.gameObject.SetActive(true);
+        upgradeOption.SetItem(item.itemDef, item.Level, levelDescription);
+        upgradeOption.gameObject.GetComponent<Button>().onClick.RemoveAllListeners();
+        upgradeOption.gameObject.GetComponent<Button>().onClick.AddListener(() =>
         {
             Select(item, path);
         });
-        options.Add(option);
     }
 
     public void Select(Item item, ItemDef.UpgradePath path)
@@ -276,17 +291,13 @@ public class UpgradePanelManager : MonoBehaviour
     /// </summary>
     public void Clear()
     {
-        for (int i = options.Count - 1; i >= 0; i--)
+        foreach (UpgradeOption i in upgradeOptions)
         {
-            Destroy(options[i].gameObject);
+            i.gameObject.SetActive(false);
         }
-        titleText.text = "Select an Upgrade";
-        options.Clear();
         selected = false;
         displaying = false;
         baseStatsTxt.text = "";
-        weaponStatsLabel.text = "";
-        weaponStatsTxt.text = "";
     }
 
     public void Reroll()
@@ -305,9 +316,8 @@ public class UpgradePanelManager : MonoBehaviour
     /// <summary>
     /// Sets up the panel with the given options
     /// </summary>
-    public void ShowOptions(int levels)
+    public void ShowOptions()
     {
-        this.levels = levels;
         if (player.rerolls > 0)
         {
             rerollButton.gameObject.SetActive(true);
@@ -317,28 +327,17 @@ public class UpgradePanelManager : MonoBehaviour
         {
             rerollButton.gameObject.SetActive(false);
         }
-        if (levels == 1)
-        {
-            titleText.text = "Select <b><color=#00D4FF>" + levels + "</color></b> Upgrade";
-        }
-        else
-        {
-            titleText.text = "Select <b><color=#00D4FF>" + levels + "</color></b> Upgrades";
-        }
 
-        textName.text = "";
-        tier.text = "";
-        desc.text = "";
-        for (int i = 0; i < options.Count; i++)
-        {
-            UpgradeOption option = options[i];
+        baseStatsTxt.text =
+    "HP: " + player.MaxHp +
+    "\nSpeed: " + player.Speed +
+    "\nDamage: " + player.Damage +
+    "\nAttack Speed: " + player.AttackSpeed * 100 + "%" +
+    "\nArmor: " + player.Armor +
+    "\nRegen: " + player.Regen +
+    "\nCrit Chance: " + (player.CritChance * 100) + "%" +
+    "\nCrit Damage: " + player.CritDamage * 100 + "%";
 
-            RectTransform upgradeRect = option.GetComponent<RectTransform>();
-
-            upgradeRect.localPosition = new Vector3(0, 0);
-            upgradeRect.anchorMax = new Vector2(0.125f + (i * 0.25f), 0.3f);
-            upgradeRect.anchorMin = new Vector2(0.125f + (i * 0.25f), 0.3f);
-        }
         displaying = true;
     }
 

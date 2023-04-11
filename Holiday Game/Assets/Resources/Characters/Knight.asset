@@ -13,19 +13,16 @@ MonoBehaviour:
   m_Name: Knight
   m_EditorClassIdentifier: 
   prefab: {fileID: 1069143796030833455, guid: b2bef236b516c45418cd8d28400ad79d, type: 3}
-  characterName: Knight
-  desc: '* Starts with <color=#AAAAAA><size=+8>???</size></color>
+  characterName: <color=#7C7FFF>Knight
+  desc: 'Starts with <color=#7C7FFF><size=+4>Iron Blade</size></color>
 
-    * Starts in
-    <color=#AAAAAA><size=+8>???</size></color>
+    Average
+    damage
 
-    * <color=#AAAAAA><size=+8>???</size></color>
+    Average attack speed
 
-    *
-    <color=#AAAAAA><size=+8>???</size></color>
-
-    * <color=#AAAAAA><size=+8>???</size></color>'
-  characterImage: {fileID: 1500714575, guid: c33ab33ef8c756640954b7567896f904, type: 3}
+    Average HP'
+  characterImage: {fileID: 1687078571, guid: c6c25a596b271a043827e4ac32d40a9a, type: 3}
   tutorialChestItems:
   - {fileID: 11400000, guid: f7eba188c934a104da54ec5823b012ac, type: 2}
   inventory: []

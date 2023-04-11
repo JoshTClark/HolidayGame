@@ -24,64 +24,13 @@ MonoBehaviour:
     levelDescriptions:
     - lvlName: Agility Boots
       desc: Increases attack speed and move speed
-      statChanges:
-        hpAdd: 0
-        speedAdd: 0.25
-        damageAdd: 0
-        attackSpeedAdd: 0
-        armorAdd: 0
-        regenAdd: 0
-        critChanceAdd: 0
-        critDamageAdd: 0
-        hpMult: 1
-        speedMult: 1
-        damageMult: 1
-        attackSpeedMult: 1.1
-        armorMult: 1
-        regenMult: 1
-        critChanceMult: 1
-        critDamageMult: 1
-        XPMult: 1
+      statChanges: []
     - lvlName: Better Fitting Footwear I
       desc: Increases attack speed and move speed
-      statChanges:
-        hpAdd: 0
-        speedAdd: 0.25
-        damageAdd: 0
-        attackSpeedAdd: 0
-        armorAdd: 0
-        regenAdd: 0
-        critChanceAdd: 0
-        critDamageAdd: 0
-        hpMult: 1
-        speedMult: 1
-        damageMult: 1
-        attackSpeedMult: 1.1
-        armorMult: 1
-        regenMult: 1
-        critChanceMult: 1
-        critDamageMult: 1
-        XPMult: 1
+      statChanges: []
     - lvlName: Better Fitting Footwear II
       desc: Increases attack speed and move speed
-      statChanges:
-        hpAdd: 0
-        speedAdd: 0.25
-        damageAdd: 0
-        attackSpeedAdd: 0
-        armorAdd: 0
-        regenAdd: 0
-        critChanceAdd: 0
-        critDamageAdd: 0
-        hpMult: 1
-        speedMult: 1
-        damageMult: 1
-        attackSpeedMult: 1.1
-        armorMult: 1
-        regenMult: 1
-        critChanceMult: 1
-        critDamageMult: 1
-        XPMult: 1
+      statChanges: []
   - pathName: Swift Strider
     previousPath: Better Fitting Footwear
     numLevels: 3
@@ -90,131 +39,29 @@ MonoBehaviour:
       desc: 'Dash cooldown is lowered
 
         Attack Speed+; Move Speed+'
-      statChanges:
-        hpAdd: 0
-        speedAdd: 0.25
-        damageAdd: 0
-        attackSpeedAdd: 0
-        armorAdd: 0
-        regenAdd: 0
-        critChanceAdd: 0
-        critDamageAdd: 0
-        hpMult: 1
-        speedMult: 1
-        damageMult: 1
-        attackSpeedMult: 1.1
-        armorMult: 1
-        regenMult: 1
-        critChanceMult: 1
-        critDamageMult: 1
-        XPMult: 1
+      statChanges: []
     - lvlName: Swift Strider II
       desc: 'Dash Cooldown is lowered even more
 
         Attack Speed+; Move Speed+'
-      statChanges:
-        hpAdd: 0
-        speedAdd: 0.25
-        damageAdd: 0
-        attackSpeedAdd: 0
-        armorAdd: 0
-        regenAdd: 0
-        critChanceAdd: 0
-        critDamageAdd: 0
-        hpMult: 1
-        speedMult: 1
-        damageMult: 1
-        attackSpeedMult: 1.1
-        armorMult: 1
-        regenMult: 1
-        critChanceMult: 1
-        critDamageMult: 1
-        XPMult: 1
+      statChanges: []
     - lvlName: Dastardly Dasher
       desc: 'Lowers Dash Cooldown even more, and stores an additional charge
 
         Attack
         Speed+ ; Move Speed+'
-      statChanges:
-        hpAdd: 0
-        speedAdd: 0.25
-        damageAdd: 0
-        attackSpeedAdd: 0
-        armorAdd: 0
-        regenAdd: 0
-        critChanceAdd: 0
-        critDamageAdd: 0
-        hpMult: 1
-        speedMult: 1
-        damageMult: 1
-        attackSpeedMult: 1.1
-        armorMult: 1
-        regenMult: 1
-        critChanceMult: 1
-        critDamageMult: 1
-        XPMult: 1
+      statChanges: []
   - pathName: Berzerker's Boots
     previousPath: Better Fitting Footwear
     numLevels: 3
     levelDescriptions:
     - lvlName: Berzerker's Boots I
       desc: Greatly increases Atk speed, but also increases damage taken by 10%
-      statChanges:
-        hpAdd: 0
-        speedAdd: 0.1
-        damageAdd: 0
-        attackSpeedAdd: 0.3
-        armorAdd: 0
-        regenAdd: 0
-        critChanceAdd: 0
-        critDamageAdd: 0
-        hpMult: 1
-        speedMult: 1
-        damageMult: 1
-        attackSpeedMult: 1
-        armorMult: 1
-        regenMult: 1
-        critChanceMult: 1
-        critDamageMult: 1
-        XPMult: 1
+      statChanges: []
     - lvlName: Berzerker's Boots II
       desc: Greatly increases Atk speed, but also increases damage taken by another
         10%
-      statChanges:
-        hpAdd: 0
-        speedAdd: 0.1
-        damageAdd: 0
-        attackSpeedAdd: 0.3
-        armorAdd: 0
-        regenAdd: 0
-        critChanceAdd: 0
-        critDamageAdd: 0
-        hpMult: 1
-        speedMult: 1
-        damageMult: 1
-        attackSpeedMult: 1
-        armorMult: 1
-        regenMult: 1
-        critChanceMult: 1
-        critDamageMult: 1
-        XPMult: 1
+      statChanges: []
     - lvlName: Glass Cannon
       desc: Doubles Attack Speed from all sources, but reduces max hp by 33%
-      statChanges:
-        hpAdd: 0
-        speedAdd: 0
-        damageAdd: 0
-        attackSpeedAdd: 0
-        armorAdd: 0
-        regenAdd: 0
-        critChanceAdd: 0
-        critDamageAdd: 0
-        hpMult: 0.6666
-        speedMult: 1
-        damageMult: 1
-        attackSpeedMult: 2
-        armorMult: 1
-        regenMult: 1
-        critChanceMult: 1
-        critDamageMult: 1
-        XPMult: 1
+      statChanges: []

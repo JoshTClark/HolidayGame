@@ -14,17 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 1069143796030833455, guid: a487fa23d2b6b8f429579c3891e1c79b, type: 3}
   characterName: <#F4831B>Wizard
-  desc: '* Starts with the <color=#F4831B><size=+8>Magic Missile</size></color>
+  desc: 'Starts with <color=#F4831B><size=+4>Magic Missile</size></color>
 
-    *
-    Starts in <color=#902EBB><size=+8>Fall</size></color>
+    Average
+    damage
 
-    * Average damage
-
-    *
     Average attack speed
 
-    * Average HP'
+    Average HP'
   characterImage: {fileID: 476859388, guid: 31ea4bd5a566ba241ae7052532e10d6a, type: 3}
   tutorialChestItems:
   - {fileID: 11400000, guid: 1bc11125d1e7e3f45b5352e2db4bf476, type: 2}

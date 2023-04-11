@@ -198,13 +198,6 @@ public class SaveSceneManager : MonoBehaviour
                 optionsPanel.gameObject.SetActive(true);
                 break;
         }
-
-        mainCam.transform.position = new Vector3(mainCam.transform.position.x + 1 * Time.deltaTime, mainCam.transform.position.y + 1 * Time.deltaTime, -10);
-        if (mainCam.transform.position.x >= 50 && mainCam.transform.position.y >= 50)
-        {
-            mainCam.transform.position = new Vector3(-50, -50, -10);
-        }
-
     }
 
     public void ToTitleScreen(int slot)
@@ -252,7 +245,7 @@ public class SaveSceneManager : MonoBehaviour
         SessionManager session = new SessionManager();
         SessionManager.data = data;
         session.SetChosenCharacter(characters[currentSelectedCharacter]);
-        session.GenerateMap(6, 5, 20, 3);
+        session.GenerateMap(5, 0, 20, 1);
         MapManager.session = session;
         SceneManager.LoadSceneAsync("MapScene");
     }

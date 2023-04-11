@@ -6,43 +6,101 @@ using UnityEngine.UI;
 
 public class UpgradeOption : MonoBehaviour
 {
-    public Item item;
-    public ItemDef.LevelDescription levelDescription;
-    public TMP_Text textName, tier, desc, baseStatsTxt, weaponStatsTxt, weaponStatsLabel;
-    public Image iconHolder;
+    public TMP_Text nameLabel, levelLabel, descLabel, statsLabel;
+    public Image icon, iconOutline;
     public bool isHover = false;
-    private float scale = 2;
+    private float scale = 1f;
+    private float maxScale = 1.025f;
+    private float scaleSpeed = 3f;
 
-    private void Start()
+    public void SetItem(ItemDef item, int level, ItemDef.LevelDescription levelDescription)
     {
         // Setting the icon
-        if (item.itemDef.icon)
+        if (item.icon)
         {
-            iconHolder.sprite = item.itemDef.icon;
+            icon.sprite = item.icon;
         }
 
         // Setting the color
-        if (item.itemDef.tier == ItemDef.Tier.Common)
+        levelLabel.enableVertexGradient = false;
+        nameLabel.enableVertexGradient = false;
+        if (item.tier == ItemDef.Tier.Common)
         {
-            this.gameObject.GetComponent<Image>().color = new Color(0f, 1f, 0f, 1f);
+            iconOutline.color = new Color(0f, 1f, 0f, 1f);
+            levelLabel.color = new Color(0f, 1f, 0f, 1f);
+            nameLabel.color = new Color(0f, 1f, 0f, 1f);
         }
-        else if (item.itemDef.tier == ItemDef.Tier.Uncommon)
+        else if (item.tier == ItemDef.Tier.Uncommon)
         {
-            this.gameObject.GetComponent<Image>().color = new Color(0f, 0f, 1f, 1f);
+            iconOutline.color = new Color(0f, 0f, 1f, 1f);
+            levelLabel.color = new Color(0f, 0f, 1f, 1f);
+            nameLabel.color = new Color(0f, 0f, 1f, 1f);
         }
-        else if (item.itemDef.tier == ItemDef.Tier.Rare)
+        else if (item.tier == ItemDef.Tier.Rare)
         {
-            this.gameObject.GetComponent<Image>().color = new Color(1f, 0f, 1f, 1f);
+            iconOutline.color = new Color(1f, 0f, 1f, 1f);
+            levelLabel.color = new Color(1f, 0f, 1f, 1f);
+            nameLabel.color = new Color(1f, 0f, 1f, 1f);
         }
-        else if (item.itemDef.tier == ItemDef.Tier.Epic)
+        else if (item.tier == ItemDef.Tier.Epic)
         {
-            this.gameObject.GetComponent<Image>().color = new Color(1f, 0.5f, 0f, 1f);
+            VertexGradient grad = new VertexGradient();
+            grad.topLeft = new Color(1f, 0.5f, 0f, 1f);
+            grad.bottomLeft = new Color(0.75f, 0.35f, 0f, 1f);
+            grad.topRight = new Color(0.75f, 0.35f, 0f, 1f);
+            grad.bottomRight = new Color(0.5f, 0.25f, 0f, 1f);
+            levelLabel.enableVertexGradient = true;
+            nameLabel.enableVertexGradient = true;
+            levelLabel.color = new Color(1f, 1f, 1f, 1f);
+            nameLabel.color = new Color(1f, 1f, 1f, 1f);
+            levelLabel.colorGradient = grad;
+            nameLabel.colorGradient = grad;
+            iconOutline.color = new Color(1f, 0.5f, 0f, 1f);
         }
-        else if (item.itemDef.tier == ItemDef.Tier.Legendary)
+        else if (item.tier == ItemDef.Tier.Legendary)
         {
-            this.gameObject.GetComponent<Image>().color = new Color(0.8f, 0f, 0f, 1f);
+            iconOutline.color = new Color(0.8f, 0f, 0f, 1f);
+            VertexGradient grad = new VertexGradient();
+            grad.topLeft = new Color(1f, 0f, 0f, 1f);
+            grad.bottomLeft = new Color(0.75f, 0f, 0f, 1f);
+            grad.topRight = new Color(0.75f, 0f, 0f, 1f);
+            grad.bottomRight = new Color(0.5f, 0f, 0f, 1f);
+            levelLabel.enableVertexGradient = true;
+            nameLabel.enableVertexGradient = true;
+            levelLabel.color = new Color(1f, 1f, 1f, 1f);
+            nameLabel.color = new Color(1f, 1f, 1f, 1f);
+            levelLabel.colorGradient = grad;
+            nameLabel.colorGradient = grad;
         }
 
+        isHover = false;
+        nameLabel.text = item.itemName;
+        descLabel.text = levelDescription.desc;
+        statsLabel.text = "";
+        if (levelDescription.statChanges.Count > 0)
+        {
+            statsLabel.text += levelDescription.statChanges[0];
+            for (int i = 1; i < levelDescription.statChanges.Count; i++)
+            {
+                statsLabel.text += "\n" + levelDescription.statChanges[i];
+            }
+        }
+
+        if (level == 0)
+        {
+            if (item.GetType() == typeof(WeaponDef))
+            {
+                levelLabel.text = "New weapon!";
+            }
+            else
+            {
+                levelLabel.text = "New item!";
+            }
+        }
+        else
+        {
+            levelLabel.text = "Level: " + (level + 1);
+        }
     }
 
     public void Update()
@@ -51,20 +109,20 @@ public class UpgradeOption : MonoBehaviour
 
         // Hover animation
         RectTransform rectTransform = this.gameObject.GetComponent<RectTransform>();
-        if (isHover && scale < 2.5f)
+        if (isHover && scale < maxScale)
         {
-            scale += 5f * delta;
-            if (scale > 2.5f)
+            scale += scaleSpeed * delta;
+            if (scale > maxScale)
             {
-                scale = 2.5f;
+                scale = maxScale;
             }
         }
-        else if (!isHover && scale > 2f)
+        else if (!isHover && scale > 1f)
         {
-            scale -= 5f * delta;
-            if (scale < 2f)
+            scale -= scaleSpeed * delta;
+            if (scale < 1f)
             {
-                scale = 2f;
+                scale = 1f;
             }
         }
 
@@ -73,66 +131,11 @@ public class UpgradeOption : MonoBehaviour
 
     /// <summary>
     /// Called when player hovers over the button
-    /// Sets the stat change descriptions
     /// </summary>
     public void OnHoverStart()
     {
         isHover = true;
-        textName.text = levelDescription.lvlName;
-        desc.text = levelDescription.desc;
-        tier.text = item.itemDef.itemName + " LVL: " + (item.Level + 1);
-        tier.enableVertexGradient = false;
-        textName.enableVertexGradient = false;
-        if (item.itemDef.tier == ItemDef.Tier.Common)
-        {
-            //tier.text = "Common";
-            tier.color = new Color(0f, 1f, 0f, 1f);
-            textName.color = new Color(0f, 1f, 0f, 1f);
-        }
-        else if (item.itemDef.tier == ItemDef.Tier.Uncommon)
-        {
-            //tier.text = "Uncommon";
-            tier.color = new Color(0f, 0f, 1f, 1f);
-            textName.color = new Color(0f, 0f, 1f, 1f);
-        }
-        else if (item.itemDef.tier == ItemDef.Tier.Rare)
-        {
-            //tier.text = "Rare";
-            tier.color = new Color(1f, 0f, 1f, 1f);
-            textName.color = new Color(1f, 0f, 1f, 1f);
-        }
-        else if (item.itemDef.tier == ItemDef.Tier.Epic)
-        {
-            VertexGradient grad = new VertexGradient();
-            grad.topLeft = new Color(1f, 0.5f, 0f, 1f);
-            grad.bottomLeft = new Color(0.75f, 0.35f, 0f, 1f);
-            grad.topRight = new Color(0.75f, 0.35f, 0f, 1f);
-            grad.bottomRight = new Color(0.5f, 0.25f, 0f, 1f);
-            tier.enableVertexGradient = true;
-            textName.enableVertexGradient = true;
-            tier.color = new Color(1f, 1f, 1f, 1f);
-            textName.color = new Color(1f, 1f, 1f, 1f);
-            //tier.text = "Epic";
-            tier.colorGradient = grad;
-            textName.colorGradient = grad;
-        }
-        else if (item.itemDef.tier == ItemDef.Tier.Legendary)
-        {
-            VertexGradient grad = new VertexGradient();
-            grad.topLeft = new Color(1f, 0f, 0f, 1f);
-            grad.bottomLeft = new Color(0.75f, 0f, 0f, 1f);
-            grad.topRight = new Color(0.75f, 0f, 0f, 1f);
-            grad.bottomRight = new Color(0.5f, 0f, 0f, 1f);
-            tier.enableVertexGradient = true;
-            textName.enableVertexGradient = true;
-            //tier.text = "Legendary";
-            tier.color = new Color(1f, 1f, 1f, 1f);
-            textName.color = new Color(1f, 1f, 1f, 1f);
-            tier.colorGradient = grad;
-            textName.colorGradient = grad;
-        }
-
-
+        /*
         Player player = GameManager.instance.Player;
 
         float newHPf = (player.BaseMaxHp + levelDescription.statChanges.hpAdd + player.hpAdd) * player.hpMult * levelDescription.statChanges.hpMult;
@@ -254,16 +257,6 @@ public class UpgradeOption : MonoBehaviour
         {
             newCritDmg = newCritDmgf * 100 + "%";
         }
-
-        baseStatsTxt.text =
-            "HP: " + player.MaxHp + " -> " + newHP +
-            "\nSpeed: " + player.Speed + " -> " + newSpeed +
-            "\nDamage: " + player.Damage + " -> " + newDamage +
-            "\nAttack Speed: " + player.AttackSpeed * 100 + "%" + " -> " + newAtckSpd +
-            "\nArmor: " + player.Armor + " -> " + newArmor +
-            "\nRegen: " + player.Regen + " -> " + newRegen +
-            "\nCrit Chance: " + (player.CritChance * 100) + "%" + " -> " + newCritChance +
-            "\nCrit Damage: " + player.CritDamage * 100 + "%" + " -> " + newCritDmg;
 
         /*
         if (u.weaponstatChangess.Count > 0)

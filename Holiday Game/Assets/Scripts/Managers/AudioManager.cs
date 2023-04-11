@@ -17,6 +17,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip titleMusic;
     [SerializeField] private AudioClip mapMusic;
 
+    public static float globalVolume = 0f;
+
     /// <summary>
     /// Called when the scene starts
     /// </summary>
@@ -67,7 +69,7 @@ public class AudioManager : MonoBehaviour
     public void PlaySound(AudioClip audio, float volume = 1f, float pitch = 1f)
     {
         AudioSource source = pool.Get();
-        source.volume = volume;
+        source.volume = volume * globalVolume;
         source.pitch = pitch;
         source.clip = audio;
         source.Play();

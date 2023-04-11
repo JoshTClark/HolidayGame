@@ -18,16 +18,6 @@ public class BigEnemy : Enemy
     protected override void CalcMoves()
     {
         // Seek & Separate
-        movements.Add(SeekPlayer() * 3f);
-        movements.Add(Separation() * .01f);
-    }
-
-    protected override void OnTriggerStay2D(Collider2D collision)
-    {
-        // For testing purposes
-        base.OnTriggerStay2D(collision);
-
-        //Debug.Break();
-
+        movements.Add(Seek() * 3f);
     }
 }

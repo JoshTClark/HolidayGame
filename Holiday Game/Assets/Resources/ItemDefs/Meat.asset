@@ -24,64 +24,13 @@ MonoBehaviour:
     levelDescriptions:
     - lvlName: Meat!
       desc: Increases Max HP and HP Regen
-      statChanges:
-        hpAdd: 10
-        speedAdd: 0
-        damageAdd: 0
-        attackSpeedAdd: 0
-        armorAdd: 0
-        regenAdd: 0.5
-        critChanceAdd: 0
-        critDamageAdd: 0
-        hpMult: 1
-        speedMult: 1
-        damageMult: 1
-        attackSpeedMult: 1
-        armorMult: 1
-        regenMult: 1
-        critChanceMult: 1
-        critDamageMult: 1
-        XPMult: 1
+      statChanges: []
     - lvlName: Bigger Portions I
       desc: Increases Max HP and HP Regen
-      statChanges:
-        hpAdd: 20
-        speedAdd: 0
-        damageAdd: 0
-        attackSpeedAdd: 0
-        armorAdd: 0
-        regenAdd: 0.5
-        critChanceAdd: 0
-        critDamageAdd: 0
-        hpMult: 1
-        speedMult: 1
-        damageMult: 1
-        attackSpeedMult: 1
-        armorMult: 1
-        regenMult: 1
-        critChanceMult: 1
-        critDamageMult: 1
-        XPMult: 1
+      statChanges: []
     - lvlName: Bigger Portions II
       desc: Increases Max HP and HP Regen
-      statChanges:
-        hpAdd: 20
-        speedAdd: 0
-        damageAdd: 0
-        attackSpeedAdd: 0
-        armorAdd: 0
-        regenAdd: 0.5
-        critChanceAdd: 0
-        critDamageAdd: 0
-        hpMult: 1
-        speedMult: 1
-        damageMult: 1
-        attackSpeedMult: 1
-        armorMult: 1
-        regenMult: 1
-        critChanceMult: 1
-        critDamageMult: 1
-        XPMult: 1
+      statChanges: []
   - pathName: Mutated Cows
     previousPath: Meat
     numLevels: 3
@@ -91,70 +40,19 @@ MonoBehaviour:
 
         MaxHP+;
         HPRegen+'
-      statChanges:
-        hpAdd: 10
-        speedAdd: 0
-        damageAdd: 0
-        attackSpeedAdd: 0
-        armorAdd: 0
-        regenAdd: 1
-        critChanceAdd: 0
-        critDamageAdd: 0
-        hpMult: 1
-        speedMult: 1
-        damageMult: 1
-        attackSpeedMult: 1
-        armorMult: 1
-        regenMult: 1
-        critChanceMult: 1
-        critDamageMult: 1
-        XPMult: 1
+      statChanges: []
     - lvlName: Mutated Cows II
       desc: 'Increases Health Regen after not taking damage for 4s
 
         MaxHP+;
         HPRegen+'
-      statChanges:
-        hpAdd: 10
-        speedAdd: 0
-        damageAdd: 0
-        attackSpeedAdd: 0
-        armorAdd: 0
-        regenAdd: 1
-        critChanceAdd: 0
-        critDamageAdd: 0
-        hpMult: 1
-        speedMult: 1
-        damageMult: 1
-        attackSpeedMult: 1
-        armorMult: 1
-        regenMult: 1
-        critChanceMult: 1
-        critDamageMult: 1
-        XPMult: 1
+      statChanges: []
     - lvlName: Mutated Cows III
       desc: 'Increases Health Regen after not taking damage for 3s
 
         MaxHP+;
         HPRegen+'
-      statChanges:
-        hpAdd: 10
-        speedAdd: 0
-        damageAdd: 0
-        attackSpeedAdd: 0
-        armorAdd: 0
-        regenAdd: 1
-        critChanceAdd: 0
-        critDamageAdd: 0
-        hpMult: 1
-        speedMult: 1
-        damageMult: 1
-        attackSpeedMult: 1
-        armorMult: 1
-        regenMult: 1
-        critChanceMult: 1
-        critDamageMult: 1
-        XPMult: 1
+      statChanges: []
   - pathName: Bigger Stomach
     previousPath: Meat
     numLevels: 3
@@ -163,67 +61,16 @@ MonoBehaviour:
       desc: 'Increases Health gained from HP drops by 5
 
         MaxHP+, HPRegen+'
-      statChanges:
-        hpAdd: 20
-        speedAdd: 0
-        damageAdd: 0
-        attackSpeedAdd: 0
-        armorAdd: 0
-        regenAdd: 0.25
-        critChanceAdd: 0
-        critDamageAdd: 0
-        hpMult: 1
-        speedMult: 1
-        damageMult: 1
-        attackSpeedMult: 1
-        armorMult: 1
-        regenMult: 1
-        critChanceMult: 1
-        critDamageMult: 1
-        XPMult: 1
+      statChanges: []
     - lvlName: Bigger Stomach II
       desc: 'Increases Health gained from HP drops by an additional 5
 
         MaxHP+,
         HPRegen+'
-      statChanges:
-        hpAdd: 20
-        speedAdd: 0
-        damageAdd: 0
-        attackSpeedAdd: 0
-        armorAdd: 0
-        regenAdd: 0.25
-        critChanceAdd: 0
-        critDamageAdd: 0
-        hpMult: 1
-        speedMult: 1
-        damageMult: 1
-        attackSpeedMult: 1
-        armorMult: 1
-        regenMult: 1
-        critChanceMult: 1
-        critDamageMult: 1
-        XPMult: 1
+      statChanges: []
     - lvlName: Insatiable Appetite
       desc: 'Increases Health gained from HP drops by an additional 20%
 
         MaxHP+,
         HPRegen+'
-      statChanges:
-        hpAdd: 25
-        speedAdd: 0
-        damageAdd: 0
-        attackSpeedAdd: 0
-        armorAdd: 0
-        regenAdd: 0.25
-        critChanceAdd: 0
-        critDamageAdd: 0
-        hpMult: 1
-        speedMult: 1
-        damageMult: 1
-        attackSpeedMult: 1
-        armorMult: 1
-        regenMult: 1
-        critChanceMult: 1
-        critDamageMult: 1
-        XPMult: 1
+      statChanges: []

@@ -6,6 +6,7 @@ using UnityEngine.Pool;
 public abstract class Enemy : StatsComponent
 {
     public Player player;
+    public GameObject attractor;
     public ObjectPool<Enemy> pool;
     public ResourceManager.EnemyIndex index;
     public bool isBoss;
@@ -28,28 +29,31 @@ public abstract class Enemy : StatsComponent
     [SerializeField]
     private List<DropInfo> drops;
 
-    // SoundEffects
-    [SerializeField]
-    protected AudioSource onHitSound;
-
     protected Vector2 Velocity { get { return GetComponent<Rigidbody2D>().velocity; } set { GetComponent<Rigidbody2D>().velocity = value; } }
 
     /// <summary>
     /// Moves the Enemy towards the player
     /// </summary>
-    protected Vector2 SeekPlayer()
+    protected Vector2 Seek()
     {
-        // Get the players position
-        Vector2 desiredVelocity = (Vector2)player.transform.position - (Vector2)transform.position;
-
-        // Get the players position, seek that point, apply forces, and move
+        Vector2 desiredVelocity = new Vector2();
+        if (attractor) 
+        {
+            // If another object is attracting the enemy seek it
+            desiredVelocity = (Vector2)attractor.transform.position - (Vector2)transform.position;
+        }
+        else
+        {
+            // Seek the player if there is no object
+            desiredVelocity = (Vector2)player.transform.position - (Vector2)transform.position;
+        }
         return desiredVelocity;
     }
 
     /// <summary>
     /// Moves the Enemy away from the player
     /// </summary>
-    protected Vector2 FleePlayer()
+    protected Vector2 Flee()
     {
         // Get Player Position
         Vector2 desiredVelocity = (Vector2)transform.position - (Vector2)player.transform.position;
@@ -67,7 +71,7 @@ public abstract class Enemy : StatsComponent
         if (PlayerDistance() >= maxPlayerDist)
         {
             // Player is too far away, move closer
-            return SeekPlayer();
+            return Seek();
         }
         /*
         else if (PlayerDistance() <= minPlayerDist)
@@ -87,14 +91,6 @@ public abstract class Enemy : StatsComponent
         if (!isStunned)
         {
             CalcMoves();
-            if (transform.position.x < player.transform.position.x)
-            {
-                sr.flipX = true;
-            }
-            else
-            {
-                sr.flipX = false;
-            }
             // Then take Velocity normalize it so it's a heading vector
             // scale that by speed, then apply movement
             Vector2 velocity = Vector2.zero;
@@ -104,6 +100,15 @@ public abstract class Enemy : StatsComponent
                 {
                     velocity += v;
                 }
+            }
+
+            if (velocity.normalized.x >= 0)
+            {
+                sr.flipX = true;
+            }
+            else
+            {
+                sr.flipX = false;
             }
 
             GetComponent<Rigidbody2D>().velocity = (velocity.normalized * Speed);
@@ -144,12 +149,6 @@ public abstract class Enemy : StatsComponent
 
     public override void OnDeath(DamageInfo dmgInfo)
     {
-        // Stop the hit sound
-        if (onHitSound.isPlaying)
-        {
-            onHitSound.Stop();
-        }
-
         if (dmgInfo.attacker && dmgInfo.attacker.GetType() == typeof(Player))
         {
             GameManager.instance.enemiesDefeated++;
@@ -243,19 +242,25 @@ public abstract class Enemy : StatsComponent
         {
             Vector2 dropPosition = new Vector2(transform.position.x + Random.Range(-sr.sprite.rect.size.x / sr.sprite.pixelsPerUnit, sr.sprite.rect.size.x / sr.sprite.pixelsPerUnit) * transform.localScale.x * (2f / 3f), transform.position.y + Random.Range(-sr.sprite.rect.size.y / sr.sprite.pixelsPerUnit, sr.sprite.rect.size.y / sr.sprite.pixelsPerUnit) * transform.localScale.y * (2f / 3f));
             float ran = Random.value;
-            if (info.index == ResourceManager.PickupIndex.HealthDrop1)
-            {
-                /*
-                if (player.HasUpgrade(ResourceManager.UpgradeIndex.CupidArrowHealth) && dmgInfo.weapon == ResourceManager.WeaponIndex.CupidArrow)
-                {
-                    ran -= (float)(0.05 * GameManager.instance.Player.GetItem(ResourceManager.UpgradeIndex.CupidArrowHealth).CurrentLevel);
-                */
-            }
             if (ran <= info.chance)
             {
                 DropBase b = DropManager.GetPickup(info.index);
                 b.gameObject.transform.position = dropPosition;
             }
+        }
+
+        float ranHealth = Random.value;
+        if (ranHealth <= 0.005)
+        {
+            DropBase b = DropManager.GetPickup(ResourceManager.PickupIndex.HealthDrop1);
+            b.gameObject.transform.position = this.gameObject.transform.position;
+        }
+
+        float ranGem = Random.value;
+        if (ranGem <= 0.005)
+        {
+            DropBase b = DropManager.GetPickup(ResourceManager.PickupIndex.Coin);
+            b.gameObject.transform.position = this.gameObject.transform.position;
         }
 
         if (deathEffect)
@@ -267,25 +272,12 @@ public abstract class Enemy : StatsComponent
         }
     }
 
-    virtual protected void OnTriggerStay2D(Collider2D collision)
-    {
-        HandleCollision(collision);
-    }
-
     /// <summary>
     /// Handles the logic for colliding with a player
     /// </summary>
     /// <param name="collision"></param>
-    private void HandleCollision(Collider2D collision)
+    public void HandleCollision(Collider2D collision)
     {
-        /*
-        Debug.Log("Here");
-        if (!GameManager.instance.Player.Invincible)
-        {
-            GameManager.instance.Player.DealDamage(Damage);
-        }
-        */
-
         // Getting Component from the collider doesn't work properly for some reason
         // The code inside of the if statements will never be called for some reason
 
@@ -301,40 +293,6 @@ public abstract class Enemy : StatsComponent
                 GameManager.instance.Player.TakeDamage(info);
             }
         }
-        else if (collision.gameObject.GetComponent<Enemy>())
-        {
-            //Debug.Log("Other Enemy");
-        }
-    }
-
-    /// <summary>
-    /// Has each enemy flee every other enemy scaled by it's distance from each other
-    /// </summary>
-    protected Vector2 Separation()
-    {
-        // Set an empty Desired Velocity
-        Vector2 desiredVelocity = Vector2.zero;
-        Vector2 currentVelocity = Vector2.zero;
-
-        // Commenting this out for right now as looping through every single enemy is very costly
-        // Loop through all enemies
-        /*
-        foreach (Enemy e in EnemyManager.instance.AllEnemies)
-        {
-            currentVelocity = Vector2.zero;
-            float sqrDistance = Vector2.SqrMagnitude(transform.position - e.transform.position);
-            if (sqrDistance <= Mathf.Epsilon)
-            {
-                continue;
-            }
-            // Flee the Enemy
-            currentVelocity = (Vector2)transform.position - (Vector2)e.transform.position;
-
-            // Scale it by how close it is & apply it to the desired velocity
-            desiredVelocity = currentVelocity * (1f / sqrDistance);
-        }
-        */
-        return desiredVelocity.normalized;
     }
 
     public void AddKnockback(Vector2 vec)

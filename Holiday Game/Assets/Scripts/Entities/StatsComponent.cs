@@ -17,17 +17,14 @@ public abstract class StatsComponent : MonoBehaviour
     public float currentHP;
 
     // Level
-    [SerializeField]
-    private float xpAmount;
-    private int level;
+    private float xpAmount = 0;
+    private float xpToNextLevel = 5f;
+    private int level = 1;
 
     [HideInInspector]
     [SerializeField]
     // Flat additions to stats
     public float hpAdd, speedAdd, damageAdd, attackSpeedAdd, armorAdd, regenAdd, critChanceAdd, critDamageAdd;
-
-    [SerializeField]
-    private AnimationCurve expCurve;
 
     [HideInInspector]
     // Multipliers to stats
@@ -88,7 +85,7 @@ public abstract class StatsComponent : MonoBehaviour
 
     // Level
     public float XP { get { return xpAmount; } }
-    public float Level { get { return level; } }
+    public int Level { get { return level; } }
 
     // Used to get the "true" values of stats after calculating any additions from upgrades etc
     public float MaxHp { get { return (baseMaxHP + hpAdd) * hpMult * hpMultConst; } }
@@ -126,12 +123,6 @@ public abstract class StatsComponent : MonoBehaviour
         damaged = false;
 
         currentHP = MaxHp;
-        if (this.gameObject.GetComponent<Player>() && xpAmount == 0)
-        {
-            level = 1;
-            xpAmount = expCurve.Evaluate(1);
-        }
-
 
         sr = gameObject.GetComponent<SpriteRenderer>();
         ogColor = sr.color;
@@ -214,29 +205,33 @@ public abstract class StatsComponent : MonoBehaviour
     //Checks to see if leveled up since last tick
     public void CalculateLevel()
     {
-        if (!this.gameObject.GetComponent<Enemy>())
+        // XP from level 1 to 2 is always 5
+        if (level == 1)
         {
-            int tempLevel = level;
-            float xpToLevelUp = expCurve.Evaluate(tempLevel + 1);
-            while (XP > xpToLevelUp)
+            if (xpAmount >= 5)
             {
-                tempLevel++;
-                xpToLevelUp = expCurve.Evaluate(tempLevel + 1);
-            }
-            if (tempLevel > level)
-            {
-                OnLevelUp(tempLevel - level);
-                level = tempLevel;
+                level++;
+                xpAmount -= 5;
+                if (this.gameObject.GetComponent<Player>())
+                {
+                    this.gameObject.GetComponent<Player>().waitingForLevels++;
+                }
+                xpToNextLevel = (level - 1) * 15;
             }
         }
-    }
-
-    //What happens when the player levels up
-    private void OnLevelUp(int levels)
-    {
-        if (this.gameObject.GetComponent<Player>())
+        else
         {
-            ((Player)this).waitingForLevels++;
+            // XP required to level up increases by 15 every level
+            if (xpAmount >= xpToNextLevel)
+            {
+                level++;
+                xpAmount -= xpToNextLevel;
+                if (this.gameObject.GetComponent<Player>())
+                {
+                    this.gameObject.GetComponent<Player>().waitingForLevels++;
+                }
+                xpToNextLevel = (level - 1) * 15;
+            }
         }
     }
 
@@ -502,21 +497,17 @@ public abstract class StatsComponent : MonoBehaviour
 
     public void SetLevel(int i)
     {
-        level = i;
-        CalculateStats();
-        currentHP = MaxHp;
+        SetLevelAndXP(i, 0);
     }
 
     public float GetXpToNextLevel()
     {
-        //create inverse speedcurve
-        return expCurve.Evaluate(level + 1);
+        return xpToNextLevel;
     }
 
     public float GetPercentToNextLevel()
     {
-        // Testing for right now until we get an actual level curve
-        return (XP - expCurve.Evaluate(level)) / (GetXpToNextLevel() - expCurve.Evaluate(level));
+        return xpAmount / xpToNextLevel;
     }
 
     public float GetPercentHealth()
@@ -1386,22 +1377,17 @@ public abstract class StatsComponent : MonoBehaviour
         return (Vector2)transform.position + (GetComponent<Rigidbody2D>().velocity * seconds);
     }
 
-    public void SetXPWithoutLevelUp(float xp)
+    public void SetLevelAndXP(int level, float xp)
     {
+        this.level = level;
         xpAmount = xp;
-        if (!this.gameObject.GetComponent<Enemy>())
+        if (level == 1)
         {
-            int tempLevel = level;
-            float xpToLevelUp = expCurve.Evaluate(tempLevel + 1);
-            while (XP > xpToLevelUp)
-            {
-                tempLevel++;
-                xpToLevelUp = expCurve.Evaluate(tempLevel + 1);
-            }
-            if (tempLevel > level)
-            {
-                level = tempLevel;
-            }
+            xpToNextLevel = 5;
+        }
+        else
+        {
+            xpToNextLevel = (level - 1) * 15;
         }
     }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -6,11 +7,11 @@ using static ResourceManager;
 
 public class DebugPanel : MonoBehaviour
 {
-    public TMP_Dropdown upgradeSelector;
-    public TMP_Dropdown enemySelector;
-    public TMP_Dropdown dropSelector;
-    public TMP_Dropdown characterSelector;
-    public TMP_Text inventoryDisplay;
+    [SerializeField]
+    private TMP_Dropdown upgradeSelector, upgradeLevelSelector, enemySelector, dropSelector, characterSelector;
+
+    [SerializeField]
+    private TMP_Text inventoryDisplay;
 
     public void Init()
     {
@@ -38,9 +39,9 @@ public class DebugPanel : MonoBehaviour
         List<TMP_Dropdown.OptionData> optionsCharacters = new List<TMP_Dropdown.OptionData>();
         foreach (PlayableCharacterData i in ResourceManager.characters)
         {
-            optionsDrops.Add(new TMP_Dropdown.OptionData(i.characterName));
+            optionsCharacters.Add(new TMP_Dropdown.OptionData(i.characterName));
         }
-        characterSelector.AddOptions(optionsDrops);
+        characterSelector.AddOptions(optionsCharacters);
     }
 
     private void Update()
@@ -64,7 +65,31 @@ public class DebugPanel : MonoBehaviour
 
     public void GiveUpgrade()
     {
-        GameManager.instance.player.AddItem(ResourceManager.ItemDefFromName(upgradeSelector.options[upgradeSelector.value].text).GetItem());
+        Item item = ResourceManager.ItemDefFromName(upgradeSelector.options[upgradeSelector.value].text).GetItem();
+        string rawText = upgradeLevelSelector.options[upgradeLevelSelector.value].text;
+        string pathString = rawText.Split("|")[0].Trim();
+        ItemDef.UpgradePath path = null;
+
+        foreach (ItemDef.UpgradePath p in item.itemDef.paths)
+        {
+            //Debug.Log(p.pathName + " = " + pathString);
+            if (p.pathName == pathString)
+            {
+                item.takenPaths.Add(p);
+                item.currentPath = p;
+                path = p;
+            }
+        }
+
+        foreach (ItemDef.UpgradePath p in item.itemDef.paths)
+        {
+            if (p.pathName == path.previousPath)
+            {
+                item.Level = Int32.Parse(rawText.Split("|")[1].Trim()) + p.numLevels;
+            }
+        }
+
+        GameManager.instance.player.AddItem(item);
     }
 
     public void SpawnEnemy()
@@ -83,5 +108,22 @@ public class DebugPanel : MonoBehaviour
 
     public void ChangeCharacter()
     {
+    }
+
+    public void UpdateUpgradeLevelSelector() 
+    {
+        ItemDef def = ResourceManager.ItemDefFromName(upgradeSelector.options[upgradeSelector.value].text);
+
+        List<TMP_Dropdown.OptionData> optionsLevels = new List<TMP_Dropdown.OptionData>();
+
+        foreach (ItemDef.UpgradePath i in def.paths)
+        {
+            for (int k = 0; k < i.levelDescriptions.Count; k++)
+            {
+                optionsLevels.Add(new TMP_Dropdown.OptionData(i.pathName + " | " + (k + 1)));
+            }
+        }
+
+        upgradeLevelSelector.AddOptions(optionsLevels);
     }
 }

@@ -34,6 +34,14 @@ public class PumpkinBomb : Weapon
                 attackSpeed += 0.1f;
             }
 
+            if (i.HasTakenPath("Shockwave"))
+            {
+                if (i.Level >= 7)
+                {
+                    size += 0.25f;
+                }
+            }
+
             trueStats["Damage"] = damage;
             trueStats["Attack Speed"] = attackSpeed;
             trueStats["Explosion Size"] = size;
@@ -63,6 +71,7 @@ public class PumpkinBomb : Weapon
                 Item i = owner.GetItem(ResourceManager.ItemIndex.PumpkinBomb);
                 if (i.HasTakenPath("Cluster Pumpkins"))
                 {
+                    //Debug.Log("Cluster - " + i.Level);
                     if (i.Level >= 7)
                     {
                         ((PumpkinBombBehavior)p).isRecursive = true;
@@ -86,29 +95,36 @@ public class PumpkinBomb : Weapon
                 if (i.HasTakenPath("Shockwave"))
                 {
                     ((PumpkinBombBehavior)p).shockWave = true;
-                }
-            }
 
-            /*
-            // Pumkin Launcher
-            if (GameManager.instance.Player.HasUpgrade(ResourceManager.UpgradeIndex.PumpkinLauncher))
-            {
-                Enemy e = GetRandomEnemyInRange(10f);
-                if (e)
-                {
-                    p.Direction = (e.transform.position - transform.position).normalized;
+                    if (i.Level >= 6)
+                    {
+                        Vector3 target = MousePosition();
+                        Vector2 direction = target - gameObject.transform.position;
+                        float distance = Vector2.Distance(target, gameObject.transform.position);
+                        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                        gameObject.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                        //p.Direction = (new Vector3(direction.x, direction.y) - transform.position).normalized;
+                        p.Direction = gameObject.transform.right;
+                        p.Speed = distance * 2.1f;
+                        p.SpeedMultiplier = 1f;
+                        //float torque = Random.Range(-500f, 500f);
+                        //p.gameObject.GetComponent<Rigidbody2D>().AddTorque(torque);
+                        //p.gameObject.GetComponent<Rigidbody2D>().angularDrag = 1.75f;
+                    }
+
+                    if (i.Level >= 7)
+                    {
+                        ((PumpkinBombBehavior)p).shockWaveStunDuration *= 1.25f;
+                        ((PumpkinBombBehavior)p).shockWaveSizeMult *= 1.25f;
+                    }
+
+                    if (i.Level >= 8)
+                    {
+                        EnemyAttractor attractor = GameObject.Instantiate<EnemyAttractor>(Resources.Load<EnemyAttractor>("Prefabs/Attractor"), p.transform);
+                        attractor.Radius = 3f;
+                    }
                 }
-                else
-                {
-                    p.RotateDirection(Random.Range(0, 360));
-                }
-                p.Speed = 10f;
-                p.SpeedMultiplier = 1f;
-                //float torque = Random.Range(-500f, 500f);
-                //p.gameObject.GetComponent<Rigidbody2D>().AddTorque(torque);
-                //p.gameObject.GetComponent<Rigidbody2D>().angularDrag = 1.75f;
             }
-            */
             ResetTimer();
         }
     }

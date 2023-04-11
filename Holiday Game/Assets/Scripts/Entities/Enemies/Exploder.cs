@@ -54,7 +54,7 @@ public class Exploder : Enemy
         }
         else
         {
-            movements.Add(SeekPlayer() * 1.5f);
+            movements.Add(Seek() * 1.5f);
 
         }
     }

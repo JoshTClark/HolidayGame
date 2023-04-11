@@ -19,6 +19,6 @@ public class BossEnemy : Enemy
 
     protected override void CalcMoves()
     {
-        movements.Add(SeekPlayer());
+        movements.Add(Seek());
     }
 }

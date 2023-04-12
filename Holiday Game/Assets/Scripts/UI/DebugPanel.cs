@@ -89,7 +89,7 @@ public class DebugPanel : MonoBehaviour
             }
         }
 
-        GameManager.instance.player.AddItem(item);
+        GameManager.instance.Player.AddItem(item);
     }
 
     public void SpawnEnemy()

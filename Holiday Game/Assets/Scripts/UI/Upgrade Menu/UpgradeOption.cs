@@ -24,53 +24,25 @@ public class UpgradeOption : MonoBehaviour
         // Setting the color
         levelLabel.enableVertexGradient = false;
         nameLabel.enableVertexGradient = false;
-        if (item.tier == ItemDef.Tier.Common)
-        {
-            iconOutline.color = new Color(0f, 1f, 0f, 1f);
-            levelLabel.color = new Color(0f, 1f, 0f, 1f);
-            nameLabel.color = new Color(0f, 1f, 0f, 1f);
-        }
-        else if (item.tier == ItemDef.Tier.Uncommon)
-        {
-            iconOutline.color = new Color(0f, 0f, 1f, 1f);
-            levelLabel.color = new Color(0f, 0f, 1f, 1f);
-            nameLabel.color = new Color(0f, 0f, 1f, 1f);
-        }
-        else if (item.tier == ItemDef.Tier.Rare)
-        {
-            iconOutline.color = new Color(1f, 0f, 1f, 1f);
-            levelLabel.color = new Color(1f, 0f, 1f, 1f);
-            nameLabel.color = new Color(1f, 0f, 1f, 1f);
-        }
-        else if (item.tier == ItemDef.Tier.Epic)
+        Color color = item.TierColor();
+        iconOutline.color = color;
+        levelLabel.color = color;
+        nameLabel.color = color;
+
+        if (item.tier == ItemDef.Tier.Epic || item.tier == ItemDef.Tier.Legendary)
         {
             VertexGradient grad = new VertexGradient();
-            grad.topLeft = new Color(1f, 0.5f, 0f, 1f);
-            grad.bottomLeft = new Color(0.75f, 0.35f, 0f, 1f);
-            grad.topRight = new Color(0.75f, 0.35f, 0f, 1f);
-            grad.bottomRight = new Color(0.5f, 0.25f, 0f, 1f);
+            grad.topLeft = color * 1.2f;
+            grad.bottomLeft = color;
+            grad.topRight = color;
+            grad.bottomRight = color * 0.8f;
             levelLabel.enableVertexGradient = true;
             nameLabel.enableVertexGradient = true;
             levelLabel.color = new Color(1f, 1f, 1f, 1f);
             nameLabel.color = new Color(1f, 1f, 1f, 1f);
             levelLabel.colorGradient = grad;
             nameLabel.colorGradient = grad;
-            iconOutline.color = new Color(1f, 0.5f, 0f, 1f);
-        }
-        else if (item.tier == ItemDef.Tier.Legendary)
-        {
-            iconOutline.color = new Color(0.8f, 0f, 0f, 1f);
-            VertexGradient grad = new VertexGradient();
-            grad.topLeft = new Color(1f, 0f, 0f, 1f);
-            grad.bottomLeft = new Color(0.75f, 0f, 0f, 1f);
-            grad.topRight = new Color(0.75f, 0f, 0f, 1f);
-            grad.bottomRight = new Color(0.5f, 0f, 0f, 1f);
-            levelLabel.enableVertexGradient = true;
-            nameLabel.enableVertexGradient = true;
-            levelLabel.color = new Color(1f, 1f, 1f, 1f);
-            nameLabel.color = new Color(1f, 1f, 1f, 1f);
-            levelLabel.colorGradient = grad;
-            nameLabel.colorGradient = grad;
+            iconOutline.color = color;
         }
 
         isHover = false;

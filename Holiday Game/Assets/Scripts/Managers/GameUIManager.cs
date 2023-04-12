@@ -208,7 +208,7 @@ public class GameUIManager : MonoBehaviour
                 }
                 break;
             case GameState.MainGame:
-                // Set all panels except for UpgradePanel to not active
+                // Set all panels except for the main game panel to not active
                 gamePanel.gameObject.SetActive(true);
                 upgradePanel.gameObject.SetActive(false);
                 pausedPanel.gameObject.SetActive(false);
@@ -217,8 +217,8 @@ public class GameUIManager : MonoBehaviour
                 optionsMenu.gameObject.SetActive(false);
 
                 // Updating objective display
-                //objectiveDisplay.rectTransform.anchorMin = new Vector2(objectiveDisplay.rectTransform.anchorMin.x, 0.94f);
-                //objectiveDisplay.rectTransform.anchorMax = new Vector2(objectiveDisplay.rectTransform.anchorMax.x, 1f);
+                // objectiveDisplay.rectTransform.anchorMin = new Vector2(objectiveDisplay.rectTransform.anchorMin.x, 0.94f);
+                // objectiveDisplay.rectTransform.anchorMax = new Vector2(objectiveDisplay.rectTransform.anchorMax.x, 1f);
 
                 // Objective display
                 bossHealth.SetActive(false);
@@ -287,8 +287,8 @@ public class GameUIManager : MonoBehaviour
                         GameObject icon = GameObject.Instantiate<GameObject>(weaponIconPrefab, gamePanel.transform);
                         icon.GetComponentInChildren<WeaponIcon>().weaponIndex = weapon.index;
                         icon.GetComponentInChildren<WeaponIcon>().sprite = weapon.icon;
-                        float x = 320 - (14 * (weaponIcons.Count + 1)) - (weaponIcons.Count * 14);
-                        icon.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, -160);
+                        float x = 640 - (28 * (weaponIcons.Count + 1)) - (weaponIcons.Count * 28);
+                        icon.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, -310);
                         weaponIcons.Add(icon.GetComponentInChildren<WeaponIcon>());
                     }
                 }
@@ -318,12 +318,16 @@ public class GameUIManager : MonoBehaviour
 
     public void DisplayHealing(float amount, StatsComponent receiver)
     {
-        TMP_Text effect = Instantiate<TMP_Text>(numberEffect, effectsPanel.gameObject.transform);
-        effect.text = amount.ToString("0.0");
-        effect.color = new Color(0f, 1f, 0f, 1f);
-        effect.GetComponent<NumberEffect>().spawnPosition = receiver.gameObject.transform.position;
-        effect.GetComponent<NumberEffect>().canvas = canvas;
-        effect.GetComponent<NumberEffect>().cam = cam;
+        // Don't display very low healing numbers to avoid clutter and having 0.0 healing numbers
+        if (amount >= 0.3f)
+        {
+            TMP_Text effect = Instantiate<TMP_Text>(numberEffect, effectsPanel.gameObject.transform);
+            effect.text = amount.ToString("0.0");
+            effect.color = new Color(0f, 1f, 0f, 1f);
+            effect.GetComponent<NumberEffect>().spawnPosition = receiver.gameObject.transform.position;
+            effect.GetComponent<NumberEffect>().canvas = canvas;
+            effect.GetComponent<NumberEffect>().cam = cam;
+        }
     }
 
     public void DoChestPickupUpgrade(Chest c)

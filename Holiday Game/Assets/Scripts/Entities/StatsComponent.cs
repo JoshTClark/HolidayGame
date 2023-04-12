@@ -65,6 +65,8 @@ public abstract class StatsComponent : MonoBehaviour
     public bool canMove = true;
     public bool isStunned = false;
 
+    public DeathEffect deathEffect;
+
     [SerializeField]
     float fadeTotalTime;
 
@@ -462,6 +464,14 @@ public abstract class StatsComponent : MonoBehaviour
         {
             isDead = true;
             OnDeath(info);
+
+            if (deathEffect)
+            {
+                DeathEffect gameObject = GameObject.Instantiate<DeathEffect>(deathEffect);
+                if (sr.flipX) gameObject.GetComponent<SpriteRenderer>().flipX = true;
+                gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y, 0f);
+                gameObject.GetComponent<SpriteRenderer>().sprite = this.gameObject.GetComponent<SpriteRenderer>().sprite;
+            }
         }
     }
 

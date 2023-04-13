@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee4d102efd0d48543a3cb4e1d2e7df3d, type: 3}
   m_Name: Knight
   m_EditorClassIdentifier: 
+  index: 1
   prefab: {fileID: 1069143796030833455, guid: b2bef236b516c45418cd8d28400ad79d, type: 3}
   characterName: <color=#7C7FFF>Knight
   desc: 'Starts with <color=#7C7FFF><size=+4>Iron Blade</size></color>

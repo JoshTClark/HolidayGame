@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     private InputAction slowToggle;
 
     [SerializeField]
-    private InputAction completeLevel;
+    private InputAction completeLevel, increaseTime;
 
     [SerializeField]
     private UnityEngine.Rendering.Universal.Light2D globalLight;
@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
 
     // Time info
     private float time = 0f;
-    private float dayLength = 180f; // 2.5 minutes
+    private float dayLength = 150f; // 2.5 minutes
     [HideInInspector]
     public int currentDay = 1;
     [HideInInspector]
@@ -190,6 +190,7 @@ public class GameManager : MonoBehaviour
         {
             slowToggle.Enable();
             completeLevel.Enable();
+            increaseTime.Enable();
         }
         slowToggle.performed += (InputAction.CallbackContext callback) =>
         {
@@ -198,6 +199,10 @@ public class GameManager : MonoBehaviour
         completeLevel.performed += (InputAction.CallbackContext callback) =>
         {
             DoLevelEnd();
+        };
+        increaseTime.performed += (InputAction.CallbackContext callback) =>
+        {
+            time += 30f;
         };
 
         // Initialize the UI manager

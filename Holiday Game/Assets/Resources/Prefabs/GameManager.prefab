@@ -189,9 +189,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.25277779
-    width: 0.20520835
-    height: 0.20520833
+    y: 0.12638889
+    width: 0.10260417
+    height: 0.102604166
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -10400,13 +10400,6 @@ MonoBehaviour:
   playerDash: {fileID: -1360119876740320047, guid: 46c5d35181ff19744bbe64637b663d10, type: 3}
   godMode: {fileID: -3235979610854536271, guid: 46c5d35181ff19744bbe64637b663d10, type: 3}
   levelUpButton: {fileID: 4188720915662867341, guid: 46c5d35181ff19744bbe64637b663d10, type: 3}
-  globalLight: {fileID: 8704142796694809916}
-  slowTimeScale: 0.5
-  currentDay: 1
-  currentHour: 12
-  enemiesDefeated: 0
-  doSpawns: 1
-  pickedUpGems: 0
   slowToggle:
     m_Name: Slow Toggle
     m_Type: 1
@@ -10441,7 +10434,30 @@ MonoBehaviour:
       m_Action: Complete Level
       m_Flags: 0
     m_Flags: 0
-  player: {fileID: 0}
+  increaseTime:
+    m_Name: Increase Time
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: da4f645e-f5ed-43f9-bd13-a9f6bebad01b
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: de94383b-76dc-4988-9d46-7ea3104584d0
+      m_Path: <Keyboard>/f4
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Increase Time
+      m_Flags: 0
+    m_Flags: 0
+  globalLight: {fileID: 8704142796694809916}
+  currentDay: 1
+  currentHour: 12
+  slowTimeScale: 0.5
+  enemiesDefeated: 0
+  pickedUpGems: 0
+  doSpawns: 1
 --- !u!114 &8704142796787333608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10456,7 +10472,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minSpawnDistance: {x: 20, y: 12}
   maxSpawnDistance: {x: 22, y: 14}
-  deathEffect: {fileID: 0}
   boss: {fileID: 0}
 --- !u!1 &8704142796789211938
 GameObject:
@@ -13189,7 +13204,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7936084502487690810, guid: 20f3430e5b9122442a69e2bea75eff2c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20f3430e5b9122442a69e2bea75eff2c, type: 3}
@@ -13306,7 +13321,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7936084502487690810, guid: 20f3430e5b9122442a69e2bea75eff2c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20f3430e5b9122442a69e2bea75eff2c, type: 3}
@@ -13423,7 +13438,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7936084502487690810, guid: 20f3430e5b9122442a69e2bea75eff2c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20f3430e5b9122442a69e2bea75eff2c, type: 3}
@@ -13540,7 +13555,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7936084502487690810, guid: 20f3430e5b9122442a69e2bea75eff2c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20f3430e5b9122442a69e2bea75eff2c, type: 3}

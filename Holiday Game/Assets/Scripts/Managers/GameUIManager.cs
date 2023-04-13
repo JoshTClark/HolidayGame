@@ -53,6 +53,9 @@ public class GameUIManager : MonoBehaviour
     private float fadeTimer = 0.0f;
     private bool doFade = false;
 
+    // Horde display timer
+    private float hordeTimer = 0.0f;
+
     /// <summary>
     /// Initializes the UI
     /// </summary>
@@ -220,6 +223,12 @@ public class GameUIManager : MonoBehaviour
                 // objectiveDisplay.rectTransform.anchorMin = new Vector2(objectiveDisplay.rectTransform.anchorMin.x, 0.94f);
                 // objectiveDisplay.rectTransform.anchorMax = new Vector2(objectiveDisplay.rectTransform.anchorMax.x, 1f);
 
+                // Updating time display
+                TimeSpan t = TimeSpan.FromSeconds(gameManager.GameTime);
+                timeDisplay.text = string.Format("{0:D1}:{1:D2}",
+                t.Minutes,
+                t.Seconds);
+
                 // Objective display
                 bossHealth.SetActive(false);
                 if (gameManager.levelData.isBossLevel && EnemyManager.instance.boss && EnemyManager.instance.boss.MaxHp != 0)
@@ -231,7 +240,7 @@ public class GameUIManager : MonoBehaviour
                     //objectiveDisplay.rectTransform.anchorMin = new Vector2(objectiveDisplay.rectTransform.anchorMin.x, 0.89f);
                     //objectiveDisplay.rectTransform.anchorMax = new Vector2(objectiveDisplay.rectTransform.anchorMax.x, 0.95f);
                 }
-                else if (gameManager.levelData.daysToSurvive > 0 && gameManager.levelData.daysToSurvive >= gameManager.currentDay)
+                else if (gameManager.levelData.daysToSurvive > 0 && gameManager.levelData.daysToSurvive > gameManager.currentDay)
                 {
                     // Display days left to survive
                     objectiveDisplay.text = "Day " + gameManager.currentDay + "/" + gameManager.levelData.daysToSurvive;
@@ -243,15 +252,19 @@ public class GameUIManager : MonoBehaviour
                 }
                 else
                 {
-                    // All objective complete
-                    objectiveDisplay.text = "Find the exit";
-                }
+                    // All objectives complete
+                    objectiveDisplay.text = "Find the exit quickly!";
 
-                // Updating time display
-                TimeSpan t = TimeSpan.FromSeconds(gameManager.GameTime);
-                timeDisplay.text = string.Format("{0:D1}:{1:D2}",
-                t.Minutes,
-                t.Seconds);
+                    // Updating horde timer
+                    hordeTimer += Time.deltaTime;
+
+                    // Updating time display for the horde
+                    float time = 120f - hordeTimer;
+                    t = TimeSpan.FromSeconds(time);
+                    timeDisplay.text = string.Format("{0:D1}:{1:D2} until the horde arrives",
+                    t.Minutes,
+                    t.Seconds);
+                }
 
                 // Updating player stat display depending on the layout
                 layout.UpdateUI(player);
@@ -319,7 +332,7 @@ public class GameUIManager : MonoBehaviour
     public void DisplayHealing(float amount, StatsComponent receiver)
     {
         // Don't display very low healing numbers to avoid clutter and having 0.0 healing numbers
-        if (amount >= 0.3f)
+        if (amount >= 0.1f)
         {
             TMP_Text effect = Instantiate<TMP_Text>(numberEffect, effectsPanel.gameObject.transform);
             effect.text = amount.ToString("0.0");

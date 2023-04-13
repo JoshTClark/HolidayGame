@@ -375,17 +375,17 @@ public abstract class StatsComponent : MonoBehaviour
             Item i = info.attacker.GetItem(ItemIndex.Vampire);
             if (i.Level == 1)
             {
-                if (info.receiver.currentHP > info.damage) info.attacker.Heal(info.damage * 0.005f);
+                if (info.receiver.currentHP > info.damage) info.attacker.Heal((info.damage * 0.0025f + 0.1f) * info.proc);
                 else info.attacker.Heal(info.receiver.currentHP * 0.005f);
             }
             else if (i.Level == 2)
             {
-                if (info.receiver.currentHP > info.damage) info.attacker.Heal(info.damage * 0.01f);
+                if (info.receiver.currentHP > info.damage) info.attacker.Heal((info.damage * 0.005f + 0.1f) * info.proc);
                 else info.attacker.Heal(info.receiver.currentHP * 0.01f);
             }
             else if (i.Level > -3)
             {
-                if (info.receiver.currentHP > info.damage) info.attacker.Heal(info.damage * 0.02f);
+                if (info.receiver.currentHP > info.damage) info.attacker.Heal((info.damage * 0.01f + 0.1f) * info.proc);
                 else info.attacker.Heal(info.receiver.currentHP * 0.02f);
             }
 
@@ -394,20 +394,20 @@ public abstract class StatsComponent : MonoBehaviour
                 if (i.Level == 4 && info.attacker.currentHP < (info.attacker.MaxHp / 4))
                 {
                     info.damage *= 1.2f;
-                    if (info.receiver.currentHP > info.damage) info.attacker.Heal(info.damage * 0.02f);
-                    else info.attacker.Heal(info.receiver.currentHP * 0.02f);
+                    if (info.receiver.currentHP > info.damage) info.attacker.Heal((info.damage * 0.02f + 0.1f) * info.proc);
+                    else info.attacker.Heal((info.receiver.currentHP * 0.02f + 0.1f) * info.proc);
                 }
                 else if (i.Level == 6 && info.attacker.currentHP < (info.attacker.MaxHp / 4))
                 {
                     info.damage *= 1.3f;
-                    if (info.receiver.currentHP > info.damage) info.attacker.Heal(info.damage * 0.03f);
-                    else info.attacker.Heal(info.receiver.currentHP * 0.03f);
+                    if (info.receiver.currentHP > info.damage) info.attacker.Heal((info.damage * 0.03f + 0.1f) * info.proc);
+                    else info.attacker.Heal((info.receiver.currentHP * 0.03f + 0.1f) * info.proc);
                 }
                 else if (i.Level == 6 && info.attacker.currentHP < (info.attacker.MaxHp / 4))
                 {
                     info.damage *= 1.5f;
-                    if (info.receiver.currentHP > info.damage) info.attacker.Heal(info.damage * 0.05f);
-                    else info.attacker.Heal(info.receiver.currentHP * 0.05f);
+                    if (info.receiver.currentHP > info.damage) info.attacker.Heal((info.damage * 0.05f + 0.1f) * info.proc);
+                    else info.attacker.Heal((info.receiver.currentHP * 0.05f + 0.1f) * info.proc);
                 }
             }
 
@@ -1482,6 +1482,7 @@ public abstract class StatsComponent : MonoBehaviour
                 {
                     tickTimer = 0f;
                     DamageInfo info = new DamageInfo();
+                    info.proc = 0f;
                     info.damage = damagePerTick;
                     info.attacker = inflictor;
                     info.neverCrit = true;

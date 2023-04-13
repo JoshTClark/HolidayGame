@@ -88644,6 +88644,8 @@ MonoBehaviour:
       m_Action: Press Space
       m_Flags: 0
     m_Flags: 0
+  wizardAnim: {fileID: 9100000, guid: 30ebc7ed5a2a3214ba597f4b8420f313, type: 2}
+  knightAnim: {fileID: 9100000, guid: 21e3c44bed4339e46a8a33c2ff5b0537, type: 2}
 --- !u!114 &1779918818
 MonoBehaviour:
   m_ObjectHideFlags: 0

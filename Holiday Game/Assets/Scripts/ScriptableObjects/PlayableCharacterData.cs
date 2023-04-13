@@ -6,6 +6,9 @@ using UnityEngine;
 public class PlayableCharacterData : ScriptableObject
 {
     [SerializeField]
+    public ResourceManager.CharacterIndex index;
+
+    [SerializeField]
     public Player prefab;
 
     [SerializeField]

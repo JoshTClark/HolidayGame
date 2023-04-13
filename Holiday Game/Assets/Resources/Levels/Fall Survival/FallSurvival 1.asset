@@ -17,8 +17,6 @@ MonoBehaviour:
   startHour: 12
   enemiesToDefeat: 0
   daysToSurvive: 2
-  levelHealthMultiplier: 1
-  levelDamageMultiplier: 1
   levelSpeedMultiplier: 1
   isBossLevel: 0
   waves:
@@ -26,164 +24,136 @@ MonoBehaviour:
     enemies:
     - isBoss: 0
       enemyIndex: 1
-      amountToSpawn: 10
+      amountToSpawn: 15
       respawn: 1
-      healthMultiplier: 0.5
+      healthMultiplier: 0.8
       damageMultiplier: 1
       speedMultiplier: 0.75
-      levelHealthMultiplier: 1
-      levelDamageMultiplier: 1
       levelSpeedMultiplier: 1
   - waveLength: 30
     enemies:
     - isBoss: 0
       enemyIndex: 1
-      amountToSpawn: 12
-      respawn: 1
-      healthMultiplier: 0.75
-      damageMultiplier: 1
-      speedMultiplier: 0.75
-      levelHealthMultiplier: 1
-      levelDamageMultiplier: 1
-      levelSpeedMultiplier: 1
-    - isBoss: 0
-      enemyIndex: 1
-      amountToSpawn: 15
-      respawn: 0
-      healthMultiplier: 0.75
-      damageMultiplier: 1
-      speedMultiplier: 0.75
-      levelHealthMultiplier: 1
-      levelDamageMultiplier: 1
-      levelSpeedMultiplier: 1
-  - waveLength: 60
-    enemies:
-    - isBoss: 0
-      enemyIndex: 1
-      amountToSpawn: 20
-      respawn: 1
-      healthMultiplier: 1
-      damageMultiplier: 1
-      speedMultiplier: 0.8
-      levelHealthMultiplier: 1
-      levelDamageMultiplier: 1
-      levelSpeedMultiplier: 1
-    - isBoss: 0
-      enemyIndex: 1
-      amountToSpawn: 20
-      respawn: 0
-      healthMultiplier: 1
-      damageMultiplier: 1
-      speedMultiplier: 0.8
-      levelHealthMultiplier: 1
-      levelDamageMultiplier: 1
-      levelSpeedMultiplier: 1
-    - isBoss: 0
-      enemyIndex: 3
-      amountToSpawn: 10
-      respawn: 1
-      healthMultiplier: 1
-      damageMultiplier: 1
-      speedMultiplier: 0.8
-      levelHealthMultiplier: 1
-      levelDamageMultiplier: 1
-      levelSpeedMultiplier: 1
-  - waveLength: 30
-    enemies:
-    - isBoss: 0
-      enemyIndex: 1
-      amountToSpawn: 15
-      respawn: 1
-      healthMultiplier: 1
-      damageMultiplier: 1
-      speedMultiplier: 0.85
-      levelHealthMultiplier: 1
-      levelDamageMultiplier: 1
-      levelSpeedMultiplier: 1
-    - isBoss: 0
-      enemyIndex: 1
-      amountToSpawn: 15
-      respawn: 0
-      healthMultiplier: 1
-      damageMultiplier: 1
-      speedMultiplier: 0.85
-      levelHealthMultiplier: 1
-      levelDamageMultiplier: 1
-      levelSpeedMultiplier: 1
-    - isBoss: 0
-      enemyIndex: 3
-      amountToSpawn: 15
-      respawn: 1
-      healthMultiplier: 1
-      damageMultiplier: 1
-      speedMultiplier: 0.75
-      levelHealthMultiplier: 1
-      levelDamageMultiplier: 1
-      levelSpeedMultiplier: 1
-    - isBoss: 0
-      enemyIndex: 5
-      amountToSpawn: 5
-      respawn: 1
-      healthMultiplier: 1
-      damageMultiplier: 1
-      speedMultiplier: 0.75
-      levelHealthMultiplier: 1
-      levelDamageMultiplier: 1
-      levelSpeedMultiplier: 1
-  - waveLength: 60
-    enemies:
-    - isBoss: 0
-      enemyIndex: 1
-      amountToSpawn: 50
-      respawn: 0
-      healthMultiplier: 1
-      damageMultiplier: 1
-      speedMultiplier: 0.9
-      levelHealthMultiplier: 1
-      levelDamageMultiplier: 1
-      levelSpeedMultiplier: 1
-    - isBoss: 0
-      enemyIndex: 3
       amountToSpawn: 20
       respawn: 1
       healthMultiplier: 0.9
       damageMultiplier: 1
-      speedMultiplier: 0.9
-      levelHealthMultiplier: 1
-      levelDamageMultiplier: 1
+      speedMultiplier: 0.75
       levelSpeedMultiplier: 1
     - isBoss: 0
-      enemyIndex: 5
-      amountToSpawn: 5
+      enemyIndex: 1
+      amountToSpawn: 15
+      respawn: 0
+      healthMultiplier: 0.9
+      damageMultiplier: 1
+      speedMultiplier: 0.75
+      levelSpeedMultiplier: 1
+  - waveLength: 60
+    enemies:
+    - isBoss: 0
+      enemyIndex: 1
+      amountToSpawn: 20
+      respawn: 1
+      healthMultiplier: 1
+      damageMultiplier: 1
+      speedMultiplier: 0.8
+      levelSpeedMultiplier: 1
+    - isBoss: 0
+      enemyIndex: 1
+      amountToSpawn: 20
       respawn: 0
       healthMultiplier: 1
       damageMultiplier: 1
       speedMultiplier: 0.8
-      levelHealthMultiplier: 1
-      levelDamageMultiplier: 1
       levelSpeedMultiplier: 1
     - isBoss: 0
-      enemyIndex: 2
-      amountToSpawn: 5
+      enemyIndex: 3
+      amountToSpawn: 10
       respawn: 1
       healthMultiplier: 1
       damageMultiplier: 1
-      speedMultiplier: 1
-      levelHealthMultiplier: 1
-      levelDamageMultiplier: 1
+      speedMultiplier: 0.8
       levelSpeedMultiplier: 1
   - waveLength: 30
     enemies:
     - isBoss: 0
       enemyIndex: 1
-      amountToSpawn: 50
+      amountToSpawn: 15
       respawn: 1
       healthMultiplier: 1
       damageMultiplier: 1
       speedMultiplier: 1
-      levelHealthMultiplier: 1
-      levelDamageMultiplier: 1
       levelSpeedMultiplier: 1
+    - isBoss: 0
+      enemyIndex: 1
+      amountToSpawn: 15
+      respawn: 0
+      healthMultiplier: 1
+      damageMultiplier: 1
+      speedMultiplier: 1
+      levelSpeedMultiplier: 1
+    - isBoss: 0
+      enemyIndex: 3
+      amountToSpawn: 10
+      respawn: 1
+      healthMultiplier: 1
+      damageMultiplier: 1
+      speedMultiplier: 1
+      levelSpeedMultiplier: 1
+  - waveLength: 60
+    enemies:
+    - isBoss: 0
+      enemyIndex: 1
+      amountToSpawn: 35
+      respawn: 1
+      healthMultiplier: 1
+      damageMultiplier: 1
+      speedMultiplier: 1
+      levelSpeedMultiplier: 1
+    - isBoss: 0
+      enemyIndex: 3
+      amountToSpawn: 10
+      respawn: 1
+      healthMultiplier: 1
+      damageMultiplier: 1
+      speedMultiplier: 1
+      levelSpeedMultiplier: 1
+    - isBoss: 0
+      enemyIndex: 5
+      amountToSpawn: 5
+      respawn: 0
+      healthMultiplier: 1
+      damageMultiplier: 1
+      speedMultiplier: 1
+      levelSpeedMultiplier: 1
+  - waveLength: 30
+    enemies:
+    - isBoss: 0
+      enemyIndex: 1
+      amountToSpawn: 25
+      respawn: 1
+      healthMultiplier: 1
+      damageMultiplier: 1
+      speedMultiplier: 1
+      levelSpeedMultiplier: 1
+    - isBoss: 0
+      enemyIndex: 1
+      amountToSpawn: 25
+      respawn: 0
+      healthMultiplier: 1
+      damageMultiplier: 1
+      speedMultiplier: 1
+      levelSpeedMultiplier: 1
+    - isBoss: 0
+      enemyIndex: 2
+      amountToSpawn: 5
+      respawn: 0
+      healthMultiplier: 1
+      damageMultiplier: 1
+      speedMultiplier: 1
+      levelSpeedMultiplier: 1
+  - waveLength: 30
+    enemies:
     - isBoss: 0
       enemyIndex: 1
       amountToSpawn: 50
@@ -191,40 +161,6 @@ MonoBehaviour:
       healthMultiplier: 1
       damageMultiplier: 1
       speedMultiplier: 1
-      levelHealthMultiplier: 1
-      levelDamageMultiplier: 1
-      levelSpeedMultiplier: 1
-    - isBoss: 0
-      enemyIndex: 2
-      amountToSpawn: 8
-      respawn: 1
-      healthMultiplier: 1
-      damageMultiplier: 1
-      speedMultiplier: 1
-      levelHealthMultiplier: 1
-      levelDamageMultiplier: 1
-      levelSpeedMultiplier: 1
-  - waveLength: 30
-    enemies:
-    - isBoss: 0
-      enemyIndex: 1
-      amountToSpawn: 50
-      respawn: 1
-      healthMultiplier: 1
-      damageMultiplier: 1
-      speedMultiplier: 1
-      levelHealthMultiplier: 1
-      levelDamageMultiplier: 1
-      levelSpeedMultiplier: 1
-    - isBoss: 0
-      enemyIndex: 2
-      amountToSpawn: 10
-      respawn: 1
-      healthMultiplier: 1
-      damageMultiplier: 1
-      speedMultiplier: 1
-      levelHealthMultiplier: 1
-      levelDamageMultiplier: 1
       levelSpeedMultiplier: 1
     - isBoss: 0
       enemyIndex: 5
@@ -233,20 +169,24 @@ MonoBehaviour:
       healthMultiplier: 1
       damageMultiplier: 1
       speedMultiplier: 1
-      levelHealthMultiplier: 1
-      levelDamageMultiplier: 1
+      levelSpeedMultiplier: 1
+    - isBoss: 0
+      enemyIndex: 3
+      amountToSpawn: 10
+      respawn: 1
+      healthMultiplier: 1
+      damageMultiplier: 1
+      speedMultiplier: 1
       levelSpeedMultiplier: 1
   - waveLength: 30
     enemies:
     - isBoss: 0
       enemyIndex: 1
-      amountToSpawn: 60
+      amountToSpawn: 50
       respawn: 1
       healthMultiplier: 1
       damageMultiplier: 1
       speedMultiplier: 1
-      levelHealthMultiplier: 1
-      levelDamageMultiplier: 1
       levelSpeedMultiplier: 1
     - isBoss: 0
       enemyIndex: 3
@@ -255,20 +195,24 @@ MonoBehaviour:
       healthMultiplier: 1
       damageMultiplier: 1
       speedMultiplier: 1
-      levelHealthMultiplier: 1
-      levelDamageMultiplier: 1
       levelSpeedMultiplier: 1
     - isBoss: 0
       enemyIndex: 5
-      amountToSpawn: 20
+      amountToSpawn: 10
       respawn: 1
       healthMultiplier: 1
       damageMultiplier: 1
       speedMultiplier: 1
-      levelHealthMultiplier: 1
-      levelDamageMultiplier: 1
       levelSpeedMultiplier: 1
-  - waveLength: 60
+    - isBoss: 0
+      enemyIndex: 2
+      amountToSpawn: 5
+      respawn: 1
+      healthMultiplier: 1
+      damageMultiplier: 1
+      speedMultiplier: 1
+      levelSpeedMultiplier: 1
+  - waveLength: 120
     enemies:
     - isBoss: 0
       enemyIndex: 1
@@ -277,18 +221,14 @@ MonoBehaviour:
       healthMultiplier: 1
       damageMultiplier: 1
       speedMultiplier: 1
-      levelHealthMultiplier: 1
-      levelDamageMultiplier: 1
       levelSpeedMultiplier: 1
   - waveLength: 1000
     enemies:
     - isBoss: 0
       enemyIndex: 3
-      amountToSpawn: 50
+      amountToSpawn: 200
       respawn: 1
-      healthMultiplier: 20
+      healthMultiplier: 10
       damageMultiplier: 10
       speedMultiplier: 5
-      levelHealthMultiplier: 1
-      levelDamageMultiplier: 1
       levelSpeedMultiplier: 1

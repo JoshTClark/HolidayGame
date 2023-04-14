@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MapPoint : MonoBehaviour
 {
@@ -8,17 +9,18 @@ public class MapPoint : MonoBehaviour
     public bool isLocked;
     public bool isComplete;
     public SessionMap.MapNode node;
+    public Sprite[] status;
 
     public void Start()
     {
         if (isLocked)
         {
-            this.gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 0.5f, 0.5f);
+            this.gameObject.GetComponent<SpriteRenderer>().sprite = status[0];
         }
 
         if (isComplete)
         {
-            this.gameObject.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 1f);
+            this.gameObject.GetComponent<SpriteRenderer>().sprite = status[1];
         }
     }
 }

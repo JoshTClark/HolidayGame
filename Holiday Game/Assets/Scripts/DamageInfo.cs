@@ -24,6 +24,7 @@ public class DamageInfo
     public bool neverCrit = false;
     public List<BuffInfo> buffs = new List<BuffInfo>();
     public ResourceManager.WeaponIndex weapon;
+    public float proc = 1.0f;
 
     /// <summary>
     /// Calculates the total damage after effects like critical strike

@@ -10,7 +10,6 @@ public abstract class Enemy : StatsComponent
     public ObjectPool<Enemy> pool;
     public ResourceManager.EnemyIndex index;
     public bool isBoss;
-    public EnemyDeathEffect deathEffect;
 
     protected List<Vector2> movements = new List<Vector2>();
     protected List<Vector2> knockback = new List<Vector2>();
@@ -261,14 +260,6 @@ public abstract class Enemy : StatsComponent
         {
             DropBase b = DropManager.GetPickup(ResourceManager.PickupIndex.Coin);
             b.gameObject.transform.position = this.gameObject.transform.position;
-        }
-
-        if (deathEffect)
-        {
-            EnemyDeathEffect gameObject = GameObject.Instantiate<EnemyDeathEffect>(deathEffect);
-            if (sr.flipX) gameObject.GetComponent<SpriteRenderer>().flipX = true;
-            gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y, 0f);
-            gameObject.GetComponent<SpriteRenderer>().sprite = this.gameObject.GetComponent<SpriteRenderer>().sprite;
         }
     }
 

@@ -22,6 +22,14 @@ public class ItemDef : ScriptableObject
     public int maxLevel;
     public Tier tier;
 
+    private static Color[] tierColors = {
+            new Color(0f, 1f, 0f, 1f), // Common
+            new Color(0f, 1f, 1f, 1f), // Uncommon
+            new Color(1f, 0f, 1f, 1f), // Rare
+            new Color(1f, 0.75f, 0f, 1f), // Epic
+            new Color(1f, 0f, 0.5f, 1f) // Legendary
+    };
+
     [Header("Upgrade Paths")]
     public List<UpgradePath> paths = new List<UpgradePath>();
 
@@ -39,6 +47,12 @@ public class ItemDef : ScriptableObject
             i.currentPath = paths[0];
         }
         return i;
+    }
+
+    public Color TierColor()
+    {
+        Color color = tierColors[(int)this.tier];
+        return color;
     }
 
     [System.Serializable]

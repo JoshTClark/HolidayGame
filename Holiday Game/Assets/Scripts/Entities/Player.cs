@@ -45,6 +45,7 @@ public class Player : StatsComponent
 
     public bool godMode = false;
 
+    public GameObject playerDeathEffect;
 
     public float DashCooldown { get { return baseDashCooldown * dashCooldownMultiplier; } }
     public float Dashes { get { return baseDashes + extraDashes; } }
@@ -61,6 +62,12 @@ public class Player : StatsComponent
 
     public override void OnDeath(DamageInfo info)
     {
+        if (playerDeathEffect)
+        {
+            GameObject gameObject = GameObject.Instantiate<GameObject>(playerDeathEffect);
+            gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y, 0f);
+        }
+        this.gameObject.SetActive(false);
     }
 
     public override void OnUpdate()

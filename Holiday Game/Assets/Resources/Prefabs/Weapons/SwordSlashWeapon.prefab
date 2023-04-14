@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d370dce18ac6219429fa20d93b7675f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 2.5
+  delay: 2
   weaponDef: {fileID: 0}
   level: 0
   index: 9
@@ -56,7 +56,7 @@ MonoBehaviour:
   baseDamageMultiplier: 1
   baseSizeMultiplier: 1
   attackSpeedMultiplier: 1
-  pierce: 4
+  pierce: 3
   extraStats: []
   soundEffects:
   - {fileID: 8300000, guid: a87d57af36089ae4cbc5c91ffb90d365, type: 3}

@@ -21,8 +21,6 @@ public class EnemyManager : MonoBehaviour
 
     private LevelData.Wave previousWave;
 
-    public GameObject deathEffect;
-
     public Enemy boss;
 
     public List<Enemy> AllEnemies
@@ -88,7 +86,7 @@ public class EnemyManager : MonoBehaviour
                 }
             }
 
-            Vector2 playerPos = GameManager.instance.player.transform.position;
+            Vector2 playerPos = GameManager.instance.Player.transform.position;
             foreach (Enemy e in allEnemies)
             {
                 Vector2 enemyPos = e.gameObject.transform.position;
@@ -137,7 +135,7 @@ public class EnemyManager : MonoBehaviour
         Enemy enemy = GetEnemy(index);
         Vector2 spawnPos = GetRandomPosition();
         enemy.gameObject.transform.position = spawnPos;
-        float playerLevel = GameManager.instance.player.Level;
+        float playerLevel = GameManager.instance.Player.Level;
         enemy.damageMultConst = (1 + (playerLevel - 1) * 0.02f);
         enemy.hpMultConst = (1 + (playerLevel - 1) * 0.075f);
         enemy.speedMultConst = 1f;
@@ -150,7 +148,7 @@ public class EnemyManager : MonoBehaviour
         Enemy enemy = GetEnemy(index);
         enemy.gameObject.transform.position = pos;
         enemy.player = GameManager.instance.Player;
-        float playerLevel = GameManager.instance.player.Level;
+        float playerLevel = GameManager.instance.Player.Level;
         enemy.damageMultConst = (1 + (playerLevel - 1) * 0.02f);
         enemy.hpMultConst = (1 + (playerLevel - 1) * 0.075f);
         enemy.speedMultConst = 1f;
@@ -160,13 +158,13 @@ public class EnemyManager : MonoBehaviour
 
     public void SpawnEnemy(LevelData.SpawnInfo info)
     {
-        float playerLevel = GameManager.instance.player.Level;
+        float playerLevel = GameManager.instance.Player.Level;
 
         Enemy enemy = GetEnemy(info.enemyIndex);
         enemy.gameObject.transform.position = GetRandomPosition();
         enemy.player = GameManager.instance.Player;
-        enemy.damageMultConst = info.damageMultiplier * info.levelDamageMultiplier * (1 + (playerLevel - 1) * 0.02f);
-        enemy.hpMultConst = info.healthMultiplier * info.levelHealthMultiplier * (1 + (playerLevel - 1) * 0.075f); ;
+        enemy.damageMultConst = info.damageMultiplier * (1 + (playerLevel - 1) * 0.02f);
+        enemy.hpMultConst = info.healthMultiplier * (1 + (playerLevel - 1) * 0.075f);
         enemy.speedMultConst = info.speedMultiplier * info.levelSpeedMultiplier;
         enemy.isBoss = info.isBoss;
         if (enemy.isBoss)
@@ -189,8 +187,8 @@ public class EnemyManager : MonoBehaviour
     private Vector2 GetRandomPosition()
     {
         Vector2 pos = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)).normalized;
-        pos.x = pos.x * Random.Range(minSpawnDistance.x, maxSpawnDistance.x) + GameManager.instance.player.transform.position.x;
-        pos.y = pos.y * Random.Range(minSpawnDistance.y, maxSpawnDistance.y) + GameManager.instance.player.transform.position.y;
+        pos.x = pos.x * Random.Range(minSpawnDistance.x, maxSpawnDistance.x) + GameManager.instance.Player.transform.position.x;
+        pos.y = pos.y * Random.Range(minSpawnDistance.y, maxSpawnDistance.y) + GameManager.instance.Player.transform.position.y;
 
         return pos;
     }
@@ -275,7 +273,7 @@ public class EnemyManager : MonoBehaviour
     /// </summary>
     void OnDrawGizmos()
     {
-        if (GameManager.instance && GameManager.instance.player)
+        if (GameManager.instance && GameManager.instance.Player)
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireCube(GameManager.instance.Player.transform.position, new Vector3(minSpawnDistance.x * 2, minSpawnDistance.y * 2, 1));

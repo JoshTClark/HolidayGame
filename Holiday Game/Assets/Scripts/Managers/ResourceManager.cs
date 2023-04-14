@@ -93,6 +93,12 @@ public class ResourceManager
         IceShield
     }
 
+    public enum CharacterIndex
+    {
+        Wizard,
+        Knight
+    }
+
     public static List<Enemy> enemyPrefabs = new List<Enemy>();
     public static List<ProjectileBase> projectilePrefabs = new List<ProjectileBase>();
     public static List<Weapon> weaponPrefabs = new List<Weapon>();

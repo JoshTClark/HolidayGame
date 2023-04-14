@@ -70,6 +70,9 @@ public class MapManager : MonoBehaviour
 
     private CamMovement camMovement;
 
+    [SerializeField]
+    private RuntimeAnimatorController wizardAnim, knightAnim;
+
     private void Start()
     {
         // If session is null create a new session and generate a random map
@@ -155,6 +158,18 @@ public class MapManager : MonoBehaviour
         }
 
         mainCam.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, -10);
+
+        if (session != null && session.playerData != null && session.playerData.chosenCharacter != null)
+        {
+            if (session.playerData.chosenCharacter.index == ResourceManager.CharacterIndex.Wizard)
+            {
+                player.gameObject.GetComponent<Animator>().runtimeAnimatorController = wizardAnim;
+            }
+            else if (session.playerData.chosenCharacter.index == ResourceManager.CharacterIndex.Knight)
+            {
+                player.gameObject.GetComponent<Animator>().runtimeAnimatorController = knightAnim;
+            }
+        }
     }
 
     private void OnDisable()

@@ -34,36 +34,55 @@ public class GameManager : MonoBehaviour
     private InputActionReference displayStats, pauseGame, giveXP, playerDash, godMode, levelUpButton;
 
     [SerializeField]
+    private InputAction slowToggle;
+
+    [SerializeField]
+    private InputAction completeLevel, increaseTime;
+
+    [SerializeField]
     private UnityEngine.Rendering.Universal.Light2D globalLight;
 
+    // Game state
+    private GameState state = GameState.MainGame;
+
+    // Time info
+    private float time = 0f;
+    private float dayLength = 150f; // 2.5 minutes
+    [HideInInspector]
+    public int currentDay = 1;
+    [HideInInspector]
+    public int currentHour = 12;
     private float baseTimeScale = 1f;
     private bool slowTime = false;
     public float slowTimeScale = 0.5f;
 
-    private float time = 0f;
-    private GameState state = GameState.MainGame;
-    private bool paused = false;
-    private float dayLength = 180f; // 2 1/2 minutes
-    public int currentDay = 1;
-    public int currentHour = 12;
+    // Tracking stats
     public int enemiesDefeated = 0;
+    public int pickedUpGems = 0;
+
+    // Flags
     private bool levelEnded = false;
     public bool doSpawns = true;
-    public int pickedUpGems = 0;
+    private bool paused = false;
+
+    // Cutscene manager
     private CutsceneManager cutscene;
 
-    [SerializeField]
-    private InputAction slowToggle;
+    // Only a single GameManager should ever exist so we can always get it here
+    [HideInInspector]
+    public static GameManager instance;
 
-    [SerializeField]
-    private InputAction completeLevel;
+    // The current session
+    [HideInInspector]
+    public static SessionManager session;
+
+    // The player object
+    private Player player;
 
     public Player Player
     {
         get { return player; }
     }
-
-    public Player player;
 
     public float GameTime
     {
@@ -80,15 +99,6 @@ public class GameManager : MonoBehaviour
         get { return state; }
         set { state = value; }
     }
-
-    // Only a single GameManager should ever exist so we can always get it here
-    [HideInInspector]
-    public static GameManager instance;
-
-    // The current session
-    [HideInInspector]
-    public static SessionManager session;
-
 
     void Start()
     {
@@ -180,6 +190,7 @@ public class GameManager : MonoBehaviour
         {
             slowToggle.Enable();
             completeLevel.Enable();
+            increaseTime.Enable();
         }
         slowToggle.performed += (InputAction.CallbackContext callback) =>
         {
@@ -188,6 +199,10 @@ public class GameManager : MonoBehaviour
         completeLevel.performed += (InputAction.CallbackContext callback) =>
         {
             DoLevelEnd();
+        };
+        increaseTime.performed += (InputAction.CallbackContext callback) =>
+        {
+            time += 30f;
         };
 
         // Initialize the UI manager
@@ -338,7 +353,7 @@ public class GameManager : MonoBehaviour
     */
     public void UpdateDate()
     {
-        currentDay = (int)Mathf.Floor(time / dayLength) + 1;
+        currentDay = (int)Mathf.Floor(time / dayLength);
         currentHour = (int)((OffsetTime % dayLength) / (dayLength / 24));
 
         float currentHourFloat = ((OffsetTime % dayLength) / (dayLength / 24));

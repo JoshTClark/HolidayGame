@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23ce62d7ff186e2429cd5cb44921f249, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMaxHP: 10
+  baseMaxHP: 5
   baseSpeed: 3.5
   baseDamage: 5
   baseAttackSpeed: 1
@@ -186,12 +186,12 @@ MonoBehaviour:
   weapons: []
   canMove: 1
   isStunned: 0
+  deathEffect: {fileID: 7639369088873833346, guid: 7a4028f9e61aa2e4e95ee4624a72463e, type: 3}
   fadeTotalTime: 0
   player: {fileID: 0}
   attractor: {fileID: 0}
   index: 5
   isBoss: 0
-  deathEffect: {fileID: 7639369088873833346, guid: 7a4028f9e61aa2e4e95ee4624a72463e, type: 3}
   drops:
   - index: 0
     chance: 1

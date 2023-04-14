@@ -34,7 +34,7 @@ public abstract class Weapon : MonoBehaviour
 
     // Audio
     [SerializeField]
-    protected List<AudioClip> soundEffects;
+    protected AudioClip soundEffect;
 
 
     public float Delay

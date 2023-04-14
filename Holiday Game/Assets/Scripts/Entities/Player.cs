@@ -19,6 +19,8 @@ public class Player : StatsComponent
 
     private Animator an;
 
+    
+
     [SerializeField]
     private AudioClip hitEffect;
     private List<StatsComponent> hitBy = new List<StatsComponent>();

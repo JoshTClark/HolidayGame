@@ -8,7 +8,7 @@ public class MagicMissile : Weapon
     private float volleyTimer = 0.2f;
     private float fireTime = 0.65f;
     private int firedShots = 0;
-    private int soundChoice = 0; //Random.Range(0, 3);
+    
 
     public override void CalcStats()
     {
@@ -192,7 +192,7 @@ public class MagicMissile : Weapon
                         }
                     }
 
-                    AudioManager.instance.PlaySound(soundEffects[soundChoice], 1f);
+                    AudioManager.instance.PlaySound(soundEffect, .5f, 1f);
                 }
             }
             else
@@ -201,8 +201,6 @@ public class MagicMissile : Weapon
                 doVolley = false;
                 volleyTimer = 0.2f;
                 firedShots = 0;
-                // So we use the same sound effect for each volley
-                soundChoice = Random.Range(0, 3);
             }
         }
     }

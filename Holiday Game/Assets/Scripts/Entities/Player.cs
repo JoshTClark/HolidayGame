@@ -20,7 +20,7 @@ public class Player : StatsComponent
     private Animator an;
 
     [SerializeField]
-    private AudioSource hitEffect;
+    private AudioClip hitEffect;
     private List<StatsComponent> hitBy = new List<StatsComponent>();
     private List<float> invincibilityTimes = new List<float>();
     private float globalInvicibilityTime = 0.1f;

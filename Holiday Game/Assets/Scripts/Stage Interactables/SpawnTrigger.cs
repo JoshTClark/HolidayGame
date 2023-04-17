@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,13 +7,27 @@ public class SpawnTrigger : CollisionTriggerBase
 {
     [SerializeField]
     private List<EnemySpawn> spawns = new List<EnemySpawn>();
+    public Boolean setSpawnLocation = false;
+    public Vector2 spawnPos;
+
 
     public override void OnTrigger()
     {
-        foreach (EnemySpawn i in spawns) 
+        if (spawnPos != null)
         {
-            EnemyManager.instance.SpawnEnemy(i.enemy, i.count);
+            foreach (EnemySpawn i in spawns)
+            {
+                EnemyManager.instance.SpawnEnemy(i.enemy, i.count, spawnPos);
+            }
         }
+        else
+        {
+            foreach (EnemySpawn i in spawns)
+            {
+                EnemyManager.instance.SpawnEnemy(i.enemy, i.count);
+            }
+        }
+
     }
 
     /// <summary>

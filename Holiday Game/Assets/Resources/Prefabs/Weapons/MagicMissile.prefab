@@ -60,8 +60,4 @@ MonoBehaviour:
   extraStats:
   - statName: Projectiles
     value: 3
-  soundEffects:
-  - {fileID: 8300000, guid: 310189399a1aa1949ae9b5354ed6c7ec, type: 3}
-  - {fileID: 8300000, guid: 2a687c57f5bcc054dba86c80dad79fcc, type: 3}
-  - {fileID: 8300000, guid: b096aef7a0b782c4d8d5a23ef7ba8e2e, type: 3}
-  - {fileID: 8300000, guid: 584aee85c9b73ec4fb10d276b26c7100, type: 3}
+  soundEffect: {fileID: 8300000, guid: 310189399a1aa1949ae9b5354ed6c7ec, type: 3}

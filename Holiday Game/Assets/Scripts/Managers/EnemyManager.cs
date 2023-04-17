@@ -184,6 +184,15 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    public void SpawnEnemy(EnemyIndex index, int count, Vector2 spawnPos)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            SpawnEnemy(index, spawnPos);
+        }
+    }
+
+
     private Vector2 GetRandomPosition()
     {
         Vector2 pos = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)).normalized;

@@ -150,6 +150,7 @@ MonoBehaviour:
   baseCritDamage: 2
   knockbackMult: 0
   currentHP: 0
+  levelUpSound: {fileID: 8300000, guid: 370a42361ef0f864abb1845389176710, type: 3}
   hpAdd: 0
   speedAdd: 0
   damageAdd: 0

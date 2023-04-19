@@ -21,6 +21,8 @@ public abstract class StatsComponent : MonoBehaviour
     private float xpToNextLevel = 5f;
     private int level = 1;
 
+    [SerializeField] protected AudioClip levelUpSound;
+
     [HideInInspector]
     [SerializeField]
     // Flat additions to stats
@@ -212,10 +214,13 @@ public abstract class StatsComponent : MonoBehaviour
         {
             if (xpAmount >= 5)
             {
+                // Level up sound
+                AudioManager.instance.PlaySound(levelUpSound, 1f, 1f);
                 level++;
                 xpAmount -= 5;
                 if (this.gameObject.GetComponent<Player>())
                 {
+                    // Backup sound area
                     this.gameObject.GetComponent<Player>().waitingForLevels++;
                 }
                 xpToNextLevel = (level - 1) * 15;
@@ -226,6 +231,8 @@ public abstract class StatsComponent : MonoBehaviour
             // XP required to level up increases by 15 every level
             if (xpAmount >= xpToNextLevel)
             {
+                // Level up sound
+                AudioManager.instance.PlaySound(levelUpSound, 1f, 1f);
                 level++;
                 xpAmount -= xpToNextLevel;
                 if (this.gameObject.GetComponent<Player>())

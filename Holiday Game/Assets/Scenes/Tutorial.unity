@@ -102335,6 +102335,8 @@ MonoBehaviour:
   spawns:
   - enemy: 1
     count: 5
+  setSpawnLocation: 0
+  spawnPos: {x: 0, y: 0}
 --- !u!1001 &2028649306
 PrefabInstance:
   m_ObjectHideFlags: 0

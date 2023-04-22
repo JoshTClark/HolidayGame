@@ -101508,13 +101508,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 519420031, guid: 63e4eaf74c005b145a2bb0c416415e86, type: 3}
+      propertyPath: m_NormalizedViewPortRect.x
+      value: 0.10091146
+      objectReference: {fileID: 0}
+    - target: {fileID: 519420031, guid: 63e4eaf74c005b145a2bb0c416415e86, type: 3}
+      propertyPath: m_NormalizedViewPortRect.width
+      value: 0.7986111
+      objectReference: {fileID: 0}
+    - target: {fileID: 519420031, guid: 63e4eaf74c005b145a2bb0c416415e86, type: 3}
+      propertyPath: m_NormalizedViewPortRect.height
+      value: 0.99884194
+      objectReference: {fileID: 0}
     - target: {fileID: 3465030634331829864, guid: 63e4eaf74c005b145a2bb0c416415e86, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3841309205968721747, guid: 63e4eaf74c005b145a2bb0c416415e86, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4411722027415035786, guid: 63e4eaf74c005b145a2bb0c416415e86, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -101522,7 +101534,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8704142796494597765, guid: 63e4eaf74c005b145a2bb0c416415e86, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8704142796787333609, guid: 63e4eaf74c005b145a2bb0c416415e86, type: 3}
       propertyPath: doSpawns
@@ -101578,7 +101590,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9010720163605277837, guid: 63e4eaf74c005b145a2bb0c416415e86, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63e4eaf74c005b145a2bb0c416415e86, type: 3}

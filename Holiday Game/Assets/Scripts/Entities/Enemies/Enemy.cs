@@ -293,13 +293,7 @@ public abstract class Enemy : StatsComponent
     public override void TakeDamage(DamageInfo info)
     {
         base.TakeDamage(info);
-        /*
-        if (!onHitSound.isPlaying)
-        {
-            // Play Audio
-            onHitSound.Play();
-        }
-        */
+        AudioManager.instance.PlaySound(damageSoundEffect, .6f, .8f);
     }
     public virtual void Clean(ObjectPool<Enemy> pool)
     {

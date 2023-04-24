@@ -23,6 +23,8 @@ public class PumpkinBombBehavior : BombProjectileBase
     [HideInInspector]
     public float shockWaveSizeMult = 3f;
 
+    
+
     public void Start()
     {
         sr = gameObject.GetComponent<SpriteRenderer>();
@@ -40,6 +42,7 @@ public class PumpkinBombBehavior : BombProjectileBase
 
     public override void OnDeath()
     {
+        AudioManager.instance.PlaySound(soundEffect, .75f, 1f);
         if (isCluster || isRecursive)
         {
             for (int i = 0; i < clusterNum; i++)

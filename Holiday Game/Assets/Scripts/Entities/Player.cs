@@ -223,14 +223,16 @@ public class Player : StatsComponent
     /// <param name="damage"></param>
     public override void TakeDamage(DamageInfo info)
     {
+        
         if (!hitBy.Contains(info.attacker) && !isInvincible && !godMode && !hasGlobalInvicibility)
         {
+            
             // take damage & become invincible
             hasGlobalInvicibility = true;
             globalInvicibilityTimer = 0f;
             hitBy.Add(info.attacker);
             invincibilityTimes.Add(iFrames);
-            //hitEffect.Play();
+            
 
             if (this.HasItem(ResourceManager.ItemIndex.AgilityBoots))
             {
@@ -250,6 +252,7 @@ public class Player : StatsComponent
             }
 
             base.TakeDamage(info);
+            AudioManager.instance.PlaySound(damageSoundEffect, 1f, 1f);
         }
     }
     private void OnDrawGizmos()

@@ -13,7 +13,7 @@ public class XP : DropBase
         //if colliding with player
         if (other.gameObject.GetComponent<Player>())
         {
-            AudioManager.instance.PlaySound(pickUp, .5f);
+            AudioManager.instance.PlaySound(pickUp, .5f, .8f);
             //access player and add xp to it
             StatsComponent receiver = other.gameObject.GetComponent<StatsComponent>();
             receiver.AddXP(XPAmount);

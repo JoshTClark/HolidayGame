@@ -180,6 +180,7 @@ MonoBehaviour:
   isStunned: 1
   deathEffect: {fileID: 7639369088873833346, guid: 7a4028f9e61aa2e4e95ee4624a72463e, type: 3}
   fadeTotalTime: 0
+  soundEffect: {fileID: 8300000, guid: 9ca7a4393494d9b438afcf0454ecd736, type: 3}
   movement: {fileID: -8801911651582695651, guid: 46c5d35181ff19744bbe64637b663d10, type: 3}
   pickupRange: 2.5
   attackActivationRange: 20

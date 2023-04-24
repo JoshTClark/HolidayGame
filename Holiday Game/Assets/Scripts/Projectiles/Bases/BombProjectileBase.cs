@@ -12,6 +12,8 @@ public abstract class BombProjectileBase : ProjectileBase
     public float explosionSizeMultiplier = 1f;
     public GameObject explosionPrefab;
 
+    public AudioClip soundEffect;
+
 
 
     public override void OnDeath()

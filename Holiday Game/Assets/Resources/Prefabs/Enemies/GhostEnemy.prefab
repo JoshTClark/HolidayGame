@@ -190,6 +190,7 @@ MonoBehaviour:
   isStunned: 0
   deathEffect: {fileID: 7639369088873833346, guid: 7a4028f9e61aa2e4e95ee4624a72463e, type: 3}
   fadeTotalTime: 0
+  damageSoundEffect: {fileID: 8300000, guid: 4c6d7fd1d91b0e8439cbe396b27f3d3c, type: 3}
   player: {fileID: 0}
   attractor: {fileID: 0}
   index: 5

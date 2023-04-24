@@ -62,4 +62,4 @@ MonoBehaviour:
     value: 1
   - statName: Fuse
     value: 1
-  soundEffects: []
+  soundEffect: {fileID: 8300000, guid: 34c58f62689453341ab613636590a7ac, type: 3}

@@ -277,7 +277,7 @@ public class SwordSlashWeapon : Weapon
             p.SizeMultiplier = GetStat("Size") * 1.5f;
             p.Pierce = GetStat("Pierce") + 99;
         }
-        AudioManager.instance.PlaySound(soundEffect, 1f);
+        AudioManager.instance.PlaySound(soundEffect, .75f);
     }
 
     private void Stab(bool strong = false)
@@ -301,6 +301,6 @@ public class SwordSlashWeapon : Weapon
             p.Pierce += GetStat("Pierce") + 99;
             p.SizeMultiplier = GetStat("Size") * 1.25f;
         }
-        AudioManager.instance.PlaySound(soundEffect, 1f);
+        AudioManager.instance.PlaySound(soundEffect, .35f);
     }
 }

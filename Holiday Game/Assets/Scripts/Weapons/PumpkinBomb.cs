@@ -58,6 +58,7 @@ public class PumpkinBomb : Weapon
             BombProjectileBase p = (BombProjectileBase)ProjectileManager.GetProjectile(ResourceManager.ProjectileIndex.PumpkinBomb);
             p.transform.position = this.transform.position;
             p.Direction = Vector2.zero;
+            p.soundEffect = soundEffect;
             DamageInfo info = new DamageInfo();
             info.damage = GetStat("Damage") * owner.Damage;
             info.attacker = owner;

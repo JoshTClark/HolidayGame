@@ -192,7 +192,7 @@ public class MagicMissile : Weapon
                         }
                     }
 
-                    AudioManager.instance.PlaySound(soundEffect, .5f, 1f);
+                    AudioManager.instance.PlaySound(soundEffect, .45f, 1f);
                 }
             }
             else

@@ -108,6 +108,8 @@ public abstract class StatsComponent : MonoBehaviour
     public bool IsDead { get { return isDead; } }
 
 
+    [SerializeField] protected AudioClip damageSoundEffect;
+
 
     protected void Start()
     {

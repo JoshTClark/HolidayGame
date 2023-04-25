@@ -105,7 +105,6 @@ public class ResourceManager
     public static List<Upgrade> upgradeDefinitions = new List<Upgrade>();
     public static List<DropBase> pickupPrefabs = new List<DropBase>();
     public static List<UpgradePool> upgradePools = new List<UpgradePool>();
-    //public static List<BuffDef> buffs = new List<BuffDef>();
     public static List<FollowingEffect> effects = new List<FollowingEffect>();
     public static List<OrbitalParent> orbitals = new List<OrbitalParent>();
 
@@ -130,15 +129,22 @@ public class ResourceManager
         LoadUpgrades();
         LoadPickups();
         LoadUpgradePools();
-        //LoadBuffs();
         LoadEffects();
         LoadPlayableCharacters();
         LoadOrbitals();
         LoadLevels();
+        LoadAudio();
 
         LoadItems();
         isLoaded = true;
     }
+
+    public static void LoadAudio()
+    {
+        AudioClip[] arr = Resources.LoadAll<AudioClip>("");
+        AudioManager.SetAudioClips(arr);
+    }
+
     public static void LoadItems()
     {
         ItemDef[] arr = Resources.LoadAll<ItemDef>("");

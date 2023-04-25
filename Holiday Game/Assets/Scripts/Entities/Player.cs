@@ -19,10 +19,6 @@ public class Player : StatsComponent
 
     private Animator an;
 
-    
-
-    [SerializeField]
-    private AudioClip hitEffect;
     private List<StatsComponent> hitBy = new List<StatsComponent>();
     private List<float> invincibilityTimes = new List<float>();
     private float globalInvicibilityTime = 0.1f;
@@ -252,7 +248,7 @@ public class Player : StatsComponent
             }
 
             base.TakeDamage(info);
-            AudioManager.instance.PlaySound(damageSoundEffect, 1f, 1f);
+            //AudioManager.instance.PlaySound("PlayerHurt");
         }
     }
     private void OnDrawGizmos()

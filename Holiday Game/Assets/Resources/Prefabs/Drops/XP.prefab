@@ -214,7 +214,7 @@ MonoBehaviour:
   index: 0
   pickupRangeMultiplier: 1
   XPAmount: 1
-  pickUp: {fileID: 8300000, guid: b85f7e771365a714abef80e4f1027183, type: 3}
+  pickUpSound: XP
 --- !u!50 &6095600392329713379
 Rigidbody2D:
   serializedVersion: 4

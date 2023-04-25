@@ -4491,6 +4491,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 475255571, guid: 63e4eaf74c005b145a2bb0c416415e86, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 519420031, guid: 63e4eaf74c005b145a2bb0c416415e86, type: 3}
+      propertyPath: m_NormalizedViewPortRect.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 519420031, guid: 63e4eaf74c005b145a2bb0c416415e86, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
       value: 0
@@ -4503,9 +4511,37 @@ PrefabInstance:
       propertyPath: m_NormalizedViewPortRect.height
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2340763561929304157, guid: 63e4eaf74c005b145a2bb0c416415e86, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2952803828134087086, guid: 63e4eaf74c005b145a2bb0c416415e86, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3841309205968721747, guid: 63e4eaf74c005b145a2bb0c416415e86, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3841309205968721747, guid: 63e4eaf74c005b145a2bb0c416415e86, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6269204079248737149, guid: 63e4eaf74c005b145a2bb0c416415e86, type: 3}
+      propertyPath: master
+      value: 
+      objectReference: {fileID: 24300002, guid: 108505613a3b8a345b2624dad9051cf3, type: 2}
+    - target: {fileID: 6269204079248737149, guid: 63e4eaf74c005b145a2bb0c416415e86, type: 3}
+      propertyPath: xpMixer
+      value: 
+      objectReference: {fileID: 1761601315440209129, guid: 108505613a3b8a345b2624dad9051cf3, type: 2}
+    - target: {fileID: 6269204079248737149, guid: 63e4eaf74c005b145a2bb0c416415e86, type: 3}
+      propertyPath: enemyHurtMixer
+      value: 
+      objectReference: {fileID: 1356528650400157842, guid: 108505613a3b8a345b2624dad9051cf3, type: 2}
+    - target: {fileID: 8704142795927063384, guid: 63e4eaf74c005b145a2bb0c416415e86, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8704142796787333609, guid: 63e4eaf74c005b145a2bb0c416415e86, type: 3}
       propertyPath: doSpawns
@@ -4580,7 +4616,15 @@ PrefabInstance:
       value: GameManager
       objectReference: {fileID: 0}
     - target: {fileID: 9010720163605277837, guid: 63e4eaf74c005b145a2bb0c416415e86, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9010720163605277837, guid: 63e4eaf74c005b145a2bb0c416415e86, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9010720163605277837, guid: 63e4eaf74c005b145a2bb0c416415e86, type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

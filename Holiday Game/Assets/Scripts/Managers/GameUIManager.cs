@@ -351,6 +351,7 @@ public class GameUIManager : MonoBehaviour
 
     public void EndLevel()
     {
+        AudioManager.instance.PlayMenuButton();
         doFade = true;
     }
 

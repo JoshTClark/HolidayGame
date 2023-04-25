@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.Pool;
 
 public class AudioManager : MonoBehaviour
@@ -9,16 +10,18 @@ public class AudioManager : MonoBehaviour
     // Singlet
     public static AudioManager instance;
 
+    // Dictionary of audio clips
+    private static Dictionary<string, AudioClip> clips = new Dictionary<string, AudioClip>();
+
+    // Mixers
+    [SerializeField]
+    private AudioMixerGroup master, xpMixer, enemyHurtMixer;
+
     // Main pool for audio sources
     private static ObjectPool<AudioSource> pool = new ObjectPool<AudioSource>(createFunc: () => CreateSource(), actionOnGet: (obj) => obj.gameObject.SetActive(true), actionOnRelease: (obj) => obj.gameObject.SetActive(false), actionOnDestroy: (obj) => Destroy(obj.gameObject), collectionCheck: true, defaultCapacity: 10);
     private static List<AudioSource> allSources = new List<AudioSource>();
 
-    [SerializeField] private AudioClip menuSound;
-    [SerializeField] private AudioClip titleMusic;
-    [SerializeField] private AudioClip mapMusic;
-    
-
-    public static float globalVolume = 0f;
+    public static float globalVolume = 0.3f;
 
     /// <summary>
     /// Called when the scene starts
@@ -55,10 +58,18 @@ public class AudioManager : MonoBehaviour
     private static AudioSource CreateSource()
     {
         GameObject obj = new GameObject("PooledSource");
-        obj.AddComponent<AudioSource>();
+        AudioSource source = obj.AddComponent<AudioSource>();
         obj.transform.parent = instance.transform;
-        allSources.Add(obj.GetComponent<AudioSource>());
-        return obj.GetComponent<AudioSource>();
+        allSources.Add(source);
+        return source;
+    }
+
+    public static void SetAudioClips(AudioClip[] audio)
+    {
+        foreach (AudioClip c in audio)
+        {
+            clips.Add(c.name, c);
+        }
     }
 
     /// <summary>
@@ -71,13 +82,49 @@ public class AudioManager : MonoBehaviour
     {
         AudioSource source = pool.Get();
         source.volume = volume * globalVolume;
+        source.outputAudioMixerGroup = master;
         source.pitch = pitch;
         source.clip = audio;
         source.Play();
     }
 
-    public void ButtonPress()
+    /// <summary>
+    /// Finds the audio source based on its name and plays it with the given volume and pitch
+    /// </summary>
+    /// <param name="audio"></param>
+    /// <param name="volume">Optional volume - Default is 1f</param>
+    /// <param name="pitch">Optional pitch - Default is 1f</param>
+    public void PlaySound(string soundName, float volume = 1f, float pitch = 1f)
     {
-        PlaySound(menuSound);
+        AudioClip clip;
+        clips.TryGetValue(soundName, out clip);
+        if (clip == null)
+        {
+            Debug.LogError("Cannot find audio clip with name " + soundName);
+            return;
+        }
+        AudioSource source = pool.Get();
+        source.volume = volume * globalVolume;
+        source.pitch = pitch;
+        source.clip = clip;
+
+        if (soundName == "XP")
+        {
+            source.outputAudioMixerGroup = xpMixer;
+        }
+        else if (soundName == "EnemyHurt")
+        {
+            source.outputAudioMixerGroup = enemyHurtMixer;
+        }
+        else
+        {
+            source.outputAudioMixerGroup = master;
+        }
+        source.Play();
+    }
+
+    public void PlayMenuButton() 
+    {
+        PlaySound("MenuButton");
     }
 }

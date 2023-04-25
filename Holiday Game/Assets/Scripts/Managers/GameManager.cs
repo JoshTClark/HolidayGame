@@ -415,6 +415,7 @@ public class GameManager : MonoBehaviour
 
     public void ToMap()
     {
+        AudioManager.instance.PlayMenuButton();
         if (session != null)
         {
             ProjectileManager.Clean();
@@ -430,6 +431,7 @@ public class GameManager : MonoBehaviour
 
     public void ToTitle()
     {
+        AudioManager.instance.PlayMenuButton();
         if (session != null)
         {
             ProjectileManager.Clean();
@@ -465,6 +467,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void ContinueButton()
     {
+        AudioManager.instance.PlayMenuButton();
         paused = false;
     }
 
@@ -473,6 +476,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void OptionsBackButton()
     {
+        AudioManager.instance.PlayMenuButton();
         state = GameState.Paused;
     }
 
@@ -481,6 +485,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void OptionsButton()
     {
+        AudioManager.instance.PlayMenuButton();
         state = GameState.OptionsMenu;
     }
 

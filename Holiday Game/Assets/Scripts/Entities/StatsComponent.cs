@@ -21,8 +21,6 @@ public abstract class StatsComponent : MonoBehaviour
     private float xpToNextLevel = 5f;
     private int level = 1;
 
-    [SerializeField] protected AudioClip levelUpSound;
-
     [HideInInspector]
     [SerializeField]
     // Flat additions to stats
@@ -106,10 +104,6 @@ public abstract class StatsComponent : MonoBehaviour
 
     // Flags
     public bool IsDead { get { return isDead; } }
-
-
-    [SerializeField] protected AudioClip damageSoundEffect;
-
 
     protected void Start()
     {
@@ -217,7 +211,10 @@ public abstract class StatsComponent : MonoBehaviour
             if (xpAmount >= 5)
             {
                 // Level up sound
-                AudioManager.instance.PlaySound(levelUpSound, 1f, 1f);
+                if (this.GetType() == typeof(Player)) 
+                {
+                    AudioManager.instance.PlaySound("LevelUp", 1f, 1f);
+                }
                 level++;
                 xpAmount -= 5;
                 if (this.gameObject.GetComponent<Player>())
@@ -234,7 +231,10 @@ public abstract class StatsComponent : MonoBehaviour
             if (xpAmount >= xpToNextLevel)
             {
                 // Level up sound
-                AudioManager.instance.PlaySound(levelUpSound, 1f, 1f);
+                if (this.GetType() == typeof(Player))
+                {
+                    AudioManager.instance.PlaySound("LevelUp", 1f, 1f);
+                }
                 level++;
                 xpAmount -= xpToNextLevel;
                 if (this.gameObject.GetComponent<Player>())

@@ -23,6 +23,8 @@ public class AudioManager : MonoBehaviour
 
     public static float globalVolume = 0.3f;
 
+    [SerializeField] private float HelperVolume = globalVolume;
+
     /// <summary>
     /// Called when the scene starts
     /// </summary>
@@ -40,6 +42,7 @@ public class AudioManager : MonoBehaviour
 
     void Update()
     {
+        HelperVolume= globalVolume;
         // Checking which sources are finished playing and releasing them to the pool
         foreach (AudioSource i in allSources)
         {

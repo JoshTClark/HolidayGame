@@ -14,6 +14,7 @@ public class XP : DropBase
         if (other.gameObject.GetComponent<Player>())
         {
             AudioManager.instance.PlaySound(pickUpSound);
+            //AudioManager.instance.PlaySound("XP", 1f, 1f);
             //access player and add xp to it
             StatsComponent receiver = other.gameObject.GetComponent<StatsComponent>();
             receiver.AddXP(XPAmount);

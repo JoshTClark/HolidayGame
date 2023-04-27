@@ -200,10 +200,10 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.16406251
+    x: 0.39959157
     y: 0
-    width: 0.17453705
-    height: 0.17453703
+    width: 0.53127605
+    height: 0.53147703
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -1047,9 +1047,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f3a9ce08b81e8446a26fd4b2ce70508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuSound: {fileID: 8300000, guid: 1968123368b902c4da27f7433733c011, type: 3}
-  titleMusic: {fileID: 8300000, guid: 01a8306ab29f92b4dae1b58edb9c2009, type: 3}
-  mapMusic: {fileID: 8300000, guid: 01a8306ab29f92b4dae1b58edb9c2009, type: 3}
+  master: {fileID: 24300002, guid: 108505613a3b8a345b2624dad9051cf3, type: 2}
+  xpMixer: {fileID: 1761601315440209129, guid: 108505613a3b8a345b2624dad9051cf3, type: 2}
+  enemyHurtMixer: {fileID: 1356528650400157842, guid: 108505613a3b8a345b2624dad9051cf3, type: 2}
+  HelperVolume: 0.5
 --- !u!1 &1034403754555799841
 GameObject:
   m_ObjectHideFlags: 0
@@ -2473,7 +2474,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 6269204079248737149}
         m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: ButtonPress
+        m_MethodName: PlayMenuButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11985,7 +11986,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 6269204079248737149}
         m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: ButtonPress
+        m_MethodName: PlayMenuButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13204,7 +13205,7 @@ PrefabInstance:
       objectReference: {fileID: 6269204079248737149}
     - target: {fileID: 3757057904788719121, guid: 20f3430e5b9122442a69e2bea75eff2c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ButtonPress
+      value: PlayMenuButton
       objectReference: {fileID: 0}
     - target: {fileID: 5897060547853423414, guid: 20f3430e5b9122442a69e2bea75eff2c, type: 3}
       propertyPath: m_Pivot.x
@@ -13329,7 +13330,7 @@ PrefabInstance:
       objectReference: {fileID: 6269204079248737149}
     - target: {fileID: 3757057904788719121, guid: 20f3430e5b9122442a69e2bea75eff2c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ButtonPress
+      value: PlayMenuButton
       objectReference: {fileID: 0}
     - target: {fileID: 5897060547853423414, guid: 20f3430e5b9122442a69e2bea75eff2c, type: 3}
       propertyPath: m_Pivot.x
@@ -13454,7 +13455,7 @@ PrefabInstance:
       objectReference: {fileID: 6269204079248737149}
     - target: {fileID: 3757057904788719121, guid: 20f3430e5b9122442a69e2bea75eff2c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ButtonPress
+      value: PlayMenuButton
       objectReference: {fileID: 0}
     - target: {fileID: 5897060547853423414, guid: 20f3430e5b9122442a69e2bea75eff2c, type: 3}
       propertyPath: m_Pivot.x
@@ -13579,7 +13580,7 @@ PrefabInstance:
       objectReference: {fileID: 6269204079248737149}
     - target: {fileID: 3757057904788719121, guid: 20f3430e5b9122442a69e2bea75eff2c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ButtonPress
+      value: PlayMenuButton
       objectReference: {fileID: 0}
     - target: {fileID: 5897060547853423414, guid: 20f3430e5b9122442a69e2bea75eff2c, type: 3}
       propertyPath: m_Pivot.x
@@ -13731,7 +13732,15 @@ PrefabInstance:
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 186151909297183110, guid: 557f771edfad95842955edef74c49e2b, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 186151909297183110, guid: 557f771edfad95842955edef74c49e2b, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 186151909297183110, guid: 557f771edfad95842955edef74c49e2b, type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 459700370797850592, guid: 557f771edfad95842955edef74c49e2b, type: 3}
@@ -13949,6 +13958,10 @@ PrefabInstance:
     - target: {fileID: 5088621339067364808, guid: 557f771edfad95842955edef74c49e2b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5392717838068425304, guid: 557f771edfad95842955edef74c49e2b, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5392717838068425304, guid: 557f771edfad95842955edef74c49e2b, type: 3}
       propertyPath: m_AnchorMax.y

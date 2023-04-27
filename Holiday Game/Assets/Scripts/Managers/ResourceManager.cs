@@ -123,20 +123,23 @@ public class ResourceManager
     /// </summary>
     public static void Init()
     {
-        LoadProjectiles();
-        LoadEnemies();
-        LoadWeapons();
-        LoadUpgrades();
-        LoadPickups();
-        LoadUpgradePools();
-        LoadEffects();
-        LoadPlayableCharacters();
-        LoadOrbitals();
-        LoadLevels();
-        LoadAudio();
+        if (!isLoaded)
+        {
+            LoadProjectiles();
+            LoadEnemies();
+            LoadWeapons();
+            LoadUpgrades();
+            LoadPickups();
+            LoadUpgradePools();
+            LoadEffects();
+            LoadPlayableCharacters();
+            LoadOrbitals();
+            LoadLevels();
+            LoadAudio();
 
-        LoadItems();
-        isLoaded = true;
+            LoadItems();
+            isLoaded = true;
+        }
     }
 
     public static void LoadAudio()

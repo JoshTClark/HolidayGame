@@ -60,4 +60,4 @@ MonoBehaviour:
   extraStats:
   - statName: Projectiles
     value: 3
-  soundEffect: {fileID: 8300000, guid: 310189399a1aa1949ae9b5354ed6c7ec, type: 3}
+  soundEffect: {fileID: 8300000, guid: 661024b2d6eea5c4daae59378f5817ff, type: 3}

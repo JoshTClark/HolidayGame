@@ -58,4 +58,4 @@ MonoBehaviour:
   attackSpeedMultiplier: 1
   pierce: 3
   extraStats: []
-  soundEffect: {fileID: 8300000, guid: 52c620ba67659b34683fc3ae0a21dda4, type: 3}
+  soundEffect: {fileID: 8300000, guid: 85ecb4c9d8527e042a37a725dbbbb439, type: 3}

@@ -24,6 +24,13 @@ public class AudioManager : MonoBehaviour
     public static float globalVolume = 0.3f;
 
     [SerializeField] private float HelperVolume = globalVolume;
+    [SerializeField] private AudioClip backgroundMusic;
+    [SerializeField] private bool allowBackgroundMusic = false; // We can decide if the scene should play background music
+    private bool backgroundPlaying = false;
+
+    private bool gamePaused = false;
+    private bool upgradeMenu = false;
+
 
     /// <summary>
     /// Called when the scene starts
@@ -42,14 +49,57 @@ public class AudioManager : MonoBehaviour
 
     void Update()
     {
-        HelperVolume= globalVolume;
         // Checking which sources are finished playing and releasing them to the pool
         foreach (AudioSource i in allSources)
         {
+            // Handle the background music when you pause the game
+            if (gamePaused && i.clip == backgroundMusic && GameManager.instance.State != GameManager.GameState.Paused)
+            {
+                i.Play();
+                gamePaused = false;
+            }
+
+
+
+
             if (i.gameObject.activeSelf && !i.isPlaying)
             {
+                if (i.clip == backgroundMusic)
+                {
+                    // Let's us know the background music has stopped
+                    backgroundPlaying = false;
+                }
                 pool.Release(i);
             }
+
+            // Changes background music based on game state
+            if (GameManager.instance.State == GameManager.GameState.GameOver && i.clip == backgroundMusic)
+            {
+                // Stops the music on death
+                i.Stop();
+            }
+            else if (GameManager.instance.State == GameManager.GameState.Paused && i.clip == backgroundMusic)
+            {
+                i.Pause();
+                gamePaused = true;
+            }
+            /*
+             else if (!upgradeMenu && GameManager.instance.State == GameManager.GameState.UpgradeMenu && i.clip == backgroundMusic)
+            {
+                upgradeMenu = true;
+                HelperVolume = globalVolume;
+                globalVolume -= .1f;
+                if (globalVolume <= 0f)
+                {
+                    globalVolume = .1f;
+                }
+            */
+            }
+        // Plays/Restarts the background music
+        if (!backgroundPlaying && allowBackgroundMusic)
+        {
+            PlaySound("Gaze up at the Stars", 1.5f, 1f);
+            backgroundPlaying = true;
         }
     }
 

@@ -1062,10 +1062,10 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.39959157
+    x: 0.13802084
     y: 0
-    width: 0.53127605
-    height: 0.53147703
+    width: 0.23287039
+    height: 0.23287037
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -89015,6 +89015,8 @@ MonoBehaviour:
   xpMixer: {fileID: 1761601315440209129, guid: 108505613a3b8a345b2624dad9051cf3, type: 2}
   enemyHurtMixer: {fileID: 1356528650400157842, guid: 108505613a3b8a345b2624dad9051cf3, type: 2}
   HelperVolume: 0.5
+  backgroundMusic: {fileID: 8300000, guid: 338e41f40d41c4949b9ef488fa1eb2c3, type: 3}
+  allowBackgroundMusic: 0
 --- !u!4 &2102139358
 Transform:
   m_ObjectHideFlags: 0

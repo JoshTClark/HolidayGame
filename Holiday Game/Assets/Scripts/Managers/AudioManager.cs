@@ -98,7 +98,7 @@ public class AudioManager : MonoBehaviour
         // Plays/Restarts the background music
         if (!backgroundPlaying && allowBackgroundMusic)
         {
-            PlaySound("Gaze up at the Stars", 1.5f, 1f);
+            PlaySound("Gaze up at the Stars", 0.4f, 1f);
             backgroundPlaying = true;
         }
     }

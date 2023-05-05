@@ -222,7 +222,7 @@ public class Player : StatsComponent
         
         if (!hitBy.Contains(info.attacker) && !isInvincible && !godMode && !hasGlobalInvicibility)
         {
-            AudioManager.instance.PlaySound("Hurt 2", 2f);
+            AudioManager.instance.PlaySound("Hurt");
             // take damage & become invincible
             hasGlobalInvicibility = true;
             globalInvicibilityTimer = 0f;
@@ -248,7 +248,6 @@ public class Player : StatsComponent
             }
 
             base.TakeDamage(info);
-            //AudioManager.instance.PlaySound("PlayerHurt");
         }
     }
     private void OnDrawGizmos()

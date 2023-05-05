@@ -177,7 +177,15 @@ public class GameUIManager : MonoBehaviour
                     }
                     else
                     {
-                        upgradeManager.SetUpgrades(4);
+                        float ran = UnityEngine.Random.value;
+                        if (ran <= 0.25f)
+                        {
+                            upgradeManager.SetUpgrades(4);
+                        }
+                        else 
+                        {
+                            upgradeManager.SetUpgrades(3);
+                        }
                         upgradeManager.ShowOptions();
                     }
                 }
@@ -204,7 +212,15 @@ public class GameUIManager : MonoBehaviour
                         else
                         {
                             upgradeManager.player = player;
-                            upgradeManager.SetUpgrades(4);
+                            float ran = UnityEngine.Random.value;
+                            if (ran <= 0.25f)
+                            {
+                                upgradeManager.SetUpgrades(4);
+                            }
+                            else
+                            {
+                                upgradeManager.SetUpgrades(3);
+                            }
                             upgradeManager.ShowOptions();
                         }
                     }

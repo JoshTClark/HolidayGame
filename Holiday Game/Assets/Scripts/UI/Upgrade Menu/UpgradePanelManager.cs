@@ -16,6 +16,7 @@ public class UpgradePanelManager : MonoBehaviour
     private Chest chest;
 
     private bool doNewItemsOnNormalLevelUp = true;
+    private int numItemsDisplay = 4;
 
     private void Start()
     {
@@ -178,6 +179,7 @@ public class UpgradePanelManager : MonoBehaviour
     /// </summary>
     public void SetUpgrades(int numOptions)
     {
+        numItemsDisplay = numOptions;
         List<ItemDef.LevelDescription> availableDescsAll = new List<ItemDef.LevelDescription>();
         List<Item> availableAll = new List<Item>();
         List<ItemDef.UpgradePath> pathsAll = new List<ItemDef.UpgradePath>();
@@ -304,7 +306,7 @@ public class UpgradePanelManager : MonoBehaviour
     {
         player.rerolls--;
         Clear();
-        SetUpgrades(4);
+        SetUpgrades(numItemsDisplay);
     }
 
     public void Skip()

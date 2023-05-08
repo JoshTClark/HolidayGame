@@ -153,7 +153,7 @@ public class GameUIManager : MonoBehaviour
                 if (session != null)
                 {
                     int numGems = session.difficulty * 5 + gameManager.pickedUpGems;
-                    gemsText.text = "You gained " + numGems + " Gems";
+                    gemsText.text = "You gained " + numGems + " Coins";
                 }
                 break;
             case GameState.UpgradeMenu:

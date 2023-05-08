@@ -42,7 +42,7 @@ public class MapManager : MonoBehaviour
     private Canvas canvas;
 
     [SerializeField]
-    private TMP_Text levelName, levelGoal;
+    private TMP_Text levelName, levelGoal, tutorialText;
 
     [SerializeField]
     private InputActionReference movement;
@@ -110,6 +110,7 @@ public class MapManager : MonoBehaviour
                     //Debug.Log("Mouse selection to new map point");
                     if (selectedNode != hit.collider.gameObject && !hit.collider.gameObject.GetComponent<MapPoint>().isLocked && !hit.collider.gameObject.GetComponent<MapPoint>().isComplete)
                     {
+                        tutorialText.gameObject.SetActive(false);
                         selectedNode = hit.collider.gameObject;
                         mapSelector.SetActive(true);
                         mapSelector.gameObject.transform.position = selectedNode.transform.position;

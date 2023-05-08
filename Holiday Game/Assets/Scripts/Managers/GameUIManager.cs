@@ -259,7 +259,7 @@ public class GameUIManager : MonoBehaviour
                 else if (gameManager.levelData.daysToSurvive > 0 && gameManager.levelData.daysToSurvive > gameManager.currentDay)
                 {
                     // Display days left to survive
-                    objectiveDisplay.text = "Day " + gameManager.currentDay + "/" + gameManager.levelData.daysToSurvive;
+                    objectiveDisplay.text = "Survive! Day " + gameManager.currentDay + "/" + gameManager.levelData.daysToSurvive;
                 }
                 else if (gameManager.levelData.enemiesToDefeat > 0 && gameManager.levelData.enemiesToDefeat > gameManager.enemiesDefeated)
                 {

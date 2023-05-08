@@ -24,7 +24,7 @@ public class AudioManager : MonoBehaviour
     public static float globalVolume = 0.3f;
 
     [SerializeField] private float HelperVolume = globalVolume;
-    [SerializeField] private AudioClip backgroundMusic;
+    private AudioClip backgroundMusic;
     [SerializeField] private bool allowBackgroundMusic = false; // We can decide if the scene should play background music
     private bool backgroundPlaying = false;
 
@@ -38,6 +38,7 @@ public class AudioManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        clips.TryGetValue("Gaze up at the Stars", out backgroundMusic);
     }
 
     private void OnDestroy()

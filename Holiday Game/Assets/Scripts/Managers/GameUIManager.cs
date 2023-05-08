@@ -398,7 +398,7 @@ public class GameUIManager : MonoBehaviour
             }
             if (dashTimer)
             {
-                dashTimer.GetComponent<RectTransform>().anchorMax = new Vector2(1 - (player.dashCooldownTimer / player.DashCooldown), dashTimer.GetComponent<RectTransform>().anchorMax.y);
+                dashTimer.GetComponent<RectTransform>().anchorMax = new Vector2((player.dashCooldownTimer / player.DashCooldown), dashTimer.GetComponent<RectTransform>().anchorMax.y);
             }
             if (playerLevel)
             {

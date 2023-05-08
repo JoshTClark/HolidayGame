@@ -104,9 +104,9 @@ public class SaveSceneManager : MonoBehaviour
         saves[1] = SaveManager.LoadFile(1);
         saves[2] = SaveManager.LoadFile(2);
 
-        slot1Info.text = "<color=#00FF8B>" + saves[0].currency + " Gems";
-        slot2Info.text = "<color=#00FF8B>" + saves[1].currency + " Gems";
-        slot3Info.text = "<color=#00FF8B>" + saves[2].currency + " Gems";
+        slot1Info.text = "<color=#00FF8B>" + saves[0].currency + " Coins";
+        slot2Info.text = "<color=#00FF8B>" + saves[1].currency + " Coins";
+        slot3Info.text = "<color=#00FF8B>" + saves[2].currency + " Coins";
     }
 
 
@@ -179,7 +179,7 @@ public class SaveSceneManager : MonoBehaviour
                         buyButton.enabled = false;
                     }
                 }
-                money.text = data.currency + " Gems";
+                money.text = data.currency + " Coins";
                 break;
             case SceneState.SaveEditor:
                 titleScreenPanel.gameObject.SetActive(false);

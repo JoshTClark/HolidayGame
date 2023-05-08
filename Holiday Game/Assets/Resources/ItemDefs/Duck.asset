@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Golden Duck
   index: 10
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 270291f4e3f58fd4684193144ed74024, type: 3}
   maxLevel: 6
   tier: 4
   paths:

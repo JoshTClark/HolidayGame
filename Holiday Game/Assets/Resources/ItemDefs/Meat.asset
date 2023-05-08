@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Mutton
   index: 9
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 7a8996d6d092844439abb376b72185fa, type: 3}
   maxLevel: 6
   tier: 0
   paths:
